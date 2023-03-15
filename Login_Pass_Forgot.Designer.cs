@@ -58,7 +58,7 @@ namespace ALBAITAR_Softvet
             this.groupBox1.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(283, 145);
+            this.groupBox1.Size = new System.Drawing.Size(339, 145);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "1er Méthode : ";
@@ -71,7 +71,7 @@ namespace ALBAITAR_Softvet
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.Black;
-            this.button4.Location = new System.Drawing.Point(156, 107);
+            this.button4.Location = new System.Drawing.Point(212, 107);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(123, 28);
             this.button4.TabIndex = 6;
@@ -86,7 +86,7 @@ namespace ALBAITAR_Softvet
             this.label3.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(5, 40);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(273, 39);
+            this.label3.Size = new System.Drawing.Size(329, 39);
             this.label3.TabIndex = 3;
             this.label3.Text = "--";
             // 
@@ -97,7 +97,7 @@ namespace ALBAITAR_Softvet
             this.textBox1.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(76, 81);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(203, 21);
+            this.textBox1.Size = new System.Drawing.Size(259, 21);
             this.textBox1.TabIndex = 2;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
@@ -131,9 +131,9 @@ namespace ALBAITAR_Softvet
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(15, 161);
+            this.groupBox2.Location = new System.Drawing.Point(10, 161);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(283, 117);
+            this.groupBox2.Size = new System.Drawing.Size(339, 117);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "2éme Méthode :";
@@ -156,9 +156,9 @@ namespace ALBAITAR_Softvet
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(128, 84);
+            this.button2.Location = new System.Drawing.Point(126, 84);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 27);
+            this.button2.Size = new System.Drawing.Size(208, 27);
             this.button2.TabIndex = 2;
             this.button2.Text = "Envoyer Mon Mot De Passe";
             this.button2.UseVisualStyleBackColor = false;
@@ -179,7 +179,7 @@ namespace ALBAITAR_Softvet
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(304, 290);
+            this.ClientSize = new System.Drawing.Size(360, 290);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

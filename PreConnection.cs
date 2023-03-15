@@ -186,7 +186,7 @@ namespace ALBAITAR_Softvet
 
                         frm.Dispose();
                     }
-                    MessageBox.Show("Contacter RancoSoft : \n---------------------\nrancosoft@gmail.com\n0779.54.24.75", "Attention :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Contactez votre fournisseur de logiciel.", "Attention :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Application.Exit();
                 }
                 else
@@ -200,8 +200,6 @@ namespace ALBAITAR_Softvet
                     {
                         dte = DateTime.Now;
                     }
-
-
                     if ((DateTime.Now - dte).TotalDays > 30 || ReadFromRegistry(Application.ProductName + "_Activ") != Codify_txt(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE + Environment.MachineName + System.Security.Principal.WindowsIdentity.GetCurrent().Name + SERIAL.Substring(SERIAL.Length - 4)))
                     {
                         foreach (Form frm in Application.OpenForms)
@@ -217,12 +215,6 @@ namespace ALBAITAR_Softvet
             }
         }
 
-        public static void Update_activaion_sit()
-        {
-            Properties.Settings.Default.RANCOSOFT_LAST_USED_DATE = DateTime.Today.ToString();
-            Properties.Settings.Default.RANCOSOFT_LAST_DEVICE_NAME = Environment.MachineName;
-            Properties.Settings.Default.Save();
-        }
 
         public static int send_infos_to_server(int ID_IN)
         {
@@ -246,6 +238,13 @@ namespace ALBAITAR_Softvet
                     {
                         cmmd.ExecuteNonQuery();
                         ID_OUT = (int)cmmd.Parameters["@OP_ID_OUT"].Value;
+                        //==========================================================
+                        //Load Gmail Authent Pass (to use it to send forgot login pass of login of clients)
+                        MySqlDataAdapter adp = new MySqlDataAdapter("SELECT VALUE_TXT FROM PARAMS_AND_VALUES WHERE NME = 'RancoSoft Gmail Auth';", client_manag);
+                        DataTable dt = new DataTable();
+                        adp.Fill(dt);
+                        if(dt.Rows.Count > 0) { Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT = PreConnection.Codify_txt(dt.Rows[0][0].ToString()); Properties.Settings.Default.Save(); }
+                        //==========================================================
                     }
                     catch { }
                     client_manag.Close();

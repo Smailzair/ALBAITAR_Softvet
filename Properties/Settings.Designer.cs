@@ -49,18 +49,6 @@ namespace ALBAITAR_Softvet.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Last_login_user_nme {
-            get {
-                return ((string)(this["Last_login_user_nme"]));
-            }
-            set {
-                this["Last_login_user_nme"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool Last_login_is_admin {
             get {
@@ -80,30 +68,6 @@ namespace ALBAITAR_Softvet.Properties {
             }
             set {
                 this["App_Closed_By_User"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Open_Last_Fold_Automatic {
-            get {
-                return ((bool)(this["Open_Last_Fold_Automatic"]));
-            }
-            set {
-                this["Open_Last_Fold_Automatic"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Last_Open_Fold {
-            get {
-                return ((string)(this["Last_Open_Fold"]));
-            }
-            set {
-                this["Last_Open_Fold"] = value;
             }
         }
         
@@ -176,6 +140,18 @@ namespace ALBAITAR_Softvet.Properties {
             }
             set {
                 this["RANCOSOFT_ACTIVE_CODE_ID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RANCOSOFT_GMAIL_AUTHENT {
+            get {
+                return ((string)(this["RANCOSOFT_GMAIL_AUTHENT"]));
+            }
+            set {
+                this["RANCOSOFT_GMAIL_AUTHENT"] = value;
             }
         }
     }

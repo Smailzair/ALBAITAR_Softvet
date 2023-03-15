@@ -25,6 +25,10 @@ namespace ALBAITAR_Softvet
 
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+            (new Login_Modif(null)).ShowDialog();
+        }
     }
 }
 

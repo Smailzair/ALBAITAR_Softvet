@@ -72,14 +72,12 @@ namespace ALBAITAR_Softvet
             if (datat.Rows.Cast<DataRow>().Where(rr => int.Parse(rr["ID"].ToString()) == int.Parse(comboBox1.SelectedValue.ToString()) && (rr["PASSWORD"].Equals(maskedTextBox1.Text) || (rr.IsNull("PASSWORD") && maskedTextBox1.Text.Length == 0))).Count() > 0)
             //if (datat.Rows.Cast<DataRow>().AsEnumerable().Select(rr => int.Parse(rr["ID"].ToString()) == int.Parse(comboBox1.SelectedValue.ToString()) && (rr["PASS"].Equals(maskedTextBox1.Text) || (rr.IsNull("PASS") && maskedTextBox1.Text.Length == 0))).First())
             {
-
                 accept = true;
                 //-----------------------------
                 change_infos_there = int.Parse(comboBox1.SelectedValue.ToString()) != Properties.Settings.Default.Last_login_user_idx;
                 Properties.Settings.Default.Last_login_user_idx = int.Parse(comboBox1.SelectedValue.ToString());
-                Properties.Settings.Default.Last_login_user_nme = comboBox1.Text;
                 Properties.Settings.Default.Show_Login = !checkBox1.Checked;
-                Properties.Settings.Default.Last_login_is_admin = datat.Rows.Cast<DataRow>().Where(rr => int.Parse(rr["ID"].ToString()) == int.Parse(comboBox1.SelectedValue.ToString()) && (byte)rr["IS_ADMIN"] == 1).Count() > 0;
+                Properties.Settings.Default.Last_login_is_admin = datat.Rows.Cast<DataRow>().Where(rr => int.Parse(rr["ID"].ToString()) == int.Parse(comboBox1.SelectedValue.ToString()) && (SByte)rr["IS_ADMIN"] == 1).Count() > 0;
                 Properties.Settings.Default.Save();
                 //------------------                
                 Close();

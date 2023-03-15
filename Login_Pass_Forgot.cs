@@ -14,13 +14,13 @@ namespace ALBAITAR_Softvet
         string Usr_ID;
         public Login_Pass_Forgot(string User_ID)
         {
-            InitializeComponent();      
+            InitializeComponent();
             Usr_ID = User_ID;
         }
         DataTable datatt;
         private void Login_Load(object sender, EventArgs e)
         {
-            datatt = PreConnection.Load_data("SELECT * FROM tb_login_and_users WHERE ID = " + Usr_ID+";");
+            datatt = PreConnection.Load_data("SELECT * FROM tb_login_and_users WHERE ID = " + Usr_ID + ";");
             //-----------------------
             if ((datatt.Rows[0]["QUESTION"].ToString() ?? "").Length > 0)
             {
@@ -31,17 +31,17 @@ namespace ALBAITAR_Softvet
                 groupBox1.Enabled = false;
             }
             //---------------------------------
-            if(datatt.Rows[0]["EMAIL"] != DBNull.Value)
+            if (datatt.Rows[0]["EMAIL"] != DBNull.Value && Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT.Length > 0)
             {
                 groupBox2.Enabled = true;
                 label5.Text = (string)datatt.Rows[0]["EMAIL"];
             }
             else
             {
-                groupBox2.Enabled = false;                
+                groupBox2.Enabled = false;
             }
             //--------------------------
-            if(!groupBox1.Enabled && !groupBox2.Enabled)
+            if (!groupBox1.Enabled && !groupBox2.Enabled)
             {
                 MessageBox.Show("Votre mot de passe est vide !");
                 Close();
@@ -50,7 +50,7 @@ namespace ALBAITAR_Softvet
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if((datatt.Rows[0]["ANSWER"].ToString() ?? "") == textBox1.Text)
+            if ((datatt.Rows[0]["ANSWER"].ToString() ?? "") == textBox1.Text)
             {
                 MessageBox.Show("Votre mot de passe est :\n\r" + ((datatt.Rows[0]["PASSWORD"].ToString() ?? "").Length > 0 ? (datatt.Rows[0]["PASSWORD"].ToString() ?? "") : "'Vide !'"), "--", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
@@ -74,43 +74,45 @@ namespace ALBAITAR_Softvet
 
         private void button2_Click(object sender, EventArgs e)
         {
-         
-                if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+
+            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                MimeMessage Mssg = new MimeMessage();
+                Mssg.From.Add(new MailboxAddress("RancoSoft", "rancosoft@gmail.com"));
+                Mssg.To.Add(MailboxAddress.Parse(datatt.Rows[0]["EMAIL"].ToString()));
+                Mssg.Subject = "ALBAITAR Softvet - Récuperation de mot de passe";
+                Mssg.Body = new TextPart("plain")
                 {
-                    MimeMessage Mssg = new MimeMessage();
-                    Mssg.From.Add(new MailboxAddress("RancoSoft", "rancosoft@gmail.com"));
-                    Mssg.To.Add(MailboxAddress.Parse(datatt.Rows[0]["EMAIL"].ToString()));
-                    Mssg.Subject = "Gestion Fonds d'Investissement - Récuperation de mot de passe";
-                    Mssg.Body = new TextPart("plain")
-                    {
-                        Text = @"Bonjour,
-Voici votre mot de passe de logiciel '" + Application.ProductName.ToString() + "' :" + ((datatt.Rows[0]["PASSWORD"].ToString() ?? "").Length > 0 ? (datatt.Rows[0]["PASSWORD"].ToString() ?? "") : "'Vide !'")
-                    };
-                    SmtpClient clnt = new SmtpClient();
-                    try
-                    {
-                        clnt.Connect("smtp.gmail.com", 465, true);
-                        clnt.Authenticate("rancosoft@gmail.com", "qlysfwobejvhnbal");
-                        clnt.Send(Mssg);
-                        MessageBox.Show("Veuillez consultez votre Email, pour trouver votre mot de passe.", "Bien envoyé :", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally
-                    {
-                        clnt.Disconnect(true);
-                        clnt.Dispose();
-                    }
-                    //-----------
-                    Close();
-                }
-                else
+                    Text = @"Bonjour,
+                           Voici votre mot de passe de logiciel '" + Application.ProductName.ToString() + "' : " + ((datatt.Rows[0]["PASSWORD"].ToString() ?? "").Length > 0 ? (datatt.Rows[0]["PASSWORD"].ToString() ?? "") : "'Vide !'")
+                };
+
+
+                SmtpClient clnt = new SmtpClient();
+                try
                 {
-                    MessageBox.Show(" - Veuillez connectez a l'internet puis continuez.\n\r - Vérifiez votre adresse Email.", "Pas de connection internet !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    clnt.Connect("smtp.gmail.com", 465, true);
+                    clnt.Authenticate("rancosoft@gmail.com", PreConnection.Traduct_Codified_txt(Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT));
+                    clnt.Send(Mssg);
+                    MessageBox.Show("Veuillez consultez votre Email, pour trouver votre mot de passe.", "Bien envoyé :", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
-            
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    clnt.Disconnect(true);
+                    clnt.Dispose();
+                }
+                //-----------
+                Close();
+            }
+            else
+            {
+                MessageBox.Show(" - Veuillez connectez a l'internet puis continuez.\n\r - Vérifiez votre adresse Email.", "Pas de connection internet !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
