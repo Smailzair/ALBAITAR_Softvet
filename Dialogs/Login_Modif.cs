@@ -72,7 +72,7 @@ namespace ALBAITAR_Softvet
                         + "`SEX` = '" + (radioButton4.Checked ? "M" : "F") + "',"
                         + "`PASSWORD` = '" + maskedTextBox1.Text + "',"
                         + "`FUNCTION` = '" + comboBox1.SelectedItem + "',"
-                        + "`IS_ADMIN` = "+ (radioButton1.Checked ? "True" : "False") + ","
+                        + "`IS_ADMIN` = " + (radioButton1.Checked ? "True" : "False") + ","
                         + "`QUESTION` = '" + textBox2.Text + "',"
                         + "`ANSWER` = '" + textBox3.Text + "',"
                         + "`EMAIL` = '" + textBox4.Text + "',"
@@ -153,13 +153,13 @@ namespace ALBAITAR_Softvet
             maskedTextBox1.Clear();
             maskedTextBox2.Clear();
             maskedTextBox1.UseSystemPasswordChar = maskedTextBox2.UseSystemPasswordChar = true;
-            radioButton2.Checked = radioButton4 .Checked = true;
-            radioButton4_CheckedChanged(null,null);
+            radioButton2.Checked = radioButton4.Checked = true;
+            radioButton4_CheckedChanged(null, null);
             textBox1.BackColor = textBox3.BackColor = textBox4.BackColor = SystemColors.Window;
             //-------------------
             foreach (Control ctr in this.Controls)
             {
-                if(ctr != label14)
+                if (ctr != label14)
                 {
                     ctr.Visible = true;
                 }
@@ -167,7 +167,7 @@ namespace ALBAITAR_Softvet
                 {
                     ctr.Visible = false;
                 }
-                
+
             }
         }
 
@@ -188,7 +188,7 @@ namespace ALBAITAR_Softvet
                     textBox3.Text = dataGridView1.SelectedRows[0].Cells["ANSWER"].Value.ToString();
                     textBox4.Text = dataGridView1.SelectedRows[0].Cells["EMAIL"].Value.ToString();
                     textBox6.Text = dataGridView1.SelectedRows[0].Cells["CNI_NUM"].Value.ToString();
-                    textBox7.Text = dataGridView1.SelectedRows[0].Cells["ANV_NUM"].Value.ToString();                    
+                    textBox7.Text = dataGridView1.SelectedRows[0].Cells["ANV_NUM"].Value.ToString();
                     radioButton1.Checked = (SByte)dataGridView1.SelectedRows[0].Cells["IS_ADMIN"].Value == 1;
                     radioButton3.Checked = dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString() == "F";
                     comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCTION"].Value.ToString();
@@ -205,7 +205,7 @@ namespace ALBAITAR_Softvet
                     textBox3.Text = dataGridView1.SelectedRows[0].Cells["ANSWER"].Value.ToString();
                     textBox4.Text = dataGridView1.SelectedRows[0].Cells["EMAIL"].Value.ToString();
                     textBox6.Text = dataGridView1.SelectedRows[0].Cells["CNI_NUM"].Value.ToString();
-                    textBox7.Text = dataGridView1.SelectedRows[0].Cells["ANV_NUM"].Value.ToString();                    
+                    textBox7.Text = dataGridView1.SelectedRows[0].Cells["ANV_NUM"].Value.ToString();
                     radioButton1.Checked = (SByte)dataGridView1.SelectedRows[0].Cells["IS_ADMIN"].Value == 1;
                     radioButton3.Checked = dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString() == "F";
                     comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCTION"].Value.ToString();
@@ -220,7 +220,8 @@ namespace ALBAITAR_Softvet
                         if (ctr != dataGridView1 && ctr != label13 && ctr != label14)
                         {
                             ctr.Visible = false;
-                        }else if (ctr == label14)
+                        }
+                        else if (ctr == label14)
                         {
                             ctr.Visible = true;
                         }
@@ -282,31 +283,58 @@ namespace ALBAITAR_Softvet
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Etes-vous sures de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (dataGridView1.Rows.Count >= 2)
             {
+                string command = "";
                 int eee = int.Parse(dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString());
-                PreConnection.Excut_Cmd("DELETE FROM tb_login_and_users WHERE ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
-
-                if (eee == Properties.Settings.Default.Last_login_user_idx)
+                //----------------------------------
+                int Admin_Rest = dataGridView1.Rows
+                     .Cast<DataGridViewRow>()
+                     .Count(row => int.Parse(row.Cells["ID"].Value.ToString()) != eee && (SByte)row.Cells["IS_ADMIN"].Value == 1);
+                bool warning = dataGridView1.Rows.Count == 2 && Admin_Rest == 0;
+                //-------------------------------------
+                if(dataGridView1.Rows.Count > 2 && Admin_Rest == 0)
                 {
-                    Application.Restart();
+                    MessageBox.Show("A cause que ce compte est le seul qui a les droits 'Admin',\nVous devez -d'abord- changer le type d'un autre compte 'Standard' à 'Admin'.","",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
                 else
                 {
-                    int previ_idx = -1;
-                    if (dataGridView1.SelectedRows.Count > 0)
+                    if (MessageBox.Show("Etes-vous sures de faire la suppression de (" + dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value.ToString() + ") ?\n\n" + (warning ? ("(L'utilisateur '" + dataGridView1.Rows
+                                .Cast<DataGridViewRow>()
+                                .FirstOrDefault(row => int.Parse(row.Cells["ID"].Value.ToString()) != eee).Cells["FULL_NME"].Value + "' acquerra les droits 'Admin')") : ""), "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        previ_idx = dataGridView1.SelectedRows[0].Index;
+                        command += warning ? "UPDATE tb_login_and_users SET IS_ADMIN = True; " : "";
+                        command += "DELETE FROM tb_login_and_users WHERE ID = " + eee + ";";
+                        PreConnection.Excut_Cmd(command);
+                        if (eee == Properties.Settings.Default.Last_login_user_idx)
+                        {
+                            Application.Restart();
+                        }
+                        else
+                        {
+                            int previ_idx = -1;
+                            if (dataGridView1.SelectedRows.Count > 0)
+                            {
+                                previ_idx = dataGridView1.SelectedRows[0].Index;
+                            }
+                            login_data = PreConnection.Load_data("SELECT *, concat(`USER_NME`,' ',`USER_FAMNME`) AS FULL_NME FROM tb_login_and_users;");
+                            dataGridView1.DataSource = login_data;                            
+                            if (previ_idx > -1)
+                            {
+                                dataGridView1.ClearSelection();
+                                dataGridView1.Rows[0].Selected = true;
+                            }
+                        }
                     }
-                    login_data = PreConnection.Load_data("SELECT * FROM tb_login_and_users;");
-                    dataGridView1.DataSource = login_data;
-                    if (previ_idx > -1)
-                    {
-                        dataGridView1.ClearSelection();
-                        dataGridView1.Rows[0].Selected = true;
-                    }
-                }
+                }                
+                
+                
             }
+            else
+            {
+                MessageBox.Show("Vous devez d'abord créer un autre compte.", "Impossible :", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+
 
         }
 
@@ -314,7 +342,6 @@ namespace ALBAITAR_Softvet
         {
             if (!IsValidEmail(textBox4.Text))
             {
-
                 e.Cancel = true;
                 textBox4.BackColor = Color.LightCoral;
             }
@@ -335,14 +362,14 @@ namespace ALBAITAR_Softvet
             int oos = comboBox1.SelectedIndex > -1 ? comboBox1.SelectedIndex : 0;
             comboBox1.Items.Clear();
             if (radioButton4.Checked)
-            {                
+            {
                 comboBox1.Items.AddRange(new object[] { "Vétérinaire", "Téchnicien Vétérinaire", "Assistant Vétérinaire", "Administratif" });
             }
             else
             {
                 comboBox1.Items.AddRange(new object[] { "Vétérinaire", "Téchnicienne Vétérinaire", "Assistante Vétérinaire", "Administrative" });
             }
-            comboBox1.SelectedIndex= oos;
+            comboBox1.SelectedIndex = oos;
         }
     }
 }

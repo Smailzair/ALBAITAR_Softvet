@@ -196,22 +196,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Login.cs">
+    <Compile Include="Dialogs\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="Dialogs\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login_Modif.cs">
+    <Compile Include="Dialogs\Login_Modif.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login_Modif.Designer.cs">
+    <Compile Include="Dialogs\Login_Modif.Designer.cs">
       <DependentUpon>Login_Modif.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login_Pass_Forgot.cs">
+    <Compile Include="Dialogs\Login_Pass_Forgot.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login_Pass_Forgot.Designer.cs">
+    <Compile Include="Dialogs\Login_Pass_Forgot.Designer.cs">
       <DependentUpon>Login_Pass_Forgot.cs</DependentUpon>
     </Compile>
     <Compile Include="Main_Frm.cs">
@@ -223,13 +223,31 @@
     <Compile Include="PreConnection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Login.resx">
+    <Compile Include="Resources\Clients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Resources\Clients.Designer.cs">
+      <DependentUpon>Clients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingGlobal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingGlobal.Designer.cs">
+      <DependentUpon>SettingGlobal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Dialogs\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login_Modif.resx">
+    <EmbeddedResource Include="Dialogs\Login_Modif.resx">
       <DependentUpon>Login_Modif.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login_Pass_Forgot.resx">
+    <EmbeddedResource Include="Dialogs\Login_Pass_Forgot.resx">
       <DependentUpon>Login_Pass_Forgot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main_Frm.resx">
@@ -245,6 +263,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Resources\Clients.resx">
+      <DependentUpon>Clients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingGlobal.resx">
+      <DependentUpon>SettingGlobal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

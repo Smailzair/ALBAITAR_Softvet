@@ -31,7 +31,7 @@ namespace ALBAITAR_Softvet
                 groupBox1.Enabled = false;
             }
             //---------------------------------
-            if (datatt.Rows[0]["EMAIL"] != DBNull.Value && Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT.Length > 0)
+            if (datatt.Rows[0]["EMAIL"] != DBNull.Value && datatt.Rows[0]["EMAIL"].ToString().Length > 0 && Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT.Length > 0)
             {
                 groupBox2.Enabled = true;
                 label5.Text = (string)datatt.Rows[0]["EMAIL"];
