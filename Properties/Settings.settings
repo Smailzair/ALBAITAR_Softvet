@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ALBAITAR_Softvet.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Show_Login" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="Last_login_user_idx" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>

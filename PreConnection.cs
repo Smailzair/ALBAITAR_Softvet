@@ -2,9 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SQLite;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -86,7 +84,7 @@ namespace ALBAITAR_Softvet
             }
             catch { if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée, veuillez vérifier l'internet et ..."); } }
             ///--------------------
-
+            close_conn();
 
             //-----------
             return tbl;
@@ -98,7 +96,7 @@ namespace ALBAITAR_Softvet
             MySqlCommand cd = new MySqlCommand(cmd, mySqlConnection);
             open_conn();
             try { MySqlDataReader read = cd.ExecuteReader(); gg.Load(read); } catch { if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée, veuillez vérifier l'internet et ..."); } }
-
+            close_conn();
             return gg;
             //----------------------------------
         }
@@ -108,8 +106,9 @@ namespace ALBAITAR_Softvet
 
             MySqlCommand cmmd = new MySqlCommand(cmd, mySqlConnection);
             open_conn();
-            try { cmmd.ExecuteNonQuery(); } catch { if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée, veuillez vérifier l'internet et ..."); } }
-
+            //try { cmmd.ExecuteNonQuery(); } catch { if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée, veuillez vérifier l'internet et ..."); } }
+            try { cmmd.ExecuteNonQuery(); } catch { if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée !"); } }
+            close_conn();
         }
 
 

@@ -48,19 +48,14 @@ namespace ALBAITAR_Softvet
 
             if (processes.Length <= 1)
             {
-                if (Properties.Settings.Default.Show_Login)
-                {
-                    Application.Run(new Login(false));
-                    //--------------
-                    if (Login.enter_allow)
-                    {
-                        Application.Run(new Main_Frm());
-                    }
-                }
-                else
+
+                Application.Run(new Login(false));
+                //--------------
+                if (Login.enter_allow)
                 {
                     Application.Run(new Main_Frm());
                 }
+
             }
             else
             {

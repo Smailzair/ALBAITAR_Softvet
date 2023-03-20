@@ -25,18 +25,6 @@ namespace ALBAITAR_Softvet.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool Show_Login {
-            get {
-                return ((bool)(this["Show_Login"]));
-            }
-            set {
-                this["Show_Login"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int Last_login_user_idx {
             get {

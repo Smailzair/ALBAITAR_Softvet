@@ -16,13 +16,6 @@ namespace ALBAITAR_Softvet
         {
             InitializeComponent();
             //-------------------------------
-            checkBox1.Checked = Properties.Settings.Default.Show_Login;
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.Show_Login = checkBox1.Checked;
-            Properties.Settings.Default.Save();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -30,10 +23,6 @@ namespace ALBAITAR_Softvet
             (new Login_Modif(Properties.Settings.Default.Last_login_user_idx)).ShowDialog();
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            //Properties.Settings.Default.Open_Last_Fold_Automatic = checkBox2.Checked;
-            Properties.Settings.Default.Save();
-        }
+
     }
 }

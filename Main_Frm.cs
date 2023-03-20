@@ -1,16 +1,6 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using Microsoft.SqlServer.Server;
+﻿using ALBAITAR_Softvet.Resources;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows.Forms;
-using Excc = Microsoft.Office.Interop.Excel;
 
 namespace ALBAITAR_Softvet
 {
@@ -27,7 +17,7 @@ namespace ALBAITAR_Softvet
 
         private void button9_Click(object sender, EventArgs e)
         {
-            
+            new Clients().Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
