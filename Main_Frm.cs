@@ -11,13 +11,20 @@ namespace ALBAITAR_Softvet
         {
             InitializeComponent();            
             //----------------------------
-            
-
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            new Clients().Show();
+            if (Application.OpenForms["Clients"] == null)
+            {
+                new Clients().Show();
+            }
+            else
+            {
+                Application.OpenForms["Clients"].WindowState = Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Clients"].WindowState;
+                Application.OpenForms["Clients"].BringToFront();
+            }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)

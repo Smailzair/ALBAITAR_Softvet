@@ -332,7 +332,6 @@ namespace ALBAITAR_Softvet
                         xcelApp.Columns[g.Index + 1 - yy].Delete();
                         yy++;
                     });
-
                 }
 
                 if (tbl_to_add != null)

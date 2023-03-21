@@ -5,11 +5,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excc = Microsoft.Office.Interop.Excel;
 //using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ALBAITAR_Softvet.Resources
@@ -38,12 +40,31 @@ namespace ALBAITAR_Softvet.Resources
             });
             comboBox3.DataSource = wilayaa;
             //------------------
-            comboBox1.SelectedIndex = 0;
+            if(dataGridView1.SelectedRows.Count == 0) {
+                comboBox3.SelectedIndexChanged -= comboBox3_SelectedIndexChanged;
+                comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
+                textBox6.TextChanged -= textBox6_TextChanged;
+                textBox6.Validating -= textBox6_Validating;
+                textBox6.Validated -= textBox6_Validated;
+                //-----------------------------
+                comboBox1.SelectedIndex = 0;
+                comboBox3.SelectedIndex = comboBox2.SelectedIndex = -1;
+                textBox6.Text = string.Empty;
+                //--------------
+                comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
+                comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+                textBox6.TextChanged += textBox6_TextChanged;
+                textBox6.Validating += textBox6_Validating;
+                textBox6.Validated += textBox6_Validated;
+            }
+           
         }
         private void Load_clients_from_DB()
         {
+            int fd = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
             clients = PreConnection.Load_data_keeping_duplicates("SELECT *,concat(FAMNME,' ',NME) AS FULL_NME FROM tb_clients;");
             dataGridView1.DataSource = clients;
+            if(dataGridView1.Rows.Count > fd) { dataGridView1.ClearSelection(); dataGridView1.Rows[fd].Selected = true; }
 
         }
         private void Load_selected_client_fields()
@@ -64,7 +85,17 @@ namespace ALBAITAR_Softvet.Resources
                 textBox7.Validating -= textBox7_Validating;
                 pictureBox1.Image = Properties.Resources.MODIF;
                 //----------------------------------------------
-                comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString();
+                comboBox1.SelectedItem = (string)dataGridView1.SelectedRows[0].Cells["SEX"].Value;
+                textBox3.Text = (string)dataGridView1.SelectedRows[0].Cells["FAMNME"].Value;
+                textBox2.Text = (string)dataGridView1.SelectedRows[0].Cells["NME"].Value;
+                textBox4.Text = (string)dataGridView1.SelectedRows[0].Cells["NUM_CNI"].Value;
+                textBox5.Text = (string)dataGridView1.SelectedRows[0].Cells["ADRESS"].Value;
+                textBox6.Text = (string)dataGridView1.SelectedRows[0].Cells["POSTAL_CODE"].Value;
+                textBox7.Text = (string)dataGridView1.SelectedRows[0].Cells["EMAIL"].Value;
+                textBox8.Text = (string)dataGridView1.SelectedRows[0].Cells["OBSERVATIONS"].Value;
+                comboBox3.Text = (string)dataGridView1.SelectedRows[0].Cells["WILAYA"].Value;
+                comboBox2.Text = (string)dataGridView1.SelectedRows[0].Cells["CITY"].Value;
+                maskedTextBox1.Text = (string)dataGridView1.SelectedRows[0].Cells["NUM_PHONE"].Value;
                 //----------------------------------------------
                 textBox2.Validated += textBox2_Validated;
                 textBox3.Validated += textBox2_Validated;
@@ -78,14 +109,18 @@ namespace ALBAITAR_Softvet.Resources
                 textBox7.TextChanged += textBox7_TextChanged;
                 textBox7.Validating += textBox7_Validating;
             }
+            else
+            {
+                button3.PerformClick();
+            }
 
         }
         private void verif_if_déja_exist_client()
         {
-            if (textBox2.Text.Length > 0 && textBox3.Text.Length > 0)
+            if (textBox2.Text.Length > 0 && textBox3.Text.Length > 0 && (Is_New || (!Is_New && dataGridView1.SelectedRows.Count > 0)))
             {
-                int cnt = clients.Rows.Cast<DataRow>().Where(zz => zz["FAMNME"].ToString().ToLower().Equals(textBox2.Text.ToLower()) && zz["NME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) && (textBox4.Text.Length > 0 ? zz["NME"].ToString().Equals(textBox4.Text) : true)).ToList().Count();
-                label13.Visible = Is_New ? (cnt > 0) : (cnt > 1);
+                int cnt = clients.Rows.Cast<DataRow>().Where(zz => zz["FAMNME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) && zz["NME"].ToString().ToLower().Equals(textBox2.Text.ToLower()) && zz["NUM_CNI"].ToString().Equals(textBox4.Text) && (!Is_New ? !zz["ID"].ToString().Equals(dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString()) : true)).ToList().Count();
+                label13.Visible = cnt > 0;
             }
             else { label13.Visible = false; }
         }
@@ -237,8 +272,8 @@ namespace ALBAITAR_Softvet.Resources
                             + "`OBSERVATIONS`)"
                             + "VALUES"
                             + "('" + comboBox1.Text + "',"
-                            + "'" + textBox2.Text + "',"
                             + "'" + textBox3.Text + "',"
+                            + "'" + textBox2.Text + "',"
                             + "'" + textBox4.Text + "',"
                             + "'" + textBox5.Text + "',"
                             + "'" + textBox6.Text + "',"
@@ -252,8 +287,8 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     PreConnection.Excut_Cmd("UPDATE `tb_clients` SET "
                             + "`SEX` = '"+comboBox1.Text+"',"
-                            + "`FAMNME` = '"+textBox2.Text+"',"
-                            + "`NME` = '"+textBox3.Text+"',"
+                            + "`FAMNME` = '"+textBox3.Text+"',"
+                            + "`NME` = '"+textBox2.Text+"',"
                             + "`NUM_CNI` = '"+textBox4.Text+"',"
                             + "`ADRESS` = '"+textBox5.Text+"',"
                             + "`POSTAL_CODE` = '"+textBox6.Text+"',"
@@ -306,8 +341,8 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            Is_New = false;
-            Load_selected_client_fields();
+                Is_New = false;
+                Load_selected_client_fields();            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -323,8 +358,9 @@ namespace ALBAITAR_Softvet.Resources
                     ((ComboBox)ctrl).SelectedIndex= 0;
                 }
             }
+            label13.Visible=false;
             pictureBox1.Image = Properties.Resources.NOUVEAU;
-            textBox2.Select();
+            if (!textBox1.Focused) { textBox3.Select(); }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -347,6 +383,100 @@ namespace ALBAITAR_Softvet.Resources
 
             }
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if(dataGridView1.Rows.Count > 0)
+            {
+                Excc.Application xcelApp = new Excc.Application();
+                xcelApp.Application.Workbooks.Add(Type.Missing);
+                xcelApp.Application.Workbooks[1].Title = Application.ProductName + " - Clients";
+                xcelApp.Application.Workbooks[1].Worksheets[1].Name = "Clients";
+                dataGridView1.Columns.Cast<DataGridViewColumn>().Where(ss => ss.Name != "ID" && ss.Name != "FULL_NME").ToList().ForEach(g =>
+                {
+                    switch (g.HeaderText)
+                    {
+                        case "SEX":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Sex";
+                            break;
+                        case "FAMNME":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Prénom";
+                            break;
+                        case "NME":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Nom";
+                            break;
+                        case "NUM_CNI":
+                            xcelApp.Cells[1, g.Index + 1].Value = "N° CNI";
+                            break;
+                        case "ADRESS":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Adresse";
+                            break;
+                        case "POSTAL_CODE":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Code Postal";
+                            break;
+                        case "CITY":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Ville";
+                            break;
+                        case "WILAYA":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Wilaya";
+                            break;
+                        case "NUM_PHONE":
+                            xcelApp.Cells[1, g.Index + 1].Value = "N° Tél";
+                            break;
+                        case "EMAIL":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Email";
+                            break;
+                        case "OBSERVATIONS":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Observations";
+                            break;
+                    }
+                    ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
+                    ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Font.Bold = true;
+                    ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
+                    try
+                    {
+                        if (dataGridView1.Columns[g.Index].DefaultCellStyle.Format == "N2")
+                        {
+                            ((Excc.Range)xcelApp.Columns[g.Index + 1]).NumberFormat = "#,##0.00 [$Da-fr-dz]";
+                        }
+                        else if (dataGridView1.Columns[g.Index].DefaultCellStyle.Format.Contains("MM/yyyy"))
+                        {
+                            ((Excc.Range)xcelApp.Columns[g.Index + 1]).NumberFormat = "dd/MM/yyyy" + (dataGridView1.Columns[g.Index].DefaultCellStyle.Format.Contains("HH") ? " HH:mm:ss" : "");
+                        }
+                    }
+                    catch { }
+                });
+
+                dataGridView1.Rows.Cast<DataGridViewRow>().ToList().ForEach(t =>
+                {
+                    t.Cells.Cast<DataGridViewCell>().ToList().ForEach(b =>
+                    {
+                        xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : "";
+                    });
+
+                });
+                xcelApp.Columns[dataGridView1.Columns["ID"].Index + 1].Delete();
+                xcelApp.Columns[dataGridView1.Columns["FULL_NME"].Index].Delete();
+                xcelApp.Columns.AutoFit();
+                //------------------
+                SaveFileDialog svd = new SaveFileDialog();
+                svd.Filter = "Excel | *.xlsx";
+                svd.DefaultExt = "*.xlsx";
+                svd.FileName = xcelApp.Application.Workbooks[1].Title + "_" + DateTime.Now.ToString("ddMMyyyy_HHmmss") + ".xlsx";
+                if (svd.ShowDialog() == DialogResult.OK)
+                {
+                    xcelApp.Workbooks[1].SaveAs(Path.GetFullPath(svd.FileName));
+                    Process.Start(Path.GetFullPath(svd.FileName));
+                }
+                xcelApp.Application.Workbooks[1].Close(false);
+                xcelApp.Quit();
+                //-------------------
+            }
+            else
+            {
+                MessageBox.Show("Aucun donnés !", ".", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
         }
     }
 }
