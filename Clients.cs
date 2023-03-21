@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Crypto.Fpe;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -47,13 +48,12 @@ namespace ALBAITAR_Softvet.Resources
         }
         private void Load_selected_client_fields()
         {
-            if(dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
                 label13.Visible = false;
                 textBox2.Validated -= textBox2_Validated;
                 textBox3.Validated -= textBox2_Validated;
                 comboBox3.SelectedIndexChanged -= comboBox3_SelectedIndexChanged;
-                comboBox3.TextUpdate -= comboBox3_TextUpdate;
                 comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
                 textBox6.TextChanged -= textBox6_TextChanged;
                 textBox6.Validating -= textBox6_Validating;
@@ -62,13 +62,13 @@ namespace ALBAITAR_Softvet.Resources
                 maskedTextBox1.Validating -= maskedTextBox1_Validating;
                 textBox7.TextChanged -= textBox7_TextChanged;
                 textBox7.Validating -= textBox7_Validating;
+                pictureBox1.Image = Properties.Resources.MODIF;
                 //----------------------------------------------
                 comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString();
                 //----------------------------------------------
                 textBox2.Validated += textBox2_Validated;
                 textBox3.Validated += textBox2_Validated;
                 comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
-                comboBox3.TextUpdate += comboBox3_TextUpdate;
                 comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
                 textBox6.TextChanged += textBox6_TextChanged;
                 textBox6.Validating += textBox6_Validating;
@@ -78,7 +78,7 @@ namespace ALBAITAR_Softvet.Resources
                 textBox7.TextChanged += textBox7_TextChanged;
                 textBox7.Validating += textBox7_Validating;
             }
-            
+
         }
         private void verif_if_déja_exist_client()
         {
@@ -140,21 +140,26 @@ namespace ALBAITAR_Softvet.Resources
 
         private void comboBox3_Validating(object sender, CancelEventArgs e)
         {
-            List<string> tmmp = new List<string>();
-            sites.Rows.Cast<DataRow>().Where(dda => dda["WILAYA"].Equals(comboBox3.Text)).ToList().ForEach(row =>
+            if (comboBox3.Text != string.Empty)
             {
-                if (!tmmp.Contains(row["CITY"])) { tmmp.Add(row["CITY"].ToString()); }
-            });
-            //------------------
-            string dd = comboBox2.Text;
-            comboBox2.Items.Clear();
-            comboBox2.Items.AddRange(tmmp.Count > 0 ? tmmp.ToArray() : cities.ToArray());
-            comboBox2.SelectedIndex = comboBox2.Items.Contains(dd) ? comboBox2.Items.IndexOf(dd) : (comboBox2.Items.Count > 0 ? 0 : -1);
-        }
-
-        private void comboBox3_TextUpdate(object sender, EventArgs e)
-        {
-
+                List<string> tmmp = new List<string>();
+                sites.Rows.Cast<DataRow>().Where(dda => dda["WILAYA"].Equals(comboBox3.Text)).ToList().ForEach(row =>
+                {
+                    if (!tmmp.Contains(row["CITY"])) { tmmp.Add(row["CITY"].ToString()); }
+                });
+                //------------------
+                string dd = comboBox2.Text;
+                comboBox2.Items.Clear();
+                comboBox2.Items.AddRange(tmmp.Count > 0 ? tmmp.ToArray() : cities.ToArray());
+                comboBox2.SelectedIndex = comboBox2.Items.Contains(dd) ? comboBox2.Items.IndexOf(dd) : (comboBox2.Items.Count > 0 ? 0 : -1);
+            }
+            else
+            {
+                string dd = comboBox2.Text;
+                comboBox2.Items.Clear();
+                comboBox2.Items.AddRange(cities.ToArray());
+                comboBox2.SelectedIndex = comboBox2.Items.Contains(dd) ? comboBox2.Items.IndexOf(dd) : (comboBox2.Items.Count > 0 ? 0 : -1);
+            }
         }
 
         private void maskedTextBox1_Validating(object sender, CancelEventArgs e)
@@ -218,30 +223,6 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (Is_New) //INSERT
                 {
-                    //Debug.WriteLine("INSERT INTO `tb_clients` "
-                    //        + "(`SEX`,"
-                    //        + "`FAMNME`,"
-                    //        + "`NME`,"
-                    //        + "`NUM_CNI`,"
-                    //        + "`ADRESS`,"
-                    //        + "`POSTAL_CODE`,"
-                    //        + "`CITY`,"
-                    //        + "`WILAYA`,"
-                    //        + "`NUM_PHONE`,"
-                    //        + "`EMAIL`,"
-                    //        + "`OBSERVATIONS`)"
-                    //        + "VALUES"
-                    //        + "('" + comboBox1.Text + "',"
-                    //        + "'" + textBox2.Text + "',"
-                    //        + "'" + textBox3.Text + "',"
-                    //        + "'" + textBox4.Text + "',"
-                    //        + "'" + textBox5.Text + "',"
-                    //        + "'" + textBox6.Text + "',"
-                    //        + "'" + comboBox2.Text + "',"
-                    //        + "'" + comboBox3.Text + "',"
-                    //        + "'" + maskedTextBox1.Text + "',"
-                    //        + "'" + textBox7.Text + "',"
-                    //        + "'" + textBox8.Text + "');");
                     PreConnection.Excut_Cmd("INSERT INTO `tb_clients` "
                             + "(`SEX`,"
                             + "`FAMNME`,"
@@ -269,7 +250,19 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 else //UPDATE
                 {
-
+                    PreConnection.Excut_Cmd("UPDATE `tb_clients` SET "
+                            + "`SEX` = '"+comboBox1.Text+"',"
+                            + "`FAMNME` = '"+textBox2.Text+"',"
+                            + "`NME` = '"+textBox3.Text+"',"
+                            + "`NUM_CNI` = '"+textBox4.Text+"',"
+                            + "`ADRESS` = '"+textBox5.Text+"',"
+                            + "`POSTAL_CODE` = '"+textBox6.Text+"',"
+                            + "`CITY` = '"+comboBox2.Text+"',"
+                            + "`WILAYA` = '"+comboBox3.Text+"',"
+                            + "`NUM_PHONE` = '" + maskedTextBox1.Text + "',"
+                            + "`EMAIL` = '"+textBox7.Text+"',"
+                            + "`OBSERVATIONS` = '"+textBox8.Text+"' "
+                            + "WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value +";");
                 }
                 //----------------
                 Load_clients_from_DB();
@@ -321,7 +314,39 @@ namespace ALBAITAR_Softvet.Resources
         {
             dataGridView1.ClearSelection();
             Is_New = true;
+            foreach(Control ctrl in splitContainer1.Panel2.Controls)
+            {                
+                if(ctrl.GetType() == typeof(TextBox) || ctrl.GetType() == typeof(MaskedTextBox) || (ctrl.GetType() == typeof(ComboBox) && ((ComboBox)ctrl).DropDownStyle != ComboBoxStyle.DropDownList))
+                {
+                    ctrl.Text = string.Empty;
+                }else if (ctrl.GetType() == typeof(ComboBox) && ((ComboBox)ctrl).DropDownStyle == ComboBoxStyle.DropDownList){
+                    ((ComboBox)ctrl).SelectedIndex= 0;
+                }
+            }
+            pictureBox1.Image = Properties.Resources.NOUVEAU;
             textBox2.Select();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string fff = "";
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+
+                dataGridView1.SelectedRows.Cast<DataGridViewRow>().ToList().ForEach(row =>
+                {
+                    fff += "," + row.Cells["ID"].Value;
+                });
+
+                fff = fff.Substring(1);
+                if (MessageBox.Show("Vous étes sures de supprimer [" + dataGridView1.SelectedRows.Count + "] clients ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    PreConnection.Excut_Cmd("DELETE FROM tb_clients WHERE ID IN (" + fff + ");");
+                    Load_clients_from_DB();
+                }
+
+            }
+
         }
     }
 }
