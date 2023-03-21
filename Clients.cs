@@ -140,7 +140,6 @@ namespace ALBAITAR_Softvet.Resources
             {
                 textBox6.BackColor = SystemColors.Window;
             }
-
         }
 
         private void textBox6_Validated(object sender, EventArgs e)
@@ -398,7 +397,7 @@ namespace ALBAITAR_Softvet.Resources
                     switch (g.HeaderText)
                     {
                         case "SEX":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Sex";
+                            xcelApp.Cells[1, g.Index + 1].Value = "Sexe";
                             break;
                         case "FAMNME":
                             xcelApp.Cells[1, g.Index + 1].Value = "Prénom";
@@ -452,7 +451,7 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     t.Cells.Cast<DataGridViewCell>().ToList().ForEach(b =>
                     {
-                        xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : "";
+                        xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").Replace("00:00:00", "").TrimStart().TrimEnd() : "";
                     });
 
                 });

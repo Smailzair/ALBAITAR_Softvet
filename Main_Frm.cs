@@ -36,6 +36,19 @@ namespace ALBAITAR_Softvet
         {
 
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["Animaux"] == null)
+            {
+                new Animaux().Show();
+            }
+            else
+            {
+                Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
+                Application.OpenForms["Animaux"].BringToFront();
+            }
+        }
     }
 }
 

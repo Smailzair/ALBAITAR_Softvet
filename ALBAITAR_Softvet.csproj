@@ -61,8 +61,7 @@
     <StartupObject>ALBAITAR_Softvet.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>icons8_veterinarian_male.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -196,6 +195,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animaux.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Animaux.Designer.cs">
+      <DependentUpon>Animaux.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +218,12 @@
     </Compile>
     <Compile Include="Dialogs\Login_Pass_Forgot.Designer.cs">
       <DependentUpon>Login_Pass_Forgot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Small_New_Client.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Small_New_Client.Designer.cs">
+      <DependentUpon>Small_New_Client.cs</DependentUpon>
     </Compile>
     <Compile Include="Main_Frm.cs">
       <SubType>Form</SubType>
@@ -241,6 +252,9 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Animaux.resx">
+      <DependentUpon>Animaux.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -249,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Login_Pass_Forgot.resx">
       <DependentUpon>Login_Pass_Forgot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Small_New_Client.resx">
+      <DependentUpon>Small_New_Client.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main_Frm.resx">
       <DependentUpon>Main_Frm.cs</DependentUpon>
@@ -410,6 +427,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\MODIF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_dog_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons8_veterinarian_male.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
