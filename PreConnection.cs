@@ -497,5 +497,19 @@ namespace ALBAITAR_Softvet
             }
 
         }
+
+        public static byte[] ImageToByteArray(Image img)
+        {
+            ImageConverter converter = new ImageConverter();
+            return (byte[])converter.ConvertTo(img, typeof(byte[]));
+        }
+
+        public static Image ByteArrayToImage(byte[] imageBytes)
+        {
+            using (var memoryStream = new MemoryStream(imageBytes))
+            {
+                return Image.FromStream(memoryStream);
+            }
+        }
     }
 }

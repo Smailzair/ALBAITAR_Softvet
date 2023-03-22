@@ -63,6 +63,36 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Canine {
+            get {
+                object obj = ResourceManager.GetObject("Canine", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Caprine {
+            get {
+                object obj = ResourceManager.GetObject("Caprine", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Equine {
+            get {
+                object obj = ResourceManager.GetObject("Equine", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Excel_In {
             get {
                 object obj = ResourceManager.GetObject("Excel_In", resourceCulture);
@@ -76,6 +106,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap Excel_Out {
             get {
                 object obj = ResourceManager.GetObject("Excel_Out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Feline {
+            get {
+                object obj = ResourceManager.GetObject("Feline", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,6 +203,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_eraser_tool_30px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_eraser_tool_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_fingerprint_scan_50px {
             get {
                 object obj = ResourceManager.GetObject("icons8_fingerprint_scan_50px", resourceCulture);
@@ -186,6 +236,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap icons8_folders_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_folders_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_image_file_remove_30px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_image_file_remove_30px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -313,6 +373,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_slr_small_lens_30px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_slr_small_lens_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_statistics_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_statistics_30px", resourceCulture);
@@ -353,9 +423,29 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Oiseaux {
+            get {
+                object obj = ResourceManager.GetObject("Oiseaux", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Ok {
             get {
                 object obj = ResourceManager.GetObject("Ok", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ovine {
+            get {
+                object obj = ResourceManager.GetObject("Ovine", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -376,6 +466,26 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap Read_Only {
             get {
                 object obj = ResourceManager.GetObject("Read_Only", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Reptile {
+            get {
+                object obj = ResourceManager.GetObject("Reptile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Rongeur {
+            get {
+                object obj = ResourceManager.GetObject("Rongeur", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

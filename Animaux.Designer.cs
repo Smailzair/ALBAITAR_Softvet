@@ -31,25 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Animaux));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.button6 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NUM_IDENTIF = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NUM_PASSPORT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CLIENT_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESPECE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RACE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SEXE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NISS_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ROBE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OBSERVATIONS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IS_RADIATED = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RADIATION_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RADIATION_CAUSES = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -66,12 +49,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -80,14 +61,39 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NUM_IDENTIF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NUM_PASSPORT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ESPECE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RACE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SEXE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NISS_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ROBE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OBSERVATIONS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IS_RADIATED = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RADIATION_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RADIATION_CAUSES = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PICTURE = new System.Windows.Forms.DataGridViewImageColumn();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,6 +117,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.button7);
+            this.splitContainer1.Panel2.Controls.Add(this.button5);
+            this.splitContainer1.Panel2.Controls.Add(this.pictureBox2);
             this.splitContainer1.Panel2.Controls.Add(this.checkBox1);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel2.Controls.Add(this.label10);
@@ -142,21 +151,6 @@
             this.splitContainer1.SplitterDistance = 219;
             this.splitContainer1.TabIndex = 0;
             // 
-            // button6
-            // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(149, 420);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(26, 31);
-            this.button6.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.button6, "Exporter en Excel");
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -166,36 +160,6 @@
             this.textBox1.Size = new System.Drawing.Size(195, 21);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // button4
-            // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(181, 421);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(26, 29);
-            this.button4.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.button4, "Supprimer");
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(12, 421);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(26, 29);
-            this.button3.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.button3, "Ajouter");
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // dataGridView1
             // 
@@ -221,7 +185,8 @@
             this.OBSERVATIONS,
             this.IS_RADIATED,
             this.RADIATION_DATE,
-            this.RADIATION_CAUSES});
+            this.RADIATION_CAUSES,
+            this.PICTURE});
             this.dataGridView1.Location = new System.Drawing.Point(3, 42);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -230,118 +195,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(213, 375);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // NME
-            // 
-            this.NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NME.DataPropertyName = "NME";
-            this.NME.HeaderText = "NME";
-            this.NME.Name = "NME";
-            this.NME.ReadOnly = true;
-            // 
-            // NUM_IDENTIF
-            // 
-            this.NUM_IDENTIF.DataPropertyName = "NUM_IDENTIF";
-            this.NUM_IDENTIF.HeaderText = "NUM_IDENTIF";
-            this.NUM_IDENTIF.Name = "NUM_IDENTIF";
-            this.NUM_IDENTIF.ReadOnly = true;
-            this.NUM_IDENTIF.Visible = false;
-            // 
-            // NUM_PASSPORT
-            // 
-            this.NUM_PASSPORT.DataPropertyName = "NUM_PASSPORT";
-            this.NUM_PASSPORT.HeaderText = "NUM_PASSPORT";
-            this.NUM_PASSPORT.Name = "NUM_PASSPORT";
-            this.NUM_PASSPORT.ReadOnly = true;
-            this.NUM_PASSPORT.Visible = false;
-            // 
-            // CLIENT_ID
-            // 
-            this.CLIENT_ID.DataPropertyName = "CLIENT_ID";
-            this.CLIENT_ID.HeaderText = "CLIENT_ID";
-            this.CLIENT_ID.Name = "CLIENT_ID";
-            this.CLIENT_ID.ReadOnly = true;
-            this.CLIENT_ID.Visible = false;
-            // 
-            // ESPECE
-            // 
-            this.ESPECE.DataPropertyName = "ESPECE";
-            this.ESPECE.HeaderText = "ESPECE";
-            this.ESPECE.Name = "ESPECE";
-            this.ESPECE.ReadOnly = true;
-            this.ESPECE.Visible = false;
-            // 
-            // RACE
-            // 
-            this.RACE.DataPropertyName = "RACE";
-            this.RACE.HeaderText = "RACE";
-            this.RACE.Name = "RACE";
-            this.RACE.ReadOnly = true;
-            this.RACE.Visible = false;
-            // 
-            // SEXE
-            // 
-            this.SEXE.DataPropertyName = "SEXE";
-            this.SEXE.HeaderText = "SEXE";
-            this.SEXE.Name = "SEXE";
-            this.SEXE.ReadOnly = true;
-            this.SEXE.Visible = false;
-            // 
-            // NISS_DATE
-            // 
-            this.NISS_DATE.DataPropertyName = "NISS_DATE";
-            this.NISS_DATE.HeaderText = "NISS_DATE";
-            this.NISS_DATE.Name = "NISS_DATE";
-            this.NISS_DATE.ReadOnly = true;
-            this.NISS_DATE.Visible = false;
-            // 
-            // ROBE
-            // 
-            this.ROBE.DataPropertyName = "ROBE";
-            this.ROBE.HeaderText = "ROBE";
-            this.ROBE.Name = "ROBE";
-            this.ROBE.ReadOnly = true;
-            this.ROBE.Visible = false;
-            // 
-            // OBSERVATIONS
-            // 
-            this.OBSERVATIONS.DataPropertyName = "OBSERVATIONS";
-            this.OBSERVATIONS.HeaderText = "OBSERVATIONS";
-            this.OBSERVATIONS.Name = "OBSERVATIONS";
-            this.OBSERVATIONS.ReadOnly = true;
-            this.OBSERVATIONS.Visible = false;
-            // 
-            // IS_RADIATED
-            // 
-            this.IS_RADIATED.DataPropertyName = "IS_RADIATED";
-            this.IS_RADIATED.HeaderText = "IS_RADIATED";
-            this.IS_RADIATED.Name = "IS_RADIATED";
-            this.IS_RADIATED.ReadOnly = true;
-            this.IS_RADIATED.Visible = false;
-            // 
-            // RADIATION_DATE
-            // 
-            this.RADIATION_DATE.DataPropertyName = "RADIATION_DATE";
-            this.RADIATION_DATE.HeaderText = "RADIATION_DATE";
-            this.RADIATION_DATE.Name = "RADIATION_DATE";
-            this.RADIATION_DATE.ReadOnly = true;
-            this.RADIATION_DATE.Visible = false;
-            // 
-            // RADIATION_CAUSES
-            // 
-            this.RADIATION_CAUSES.DataPropertyName = "RADIATION_CAUSES";
-            this.RADIATION_CAUSES.HeaderText = "RADIATION_CAUSES";
-            this.RADIATION_CAUSES.Name = "RADIATION_CAUSES";
-            this.RADIATION_CAUSES.ReadOnly = true;
-            this.RADIATION_CAUSES.Visible = false;
             // 
             // checkBox1
             // 
@@ -363,9 +216,9 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Location = new System.Drawing.Point(352, 241);
+            this.groupBox1.Location = new System.Drawing.Point(352, 268);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(229, 155);
+            this.groupBox1.Size = new System.Drawing.Size(229, 128);
             this.groupBox1.TabIndex = 41;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Radiation : ";
@@ -405,7 +258,7 @@
             this.textBox5.Location = new System.Drawing.Point(6, 72);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(217, 73);
+            this.textBox5.Size = new System.Drawing.Size(217, 46);
             this.textBox5.TabIndex = 17;
             this.toolTip1.SetToolTip(this.textBox5, "ex: Euthanasie");
             // 
@@ -565,6 +418,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(255, 24);
             this.comboBox2.TabIndex = 9;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -574,21 +428,6 @@
             this.label6.Size = new System.Drawing.Size(52, 16);
             this.label6.TabIndex = 29;
             this.label6.Text = "Espéce :";
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(348, 93);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(25, 24);
-            this.button1.TabIndex = 28;
-            this.toolTip1.SetToolTip(this.button1, "Ajouter un propriétaire");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBox1
             // 
@@ -640,26 +479,6 @@
             this.label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label12.Visible = false;
             this.label12.VisibleChanged += new System.EventHandler(this.label12_VisibleChanged);
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.button2.FlatAppearance.BorderSize = 2;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Green;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_save_close_25px;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(372, 408);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(188, 37);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "Enregistrer";
-            this.toolTip1.SetToolTip(this.button2, "Enregistrer");
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox8
             // 
@@ -739,6 +558,263 @@
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.Validated += new System.EventHandler(this.textBox2_Validated);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "Images |*.bmp;*.jpg;*.jpeg;*.png";
+            this.openFileDialog1.Title = "Choisir une image :";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // NME
+            // 
+            this.NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NME.DataPropertyName = "NME";
+            this.NME.HeaderText = "NME";
+            this.NME.Name = "NME";
+            this.NME.ReadOnly = true;
+            // 
+            // NUM_IDENTIF
+            // 
+            this.NUM_IDENTIF.DataPropertyName = "NUM_IDENTIF";
+            this.NUM_IDENTIF.HeaderText = "NUM_IDENTIF";
+            this.NUM_IDENTIF.Name = "NUM_IDENTIF";
+            this.NUM_IDENTIF.ReadOnly = true;
+            this.NUM_IDENTIF.Visible = false;
+            // 
+            // NUM_PASSPORT
+            // 
+            this.NUM_PASSPORT.DataPropertyName = "NUM_PASSPORT";
+            this.NUM_PASSPORT.HeaderText = "NUM_PASSPORT";
+            this.NUM_PASSPORT.Name = "NUM_PASSPORT";
+            this.NUM_PASSPORT.ReadOnly = true;
+            this.NUM_PASSPORT.Visible = false;
+            // 
+            // CLIENT_ID
+            // 
+            this.CLIENT_ID.DataPropertyName = "CLIENT_ID";
+            this.CLIENT_ID.HeaderText = "CLIENT_ID";
+            this.CLIENT_ID.Name = "CLIENT_ID";
+            this.CLIENT_ID.ReadOnly = true;
+            this.CLIENT_ID.Visible = false;
+            // 
+            // ESPECE
+            // 
+            this.ESPECE.DataPropertyName = "ESPECE";
+            this.ESPECE.HeaderText = "ESPECE";
+            this.ESPECE.Name = "ESPECE";
+            this.ESPECE.ReadOnly = true;
+            this.ESPECE.Visible = false;
+            // 
+            // RACE
+            // 
+            this.RACE.DataPropertyName = "RACE";
+            this.RACE.HeaderText = "RACE";
+            this.RACE.Name = "RACE";
+            this.RACE.ReadOnly = true;
+            this.RACE.Visible = false;
+            // 
+            // SEXE
+            // 
+            this.SEXE.DataPropertyName = "SEXE";
+            this.SEXE.HeaderText = "SEXE";
+            this.SEXE.Name = "SEXE";
+            this.SEXE.ReadOnly = true;
+            this.SEXE.Visible = false;
+            // 
+            // NISS_DATE
+            // 
+            this.NISS_DATE.DataPropertyName = "NISS_DATE";
+            this.NISS_DATE.HeaderText = "NISS_DATE";
+            this.NISS_DATE.Name = "NISS_DATE";
+            this.NISS_DATE.ReadOnly = true;
+            this.NISS_DATE.Visible = false;
+            // 
+            // ROBE
+            // 
+            this.ROBE.DataPropertyName = "ROBE";
+            this.ROBE.HeaderText = "ROBE";
+            this.ROBE.Name = "ROBE";
+            this.ROBE.ReadOnly = true;
+            this.ROBE.Visible = false;
+            // 
+            // OBSERVATIONS
+            // 
+            this.OBSERVATIONS.DataPropertyName = "OBSERVATIONS";
+            this.OBSERVATIONS.HeaderText = "OBSERVATIONS";
+            this.OBSERVATIONS.Name = "OBSERVATIONS";
+            this.OBSERVATIONS.ReadOnly = true;
+            this.OBSERVATIONS.Visible = false;
+            // 
+            // IS_RADIATED
+            // 
+            this.IS_RADIATED.DataPropertyName = "IS_RADIATED";
+            this.IS_RADIATED.HeaderText = "IS_RADIATED";
+            this.IS_RADIATED.Name = "IS_RADIATED";
+            this.IS_RADIATED.ReadOnly = true;
+            this.IS_RADIATED.Visible = false;
+            // 
+            // RADIATION_DATE
+            // 
+            this.RADIATION_DATE.DataPropertyName = "RADIATION_DATE";
+            this.RADIATION_DATE.HeaderText = "RADIATION_DATE";
+            this.RADIATION_DATE.Name = "RADIATION_DATE";
+            this.RADIATION_DATE.ReadOnly = true;
+            this.RADIATION_DATE.Visible = false;
+            // 
+            // RADIATION_CAUSES
+            // 
+            this.RADIATION_CAUSES.DataPropertyName = "RADIATION_CAUSES";
+            this.RADIATION_CAUSES.HeaderText = "RADIATION_CAUSES";
+            this.RADIATION_CAUSES.Name = "RADIATION_CAUSES";
+            this.RADIATION_CAUSES.ReadOnly = true;
+            this.RADIATION_CAUSES.Visible = false;
+            // 
+            // PICTURE
+            // 
+            this.PICTURE.DataPropertyName = "PICTURE";
+            this.PICTURE.HeaderText = "PICTURE";
+            this.PICTURE.Name = "PICTURE";
+            this.PICTURE.ReadOnly = true;
+            this.PICTURE.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.PICTURE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.PICTURE.Visible = false;
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Location = new System.Drawing.Point(149, 420);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(26, 31);
+            this.button6.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.button6, "Exporter en Excel");
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(181, 421);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(26, 29);
+            this.button4.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.button4, "Supprimer");
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(12, 421);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(26, 29);
+            this.button3.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.button3, "Ajouter");
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button7
+            // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button7.BackColor = System.Drawing.Color.Transparent;
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_eraser_tool_30px;
+            this.button7.Location = new System.Drawing.Point(541, 201);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(34, 31);
+            this.button7.TabIndex = 44;
+            this.toolTip1.SetToolTip(this.button7, "Supprimer l\'image");
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Visible = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button5
+            // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button5.BackColor = System.Drawing.Color.Transparent;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_slr_small_lens_30px;
+            this.button5.Location = new System.Drawing.Point(383, 201);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(34, 31);
+            this.button5.TabIndex = 43;
+            this.toolTip1.SetToolTip(this.button5, "Changer l\'image");
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox2.Location = new System.Drawing.Point(383, 37);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(192, 195);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 42;
+            this.pictureBox2.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(348, 93);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(25, 24);
+            this.button1.TabIndex = 28;
+            this.toolTip1.SetToolTip(this.button1, "Ajouter un propriétaire");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Green;
+            this.button2.FlatAppearance.BorderSize = 2;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Green;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_save_close_25px;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(372, 408);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(188, 37);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "Enregistrer";
+            this.toolTip1.SetToolTip(this.button2, "Enregistrer");
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -772,6 +848,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -817,6 +894,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn NME;
         private System.Windows.Forms.DataGridViewTextBoxColumn NUM_IDENTIF;
@@ -831,5 +911,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IS_RADIATED;
         private System.Windows.Forms.DataGridViewTextBoxColumn RADIATION_DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn RADIATION_CAUSES;
+        private System.Windows.Forms.DataGridViewImageColumn PICTURE;
+        private System.Windows.Forms.Button button7;
     }
 }
