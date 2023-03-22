@@ -42,7 +42,8 @@ namespace ALBAITAR_Softvet.Resources
             //---------------------
             Load_anims_from_DB();
             //---------------------
-           
+
+
         }
         private void Load_anims_from_DB()
         {
@@ -89,7 +90,7 @@ namespace ALBAITAR_Softvet.Resources
             }
             else
             {
-                button3.PerformClick();
+               button3.PerformClick();                
             }
 
         }
@@ -104,7 +105,8 @@ namespace ALBAITAR_Softvet.Resources
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            PreConnection.search_filter_datagridview(dataGridView1, textBox1.Text);
+            ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = String.Format("NME LIKE '%{0}%'", textBox1.Text);
+            
         }
 
 
@@ -240,12 +242,17 @@ namespace ALBAITAR_Softvet.Resources
             Is_New = true;
             foreach(Control ctrl in splitContainer1.Panel2.Controls)
             {                
-                if(ctrl.GetType() == typeof(TextBox) || ctrl.GetType() == typeof(MaskedTextBox) || (ctrl.GetType() == typeof(ComboBox) && ((ComboBox)ctrl).DropDownStyle != ComboBoxStyle.DropDownList))
+                if(ctrl.GetType() == typeof(TextBox) || ctrl.GetType() == typeof(MaskedTextBox))
                 {
                     ctrl.Text = string.Empty;
                 }else if (ctrl.GetType() == typeof(ComboBox) && ((ComboBox)ctrl).DropDownStyle == ComboBoxStyle.DropDownList){
                     ((ComboBox)ctrl).SelectedIndex= 0;
-                }else if (ctrl.GetType() == typeof(DateTimePicker))
+                }
+                else if(ctrl.GetType() == typeof(ComboBox))
+                {
+                    ((ComboBox)ctrl).SelectedValue = -1;
+                }
+                else if (ctrl.GetType() == typeof(DateTimePicker))
                 {
                     ((DateTimePicker)ctrl).Value = DateTime.Now;
                 }
@@ -426,6 +433,11 @@ namespace ALBAITAR_Softvet.Resources
         private void comboBox1_TextChanged(object sender, EventArgs e)
         {
             comboBox1.BackColor = SystemColors.Window;
+            //----------------
+            //if((int)comboBox1.SelectedValue > 0 && comboBox1.Text == "")
+            //{
+            //    comboBox1.SelectedValue = comboBox1.SelectedValue;
+            //}
         }
 
         private void comboBox1_DropDown(object sender, EventArgs e)
@@ -461,3 +473,4 @@ namespace ALBAITAR_Softvet.Resources
         }
     }
 }
+
