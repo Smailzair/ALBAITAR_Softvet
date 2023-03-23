@@ -142,5 +142,17 @@ namespace ALBAITAR_Softvet.Properties {
                 this["RANCOSOFT_GMAIL_AUTHENT"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Use_animals_logo {
+            get {
+                return ((bool)(this["Use_animals_logo"]));
+            }
+            set {
+                this["Use_animals_logo"] = value;
+            }
+        }
     }
 }

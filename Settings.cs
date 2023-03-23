@@ -46,12 +46,15 @@ namespace ALBAITAR_Softvet
             }
 
             //-----------------
-            
-            if (splitContainer1.Panel2.Controls[0] != ll)
-            {              
-               
-                splitContainer1.Panel2.Controls[0].Dock = DockStyle.Fill;
+            if(splitContainer1.Panel2.Controls.Count > 0)
+            {
+                if (splitContainer1.Panel2.Controls[0] != ll)
+                {
+
+                    splitContainer1.Panel2.Controls[0].Dock = DockStyle.Fill;
+                }
             }
+            
             
             
         }

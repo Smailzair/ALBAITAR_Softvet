@@ -195,6 +195,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Produits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Produits.Designer.cs">
+      <DependentUpon>Produits.cs</DependentUpon>
+    </Compile>
     <Compile Include="Animaux.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +258,9 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Produits.resx">
+      <DependentUpon>Produits.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Animaux.resx">
       <DependentUpon>Animaux.cs</DependentUpon>
     </EmbeddedResource>
@@ -433,6 +442,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\icons8_down_button_30px1.png" />
+    <None Include="Resources\icons8_slide_up_30px.png" />
+    <None Include="Resources\icons8_down_button_30px.png" />
+    <None Include="Resources\icons8_products_pile_30px_1.png" />
     <None Include="Resources\Rongeur.png" />
     <None Include="Resources\Reptile.png" />
     <None Include="Resources\Ovine.png" />

@@ -80,7 +80,7 @@ namespace ALBAITAR_Softvet.Resources
                 checkBox1.Checked = (SByte)dataGridView1.SelectedRows[0].Cells["IS_RADIATED"].Value != 0;
                 dateTimePicker2.Value = dataGridView1.SelectedRows[0].Cells["RADIATION_DATE"].Value != DBNull.Value ? (DateTime)dataGridView1.SelectedRows[0].Cells["RADIATION_DATE"].Value : DateTime.Now.Date;
                 textBox5.Text = (string)dataGridView1.SelectedRows[0].Cells["RADIATION_CAUSES"].Value;
-                pictureBox2.Image = dataGridView1.SelectedRows[0].Cells["picture"].Value != DBNull.Value ? PreConnection.ByteArrayToImage((byte[])dataGridView1.SelectedRows[0].Cells["picture"].Value) : (Image)Properties.Resources.ResourceManager.GetObject(comboBox2.Text);
+                pictureBox2.Image = dataGridView1.SelectedRows[0].Cells["picture"].Value != DBNull.Value ? PreConnection.ByteArrayToImage((byte[])dataGridView1.SelectedRows[0].Cells["picture"].Value) : (Properties.Settings.Default.Use_animals_logo ? (Image)Properties.Resources.ResourceManager.GetObject(comboBox2.Text) : null);
                 button7.Visible = dataGridView1.SelectedRows[0].Cells["picture"].Value != DBNull.Value;
                 //----------------------------------------------
                 textBox2.Validated += textBox2_Validated;
@@ -449,7 +449,15 @@ namespace ALBAITAR_Softvet.Resources
         {            
             if (!button7.Visible)
             {
-                pictureBox2.Image = (Image)Properties.Resources.ResourceManager.GetObject(comboBox2.Text);
+                if (Properties.Settings.Default.Use_animals_logo)
+                {
+                    pictureBox2.Image = (Image)Properties.Resources.ResourceManager.GetObject(comboBox2.Text);
+                }
+                else
+                {
+                    pictureBox2.Image = null;
+                }
+                
             }        
         }
 
