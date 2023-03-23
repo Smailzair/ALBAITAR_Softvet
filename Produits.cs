@@ -52,6 +52,11 @@ namespace ALBAITAR_Softvet.Resources
                 textBox4.Text = des.ToString("# ##0.00");
             
         }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
