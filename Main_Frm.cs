@@ -62,6 +62,37 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Produits"].BringToFront();
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["Agenda"] == null)
+            {
+                new Agenda().Show();
+            }
+            else
+            {
+                Application.OpenForms["Agenda"].WindowState = Application.OpenForms["Agenda"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Agenda"].WindowState;
+                Application.OpenForms["Agenda"].BringToFront();
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["Agenda_test"] == null)
+            {
+                new Agenda_test().Show();
+            }
+            else
+            {
+                Application.OpenForms["Agenda_test"].WindowState = Application.OpenForms["Agenda_test"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Agenda_test"].WindowState;
+                Application.OpenForms["Agenda_test"].BringToFront();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            new Form1().Show();
+        }
     }
 }
 

@@ -433,6 +433,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_tear_off_calendar_30px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_tear-off_calendar_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_trash_25px_1 {
             get {
                 object obj = ResourceManager.GetObject("icons8_trash_25px_1", resourceCulture);
@@ -493,6 +503,26 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pngfind_com_doctor_png_3001218 {
+            get {
+                object obj = ResourceManager.GetObject("pngfind.com-doctor-png-3001218", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngtree_vet_doctors_with_animals_png_image_876872799 {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-vet-doctors-with-animals-png-image_876872799", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rainbow_spinner_loading {
             get {
                 object obj = ResourceManager.GetObject("rainbow-spinner-loading", resourceCulture);
@@ -533,9 +563,29 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap stethoscope_forme_chien_isole_blanc_1401_2360 {
+            get {
+                object obj = ResourceManager.GetObject("stethoscope-forme-chien-isole-blanc_1401-2360", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Stop {
             get {
                 object obj = ResourceManager.GetObject("Stop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap variedad_siluetas_razas_perros_23_2147516351 {
+            get {
+                object obj = ResourceManager.GetObject("variedad-siluetas-razas-perros_23-2147516351", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
