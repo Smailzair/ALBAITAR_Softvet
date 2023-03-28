@@ -280,4 +280,25 @@
   <data name="icons8_tear-off_calendar_30px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_tear-off_calendar_30px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="agenda_001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\agenda_001.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="agenda_002" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\agenda_002.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="agenda_003" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\agenda_003.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="agenda_004" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\agenda_004.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="agenda_005" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\agenda_005.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="agenda_006" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\agenda_006.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="agenda_007" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\agenda_007.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

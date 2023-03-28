@@ -573,6 +573,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\agenda_007.png" />
+    <None Include="Resources\agenda_006.png" />
+    <None Include="Resources\agenda_005.png" />
+    <None Include="Resources\agenda_004.png" />
+    <None Include="Resources\agenda_003.png" />
+    <None Include="Resources\agenda_002.png" />
+    <None Include="Resources\agenda_001.png" />
+    <None Include="Resources\agenda_011.png" />
+    <None Include="Resources\agenda_005.ico" />
+    <None Include="Resources\agenda_004.ico" />
+    <None Include="Resources\agenda_003.ico" />
+    <None Include="Resources\agenda_002.ico" />
+    <None Include="Resources\agenda_001.ico" />
+    <None Include="Resources\icons8_veterinary_examination_1.ico" />
+    <None Include="Resources\icons8_syringe_with_a_drop_of_blood.ico" />
+    <None Include="Resources\icons8_pill.ico" />
+    <None Include="Resources\icons8_pets_medical_examination.ico" />
+    <None Include="Resources\icons8_laboratory.ico" />
     <None Include="Resources\icons8_tear-off_calendar_30px.png" />
     <None Include="Resources\pngtree-vet-doctors-with-animals-png-image_876872799.png" />
     <None Include="Resources\pngfind.com-doctor-png-3001218.png" />
