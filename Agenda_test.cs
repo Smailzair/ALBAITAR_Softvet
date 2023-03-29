@@ -1,26 +1,27 @@
-﻿using System;
+﻿using ServiceStack;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Resources
 {
-    public partial class Agenda_test : Form
+    public partial class Agenda_TEST : Form
     {
         DateTime startDate = DateTime.MinValue;
         DateTime endDate = DateTime.MaxValue;
-        int lineHeight;
-        public Agenda_test()
+        public Agenda_TEST()
         {
             InitializeComponent();
             //----------------------
-            lineHeight = TextRenderer.MeasureText("Sample Text", textBox2.Font).Height;
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
+
             startDate = DateTime.Parse("01/" + e.Start.Month + "/" + e.Start.Year);
             endDate = DateTime.Parse(DateTime.DaysInMonth(e.Start.Year, e.Start.Month) + "/" + e.Start.Month + "/" + e.Start.Year);
             //--------------------------------
@@ -32,54 +33,45 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     if (ctr1.Name.Contains("Dayy_"))
                     {
-                        ctr1.Enabled = true;
-                        ctr1.BackColor = Color.White;
-                        foreach (Control ctr2 in ctr1.Controls)
+                        ((ListView)ctr1).Items.Clear();
+                        ((ListView)ctr1).Columns[0].Text = "";
+                        if ((int.Parse(ctr1.Name.Substring(5)) - ddds) <= (endDate.Date).Day && (int.Parse(ctr1.Name.Substring(5)) - ddds) >= (startDate.Date).Day)
                         {
-                            if (!ctr2.Name.Contains("label_nb_day_"))
-                            {
-                                ctr1.Controls.Remove(ctr2);
-                            }
-                            else
-                            {
-                                if ((int.Parse(ctr2.Name.Substring(13)) - ddds) <= (endDate.Date).Day)
-                                {
-                                    ctr2.Text = (int.Parse(ctr2.Name.Substring(13)) - ddds).ToString();
-                                }
-                                else
-                                {
-
-
-                                    next_mnth_frst_day_label_nb = next_mnth_frst_day_label_nb > int.Parse(ctr2.Name.Substring(13)) || next_mnth_frst_day_label_nb == 0 ? int.Parse(ctr2.Name.Substring(13)) : next_mnth_frst_day_label_nb;
-                                    ctr2.Text = (int.Parse(ctr2.Name.Substring(13)) - ddds - (endDate.Date).Day + 1).ToString();
-                                }
-
-                            }
+                            ((ListView)ctr1).Columns[0].Text = (int.Parse(ctr1.Name.Substring(5)) - ddds).ToString();                            
+                            ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.Nonclickable;
+                            ((ListView)ctr1).BorderStyle = BorderStyle.Fixed3D;
                         }
+                        else
+                        {
+                            ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.None;
+                            ((ListView)ctr1).BorderStyle= BorderStyle.None;
+                        }
+
+
                     }
                 }
             }
             //------------------------
-            int ss = ((int)startDate.DayOfWeek);
-            if (ss > 0)
-            {
-                for (int pp = 0; pp < ss; pp++)
-                {
-                    Controls.Find("Dayy_0" + (pp + 1), true).FirstOrDefault().Controls[0].Text = (startDate.AddDays((ss * -1) + pp)).Day.ToString();
-                    Controls.Find("Dayy_0" + (pp + 1), true).FirstOrDefault().BackColor = Color.Gainsboro;
-                    Controls.Find("Dayy_0" + (pp + 1), true).FirstOrDefault().Enabled = false;
-                }
-            }
-            //--------------------------
-            int zsq = 1;
-            while (next_mnth_frst_day_label_nb < 43)
-            {
-                Controls.Find(string.Concat("label_nb_day_", next_mnth_frst_day_label_nb.ToString()), true).FirstOrDefault().Text = zsq.ToString();
-                Controls.Find("Dayy_" + next_mnth_frst_day_label_nb, true).FirstOrDefault().BackColor = Color.Gainsboro;
-                Controls.Find("Dayy_" + next_mnth_frst_day_label_nb, true).FirstOrDefault().Enabled = false;
-                zsq++;
-                next_mnth_frst_day_label_nb++;
-            }
+            //int ss = ((int)startDate.DayOfWeek);
+            //if (ss > 0)
+            //{
+            //    for (int pp = 0; pp < ss; pp++)
+            //    {
+            //        ((ListView)Controls.Find("Dayy_" + (pp + 1), true).FirstOrDefault()).Columns[0].Text = (startDate.AddDays((ss * -1) + pp)).Day.ToString();
+            //        Controls.Find("Dayy_" + (pp + 1), true).FirstOrDefault().BackColor = Color.Gainsboro;
+            //        Controls.Find("Dayy_" + (pp + 1), true).FirstOrDefault().Enabled = false;
+            //    }
+            //}
+            ////--------------------------
+            //int zsq = 1;
+            //while (next_mnth_frst_day_label_nb < 43)
+            //{
+            //    ((ListView)Controls.Find("Dayy_" + next_mnth_frst_day_label_nb.ToString(), true).FirstOrDefault()).Columns[0].Text = zsq.ToString();                
+            //    Controls.Find("Dayy_" + next_mnth_frst_day_label_nb, true).FirstOrDefault().BackColor = Color.Gainsboro;
+            //    Controls.Find("Dayy_" + next_mnth_frst_day_label_nb, true).FirstOrDefault().Enabled = false;
+            //    zsq++;
+            //    next_mnth_frst_day_label_nb++;
+            //}
         }
 
         private void flowLayoutPanel1_SizeChanged(object sender, EventArgs e)
@@ -87,12 +79,15 @@ namespace ALBAITAR_Softvet.Resources
            
         }
 
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            textBox2.Text += "\r\ndsfsdfsdfsdf sdfdsf dfdsfdf dfsg dsfg dsds gdsf df fd df df";
-            textBox2.Size = new Size(textBox2.Width ,lineHeight * textBox2.Lines.Length + 4);
+            Label ddsq= new Label();
+            ddsq.Text = "fsfsd sdfsdf sdfsd sdfsdff fsd sdfsdfsdf dfdsfdfsfds gdfsgdsfgdsfg sdfgdsfgdsf";
+            Dayy_3.Controls.Add(ddsq);
+            Dayy_3.AutoSize= true;
+            //Dayy_03.AutoSize = false;
         }
+
     }
 }
 

@@ -50,7 +50,8 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(27, 86);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(427, 149);
+            this.listView1.ShowItemToolTips = true;
+            this.listView1.Size = new System.Drawing.Size(158, 84);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -71,6 +72,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 2;
+            this.textBox1.Text = "15/07/2015";
             // 
             // button2
             // 
@@ -81,6 +83,15 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 5000;
+            this.toolTip1.InitialDelay = 0;
+            this.toolTip1.IsBalloon = true;
+            this.toolTip1.ReshowDelay = 100;
+            this.toolTip1.ShowAlways = true;
+            this.toolTip1.ToolTipTitle = "Déteil :";
             // 
             // Form1
             // 

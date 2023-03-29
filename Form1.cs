@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
-using System.Resources;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet
@@ -28,7 +24,7 @@ namespace ALBAITAR_Softvet
             items_icon.Images.Add("Feline", Properties.Resources.Feline);
             items_icon.Images.Add("Caprine", Properties.Resources.Caprine);
             items_icon.Images.Add("Equine", Properties.Resources.Equine);
-            items_icon.Images.Add("Canine", Properties.Resources.Canine); 
+            items_icon.Images.Add("Canine", Properties.Resources.Canine);
             items_icon.Images.Add("Oiseaux", Properties.Resources.Oiseaux);
             items_icon.Images.Add("Ovine", Properties.Resources.Ovine);
             items_icon.Images.Add("Rongeur", Properties.Resources.Rongeur);
@@ -36,7 +32,7 @@ namespace ALBAITAR_Softvet
             //--------------------------------
             infos = PreConnection.Load_data("SELECT * FROM tb_agenda;");
             //-------------------------------
-            listView1_SizeChanged(null, null);
+            listView1_SizeChanged(listView1, null);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,18 +42,12 @@ namespace ALBAITAR_Softvet
 
         private void listView1_SizeChanged(object sender, EventArgs e)
         {
-           if(sender != null)
-            {
                 if (((ListView)sender).Columns.Count > 0)
                 {
                     int totalWidth = ((ListView)sender).Columns.Cast<ColumnHeader>().Sum(c => c.Width); // Get the total width of all columns
                     int newFirstColumnWidth = ((ListView)sender).ClientSize.Width - (totalWidth - ((ListView)sender).Columns[0].Width); // Calculate the new width of the first column
                     ((ListView)sender).Columns[0].Width = newFirstColumnWidth; // Set the new width of the first column
                 }
-                    
-            }
-            
-
         }
 
 
@@ -65,7 +55,7 @@ namespace ALBAITAR_Softvet
         {
             e.Item.ForeColor = e.Item.Checked ? Color.Green : SystemColors.WindowText;
         }
-        int ppp = -1;
+
         private void listView1_MouseMove(object sender, MouseEventArgs e)
         {
             if (((ListView)sender).SelectedItems.Count > 0 && e.Button == MouseButtons.Left)
@@ -78,25 +68,7 @@ namespace ALBAITAR_Softvet
                 }
             }
             //==============================
-            ListViewItem itemm = ((ListView)sender).HitTest(e.Location).Item;
-            if (itemm != null)//&& ppp != itemm.Index)
-            {
-                ppp = itemm.Index;
-                //toolTip1.ToolTipTitle = "Item Details";
-                //toolTip1.ToolTipIcon = ToolTipIcon.Info;
-
-                toolTip1.SetToolTip(((ListView)sender), itemm.ToolTipText);
-                toolTip1.Show(itemm.ToolTipText, ((ListView)sender), e.Location);
-
-            }
-            else
-            {
-                //ppp = -1;
-                //toolTip1.Hide(((ListView)sender));
-            }
-
         }
-
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (((ListView)sender).SelectedItems.Count > 0)
@@ -134,7 +106,8 @@ namespace ALBAITAR_Softvet
                 }
             }
 
-            if (((ListView)sender).CheckBoxes) {
+            if (((ListView)sender).CheckBoxes)
+            {
                 ((ListView)sender).SelectedItems.Clear();
                 if (((ListView)sender).CheckedItems.Count == 0)
                 {
@@ -146,7 +119,7 @@ namespace ALBAITAR_Softvet
         private void button2_Click(object sender, EventArgs e)
         {
             Load_day_events(listView1, textBox1.Text);
-            
+
         }
 
         private void Load_day_events(ListView lst, string dte)
@@ -155,19 +128,21 @@ namespace ALBAITAR_Softvet
             //----------------
             DateTime dtt = DateTime.Parse("01/01/1999");
             DateTime.TryParse(dte, out dtt);
-            if(infos.Rows.Count > 0 && dtt > DateTime.Parse("01/01/1999")) {
+            if (infos.Rows.Count > 0 && dtt > DateTime.Parse("01/01/1999"))
+            {
                 infos.Rows.Cast<DataRow>().Where(EE => dtt >= (DateTime)EE["START_TIME"] && dtt <= (DateTime)EE["END_TIME"]).ToList().ForEach(ZZ =>
                 {
                     ListViewItem dd = new ListViewItem(ZZ["OBJECT"].ToString());
                     dd.SubItems.Add(ZZ["ID"].ToString());
                     dd.ImageKey = ZZ["ICON_NME"].ToString();
-                    dd.ToolTipText = ZZ["DESCRIPTION"].ToString();
+                    dd.ToolTipText = ZZ["DESCRIPTION"] != DBNull.Value ? (string)ZZ["DESCRIPTION"] : "";
                     lst.Items.Add(dd);
 
                 });
-               listView1_SizeChanged(lst, null);
-            }            
+                listView1_SizeChanged(lst, null);
+            }
         }
+
     }
 }
 

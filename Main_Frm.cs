@@ -78,14 +78,14 @@ namespace ALBAITAR_Softvet
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms["Agenda_test"] == null)
+            if (Application.OpenForms["Agenda_TEST"] == null)
             {
-                new Agenda_test().Show();
+                new Agenda_TEST().Show();
             }
             else
             {
-                Application.OpenForms["Agenda_test"].WindowState = Application.OpenForms["Agenda_test"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Agenda_test"].WindowState;
-                Application.OpenForms["Agenda_test"].BringToFront();
+                Application.OpenForms["Agenda_TEST"].WindowState = Application.OpenForms["Agenda_TEST"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Agenda_TEST"].WindowState;
+                Application.OpenForms["Agenda_TEST"].BringToFront();
             }
         }
 

@@ -299,11 +299,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agenda_test.cs">
+    <Compile Include="Agenda_TEST.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Agenda_test.Designer.cs">
-      <DependentUpon>Agenda_test.cs</DependentUpon>
+    <Compile Include="Agenda_TEST.Designer.cs">
+      <DependentUpon>Agenda_TEST.cs</DependentUpon>
     </Compile>
     <Compile Include="Agenda.cs">
       <SubType>Form</SubType>
@@ -380,8 +380,8 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Agenda_test.resx">
-      <DependentUpon>Agenda_test.cs</DependentUpon>
+    <EmbeddedResource Include="Agenda_TEST.resx">
+      <DependentUpon>Agenda_TEST.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Agenda.resx">
       <DependentUpon>Agenda.cs</DependentUpon>
