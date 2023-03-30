@@ -33,7 +33,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.Dim_Flow = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -135,6 +136,8 @@
             this.label_nb_day_42 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.flowLayoutPanel1.SuspendLayout();
             this.Dim_Flow.SuspendLayout();
             this.Lun_Flow.SuspendLayout();
@@ -163,13 +166,39 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Rechercher : ";
             // 
-            // monthCalendar1
+            // button1
             // 
-            this.monthCalendar1.FirstDayOfWeek = System.Windows.Forms.Day.Sunday;
-            this.monthCalendar1.Location = new System.Drawing.Point(15, 45);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 2;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_back_30px;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(10, 285);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(34, 30);
+            this.button1.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.button1, "Ajouter");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_next_page_30px;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(207, 285);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(34, 30);
+            this.button2.TabIndex = 26;
+            this.toolTip1.SetToolTip(this.button2, "Ajouter");
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -191,7 +220,6 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1104, 564);
             this.flowLayoutPanel1.TabIndex = 5;
-            this.flowLayoutPanel1.SizeChanged += new System.EventHandler(this.flowLayoutPanel1_SizeChanged);
             // 
             // Dim_Flow
             // 
@@ -239,6 +267,11 @@
             this.Dayy_1.TabIndex = 9;
             this.Dayy_1.UseCompatibleStateImageBehavior = false;
             this.Dayy_1.View = System.Windows.Forms.View.Details;
+            this.Dayy_1.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_1.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_1
             // 
@@ -264,6 +297,11 @@
             this.Dayy_8.TabIndex = 10;
             this.Dayy_8.UseCompatibleStateImageBehavior = false;
             this.Dayy_8.View = System.Windows.Forms.View.Details;
+            this.Dayy_8.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_8.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_8.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_8.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_8.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_8
             // 
@@ -289,6 +327,11 @@
             this.Dayy_15.TabIndex = 11;
             this.Dayy_15.UseCompatibleStateImageBehavior = false;
             this.Dayy_15.View = System.Windows.Forms.View.Details;
+            this.Dayy_15.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_15.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_15.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_15.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_15.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_15
             // 
@@ -314,6 +357,11 @@
             this.Dayy_22.TabIndex = 12;
             this.Dayy_22.UseCompatibleStateImageBehavior = false;
             this.Dayy_22.View = System.Windows.Forms.View.Details;
+            this.Dayy_22.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_22.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_22.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_22.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_22.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_22
             // 
@@ -339,6 +387,11 @@
             this.Dayy_29.TabIndex = 13;
             this.Dayy_29.UseCompatibleStateImageBehavior = false;
             this.Dayy_29.View = System.Windows.Forms.View.Details;
+            this.Dayy_29.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_29.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_29.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_29.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_29.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_29
             // 
@@ -364,6 +417,11 @@
             this.Dayy_36.TabIndex = 14;
             this.Dayy_36.UseCompatibleStateImageBehavior = false;
             this.Dayy_36.View = System.Windows.Forms.View.Details;
+            this.Dayy_36.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_36.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_36.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_36.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_36.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_36
             // 
@@ -416,6 +474,11 @@
             this.Dayy_2.TabIndex = 15;
             this.Dayy_2.UseCompatibleStateImageBehavior = false;
             this.Dayy_2.View = System.Windows.Forms.View.Details;
+            this.Dayy_2.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_2.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_2.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_2
             // 
@@ -441,6 +504,11 @@
             this.Dayy_9.TabIndex = 16;
             this.Dayy_9.UseCompatibleStateImageBehavior = false;
             this.Dayy_9.View = System.Windows.Forms.View.Details;
+            this.Dayy_9.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_9.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_9.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_9.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_9.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_9
             // 
@@ -466,6 +534,11 @@
             this.Dayy_16.TabIndex = 17;
             this.Dayy_16.UseCompatibleStateImageBehavior = false;
             this.Dayy_16.View = System.Windows.Forms.View.Details;
+            this.Dayy_16.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_16.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_16.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_16.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_16.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_16
             // 
@@ -491,6 +564,11 @@
             this.Dayy_23.TabIndex = 18;
             this.Dayy_23.UseCompatibleStateImageBehavior = false;
             this.Dayy_23.View = System.Windows.Forms.View.Details;
+            this.Dayy_23.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_23.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_23.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_23.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_23.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_23
             // 
@@ -516,6 +594,11 @@
             this.Dayy_30.TabIndex = 19;
             this.Dayy_30.UseCompatibleStateImageBehavior = false;
             this.Dayy_30.View = System.Windows.Forms.View.Details;
+            this.Dayy_30.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_30.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_30.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_30.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_30.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_30
             // 
@@ -541,6 +624,11 @@
             this.Dayy_37.TabIndex = 20;
             this.Dayy_37.UseCompatibleStateImageBehavior = false;
             this.Dayy_37.View = System.Windows.Forms.View.Details;
+            this.Dayy_37.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_37.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_37.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_37.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_37.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_37
             // 
@@ -593,6 +681,11 @@
             this.Dayy_3.TabIndex = 15;
             this.Dayy_3.UseCompatibleStateImageBehavior = false;
             this.Dayy_3.View = System.Windows.Forms.View.Details;
+            this.Dayy_3.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_3.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_3.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_3
             // 
@@ -618,6 +711,11 @@
             this.Dayy_10.TabIndex = 16;
             this.Dayy_10.UseCompatibleStateImageBehavior = false;
             this.Dayy_10.View = System.Windows.Forms.View.Details;
+            this.Dayy_10.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_10.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_10.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_10.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_10.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_10
             // 
@@ -643,6 +741,11 @@
             this.Dayy_17.TabIndex = 17;
             this.Dayy_17.UseCompatibleStateImageBehavior = false;
             this.Dayy_17.View = System.Windows.Forms.View.Details;
+            this.Dayy_17.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_17.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_17.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_17.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_17.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_17
             // 
@@ -668,6 +771,11 @@
             this.Dayy_24.TabIndex = 18;
             this.Dayy_24.UseCompatibleStateImageBehavior = false;
             this.Dayy_24.View = System.Windows.Forms.View.Details;
+            this.Dayy_24.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_24.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_24.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_24.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_24.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_24
             // 
@@ -693,6 +801,11 @@
             this.Dayy_31.TabIndex = 19;
             this.Dayy_31.UseCompatibleStateImageBehavior = false;
             this.Dayy_31.View = System.Windows.Forms.View.Details;
+            this.Dayy_31.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_31.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_31.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_31.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_31.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_31
             // 
@@ -718,6 +831,11 @@
             this.Dayy_38.TabIndex = 20;
             this.Dayy_38.UseCompatibleStateImageBehavior = false;
             this.Dayy_38.View = System.Windows.Forms.View.Details;
+            this.Dayy_38.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_38.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_38.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_38.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_38.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_38
             // 
@@ -770,6 +888,11 @@
             this.Dayy_4.TabIndex = 15;
             this.Dayy_4.UseCompatibleStateImageBehavior = false;
             this.Dayy_4.View = System.Windows.Forms.View.Details;
+            this.Dayy_4.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_4.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_4.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_4
             // 
@@ -795,6 +918,11 @@
             this.Dayy_11.TabIndex = 16;
             this.Dayy_11.UseCompatibleStateImageBehavior = false;
             this.Dayy_11.View = System.Windows.Forms.View.Details;
+            this.Dayy_11.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_11.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_11.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_11.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_11.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_11
             // 
@@ -820,6 +948,11 @@
             this.Dayy_18.TabIndex = 17;
             this.Dayy_18.UseCompatibleStateImageBehavior = false;
             this.Dayy_18.View = System.Windows.Forms.View.Details;
+            this.Dayy_18.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_18.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_18.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_18.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_18.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_18
             // 
@@ -845,6 +978,11 @@
             this.Dayy_25.TabIndex = 18;
             this.Dayy_25.UseCompatibleStateImageBehavior = false;
             this.Dayy_25.View = System.Windows.Forms.View.Details;
+            this.Dayy_25.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_25.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_25.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_25.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_25.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_25
             // 
@@ -870,6 +1008,11 @@
             this.Dayy_32.TabIndex = 19;
             this.Dayy_32.UseCompatibleStateImageBehavior = false;
             this.Dayy_32.View = System.Windows.Forms.View.Details;
+            this.Dayy_32.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_32.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_32.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_32.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_32.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_32
             // 
@@ -895,6 +1038,11 @@
             this.Dayy_39.TabIndex = 20;
             this.Dayy_39.UseCompatibleStateImageBehavior = false;
             this.Dayy_39.View = System.Windows.Forms.View.Details;
+            this.Dayy_39.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_39.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_39.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_39.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_39.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_39
             // 
@@ -947,6 +1095,11 @@
             this.Dayy_5.TabIndex = 15;
             this.Dayy_5.UseCompatibleStateImageBehavior = false;
             this.Dayy_5.View = System.Windows.Forms.View.Details;
+            this.Dayy_5.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_5.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_5.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_5
             // 
@@ -972,6 +1125,11 @@
             this.Dayy_12.TabIndex = 16;
             this.Dayy_12.UseCompatibleStateImageBehavior = false;
             this.Dayy_12.View = System.Windows.Forms.View.Details;
+            this.Dayy_12.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_12.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_12.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_12.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_12.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_12
             // 
@@ -997,6 +1155,11 @@
             this.Dayy_19.TabIndex = 17;
             this.Dayy_19.UseCompatibleStateImageBehavior = false;
             this.Dayy_19.View = System.Windows.Forms.View.Details;
+            this.Dayy_19.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_19.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_19.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_19.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_19.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_19
             // 
@@ -1022,6 +1185,11 @@
             this.Dayy_26.TabIndex = 18;
             this.Dayy_26.UseCompatibleStateImageBehavior = false;
             this.Dayy_26.View = System.Windows.Forms.View.Details;
+            this.Dayy_26.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_26.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_26.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_26.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_26.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_26
             // 
@@ -1047,6 +1215,11 @@
             this.Dayy_33.TabIndex = 19;
             this.Dayy_33.UseCompatibleStateImageBehavior = false;
             this.Dayy_33.View = System.Windows.Forms.View.Details;
+            this.Dayy_33.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_33.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_33.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_33.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_33.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_33
             // 
@@ -1072,6 +1245,11 @@
             this.Dayy_40.TabIndex = 20;
             this.Dayy_40.UseCompatibleStateImageBehavior = false;
             this.Dayy_40.View = System.Windows.Forms.View.Details;
+            this.Dayy_40.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_40.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_40.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_40.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_40.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_40
             // 
@@ -1124,6 +1302,11 @@
             this.Dayy_6.TabIndex = 15;
             this.Dayy_6.UseCompatibleStateImageBehavior = false;
             this.Dayy_6.View = System.Windows.Forms.View.Details;
+            this.Dayy_6.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_6.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_6.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_6.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_6
             // 
@@ -1149,6 +1332,11 @@
             this.Dayy_13.TabIndex = 16;
             this.Dayy_13.UseCompatibleStateImageBehavior = false;
             this.Dayy_13.View = System.Windows.Forms.View.Details;
+            this.Dayy_13.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_13.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_13.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_13.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_13.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_13
             // 
@@ -1174,6 +1362,11 @@
             this.Dayy_20.TabIndex = 17;
             this.Dayy_20.UseCompatibleStateImageBehavior = false;
             this.Dayy_20.View = System.Windows.Forms.View.Details;
+            this.Dayy_20.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_20.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_20.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_20.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_20.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_20
             // 
@@ -1199,6 +1392,11 @@
             this.Dayy_27.TabIndex = 18;
             this.Dayy_27.UseCompatibleStateImageBehavior = false;
             this.Dayy_27.View = System.Windows.Forms.View.Details;
+            this.Dayy_27.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_27.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_27.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_27.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_27.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_27
             // 
@@ -1224,6 +1422,11 @@
             this.Dayy_34.TabIndex = 19;
             this.Dayy_34.UseCompatibleStateImageBehavior = false;
             this.Dayy_34.View = System.Windows.Forms.View.Details;
+            this.Dayy_34.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_34.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_34.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_34.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_34.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_34
             // 
@@ -1249,6 +1452,11 @@
             this.Dayy_41.TabIndex = 20;
             this.Dayy_41.UseCompatibleStateImageBehavior = false;
             this.Dayy_41.View = System.Windows.Forms.View.Details;
+            this.Dayy_41.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_41.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_41.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_41.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_41.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_41
             // 
@@ -1301,6 +1509,11 @@
             this.Dayy_7.TabIndex = 15;
             this.Dayy_7.UseCompatibleStateImageBehavior = false;
             this.Dayy_7.View = System.Windows.Forms.View.Details;
+            this.Dayy_7.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_7.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_7.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_7.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_7.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_7
             // 
@@ -1326,6 +1539,11 @@
             this.Dayy_14.TabIndex = 16;
             this.Dayy_14.UseCompatibleStateImageBehavior = false;
             this.Dayy_14.View = System.Windows.Forms.View.Details;
+            this.Dayy_14.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_14.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_14.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_14.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_14.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_14
             // 
@@ -1351,6 +1569,11 @@
             this.Dayy_21.TabIndex = 17;
             this.Dayy_21.UseCompatibleStateImageBehavior = false;
             this.Dayy_21.View = System.Windows.Forms.View.Details;
+            this.Dayy_21.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_21.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_21.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_21.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_21.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_21
             // 
@@ -1376,6 +1599,11 @@
             this.Dayy_28.TabIndex = 18;
             this.Dayy_28.UseCompatibleStateImageBehavior = false;
             this.Dayy_28.View = System.Windows.Forms.View.Details;
+            this.Dayy_28.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_28.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_28.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_28.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_28.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_28
             // 
@@ -1401,6 +1629,11 @@
             this.Dayy_35.TabIndex = 19;
             this.Dayy_35.UseCompatibleStateImageBehavior = false;
             this.Dayy_35.View = System.Windows.Forms.View.Details;
+            this.Dayy_35.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_35.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_35.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_35.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_35.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_35
             // 
@@ -1426,6 +1659,11 @@
             this.Dayy_42.TabIndex = 20;
             this.Dayy_42.UseCompatibleStateImageBehavior = false;
             this.Dayy_42.View = System.Windows.Forms.View.Details;
+            this.Dayy_42.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
+            this.Dayy_42.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.Dayy_42.SizeChanged += new System.EventHandler(this.listView1_SizeChanged);
+            this.Dayy_42.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseMove);
+            this.Dayy_42.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // label_nb_day_42
             // 
@@ -1460,11 +1698,36 @@
             this.checkBox2.Text = "Autre";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "    MMMM     yyyy";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dateTimePicker1.Location = new System.Drawing.Point(50, 290);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(151, 21);
+            this.dateTimePicker1.TabIndex = 9;
+            this.dateTimePicker1.TabStop = false;
+            this.dateTimePicker1.CloseUp += new System.EventHandler(this.dateTimePicker1_CloseUp);
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dateTimePicker1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dateTimePicker1_MouseDown);
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.FirstDayOfWeek = System.Windows.Forms.Day.Sunday;
+            this.monthCalendar1.Location = new System.Drawing.Point(15, 45);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 2;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
             // Agenda_TEST
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 621);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -1495,7 +1758,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel Dim_Flow;
         private System.Windows.Forms.Label label2;
@@ -1597,5 +1859,9 @@
         private System.Windows.Forms.ColumnHeader label_nb_day_35;
         private System.Windows.Forms.ListView Dayy_42;
         private System.Windows.Forms.ColumnHeader label_nb_day_42;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
     }
 }
