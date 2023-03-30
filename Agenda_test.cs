@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 
 namespace ALBAITAR_Softvet.Resources
-{    
+{
     public partial class Agenda_TEST : Form
     {
         ImageList items_icon = new ImageList();
@@ -71,14 +71,14 @@ namespace ALBAITAR_Softvet.Resources
                         ((ListView)ctr1).Columns[0].Text = "";
                         if ((int.Parse(ctr1.Name.Substring(5)) - ddds) <= (endDate.Date).Day && (int.Parse(ctr1.Name.Substring(5)) - ddds) >= (startDate.Date).Day)
                         {
-                            ((ListView)ctr1).Columns[0].Text = (int.Parse(ctr1.Name.Substring(5)) - ddds).ToString();                            
+                            ((ListView)ctr1).Columns[0].Text = (int.Parse(ctr1.Name.Substring(5)) - ddds).ToString();
                             ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.Nonclickable;
                             ((ListView)ctr1).BorderStyle = BorderStyle.Fixed3D;
                         }
                         else
                         {
                             ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.None;
-                            ((ListView)ctr1).BorderStyle= BorderStyle.None;
+                            ((ListView)ctr1).BorderStyle = BorderStyle.None;
                         }
 
 
@@ -95,6 +95,7 @@ namespace ALBAITAR_Softvet.Resources
                 int newFirstColumnWidth = ((ListView)sender).ClientSize.Width - (totalWidth - ((ListView)sender).Columns[0].Width); // Calculate the new width of the first column
                 ((ListView)sender).Columns[0].Width = newFirstColumnWidth; // Set the new width of the first column
             }
+            
         }
 
 
@@ -120,7 +121,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             if (((ListView)sender).SelectedItems.Count > 0)
             {
-                textBox1.Text = ((ListView)sender).SelectedItems[0].SubItems.Count > 1 ? ((ListView)sender).SelectedItems[0].SubItems[1].Text : ""; //Get the ID
+                // textBox1.Text = ((ListView)sender).SelectedItems[0].SubItems.Count > 1 ? ((ListView)sender).SelectedItems[0].SubItems[1].Text : ""; //Get the ID
             }
 
         }
@@ -189,12 +190,12 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dateTimePicker1_MouseDown(object sender, MouseEventArgs e)
         {
-            
+
             if (e.X < 117)
             {
                 this.SelectNextControl((Control)sender, true, true, true, true);
             }
-            
+
         }
 
         private void dateTimePicker1_CloseUp(object sender, EventArgs e)
@@ -232,6 +233,8 @@ namespace ALBAITAR_Softvet.Resources
                             ((ListView)ctr1).Columns[0].Text = (int.Parse(ctr1.Name.Substring(5)) - ddds).ToString();
                             ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.Nonclickable;
                             ((ListView)ctr1).BorderStyle = BorderStyle.Fixed3D;
+                            //--------------------
+                            // infos.AsEnumerable().Where(row => row.Field<DateTime>("")
                         }
                         else
                         {
@@ -244,6 +247,24 @@ namespace ALBAITAR_Softvet.Resources
                 }
             }
             //------------------------
+        }
+
+        private void Agenda_TEST_SizeChanged(object sender, EventArgs e)
+        {
+            Dim_Flow.Height = Lun_Flow.Height = Mar_Flow.Height = Mer_Flow.Height = Jeu_Flow.Height = Ven_Flow.Height = Sam_Flow.Height = (flowLayoutPanel1.ClientSize.Height < flowLayoutPanel1.DisplayRectangle.Height) ? 533 : flowLayoutPanel1.ClientSize.Height - 6;
+            //foreach (Control vw in flowLayoutPanel1.Controls.OfType<ListView>())
+            //{
+            //    vw.Height = (((FlowLayoutPanel)sender).Height - 28) / 6;
+            //}
+        }
+
+        private void Dim_Flow_SizeChanged(object sender, EventArgs e)
+        {
+            //-----------------
+            foreach (Control vw in ((FlowLayoutPanel)sender).Controls.OfType<ListView>())
+            {
+                vw.Height = (((FlowLayoutPanel)sender).Height - 61) / 6;
+            }
         }
     }
 }

@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Agenda_TEST));
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -137,7 +135,7 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.Dim_Flow.SuspendLayout();
             this.Lun_Flow.SuspendLayout();
@@ -148,34 +146,15 @@
             this.Sam_Flow.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(96, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(753, 21);
-            this.textBox1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Rechercher : ";
-            // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_back_30px;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(10, 285);
+            this.button1.Location = new System.Drawing.Point(11, 8);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(34, 30);
             this.button1.TabIndex = 25;
@@ -185,14 +164,13 @@
             // 
             // button2
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button2.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_next_page_30px;
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(207, 285);
+            this.button2.Location = new System.Drawing.Point(208, 8);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(34, 30);
             this.button2.TabIndex = 26;
@@ -216,13 +194,14 @@
             this.flowLayoutPanel1.Controls.Add(this.Ven_Flow);
             this.flowLayoutPanel1.Controls.Add(this.Sam_Flow);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(254, 45);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(254, 8);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1104, 564);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1104, 382);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // Dim_Flow
             // 
+            this.Dim_Flow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Dim_Flow.BackColor = System.Drawing.Color.White;
             this.Dim_Flow.Controls.Add(this.label2);
             this.Dim_Flow.Controls.Add(this.Dayy_1);
@@ -235,6 +214,7 @@
             this.Dim_Flow.Name = "Dim_Flow";
             this.Dim_Flow.Size = new System.Drawing.Size(162, 533);
             this.Dim_Flow.TabIndex = 0;
+            this.Dim_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label2
             // 
@@ -442,6 +422,7 @@
             this.Lun_Flow.Name = "Lun_Flow";
             this.Lun_Flow.Size = new System.Drawing.Size(162, 533);
             this.Lun_Flow.TabIndex = 1;
+            this.Lun_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label3
             // 
@@ -649,6 +630,7 @@
             this.Mar_Flow.Name = "Mar_Flow";
             this.Mar_Flow.Size = new System.Drawing.Size(162, 533);
             this.Mar_Flow.TabIndex = 2;
+            this.Mar_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label4
             // 
@@ -856,6 +838,7 @@
             this.Mer_Flow.Name = "Mer_Flow";
             this.Mer_Flow.Size = new System.Drawing.Size(162, 533);
             this.Mer_Flow.TabIndex = 3;
+            this.Mer_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label5
             // 
@@ -1063,6 +1046,7 @@
             this.Jeu_Flow.Name = "Jeu_Flow";
             this.Jeu_Flow.Size = new System.Drawing.Size(162, 533);
             this.Jeu_Flow.TabIndex = 4;
+            this.Jeu_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label6
             // 
@@ -1270,6 +1254,7 @@
             this.Ven_Flow.Name = "Ven_Flow";
             this.Ven_Flow.Size = new System.Drawing.Size(162, 533);
             this.Ven_Flow.TabIndex = 5;
+            this.Ven_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label7
             // 
@@ -1477,6 +1462,7 @@
             this.Sam_Flow.Name = "Sam_Flow";
             this.Sam_Flow.Size = new System.Drawing.Size(162, 533);
             this.Sam_Flow.TabIndex = 6;
+            this.Sam_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label8
             // 
@@ -1677,7 +1663,7 @@
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.checkBox1.Location = new System.Drawing.Point(15, 228);
+            this.checkBox1.Location = new System.Drawing.Point(21, 61);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(89, 20);
             this.checkBox1.TabIndex = 6;
@@ -1691,7 +1677,7 @@
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox2.ForeColor = System.Drawing.Color.Green;
-            this.checkBox2.Location = new System.Drawing.Point(15, 254);
+            this.checkBox2.Location = new System.Drawing.Point(21, 87);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(51, 20);
             this.checkBox2.TabIndex = 7;
@@ -1703,7 +1689,7 @@
             this.dateTimePicker1.CustomFormat = "    MMMM     yyyy";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePicker1.Location = new System.Drawing.Point(50, 290);
+            this.dateTimePicker1.Location = new System.Drawing.Point(51, 13);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(151, 21);
             this.dateTimePicker1.TabIndex = 9;
@@ -1712,28 +1698,29 @@
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             this.dateTimePicker1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dateTimePicker1_MouseDown);
             // 
-            // monthCalendar1
+            // groupBox1
             // 
-            this.monthCalendar1.FirstDayOfWeek = System.Windows.Forms.Day.Sunday;
-            this.monthCalendar1.Location = new System.Drawing.Point(15, 45);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 2;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Location = new System.Drawing.Point(12, 121);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(230, 269);
+            this.groupBox1.TabIndex = 27;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
             // 
             // Agenda_TEST
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 621);
+            this.ClientSize = new System.Drawing.Size(1370, 402);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.monthCalendar1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -1741,6 +1728,7 @@
             this.Name = "Agenda_TEST";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agenda - [ALBAITAR Softvet]";
+            this.SizeChanged += new System.EventHandler(this.Agenda_TEST_SizeChanged);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.Dim_Flow.ResumeLayout(false);
             this.Lun_Flow.ResumeLayout(false);
@@ -1756,8 +1744,6 @@
 
         #endregion
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel Dim_Flow;
         private System.Windows.Forms.Label label2;
@@ -1862,6 +1848,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
