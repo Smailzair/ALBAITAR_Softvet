@@ -51,6 +51,7 @@ namespace ALBAITAR_Softvet.Resources
                 }
             }
             //---------------
+            intial_Modify_fields();
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
@@ -264,6 +265,31 @@ namespace ALBAITAR_Softvet.Resources
             foreach (Control vw in ((FlowLayoutPanel)sender).Controls.OfType<ListView>())
             {
                 vw.Height = (((FlowLayoutPanel)sender).Height - 61) / 6;
+            }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePicker3.Visible = dateTimePicker4.Visible = !checkBox3.Checked;
+            dateTimePicker2.Width = dateTimePicker5.Width = checkBox3.Checked ? 217 : 155;
+        }
+
+        private void intial_Modify_fields()
+        {
+            checkBox3.Checked = false;
+            dateTimePicker2.Value = DateTime.Today;
+            dateTimePicker3.Value = DateTime.Now;
+            dateTimePicker5.Value = dateTimePicker2.Value.AddHours(1);
+            dateTimePicker3.Value = DateTime.Now.AddHours(1);
+            comboBox1.SelectedIndex = 0;
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePicker5.MinDate = dateTimePicker2.Value;
+            if(dateTimePicker5.Value == DateTime.Now)
+            {
+                dateTimePicker5.Value = dateTimePicker2.Value.AddHours(1);
             }
         }
     }

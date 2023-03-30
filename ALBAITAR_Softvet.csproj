@@ -573,6 +573,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\icons8_synchronize_30px.png" />
     <None Include="Resources\icons8_next_page_30px.png" />
     <None Include="Resources\icons8_back_30px.png" />
     <None Include="Resources\agenda_007.png" />
