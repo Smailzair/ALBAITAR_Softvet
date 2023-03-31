@@ -270,26 +270,89 @@ namespace ALBAITAR_Softvet.Resources
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
-            dateTimePicker3.Visible = dateTimePicker4.Visible = !checkBox3.Checked;
-            dateTimePicker2.Width = dateTimePicker5.Width = checkBox3.Checked ? 217 : 155;
+            dateTimePicker3.Visible = !checkBox3.Checked;
+            dateTimePicker4.Visible = !checkBox3.Checked && comboBox1.SelectedIndex > 0;
+            dateTimePicker2.Width = dateTimePicker5.Width = checkBox3.Checked ? 217 : 168;
         }
 
         private void intial_Modify_fields()
         {
+            pictureBox1.Visible = false;
             checkBox3.Checked = false;
             dateTimePicker2.Value = DateTime.Today;
             dateTimePicker3.Value = DateTime.Now;
             dateTimePicker5.Value = dateTimePicker2.Value.AddHours(1);
-            dateTimePicker3.Value = DateTime.Now.AddHours(1);
+            dateTimePicker4.Value = DateTime.Now.AddHours(1);
             comboBox1.SelectedIndex = 0;
+            numericUpDown1.Value = 1;
+            numericUpDown2.Value = 31;
+            //-------------
+            comboBox2.Items.Clear();
+            comboBox2.Items.Add("--");
+            infos.AsEnumerable().Select(row => row.Field<string>("TYPE")).Distinct().ToList().ForEach(row => {
+                if (row != null && row.Trim().Length > 0) { comboBox2.Items.Add(row); }
+            });
+            comboBox2.SelectedIndex= 0;
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            dateTimePicker5.MinDate = dateTimePicker2.Value;
-            if(dateTimePicker5.Value == DateTime.Now)
+            verif_dates();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dateTimePicker5.Visible = dateTimePicker4.Visible = comboBox1.SelectedIndex > 0;
+            dateTimePicker5.Value = dateTimePicker3.Value.Hour < 23 ? dateTimePicker2.Value : dateTimePicker2.Value.AddDays(1);
+            dateTimePicker4.Value = dateTimePicker3.Value.AddHours(1);
+            checkBox3_CheckedChanged(null, null);
+            panel4.Visible = comboBox1.SelectedIndex == 2;
+            panel5.Visible = comboBox1.SelectedIndex == 3;
+           // verif_dates();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown2.Minimum= numericUpDown1.Value;
+        }
+
+        private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+        {  
+            verif_dates();
+        }
+
+        private void verif_dates()
+        {
+            if(comboBox1.SelectedIndex > 0)
             {
-                dateTimePicker5.Value = dateTimePicker2.Value.AddHours(1);
+                DateTime dte_from;
+                DateTime dte_to;
+                if (!checkBox3.Checked)
+                {
+                    dte_from = new DateTime(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month, dateTimePicker2.Value.Day, dateTimePicker3.Value.Hour, dateTimePicker3.Value.Minute, 00);
+                    dte_to = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, dateTimePicker5.Value.Day, dateTimePicker4.Value.Hour, dateTimePicker4.Value.Minute, 00);                    
+                    pictureBox1.Visible = dte_from >= dte_to;
+                    
+                    
+                }
+                else
+                {
+                    dte_from = new DateTime(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month, dateTimePicker2.Value.Day);
+                    dte_to = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, dateTimePicker5.Value.Day);
+                    dateTimePicker5.CalendarTitleBackColor = dateTimePicker4.CalendarTitleBackColor = dte_from > dte_to ? Color.LightCoral : SystemColors.Window;
+                    pictureBox1.Visible = dte_from > dte_to;                    
+                }
+            }
+        }
+        private void comboBox2_Validated(object sender, EventArgs e)
+        {
+            if (comboBox2.Text.Length > 0 && !comboBox2.Items.Contains(comboBox2.Text))
+            {
+                comboBox2.Text = comboBox2.Text.Trim().Substring(0, 1).ToUpper() + comboBox2.Text.Trim().Substring(1, comboBox2.Text.Trim().Length - 1).ToLower();
+            }
+            else if (comboBox2.Text.Trim().Length == 0)
+            {
+                comboBox2.SelectedIndex = 0;
             }
         }
     }

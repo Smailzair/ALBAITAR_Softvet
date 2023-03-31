@@ -573,6 +573,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\pngtree-star-horizontal-line-decoration-elements-2986140-png-image_1731077 copy.png" />
+    <None Include="Resources\icons8_alarm_30px.png" />
+    <None Include="Resources\icons8_info_15px_1.png" />
+    <None Include="Resources\icons8_info_15px.png" />
+    <None Include="Resources\icons8_info_20px.png" />
     <None Include="Resources\icons8_synchronize_30px.png" />
     <None Include="Resources\icons8_next_page_30px.png" />
     <None Include="Resources\icons8_back_30px.png" />

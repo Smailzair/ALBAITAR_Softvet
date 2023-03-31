@@ -203,6 +203,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_alarm_30px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_alarm_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_archive_folder_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_archive_folder_30px", resourceCulture);
@@ -346,6 +356,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap icons8_image_file_remove_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_image_file_remove_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_info_15px_1 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_info_15px_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -606,6 +626,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap pngfind_com_doctor_png_3001218 {
             get {
                 object obj = ResourceManager.GetObject("pngfind.com-doctor-png-3001218", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-star-horizontal-line-decoration-elements-2986140-png-image_1731077 copy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
