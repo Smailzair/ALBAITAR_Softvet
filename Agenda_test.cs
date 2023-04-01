@@ -1,4 +1,6 @@
-﻿using ServiceStack;
+﻿using ALBAITAR_Softvet.Dialogs;
+using MySqlX.XDevAPI;
+using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,6 +15,7 @@ namespace ALBAITAR_Softvet.Resources
 {
     public partial class Agenda_TEST : Form
     {
+        public static List<int> selected_clients { get; set; }
         ImageList items_icon = new ImageList();
         DataTable infos = new DataTable();
         DateTime startDate = DateTime.MinValue;
@@ -52,6 +55,7 @@ namespace ALBAITAR_Softvet.Resources
             }
             //---------------
             intial_Modify_fields();
+            
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
@@ -353,6 +357,51 @@ namespace ALBAITAR_Softvet.Resources
             else if (comboBox2.Text.Trim().Length == 0)
             {
                 comboBox2.SelectedIndex = 0;
+            }
+        }
+        public static ListViewItem[] Clientss;
+        public static ListViewItem[] Clientss2;
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Clientss2 = new ListViewItem[listView_Clients.Items.Count];
+            for (int i = 0; i < listView_Clients.Items.Count; i++)
+            {
+                Clientss2[i] = listView_Clients.Items[i];
+            }
+            //--------------
+            Clients_List lsst = new Clients_List();
+            lsst.ShowDialog();
+            //-------------
+            listView_Clients.Items.Clear();
+            if(Clientss.Length> 0)
+            {
+                for (int yd = 0; yd < Clientss.Length; yd++)
+                {
+                    ListViewItem itttm = Clientss[yd];
+                    Clientss[yd].Remove();
+                    listView_Clients.Items.Add(itttm);
+                }
+            }
+            //----------------
+            label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires ", listView_Clients.Items.Count, ":") : "Propriétaires :";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            foreach(ListViewItem itttm in listView_Clients.CheckedItems)
+            {
+                itttm.Remove();
+            }
+            //----------------
+            label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires (", listView_Clients.Items.Count, "):") : "Propriétaires :";
+        }
+
+        private void listView_Clients_ItemActivate(object sender, EventArgs e)
+        {
+            if (listView_Clients.SelectedItems.Count > 0)
+            {
+                ListViewItem item = listView_Clients.SelectedItems[0];
+                item.Checked = !item.Checked;
             }
         }
     }

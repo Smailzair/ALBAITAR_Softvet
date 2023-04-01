@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Agenda_TEST));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.Dim_Flow = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -135,40 +139,43 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.listView_Clients = new System.Windows.Forms.ListView();
+            this.Col999 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.checkBox11 = new System.Windows.Forms.CheckBox();
+            this.panel8 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
-            this.panel9 = new System.Windows.Forms.Panel();
+            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.Dim_Flow.SuspendLayout();
             this.Lun_Flow.SuspendLayout();
@@ -178,14 +185,78 @@
             this.Ven_Flow.SuspendLayout();
             this.Sam_Flow.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_remove_administrator_20px_1;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(180, 386);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(24, 24);
+            this.button4.TabIndex = 31;
+            this.toolTip1.SetToolTip(this.button4, "Supprimer");
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_administrator_20px;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(153, 386);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(24, 24);
+            this.button3.TabIndex = 30;
+            this.toolTip1.SetToolTip(this.button3, "Ajouter");
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_next_page_30px;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(208, 8);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(34, 30);
+            this.button2.TabIndex = 26;
+            this.toolTip1.SetToolTip(this.button2, "Suivant");
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_back_30px;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(11, 8);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(34, 30);
+            this.button1.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.button1, "Précédent");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -205,7 +276,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(264, 8);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1094, 637);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1094, 689);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // Dim_Flow
@@ -1724,186 +1795,215 @@
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Location = new System.Drawing.Point(2, 113);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(256, 532);
+            this.panel2.Size = new System.Drawing.Size(256, 584);
             this.panel2.TabIndex = 29;
             // 
-            // checkBox3
+            // panel1
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox3.Location = new System.Drawing.Point(9, 86);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(109, 20);
-            this.checkBox3.TabIndex = 4;
-            this.checkBox3.Text = "Toute la journée";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoScroll = true;
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.panel11);
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.listView_Clients);
+            this.panel1.Controls.Add(this.panel10);
+            this.panel1.Controls.Add(this.panel9);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.numericUpDown3);
+            this.panel1.Controls.Add(this.checkBox11);
+            this.panel1.Controls.Add(this.panel8);
+            this.panel1.Controls.Add(this.panel7);
+            this.panel1.Controls.Add(this.panel6);
+            this.panel1.Controls.Add(this.comboBox2);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.panel5);
+            this.panel1.Controls.Add(this.panel4);
+            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.dateTimePicker4);
+            this.panel1.Controls.Add(this.dateTimePicker5);
+            this.panel1.Controls.Add(this.dateTimePicker3);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.dateTimePicker2);
+            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.checkBox3);
+            this.panel1.Location = new System.Drawing.Point(-1, 30);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(256, 548);
+            this.panel1.TabIndex = 5;
             // 
-            // textBox2
+            // panel11
             // 
-            this.textBox2.Location = new System.Drawing.Point(2, 291);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(231, 70);
-            this.textBox2.TabIndex = 2;
+            this.panel11.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_person_30px;
+            this.panel11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel11.Location = new System.Drawing.Point(3, 383);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(24, 27);
+            this.panel11.TabIndex = 25;
             // 
-            // dateTimePicker2
+            // label12
             // 
-            this.dateTimePicker2.CustomFormat = "dddd dd/MM/yyyy";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(4, 112);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(168, 21);
-            this.dateTimePicker2.TabIndex = 3;
-            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(33, 386);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(78, 16);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "Propriétaires :";
             // 
-            // label1
+            // listView_Clients
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 272);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Déscription :";
+            this.listView_Clients.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listView_Clients.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.listView_Clients.CheckBoxes = true;
+            this.listView_Clients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Col999});
+            this.listView_Clients.FullRowSelect = true;
+            this.listView_Clients.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listView_Clients.HideSelection = false;
+            this.listView_Clients.Location = new System.Drawing.Point(2, 413);
+            this.listView_Clients.Name = "listView_Clients";
+            this.listView_Clients.Size = new System.Drawing.Size(231, 87);
+            this.listView_Clients.TabIndex = 23;
+            this.listView_Clients.UseCompatibleStateImageBehavior = false;
+            this.listView_Clients.View = System.Windows.Forms.View.Details;
+            this.listView_Clients.ItemActivate += new System.EventHandler(this.listView_Clients_ItemActivate);
             // 
-            // dateTimePicker3
+            // Col999
             // 
-            this.dateTimePicker3.CustomFormat = "HH:mm";
-            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(178, 112);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.ShowUpDown = true;
-            this.dateTimePicker3.Size = new System.Drawing.Size(56, 21);
-            this.dateTimePicker3.TabIndex = 5;
-            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            this.Col999.Width = 225;
             // 
-            // dateTimePicker5
+            // panel10
             // 
-            this.dateTimePicker5.CustomFormat = "dddd dd/MM/yyyy";
-            this.dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker5.Location = new System.Drawing.Point(4, 139);
-            this.dateTimePicker5.Name = "dateTimePicker5";
-            this.dateTimePicker5.Size = new System.Drawing.Size(168, 21);
-            this.dateTimePicker5.TabIndex = 6;
-            this.dateTimePicker5.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            this.panel10.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel10.Location = new System.Drawing.Point(-1, 366);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(247, 17);
+            this.panel10.TabIndex = 22;
             // 
-            // dateTimePicker4
+            // panel9
             // 
-            this.dateTimePicker4.CustomFormat = "HH:mm";
-            this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker4.Location = new System.Drawing.Point(178, 139);
-            this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.ShowUpDown = true;
-            this.dateTimePicker4.Size = new System.Drawing.Size(56, 21);
-            this.dateTimePicker4.TabIndex = 7;
-            this.dateTimePicker4.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            this.panel9.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel9.Location = new System.Drawing.Point(-3, 218);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(247, 17);
+            this.panel9.TabIndex = 21;
             // 
-            // comboBox1
+            // label11
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(143, 190);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 16);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "Jours";
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(91, 188);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(46, 21);
+            this.numericUpDown3.TabIndex = 19;
+            this.numericUpDown3.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // checkBox11
+            // 
+            this.checkBox11.AutoSize = true;
+            this.checkBox11.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox11.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(29)))));
+            this.checkBox11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox11.Font = new System.Drawing.Font("Century Gothic", 7.5F);
+            this.checkBox11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(29)))));
+            this.checkBox11.Location = new System.Drawing.Point(32, 189);
+            this.checkBox11.Name = "checkBox11";
+            this.checkBox11.Size = new System.Drawing.Size(53, 19);
+            this.checkBox11.TabIndex = 18;
+            this.checkBox11.Text = "Avant";
+            this.checkBox11.UseVisualStyleBackColor = false;
+            // 
+            // panel8
+            // 
+            this.panel8.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel8.Location = new System.Drawing.Point(-4, 3);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(247, 17);
+            this.panel8.TabIndex = 17;
+            // 
+            // panel7
+            // 
+            this.panel7.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel7.Location = new System.Drawing.Point(-3, 166);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(247, 17);
+            this.panel7.TabIndex = 16;
+            // 
+            // panel6
+            // 
+            this.panel6.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_30px;
+            this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel6.Location = new System.Drawing.Point(2, 186);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(24, 27);
+            this.panel6.TabIndex = 15;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
             "Une fois",
             "Chaque jour",
             "Chaque semaine",
             "Chaque mois"});
-            this.comboBox1.Location = new System.Drawing.Point(32, 25);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(202, 24);
-            this.comboBox1.TabIndex = 9;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox2.Location = new System.Drawing.Point(58, 245);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(175, 24);
+            this.comboBox2.TabIndex = 14;
+            this.comboBox2.Validated += new System.EventHandler(this.comboBox2_Validated);
             // 
-            // panel4
+            // label10
             // 
-            this.panel4.Controls.Add(this.checkBox10);
-            this.panel4.Controls.Add(this.checkBox9);
-            this.panel4.Controls.Add(this.checkBox8);
-            this.panel4.Controls.Add(this.checkBox7);
-            this.panel4.Controls.Add(this.checkBox6);
-            this.panel4.Controls.Add(this.checkBox5);
-            this.panel4.Controls.Add(this.checkBox4);
-            this.panel4.Location = new System.Drawing.Point(3, 55);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(231, 26);
-            this.panel4.TabIndex = 10;
-            this.panel4.Visible = false;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(5, 249);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(47, 16);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Genre :";
             // 
-            // checkBox4
+            // pictureBox1
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox4.Location = new System.Drawing.Point(3, 3);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(31, 20);
-            this.checkBox4.TabIndex = 0;
-            this.checkBox4.Text = "D";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox5.Location = new System.Drawing.Point(35, 3);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(28, 20);
-            this.checkBox5.TabIndex = 1;
-            this.checkBox5.Text = "L";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox6.Location = new System.Drawing.Point(66, 3);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(34, 20);
-            this.checkBox6.TabIndex = 2;
-            this.checkBox6.Text = "M";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox7.Location = new System.Drawing.Point(100, 3);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(34, 20);
-            this.checkBox7.TabIndex = 3;
-            this.checkBox7.Text = "M";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox8.Location = new System.Drawing.Point(134, 3);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(28, 20);
-            this.checkBox8.TabIndex = 4;
-            this.checkBox8.Text = "J";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            // 
-            // checkBox9
-            // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox9.Location = new System.Drawing.Point(165, 3);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(30, 20);
-            this.checkBox9.TabIndex = 5;
-            this.checkBox9.Text = "V";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            // 
-            // checkBox10
-            // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox10.Location = new System.Drawing.Point(197, 3);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(29, 20);
-            this.checkBox10.TabIndex = 6;
-            this.checkBox10.Text = "S";
-            this.checkBox10.UseVisualStyleBackColor = true;
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_15px_1;
+            this.pictureBox1.Location = new System.Drawing.Point(126, 140);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(15, 18);
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             // 
             // panel5
             // 
@@ -1915,6 +2015,37 @@
             this.panel5.Size = new System.Drawing.Size(231, 27);
             this.panel5.TabIndex = 11;
             this.panel5.Visible = false;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(128, 3);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(46, 21);
+            this.numericUpDown2.TabIndex = 2;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(96, 5);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(26, 16);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "--->";
             // 
             // numericUpDown1
             // 
@@ -1939,124 +2070,112 @@
             0});
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
-            // label9
+            // panel4
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(96, 5);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(26, 16);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "--->";
+            this.panel4.Controls.Add(this.checkBox10);
+            this.panel4.Controls.Add(this.checkBox9);
+            this.panel4.Controls.Add(this.checkBox8);
+            this.panel4.Controls.Add(this.checkBox7);
+            this.panel4.Controls.Add(this.checkBox6);
+            this.panel4.Controls.Add(this.checkBox5);
+            this.panel4.Controls.Add(this.checkBox4);
+            this.panel4.Location = new System.Drawing.Point(3, 55);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(231, 26);
+            this.panel4.TabIndex = 10;
+            this.panel4.Visible = false;
             // 
-            // numericUpDown2
+            // checkBox10
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(128, 3);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(46, 21);
-            this.numericUpDown2.TabIndex = 2;
-            this.numericUpDown2.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox10.Location = new System.Drawing.Point(197, 3);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(29, 20);
+            this.checkBox10.TabIndex = 6;
+            this.checkBox10.Text = "S";
+            this.checkBox10.UseVisualStyleBackColor = true;
             // 
-            // label10
+            // checkBox9
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(5, 249);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 16);
-            this.label10.TabIndex = 13;
-            this.label10.Text = "Genre :";
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox9.Location = new System.Drawing.Point(165, 3);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(30, 20);
+            this.checkBox9.TabIndex = 5;
+            this.checkBox9.Text = "V";
+            this.checkBox9.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // checkBox8
             // 
-            this.comboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox8.Location = new System.Drawing.Point(134, 3);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(28, 20);
+            this.checkBox8.TabIndex = 4;
+            this.checkBox8.Text = "J";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox7.Location = new System.Drawing.Point(100, 3);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(34, 20);
+            this.checkBox7.TabIndex = 3;
+            this.checkBox7.Text = "M";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox6.Location = new System.Drawing.Point(66, 3);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(34, 20);
+            this.checkBox6.TabIndex = 2;
+            this.checkBox6.Text = "M";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox5.Location = new System.Drawing.Point(35, 3);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(28, 20);
+            this.checkBox5.TabIndex = 1;
+            this.checkBox5.Text = "L";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox4.Location = new System.Drawing.Point(3, 3);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(31, 20);
+            this.checkBox4.TabIndex = 0;
+            this.checkBox4.Text = "D";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
             "Une fois",
             "Chaque jour",
             "Chaque semaine",
             "Chaque mois"});
-            this.comboBox2.Location = new System.Drawing.Point(58, 245);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(175, 24);
-            this.comboBox2.TabIndex = 14;
-            this.comboBox2.Validated += new System.EventHandler(this.comboBox2_Validated);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoScroll = true;
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.panel9);
-            this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.numericUpDown3);
-            this.panel1.Controls.Add(this.checkBox11);
-            this.panel1.Controls.Add(this.panel8);
-            this.panel1.Controls.Add(this.panel7);
-            this.panel1.Controls.Add(this.panel6);
-            this.panel1.Controls.Add(this.comboBox2);
-            this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.panel5);
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.dateTimePicker4);
-            this.panel1.Controls.Add(this.dateTimePicker5);
-            this.panel1.Controls.Add(this.dateTimePicker3);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.dateTimePicker2);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.checkBox3);
-            this.panel1.Location = new System.Drawing.Point(-1, 30);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(256, 496);
-            this.panel1.TabIndex = 5;
-            // 
-            // panel7
-            // 
-            this.panel7.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel7.Location = new System.Drawing.Point(-3, 166);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(247, 17);
-            this.panel7.TabIndex = 16;
-            // 
-            // panel6
-            // 
-            this.panel6.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_30px;
-            this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel6.Location = new System.Drawing.Point(2, 186);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(24, 27);
-            this.panel6.TabIndex = 15;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_15px_1;
-            this.pictureBox1.Location = new System.Drawing.Point(126, 140);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(15, 18);
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
+            this.comboBox1.Location = new System.Drawing.Point(32, 25);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(202, 24);
+            this.comboBox1.TabIndex = 9;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // panel3
             // 
@@ -2067,107 +2186,82 @@
             this.panel3.Size = new System.Drawing.Size(24, 27);
             this.panel3.TabIndex = 8;
             // 
-            // button2
+            // dateTimePicker4
             // 
-            this.button2.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_next_page_30px;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(208, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(34, 30);
-            this.button2.TabIndex = 26;
-            this.toolTip1.SetToolTip(this.button2, "Ajouter");
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.dateTimePicker4.CustomFormat = "HH:mm";
+            this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker4.Location = new System.Drawing.Point(178, 139);
+            this.dateTimePicker4.Name = "dateTimePicker4";
+            this.dateTimePicker4.ShowUpDown = true;
+            this.dateTimePicker4.Size = new System.Drawing.Size(56, 21);
+            this.dateTimePicker4.TabIndex = 7;
+            this.dateTimePicker4.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
             // 
-            // button1
+            // dateTimePicker5
             // 
-            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_back_30px;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(11, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(34, 30);
-            this.button1.TabIndex = 25;
-            this.toolTip1.SetToolTip(this.button1, "Ajouter");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.dateTimePicker5.CustomFormat = "dddd dd/MM/yyyy";
+            this.dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker5.Location = new System.Drawing.Point(4, 139);
+            this.dateTimePicker5.Name = "dateTimePicker5";
+            this.dateTimePicker5.Size = new System.Drawing.Size(168, 21);
+            this.dateTimePicker5.TabIndex = 6;
+            this.dateTimePicker5.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
             // 
-            // panel8
+            // dateTimePicker3
             // 
-            this.panel8.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel8.Location = new System.Drawing.Point(-4, 3);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(247, 17);
-            this.panel8.TabIndex = 17;
+            this.dateTimePicker3.CustomFormat = "HH:mm";
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker3.Location = new System.Drawing.Point(178, 112);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.ShowUpDown = true;
+            this.dateTimePicker3.Size = new System.Drawing.Size(56, 21);
+            this.dateTimePicker3.TabIndex = 5;
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
             // 
-            // checkBox11
+            // label1
             // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox11.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(29)))));
-            this.checkBox11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox11.Font = new System.Drawing.Font("Century Gothic", 7.5F);
-            this.checkBox11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(29)))));
-            this.checkBox11.Location = new System.Drawing.Point(32, 189);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(53, 19);
-            this.checkBox11.TabIndex = 18;
-            this.checkBox11.Text = "Avant";
-            this.checkBox11.UseVisualStyleBackColor = false;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 272);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Déscription :";
             // 
-            // numericUpDown3
+            // dateTimePicker2
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(91, 188);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(46, 21);
-            this.numericUpDown3.TabIndex = 19;
-            this.numericUpDown3.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.dateTimePicker2.CustomFormat = "dddd dd/MM/yyyy";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(4, 112);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(168, 21);
+            this.dateTimePicker2.TabIndex = 3;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
-            // label11
+            // textBox2
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(143, 190);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(33, 16);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "Jours";
+            this.textBox2.Location = new System.Drawing.Point(2, 291);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(231, 70);
+            this.textBox2.TabIndex = 2;
             // 
-            // panel9
+            // checkBox3
             // 
-            this.panel9.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel9.Location = new System.Drawing.Point(-3, 218);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(247, 17);
-            this.panel9.TabIndex = 21;
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox3.Location = new System.Drawing.Point(9, 86);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(109, 20);
+            this.checkBox3.TabIndex = 4;
+            this.checkBox3.Text = "Toute la journée";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // Agenda_TEST
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 657);
+            this.ClientSize = new System.Drawing.Size(1370, 709);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -2192,16 +2286,16 @@
             this.Sam_Flow.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2347,5 +2441,12 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.CheckBox checkBox11;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.ListView listView_Clients;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ColumnHeader Col999;
     }
 }

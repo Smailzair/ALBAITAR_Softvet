@@ -203,6 +203,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_add_administrator_20px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_add_administrator_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_alarm_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_alarm_30px", resourceCulture);
@@ -256,6 +266,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap icons8_cancel_25px_2 {
             get {
                 object obj = ResourceManager.GetObject("icons8_cancel_25px_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_choose_30px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_choose_30px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -463,6 +483,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_person_30px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_person_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_products_pile_30px_1 {
             get {
                 object obj = ResourceManager.GetObject("icons8_products_pile_30px_1", resourceCulture);
@@ -473,9 +503,29 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_remove_administrator_20px_1 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_remove_administrator_20px_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_save_close_25px {
             get {
                 object obj = ResourceManager.GetObject("icons8_save_close_25px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_search_20px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_search_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
