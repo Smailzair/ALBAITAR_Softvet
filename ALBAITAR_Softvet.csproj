@@ -311,6 +311,12 @@
     <Compile Include="Agenda.Designer.cs">
       <DependentUpon>Agenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Anims_List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Anims_List.Designer.cs">
+      <DependentUpon>Anims_List.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Clients_List.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -391,6 +397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Agenda.resx">
       <DependentUpon>Agenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Anims_List.resx">
+      <DependentUpon>Anims_List.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Clients_List.resx">
       <DependentUpon>Clients_List.cs</DependentUpon>
@@ -582,6 +591,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\icons8_veterinarian_20px_2 copy.png" />
+    <None Include="Resources\icons8_veterinarian_20px_3.png" />
+    <None Include="Resources\icons8_shiba_inu_30px.png" />
     <None Include="Resources\icons8_search_20px.png" />
     <None Include="Resources\icons8_choose_30px.png" />
     <None Include="Resources\icons8_remove_administrator_20px_1.png" />

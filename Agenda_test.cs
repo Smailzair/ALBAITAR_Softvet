@@ -404,6 +404,15 @@ namespace ALBAITAR_Softvet.Resources
                 item.Checked = !item.Checked;
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if(listView_Clients.Items.Count > 0)
+            {
+                Anims_List ann = new Anims_List(null);
+                ann.ShowDialog();
+            }
+        }
     }
 }
 

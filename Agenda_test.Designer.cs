@@ -31,10 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Agenda_TEST));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.Dim_Flow = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -140,21 +136,14 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.listView_Clients = new System.Windows.Forms.ListView();
             this.Col999 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.checkBox11 = new System.Windows.Forms.CheckBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
@@ -168,7 +157,6 @@
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
@@ -176,6 +164,25 @@
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.listView_Anim = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.Dim_Flow.SuspendLayout();
             this.Lun_Flow.SuspendLayout();
@@ -187,76 +194,12 @@
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button4
-            // 
-            this.button4.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_remove_administrator_20px_1;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(180, 386);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(24, 24);
-            this.button4.TabIndex = 31;
-            this.toolTip1.SetToolTip(this.button4, "Supprimer");
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_administrator_20px;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(153, 386);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(24, 24);
-            this.button3.TabIndex = 30;
-            this.toolTip1.SetToolTip(this.button3, "Ajouter");
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_next_page_30px;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(208, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(34, 30);
-            this.button2.TabIndex = 26;
-            this.toolTip1.SetToolTip(this.button2, "Suivant");
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_back_30px;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(11, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(34, 30);
-            this.button1.TabIndex = 25;
-            this.toolTip1.SetToolTip(this.button1, "Précédent");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -276,7 +219,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(264, 8);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1094, 689);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1094, 729);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // Dim_Flow
@@ -1795,7 +1738,7 @@
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Location = new System.Drawing.Point(2, 113);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(256, 584);
+            this.panel2.Size = new System.Drawing.Size(256, 624);
             this.panel2.TabIndex = 29;
             // 
             // panel1
@@ -1806,6 +1749,12 @@
             this.panel1.AutoScroll = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button5);
+            this.panel1.Controls.Add(this.button6);
+            this.panel1.Controls.Add(this.panel12);
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.listView_Anim);
+            this.panel1.Controls.Add(this.panel13);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.panel11);
@@ -1835,22 +1784,13 @@
             this.panel1.Controls.Add(this.checkBox3);
             this.panel1.Location = new System.Drawing.Point(-1, 30);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(256, 548);
+            this.panel1.Size = new System.Drawing.Size(256, 593);
             this.panel1.TabIndex = 5;
-            // 
-            // panel11
-            // 
-            this.panel11.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_person_30px;
-            this.panel11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel11.Location = new System.Drawing.Point(3, 383);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(24, 27);
-            this.panel11.TabIndex = 25;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(33, 386);
+            this.label12.Location = new System.Drawing.Point(33, 435);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(78, 16);
             this.label12.TabIndex = 24;
@@ -1866,7 +1806,7 @@
             this.listView_Clients.FullRowSelect = true;
             this.listView_Clients.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listView_Clients.HideSelection = false;
-            this.listView_Clients.Location = new System.Drawing.Point(2, 413);
+            this.listView_Clients.Location = new System.Drawing.Point(2, 462);
             this.listView_Clients.Name = "listView_Clients";
             this.listView_Clients.Size = new System.Drawing.Size(231, 87);
             this.listView_Clients.TabIndex = 23;
@@ -1878,28 +1818,10 @@
             // 
             this.Col999.Width = 225;
             // 
-            // panel10
-            // 
-            this.panel10.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel10.Location = new System.Drawing.Point(-1, 366);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(247, 17);
-            this.panel10.TabIndex = 22;
-            // 
-            // panel9
-            // 
-            this.panel9.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel9.Location = new System.Drawing.Point(-3, 218);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(247, 17);
-            this.panel9.TabIndex = 21;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(143, 190);
+            this.label11.Location = new System.Drawing.Point(145, 239);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(33, 16);
             this.label11.TabIndex = 20;
@@ -1907,7 +1829,7 @@
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(91, 188);
+            this.numericUpDown3.Location = new System.Drawing.Point(93, 237);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1935,39 +1857,12 @@
             this.checkBox11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox11.Font = new System.Drawing.Font("Century Gothic", 7.5F);
             this.checkBox11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(29)))));
-            this.checkBox11.Location = new System.Drawing.Point(32, 189);
+            this.checkBox11.Location = new System.Drawing.Point(34, 238);
             this.checkBox11.Name = "checkBox11";
             this.checkBox11.Size = new System.Drawing.Size(53, 19);
             this.checkBox11.TabIndex = 18;
             this.checkBox11.Text = "Avant";
             this.checkBox11.UseVisualStyleBackColor = false;
-            // 
-            // panel8
-            // 
-            this.panel8.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel8.Location = new System.Drawing.Point(-4, 3);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(247, 17);
-            this.panel8.TabIndex = 17;
-            // 
-            // panel7
-            // 
-            this.panel7.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel7.Location = new System.Drawing.Point(-3, 166);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(247, 17);
-            this.panel7.TabIndex = 16;
-            // 
-            // panel6
-            // 
-            this.panel6.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_30px;
-            this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel6.Location = new System.Drawing.Point(2, 186);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(24, 27);
-            this.panel6.TabIndex = 15;
             // 
             // comboBox2
             // 
@@ -1979,7 +1874,7 @@
             "Chaque jour",
             "Chaque semaine",
             "Chaque mois"});
-            this.comboBox2.Location = new System.Drawing.Point(58, 245);
+            this.comboBox2.Location = new System.Drawing.Point(60, 294);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(175, 24);
             this.comboBox2.TabIndex = 14;
@@ -1988,29 +1883,18 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(5, 249);
+            this.label10.Location = new System.Drawing.Point(7, 298);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(47, 16);
             this.label10.TabIndex = 13;
             this.label10.Text = "Genre :";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_15px_1;
-            this.pictureBox1.Location = new System.Drawing.Point(126, 140);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(15, 18);
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
             // 
             // panel5
             // 
             this.panel5.Controls.Add(this.numericUpDown2);
             this.panel5.Controls.Add(this.label9);
             this.panel5.Controls.Add(this.numericUpDown1);
-            this.panel5.Location = new System.Drawing.Point(3, 55);
+            this.panel5.Location = new System.Drawing.Point(5, 104);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(231, 27);
             this.panel5.TabIndex = 11;
@@ -2079,7 +1963,7 @@
             this.panel4.Controls.Add(this.checkBox6);
             this.panel4.Controls.Add(this.checkBox5);
             this.panel4.Controls.Add(this.checkBox4);
-            this.panel4.Location = new System.Drawing.Point(3, 55);
+            this.panel4.Location = new System.Drawing.Point(5, 104);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(231, 26);
             this.panel4.TabIndex = 10;
@@ -2171,26 +2055,17 @@
             "Chaque jour",
             "Chaque semaine",
             "Chaque mois"});
-            this.comboBox1.Location = new System.Drawing.Point(32, 25);
+            this.comboBox1.Location = new System.Drawing.Point(34, 74);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(202, 24);
             this.comboBox1.TabIndex = 9;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // panel3
-            // 
-            this.panel3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_synchronize_30px;
-            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel3.Location = new System.Drawing.Point(2, 24);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(24, 27);
-            this.panel3.TabIndex = 8;
-            // 
             // dateTimePicker4
             // 
             this.dateTimePicker4.CustomFormat = "HH:mm";
             this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker4.Location = new System.Drawing.Point(178, 139);
+            this.dateTimePicker4.Location = new System.Drawing.Point(180, 188);
             this.dateTimePicker4.Name = "dateTimePicker4";
             this.dateTimePicker4.ShowUpDown = true;
             this.dateTimePicker4.Size = new System.Drawing.Size(56, 21);
@@ -2201,7 +2076,7 @@
             // 
             this.dateTimePicker5.CustomFormat = "dddd dd/MM/yyyy";
             this.dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker5.Location = new System.Drawing.Point(4, 139);
+            this.dateTimePicker5.Location = new System.Drawing.Point(6, 188);
             this.dateTimePicker5.Name = "dateTimePicker5";
             this.dateTimePicker5.Size = new System.Drawing.Size(168, 21);
             this.dateTimePicker5.TabIndex = 6;
@@ -2211,7 +2086,7 @@
             // 
             this.dateTimePicker3.CustomFormat = "HH:mm";
             this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(178, 112);
+            this.dateTimePicker3.Location = new System.Drawing.Point(180, 161);
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.ShowUpDown = true;
             this.dateTimePicker3.Size = new System.Drawing.Size(56, 21);
@@ -2221,7 +2096,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 272);
+            this.label1.Location = new System.Drawing.Point(7, 321);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 16);
             this.label1.TabIndex = 0;
@@ -2231,7 +2106,7 @@
             // 
             this.dateTimePicker2.CustomFormat = "dddd dd/MM/yyyy";
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(4, 112);
+            this.dateTimePicker2.Location = new System.Drawing.Point(6, 161);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(168, 21);
             this.dateTimePicker2.TabIndex = 3;
@@ -2239,7 +2114,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(2, 291);
+            this.textBox2.Location = new System.Drawing.Point(4, 340);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(231, 70);
@@ -2249,7 +2124,7 @@
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox3.Location = new System.Drawing.Point(9, 86);
+            this.checkBox3.Location = new System.Drawing.Point(11, 135);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(109, 20);
             this.checkBox3.TabIndex = 4;
@@ -2257,11 +2132,228 @@
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(33, 575);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(60, 16);
+            this.label13.TabIndex = 34;
+            this.label13.Text = "Animaux :";
+            // 
+            // listView_Anim
+            // 
+            this.listView_Anim.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listView_Anim.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.listView_Anim.CheckBoxes = true;
+            this.listView_Anim.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.listView_Anim.FullRowSelect = true;
+            this.listView_Anim.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listView_Anim.HideSelection = false;
+            this.listView_Anim.Location = new System.Drawing.Point(2, 602);
+            this.listView_Anim.Name = "listView_Anim";
+            this.listView_Anim.Size = new System.Drawing.Size(231, 87);
+            this.listView_Anim.TabIndex = 33;
+            this.listView_Anim.UseCompatibleStateImageBehavior = false;
+            this.listView_Anim.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 225;
+            // 
+            // button5
+            // 
+            this.button5.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_veterinarian_20px_2_copy;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(180, 575);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(24, 24);
+            this.button5.TabIndex = 37;
+            this.toolTip1.SetToolTip(this.button5, "Supprimer");
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_veterinarian_20px_3;
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Location = new System.Drawing.Point(153, 575);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(24, 24);
+            this.button6.TabIndex = 36;
+            this.toolTip1.SetToolTip(this.button6, "Ajouter");
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // panel12
+            // 
+            this.panel12.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_shiba_inu_30px;
+            this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel12.Location = new System.Drawing.Point(3, 572);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(24, 27);
+            this.panel12.TabIndex = 35;
+            // 
+            // panel13
+            // 
+            this.panel13.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel13.Location = new System.Drawing.Point(-1, 555);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(237, 17);
+            this.panel13.TabIndex = 32;
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_remove_administrator_20px_1;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(180, 435);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(24, 24);
+            this.button4.TabIndex = 31;
+            this.toolTip1.SetToolTip(this.button4, "Supprimer");
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_administrator_20px;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(153, 435);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(24, 24);
+            this.button3.TabIndex = 30;
+            this.toolTip1.SetToolTip(this.button3, "Ajouter");
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // panel11
+            // 
+            this.panel11.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_person_30px;
+            this.panel11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel11.Location = new System.Drawing.Point(3, 432);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(24, 27);
+            this.panel11.TabIndex = 25;
+            // 
+            // panel10
+            // 
+            this.panel10.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel10.Location = new System.Drawing.Point(-1, 415);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(237, 17);
+            this.panel10.TabIndex = 22;
+            // 
+            // panel9
+            // 
+            this.panel9.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel9.Location = new System.Drawing.Point(-1, 267);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(237, 17);
+            this.panel9.TabIndex = 21;
+            // 
+            // panel8
+            // 
+            this.panel8.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel8.Location = new System.Drawing.Point(-2, 52);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(237, 17);
+            this.panel8.TabIndex = 17;
+            // 
+            // panel7
+            // 
+            this.panel7.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel7.Location = new System.Drawing.Point(-1, 215);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(237, 17);
+            this.panel7.TabIndex = 16;
+            // 
+            // panel6
+            // 
+            this.panel6.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_30px;
+            this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel6.Location = new System.Drawing.Point(4, 235);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(24, 27);
+            this.panel6.TabIndex = 15;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_15px_1;
+            this.pictureBox1.Location = new System.Drawing.Point(128, 189);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(15, 18);
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
+            // 
+            // panel3
+            // 
+            this.panel3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_synchronize_30px;
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel3.Location = new System.Drawing.Point(4, 73);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(24, 27);
+            this.panel3.TabIndex = 8;
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_next_page_30px;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(208, 8);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(34, 30);
+            this.button2.TabIndex = 26;
+            this.toolTip1.SetToolTip(this.button2, "Suivant");
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_back_30px;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(11, 8);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(34, 30);
+            this.button1.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.button1, "Précédent");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Agenda_TEST
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 709);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -2289,13 +2381,13 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2448,5 +2540,12 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ColumnHeader Col999;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ListView listView_Anim;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.Panel panel13;
     }
 }
