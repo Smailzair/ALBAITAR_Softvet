@@ -154,5 +154,10 @@ namespace ALBAITAR_Softvet.Dialogs
                 e.Cancel = MessageBox.Show("Vous n'avez pas enregistrer les modifications ! \nSuivez-vous comme méme ?", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No;
             }
         }
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

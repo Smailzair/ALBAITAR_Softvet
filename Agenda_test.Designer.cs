@@ -31,8 +31,21 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Agenda_TEST));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button8 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.Dim_Flow = new System.Windows.Forms.FlowLayoutPanel();
+            this.Sam_Flow = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.Dayy_1 = new System.Windows.Forms.ListView();
             this.label_nb_day_1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -46,7 +59,7 @@
             this.label_nb_day_29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Dayy_36 = new System.Windows.Forms.ListView();
             this.label_nb_day_36 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Lun_Flow = new System.Windows.Forms.FlowLayoutPanel();
+            this.Dim_Flow = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.Dayy_2 = new System.Windows.Forms.ListView();
             this.label_nb_day_2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -60,7 +73,7 @@
             this.label_nb_day_30 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Dayy_37 = new System.Windows.Forms.ListView();
             this.label_nb_day_37 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Mar_Flow = new System.Windows.Forms.FlowLayoutPanel();
+            this.Lun_Flow = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.Dayy_3 = new System.Windows.Forms.ListView();
             this.label_nb_day_3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -74,7 +87,7 @@
             this.label_nb_day_31 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Dayy_38 = new System.Windows.Forms.ListView();
             this.label_nb_day_38 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Mer_Flow = new System.Windows.Forms.FlowLayoutPanel();
+            this.Mar_Flow = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.Dayy_4 = new System.Windows.Forms.ListView();
             this.label_nb_day_4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -88,7 +101,7 @@
             this.label_nb_day_32 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Dayy_39 = new System.Windows.Forms.ListView();
             this.label_nb_day_39 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Jeu_Flow = new System.Windows.Forms.FlowLayoutPanel();
+            this.Mer_Flow = new System.Windows.Forms.FlowLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.Dayy_5 = new System.Windows.Forms.ListView();
             this.label_nb_day_5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -102,7 +115,7 @@
             this.label_nb_day_33 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Dayy_40 = new System.Windows.Forms.ListView();
             this.label_nb_day_40 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Ven_Flow = new System.Windows.Forms.FlowLayoutPanel();
+            this.Jeu_Flow = new System.Windows.Forms.FlowLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
             this.Dayy_6 = new System.Windows.Forms.ListView();
             this.label_nb_day_6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -116,7 +129,7 @@
             this.label_nb_day_34 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Dayy_41 = new System.Windows.Forms.ListView();
             this.label_nb_day_41 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Sam_Flow = new System.Windows.Forms.FlowLayoutPanel();
+            this.Ven_Flow = new System.Windows.Forms.FlowLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
             this.Dayy_7 = new System.Windows.Forms.ListView();
             this.label_nb_day_7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -131,20 +144,44 @@
             this.Dayy_42 = new System.Windows.Forms.ListView();
             this.label_nb_day_42 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.listView_Anim = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.listView_Clients = new System.Windows.Forms.ListView();
             this.Col999 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.checkBox11 = new System.Windows.Forms.CheckBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -156,50 +193,249 @@
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.listView_Anim = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.listView_Icons = new System.Windows.Forms.ListView();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
+            this.Sam_Flow.SuspendLayout();
             this.Dim_Flow.SuspendLayout();
             this.Lun_Flow.SuspendLayout();
             this.Mar_Flow.SuspendLayout();
             this.Mer_Flow.SuspendLayout();
             this.Jeu_Flow.SuspendLayout();
             this.Ven_Flow.SuspendLayout();
-            this.Sam_Flow.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
+            // 
+            // button8
+            // 
+            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button8.FlatAppearance.BorderSize = 2;
+            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button8.Location = new System.Drawing.Point(579, 16);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(39, 27);
+            this.button8.TabIndex = 31;
+            this.button8.Text = "...";
+            this.toolTip1.SetToolTip(this.button8, "Suivant");
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(3, 3);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(213, 46);
+            this.textBox1.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.textBox1, "L\'objet de évènement");
+            // 
+            // button7
+            // 
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button7.FlatAppearance.BorderSize = 2;
+            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_save_close_25px;
+            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button7.Location = new System.Drawing.Point(2, 17);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(100, 30);
+            this.button7.TabIndex = 30;
+            this.button7.Text = "Enregistrer";
+            this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.button7, "Suivant");
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button5
+            // 
+            this.button5.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_veterinarian_20px_2_copy;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(180, 228);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(24, 24);
+            this.button5.TabIndex = 37;
+            this.toolTip1.SetToolTip(this.button5, "Supprimer");
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_veterinarian_20px_3;
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Location = new System.Drawing.Point(153, 228);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(24, 24);
+            this.button6.TabIndex = 36;
+            this.toolTip1.SetToolTip(this.button6, "Ajouter");
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_remove_administrator_20px_1;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(180, 364);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(24, 24);
+            this.button4.TabIndex = 31;
+            this.toolTip1.SetToolTip(this.button4, "Supprimer");
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_administrator_20px;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(153, 364);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(24, 24);
+            this.button3.TabIndex = 30;
+            this.toolTip1.SetToolTip(this.button3, "Ajouter");
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_next_page_30px;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(467, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(34, 30);
+            this.button2.TabIndex = 26;
+            this.toolTip1.SetToolTip(this.button2, "Suivant");
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_back_30px;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(270, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(34, 30);
+            this.button1.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.button1, "Précédent");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button11
+            // 
+            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button11.FlatAppearance.BorderSize = 2;
+            this.button11.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button11.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
+            this.button11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button11.Location = new System.Drawing.Point(300, 94);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(41, 30);
+            this.button11.TabIndex = 36;
+            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.button11, "Effacer");
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button12
+            // 
+            this.button12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button12.FlatAppearance.BorderSize = 2;
+            this.button12.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button12.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button12.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_opened_folder_25px;
+            this.button12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button12.Location = new System.Drawing.Point(300, 154);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(41, 30);
+            this.button12.TabIndex = 37;
+            this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.button12, "Autre");
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // button10
+            // 
+            this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button10.FlatAppearance.BorderSize = 2;
+            this.button10.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
+            this.button10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button10.Location = new System.Drawing.Point(1111, 12);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(119, 30);
+            this.button10.TabIndex = 33;
+            this.button10.Text = "Supprimer";
+            this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button9.FlatAppearance.BorderSize = 2;
+            this.button9.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button9.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
+            this.button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button9.Location = new System.Drawing.Point(1243, 12);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(115, 30);
+            this.button9.TabIndex = 32;
+            this.button9.Text = "Nouveau";
+            this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button9.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
             // 
@@ -209,35 +445,35 @@
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel1.Controls.Add(this.Sam_Flow);
             this.flowLayoutPanel1.Controls.Add(this.Dim_Flow);
             this.flowLayoutPanel1.Controls.Add(this.Lun_Flow);
             this.flowLayoutPanel1.Controls.Add(this.Mar_Flow);
             this.flowLayoutPanel1.Controls.Add(this.Mer_Flow);
             this.flowLayoutPanel1.Controls.Add(this.Jeu_Flow);
             this.flowLayoutPanel1.Controls.Add(this.Ven_Flow);
-            this.flowLayoutPanel1.Controls.Add(this.Sam_Flow);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(264, 8);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(264, 48);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1094, 729);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1094, 388);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
-            // Dim_Flow
+            // Sam_Flow
             // 
-            this.Dim_Flow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Dim_Flow.BackColor = System.Drawing.Color.White;
-            this.Dim_Flow.Controls.Add(this.label2);
-            this.Dim_Flow.Controls.Add(this.Dayy_1);
-            this.Dim_Flow.Controls.Add(this.Dayy_8);
-            this.Dim_Flow.Controls.Add(this.Dayy_15);
-            this.Dim_Flow.Controls.Add(this.Dayy_22);
-            this.Dim_Flow.Controls.Add(this.Dayy_29);
-            this.Dim_Flow.Controls.Add(this.Dayy_36);
-            this.Dim_Flow.Location = new System.Drawing.Point(3, 3);
-            this.Dim_Flow.Name = "Dim_Flow";
-            this.Dim_Flow.Size = new System.Drawing.Size(162, 533);
-            this.Dim_Flow.TabIndex = 0;
-            this.Dim_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
+            this.Sam_Flow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Sam_Flow.BackColor = System.Drawing.Color.White;
+            this.Sam_Flow.Controls.Add(this.label2);
+            this.Sam_Flow.Controls.Add(this.Dayy_1);
+            this.Sam_Flow.Controls.Add(this.Dayy_8);
+            this.Sam_Flow.Controls.Add(this.Dayy_15);
+            this.Sam_Flow.Controls.Add(this.Dayy_22);
+            this.Sam_Flow.Controls.Add(this.Dayy_29);
+            this.Sam_Flow.Controls.Add(this.Dayy_36);
+            this.Sam_Flow.Location = new System.Drawing.Point(3, 3);
+            this.Sam_Flow.Name = "Sam_Flow";
+            this.Sam_Flow.Size = new System.Drawing.Size(162, 533);
+            this.Sam_Flow.TabIndex = 0;
+            this.Sam_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label2
             // 
@@ -248,7 +484,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(159, 22);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Dimanche";
+            this.label2.Text = "Samedi";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Dayy_1
@@ -431,21 +667,21 @@
             this.label_nb_day_36.Text = "01";
             this.label_nb_day_36.Width = 64;
             // 
-            // Lun_Flow
+            // Dim_Flow
             // 
-            this.Lun_Flow.BackColor = System.Drawing.Color.White;
-            this.Lun_Flow.Controls.Add(this.label3);
-            this.Lun_Flow.Controls.Add(this.Dayy_2);
-            this.Lun_Flow.Controls.Add(this.Dayy_9);
-            this.Lun_Flow.Controls.Add(this.Dayy_16);
-            this.Lun_Flow.Controls.Add(this.Dayy_23);
-            this.Lun_Flow.Controls.Add(this.Dayy_30);
-            this.Lun_Flow.Controls.Add(this.Dayy_37);
-            this.Lun_Flow.Location = new System.Drawing.Point(171, 3);
-            this.Lun_Flow.Name = "Lun_Flow";
-            this.Lun_Flow.Size = new System.Drawing.Size(162, 533);
-            this.Lun_Flow.TabIndex = 1;
-            this.Lun_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
+            this.Dim_Flow.BackColor = System.Drawing.Color.White;
+            this.Dim_Flow.Controls.Add(this.label3);
+            this.Dim_Flow.Controls.Add(this.Dayy_2);
+            this.Dim_Flow.Controls.Add(this.Dayy_9);
+            this.Dim_Flow.Controls.Add(this.Dayy_16);
+            this.Dim_Flow.Controls.Add(this.Dayy_23);
+            this.Dim_Flow.Controls.Add(this.Dayy_30);
+            this.Dim_Flow.Controls.Add(this.Dayy_37);
+            this.Dim_Flow.Location = new System.Drawing.Point(171, 3);
+            this.Dim_Flow.Name = "Dim_Flow";
+            this.Dim_Flow.Size = new System.Drawing.Size(162, 533);
+            this.Dim_Flow.TabIndex = 1;
+            this.Dim_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label3
             // 
@@ -456,7 +692,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(159, 22);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Lundi";
+            this.label3.Text = "Dimanche";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Dayy_2
@@ -639,21 +875,21 @@
             this.label_nb_day_37.Text = "01";
             this.label_nb_day_37.Width = 64;
             // 
-            // Mar_Flow
+            // Lun_Flow
             // 
-            this.Mar_Flow.BackColor = System.Drawing.Color.White;
-            this.Mar_Flow.Controls.Add(this.label4);
-            this.Mar_Flow.Controls.Add(this.Dayy_3);
-            this.Mar_Flow.Controls.Add(this.Dayy_10);
-            this.Mar_Flow.Controls.Add(this.Dayy_17);
-            this.Mar_Flow.Controls.Add(this.Dayy_24);
-            this.Mar_Flow.Controls.Add(this.Dayy_31);
-            this.Mar_Flow.Controls.Add(this.Dayy_38);
-            this.Mar_Flow.Location = new System.Drawing.Point(339, 3);
-            this.Mar_Flow.Name = "Mar_Flow";
-            this.Mar_Flow.Size = new System.Drawing.Size(162, 533);
-            this.Mar_Flow.TabIndex = 2;
-            this.Mar_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
+            this.Lun_Flow.BackColor = System.Drawing.Color.White;
+            this.Lun_Flow.Controls.Add(this.label4);
+            this.Lun_Flow.Controls.Add(this.Dayy_3);
+            this.Lun_Flow.Controls.Add(this.Dayy_10);
+            this.Lun_Flow.Controls.Add(this.Dayy_17);
+            this.Lun_Flow.Controls.Add(this.Dayy_24);
+            this.Lun_Flow.Controls.Add(this.Dayy_31);
+            this.Lun_Flow.Controls.Add(this.Dayy_38);
+            this.Lun_Flow.Location = new System.Drawing.Point(339, 3);
+            this.Lun_Flow.Name = "Lun_Flow";
+            this.Lun_Flow.Size = new System.Drawing.Size(162, 533);
+            this.Lun_Flow.TabIndex = 2;
+            this.Lun_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label4
             // 
@@ -664,7 +900,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(159, 22);
             this.label4.TabIndex = 0;
-            this.label4.Text = "Mardi";
+            this.label4.Text = "Lundi";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Dayy_3
@@ -847,21 +1083,21 @@
             this.label_nb_day_38.Text = "01";
             this.label_nb_day_38.Width = 64;
             // 
-            // Mer_Flow
+            // Mar_Flow
             // 
-            this.Mer_Flow.BackColor = System.Drawing.Color.White;
-            this.Mer_Flow.Controls.Add(this.label5);
-            this.Mer_Flow.Controls.Add(this.Dayy_4);
-            this.Mer_Flow.Controls.Add(this.Dayy_11);
-            this.Mer_Flow.Controls.Add(this.Dayy_18);
-            this.Mer_Flow.Controls.Add(this.Dayy_25);
-            this.Mer_Flow.Controls.Add(this.Dayy_32);
-            this.Mer_Flow.Controls.Add(this.Dayy_39);
-            this.Mer_Flow.Location = new System.Drawing.Point(507, 3);
-            this.Mer_Flow.Name = "Mer_Flow";
-            this.Mer_Flow.Size = new System.Drawing.Size(162, 533);
-            this.Mer_Flow.TabIndex = 3;
-            this.Mer_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
+            this.Mar_Flow.BackColor = System.Drawing.Color.White;
+            this.Mar_Flow.Controls.Add(this.label5);
+            this.Mar_Flow.Controls.Add(this.Dayy_4);
+            this.Mar_Flow.Controls.Add(this.Dayy_11);
+            this.Mar_Flow.Controls.Add(this.Dayy_18);
+            this.Mar_Flow.Controls.Add(this.Dayy_25);
+            this.Mar_Flow.Controls.Add(this.Dayy_32);
+            this.Mar_Flow.Controls.Add(this.Dayy_39);
+            this.Mar_Flow.Location = new System.Drawing.Point(507, 3);
+            this.Mar_Flow.Name = "Mar_Flow";
+            this.Mar_Flow.Size = new System.Drawing.Size(162, 533);
+            this.Mar_Flow.TabIndex = 3;
+            this.Mar_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label5
             // 
@@ -872,7 +1108,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(159, 22);
             this.label5.TabIndex = 0;
-            this.label5.Text = "Mercredi";
+            this.label5.Text = "Mardi";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Dayy_4
@@ -1055,21 +1291,21 @@
             this.label_nb_day_39.Text = "01";
             this.label_nb_day_39.Width = 64;
             // 
-            // Jeu_Flow
+            // Mer_Flow
             // 
-            this.Jeu_Flow.BackColor = System.Drawing.Color.White;
-            this.Jeu_Flow.Controls.Add(this.label6);
-            this.Jeu_Flow.Controls.Add(this.Dayy_5);
-            this.Jeu_Flow.Controls.Add(this.Dayy_12);
-            this.Jeu_Flow.Controls.Add(this.Dayy_19);
-            this.Jeu_Flow.Controls.Add(this.Dayy_26);
-            this.Jeu_Flow.Controls.Add(this.Dayy_33);
-            this.Jeu_Flow.Controls.Add(this.Dayy_40);
-            this.Jeu_Flow.Location = new System.Drawing.Point(675, 3);
-            this.Jeu_Flow.Name = "Jeu_Flow";
-            this.Jeu_Flow.Size = new System.Drawing.Size(162, 533);
-            this.Jeu_Flow.TabIndex = 4;
-            this.Jeu_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
+            this.Mer_Flow.BackColor = System.Drawing.Color.White;
+            this.Mer_Flow.Controls.Add(this.label6);
+            this.Mer_Flow.Controls.Add(this.Dayy_5);
+            this.Mer_Flow.Controls.Add(this.Dayy_12);
+            this.Mer_Flow.Controls.Add(this.Dayy_19);
+            this.Mer_Flow.Controls.Add(this.Dayy_26);
+            this.Mer_Flow.Controls.Add(this.Dayy_33);
+            this.Mer_Flow.Controls.Add(this.Dayy_40);
+            this.Mer_Flow.Location = new System.Drawing.Point(675, 3);
+            this.Mer_Flow.Name = "Mer_Flow";
+            this.Mer_Flow.Size = new System.Drawing.Size(162, 533);
+            this.Mer_Flow.TabIndex = 4;
+            this.Mer_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label6
             // 
@@ -1080,7 +1316,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(159, 22);
             this.label6.TabIndex = 0;
-            this.label6.Text = "Jeudi";
+            this.label6.Text = "Mercredi";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Dayy_5
@@ -1263,21 +1499,21 @@
             this.label_nb_day_40.Text = "01";
             this.label_nb_day_40.Width = 64;
             // 
-            // Ven_Flow
+            // Jeu_Flow
             // 
-            this.Ven_Flow.BackColor = System.Drawing.Color.White;
-            this.Ven_Flow.Controls.Add(this.label7);
-            this.Ven_Flow.Controls.Add(this.Dayy_6);
-            this.Ven_Flow.Controls.Add(this.Dayy_13);
-            this.Ven_Flow.Controls.Add(this.Dayy_20);
-            this.Ven_Flow.Controls.Add(this.Dayy_27);
-            this.Ven_Flow.Controls.Add(this.Dayy_34);
-            this.Ven_Flow.Controls.Add(this.Dayy_41);
-            this.Ven_Flow.Location = new System.Drawing.Point(843, 3);
-            this.Ven_Flow.Name = "Ven_Flow";
-            this.Ven_Flow.Size = new System.Drawing.Size(162, 533);
-            this.Ven_Flow.TabIndex = 5;
-            this.Ven_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
+            this.Jeu_Flow.BackColor = System.Drawing.Color.White;
+            this.Jeu_Flow.Controls.Add(this.label7);
+            this.Jeu_Flow.Controls.Add(this.Dayy_6);
+            this.Jeu_Flow.Controls.Add(this.Dayy_13);
+            this.Jeu_Flow.Controls.Add(this.Dayy_20);
+            this.Jeu_Flow.Controls.Add(this.Dayy_27);
+            this.Jeu_Flow.Controls.Add(this.Dayy_34);
+            this.Jeu_Flow.Controls.Add(this.Dayy_41);
+            this.Jeu_Flow.Location = new System.Drawing.Point(843, 3);
+            this.Jeu_Flow.Name = "Jeu_Flow";
+            this.Jeu_Flow.Size = new System.Drawing.Size(162, 533);
+            this.Jeu_Flow.TabIndex = 5;
+            this.Jeu_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label7
             // 
@@ -1288,7 +1524,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(159, 22);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Vendredi";
+            this.label7.Text = "Jeudi";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Dayy_6
@@ -1471,21 +1707,21 @@
             this.label_nb_day_41.Text = "01";
             this.label_nb_day_41.Width = 64;
             // 
-            // Sam_Flow
+            // Ven_Flow
             // 
-            this.Sam_Flow.BackColor = System.Drawing.Color.White;
-            this.Sam_Flow.Controls.Add(this.label8);
-            this.Sam_Flow.Controls.Add(this.Dayy_7);
-            this.Sam_Flow.Controls.Add(this.Dayy_14);
-            this.Sam_Flow.Controls.Add(this.Dayy_21);
-            this.Sam_Flow.Controls.Add(this.Dayy_28);
-            this.Sam_Flow.Controls.Add(this.Dayy_35);
-            this.Sam_Flow.Controls.Add(this.Dayy_42);
-            this.Sam_Flow.Location = new System.Drawing.Point(1011, 3);
-            this.Sam_Flow.Name = "Sam_Flow";
-            this.Sam_Flow.Size = new System.Drawing.Size(162, 533);
-            this.Sam_Flow.TabIndex = 6;
-            this.Sam_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
+            this.Ven_Flow.BackColor = System.Drawing.Color.White;
+            this.Ven_Flow.Controls.Add(this.label8);
+            this.Ven_Flow.Controls.Add(this.Dayy_7);
+            this.Ven_Flow.Controls.Add(this.Dayy_14);
+            this.Ven_Flow.Controls.Add(this.Dayy_21);
+            this.Ven_Flow.Controls.Add(this.Dayy_28);
+            this.Ven_Flow.Controls.Add(this.Dayy_35);
+            this.Ven_Flow.Controls.Add(this.Dayy_42);
+            this.Ven_Flow.Location = new System.Drawing.Point(1011, 3);
+            this.Ven_Flow.Name = "Ven_Flow";
+            this.Ven_Flow.Size = new System.Drawing.Size(162, 533);
+            this.Ven_Flow.TabIndex = 6;
+            this.Ven_Flow.SizeChanged += new System.EventHandler(this.Dim_Flow_SizeChanged);
             // 
             // label8
             // 
@@ -1496,7 +1732,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(159, 22);
             this.label8.TabIndex = 0;
-            this.label8.Text = "Samedi";
+            this.label8.Text = "Vendredi";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Dayy_7
@@ -1682,37 +1918,21 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.checkBox1.Location = new System.Drawing.Point(21, 61);
+            this.checkBox1.Location = new System.Drawing.Point(530, 19);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 20);
+            this.checkBox1.Size = new System.Drawing.Size(46, 20);
             this.checkBox1.TabIndex = 6;
-            this.checkBox1.Text = "Vaccination";
+            this.checkBox1.Text = "Filtre";
             this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox2.ForeColor = System.Drawing.Color.Green;
-            this.checkBox2.Location = new System.Drawing.Point(21, 87);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(51, 20);
-            this.checkBox2.TabIndex = 7;
-            this.checkBox2.Text = "Autre";
-            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.CustomFormat = "    MMMM     yyyy";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePicker1.Location = new System.Drawing.Point(51, 13);
+            this.dateTimePicker1.Location = new System.Drawing.Point(310, 17);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(151, 21);
             this.dateTimePicker1.TabIndex = 9;
@@ -1721,31 +1941,56 @@
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             this.dateTimePicker1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dateTimePicker1_MouseDown);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(3, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(236, 21);
-            this.textBox1.TabIndex = 1;
-            // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.panel1);
-            this.panel2.Location = new System.Drawing.Point(2, 113);
+            this.panel2.Controls.Add(this.panel8);
+            this.panel2.Controls.Add(this.checkBox3);
+            this.panel2.Controls.Add(this.dateTimePicker2);
+            this.panel2.Controls.Add(this.dateTimePicker3);
+            this.panel2.Controls.Add(this.dateTimePicker5);
+            this.panel2.Controls.Add(this.dateTimePicker4);
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.comboBox1);
+            this.panel2.Controls.Add(this.panel5);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Location = new System.Drawing.Point(2, 46);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(256, 624);
+            this.panel2.Size = new System.Drawing.Size(256, 390);
             this.panel2.TabIndex = 29;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_camera_30px;
+            this.pictureBox2.Location = new System.Drawing.Point(217, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(32, 46);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 18;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_15px_1;
+            this.pictureBox1.Location = new System.Drawing.Point(133, 194);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(15, 18);
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.AutoScroll = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1765,32 +2010,97 @@
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.numericUpDown3);
             this.panel1.Controls.Add(this.checkBox11);
-            this.panel1.Controls.Add(this.panel8);
             this.panel1.Controls.Add(this.panel7);
             this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.comboBox2);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.panel5);
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.dateTimePicker4);
-            this.panel1.Controls.Add(this.dateTimePicker5);
-            this.panel1.Controls.Add(this.dateTimePicker3);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.dateTimePicker2);
             this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.checkBox3);
-            this.panel1.Location = new System.Drawing.Point(-1, 30);
+            this.panel1.Location = new System.Drawing.Point(-1, 221);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(256, 593);
+            this.panel1.Size = new System.Drawing.Size(256, 168);
             this.panel1.TabIndex = 5;
+            // 
+            // panel12
+            // 
+            this.panel12.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_shiba_inu_30px;
+            this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel12.Location = new System.Drawing.Point(3, 225);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(24, 27);
+            this.panel12.TabIndex = 35;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(33, 228);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(60, 16);
+            this.label13.TabIndex = 34;
+            this.label13.Text = "Animaux :";
+            // 
+            // listView_Anim
+            // 
+            this.listView_Anim.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listView_Anim.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.listView_Anim.CheckBoxes = true;
+            this.listView_Anim.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.listView_Anim.FullRowSelect = true;
+            this.listView_Anim.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listView_Anim.HideSelection = false;
+            this.listView_Anim.Location = new System.Drawing.Point(2, 255);
+            this.listView_Anim.Name = "listView_Anim";
+            this.listView_Anim.Size = new System.Drawing.Size(231, 87);
+            this.listView_Anim.TabIndex = 33;
+            this.listView_Anim.UseCompatibleStateImageBehavior = false;
+            this.listView_Anim.View = System.Windows.Forms.View.Details;
+            this.listView_Anim.ItemActivate += new System.EventHandler(this.listView_Clients_ItemActivate);
+            this.listView_Anim.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView_Anim_KeyDown);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Animal";
+            this.columnHeader1.Width = 225;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "";
+            this.columnHeader2.Width = 0;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Propriétaire";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Width = 0;
+            // 
+            // panel13
+            // 
+            this.panel13.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel13.Location = new System.Drawing.Point(-1, 208);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(237, 17);
+            this.panel13.TabIndex = 32;
+            // 
+            // panel11
+            // 
+            this.panel11.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_person_30px;
+            this.panel11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel11.Location = new System.Drawing.Point(3, 361);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(24, 27);
+            this.panel11.TabIndex = 25;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(33, 435);
+            this.label12.Location = new System.Drawing.Point(33, 364);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(78, 16);
             this.label12.TabIndex = 24;
@@ -1806,22 +2116,41 @@
             this.listView_Clients.FullRowSelect = true;
             this.listView_Clients.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listView_Clients.HideSelection = false;
-            this.listView_Clients.Location = new System.Drawing.Point(2, 462);
+            this.listView_Clients.Location = new System.Drawing.Point(2, 391);
             this.listView_Clients.Name = "listView_Clients";
             this.listView_Clients.Size = new System.Drawing.Size(231, 87);
             this.listView_Clients.TabIndex = 23;
             this.listView_Clients.UseCompatibleStateImageBehavior = false;
             this.listView_Clients.View = System.Windows.Forms.View.Details;
             this.listView_Clients.ItemActivate += new System.EventHandler(this.listView_Clients_ItemActivate);
+            this.listView_Clients.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView_Anim_KeyDown);
             // 
             // Col999
             // 
             this.Col999.Width = 225;
             // 
+            // panel10
+            // 
+            this.panel10.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel10.Location = new System.Drawing.Point(-1, 344);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(237, 17);
+            this.panel10.TabIndex = 22;
+            // 
+            // panel9
+            // 
+            this.panel9.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel9.Location = new System.Drawing.Point(-1, 63);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(237, 17);
+            this.panel9.TabIndex = 21;
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(145, 239);
+            this.label11.Location = new System.Drawing.Point(145, 35);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(33, 16);
             this.label11.TabIndex = 20;
@@ -1829,7 +2158,7 @@
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(93, 237);
+            this.numericUpDown3.Location = new System.Drawing.Point(93, 33);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1848,6 +2177,7 @@
             0,
             0,
             0});
+            this.numericUpDown3.ValueChanged += new System.EventHandler(this.numericUpDown3_ValueChanged);
             // 
             // checkBox11
             // 
@@ -1857,12 +2187,30 @@
             this.checkBox11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox11.Font = new System.Drawing.Font("Century Gothic", 7.5F);
             this.checkBox11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(29)))));
-            this.checkBox11.Location = new System.Drawing.Point(34, 238);
+            this.checkBox11.Location = new System.Drawing.Point(34, 34);
             this.checkBox11.Name = "checkBox11";
             this.checkBox11.Size = new System.Drawing.Size(53, 19);
             this.checkBox11.TabIndex = 18;
             this.checkBox11.Text = "Avant";
             this.checkBox11.UseVisualStyleBackColor = false;
+            // 
+            // panel7
+            // 
+            this.panel7.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel7.Location = new System.Drawing.Point(-1, 11);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(237, 17);
+            this.panel7.TabIndex = 16;
+            // 
+            // panel6
+            // 
+            this.panel6.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_30px;
+            this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel6.Location = new System.Drawing.Point(4, 31);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(24, 27);
+            this.panel6.TabIndex = 15;
             // 
             // comboBox2
             // 
@@ -1874,7 +2222,7 @@
             "Chaque jour",
             "Chaque semaine",
             "Chaque mois"});
-            this.comboBox2.Location = new System.Drawing.Point(60, 294);
+            this.comboBox2.Location = new System.Drawing.Point(60, 90);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(175, 24);
             this.comboBox2.TabIndex = 14;
@@ -1883,26 +2231,141 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 298);
+            this.label10.Location = new System.Drawing.Point(7, 94);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(47, 16);
             this.label10.TabIndex = 13;
             this.label10.Text = "Genre :";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 117);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Déscription :";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(4, 136);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox2.Size = new System.Drawing.Size(231, 70);
+            this.textBox2.TabIndex = 2;
+            // 
+            // panel8
+            // 
+            this.panel8.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel8.Location = new System.Drawing.Point(3, 55);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(248, 17);
+            this.panel8.TabIndex = 17;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox3.Location = new System.Drawing.Point(16, 140);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(109, 20);
+            this.checkBox3.TabIndex = 4;
+            this.checkBox3.Text = "Toute la journée";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CustomFormat = "dddd dd/MM/yyyy";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(11, 166);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(168, 21);
+            this.dateTimePicker2.TabIndex = 3;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.CustomFormat = "HH:mm";
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker3.Location = new System.Drawing.Point(185, 166);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.ShowUpDown = true;
+            this.dateTimePicker3.Size = new System.Drawing.Size(56, 21);
+            this.dateTimePicker3.TabIndex = 5;
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            // 
+            // dateTimePicker5
+            // 
+            this.dateTimePicker5.CustomFormat = "dddd dd/MM/yyyy";
+            this.dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker5.Location = new System.Drawing.Point(11, 193);
+            this.dateTimePicker5.Name = "dateTimePicker5";
+            this.dateTimePicker5.Size = new System.Drawing.Size(168, 21);
+            this.dateTimePicker5.TabIndex = 6;
+            this.dateTimePicker5.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            // 
+            // dateTimePicker4
+            // 
+            this.dateTimePicker4.CustomFormat = "HH:mm";
+            this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker4.Location = new System.Drawing.Point(185, 193);
+            this.dateTimePicker4.Name = "dateTimePicker4";
+            this.dateTimePicker4.ShowUpDown = true;
+            this.dateTimePicker4.Size = new System.Drawing.Size(56, 21);
+            this.dateTimePicker4.TabIndex = 7;
+            this.dateTimePicker4.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            // 
+            // panel3
+            // 
+            this.panel3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_synchronize_30px;
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel3.Location = new System.Drawing.Point(9, 78);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(24, 27);
+            this.panel3.TabIndex = 8;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Une fois",
+            "Chaque jour",
+            "Chaque semaine",
+            "Chaque mois"});
+            this.comboBox1.Location = new System.Drawing.Point(39, 79);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(212, 24);
+            this.comboBox1.TabIndex = 9;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.label14);
             this.panel5.Controls.Add(this.numericUpDown2);
             this.panel5.Controls.Add(this.label9);
             this.panel5.Controls.Add(this.numericUpDown1);
-            this.panel5.Location = new System.Drawing.Point(5, 104);
+            this.panel5.Location = new System.Drawing.Point(10, 110);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(231, 27);
+            this.panel5.Size = new System.Drawing.Size(241, 27);
             this.panel5.TabIndex = 11;
             this.panel5.Visible = false;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(26, 5);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(15, 16);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "Jr";
+            // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(128, 3);
+            this.numericUpDown2.Location = new System.Drawing.Point(150, 2);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             31,
             0,
@@ -1917,7 +2380,7 @@
             this.numericUpDown2.Size = new System.Drawing.Size(46, 21);
             this.numericUpDown2.TabIndex = 2;
             this.numericUpDown2.Value = new decimal(new int[] {
-            1,
+            7,
             0,
             0,
             0});
@@ -1927,9 +2390,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(96, 5);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(26, 16);
+            this.label9.Size = new System.Drawing.Size(49, 16);
             this.label9.TabIndex = 1;
-            this.label9.Text = "--->";
+            this.label9.Text = "--->     Jr";
             // 
             // numericUpDown1
             // 
@@ -1963,9 +2426,9 @@
             this.panel4.Controls.Add(this.checkBox6);
             this.panel4.Controls.Add(this.checkBox5);
             this.panel4.Controls.Add(this.checkBox4);
-            this.panel4.Location = new System.Drawing.Point(5, 104);
+            this.panel4.Location = new System.Drawing.Point(11, 110);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(231, 26);
+            this.panel4.Size = new System.Drawing.Size(240, 26);
             this.panel4.TabIndex = 10;
             this.panel4.Visible = false;
             // 
@@ -1973,7 +2436,7 @@
             // 
             this.checkBox10.AutoSize = true;
             this.checkBox10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox10.Location = new System.Drawing.Point(197, 3);
+            this.checkBox10.Location = new System.Drawing.Point(5, 3);
             this.checkBox10.Name = "checkBox10";
             this.checkBox10.Size = new System.Drawing.Size(29, 20);
             this.checkBox10.TabIndex = 6;
@@ -1984,7 +2447,7 @@
             // 
             this.checkBox9.AutoSize = true;
             this.checkBox9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox9.Location = new System.Drawing.Point(165, 3);
+            this.checkBox9.Location = new System.Drawing.Point(206, 3);
             this.checkBox9.Name = "checkBox9";
             this.checkBox9.Size = new System.Drawing.Size(30, 20);
             this.checkBox9.TabIndex = 5;
@@ -1995,7 +2458,7 @@
             // 
             this.checkBox8.AutoSize = true;
             this.checkBox8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox8.Location = new System.Drawing.Point(134, 3);
+            this.checkBox8.Location = new System.Drawing.Point(175, 3);
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(28, 20);
             this.checkBox8.TabIndex = 4;
@@ -2006,7 +2469,7 @@
             // 
             this.checkBox7.AutoSize = true;
             this.checkBox7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox7.Location = new System.Drawing.Point(100, 3);
+            this.checkBox7.Location = new System.Drawing.Point(141, 3);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(34, 20);
             this.checkBox7.TabIndex = 3;
@@ -2017,7 +2480,7 @@
             // 
             this.checkBox6.AutoSize = true;
             this.checkBox6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox6.Location = new System.Drawing.Point(66, 3);
+            this.checkBox6.Location = new System.Drawing.Point(107, 3);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(34, 20);
             this.checkBox6.TabIndex = 2;
@@ -2028,7 +2491,7 @@
             // 
             this.checkBox5.AutoSize = true;
             this.checkBox5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox5.Location = new System.Drawing.Point(35, 3);
+            this.checkBox5.Location = new System.Drawing.Point(74, 3);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(28, 20);
             this.checkBox5.TabIndex = 1;
@@ -2039,326 +2502,78 @@
             // 
             this.checkBox4.AutoSize = true;
             this.checkBox4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox4.Location = new System.Drawing.Point(3, 3);
+            this.checkBox4.Location = new System.Drawing.Point(37, 3);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(31, 20);
             this.checkBox4.TabIndex = 0;
             this.checkBox4.Text = "D";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // listView_Icons
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Une fois",
-            "Chaque jour",
-            "Chaque semaine",
-            "Chaque mois"});
-            this.comboBox1.Location = new System.Drawing.Point(34, 74);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(202, 24);
-            this.comboBox1.TabIndex = 9;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.listView_Icons.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listView_Icons.Dock = System.Windows.Forms.DockStyle.Left;
+            this.listView_Icons.HideSelection = false;
+            this.listView_Icons.Location = new System.Drawing.Point(0, 0);
+            this.listView_Icons.MultiSelect = false;
+            this.listView_Icons.Name = "listView_Icons";
+            this.listView_Icons.Size = new System.Drawing.Size(291, 190);
+            this.listView_Icons.TabIndex = 34;
+            this.listView_Icons.UseCompatibleStateImageBehavior = false;
+            this.listView_Icons.View = System.Windows.Forms.View.SmallIcon;
+            this.listView_Icons.ItemActivate += new System.EventHandler(this.listView_Icons_ItemActivate);
+            this.listView_Icons.Leave += new System.EventHandler(this.listView_Icons_Leave);
             // 
-            // dateTimePicker4
+            // panel14
             // 
-            this.dateTimePicker4.CustomFormat = "HH:mm";
-            this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker4.Location = new System.Drawing.Point(180, 188);
-            this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.ShowUpDown = true;
-            this.dateTimePicker4.Size = new System.Drawing.Size(56, 21);
-            this.dateTimePicker4.TabIndex = 7;
-            this.dateTimePicker4.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel14.Controls.Add(this.label15);
+            this.panel14.Controls.Add(this.button12);
+            this.panel14.Controls.Add(this.button11);
+            this.panel14.Controls.Add(this.pictureBox3);
+            this.panel14.Controls.Add(this.listView_Icons);
+            this.panel14.Location = new System.Drawing.Point(239, 82);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(350, 192);
+            this.panel14.TabIndex = 35;
+            this.panel14.Visible = false;
             // 
-            // dateTimePicker5
+            // pictureBox3
             // 
-            this.dateTimePicker5.CustomFormat = "dddd dd/MM/yyyy";
-            this.dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker5.Location = new System.Drawing.Point(6, 188);
-            this.dateTimePicker5.Name = "dateTimePicker5";
-            this.dateTimePicker5.Size = new System.Drawing.Size(168, 21);
-            this.dateTimePicker5.TabIndex = 6;
-            this.dateTimePicker5.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            this.pictureBox3.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_camera_30px;
+            this.pictureBox3.Location = new System.Drawing.Point(304, 19);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(32, 46);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 35;
+            this.pictureBox3.TabStop = false;
             // 
-            // dateTimePicker3
+            // label15
             // 
-            this.dateTimePicker3.CustomFormat = "HH:mm";
-            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(180, 161);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.ShowUpDown = true;
-            this.dateTimePicker3.Size = new System.Drawing.Size(56, 21);
-            this.dateTimePicker3.TabIndex = 5;
-            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 321);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Déscription :";
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.CustomFormat = "dddd dd/MM/yyyy";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(6, 161);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(168, 21);
-            this.dateTimePicker2.TabIndex = 3;
-            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(4, 340);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(231, 70);
-            this.textBox2.TabIndex = 2;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox3.Location = new System.Drawing.Point(11, 135);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(109, 20);
-            this.checkBox3.TabIndex = 4;
-            this.checkBox3.Text = "Toute la journée";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(33, 575);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(60, 16);
-            this.label13.TabIndex = 34;
-            this.label13.Text = "Animaux :";
-            // 
-            // listView_Anim
-            // 
-            this.listView_Anim.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.listView_Anim.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-            this.listView_Anim.CheckBoxes = true;
-            this.listView_Anim.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.listView_Anim.FullRowSelect = true;
-            this.listView_Anim.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listView_Anim.HideSelection = false;
-            this.listView_Anim.Location = new System.Drawing.Point(2, 602);
-            this.listView_Anim.Name = "listView_Anim";
-            this.listView_Anim.Size = new System.Drawing.Size(231, 87);
-            this.listView_Anim.TabIndex = 33;
-            this.listView_Anim.UseCompatibleStateImageBehavior = false;
-            this.listView_Anim.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Width = 225;
-            // 
-            // button5
-            // 
-            this.button5.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_veterinarian_20px_2_copy;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(180, 575);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(24, 24);
-            this.button5.TabIndex = 37;
-            this.toolTip1.SetToolTip(this.button5, "Supprimer");
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_veterinarian_20px_3;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(153, 575);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(24, 24);
-            this.button6.TabIndex = 36;
-            this.toolTip1.SetToolTip(this.button6, "Ajouter");
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // panel12
-            // 
-            this.panel12.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_shiba_inu_30px;
-            this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel12.Location = new System.Drawing.Point(3, 572);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(24, 27);
-            this.panel12.TabIndex = 35;
-            // 
-            // panel13
-            // 
-            this.panel13.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel13.Location = new System.Drawing.Point(-1, 555);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(237, 17);
-            this.panel13.TabIndex = 32;
-            // 
-            // button4
-            // 
-            this.button4.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_remove_administrator_20px_1;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(180, 435);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(24, 24);
-            this.button4.TabIndex = 31;
-            this.toolTip1.SetToolTip(this.button4, "Supprimer");
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_administrator_20px;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(153, 435);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(24, 24);
-            this.button3.TabIndex = 30;
-            this.toolTip1.SetToolTip(this.button3, "Ajouter");
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // panel11
-            // 
-            this.panel11.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_person_30px;
-            this.panel11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel11.Location = new System.Drawing.Point(3, 432);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(24, 27);
-            this.panel11.TabIndex = 25;
-            // 
-            // panel10
-            // 
-            this.panel10.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel10.Location = new System.Drawing.Point(-1, 415);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(237, 17);
-            this.panel10.TabIndex = 22;
-            // 
-            // panel9
-            // 
-            this.panel9.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel9.Location = new System.Drawing.Point(-1, 267);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(237, 17);
-            this.panel9.TabIndex = 21;
-            // 
-            // panel8
-            // 
-            this.panel8.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel8.Location = new System.Drawing.Point(-2, 52);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(237, 17);
-            this.panel8.TabIndex = 17;
-            // 
-            // panel7
-            // 
-            this.panel7.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
-            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel7.Location = new System.Drawing.Point(-1, 215);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(237, 17);
-            this.panel7.TabIndex = 16;
-            // 
-            // panel6
-            // 
-            this.panel6.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_30px;
-            this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel6.Location = new System.Drawing.Point(4, 235);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(24, 27);
-            this.panel6.TabIndex = 15;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_15px_1;
-            this.pictureBox1.Location = new System.Drawing.Point(128, 189);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(15, 18);
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
-            // 
-            // panel3
-            // 
-            this.panel3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_synchronize_30px;
-            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel3.Location = new System.Drawing.Point(4, 73);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(24, 27);
-            this.panel3.TabIndex = 8;
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_next_page_30px;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(208, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(34, 30);
-            this.button2.TabIndex = 26;
-            this.toolTip1.SetToolTip(this.button2, "Suivant");
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_back_30px;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(11, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(34, 30);
-            this.button1.TabIndex = 25;
-            this.toolTip1.SetToolTip(this.button1, "Précédent");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(331, 3);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(14, 15);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "X";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // Agenda_TEST
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1370, 448);
+            this.Controls.Add(this.panel14);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2367,17 +2582,21 @@
             this.Name = "Agenda_TEST";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agenda - [ALBAITAR Softvet]";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.SizeChanged += new System.EventHandler(this.Agenda_TEST_SizeChanged);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Agenda_TEST_MouseDown);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.Sam_Flow.ResumeLayout(false);
             this.Dim_Flow.ResumeLayout(false);
             this.Lun_Flow.ResumeLayout(false);
             this.Mar_Flow.ResumeLayout(false);
             this.Mer_Flow.ResumeLayout(false);
             this.Jeu_Flow.ResumeLayout(false);
             this.Ven_Flow.ResumeLayout(false);
-            this.Sam_Flow.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
@@ -2387,7 +2606,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2396,22 +2617,21 @@
         #endregion
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel Dim_Flow;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.FlowLayoutPanel Lun_Flow;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.FlowLayoutPanel Mar_Flow;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.FlowLayoutPanel Mer_Flow;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.FlowLayoutPanel Jeu_Flow;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.FlowLayoutPanel Ven_Flow;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.FlowLayoutPanel Sam_Flow;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.FlowLayoutPanel Dim_Flow;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.FlowLayoutPanel Lun_Flow;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.FlowLayoutPanel Mar_Flow;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.FlowLayoutPanel Mer_Flow;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.FlowLayoutPanel Jeu_Flow;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.FlowLayoutPanel Ven_Flow;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.ListView Dayy_1;
         private System.Windows.Forms.ColumnHeader label_nb_day_1;
         private System.Windows.Forms.ListView Dayy_8;
@@ -2547,5 +2767,20 @@
         private System.Windows.Forms.ListView listView_Anim;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.ListView listView_Icons;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label15;
     }
 }

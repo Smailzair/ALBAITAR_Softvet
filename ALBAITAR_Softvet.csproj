@@ -591,6 +591,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\icons8_camera_30px.png" />
     <None Include="Resources\icons8_veterinarian_20px_2 copy.png" />
     <None Include="Resources\icons8_veterinarian_20px_3.png" />
     <None Include="Resources\icons8_shiba_inu_30px.png" />
@@ -615,11 +616,6 @@
     <None Include="Resources\agenda_002.png" />
     <None Include="Resources\agenda_001.png" />
     <None Include="Resources\agenda_011.png" />
-    <None Include="Resources\agenda_005.ico" />
-    <None Include="Resources\agenda_004.ico" />
-    <None Include="Resources\agenda_003.ico" />
-    <None Include="Resources\agenda_002.ico" />
-    <None Include="Resources\agenda_001.ico" />
     <None Include="Resources\icons8_veterinary_examination_1.ico" />
     <None Include="Resources\icons8_syringe_with_a_drop_of_blood.ico" />
     <None Include="Resources\icons8_pill.ico" />
