@@ -195,8 +195,9 @@
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.listView_Icons = new System.Windows.Forms.ListView();
             this.panel14 = new System.Windows.Forms.Panel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.openFileDialog_icon_choose = new System.Windows.Forms.OpenFileDialog();
             this.flowLayoutPanel1.SuspendLayout();
             this.Sam_Flow.SuspendLayout();
             this.Dim_Flow.SuspendLayout();
@@ -398,6 +399,7 @@
             this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.button12, "Autre");
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button10
             // 
@@ -2158,6 +2160,7 @@
             // 
             // numericUpDown3
             // 
+            this.numericUpDown3.Enabled = false;
             this.numericUpDown3.Location = new System.Drawing.Point(93, 33);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             1000,
@@ -2193,6 +2196,7 @@
             this.checkBox11.TabIndex = 18;
             this.checkBox11.Text = "Avant";
             this.checkBox11.UseVisualStyleBackColor = false;
+            this.checkBox11.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
             // 
             // panel7
             // 
@@ -2539,16 +2543,6 @@
             this.panel14.TabIndex = 35;
             this.panel14.Visible = false;
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_camera_30px;
-            this.pictureBox3.Location = new System.Drawing.Point(304, 19);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(32, 46);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 35;
-            this.pictureBox3.TabStop = false;
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -2559,6 +2553,22 @@
             this.label15.TabIndex = 38;
             this.label15.Text = "X";
             this.label15.Click += new System.EventHandler(this.label15_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_camera_30px;
+            this.pictureBox3.Location = new System.Drawing.Point(304, 19);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(32, 46);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 35;
+            this.pictureBox3.TabStop = false;
+            // 
+            // openFileDialog_icon_choose
+            // 
+            this.openFileDialog_icon_choose.DefaultExt = "*.png";
+            this.openFileDialog_icon_choose.Filter = "Png Image files (*.png)|*.png";
+            this.openFileDialog_icon_choose.RestoreDirectory = true;
             // 
             // Agenda_TEST
             // 
@@ -2782,5 +2792,6 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.OpenFileDialog openFileDialog_icon_choose;
     }
 }
