@@ -366,7 +366,6 @@
             this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button11.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.button11.FlatAppearance.BorderSize = 2;
             this.button11.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -386,7 +385,6 @@
             this.button12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button12.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.button12.FlatAppearance.BorderSize = 2;
             this.button12.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button12.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

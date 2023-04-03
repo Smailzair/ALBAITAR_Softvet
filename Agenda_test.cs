@@ -16,6 +16,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+using Xamarin.Forms.Internals;
 
 namespace ALBAITAR_Softvet.Resources
 {
@@ -23,10 +24,9 @@ namespace ALBAITAR_Softvet.Resources
     {
         public static List<int> selected_clients { get; set; }
         bool Is_New_To_Insert = true;
+        List<string> Current_items_id = new List<string>();
         ImageList items_icon = new ImageList();
         DataTable infos = new DataTable();
-        DataTable all_clients = new DataTable();
-        DataTable all_animals = new DataTable();
         DateTime startDate = DateTime.MinValue;
         DateTime endDate = DateTime.MaxValue;
         //-----------
@@ -56,7 +56,26 @@ namespace ALBAITAR_Softvet.Resources
             items_icon.Images.Add("Reptile", Properties.Resources.Reptile);
             //--------------------------------
             infos = PreConnection.Load_data("SELECT * FROM tb_agenda;");
-            all_clients = PreConnection.Load_data("SELECT * FROM tb_agenda;");
+            if(infos != null)
+            {
+                infos.Rows.Cast<DataRow>().Where(xx => xx["ICON"] != DBNull.Value).ToList().ForEach(row => {
+                    Image img = PreConnection.ByteArrayToImage((byte[])row["ICON"]);
+                    bool exist = false;
+                    for(int i = 0; i < items_icon.Images.Count; i++)
+                    {
+                        if (PreConnection.ArePicturesEqual(items_icon.Images[i],img ))
+                        {
+                            exist = true;
+                            break;
+                        }
+                    }
+                    if(!exist)
+                    {
+                        items_icon.Images.Add(img);
+                    }
+                    
+                });
+            }
             //-------------------------------
             foreach (Control ctr in flowLayoutPanel1.Controls)
             {
@@ -70,13 +89,13 @@ namespace ALBAITAR_Softvet.Resources
                 }
             }
             //----------------------------
-            listView_Icons.SmallImageList= items_icon;
+            listView_Icons.SmallImageList = items_icon;
             for (int s = 0; s < items_icon.Images.Count; s++)
             {
                 ListViewItem itm = new ListViewItem("", s);
                 listView_Icons.Items.Add(itm);
             }
-            //---------------            
+            //-------------------------        
             intial_Modify_fields();
             //------------------
         }
@@ -144,11 +163,16 @@ namespace ALBAITAR_Softvet.Resources
         }
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Current_items_id.Clear();
             if (((ListView)sender).SelectedItems.Count > 0)
             {
                 // textBox1.Text = ((ListView)sender).SelectedItems[0].SubItems.Count > 1 ? ((ListView)sender).SelectedItems[0].SubItems[1].Text : ""; //Get the ID
+                ((ListView)sender).SelectedItems.Cast<ListViewItem>().ToList().ForEach(RR =>
+                {
+                    Current_items_id.Add(RR.SubItems[1].Text);
+                });
             }
-
+            
         }
 
         private void listView1_MouseUp(object sender, MouseEventArgs e)
@@ -189,8 +213,6 @@ namespace ALBAITAR_Softvet.Resources
             }
         }
 
-
-
         private void Load_day_events(ListView lst, string dte)
         {
             lst.Items.Clear();
@@ -201,11 +223,30 @@ namespace ALBAITAR_Softvet.Resources
             {
                 infos.Rows.Cast<DataRow>().Where(EE => dtt >= (DateTime)EE["START_TIME"] && dtt <= (DateTime)EE["END_TIME"]).ToList().ForEach(ZZ =>
                 {
-                    ListViewItem dd = new ListViewItem(ZZ["OBJECT"].ToString());
-                    dd.SubItems.Add(ZZ["ID"].ToString());
-                    dd.ImageKey = ZZ["ICON_NME"].ToString();
-                    dd.ToolTipText = ZZ["DESCRIPTION"] != DBNull.Value ? (string)ZZ["DESCRIPTION"] : "";
-                    lst.Items.Add(dd);
+                    switch (ZZ["EVERY_TYPE"])
+                    {
+                        case "ONCE":
+                            ListViewItem dd = new ListViewItem(ZZ["OBJECT"].ToString());
+                            dd.SubItems.Add(ZZ["ID"].ToString());
+                            if(ZZ["ICON"] != DBNull.Value)
+                            {
+                                Image tmp = PreConnection.ByteArrayToImage((byte[])ZZ["ICON"]);
+                                for (int i = 0; i < items_icon.Images.Count; i++)
+                                {
+                                    if (PreConnection.ArePicturesEqual(items_icon.Images[i], tmp))
+                                    {
+                                        dd.ImageIndex = i;
+                                        break;
+                                    }
+                                }
+                                
+                            }                            
+                            dd.ToolTipText = ZZ["DESCRIPTION"] != DBNull.Value ? (string)ZZ["DESCRIPTION"] : "";
+                            lst.Items.Add(dd);
+                            break;
+                    }
+
+
 
                 });
                 listView1_SizeChanged(lst, null);
@@ -258,7 +299,7 @@ namespace ALBAITAR_Softvet.Resources
                             ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.Nonclickable;
                             ((ListView)ctr1).BorderStyle = BorderStyle.Fixed3D;
                             //--------------------
-                            // infos.AsEnumerable().Where(row => row.Field<DateTime>("")
+                            Load_day_events((ListView)ctr1, string.Concat((int.Parse(ctr1.Name.Substring(5)) - ddds),"/", dateTimePicker1.Value.Month, "/", dateTimePicker1.Value.Year)); ;
                         }
                         else
                         {
@@ -532,7 +573,7 @@ namespace ALBAITAR_Softvet.Resources
             {
                 case 0:
                     loop = "ONCE";
-                    break; 
+                    break;
                 case 1:
                     loop = "EVERY_DAY";
                     break;
@@ -602,93 +643,80 @@ namespace ALBAITAR_Softvet.Resources
                 string related_Animaux = "M";
                 listView_Anim.Items.Cast<ListViewItem>().ToList().ForEach(ZZZ => { related_Animaux += "," + ZZZ.SubItems[1].Text; });
                 related_Animaux = related_Animaux.Replace("M,", "").Replace("M", "");
+                string cmmd = "";
                 if (Is_New_To_Insert) //Insert
                 {
-                    string cmmd = "INSERT INTO tb_agenda "
-                                + "(`START_TIME`,"
-                                + "`END_TIME`,"
-                                + "`EVERY_TYPE`,"
-                                + "`EVERY_WEEK_DAY`,"
-                                + "`EVERY_MONTH_DAY`,"
-                                + "`HOURS_ARRANG_OF`,"
-                                + "`HOURS_ARRANG_TO`,"
-                                + "`TYPE`,"
-                                + "`OBJECT`,"
-                                + "`DESCRIPTION`,"
-                                + "`REPPEL_BEFORE_DAYS`,"
-                                + "`RELATED_CLIENTS_IDs`,"
-                                + "`RELATED_ANIMALS_IDs`,"
-                                + "`ICON`)"
-                                + "VALUES"
-                                + "('"+dateTimePicker2.Value.ToString("yyyy-MM-dd") +"'," //START_TIME
-                                + "'" + (dateTimePicker5.Visible ? dateTimePicker5.Value.ToString("yyyy-MM-dd") : dateTimePicker2.Value.ToString("yyyy-MM-dd")) + "'," //END_TIME
-                                + "'"+ loop +"'," //EVERY_TYPE
-                                + (Week_loop.Length > 0 ? "'"+Week_loop+"'" : "NULL") + "," //EVERY_WEEK_DAY
-                                +  (loop.Equals("EVERY_MONTH") ? "'" +numericUpDown1.Value+ "_TO_" + numericUpDown2.Value + "'" : "NULL") + "," //EVERY_MONTH_DAY
-                                + (dateTimePicker3.Visible ? "'" + dateTimePicker3.Value.ToString("HH:mm:ss") + "'" : "NULL") + "," //"<{HOURS_ARRANG_OF: }>,"
-                                + (dateTimePicker4.Visible ? "'" + dateTimePicker4.Value.ToString("HH:mm:ss") + "'" : "NULL") + ","//"<{HOURS_ARRANG_TO: }>,"
-                                + "'"+ comboBox2.Text +"'," //TYPE
-                                + "'"+textBox1.Text+"'," //OBJECT
-                                + "'"+textBox2.Text+"'," //DESCRIPTION
-                                + (numericUpDown3.Enabled ? numericUpDown3.Value.ToString() : "NULL") + "," //REPPEL_BEFORE_DAYS
-                                + "'"+ related_clients + "'," //RELATED_CLIENTS_IDs
-                                + "'" + related_Animaux + "'," //RELATED_ANIMALS_IDs
-                                + "@Icon);"; //ICO
-                    PreConnection.open_conn();
-                    MySqlCommand mySqlCommand = new MySqlCommand(cmmd, PreConnection.mySqlConnection);
-                    //---------------------------
-                    Image default_image = pictureBox2.Image;
-                    byte[] default_image_imageBytes = null;
+                    cmmd = "INSERT INTO tb_agenda "
+                           + "(`START_TIME`,"
+                           + "`END_TIME`,"
+                           + "`EVERY_TYPE`,"
+                           + "`EVERY_WEEK_DAY`,"
+                           + "`EVERY_MONTH_DAY`,"
+                           + "`HOURS_ARRANG_OF`,"
+                           + "`HOURS_ARRANG_TO`,"
+                           + "`TYPE`,"
+                           + "`OBJECT`,"
+                           + "`DESCRIPTION`,"
+                           + "`REPPEL_BEFORE_DAYS`,"
+                           + "`RELATED_CLIENTS_IDs`,"
+                           + "`RELATED_ANIMALS_IDs`,"
+                           + "`ICON`)"
+                           + "VALUES"
+                           + "('" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "'," //START_TIME
+                           + "'" + (dateTimePicker5.Visible ? dateTimePicker5.Value.ToString("yyyy-MM-dd") : dateTimePicker2.Value.ToString("yyyy-MM-dd")) + "'," //END_TIME
+                           + "'" + loop + "'," //EVERY_TYPE
+                           + (Week_loop.Length > 0 ? "'" + Week_loop + "'" : "NULL") + "," //EVERY_WEEK_DAY
+                           + (loop.Equals("EVERY_MONTH") ? "'" + numericUpDown1.Value + "_TO_" + numericUpDown2.Value + "'" : "NULL") + "," //EVERY_MONTH_DAY
+                           + (dateTimePicker3.Visible ? "'" + dateTimePicker3.Value.ToString("HH:mm:ss") + "'" : "NULL") + "," //"<{HOURS_ARRANG_OF: }>,"
+                           + (dateTimePicker4.Visible ? "'" + dateTimePicker4.Value.ToString("HH:mm:ss") + "'" : "NULL") + ","//"<{HOURS_ARRANG_TO: }>,"
+                           + "'" + comboBox2.Text + "'," //TYPE
+                           + "'" + textBox1.Text + "'," //OBJECT
+                           + "'" + textBox2.Text + "'," //DESCRIPTION
+                           + (numericUpDown3.Enabled ? numericUpDown3.Value.ToString() : "NULL") + "," //REPPEL_BEFORE_DAYS
+                           + "'" + related_clients + "'," //RELATED_CLIENTS_IDs
+                           + "'" + related_Animaux + "'," //RELATED_ANIMALS_IDs
+                           + "@Icon);"; //ICO
 
-                    using (MemoryStream mss = new MemoryStream())
-                    {                        
-                        Properties.Resources.icons8_camera_30px.Save(mss, Properties.Resources.icons8_camera_30px.RawFormat);
-                        default_image_imageBytes = mss.ToArray();
-                    }
-                    //-------------------------
-                    byte[] imageBytes;
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        pictureBox2.Image.Save(ms, ImageFormat.Png);
-                        imageBytes = ms.ToArray();
-                    }
-                    //-------------------
-                    if (imageBytes == null || default_image_imageBytes.SequenceEqual(imageBytes))
+
+                }
+                else //Update
+                {
+                    cmmd = "UPDATE `tb_agenda` SET "
+                           + "`START_TIME` = '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "',"
+                           + "`END_TIME` = '" + (dateTimePicker5.Visible ? dateTimePicker5.Value.ToString("yyyy-MM-dd") : dateTimePicker2.Value.ToString("yyyy-MM-dd")) + "',"
+                           + "`EVERY_TYPE` = '" + loop + "',"
+                           + "`EVERY_WEEK_DAY` = " + (Week_loop.Length > 0 ? "'" + Week_loop + "'" : "NULL") + ","
+                           + "`EVERY_MONTH_DAY` = " + (loop.Equals("EVERY_MONTH") ? "'" + numericUpDown1.Value + "_TO_" + numericUpDown2.Value + "'" : "NULL") + ","
+                           + "`HOURS_ARRANG_OF` = " + (dateTimePicker3.Visible ? "'" + dateTimePicker3.Value.ToString("HH:mm:ss") + "'" : "NULL") + ","
+                           + "`HOURS_ARRANG_TO` = " + (dateTimePicker4.Visible ? "'" + dateTimePicker4.Value.ToString("HH:mm:ss") + "'" : "NULL") + ","
+                           + "`TYPE` = '" + comboBox2.Text + "',"
+                           + "`OBJECT` = '" + textBox1.Text + "',"
+                           + "`DESCRIPTION` = '" + textBox2.Text + "',"
+                           + "`REPPEL_BEFORE_DAYS` = " + (numericUpDown3.Enabled ? numericUpDown3.Value.ToString() : "NULL") + ","
+                           + "`RELATED_CLIENTS_IDs` = '" + related_clients + "',"
+                           + "`RELATED_ANIMALS_IDs` = '" + related_Animaux + "',"
+                           + "`ICON` = @Icon"
+                           + " WHERE `ID` = " + Current_items_id[0] + ";";
+                }
+                PreConnection.open_conn();
+                MySqlCommand mySqlCommand = new MySqlCommand(cmmd, PreConnection.mySqlConnection);
+                //-------------------
+
+                    if (pictureBox2.Image == null || PreConnection.ArePicturesEqual(pictureBox2.Image, Properties.Resources.icons8_camera_30px))
                     {
                         mySqlCommand.Parameters.AddWithValue("@Icon", DBNull.Value);
                     }
                     else
                     {
-                        mySqlCommand.Parameters.AddWithValue("@Icon", imageBytes);
+                        mySqlCommand.Parameters.AddWithValue("@Icon", PreConnection.ImageToByteArray(pictureBox2.Image));
                     }
-                    int row_affected = mySqlCommand.ExecuteNonQuery();
-                    
-                }
-                else //Update
-                {
-                    string upd_cmd = "UPDATE `tb_agenda` SET "
-                                + "`START_TIME` = <{START_TIME: }>,"
-                                + "`END_TIME` = <{END_TIME: }>,"
-                                + "`EVERY_TYPE` = <{EVERY_TYPE: }>,"
-                                + "`EVERY_WEEK_DAY` = <{EVERY_WEEK_DAY: }>,"
-                                + "`EVERY_MONTH_DAY` = <{EVERY_MONTH_DAY: }>,"
-                                + "`HOURS_ARRANG_OF` = <{HOURS_ARRANG_OF: }>,"
-                                + "`HOURS_ARRANG_TO` = <{HOURS_ARRANG_TO: }>,"
-                                + "`TYPE` = <{TYPE: }>,"
-                                + "`OBJECT` = <{OBJECT: }>,"
-                                + "`DESCRIPTION` = <{DESCRIPTION: }>,"
-                                + "`REPPEL_BEFORE_DAYS` = <{REPPEL_BEFORE_DAYS: }>,"
-                                + "`RELATED_CLIENTS_IDs` = <{RELATED_CLIENTS_IDs: }>,"
-                                + "`RELATED_ANIMALS_IDs` = <{RELATED_ANIMALS_IDs: }>,"
-                                + "`ICON` = <{ICON: }>"
-                                + "WHERE `ID` = <{expr}>;";
-                }                
+                int row_affected = mySqlCommand.ExecuteNonQuery();
             }
             else
             {
-                MessageBox.Show(msg_err,"",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show(msg_err, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
 
         }
 
@@ -708,7 +736,7 @@ namespace ALBAITAR_Softvet.Resources
         }
 
         private void listView_Icons_ItemActivate(object sender, EventArgs e)
-        {            
+        {
             pictureBox2.Image = items_icon.Images[listView_Icons.SelectedItems[0].ImageIndex];
             panel14.Visible = false;
             textBox1.Focus();
@@ -730,7 +758,8 @@ namespace ALBAITAR_Softvet.Resources
 
         private void Agenda_TEST_MouseDown(object sender, MouseEventArgs e)
         {
-            if (panel14.Visible && !panel14.Bounds.Contains(e.Location)) { 
+            if (panel14.Visible && !panel14.Bounds.Contains(e.Location))
+            {
                 panel14.Visible = false;
                 textBox1.Focus();
             }
@@ -749,9 +778,9 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button12_Click(object sender, EventArgs e)
         {
-            if(openFileDialog_icon_choose.ShowDialog() == DialogResult.OK)
-            {                
-                if(Path.GetExtension(openFileDialog_icon_choose.FileName).ToLower() == ".png")
+            if (openFileDialog_icon_choose.ShowDialog() == DialogResult.OK)
+            {
+                if (Path.GetExtension(openFileDialog_icon_choose.FileName).ToLower() == ".png")
                 {
                     pictureBox2.Image = Image.FromFile(openFileDialog_icon_choose.FileName);
                     panel14.Visible = false;
@@ -759,9 +788,9 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 else
                 {
-                    MessageBox.Show("Ce type d'image non accepté !", "",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                }            
-                
+                    MessageBox.Show("Ce type d'image non accepté !", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
             }
         }
     }

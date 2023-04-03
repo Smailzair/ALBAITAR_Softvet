@@ -284,6 +284,37 @@ namespace ALBAITAR_Softvet
             }
         }
 
+        public static bool ArePicturesEqual(Image pictureBox1, Image pictureBox2)
+        {
+            if (pictureBox1 == null || pictureBox2 == null)
+            {
+                return false;
+            }
+
+            if (pictureBox1.Width != pictureBox2.Width ||
+                pictureBox1.Height != pictureBox2.Height)
+            {
+                // The images have different sizes
+                return false;
+            }
+
+            Bitmap bmp1 = new Bitmap(pictureBox1);
+            Bitmap bmp2 = new Bitmap(pictureBox2);
+
+            for (int y = 0; y < bmp1.Height; y++)
+            {
+                for (int x = 0; x < bmp1.Width; x++)
+                {
+                    if (bmp1.GetPixel(x, y) != bmp2.GetPixel(x, y))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+
         public static void Excport_to_excel(DataGridView dgv, string Workbook_title, string Worksheet_title, DataTable tbl_to_add, bool Also_Hidden_Columns)
         {
 
