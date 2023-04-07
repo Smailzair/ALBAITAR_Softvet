@@ -1,20 +1,103 @@
-﻿using System;
+﻿using ALBAITAR_Softvet.Dialogs;
+using Microsoft.Office.Core;
+using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
+using Org.BouncyCastle.Utilities;
+using ServiceStack;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
+using Xamarin.Forms.Internals;
 
 namespace ALBAITAR_Softvet.Resources
 {
     public partial class Agenda : Form
     {
+
+
+        public static List<int> selected_clients { get; set; }
+        bool Is_New_To_Insert = true;
+        string Current_items_id = string.Empty;
+        ImageList items_icon = new ImageList();
+        DataTable infos = new DataTable();
+        DataTable icons = new DataTable();
+        DataTable animals = new DataTable();
+        DataTable clients = new DataTable();
         DateTime startDate = DateTime.MinValue;
         DateTime endDate = DateTime.MaxValue;
+        string selected_ids_to_delete = "";
+        //-----------
+        public static ListViewItem[] Clientss;
+        public static ListViewItem[] Clientss2;
+        public static ListViewItem[] Animm;
+        public static ListViewItem[] Animm2;
+        int selected_img_idx = -1;
         public Agenda()
         {
+
             InitializeComponent();
             //----------------------
+            items_icon.ImageSize = new Size(32, 32);
+            //--------------------------------
+            clients = PreConnection.Load_data("SELECT * FROM tb_clients;;");
+            animals = PreConnection.Load_data("SELECT * FROM tb_animaux;");
+            infos = PreConnection.Load_data("SELECT * FROM tb_agenda;");
+            icons = PreConnection.Load_data("SELECT MIN(tb1.`ID`) AS ID,tb2.`MODIF_TIME`,tb2.`NME`,tb1.`IMG_DATA` FROM tb_images tb1 LEFT JOIN tb_images tb2 ON tb1.ID = tb2.ID WHERE tb1.`IMG_DATA` IS NOT NULL  GROUP BY tb1.`IMG_DATA`;");
+            listView_Icons.SmallImageList = items_icon;
+            items_icon.Images.Add("-1", Properties.Resources.icons8_Checkmark_30px);
+            if (icons != null)
+            {
+                icons.Rows.Cast<DataRow>().Where(xx => xx["IMG_DATA"] != DBNull.Value).ToList().ForEach(row =>
+                {
+                    Image img = PreConnection.ByteArrayToImage((byte[])row["IMG_DATA"]);
+                    bool exist = false;
+                    for (int i = 0; i < items_icon.Images.Count; i++)
+                    {
+                        if (PreConnection.ArePicturesEqual(items_icon.Images[i], img))
+                        {
+                            exist = true;
+                            break;
+                        }
+                    }
+                    if (!exist)
+                    {
+                        items_icon.Images.Add(row["ID"].ToString(), img);
+                    }
+                    //------------------------
+                    listView_Icons.SmallImageList = items_icon;
+                    ListViewItem itm = new ListViewItem("");
+                    itm.ImageKey = row["ID"].ToString();
+                    itm.SubItems.Add(row["ID"].ToString());
+                    listView_Icons.Items.Add(itm);
+                });
+            }
+            //-------------------------------
+            foreach (Control ctr in flowLayoutPanel1.Controls)
+            {
+                foreach (Control ctr1 in ctr.Controls)
+                {
+                    if (ctr1.Name.Contains("Dayy_"))
+                    {
+                        ((ListView)ctr1).SmallImageList = items_icon;
+                        listView1_SizeChanged(((ListView)ctr1), null);
+                    }
+                }
+            }
+            //-------------------------
+            dateTimePicker1_ValueChanged(null, null);
+            intial_Modify_fields();
+            //------------------
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
@@ -23,84 +106,957 @@ namespace ALBAITAR_Softvet.Resources
             endDate = DateTime.Parse(DateTime.DaysInMonth(e.Start.Year, e.Start.Month) + "/" + e.Start.Month + "/" + e.Start.Year);
             //--------------------------------
             int ddds = (int)startDate.DayOfWeek;
-            int next_mnth_frst_day_label_nb = 0;
             foreach (Control ctr in flowLayoutPanel1.Controls)
             {
                 foreach (Control ctr1 in ctr.Controls)
                 {
                     if (ctr1.Name.Contains("Dayy_"))
                     {
-                        ctr1.Enabled = true;
-                        ctr1.BackColor = Color.White;
-                        foreach (Control ctr2 in ctr1.Controls)
+                        ((ListView)ctr1).Items.Clear();
+                        ((ListView)ctr1).Columns[0].Text = "";
+                        if ((int.Parse(ctr1.Name.Substring(5)) - ddds) <= (endDate.Date).Day && (int.Parse(ctr1.Name.Substring(5)) - ddds) >= (startDate.Date).Day)
                         {
-                            if (!ctr2.Name.Contains("label_nb_day_"))
-                            {
-                                ctr1.Controls.Remove(ctr2);
-                            }
-                            else
-                            {
-                                if ((int.Parse(ctr2.Name.Substring(13)) - ddds) <= (endDate.Date).Day)
-                                {
-                                    ctr2.Text = (int.Parse(ctr2.Name.Substring(13)) - ddds).ToString();
-                                }
-                                else
-                                {
-
-
-                                    next_mnth_frst_day_label_nb = next_mnth_frst_day_label_nb > int.Parse(ctr2.Name.Substring(13)) || next_mnth_frst_day_label_nb == 0 ? int.Parse(ctr2.Name.Substring(13)) : next_mnth_frst_day_label_nb;
-                                    ctr2.Text = (int.Parse(ctr2.Name.Substring(13)) - ddds - (endDate.Date).Day + 1).ToString();
-                                }
-
-                            }
+                            ((ListView)ctr1).Columns[0].Text = (int.Parse(ctr1.Name.Substring(5)) - ddds).ToString();
+                            ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.Nonclickable;
+                            ((ListView)ctr1).BorderStyle = BorderStyle.Fixed3D;
+                        }
+                        else
+                        {
+                            ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.None;
+                            ((ListView)ctr1).BorderStyle = BorderStyle.None;
                         }
                     }
                 }
             }
             //------------------------
-            int ss = ((int)startDate.DayOfWeek);
-            if (ss > 0)
+        }
+        private void listView1_SizeChanged(object sender, EventArgs e)
+        {
+            if (((ListView)sender).Columns.Count > 0)
             {
-                for (int pp = 0; pp < ss; pp++)
+                int totalWidth = ((ListView)sender).Columns.Cast<ColumnHeader>().Sum(c => c.Width); // Get the total width of all columns
+                int newFirstColumnWidth = ((ListView)sender).ClientSize.Width - (totalWidth - ((ListView)sender).Columns[0].Width); // Calculate the new width of the first column
+                ((ListView)sender).Columns[0].Width = newFirstColumnWidth; // Set the new width of the first column
+            }
+
+        }
+
+
+        private void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            e.Item.ForeColor = e.Item.Checked ? Color.Green : SystemColors.WindowText;
+        }
+
+        private void listView1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (((ListView)sender).SelectedItems.Count > 0 && e.Button == MouseButtons.Left)
+            {
+                ((ListView)sender).CheckBoxes = true;
+                ListViewItem item = ((ListView)sender).GetItemAt(e.X, e.Y);
+                if (item != null && !item.Selected)
                 {
-                    Controls.Find("Dayy_0" + (pp + 1), true).FirstOrDefault().Controls[0].Text = (startDate.AddDays((ss * -1) + pp)).Day.ToString();
-                    Controls.Find("Dayy_0" + (pp + 1), true).FirstOrDefault().BackColor = Color.Gainsboro;
-                    Controls.Find("Dayy_0" + (pp + 1), true).FirstOrDefault().Enabled = false;
+                    item.Selected = true;
                 }
             }
-            //--------------------------
-            int zsq = 1;
-            while (next_mnth_frst_day_label_nb < 43)
+            //==============================
+        }
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {           
+            if (((ListView)sender).SelectedItems.Count > 0)
             {
-                Controls.Find(string.Concat("label_nb_day_", next_mnth_frst_day_label_nb.ToString()), true).FirstOrDefault().Text = zsq.ToString();
-                Controls.Find("Dayy_" + next_mnth_frst_day_label_nb, true).FirstOrDefault().BackColor = Color.Gainsboro;
-                Controls.Find("Dayy_" + next_mnth_frst_day_label_nb, true).FirstOrDefault().Enabled = false;
-                zsq++;
-                next_mnth_frst_day_label_nb++;
+                Current_items_id = ((ListView)sender).SelectedItems[0].SubItems[1].Text; //Get the ID
+                Is_New_To_Insert = false;
+                pictureBox6.Image = Properties.Resources.MODIF_002;
+                Fill_Event_Fields(Current_items_id);
+            }
+            else
+            {
+                Current_items_id = string.Empty;
+                Is_New_To_Insert = true;
+                pictureBox6.Image = Properties.Resources.NOUVEAU_002;
+                intial_Modify_fields();
             }
         }
 
-        private void flowLayoutPanel1_SizeChanged(object sender, EventArgs e)
+        private void Fill_Event_Fields(string ID)
         {
-           
+            intial_Modify_fields();
+            DataRow row = infos.Rows.Cast<DataRow>().Where(w => w["ID"].ToString() == ID).FirstOrDefault();
+            if (row[0] != null)
+            {
+                Current_items_id = ID;
+                Is_New_To_Insert = false;
+                pictureBox6.Image = Properties.Resources.MODIF_002;
+                //----------Loading Data------------
+                textBox1.Text = row["OBJECT"].ToString(); //OBJECT
+                pictureBox2.Image = items_icon.Images[row["ICON_ID"].ToString()]; //ICON
+                switch(row["EVERY_TYPE"].ToString()){
+                    case "ONCE":
+                        comboBox1.SelectedIndex = 0;
+                        break;
+                    case "EVERY_DAY":
+                        comboBox1.SelectedIndex = 1;
+                        break;
+                    case "EVERY_WEEK":
+                        comboBox1.SelectedIndex = 2;
+                        List<string> wk = row["EVERY_WEEK_DAY"].ToString().Split(',').ToList();
+                        checkBox10.Checked = wk.Contains("Sam");
+                        checkBox4.Checked = wk.Contains("Dim");
+                        checkBox5.Checked = wk.Contains("Lun");
+                        checkBox6.Checked = wk.Contains("Mar");
+                        checkBox7.Checked = wk.Contains("Mer");
+                        checkBox8.Checked = wk.Contains("Jeu");
+                        checkBox9.Checked = wk.Contains("Ven");
+                        break;
+                    case "EVERY_MONTH":
+                        comboBox1.SelectedIndex = 3;
+                        string[] separator2 = { "_TO_" };
+                        List<string> mnth = row["EVERY_MONTH_DAY"].ToString().Split(separator2, StringSplitOptions.RemoveEmptyEntries).ToList();                        
+                        numericUpDown1.Value = int.Parse(mnth[0]);
+                        numericUpDown2.Value = int.Parse(mnth[1]);
+                        break;
+                }                
+                dateTimePicker2.Value = (DateTime)row["START_TIME"];
+                dateTimePicker5.Value = (DateTime)row["END_TIME"];
+                if(row["HOURS_ARRANG_OF"] != DBNull.Value)
+                {
+                    TimeSpan tm = TimeSpan.Parse(row["HOURS_ARRANG_OF"].ToString());
+                    dateTimePicker3.Value = new DateTime(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month, dateTimePicker2.Value.Day, tm.Hours, tm.Minutes, 0);
+                    if (row["HOURS_ARRANG_TO"] != DBNull.Value)
+                    {
+                        TimeSpan tm2 = TimeSpan.Parse(row["HOURS_ARRANG_TO"].ToString());
+                        dateTimePicker4.Value = new DateTime(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month, dateTimePicker2.Value.Day, tm2.Hours, tm2.Minutes, 0);
+                    }
+                }
+                else
+                {
+                    checkBox3.Checked = true;
+                }
+                if (row["REPPEL_BEFORE_DAYS"] != DBNull.Value)
+                { 
+                    checkBox11.Checked = true;
+                    numericUpDown3.Value = int.Parse(row["REPPEL_BEFORE_DAYS"].ToString());
+                }
+                comboBox2.SelectedItem = row["REPPEL_BEFORE_DAYS"].ToString();
+                textBox2.Text = row["DESCRIPTION"].ToString();
+                //-------------------
+                List<string> already = new List<string>();
+                if(row["RELATED_ANIMALS_IDs"].ToString().Trim().Length > 0)
+                {
+                    string[] separator3 = { "," };
+                    List<string> mnth = row["RELATED_ANIMALS_IDs"].ToString().Split(separator3, StringSplitOptions.RemoveEmptyEntries).ToList();
+                    mnth.ForEach(AA => {
+                        DataRow ann = animals.Rows.Cast<DataRow>().Where(h => h["ID"].ToString() == AA).FirstOrDefault();
+                        if (ann[0] != null)
+                        {
+                            ListViewItem dd = new ListViewItem(ann["NME"].ToString());
+                            dd.SubItems.Add(ann["ID"].ToString());
+                            string sss = "";
+                            DataRow clt = clients.Rows.Cast<DataRow>().Where(hhj => hhj["ID"].ToString() == ann["CLIENT_ID"].ToString()).FirstOrDefault();
+                            if (clt[0] != null)
+                            {
+                                sss = string.Concat(clt["FAMNME"].ToString(), " ", clt["NME"].ToString());
+                            }                            
+                            dd.SubItems.Add(sss);
+                            dd.SubItems.Add(ann["CLIENT_ID"].ToString());
+                            listView_Anim.Items.Add(dd);
+                        }
+                        
+                    });
+                    //------------
+                    foreach (ColumnHeader column in listView_Anim.Columns)
+                    {
+                        if (column.Width > 0)
+                        {
+                            column.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                        }
+                    }
+                    //----------------
+                    label13.Text = listView_Anim.Items.Count > 0 ? string.Concat("Animaux (", listView_Anim.Items.Count, "):") : "Animaux :";
+                }
+                //-----------------
+                if (row["RELATED_CLIENTS_IDs"].ToString().Trim().Length > 0)
+                {
+                    string[] separator4 = { "," };
+                    List<string> mnth = row["RELATED_CLIENTS_IDs"].ToString().Split(separator4, StringSplitOptions.RemoveEmptyEntries).ToList();
+                    mnth.ForEach(AA => {
+                        DataRow cllt = clients.Rows.Cast<DataRow>().Where(h => h["ID"].ToString() == AA).FirstOrDefault();
+                        if (cllt[0] != null)
+                        {
+                            ListViewItem dd = new ListViewItem(string.Concat(cllt["FAMNME"].ToString(), " ", cllt["NME"].ToString()));
+                            dd.SubItems.Add(cllt["ID"].ToString());
+                            listView_Clients.Items.Add(dd);
+                        }
+
+                    });
+                    label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires (", listView_Clients.Items.Count, "):") : "Propriétaires :";
+                }
+                //--------------
+            }
+            else
+            {
+                Current_items_id = string.Empty;
+                Is_New_To_Insert = true;
+                pictureBox6.Image = Properties.Resources.NOUVEAU_002;
+            }
+        }
+        private void listView1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (((ListView)sender).CheckBoxes && ((ListView)sender).SelectedItems.Count > 0)
+            {
+                if (((ListView)sender).SelectedItems.Count == 1)
+                {
+                    ((ListView)sender).SelectedItems[0].Checked = !((ListView)sender).SelectedItems[0].Checked;
+                }
+                else
+                {
+                    if (((ListView)sender).SelectedItems.Cast<ListViewItem>().Where(zz => zz.Checked).ToList().Count == ((ListView)sender).SelectedItems.Count || ((ListView)sender).SelectedItems.Cast<ListViewItem>().Where(zz => !zz.Checked).ToList().Count == ((ListView)sender).SelectedItems.Count)
+                    {
+                        foreach (ListViewItem ittm in ((ListView)sender).SelectedItems)
+                        {
+                            ittm.Checked = !ittm.Checked;
+                        }
+                    }
+                    else
+                    {
+                        foreach (ListViewItem ittm in ((ListView)sender).SelectedItems)
+                        {
+                            ittm.Checked = true;
+                        }
+                    }
+
+                }
+            }
+
+            if (((ListView)sender).CheckBoxes)
+            {
+                ((ListView)sender).SelectedItems.Clear();
+                if (((ListView)sender).CheckedItems.Count == 0)
+                {
+                    ((ListView)sender).CheckBoxes = false;
+                }
+            }
+        }
+
+        private void Load_day_events(ListView lst, string dte)
+        {
+            lst.Items.Clear();
+            //----------------
+            DateTime dtt = DateTime.Parse("01/01/1999");
+            DateTime.TryParse(dte, out dtt);
+            if (infos.Rows.Count > 0 && dtt > DateTime.Parse("01/01/1999"))
+            {
+                int y = 11;
+                int idx = -1;
+                Image img = null;
+                bool exist = false;
+                infos.Rows.Cast<DataRow>().Where(EE => dtt >= (DateTime)EE["START_TIME"] && dtt <= (DateTime)EE["END_TIME"]).ToList().ForEach(ZZ =>
+                {
+                    y++;
+                    bool Write_It = false;
+                    switch (ZZ["EVERY_TYPE"])
+                    {
+                        case "ONCE":
+                        case "EVERY_DAY":
+                            Write_It = true;
+                            break;
+                        case "EVERY_WEEK":
+                            if (ZZ["EVERY_WEEK_DAY"].ToString().Split(',').ToList().Contains(dtt.DayOfWeek.ToString().Replace("Saturday", "Sam").Replace("Sunday", "Dim").Replace("Monday", "Lun").Replace("Tuesday", "Mar").Replace("Wednesday", "Mer").Replace("Thursday", "Jeu").Replace("Friday", "Ven")))
+                            {
+                                Write_It = true;
+                            }
+                            break;
+                        case "EVERY_MONTH":
+                            string[] separators = { "_TO_" };
+                            string[] substrings = ZZ["EVERY_MONTH_DAY"].ToString().Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                            int val1 = int.Parse(substrings[0]);
+                            int val2 = int.Parse(substrings[1]);
+                            if (dtt.Day >= val1 && dtt.Day <= val2)
+                            {
+                                Write_It = true;
+                            }
+                            break;
+                    }
+                    //-----------
+                    if (Write_It)
+                    {
+                        ListViewItem dd = new ListViewItem(ZZ["OBJECT"].ToString());
+                        dd.SubItems.Add(ZZ["ID"].ToString());
+
+                        if (ZZ["ICON_ID"] != DBNull.Value)
+                        {
+                            dd.ImageKey = ZZ["ICON_ID"].ToString();
+                        }
+                        else
+                        {
+                            dd.ImageKey = "-1";
+                        }
+                        if (ZZ["DESCRIPTION"] != DBNull.Value && ZZ["DESCRIPTION"].ToString().Length > 0)
+                        {
+                            dd.ToolTipText = ZZ["OBJECT"].ToString() + "\n" + "----<.>----\n" + (string)ZZ["DESCRIPTION"];
+                        }
+                        lst.Items.Add(dd);
+                    }
+
+                });
+                //---------------------------------
+                listView1_SizeChanged(lst, null);
+
+            }
+
+        }
+
+
+        private void dateTimePicker1_MouseDown(object sender, MouseEventArgs e)
+        {
+
+            if (e.X < 117)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+
+            }
+
+        }
+
+        private void dateTimePicker1_CloseUp(object sender, EventArgs e)
+        {
+            this.SelectNextControl((Control)sender, true, true, true, true);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Label ddsq= new Label();
-            ddsq.Text = "fsfsd sdfsdf sdfsd sdfsdff fsd sdfsdfsdf dfdsfdfsfds gdfsgdsfgdsfg sdfgdsfgdsf";
-            Dayy_03.Controls.Add(ddsq);
-            Dayy_03.AutoSize= true;
-            //Dayy_03.AutoSize = false;
+            dateTimePicker1.Value = dateTimePicker1.Value.AddMonths(1);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Label ddsq = new Label();
-            ddsq.Text = "fsfsd sdfsdf sdfsd sdfsdff fsd";
-            Dayy_10.Controls.Add(ddsq);
-            Dayy_10.AutoSize = true;
-            //Dayy_10.AutoSize = false;
+            dateTimePicker1.Value = dateTimePicker1.Value.AddMonths(-1);
+        }
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            startDate = DateTime.Parse("01/" + dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Year);
+            endDate = DateTime.Parse(DateTime.DaysInMonth(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month) + "/" + dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Year);
+            //--------------------------------
+            int ddds = ((int)startDate.DayOfWeek + 1) == 7 ? 0 : ((int)startDate.DayOfWeek + 1);
+            foreach (Control ctr in flowLayoutPanel1.Controls)
+            {
+                foreach (Control ctr1 in ctr.Controls)
+                {
+                    if (ctr1.Name.Contains("Dayy_"))
+                    {
+                        ((ListView)ctr1).Items.Clear();
+                        ((ListView)ctr1).Columns[0].Text = "";
+                        if ((int.Parse(ctr1.Name.Substring(5)) - ddds) <= (endDate.Date).Day && (int.Parse(ctr1.Name.Substring(5)) - ddds) >= (startDate.Date).Day)
+                        {
+                            ((ListView)ctr1).Columns[0].Text = (int.Parse(ctr1.Name.Substring(5)) - ddds).ToString();
+                            ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.Nonclickable;
+                            ((ListView)ctr1).BorderStyle = BorderStyle.Fixed3D;
+                            //--------------------
+                            Load_day_events((ListView)ctr1, string.Concat((int.Parse(ctr1.Name.Substring(5)) - ddds), "/", dateTimePicker1.Value.Month, "/", dateTimePicker1.Value.Year));
+                        }
+                        else
+                        {
+                            ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.None;
+                            ((ListView)ctr1).BorderStyle = BorderStyle.None;
+                        }
+
+
+                    }
+                }
+            }
+            //------------------------
+
+        }
+
+        private void Agenda_TEST_SizeChanged(object sender, EventArgs e)
+        {
+            Sam_Flow.Height = Dim_Flow.Height = Lun_Flow.Height = Mar_Flow.Height = Mer_Flow.Height = Jeu_Flow.Height = Ven_Flow.Height = (flowLayoutPanel1.ClientSize.Height < flowLayoutPanel1.DisplayRectangle.Height) ? 533 : flowLayoutPanel1.ClientSize.Height - 6;
+            //foreach (Control vw in flowLayoutPanel1.Controls.OfType<ListView>())
+            //{
+            //    vw.Height = (((FlowLayoutPanel)sender).Height - 28) / 6;
+            //}
+        }
+
+        private void Dim_Flow_SizeChanged(object sender, EventArgs e)
+        {
+            //-----------------
+            foreach (Control vw in ((FlowLayoutPanel)sender).Controls.OfType<ListView>())
+            {
+                vw.Height = (((FlowLayoutPanel)sender).Height - 61) / 6;
+            }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePicker3.Visible = !checkBox3.Checked;
+            dateTimePicker4.Visible = !checkBox3.Checked && comboBox1.SelectedIndex > 0;
+            dateTimePicker2.Width = dateTimePicker5.Width = checkBox3.Checked ? 217 : 168;
+        }
+
+        private void intial_Modify_fields()
+        {
+            selected_img_idx = -1;
+            pictureBox1.Visible = false;
+            checkBox3.Checked = false;
+            dateTimePicker2.Value = DateTime.Today;
+            dateTimePicker3.Value = DateTime.Now;
+            dateTimePicker5.Value = dateTimePicker2.Value.AddHours(1);
+            dateTimePicker4.Value = DateTime.Now.AddHours(1);
+            comboBox1.SelectedIndex = 0;
+            numericUpDown1.Value = 1;
+            numericUpDown2.Value = 7;
+            numericUpDown3.Value = 1;
+            checkBox11.Checked = false;
+            textBox1.Text = string.Empty;
+            textBox2.Text = string.Empty;
+            checkBox10.Checked = checkBox4.Checked = checkBox5.Checked = checkBox6.Checked = checkBox7.Checked = checkBox8.Checked = checkBox9.Checked = false;
+            //-------------
+            comboBox2.Items.Clear();
+            comboBox2.Items.Add("--");
+            infos.AsEnumerable().Select(row => row.Field<string>("TYPE")).Distinct().ToList().ForEach(row =>
+            {
+                if (row != null && row.Trim().Length > 0) { comboBox2.Items.Add(row); }
+            });
+            comboBox2.SelectedIndex = 0;
+            //-----------------
+            listView_Anim.Items.Clear();
+            label13.Text = "Animaux :";
+            listView_Clients.Items.Clear();            
+            label12.Text = "Propriétaires :";
+
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            verif_dates();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dateTimePicker5.Visible = dateTimePicker4.Visible = comboBox1.SelectedIndex > 0;
+            dateTimePicker5.Value = dateTimePicker3.Value.Hour < 23 ? dateTimePicker2.Value : dateTimePicker2.Value.AddDays(1);
+            dateTimePicker4.Value = dateTimePicker3.Value.AddHours(1);
+            checkBox3_CheckedChanged(null, null);
+            panel4.Visible = comboBox1.SelectedIndex == 2;
+            panel5.Visible = comboBox1.SelectedIndex == 3;
+            // verif_dates();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown2.Minimum = numericUpDown1.Value;
+        }
+
+        private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+        {
+            verif_dates();
+        }
+
+        private void verif_dates()
+        {
+            if (comboBox1.SelectedIndex > 0)
+            {
+                DateTime dte_from;
+                DateTime dte_to;
+                if (!checkBox3.Checked)
+                {
+                    dte_from = new DateTime(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month, dateTimePicker2.Value.Day, dateTimePicker3.Value.Hour, dateTimePicker3.Value.Minute, 00);
+                    dte_to = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, dateTimePicker5.Value.Day, dateTimePicker4.Value.Hour, dateTimePicker4.Value.Minute, 00);
+                    pictureBox1.Visible = dte_from >= dte_to;
+
+
+                }
+                else
+                {
+                    dte_from = new DateTime(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month, dateTimePicker2.Value.Day);
+                    dte_to = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, dateTimePicker5.Value.Day);
+                    dateTimePicker5.CalendarTitleBackColor = dateTimePicker4.CalendarTitleBackColor = dte_from > dte_to ? Color.LightCoral : SystemColors.Window;
+                    pictureBox1.Visible = dte_from > dte_to;
+                }
+            }
+        }
+        private void comboBox2_Validated(object sender, EventArgs e)
+        {
+            if (comboBox2.Text.Length > 0 && !comboBox2.Items.Contains(comboBox2.Text))
+            {
+                comboBox2.Text = comboBox2.Text.Trim().Substring(0, 1).ToUpper() + comboBox2.Text.Trim().Substring(1, comboBox2.Text.Trim().Length - 1).ToLower();
+            }
+            else if (comboBox2.Text.Trim().Length == 0)
+            {
+                comboBox2.SelectedIndex = 0;
+            }
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Clientss2 = new ListViewItem[listView_Clients.Items.Count];
+            for (int i = 0; i < listView_Clients.Items.Count; i++)
+            {
+                Clientss2[i] = listView_Clients.Items[i];
+            }
+            //--------------
+            Clients_List lsst = new Clients_List();
+            lsst.ShowDialog();
+            //-------------
+            if (Clientss != null)
+            {
+                listView_Clients.Items.Clear();
+                if (Clientss.Length > 0)
+                {
+                    for (int yd = 0; yd < Clientss.Length; yd++)
+                    {
+                        ListViewItem itttm = Clientss[yd];
+                        Clientss[yd].Remove();
+                        listView_Clients.Items.Add(itttm);
+                    }
+                }
+            }
+
+            //----------------
+            label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires (", listView_Clients.Items.Count, "):") : "Propriétaires :";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem itttm in listView_Clients.CheckedItems)
+            {
+                itttm.Remove();
+            }
+            //----------------
+            label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires (", listView_Clients.Items.Count, "):") : "Propriétaires :";
+        }
+
+        private void listView_Clients_ItemActivate(object sender, EventArgs e)
+        {
+            if (((ListView)sender).SelectedItems.Count > 0)
+            {
+                ListViewItem item = ((ListView)sender).SelectedItems[0];
+                item.Checked = !item.Checked;
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Animm2 = new ListViewItem[listView_Anim.Items.Count];
+            for (int i = 0; i < listView_Anim.Items.Count; i++)
+            {
+                Animm2[i] = listView_Anim.Items[i];
+            }
+            //--------------
+            Anims_List ann = new Anims_List();
+            ann.ShowDialog();
+            //--------------
+            listView_Anim.Items.Clear();
+            if (Animm != null)
+            {
+                if (Animm.Length > 0)
+                {
+                    for (int yd = 0; yd < Animm.Length; yd++)
+                    {
+                        ListViewItem itttm = Animm[yd];
+                        Animm[yd].Remove();
+                        listView_Anim.Items.Add(itttm);
+                        //----------------Add clients to clients list
+                        if (listView_Clients.Items.Cast<ListViewItem>().Where(itm => itm.SubItems[1].Text == itttm.SubItems[3].Text).ToList().Count == 0)
+                        {
+                            string[] itm_tmmp = new string[] { itttm.SubItems[2].Text, itttm.SubItems[3].Text }; //Client FULL_NME + Client ID
+                            ListViewItem clnt = new ListViewItem(itm_tmmp);
+                            listView_Clients.Items.Add(clnt);
+
+                        }
+                    }
+                    label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires (", listView_Clients.Items.Count, "):") : "Propriétaires :";
+                }
+            }
+            //------------
+            foreach (ColumnHeader column in listView_Anim.Columns)
+            {
+                if (column.Width > 0)
+                {
+                    column.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                }
+            }
+            //----------------
+            label13.Text = listView_Anim.Items.Count > 0 ? string.Concat("Animaux (", listView_Anim.Items.Count, "):") : "Animaux :";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem itttm in listView_Anim.CheckedItems)
+            {
+                //---------Remove it from clients list
+                if (listView_Clients.Items.Cast<ListViewItem>().Where(itm => itm.SubItems[1].Text == itttm.SubItems[3].Text).ToList().Count > 0)
+                {
+                    listView_Clients.Items.Cast<ListViewItem>().Where(itm => itm.SubItems[1].Text == itttm.SubItems[3].Text).First().Remove();
+                }
+                //-------------------                
+                itttm.Remove();
+            }
+            //----------------
+            label13.Text = listView_Anim.Items.Count > 0 ? string.Concat("Animaux (", listView_Anim.Items.Count, "):") : "Animaux :";
+            label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires (", listView_Clients.Items.Count, "):") : "Propriétaires :";
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            DateTime dte_from;// = DateTime.Now;
+            DateTime dte_to;
+            string Week_loop = string.Empty;
+            bool ready_to_save = true;
+            string msg_err = "Veuillez d'abord vérifier ces perturbateurs :\n";
+            //-------------- Objet
+            ready_to_save = textBox1.Text.Trim().Length > 0;
+            msg_err += textBox1.Text.Trim().Length > 0 ? "" : "\n- L'objet d'événement (titre).";
+            //-------------- Dates 
+
+            if (!checkBox3.Checked)
+            {
+                dte_from = new DateTime(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month, dateTimePicker2.Value.Day, dateTimePicker3.Value.Hour, dateTimePicker3.Value.Minute, 00);
+                dte_to = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, dateTimePicker5.Value.Day, dateTimePicker4.Value.Hour, dateTimePicker4.Value.Minute, 00);
+
+
+                if (dte_from >= dte_to && dateTimePicker5.Visible)
+                {
+                    ready_to_save = false;
+                    msg_err += "\n- La première date est (après/égales) la deuxième date.";
+                }
+            }
+            else
+            {
+                dte_from = new DateTime(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month, dateTimePicker2.Value.Day);
+                dte_to = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, dateTimePicker5.Value.Day);
+                if (dte_from > dte_to && dateTimePicker5.Visible)
+                {
+                    ready_to_save = false;
+                    msg_err += "\n- La première date est après la deuxième date.";
+                }
+            }
+
+            //---------------- Loop
+            string loop = "";
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0:
+                    loop = "ONCE";
+                    break;
+                case 1:
+                    loop = "EVERY_DAY";
+                    break;
+                case 2: //Chaque Semaine
+                    loop = "EVERY_WEEK";
+                    List<string> week_tmp = new List<string>();
+                    if (checkBox4.Checked) { week_tmp.Add("Dim"); }
+                    if (checkBox5.Checked) { week_tmp.Add("Lun"); }
+                    if (checkBox6.Checked) { week_tmp.Add("Mar"); }
+                    if (checkBox7.Checked) { week_tmp.Add("Mer"); }
+                    if (checkBox8.Checked) { week_tmp.Add("Jeu"); }
+                    if (checkBox9.Checked) { week_tmp.Add("Ven"); }
+                    if (checkBox10.Checked) { week_tmp.Add("Sam"); }
+                    week_tmp.ForEach(rr => Week_loop += "," + rr);
+                    Week_loop = week_tmp.Count > 0 ? Week_loop.Substring(1, Week_loop.Length - 1) : "";
+                    //--------------
+                    bool sem_tmp = false;
+                    for (int y = 0; y < 7; y++)
+                    {
+                        DateTime tmmp_dt = dte_from.AddDays(y);
+                        if (tmmp_dt <= dte_to)
+                        {
+                            sem_tmp = week_tmp.Contains(tmmp_dt.ToString("dddd", new CultureInfo("fr-FR")).ToTitleCase().Substring(0, 3));
+                            if (sem_tmp) { break; }
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if (sem_tmp == false || week_tmp.Count == 0)
+                    {
+                        ready_to_save = false;
+                        msg_err += "\n- Aucun jour de semaine trouvé dans cette période.";
+                    }
+                    break;
+                case 3: //Chaque Mois
+                    loop = "EVERY_MONTH";
+                    bool sem_tmp2 = false;
+                    for (int y = 0; y < 31; y++)
+                    {
+                        DateTime tmmp_dt = dte_from.AddDays(y);
+                        if (tmmp_dt <= dte_to)
+                        {
+                            sem_tmp2 = tmmp_dt.Day >= numericUpDown1.Value && tmmp_dt.Day <= numericUpDown2.Value;
+                            if (sem_tmp2) { break; }
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if (sem_tmp2 == false)
+                    {
+                        ready_to_save = false;
+                        msg_err += "\n- Aucun jour de mois trouvé dans cette période.";
+                    }
+                    break;
+            }
+            //----------
+
+            if (ready_to_save)
+            {
+                string related_clients = "K";
+                listView_Clients.Items.Cast<ListViewItem>().ToList().ForEach(ZZZ => { related_clients += "," + ZZZ.SubItems[1].Text; });
+                related_clients = related_clients.Replace("K,", "").Replace("K", "");
+                string related_Animaux = "M";
+                listView_Anim.Items.Cast<ListViewItem>().ToList().ForEach(ZZZ => { related_Animaux += "," + ZZZ.SubItems[1].Text; });
+                related_Animaux = related_Animaux.Replace("M,", "").Replace("M", "");
+                string cmmd = "";
+                if (Is_New_To_Insert) //Insert
+                {
+                    cmmd = "INSERT INTO tb_agenda "
+                           + "(`START_TIME`,"
+                           + "`END_TIME`,"
+                           + "`EVERY_TYPE`,"
+                           + "`EVERY_WEEK_DAY`,"
+                           + "`EVERY_MONTH_DAY`,"
+                           + "`HOURS_ARRANG_OF`,"
+                           + "`HOURS_ARRANG_TO`,"
+                           + "`TYPE`,"
+                           + "`OBJECT`,"
+                           + "`DESCRIPTION`,"
+                           + "`REPPEL_BEFORE_DAYS`,"
+                           + "`RELATED_CLIENTS_IDs`,"
+                           + "`RELATED_ANIMALS_IDs`,"
+                           + "`ICON_ID`)"
+                           + "VALUES"
+                           + "('" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "'," //START_TIME
+                           + "'" + (dateTimePicker5.Visible ? dateTimePicker5.Value.ToString("yyyy-MM-dd") : dateTimePicker2.Value.ToString("yyyy-MM-dd")) + "'," //END_TIME
+                           + "'" + loop + "'," //EVERY_TYPE
+                           + (Week_loop.Length > 0 ? "'" + Week_loop + "'" : "NULL") + "," //EVERY_WEEK_DAY
+                           + (loop.Equals("EVERY_MONTH") ? "'" + numericUpDown1.Value + "_TO_" + numericUpDown2.Value + "'" : "NULL") + "," //EVERY_MONTH_DAY
+                           + (dateTimePicker3.Visible ? "'" + dateTimePicker3.Value.ToString("HH:mm:ss") + "'" : "NULL") + "," //"<{HOURS_ARRANG_OF: }>,"
+                           + (dateTimePicker4.Visible ? "'" + dateTimePicker4.Value.ToString("HH:mm:ss") + "'" : "NULL") + ","//"<{HOURS_ARRANG_TO: }>,"
+                           + "'" + comboBox2.Text + "'," //TYPE
+                           + "'" + textBox1.Text + "'," //OBJECT
+                           + "'" + textBox2.Text + "'," //DESCRIPTION
+                           + (numericUpDown3.Enabled ? numericUpDown3.Value.ToString() : "NULL") + "," //REPPEL_BEFORE_DAYS
+                           + "'" + related_clients + "'," //RELATED_CLIENTS_IDs
+                           + "'" + related_Animaux + "'," //RELATED_ANIMALS_IDs
+                           + "@Icon);"; //ICO
+
+
+                }
+                else //Update
+                {
+                    cmmd = "UPDATE `tb_agenda` SET "
+                           + "`START_TIME` = '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "',"
+                           + "`END_TIME` = '" + (dateTimePicker5.Visible ? dateTimePicker5.Value.ToString("yyyy-MM-dd") : dateTimePicker2.Value.ToString("yyyy-MM-dd")) + "',"
+                           + "`EVERY_TYPE` = '" + loop + "',"
+                           + "`EVERY_WEEK_DAY` = " + (Week_loop.Length > 0 ? "'" + Week_loop + "'" : "NULL") + ","
+                           + "`EVERY_MONTH_DAY` = " + (loop.Equals("EVERY_MONTH") ? "'" + numericUpDown1.Value + "_TO_" + numericUpDown2.Value + "'" : "NULL") + ","
+                           + "`HOURS_ARRANG_OF` = " + (dateTimePicker3.Visible ? "'" + dateTimePicker3.Value.ToString("HH:mm:ss") + "'" : "NULL") + ","
+                           + "`HOURS_ARRANG_TO` = " + (dateTimePicker4.Visible ? "'" + dateTimePicker4.Value.ToString("HH:mm:ss") + "'" : "NULL") + ","
+                           + "`TYPE` = '" + comboBox2.Text + "',"
+                           + "`OBJECT` = '" + textBox1.Text + "',"
+                           + "`DESCRIPTION` = '" + textBox2.Text + "',"
+                           + "`REPPEL_BEFORE_DAYS` = " + (numericUpDown3.Enabled ? numericUpDown3.Value.ToString() : "NULL") + ","
+                           + "`RELATED_CLIENTS_IDs` = '" + related_clients + "',"
+                           + "`RELATED_ANIMALS_IDs` = '" + related_Animaux + "',"
+                           + "`ICON_ID` = @Icon"
+                           + " WHERE `ID` = " + Current_items_id + ";";
+                }
+                PreConnection.open_conn();
+                MySqlCommand mySqlCommand = new MySqlCommand(cmmd, PreConnection.mySqlConnection);
+                //-------------------
+
+                if (pictureBox2.Image == null || selected_img_idx == -1)
+                {
+                    mySqlCommand.Parameters.AddWithValue("@Icon", DBNull.Value);
+                }
+                else
+                {
+                    mySqlCommand.Parameters.AddWithValue("@Icon", selected_img_idx);
+                }
+                int row_affected = mySqlCommand.ExecuteNonQuery();
+            }
+            else
+            {
+                MessageBox.Show(msg_err, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+
+        }
+
+        private void listView_Anim_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
+        {
+            checkBox11.Checked = true;
+        }
+
+        private void listView_Icons_ItemActivate(object sender, EventArgs e)
+        {
+            if (label16.Visible) //supprimer les icons
+            {
+                PreConnection.Excut_Cmd("DELETE FROM tb_images WHERE `ID` = "+ listView_Icons.SelectedItems[0].ImageKey + ";");
+                listView_Icons.SelectedItems[0].Remove();
+            }
+            else //selectionner une icon
+            {
+                selected_img_idx = int.Parse(listView_Icons.SelectedItems[0].ImageKey);
+                pictureBox2.Image = items_icon.Images[listView_Icons.SelectedItems[0].Index + 1];
+
+
+                panel14.Visible = false;
+                textBox1.Focus();
+            }
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            panel14.Visible = true;
+            listView_Icons.SelectedItems.Clear();
+            panel14.Focus();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            pictureBox2.Image = Properties.Resources.icons8_camera_30px;
+            selected_img_idx = -1;
+            //---------------------------
+            label16.Visible = !label16.Visible;
+            listView_Icons.Focus();
+        }
+
+        private void Agenda_TEST_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (panel14.Visible && !panel14.Bounds.Contains(e.Location))
+            {
+                panel14.Visible = false;
+                textBox1.Focus();
+            }
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+            panel14.Visible = false;
+            textBox1.Focus();
+        }
+
+        private void checkBox11_CheckedChanged(object sender, EventArgs e)
+        {
+            numericUpDown3.Enabled = checkBox11.Checked;
+        }
+        Image tmmmmp_img = null;
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog_icon_choose.ShowDialog() == DialogResult.OK)
+            {
+                if (Path.GetExtension(openFileDialog_icon_choose.FileName).ToLower() == ".png")
+                {
+                    MySqlCommand mySqlCommand = new MySqlCommand("INSERT INTO tb_images (`NME`,`IMG_DATA`) VALUES ('',@Immg);", PreConnection.mySqlConnection);
+                    mySqlCommand.Parameters.AddWithValue("@Immg", PreConnection.ImageToByteArray(Image.FromFile(openFileDialog_icon_choose.FileName)));
+                    PreConnection.open_conn();
+                    int affected_rows_nb = mySqlCommand.ExecuteNonQuery();
+                    if (affected_rows_nb > 0)
+                    {
+                        DataTable dt = PreConnection.Load_data("SELECT * FROM tb_images WHERE ID = (SELECT MAX(`ID`) AS LAST_ID FROM tb_images LIMIT 1);");
+                        if (dt.Rows.Count > 0)
+                        {
+                            //-----------------------                            
+                            tmmmmp_img = Image.FromFile(openFileDialog_icon_choose.FileName);
+                            items_icon.Images.Add(dt.Rows[0]["ID"].ToString(), tmmmmp_img);
+                            listView_Icons.SmallImageList = items_icon;
+                            //------
+                            ListViewItem itmm = new ListViewItem("");
+                            itmm.ImageKey = dt.Rows[0]["ID"].ToString();
+                            itmm.SubItems.Add(dt.Rows[0]["ID"].ToString());
+                            listView_Icons.Items.Add(itmm);
+
+                            //---------
+                            selected_img_idx = (int)dt.Rows[0]["ID"];
+                            pictureBox2.Image = tmmmmp_img;
+                        }
+                    }
+
+                    panel14.Visible = false;
+                    textBox1.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Ce type d'image non accepté !", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+        }
+
+        private void panel14_VisibleChanged(object sender, EventArgs e)
+        {
+            label16.Visible = false;
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            pictureBox2.Image = Properties.Resources.icons8_camera_30px;
+            selected_img_idx = -1;
+            panel14.Visible = false;
+            textBox1.Focus();
+        }
+
+        private void listView_Icons_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode== Keys.Escape)
+            {
+                label16.Visible = false;
+            }
+        }
+
+        private void pictureBox4_MouseHover(object sender, EventArgs e)
+        {
+            panel15.Visible = true;
+        }
+
+        private void pictureBox4_MouseLeave(object sender, EventArgs e)
+        {
+            panel15.Visible = false;
+        }
+        private void button10_Click(object sender, EventArgs e)
+        {
+            selected_ids_to_delete = string.Empty;
+            foreach (Control ctr in flowLayoutPanel1.Controls)
+            {
+                foreach (Control ctr1 in ctr.Controls)
+                {
+                    if (ctr1.Name.Contains("Dayy_"))
+                    {
+                        if (((ListView)ctr1).CheckBoxes)
+                        {
+                           foreach(ListViewItem itm in ((ListView)ctr1).CheckedItems)
+                            {
+                                selected_ids_to_delete += "," + itm.SubItems[1].Text;
+                            }
+                        }                        
+                    }
+                }
+            }
+
+            if(selected_ids_to_delete == string.Empty)
+            {
+                selected_ids_to_delete = Current_items_id.ToString();
+            }
+            else
+            {
+                selected_ids_to_delete = selected_ids_to_delete.Substring(1,selected_ids_to_delete.Length- 1);
+            }
+            Debug.WriteLine(">>>>>>>>> Ids to delete >>>>>>>>> " + selected_ids_to_delete);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Current_items_id = string.Empty;
+            Is_New_To_Insert = true;
+            pictureBox6.Image = Properties.Resources.NOUVEAU_002;
+            intial_Modify_fields();
         }
     }
 }

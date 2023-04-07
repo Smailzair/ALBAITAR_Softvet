@@ -63,7 +63,7 @@ namespace ALBAITAR_Softvet
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
             if (Application.OpenForms["Agenda"] == null)
             {
@@ -76,20 +76,7 @@ namespace ALBAITAR_Softvet
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (Application.OpenForms["Agenda_TEST"] == null)
-            {
-                new Agenda_TEST().Show();
-            }
-            else
-            {
-                Application.OpenForms["Agenda_TEST"].WindowState = Application.OpenForms["Agenda_TEST"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Agenda_TEST"].WindowState;
-                Application.OpenForms["Agenda_TEST"].BringToFront();
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             new Form1().Show();
         }

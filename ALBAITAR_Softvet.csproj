@@ -299,12 +299,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agenda_TEST.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Agenda_TEST.Designer.cs">
-      <DependentUpon>Agenda_TEST.cs</DependentUpon>
-    </Compile>
     <Compile Include="Agenda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -322,6 +316,12 @@
     </Compile>
     <Compile Include="Dialogs\Clients_List.Designer.cs">
       <DependentUpon>Clients_List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Loading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Loading.Designer.cs">
+      <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -392,9 +392,6 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Agenda_TEST.resx">
-      <DependentUpon>Agenda_TEST.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Agenda.resx">
       <DependentUpon>Agenda.cs</DependentUpon>
     </EmbeddedResource>
@@ -403,6 +400,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Clients_List.resx">
       <DependentUpon>Clients_List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Loading.resx">
+      <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -591,6 +591,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\NOUVEAU_002.png" />
+    <None Include="Resources\MODIF_002.png" />
+    <None Include="Resources\Animation.gif" />
+    <None Include="Resources\icons8_info_30px.png" />
+    <None Include="Resources\icons8_info_96px_1.png" />
+    <None Include="Resources\icons8_remove_image_30px_1.png" />
+    <None Include="Resources\output-onlinegiftools copy.gif" />
+    <None Include="Resources\icons8_Checkmark_30px.png" />
     <None Include="Resources\icons8_camera_30px.png" />
     <None Include="Resources\icons8_veterinarian_20px_2 copy.png" />
     <None Include="Resources\icons8_veterinarian_20px_3.png" />

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using ALBAITAR_Softvet.Dialogs;
+using Microsoft.Win32;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace ALBAITAR_Softvet
 {
     internal class PreConnection
     {
-
+      //  public static Loading loading = new Loading();
         public static MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine
         //public static MySqlConnection mySqlConnection = new MySqlConnection("Server=instances.spawn.cc;Port=31681;Database=TRESOR_LUNAR_TEST;Uid=root;Pwd=kOluo0PgmDVowykt;"); //Pour le test
         static bool Connection_opened = false;

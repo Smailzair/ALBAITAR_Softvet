@@ -37,20 +37,21 @@ namespace ALBAITAR_Softvet.Dialogs
                         items2.Add(dd);
                     }
                     
-                    if (Agenda_TEST.Clientss2.Length > 0)
-                    {
-                        for (int dd = 0; dd < Agenda_TEST.Clientss2.Length; dd++)
+                        if (Agenda.Clientss2.Length > 0)
                         {
-                            ListViewItem item = listView1.Items.Cast<ListViewItem>().Where(XX => XX.SubItems[0].Text == Agenda_TEST.Clientss2[dd].SubItems[0].Text).FirstOrDefault();
-                            listView1.Items.Remove(item);
-                            items2.Remove(item);
-                            listView2.ItemSelectionChanged -= listView2_ItemSelectionChanged;
-                            listView2.Items.Add(item);
-                            listView2.SelectedIndices.Clear();
-                            listView2.ItemSelectionChanged += listView2_ItemSelectionChanged;
-                            selected_items_count++;
+                            for (int dd = 0; dd < Agenda.Clientss2.Length; dd++)
+                            {
+                                ListViewItem item = listView1.Items.Cast<ListViewItem>().Where(XX => XX.SubItems[0].Text == Agenda.Clientss2[dd].SubItems[0].Text).FirstOrDefault();
+                                listView1.Items.Remove(item);
+                                items2.Remove(item);
+                                listView2.ItemSelectionChanged -= listView2_ItemSelectionChanged;
+                                listView2.Items.Add(item);
+                                listView2.SelectedIndices.Clear();
+                                listView2.ItemSelectionChanged += listView2_ItemSelectionChanged;
+                                selected_items_count++;
+                            }
                         }
-                    }
+                    
                     
                     button2.Enabled = selected_items_count > 0;
                     button2.Text = "OK " + (button2.Enabled ? "[" + selected_items_count + "]" : "");
@@ -137,10 +138,10 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Agenda_TEST.Clientss = new ListViewItem[listView2.Items.Count];
+            Agenda.Clientss = new ListViewItem[listView2.Items.Count];
             for (int i = 0; i < listView2.Items.Count; i++)
             {
-                Agenda_TEST.Clientss[i] = listView2.Items[i];
+                Agenda.Clientss[i] = listView2.Items[i];
             }
 
             thers_modif = false; //to prevent "Clients_List_FormClosing";

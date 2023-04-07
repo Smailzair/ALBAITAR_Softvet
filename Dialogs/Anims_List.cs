@@ -92,10 +92,10 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Agenda_TEST.Animm = new ListViewItem[listView2.Items.Count];
+            Agenda.Animm = new ListViewItem[listView2.Items.Count];
             for (int i = 0; i < listView2.Items.Count; i++)
             {
-                Agenda_TEST.Animm[i] = listView2.Items[i];
+                Agenda.Animm[i] = listView2.Items[i];
             }
 
             thers_modif = false; //to prevent "Clients_List_FormClosing";
@@ -134,11 +134,11 @@ namespace ALBAITAR_Softvet.Dialogs
                             items2.Add(dd);
                         }
 
-                        if (Agenda_TEST.Animm2.Length > 0)
+                        if (Agenda.Animm2.Length > 0)
                         {
-                            for (int dd = 0; dd < Agenda_TEST.Animm2.Length; dd++)
+                            for (int dd = 0; dd < Agenda.Animm2.Length; dd++)
                             {
-                                ListViewItem item = listView1.Items.Cast<ListViewItem>().Where(XX => XX.SubItems[0].Text == Agenda_TEST.Animm2[dd].SubItems[0].Text).FirstOrDefault();
+                                ListViewItem item = listView1.Items.Cast<ListViewItem>().Where(XX => XX.SubItems[0].Text == Agenda.Animm2[dd].SubItems[0].Text).FirstOrDefault();
                                 listView1.Items.Remove(item);
                                 items2.Remove(item);
                                 listView2.ItemSelectionChanged -= listView2_ItemSelectionChanged;
