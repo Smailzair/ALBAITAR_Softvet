@@ -48,8 +48,9 @@ namespace ALBAITAR_Softvet
 
             if (processes.Length <= 1)
             {
-
-                Application.Run(new Login(false));
+                Login log = new Login(false);
+                Application.Run(log);
+                log.BringToFront();
                 //--------------
                 if (Login.enter_allow)
                 {

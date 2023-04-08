@@ -29,7 +29,8 @@ namespace ALBAITAR_Softvet.Resources
             //----------------------
             Load_clients_from_DB();
             //---------------------
-            sites = PreConnection.Load_data_keeping_duplicates("SELECT * FROM tb_adresses;");
+            //sites = PreConnection.Load_data_keeping_duplicates("SELECT * FROM tb_adresses;");
+            sites = Main_Frm.ADRESSES_SITES;
             wilayaa = new List<string>();
             cities = new List<string>();
             sites.Rows.Cast<DataRow>().ToList().ForEach(row =>

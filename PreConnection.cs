@@ -20,8 +20,9 @@ namespace ALBAITAR_Softvet
     internal class PreConnection
     {
       //  public static Loading loading = new Loading();
-        public static MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine
-        //public static MySqlConnection mySqlConnection = new MySqlConnection("Server=instances.spawn.cc;Port=31681;Database=TRESOR_LUNAR_TEST;Uid=root;Pwd=kOluo0PgmDVowykt;"); //Pour le test
+        //public static MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine
+        public static MySqlConnection mySqlConnection = new MySqlConnection("Server=192.168.1.50;Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine
+
         static bool Connection_opened = false;
         public static void open_conn()
         {

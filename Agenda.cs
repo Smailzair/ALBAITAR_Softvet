@@ -19,12 +19,13 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
+using System.Runtime.InteropServices;
+
 
 namespace ALBAITAR_Softvet.Resources
 {
     public partial class Agenda : Form
     {
-
 
         public static List<int> selected_clients { get; set; }
         bool Is_New_To_Insert = true;
@@ -144,6 +145,7 @@ namespace ALBAITAR_Softvet.Resources
                 int totalWidth = ((ListView)sender).Columns.Cast<ColumnHeader>().Sum(c => c.Width); // Get the total width of all columns
                 int newFirstColumnWidth = ((ListView)sender).ClientSize.Width - (totalWidth - ((ListView)sender).Columns[0].Width); // Calculate the new width of the first column
                 ((ListView)sender).Columns[0].Width = newFirstColumnWidth; // Set the new width of the first column
+
             }
 
         }
@@ -545,7 +547,8 @@ namespace ALBAITAR_Softvet.Resources
 
         private void Agenda_TEST_SizeChanged(object sender, EventArgs e)
         {
-            Sam_Flow.Height = Dim_Flow.Height = Lun_Flow.Height = Mar_Flow.Height = Mer_Flow.Height = Jeu_Flow.Height = Ven_Flow.Height = (flowLayoutPanel1.ClientSize.Height < flowLayoutPanel1.DisplayRectangle.Height) ? 533 : flowLayoutPanel1.ClientSize.Height - 6;       
+            Sam_Flow.Height = Dim_Flow.Height = Lun_Flow.Height = Mar_Flow.Height = Mer_Flow.Height = Jeu_Flow.Height = Ven_Flow.Height = (flowLayoutPanel1.ClientSize.Height < flowLayoutPanel1.DisplayRectangle.Height) ? 533 : flowLayoutPanel1.ClientSize.Height - 6;            
+            Sam_Flow.Width = Dim_Flow.Width = Lun_Flow.Width = Mar_Flow.Width = Mer_Flow.Width = Jeu_Flow.Width = Ven_Flow.Width = (flowLayoutPanel1.ClientSize.Width > flowLayoutPanel1.DisplayRectangle.Width) ? 162 : (flowLayoutPanel1.ClientSize.Width - 48) / 7;
         }
 
         private void Dim_Flow_SizeChanged(object sender, EventArgs e)
@@ -553,8 +556,11 @@ namespace ALBAITAR_Softvet.Resources
             //-----------------
             foreach (Control vw in ((FlowLayoutPanel)sender).Controls.OfType<ListView>())
             {
-                vw.Height = (((FlowLayoutPanel)sender).Height - 61) / 6;
+                vw.Width = (((FlowLayoutPanel)sender).Width - 9);
+                vw.Height = (((FlowLayoutPanel)sender).Height - 60) / 5;
+                vw.Width = (((FlowLayoutPanel)sender).Width - 6);
             }
+            label2.Width = label3.Width = label4.Width = label5.Width = label6.Width = label7.Width = label8.Width = (((FlowLayoutPanel)sender).Width - 6);
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)

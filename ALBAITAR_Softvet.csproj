@@ -591,6 +591,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\output-onlinegiftools copy1.gif" />
     <None Include="Resources\icons8_todo_list_20px.png" />
     <None Include="Resources\icons8_todo_list_30px.png" />
     <None Include="Resources\NOUVEAU_002.png" />

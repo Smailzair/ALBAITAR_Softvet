@@ -783,6 +783,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap output_onlinegiftools_copy {
+            get {
+                object obj = ResourceManager.GetObject("output-onlinegiftools copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Ovine {
             get {
                 object obj = ResourceManager.GetObject("Ovine", resourceCulture);
