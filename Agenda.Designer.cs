@@ -178,7 +178,8 @@
             this.openFileDialog_icon_choose = new System.Windows.Forms.OpenFileDialog();
             this.panel15 = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.button13 = new System.Windows.Forms.Button();
@@ -205,6 +206,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.Sam_Flow.SuspendLayout();
             this.Dim_Flow.SuspendLayout();
@@ -222,22 +224,22 @@
             this.panel4.SuspendLayout();
             this.panel14.SuspendLayout();
             this.panel15.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // button8
             // 
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button8.Enabled = false;
             this.button8.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.button8.FlatAppearance.BorderSize = 2;
             this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button8.Location = new System.Drawing.Point(579, 16);
             this.button8.Name = "button8";
@@ -246,6 +248,7 @@
             this.button8.Text = "...";
             this.toolTip1.SetToolTip(this.button8, "Suivant");
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // textBox1
             // 
@@ -317,6 +320,7 @@
             this.Dayy_1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_1.FullRowSelect = true;
             this.Dayy_1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_1.HideSelection = false;
             this.Dayy_1.Location = new System.Drawing.Point(3, 25);
             this.Dayy_1.Name = "Dayy_1";
             this.Dayy_1.ShowItemToolTips = true;
@@ -346,6 +350,7 @@
             this.Dayy_8.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_8.FullRowSelect = true;
             this.Dayy_8.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_8.HideSelection = false;
             this.Dayy_8.Location = new System.Drawing.Point(3, 109);
             this.Dayy_8.Name = "Dayy_8";
             this.Dayy_8.ShowItemToolTips = true;
@@ -375,6 +380,7 @@
             this.Dayy_15.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_15.FullRowSelect = true;
             this.Dayy_15.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_15.HideSelection = false;
             this.Dayy_15.Location = new System.Drawing.Point(3, 193);
             this.Dayy_15.Name = "Dayy_15";
             this.Dayy_15.ShowItemToolTips = true;
@@ -404,6 +410,7 @@
             this.Dayy_22.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_22.FullRowSelect = true;
             this.Dayy_22.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_22.HideSelection = false;
             this.Dayy_22.Location = new System.Drawing.Point(3, 277);
             this.Dayy_22.Name = "Dayy_22";
             this.Dayy_22.ShowItemToolTips = true;
@@ -433,6 +440,7 @@
             this.Dayy_29.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_29.FullRowSelect = true;
             this.Dayy_29.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_29.HideSelection = false;
             this.Dayy_29.Location = new System.Drawing.Point(3, 361);
             this.Dayy_29.Name = "Dayy_29";
             this.Dayy_29.ShowItemToolTips = true;
@@ -462,6 +470,7 @@
             this.Dayy_36.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_36.FullRowSelect = true;
             this.Dayy_36.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_36.HideSelection = false;
             this.Dayy_36.Location = new System.Drawing.Point(3, 445);
             this.Dayy_36.Name = "Dayy_36";
             this.Dayy_36.ShowItemToolTips = true;
@@ -519,6 +528,7 @@
             this.Dayy_2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_2.FullRowSelect = true;
             this.Dayy_2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_2.HideSelection = false;
             this.Dayy_2.Location = new System.Drawing.Point(3, 25);
             this.Dayy_2.Name = "Dayy_2";
             this.Dayy_2.ShowItemToolTips = true;
@@ -548,6 +558,7 @@
             this.Dayy_9.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_9.FullRowSelect = true;
             this.Dayy_9.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_9.HideSelection = false;
             this.Dayy_9.Location = new System.Drawing.Point(3, 109);
             this.Dayy_9.Name = "Dayy_9";
             this.Dayy_9.ShowItemToolTips = true;
@@ -577,6 +588,7 @@
             this.Dayy_16.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_16.FullRowSelect = true;
             this.Dayy_16.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_16.HideSelection = false;
             this.Dayy_16.Location = new System.Drawing.Point(3, 193);
             this.Dayy_16.Name = "Dayy_16";
             this.Dayy_16.ShowItemToolTips = true;
@@ -606,6 +618,7 @@
             this.Dayy_23.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_23.FullRowSelect = true;
             this.Dayy_23.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_23.HideSelection = false;
             this.Dayy_23.Location = new System.Drawing.Point(3, 277);
             this.Dayy_23.Name = "Dayy_23";
             this.Dayy_23.ShowItemToolTips = true;
@@ -635,6 +648,7 @@
             this.Dayy_30.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_30.FullRowSelect = true;
             this.Dayy_30.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_30.HideSelection = false;
             this.Dayy_30.Location = new System.Drawing.Point(3, 361);
             this.Dayy_30.Name = "Dayy_30";
             this.Dayy_30.ShowItemToolTips = true;
@@ -664,6 +678,7 @@
             this.Dayy_37.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_37.FullRowSelect = true;
             this.Dayy_37.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_37.HideSelection = false;
             this.Dayy_37.Location = new System.Drawing.Point(3, 445);
             this.Dayy_37.Name = "Dayy_37";
             this.Dayy_37.ShowItemToolTips = true;
@@ -721,6 +736,7 @@
             this.Dayy_3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_3.FullRowSelect = true;
             this.Dayy_3.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_3.HideSelection = false;
             this.Dayy_3.Location = new System.Drawing.Point(3, 25);
             this.Dayy_3.Name = "Dayy_3";
             this.Dayy_3.ShowItemToolTips = true;
@@ -750,6 +766,7 @@
             this.Dayy_10.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_10.FullRowSelect = true;
             this.Dayy_10.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_10.HideSelection = false;
             this.Dayy_10.Location = new System.Drawing.Point(3, 109);
             this.Dayy_10.Name = "Dayy_10";
             this.Dayy_10.ShowItemToolTips = true;
@@ -779,6 +796,7 @@
             this.Dayy_17.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_17.FullRowSelect = true;
             this.Dayy_17.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_17.HideSelection = false;
             this.Dayy_17.Location = new System.Drawing.Point(3, 193);
             this.Dayy_17.Name = "Dayy_17";
             this.Dayy_17.ShowItemToolTips = true;
@@ -808,6 +826,7 @@
             this.Dayy_24.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_24.FullRowSelect = true;
             this.Dayy_24.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_24.HideSelection = false;
             this.Dayy_24.Location = new System.Drawing.Point(3, 277);
             this.Dayy_24.Name = "Dayy_24";
             this.Dayy_24.ShowItemToolTips = true;
@@ -837,6 +856,7 @@
             this.Dayy_31.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_31.FullRowSelect = true;
             this.Dayy_31.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_31.HideSelection = false;
             this.Dayy_31.Location = new System.Drawing.Point(3, 361);
             this.Dayy_31.Name = "Dayy_31";
             this.Dayy_31.ShowItemToolTips = true;
@@ -866,6 +886,7 @@
             this.Dayy_38.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_38.FullRowSelect = true;
             this.Dayy_38.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_38.HideSelection = false;
             this.Dayy_38.Location = new System.Drawing.Point(3, 445);
             this.Dayy_38.Name = "Dayy_38";
             this.Dayy_38.ShowItemToolTips = true;
@@ -923,6 +944,7 @@
             this.Dayy_4.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_4.FullRowSelect = true;
             this.Dayy_4.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_4.HideSelection = false;
             this.Dayy_4.Location = new System.Drawing.Point(3, 25);
             this.Dayy_4.Name = "Dayy_4";
             this.Dayy_4.ShowItemToolTips = true;
@@ -952,6 +974,7 @@
             this.Dayy_11.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_11.FullRowSelect = true;
             this.Dayy_11.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_11.HideSelection = false;
             this.Dayy_11.Location = new System.Drawing.Point(3, 109);
             this.Dayy_11.Name = "Dayy_11";
             this.Dayy_11.ShowItemToolTips = true;
@@ -981,6 +1004,7 @@
             this.Dayy_18.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_18.FullRowSelect = true;
             this.Dayy_18.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_18.HideSelection = false;
             this.Dayy_18.Location = new System.Drawing.Point(3, 193);
             this.Dayy_18.Name = "Dayy_18";
             this.Dayy_18.ShowItemToolTips = true;
@@ -1010,6 +1034,7 @@
             this.Dayy_25.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_25.FullRowSelect = true;
             this.Dayy_25.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_25.HideSelection = false;
             this.Dayy_25.Location = new System.Drawing.Point(3, 277);
             this.Dayy_25.Name = "Dayy_25";
             this.Dayy_25.ShowItemToolTips = true;
@@ -1039,6 +1064,7 @@
             this.Dayy_32.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_32.FullRowSelect = true;
             this.Dayy_32.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_32.HideSelection = false;
             this.Dayy_32.Location = new System.Drawing.Point(3, 361);
             this.Dayy_32.Name = "Dayy_32";
             this.Dayy_32.ShowItemToolTips = true;
@@ -1068,6 +1094,7 @@
             this.Dayy_39.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_39.FullRowSelect = true;
             this.Dayy_39.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_39.HideSelection = false;
             this.Dayy_39.Location = new System.Drawing.Point(3, 445);
             this.Dayy_39.Name = "Dayy_39";
             this.Dayy_39.ShowItemToolTips = true;
@@ -1125,6 +1152,7 @@
             this.Dayy_5.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_5.FullRowSelect = true;
             this.Dayy_5.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_5.HideSelection = false;
             this.Dayy_5.Location = new System.Drawing.Point(3, 25);
             this.Dayy_5.Name = "Dayy_5";
             this.Dayy_5.ShowItemToolTips = true;
@@ -1154,6 +1182,7 @@
             this.Dayy_12.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_12.FullRowSelect = true;
             this.Dayy_12.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_12.HideSelection = false;
             this.Dayy_12.Location = new System.Drawing.Point(3, 109);
             this.Dayy_12.Name = "Dayy_12";
             this.Dayy_12.ShowItemToolTips = true;
@@ -1183,6 +1212,7 @@
             this.Dayy_19.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_19.FullRowSelect = true;
             this.Dayy_19.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_19.HideSelection = false;
             this.Dayy_19.Location = new System.Drawing.Point(3, 193);
             this.Dayy_19.Name = "Dayy_19";
             this.Dayy_19.ShowItemToolTips = true;
@@ -1212,6 +1242,7 @@
             this.Dayy_26.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_26.FullRowSelect = true;
             this.Dayy_26.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_26.HideSelection = false;
             this.Dayy_26.Location = new System.Drawing.Point(3, 277);
             this.Dayy_26.Name = "Dayy_26";
             this.Dayy_26.ShowItemToolTips = true;
@@ -1241,6 +1272,7 @@
             this.Dayy_33.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_33.FullRowSelect = true;
             this.Dayy_33.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_33.HideSelection = false;
             this.Dayy_33.Location = new System.Drawing.Point(3, 361);
             this.Dayy_33.Name = "Dayy_33";
             this.Dayy_33.ShowItemToolTips = true;
@@ -1270,6 +1302,7 @@
             this.Dayy_40.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_40.FullRowSelect = true;
             this.Dayy_40.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_40.HideSelection = false;
             this.Dayy_40.Location = new System.Drawing.Point(3, 445);
             this.Dayy_40.Name = "Dayy_40";
             this.Dayy_40.ShowItemToolTips = true;
@@ -1327,6 +1360,7 @@
             this.Dayy_6.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_6.FullRowSelect = true;
             this.Dayy_6.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_6.HideSelection = false;
             this.Dayy_6.Location = new System.Drawing.Point(3, 25);
             this.Dayy_6.Name = "Dayy_6";
             this.Dayy_6.ShowItemToolTips = true;
@@ -1356,6 +1390,7 @@
             this.Dayy_13.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_13.FullRowSelect = true;
             this.Dayy_13.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_13.HideSelection = false;
             this.Dayy_13.Location = new System.Drawing.Point(3, 109);
             this.Dayy_13.Name = "Dayy_13";
             this.Dayy_13.ShowItemToolTips = true;
@@ -1385,6 +1420,7 @@
             this.Dayy_20.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_20.FullRowSelect = true;
             this.Dayy_20.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_20.HideSelection = false;
             this.Dayy_20.Location = new System.Drawing.Point(3, 193);
             this.Dayy_20.Name = "Dayy_20";
             this.Dayy_20.ShowItemToolTips = true;
@@ -1414,6 +1450,7 @@
             this.Dayy_27.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_27.FullRowSelect = true;
             this.Dayy_27.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_27.HideSelection = false;
             this.Dayy_27.Location = new System.Drawing.Point(3, 277);
             this.Dayy_27.Name = "Dayy_27";
             this.Dayy_27.ShowItemToolTips = true;
@@ -1443,6 +1480,7 @@
             this.Dayy_34.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_34.FullRowSelect = true;
             this.Dayy_34.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_34.HideSelection = false;
             this.Dayy_34.Location = new System.Drawing.Point(3, 361);
             this.Dayy_34.Name = "Dayy_34";
             this.Dayy_34.ShowItemToolTips = true;
@@ -1472,6 +1510,7 @@
             this.Dayy_41.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_41.FullRowSelect = true;
             this.Dayy_41.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_41.HideSelection = false;
             this.Dayy_41.Location = new System.Drawing.Point(3, 445);
             this.Dayy_41.Name = "Dayy_41";
             this.Dayy_41.ShowItemToolTips = true;
@@ -1529,6 +1568,7 @@
             this.Dayy_7.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_7.FullRowSelect = true;
             this.Dayy_7.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_7.HideSelection = false;
             this.Dayy_7.Location = new System.Drawing.Point(3, 25);
             this.Dayy_7.Name = "Dayy_7";
             this.Dayy_7.ShowItemToolTips = true;
@@ -1558,6 +1598,7 @@
             this.Dayy_14.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_14.FullRowSelect = true;
             this.Dayy_14.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_14.HideSelection = false;
             this.Dayy_14.Location = new System.Drawing.Point(3, 109);
             this.Dayy_14.Name = "Dayy_14";
             this.Dayy_14.ShowItemToolTips = true;
@@ -1587,6 +1628,7 @@
             this.Dayy_21.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_21.FullRowSelect = true;
             this.Dayy_21.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_21.HideSelection = false;
             this.Dayy_21.Location = new System.Drawing.Point(3, 193);
             this.Dayy_21.Name = "Dayy_21";
             this.Dayy_21.ShowItemToolTips = true;
@@ -1616,6 +1658,7 @@
             this.Dayy_28.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_28.FullRowSelect = true;
             this.Dayy_28.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_28.HideSelection = false;
             this.Dayy_28.Location = new System.Drawing.Point(3, 277);
             this.Dayy_28.Name = "Dayy_28";
             this.Dayy_28.ShowItemToolTips = true;
@@ -1645,6 +1688,7 @@
             this.Dayy_35.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_35.FullRowSelect = true;
             this.Dayy_35.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_35.HideSelection = false;
             this.Dayy_35.Location = new System.Drawing.Point(3, 361);
             this.Dayy_35.Name = "Dayy_35";
             this.Dayy_35.ShowItemToolTips = true;
@@ -1674,6 +1718,7 @@
             this.Dayy_42.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dayy_42.FullRowSelect = true;
             this.Dayy_42.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.Dayy_42.HideSelection = false;
             this.Dayy_42.Location = new System.Drawing.Point(3, 445);
             this.Dayy_42.Name = "Dayy_42";
             this.Dayy_42.ShowItemToolTips = true;
@@ -1703,6 +1748,7 @@
             this.checkBox1.TabIndex = 6;
             this.checkBox1.Text = "Filtre";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // dateTimePicker1
             // 
@@ -2248,10 +2294,11 @@
             // 
             // panel15
             // 
+            this.panel15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel15.Controls.Add(this.label17);
             this.panel15.Controls.Add(this.pictureBox5);
-            this.panel15.Location = new System.Drawing.Point(1084, 32);
+            this.panel15.Location = new System.Drawing.Point(1116, 225);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(236, 202);
             this.panel15.TabIndex = 37;
@@ -2266,15 +2313,46 @@
             this.label17.TabIndex = 38;
             this.label17.Text = "Pour activer multi-sélection :";
             // 
-            // pictureBox6
+            // button15
             // 
-            this.pictureBox6.Image = global::ALBAITAR_Softvet.Properties.Resources.NOUVEAU_002;
-            this.pictureBox6.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(80, 87);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 38;
-            this.pictureBox6.TabStop = false;
+            this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button15.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button15.FlatAppearance.BorderSize = 2;
+            this.button15.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button15.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button15.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_todo_list_20px;
+            this.button15.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button15.Location = new System.Drawing.Point(935, 13);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(36, 30);
+            this.button15.TabIndex = 40;
+            this.button15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.button15, "Annuler Multi Selection");
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Visible = false;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // button14
+            // 
+            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button14.FlatAppearance.BorderSize = 2;
+            this.button14.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.button14.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button14.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
+            this.button14.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button14.Location = new System.Drawing.Point(51, 46);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(41, 30);
+            this.button14.TabIndex = 39;
+            this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.button14, "Supprimer ce event");
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // pictureBox5
             // 
@@ -2289,11 +2367,11 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox4.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_30px;
-            this.pictureBox4.Location = new System.Drawing.Point(1067, 12);
+            this.pictureBox4.Location = new System.Drawing.Point(1340, 416);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(35, 29);
+            this.pictureBox4.Size = new System.Drawing.Size(30, 29);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 36;
             this.pictureBox4.TabStop = false;
@@ -2378,13 +2456,14 @@
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button10.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
             this.button10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button10.Location = new System.Drawing.Point(1111, 12);
+            this.button10.Location = new System.Drawing.Point(977, 13);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(119, 30);
+            this.button10.Size = new System.Drawing.Size(125, 30);
             this.button10.TabIndex = 33;
             this.button10.Text = "Supprimer";
             this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Visible = false;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button9
@@ -2626,11 +2705,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::ALBAITAR_Softvet.Properties.Resources.NOUVEAU_002;
+            this.pictureBox6.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(80, 87);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 38;
+            this.pictureBox6.TabStop = false;
+            // 
             // Agenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 448);
+            this.Controls.Add(this.button15);
+            this.Controls.Add(this.button14);
             this.Controls.Add(this.panel15);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.panel14);
@@ -2677,12 +2768,12 @@
             this.panel14.PerformLayout();
             this.panel15.ResumeLayout(false);
             this.panel15.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2864,5 +2955,7 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button15;
     }
 }

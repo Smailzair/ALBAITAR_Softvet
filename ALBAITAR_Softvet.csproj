@@ -305,6 +305,12 @@
     <Compile Include="Agenda.Designer.cs">
       <DependentUpon>Agenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Agenda_Filter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Agenda_Filter.Designer.cs">
+      <DependentUpon>Agenda_Filter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Anims_List.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -322,12 +328,6 @@
     </Compile>
     <Compile Include="Dialogs\Loading.Designer.cs">
       <DependentUpon>Loading.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Produits.cs">
       <SubType>Form</SubType>
@@ -395,6 +395,9 @@
     <EmbeddedResource Include="Agenda.resx">
       <DependentUpon>Agenda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Agenda_Filter.resx">
+      <DependentUpon>Agenda_Filter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Anims_List.resx">
       <DependentUpon>Anims_List.cs</DependentUpon>
     </EmbeddedResource>
@@ -403,9 +406,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Produits.resx">
       <DependentUpon>Produits.cs</DependentUpon>
@@ -591,6 +591,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\icons8_todo_list_20px.png" />
+    <None Include="Resources\icons8_todo_list_30px.png" />
     <None Include="Resources\NOUVEAU_002.png" />
     <None Include="Resources\MODIF_002.png" />
     <None Include="Resources\Animation.gif" />

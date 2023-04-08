@@ -37,6 +37,8 @@ namespace ALBAITAR_Softvet.Resources
         DateTime startDate = DateTime.MinValue;
         DateTime endDate = DateTime.MaxValue;
         string selected_ids_to_delete = "";
+        bool tmp_pause = false;
+        ListView prev = null;
         //-----------
         public static ListViewItem[] Clientss;
         public static ListViewItem[] Clientss2;
@@ -49,12 +51,31 @@ namespace ALBAITAR_Softvet.Resources
             InitializeComponent();
             //----------------------
             items_icon.ImageSize = new Size(32, 32);
+            listView_Icons.SmallImageList = items_icon;
+            foreach (Control ctr in flowLayoutPanel1.Controls)
+            {
+                foreach (Control ctr1 in ctr.Controls)
+                {
+                    if (ctr1.Name.Contains("Dayy_"))
+                    {
+                        ((ListView)ctr1).SmallImageList = items_icon;
+                        listView1_SizeChanged(((ListView)ctr1), null);
+                    }
+                }
+            }
             //--------------------------------
+            Load_all_data();
+            //------------------
+        }
+        private void Load_all_data()
+        {
             clients = PreConnection.Load_data("SELECT * FROM tb_clients;;");
             animals = PreConnection.Load_data("SELECT * FROM tb_animaux;");
             infos = PreConnection.Load_data("SELECT * FROM tb_agenda;");
             icons = PreConnection.Load_data("SELECT MIN(tb1.`ID`) AS ID,tb2.`MODIF_TIME`,tb2.`NME`,tb1.`IMG_DATA` FROM tb_images tb1 LEFT JOIN tb_images tb2 ON tb1.ID = tb2.ID WHERE tb1.`IMG_DATA` IS NOT NULL  GROUP BY tb1.`IMG_DATA`;");
-            listView_Icons.SmallImageList = items_icon;
+            //------------------------------
+            items_icon.Images.Clear();
+            listView_Icons.Items.Clear();
             items_icon.Images.Add("-1", Properties.Resources.icons8_Checkmark_30px);
             if (icons != null)
             {
@@ -82,24 +103,10 @@ namespace ALBAITAR_Softvet.Resources
                     listView_Icons.Items.Add(itm);
                 });
             }
-            //-------------------------------
-            foreach (Control ctr in flowLayoutPanel1.Controls)
-            {
-                foreach (Control ctr1 in ctr.Controls)
-                {
-                    if (ctr1.Name.Contains("Dayy_"))
-                    {
-                        ((ListView)ctr1).SmallImageList = items_icon;
-                        listView1_SizeChanged(((ListView)ctr1), null);
-                    }
-                }
-            }
             //-------------------------
             dateTimePicker1_ValueChanged(null, null);
             intial_Modify_fields();
-            //------------------
         }
-
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             startDate = DateTime.Parse("01/" + e.Start.Month + "/" + e.Start.Year);
@@ -144,7 +151,8 @@ namespace ALBAITAR_Softvet.Resources
 
         private void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            e.Item.ForeColor = e.Item.Checked ? Color.Green : SystemColors.WindowText;
+           // e.Item.ForeColor = e.Item.Checked ? Color.Green : SystemColors.WindowText;
+            checked_to_delete_nb();
         }
 
         private void listView1_MouseMove(object sender, MouseEventArgs e)
@@ -160,24 +168,44 @@ namespace ALBAITAR_Softvet.Resources
             }
             //==============================
         }
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {           
-            if (((ListView)sender).SelectedItems.Count > 0)
-            {
-                Current_items_id = ((ListView)sender).SelectedItems[0].SubItems[1].Text; //Get the ID
-                Is_New_To_Insert = false;
-                pictureBox6.Image = Properties.Resources.MODIF_002;
-                Fill_Event_Fields(Current_items_id);
-            }
-            else
-            {
-                Current_items_id = string.Empty;
-                Is_New_To_Insert = true;
-                pictureBox6.Image = Properties.Resources.NOUVEAU_002;
-                intial_Modify_fields();
-            }
-        }
 
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!tmp_pause)
+            {                
+                if (((ListView)sender).SelectedItems.Count > 0)
+                {
+                    Current_items_id = ((ListView)sender).SelectedItems[0].SubItems[1].Text; //Get the ID
+                    Is_New_To_Insert = false;
+                    pictureBox6.Image = Properties.Resources.MODIF_002;
+                    Fill_Event_Fields(Current_items_id);
+                    if (prev != null && prev != ((ListView)sender))
+                    {
+                        try
+                        {
+                            tmp_pause = true;
+                            prev.SelectedIndices.Clear();
+                            prev.SelectedItems.Clear();
+                            tmp_pause = false;
+                        }
+                        catch { }
+                    }
+                    prev = ((ListView)sender);
+                }
+                else
+                {
+                    Current_items_id = string.Empty;
+                    Is_New_To_Insert = true;
+                    pictureBox6.Image = Properties.Resources.NOUVEAU_002;
+                    intial_Modify_fields();
+                    // prev = null;
+                }
+            }
+            
+
+
+        }
+        
         private void Fill_Event_Fields(string ID)
         {
             intial_Modify_fields();
@@ -187,10 +215,16 @@ namespace ALBAITAR_Softvet.Resources
                 Current_items_id = ID;
                 Is_New_To_Insert = false;
                 pictureBox6.Image = Properties.Resources.MODIF_002;
+                button14.Visible = true;
                 //----------Loading Data------------
                 textBox1.Text = row["OBJECT"].ToString(); //OBJECT
-                pictureBox2.Image = items_icon.Images[row["ICON_ID"].ToString()]; //ICON
-                switch(row["EVERY_TYPE"].ToString()){
+                if(row["ICON_ID"] != DBNull.Value)
+                {
+                    pictureBox2.Image = items_icon.Images[row["ICON_ID"].ToString()]; //ICON
+                    selected_img_idx = int.Parse(row["ICON_ID"].ToString());
+                }                
+                switch (row["EVERY_TYPE"].ToString())
+                {
                     case "ONCE":
                         comboBox1.SelectedIndex = 0;
                         break;
@@ -211,14 +245,14 @@ namespace ALBAITAR_Softvet.Resources
                     case "EVERY_MONTH":
                         comboBox1.SelectedIndex = 3;
                         string[] separator2 = { "_TO_" };
-                        List<string> mnth = row["EVERY_MONTH_DAY"].ToString().Split(separator2, StringSplitOptions.RemoveEmptyEntries).ToList();                        
+                        List<string> mnth = row["EVERY_MONTH_DAY"].ToString().Split(separator2, StringSplitOptions.RemoveEmptyEntries).ToList();
                         numericUpDown1.Value = int.Parse(mnth[0]);
                         numericUpDown2.Value = int.Parse(mnth[1]);
                         break;
-                }                
+                }
                 dateTimePicker2.Value = (DateTime)row["START_TIME"];
                 dateTimePicker5.Value = (DateTime)row["END_TIME"];
-                if(row["HOURS_ARRANG_OF"] != DBNull.Value)
+                if (row["HOURS_ARRANG_OF"] != DBNull.Value)
                 {
                     TimeSpan tm = TimeSpan.Parse(row["HOURS_ARRANG_OF"].ToString());
                     dateTimePicker3.Value = new DateTime(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month, dateTimePicker2.Value.Day, tm.Hours, tm.Minutes, 0);
@@ -233,7 +267,7 @@ namespace ALBAITAR_Softvet.Resources
                     checkBox3.Checked = true;
                 }
                 if (row["REPPEL_BEFORE_DAYS"] != DBNull.Value)
-                { 
+                {
                     checkBox11.Checked = true;
                     numericUpDown3.Value = int.Parse(row["REPPEL_BEFORE_DAYS"].ToString());
                 }
@@ -241,11 +275,12 @@ namespace ALBAITAR_Softvet.Resources
                 textBox2.Text = row["DESCRIPTION"].ToString();
                 //-------------------
                 List<string> already = new List<string>();
-                if(row["RELATED_ANIMALS_IDs"].ToString().Trim().Length > 0)
+                if (row["RELATED_ANIMALS_IDs"].ToString().Trim().Length > 0)
                 {
                     string[] separator3 = { "," };
                     List<string> mnth = row["RELATED_ANIMALS_IDs"].ToString().Split(separator3, StringSplitOptions.RemoveEmptyEntries).ToList();
-                    mnth.ForEach(AA => {
+                    mnth.ForEach(AA =>
+                    {
                         DataRow ann = animals.Rows.Cast<DataRow>().Where(h => h["ID"].ToString() == AA).FirstOrDefault();
                         if (ann[0] != null)
                         {
@@ -256,12 +291,12 @@ namespace ALBAITAR_Softvet.Resources
                             if (clt[0] != null)
                             {
                                 sss = string.Concat(clt["FAMNME"].ToString(), " ", clt["NME"].ToString());
-                            }                            
+                            }
                             dd.SubItems.Add(sss);
                             dd.SubItems.Add(ann["CLIENT_ID"].ToString());
                             listView_Anim.Items.Add(dd);
                         }
-                        
+
                     });
                     //------------
                     foreach (ColumnHeader column in listView_Anim.Columns)
@@ -279,7 +314,8 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     string[] separator4 = { "," };
                     List<string> mnth = row["RELATED_CLIENTS_IDs"].ToString().Split(separator4, StringSplitOptions.RemoveEmptyEntries).ToList();
-                    mnth.ForEach(AA => {
+                    mnth.ForEach(AA =>
+                    {
                         DataRow cllt = clients.Rows.Cast<DataRow>().Where(h => h["ID"].ToString() == AA).FirstOrDefault();
                         if (cllt[0] != null)
                         {
@@ -316,6 +352,8 @@ namespace ALBAITAR_Softvet.Resources
                         {
                             ittm.Checked = !ittm.Checked;
                         }
+
+
                     }
                     else
                     {
@@ -336,8 +374,45 @@ namespace ALBAITAR_Softvet.Resources
                     ((ListView)sender).CheckBoxes = false;
                 }
             }
+            
+            checked_to_delete_nb();
         }
 
+        private void checked_to_delete_nb()
+        {
+            int ttt = 0;
+            foreach (Control ctr in flowLayoutPanel1.Controls)
+            {
+                foreach (Control ctr1 in ctr.Controls)
+                {
+                    if (ctr1.Name.Contains("Dayy_"))
+                    {
+                        if (((ListView)ctr1).CheckBoxes)
+                        {
+                            ttt += ((ListView)ctr1).CheckedItems.Count;
+                        }
+                    }
+                }
+            }
+            button10.Text = "Supprimer (" + ttt + ")";
+            button10.Visible = button15.Visible = ttt > 0;
+            if (ttt < 1)
+            {
+                foreach (Control ctr in flowLayoutPanel1.Controls)
+                {
+                    foreach (Control ctr1 in ctr.Controls)
+                    {
+                        if (ctr1.Name.Contains("Dayy_"))
+                        {
+                            if (((ListView)ctr1).CheckBoxes)
+                            {
+                                ((ListView)ctr1).CheckBoxes = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         private void Load_day_events(ListView lst, string dte)
         {
             lst.Items.Clear();
@@ -470,11 +545,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void Agenda_TEST_SizeChanged(object sender, EventArgs e)
         {
-            Sam_Flow.Height = Dim_Flow.Height = Lun_Flow.Height = Mar_Flow.Height = Mer_Flow.Height = Jeu_Flow.Height = Ven_Flow.Height = (flowLayoutPanel1.ClientSize.Height < flowLayoutPanel1.DisplayRectangle.Height) ? 533 : flowLayoutPanel1.ClientSize.Height - 6;
-            //foreach (Control vw in flowLayoutPanel1.Controls.OfType<ListView>())
-            //{
-            //    vw.Height = (((FlowLayoutPanel)sender).Height - 28) / 6;
-            //}
+            Sam_Flow.Height = Dim_Flow.Height = Lun_Flow.Height = Mar_Flow.Height = Mer_Flow.Height = Jeu_Flow.Height = Ven_Flow.Height = (flowLayoutPanel1.ClientSize.Height < flowLayoutPanel1.DisplayRectangle.Height) ? 533 : flowLayoutPanel1.ClientSize.Height - 6;       
         }
 
         private void Dim_Flow_SizeChanged(object sender, EventArgs e)
@@ -495,6 +566,9 @@ namespace ALBAITAR_Softvet.Resources
 
         private void intial_Modify_fields()
         {
+            pictureBox6.Image = Properties.Resources.NOUVEAU_002;
+            button14.Visible = false;
+            pictureBox2.Image = Properties.Resources.icons8_camera_30px;
             selected_img_idx = -1;
             pictureBox1.Visible = false;
             checkBox3.Checked = false;
@@ -521,7 +595,7 @@ namespace ALBAITAR_Softvet.Resources
             //-----------------
             listView_Anim.Items.Clear();
             label13.Text = "Animaux :";
-            listView_Clients.Items.Clear();            
+            listView_Clients.Items.Clear();
             label12.Text = "Propriétaires :";
 
         }
@@ -875,6 +949,7 @@ namespace ALBAITAR_Softvet.Resources
                     mySqlCommand.Parameters.AddWithValue("@Icon", selected_img_idx);
                 }
                 int row_affected = mySqlCommand.ExecuteNonQuery();
+                Load_all_data();
             }
             else
             {
@@ -897,7 +972,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             if (label16.Visible) //supprimer les icons
             {
-                PreConnection.Excut_Cmd("DELETE FROM tb_images WHERE `ID` = "+ listView_Icons.SelectedItems[0].ImageKey + ";");
+                PreConnection.Excut_Cmd("DELETE FROM tb_images WHERE `ID` = " + listView_Icons.SelectedItems[0].ImageKey + ";");
                 listView_Icons.SelectedItems[0].Remove();
             }
             else //selectionner une icon
@@ -1005,7 +1080,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void listView_Icons_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode== Keys.Escape)
+            if (e.KeyCode == Keys.Escape)
             {
                 label16.Visible = false;
             }
@@ -1023,6 +1098,7 @@ namespace ALBAITAR_Softvet.Resources
         private void button10_Click(object sender, EventArgs e)
         {
             selected_ids_to_delete = string.Empty;
+            List<string> list_tmp = new List<string>();
             foreach (Control ctr in flowLayoutPanel1.Controls)
             {
                 foreach (Control ctr1 in ctr.Controls)
@@ -1031,24 +1107,37 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         if (((ListView)ctr1).CheckBoxes)
                         {
-                           foreach(ListViewItem itm in ((ListView)ctr1).CheckedItems)
+                            foreach (ListViewItem itm in ((ListView)ctr1).CheckedItems)
                             {
-                                selected_ids_to_delete += "," + itm.SubItems[1].Text;
+                                if (!list_tmp.Contains(itm.SubItems[1].Text))
+                                {
+                                    list_tmp.Add(itm.SubItems[1].Text);
+                                }
                             }
-                        }                        
+                        }
                     }
                 }
             }
 
-            if(selected_ids_to_delete == string.Empty)
+            if (list_tmp.Count == 0)//selected_ids_to_delete == string.Empty)
             {
                 selected_ids_to_delete = Current_items_id.ToString();
             }
             else
             {
-                selected_ids_to_delete = selected_ids_to_delete.Substring(1,selected_ids_to_delete.Length- 1);
+                list_tmp.ForEach(pp =>
+                {
+                    selected_ids_to_delete += "," + pp;
+                });
+                selected_ids_to_delete = selected_ids_to_delete.Substring(1, selected_ids_to_delete.Length - 1);
             }
-            Debug.WriteLine(">>>>>>>>> Ids to delete >>>>>>>>> " + selected_ids_to_delete);
+
+            if(MessageBox.Show("Sures de faire la suppression ?\n\nRMQ : L'évenement origine sera supprimer (tous les répétition liés seront supprimés)","Confirmation :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID IN ("+selected_ids_to_delete+");");
+                Load_all_data();
+            }
+            
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1057,6 +1146,43 @@ namespace ALBAITAR_Softvet.Resources
             Is_New_To_Insert = true;
             pictureBox6.Image = Properties.Resources.NOUVEAU_002;
             intial_Modify_fields();
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            foreach (Control ctr in flowLayoutPanel1.Controls)
+            {
+                foreach (Control ctr1 in ctr.Controls)
+                {
+                    if (ctr1.Name.Contains("Dayy_"))
+                    {
+                        if (((ListView)ctr1).CheckBoxes)
+                        {
+                            ((ListView)ctr1).CheckBoxes = false;
+                        }
+                    }
+                }
+            }
+            button10.Visible = button15.Visible = false;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Sures de faire la suppression ?\n\nL'évenement : '"+textBox1.Text+"'\n\nRMQ : L'évenement origine sera supprimer (tous les répétition liés seront supprimés)", "Confirmation :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID = " + Current_items_id + ";");
+                Load_all_data();
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //new Agenda_Filter().ShowDialog();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            button8.Enabled = checkBox1.Checked;
         }
     }
 }

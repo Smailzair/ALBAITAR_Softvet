@@ -76,10 +76,6 @@ namespace ALBAITAR_Softvet
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            new Form1().Show();
-        }
     }
 }
 
