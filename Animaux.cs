@@ -94,14 +94,33 @@ namespace ALBAITAR_Softvet.Resources
             }
 
         }
+
         private void verif_if_déja_exist_animal()
         {
-            if (textBox2.Text.Length > 0 && textBox3.Text.Length > 0 && (Is_New || (!Is_New && dataGridView1.SelectedRows.Count > 0)))
+            
+            bool exist = false;
+            
+            if(animaux != null && (Is_New || (!Is_New && dataGridView1.SelectedRows.Count > 0)))
             {
-                int cnt = animaux.Rows.Cast<DataRow>().Where(zz => zz["NME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) && zz["CLIENT_ID"] == comboBox1.SelectedValue).ToList().Count();
-                label13.Visible = cnt > 0;
+               
+                int cntt = animaux.Rows.Cast<DataRow>().Where(zz =>
+                
+                (zz["NME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) &&
+                (zz["ESPECE"] != DBNull.Value ? zz["ESPECE"].ToString() : "--").ToLower().Equals(comboBox2.Text.ToLower()) &&
+                (zz["RACE"] != DBNull.Value ? zz["RACE"].ToString() : "--").ToLower().Equals(comboBox3.Text.ToLower()) &&
+                (zz["SEXE"] != DBNull.Value ? zz["SEXE"].ToString() : "--").ToLower().Equals(comboBox4.Text.ToLower())) &&
+                int.Parse(zz["CLIENT_ID"].ToString()) == (comboBox1.SelectedValue != null ? (int)comboBox1.SelectedValue : -2) &&
+                (!Is_New && dataGridView1.SelectedRows.Count > 0 ? (int)zz["ID"] != (int)dataGridView1.SelectedRows[0].Cells["ID"].Value : true)
+                
+                ).ToList().Count();
+
+               
+                exist = cntt > 0;
+
+                
             }
-            else { label13.Visible = false; }
+            
+            label13.Visible = exist;
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -119,6 +138,7 @@ namespace ALBAITAR_Softvet.Resources
             comboBox1.BackColor = comboBox1.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
             all_ready &= comboBox1.BackColor == SystemColors.Window;
             all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+            if (all_ready && label13.Visible) { all_ready &= MessageBox.Show("Ce animal déja existe pour ce client,\n\nVoulez vous continuer comme meme ?\n\n", "Attention :", MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes; }
             //-------------
             label12.Visible = !all_ready;
             //-------------
@@ -428,6 +448,7 @@ namespace ALBAITAR_Softvet.Resources
             if (comboBox1.Text.Length  > 0 && !full_nme_clients.Contains(comboBox1.Text)) { 
                 comboBox1.BackColor= Color.LightCoral;
             }
+            verif_if_déja_exist_animal();
         }
 
         private void comboBox1_TextChanged(object sender, EventArgs e)
@@ -458,7 +479,8 @@ namespace ALBAITAR_Softvet.Resources
                     pictureBox2.Image = null;
                 }
                 
-            }        
+            }
+            verif_if_déja_exist_animal();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -478,6 +500,26 @@ namespace ALBAITAR_Softvet.Resources
             openFileDialog1.FileName= "";          
             button7.Visible= false;
             comboBox2_SelectedIndexChanged(null, null);
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            verif_if_déja_exist_animal();
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            verif_if_déja_exist_animal();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            verif_if_déja_exist_animal();
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            verif_if_déja_exist_animal();
         }
     }
 }

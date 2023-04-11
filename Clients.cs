@@ -120,7 +120,14 @@ namespace ALBAITAR_Softvet.Resources
         {
             if (textBox2.Text.Length > 0 && textBox3.Text.Length > 0 && (Is_New || (!Is_New && dataGridView1.SelectedRows.Count > 0)))
             {
-                int cnt = clients.Rows.Cast<DataRow>().Where(zz => zz["FAMNME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) && zz["NME"].ToString().ToLower().Equals(textBox2.Text.ToLower()) && zz["NUM_CNI"].ToString().Equals(textBox4.Text) && (!Is_New ? !zz["ID"].ToString().Equals(dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString()) : true)).ToList().Count();
+                int cnt = clients.Rows.Cast<DataRow>().Where(zz => 
+
+                zz["FAMNME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) && 
+                zz["NME"].ToString().ToLower().Equals(textBox2.Text.ToLower()) && 
+                zz["NUM_CNI"].ToString().Equals(textBox4.Text) &&
+                (!Is_New && dataGridView1.SelectedRows.Count > 0 ? (int)zz["ID"] != (int)dataGridView1.SelectedRows[0].Cells["ID"].Value : true)
+
+                ).ToList().Count();
                 label13.Visible = cnt > 0;
             }
             else { label13.Visible = false; }
@@ -251,6 +258,7 @@ namespace ALBAITAR_Softvet.Resources
             textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
             all_ready &= textBox2.Text.TrimStart().TrimEnd() != string.Empty;
             all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+            all_ready &= !label13.Visible;
             //-------------
             label12.Visible = !all_ready;
             //-------------
