@@ -1,8 +1,10 @@
 ﻿using ALBAITAR_Softvet.Resources;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Dynamic;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -21,8 +23,9 @@ namespace ALBAITAR_Softvet
             th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting perfermance of "Clients" from
             th.Start();
             //--------------
+
         }
-         
+
 
         public void Load_sites_table()
         {
@@ -97,6 +100,10 @@ namespace ALBAITAR_Softvet
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
     }
 }
 

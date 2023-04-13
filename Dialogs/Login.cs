@@ -76,6 +76,7 @@ namespace ALBAITAR_Softvet
                 //-----------------------------
                 change_infos_there = int.Parse(comboBox1.SelectedValue.ToString()) != Properties.Settings.Default.Last_login_user_idx;
                 Properties.Settings.Default.Last_login_user_idx = int.Parse(comboBox1.SelectedValue.ToString());
+                Properties.Settings.Default.Last_login_user_full_nme = comboBox1.Text;
                 Properties.Settings.Default.Last_login_is_admin = datat.Rows.Cast<DataRow>().Where(rr => int.Parse(rr["ID"].ToString()) == int.Parse(comboBox1.SelectedValue.ToString()) && (SByte)rr["IS_ADMIN"] == 1).Count() > 0;
                 Properties.Settings.Default.Save();
                 //------------------                

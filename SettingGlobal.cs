@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ALBAITAR_Softvet.Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,6 +35,11 @@ namespace ALBAITAR_Softvet
         private void SettingGlobal_Load(object sender, EventArgs e)
         {
             checkBox1.Checked = Properties.Settings.Default.Use_animals_logo;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new Autorizations().ShowDialog();
         }
     }
 }

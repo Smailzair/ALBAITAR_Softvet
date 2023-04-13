@@ -1,4 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using Mysqlx.Prepare;
+using Org.BouncyCastle.Utilities.Collections;
+using Org.BouncyCastle.Utilities.Zlib;
+using ServiceStack.OrmLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -55,6 +60,15 @@ namespace ALBAITAR_Softvet
                 textBox4.BackColor = SystemColors.Window;
             }
 
+            if (In_Modif_Mod)
+            {
+                int admin_count = login_data.Rows.Cast<DataRow>().Where(SS => (SByte)SS["IS_ADMIN"] == 1 && (int)SS["ID"] != (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ToList().Count();
+                if (admin_count == 0)
+                {
+                    ready_to_save = false;
+                    MessageBox.Show("A cause que ce compte est le seul qui a les droits 'Admin',\nVous devez -d'abord- changer le type d'un autre compte 'Standard' à 'Admin'.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
 
 
             if (In_Modif_Mod) //UPDATE
@@ -115,6 +129,11 @@ namespace ALBAITAR_Softvet
                         + "'" + textBox6.Text + "',"
                         + "'" + textBox7.Text + "');");
 
+                    //------Autorisations -------------------
+                    DataTable dt = PreConnection.Load_data("SELECT MAX(ID) FROM tb_login_and_users");
+                    PreConnection.Excut_Cmd("ALTER TABLE tb_autoriz ADD COLUMN Usr_" + dt.Rows[0][0].ToString() +" INT; " +
+                        "UPDATE tb_autoriz e1 JOIN tb_autoriz e2 ON e1.ID = e2.ID SET e1.Usr_" + dt.Rows[0][0].ToString() + " = e2.DEFAULT_VALUES;");
+                  
                 }
             }
             //--------------------------
@@ -293,9 +312,9 @@ namespace ALBAITAR_Softvet
                      .Count(row => int.Parse(row.Cells["ID"].Value.ToString()) != eee && (SByte)row.Cells["IS_ADMIN"].Value == 1);
                 bool warning = dataGridView1.Rows.Count == 2 && Admin_Rest == 0;
                 //-------------------------------------
-                if(dataGridView1.Rows.Count > 2 && Admin_Rest == 0)
+                if (dataGridView1.Rows.Count > 2 && Admin_Rest == 0)
                 {
-                    MessageBox.Show("A cause que ce compte est le seul qui a les droits 'Admin',\nVous devez -d'abord- changer le type d'un autre compte 'Standard' à 'Admin'.","",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show("A cause que ce compte est le seul qui a les droits 'Admin',\nVous devez -d'abord- changer le type d'un autre compte 'Standard' à 'Admin'.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -305,6 +324,7 @@ namespace ALBAITAR_Softvet
                     {
                         command += warning ? "UPDATE tb_login_and_users SET IS_ADMIN = True; " : "";
                         command += "DELETE FROM tb_login_and_users WHERE ID = " + eee + ";";
+                        command += "ALTER TABLE tb_autoriz DROP COLUMN Usr_" + eee + ";";
                         PreConnection.Excut_Cmd(command);
                         if (eee == Properties.Settings.Default.Last_login_user_idx)
                         {
@@ -318,7 +338,7 @@ namespace ALBAITAR_Softvet
                                 previ_idx = dataGridView1.SelectedRows[0].Index;
                             }
                             login_data = PreConnection.Load_data("SELECT *, concat(`USER_NME`,' ',`USER_FAMNME`) AS FULL_NME FROM tb_login_and_users;");
-                            dataGridView1.DataSource = login_data;                            
+                            dataGridView1.DataSource = login_data;
                             if (previ_idx > -1)
                             {
                                 dataGridView1.ClearSelection();
@@ -326,9 +346,9 @@ namespace ALBAITAR_Softvet
                             }
                         }
                     }
-                }                
-                
-                
+                }
+
+
             }
             else
             {

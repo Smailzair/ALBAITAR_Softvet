@@ -150,6 +150,12 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.panel16 = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.listView_Anim = new System.Windows.Forms.ListView();
@@ -384,7 +390,7 @@
             this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(180, 228);
+            this.button5.Location = new System.Drawing.Point(180, 300);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(24, 24);
             this.button5.TabIndex = 37;
@@ -400,7 +406,7 @@
             this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(153, 228);
+            this.button6.Location = new System.Drawing.Point(153, 300);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(24, 24);
             this.button6.TabIndex = 36;
@@ -416,7 +422,7 @@
             this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(180, 364);
+            this.button4.Location = new System.Drawing.Point(180, 436);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(24, 24);
             this.button4.TabIndex = 31;
@@ -432,7 +438,7 @@
             this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(153, 364);
+            this.button3.Location = new System.Drawing.Point(153, 436);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(24, 24);
             this.button3.TabIndex = 30;
@@ -490,7 +496,7 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(264, 48);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1094, 388);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1094, 689);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // Sam_Flow
@@ -1998,7 +2004,7 @@
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Location = new System.Drawing.Point(2, 75);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(256, 361);
+            this.panel2.Size = new System.Drawing.Size(256, 662);
             this.panel2.TabIndex = 29;
             // 
             // pictureBox2
@@ -2030,6 +2036,12 @@
             this.panel1.AutoScroll = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.radioButton3);
+            this.panel1.Controls.Add(this.radioButton2);
+            this.panel1.Controls.Add(this.radioButton1);
+            this.panel1.Controls.Add(this.panel17);
+            this.panel1.Controls.Add(this.label18);
+            this.panel1.Controls.Add(this.panel16);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button6);
             this.panel1.Controls.Add(this.panel12);
@@ -2054,14 +2066,76 @@
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Location = new System.Drawing.Point(-1, 221);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(256, 139);
+            this.panel1.Size = new System.Drawing.Size(256, 440);
             this.panel1.TabIndex = 5;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(9, 57);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(83, 20);
+            this.radioButton3.TabIndex = 41;
+            this.radioButton3.Text = "Personalisé";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.radioButton3_MouseClick);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(109, 57);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(102, 20);
+            this.radioButton2.TabIndex = 40;
+            this.radioButton2.Text = "Tout le monde";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.radioButton2_MouseClick);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(109, 32);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(33, 20);
+            this.radioButton1.TabIndex = 39;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "--";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.radioButton1_MouseClick);
+            // 
+            // panel17
+            // 
+            this.panel17.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_people_30px1;
+            this.panel17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel17.Location = new System.Drawing.Point(4, 25);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(24, 27);
+            this.panel17.TabIndex = 16;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(32, 31);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(68, 16);
+            this.label18.TabIndex = 38;
+            this.label18.Text = "Utilisateurs :";
+            // 
+            // panel16
+            // 
+            this.panel16.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
+            this.panel16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel16.Location = new System.Drawing.Point(0, 2);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(237, 17);
+            this.panel16.TabIndex = 17;
             // 
             // panel12
             // 
             this.panel12.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_shiba_inu_30px;
             this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel12.Location = new System.Drawing.Point(3, 225);
+            this.panel12.Location = new System.Drawing.Point(3, 297);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(24, 27);
             this.panel12.TabIndex = 35;
@@ -2069,7 +2143,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(33, 228);
+            this.label13.Location = new System.Drawing.Point(33, 300);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(60, 16);
             this.label13.TabIndex = 34;
@@ -2088,7 +2162,7 @@
             this.listView_Anim.FullRowSelect = true;
             this.listView_Anim.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView_Anim.HideSelection = false;
-            this.listView_Anim.Location = new System.Drawing.Point(2, 255);
+            this.listView_Anim.Location = new System.Drawing.Point(2, 327);
             this.listView_Anim.Name = "listView_Anim";
             this.listView_Anim.Size = new System.Drawing.Size(231, 87);
             this.listView_Anim.TabIndex = 33;
@@ -2119,7 +2193,7 @@
             // 
             this.panel13.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
             this.panel13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel13.Location = new System.Drawing.Point(-1, 208);
+            this.panel13.Location = new System.Drawing.Point(-1, 280);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(237, 17);
             this.panel13.TabIndex = 32;
@@ -2128,7 +2202,7 @@
             // 
             this.panel11.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_person_30px;
             this.panel11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel11.Location = new System.Drawing.Point(3, 361);
+            this.panel11.Location = new System.Drawing.Point(3, 433);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(24, 27);
             this.panel11.TabIndex = 25;
@@ -2136,7 +2210,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(33, 364);
+            this.label12.Location = new System.Drawing.Point(33, 436);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(78, 16);
             this.label12.TabIndex = 24;
@@ -2152,7 +2226,7 @@
             this.listView_Clients.FullRowSelect = true;
             this.listView_Clients.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listView_Clients.HideSelection = false;
-            this.listView_Clients.Location = new System.Drawing.Point(2, 391);
+            this.listView_Clients.Location = new System.Drawing.Point(2, 463);
             this.listView_Clients.Name = "listView_Clients";
             this.listView_Clients.Size = new System.Drawing.Size(231, 87);
             this.listView_Clients.TabIndex = 23;
@@ -2169,7 +2243,7 @@
             // 
             this.panel10.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
             this.panel10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel10.Location = new System.Drawing.Point(-1, 344);
+            this.panel10.Location = new System.Drawing.Point(-1, 416);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(237, 17);
             this.panel10.TabIndex = 22;
@@ -2178,7 +2252,7 @@
             // 
             this.panel9.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
             this.panel9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel9.Location = new System.Drawing.Point(-1, 63);
+            this.panel9.Location = new System.Drawing.Point(-1, 135);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(237, 17);
             this.panel9.TabIndex = 21;
@@ -2186,7 +2260,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(145, 35);
+            this.label11.Location = new System.Drawing.Point(145, 107);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(33, 16);
             this.label11.TabIndex = 20;
@@ -2195,7 +2269,7 @@
             // numericUpDown3
             // 
             this.numericUpDown3.Enabled = false;
-            this.numericUpDown3.Location = new System.Drawing.Point(93, 33);
+            this.numericUpDown3.Location = new System.Drawing.Point(93, 105);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -2224,7 +2298,7 @@
             this.checkBox11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox11.Font = new System.Drawing.Font("Century Gothic", 7.5F);
             this.checkBox11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(29)))));
-            this.checkBox11.Location = new System.Drawing.Point(34, 34);
+            this.checkBox11.Location = new System.Drawing.Point(34, 106);
             this.checkBox11.Name = "checkBox11";
             this.checkBox11.Size = new System.Drawing.Size(53, 19);
             this.checkBox11.TabIndex = 18;
@@ -2236,7 +2310,7 @@
             // 
             this.panel7.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy;
             this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel7.Location = new System.Drawing.Point(-1, 11);
+            this.panel7.Location = new System.Drawing.Point(-1, 83);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(237, 17);
             this.panel7.TabIndex = 16;
@@ -2245,7 +2319,7 @@
             // 
             this.panel6.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_30px;
             this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel6.Location = new System.Drawing.Point(4, 31);
+            this.panel6.Location = new System.Drawing.Point(4, 103);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(24, 27);
             this.panel6.TabIndex = 15;
@@ -2260,7 +2334,7 @@
             "Chaque jour",
             "Chaque semaine",
             "Chaque mois"});
-            this.comboBox2.Location = new System.Drawing.Point(60, 90);
+            this.comboBox2.Location = new System.Drawing.Point(60, 162);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(175, 24);
             this.comboBox2.TabIndex = 14;
@@ -2269,7 +2343,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 94);
+            this.label10.Location = new System.Drawing.Point(7, 166);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(47, 16);
             this.label10.TabIndex = 13;
@@ -2278,7 +2352,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 117);
+            this.label1.Location = new System.Drawing.Point(7, 189);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 16);
             this.label1.TabIndex = 0;
@@ -2286,7 +2360,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(4, 136);
+            this.textBox2.Location = new System.Drawing.Point(4, 208);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -2624,7 +2698,7 @@
             this.panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel15.Controls.Add(this.label17);
             this.panel15.Controls.Add(this.pictureBox5);
-            this.panel15.Location = new System.Drawing.Point(1116, 225);
+            this.panel15.Location = new System.Drawing.Point(1116, 526);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(236, 202);
             this.panel15.TabIndex = 37;
@@ -2654,7 +2728,7 @@
             // 
             this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox4.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_30px;
-            this.pictureBox4.Location = new System.Drawing.Point(1340, 416);
+            this.pictureBox4.Location = new System.Drawing.Point(1340, 717);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(30, 29);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2718,7 +2792,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 448);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.panel15);
@@ -2956,5 +3030,11 @@
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Panel panel17;
+        private System.Windows.Forms.Panel panel16;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
     }
 }

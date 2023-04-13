@@ -317,17 +317,29 @@
     <Compile Include="Dialogs\Anims_List.Designer.cs">
       <DependentUpon>Anims_List.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Autorizations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Autorizations.Designer.cs">
+      <DependentUpon>Autorizations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Users_List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Users_List.Designer.cs">
+      <DependentUpon>Users_List.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Clients_List.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\Clients_List.Designer.cs">
       <DependentUpon>Clients_List.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Loading.cs">
+    <Compile Include="Statistic.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\Loading.Designer.cs">
-      <DependentUpon>Loading.cs</DependentUpon>
+    <Compile Include="Statistic.Designer.cs">
+      <DependentUpon>Statistic.cs</DependentUpon>
     </Compile>
     <Compile Include="Produits.cs">
       <SubType>Form</SubType>
@@ -401,11 +413,17 @@
     <EmbeddedResource Include="Dialogs\Anims_List.resx">
       <DependentUpon>Anims_List.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Autorizations.resx">
+      <DependentUpon>Autorizations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Users_List.resx">
+      <DependentUpon>Users_List.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Clients_List.resx">
       <DependentUpon>Clients_List.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Loading.resx">
-      <DependentUpon>Loading.cs</DependentUpon>
+    <EmbeddedResource Include="Statistic.resx">
+      <DependentUpon>Statistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Produits.resx">
       <DependentUpon>Produits.cs</DependentUpon>
@@ -591,6 +609,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\icons8_administrative_tools_30px.png" />
+    <None Include="Resources\icons8_protect_30px.png" />
+    <None Include="Resources\icons8_warning_shield_30px.png" />
+    <None Include="Resources\icons8_access_denied_30px.png" />
+    <None Include="Resources\icons8_people_30px1.png" />
+    <None Include="Resources\icons8_user_shield_30px.png" />
+    <None Include="Resources\icons8_circled_user_male_skin_type_1_and_2_30px.png" />
     <None Include="Resources\output-onlinegiftools copy1.gif" />
     <None Include="Resources\icons8_todo_list_20px.png" />
     <None Include="Resources\icons8_todo_list_30px.png" />

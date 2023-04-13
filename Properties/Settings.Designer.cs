@@ -154,5 +154,17 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Use_animals_logo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Last_login_user_full_nme {
+            get {
+                return ((string)(this["Last_login_user_full_nme"]));
+            }
+            set {
+                this["Last_login_user_full_nme"] = value;
+            }
+        }
     }
 }
