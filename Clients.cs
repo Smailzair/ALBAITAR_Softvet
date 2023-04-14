@@ -1,4 +1,5 @@
-﻿using Org.BouncyCastle.Crypto.Fpe;
+﻿using ALBAITAR_Softvet.Dialogs;
+using Org.BouncyCastle.Crypto.Fpe;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -485,6 +486,17 @@ namespace ALBAITAR_Softvet.Resources
             {
                 MessageBox.Show("Aucun donnés !", ".", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
+        }
+
+        private void Clients_Load(object sender, EventArgs e)
+        {
+            if (!Properties.Settings.Default.Last_login_is_admin)
+            {
+                button4.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10002" && (Int32)QQ[3] == 1).Count() > 0; //Supprimer
+                button3.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10001" && (Int32)QQ[3] == 1).Count() > 0; //Ajouter
+                splitContainer1.Panel2.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
+            }            
+           
         }
     }
 }

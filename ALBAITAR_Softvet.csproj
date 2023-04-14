@@ -323,6 +323,12 @@
     <Compile Include="Dialogs\Autorizations.Designer.cs">
       <DependentUpon>Autorizations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Non_Autorized_Msg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Non_Autorized_Msg.Designer.cs">
+      <DependentUpon>Non_Autorized_Msg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Users_List.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -392,12 +398,6 @@
     <Compile Include="Clients.Designer.cs">
       <DependentUpon>Clients.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingGlobal.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SettingGlobal.Designer.cs">
-      <DependentUpon>SettingGlobal.cs</DependentUpon>
-    </Compile>
     <Compile Include="Settings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -415,6 +415,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Autorizations.resx">
       <DependentUpon>Autorizations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Non_Autorized_Msg.resx">
+      <DependentUpon>Non_Autorized_Msg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Users_List.resx">
       <DependentUpon>Users_List.cs</DependentUpon>
@@ -458,9 +461,6 @@
     </Compile>
     <EmbeddedResource Include="Clients.resx">
       <DependentUpon>Clients.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingGlobal.resx">
-      <DependentUpon>SettingGlobal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
@@ -609,6 +609,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\icons8_private_120px.png" />
+    <None Include="Resources\icons8_private_50px.png" />
+    <None Include="Resources\icons8_private.ico" />
     <None Include="Resources\icons8_administrative_tools_30px.png" />
     <None Include="Resources\icons8_protect_30px.png" />
     <None Include="Resources\icons8_warning_shield_30px.png" />

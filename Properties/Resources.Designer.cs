@@ -563,6 +563,26 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_private_120px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_private_120px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_private_50px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_private_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_products_pile_30px_1 {
             get {
                 object obj = ResourceManager.GetObject("icons8_products_pile_30px_1", resourceCulture);
@@ -936,16 +956,6 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap stethoscope_forme_chien_isole_blanc_1401_2360 {
             get {
                 object obj = ResourceManager.GetObject("stethoscope-forme-chien-isole-blanc_1401-2360", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Stop {
-            get {
-                object obj = ResourceManager.GetObject("Stop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

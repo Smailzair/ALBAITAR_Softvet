@@ -30,7 +30,7 @@ namespace ALBAITAR_Softvet.Resources
         private void Autorizations_Load(object sender, System.EventArgs e)
         {
             //----------------------
-            Autoriz_data = PreConnection.Load_data("SELECT * FROM tb_autoriz;");
+            Autoriz_data = PreConnection.Load_data("SELECT * FROM tb_autoriz ORDER BY CODE;");
 
             dataGridView1.DataSource = Autoriz_data;
             //-----------------------------
