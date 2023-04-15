@@ -40,6 +40,14 @@ namespace ALBAITAR_Softvet.Resources
         string selected_ids_to_delete = "";
         bool tmp_pause = false;
         ListView prev = null;
+        //---------
+        bool Ajouter_pour_tout_monde_40001,
+            Ajouter_pour_juste_lui_40002,
+            Modifier_pour_tous_40003,
+            Modifier_pour_juste_lui_40004,
+            Supprimer_pour_tous_40005,
+            Supprimer_pour_juste_lui_40006
+            = false;
         //-----------
         public static ListViewItem[] Clientss;
         public static ListViewItem[] Clientss2;
@@ -52,6 +60,28 @@ namespace ALBAITAR_Softvet.Resources
 
             InitializeComponent();
             //----------------------
+            if (!Properties.Settings.Default.Last_login_is_admin)
+            {
+                Ajouter_pour_tout_monde_40001 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40001" && (Int32)QQ[3] == 1).Count() > 0;
+                Ajouter_pour_juste_lui_40002 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40002" && (Int32)QQ[3] == 1).Count() > 0;
+                Modifier_pour_tous_40003 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40003" && (Int32)QQ[3] == 1).Count() > 0;
+                Modifier_pour_juste_lui_40004 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40004" && (Int32)QQ[3] == 1).Count() > 0;
+                Supprimer_pour_tous_40005 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40005" && (Int32)QQ[3] == 1).Count() > 0;
+                Supprimer_pour_juste_lui_40006 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40006" && (Int32)QQ[3] == 1).Count() > 0;
+                //-----------
+                button3.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10000" && (Int32)QQ[3] == 1).Count() > 0; //Clients (Propritaires)                
+                button6.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20000" && (Int32)QQ[3] == 1).Count() > 0; //Animaux              
+            }
+            else
+            {
+                Ajouter_pour_tout_monde_40001 =
+                Ajouter_pour_juste_lui_40002 =
+                Modifier_pour_tous_40003 =
+                Modifier_pour_juste_lui_40004 =
+                Supprimer_pour_tous_40005 =
+                Supprimer_pour_juste_lui_40006 = true;
+            }
+            //---------------
             items_icon.ImageSize = new Size(32, 32);
             listView_Icons.SmallImageList = items_icon;
             foreach (Control ctr in flowLayoutPanel1.Controls)
@@ -73,7 +103,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             clients = PreConnection.Load_data("SELECT * FROM tb_clients;;");
             animals = PreConnection.Load_data("SELECT * FROM tb_animaux;");
-            infos = PreConnection.Load_data("SELECT * FROM tb_agenda;");
+            infos = PreConnection.Load_data("SELECT * FROM tb_agenda WHERE `FOR_THIS_USERS` IN (NULL, '') OR `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + ",%' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + ",%';");
 
             icons = PreConnection.Load_data("SELECT MIN(tb1.`ID`) AS ID,tb2.`MODIF_TIME`,tb2.`NME`,tb1.`IMG_DATA` FROM tb_images tb1 LEFT JOIN tb_images tb2 ON tb1.ID = tb2.ID WHERE tb1.`IMG_DATA` IS NOT NULL  GROUP BY tb1.`IMG_DATA`;");
             //------------------------------
@@ -357,6 +387,45 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 //--------------
                 Userss = row["FOR_THIS_USERS"].ToString();
+
+                //============= Autorisations --> ===================                
+                if (Modifier_pour_tous_40003)
+                {
+                    radioButton1.Enabled = radioButton2.Enabled = radioButton3.Enabled = true;
+                    button7.Visible = true;
+                    //---------
+                    foreach (Control ctrl in panel2.Controls)
+                    {                        
+                        ctrl.Enabled = true;
+                    }
+                }
+                else if (Modifier_pour_juste_lui_40004 && Userss == Properties.Settings.Default.Last_login_user_idx.ToString())
+                {
+                    //---------
+                    foreach (Control ctrl in panel2.Controls)
+                    {
+                        ctrl.Enabled = true;
+                    }
+                    //----------
+                    button7.Visible = true;
+                    radioButton1.Enabled = true;
+                    radioButton2.Enabled = radioButton3.Enabled = false;
+                }
+                else
+                {
+                    button7.Visible = false;
+                    foreach (Control ctrl in panel1.Controls)
+                    {
+                        ctrl.Enabled = false;
+                    }
+                    foreach (Control ctrl in panel2.Controls)
+                    {
+                        if (ctrl.Name != "panel1")
+                            ctrl.Enabled = false;
+                    }
+                }
+                button14.Visible = Supprimer_pour_tous_40005 || (Supprimer_pour_juste_lui_40006 && Userss == Properties.Settings.Default.Last_login_user_idx.ToString());
+                //============= <-- Autorisations ===================
             }
             else
             {
@@ -600,7 +669,7 @@ namespace ALBAITAR_Softvet.Resources
         private void intial_Modify_fields()
         {
             radioButton1.Checked = true;
-            Userss = string.Empty;
+            Userss = Properties.Settings.Default.Last_login_user_idx.ToString();
             pictureBox6.Image = Properties.Resources.NOUVEAU_002;
             button14.Visible = false;
             pictureBox2.Image = Properties.Resources.icons8_camera_30px;
@@ -975,6 +1044,7 @@ namespace ALBAITAR_Softvet.Resources
                            + " WHERE `ID` = " + Current_items_id + ";";
                 }
                 PreConnection.open_conn();
+                MessageBox.Show(">>>>>>>>>>>>>>> " + cmmd);
                 MySqlCommand mySqlCommand = new MySqlCommand(cmmd, PreConnection.mySqlConnection);
                 //-------------------
 
@@ -1170,9 +1240,29 @@ namespace ALBAITAR_Softvet.Resources
                 selected_ids_to_delete = selected_ids_to_delete.Substring(1, selected_ids_to_delete.Length - 1);
             }
 
+
             if (MessageBox.Show("Sures de faire la suppression ?\n\nRMQ : L'évenement origine sera supprimer (tous les répétition liés seront supprimés)", "Confirmation :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID IN (" + selected_ids_to_delete + ");");
+                if (Supprimer_pour_tous_40005)
+                {
+                    PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID IN (" + selected_ids_to_delete + ");");
+                }
+                else if (Supprimer_pour_juste_lui_40006)
+                {
+                    int tmpppp = PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID IN (" + selected_ids_to_delete + ") AND `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + ",%' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + ",%';");
+                    if (list_tmp.Count != tmpppp)
+                    {
+                        if (tmpppp == 0)
+                        {
+                            new Non_Autorized_Msg("Vous n'êtes pas autorisé à supprimer ces événements.").Show();
+                        }
+                        else
+                        {
+                            new Non_Autorized_Msg("Seuls vos événements sont supprimés.").Show();
+                        }
+
+                    }
+                }
                 Load_all_data();
             }
 
@@ -1183,6 +1273,14 @@ namespace ALBAITAR_Softvet.Resources
             Current_items_id = string.Empty;
             Is_New_To_Insert = true;
             pictureBox6.Image = Properties.Resources.NOUVEAU_002;
+            //--------------------------
+            radioButton1.Enabled = radioButton2.Enabled = radioButton3.Enabled = button7.Visible = true;
+            if (!Ajouter_pour_tout_monde_40001) //Ajouter Event pour tout le monde
+            {
+                radioButton2.Enabled = radioButton3.Enabled = button7.Visible = false;
+                radioButton1.Enabled = button7.Visible = Ajouter_pour_juste_lui_40002;
+            }
+            //----------------------------
             intial_Modify_fields();
         }
 
@@ -1208,7 +1306,22 @@ namespace ALBAITAR_Softvet.Resources
         {
             if (MessageBox.Show("Sures de faire la suppression ?\n\nL'évenement : '" + textBox1.Text + "'\n\nRMQ : L'évenement origine sera supprimer (tous les répétition liés seront supprimés)", "Confirmation :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID = " + Current_items_id + ";");
+                if (Supprimer_pour_tous_40005)
+                {
+                    PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID = " + Current_items_id + ";");
+                }
+                else if (Supprimer_pour_juste_lui_40006)
+                {
+                    int tmpppp = PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID = " + Current_items_id + " AND `FOR_THIS_USERS` IN ('',CONCAT(','," + Properties.Settings.Default.Last_login_user_idx + "),CONCAT(" + Properties.Settings.Default.Last_login_user_idx + ",','),CONCAT(','," + Properties.Settings.Default.Last_login_user_idx + ",','));");
+                    if (tmpppp == 0)
+                    {
+                        new Non_Autorized_Msg("Vous n'êtes pas autorisé à supprimer cet événement.").Show();
+                    }
+                }
+                else
+                {
+                    new Non_Autorized_Msg("Vous n'êtes pas autorisé à supprimer cet événement.").Show();
+                }
                 Load_all_data();
             }
         }
@@ -1216,6 +1329,18 @@ namespace ALBAITAR_Softvet.Resources
         private void button8_Click(object sender, EventArgs e)
         {
             //new Agenda_Filter().ShowDialog();
+        }
+
+        private void flowLayoutPanel1_Enter(object sender, EventArgs e)
+        {
+            if(prev != null)
+            {
+                if (prev.SelectedItems.Count > 0)
+                {
+                    listView1_SelectedIndexChanged(prev, null);
+                }
+            }
+            
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -1242,6 +1367,37 @@ namespace ALBAITAR_Softvet.Resources
         private void radioButton2_MouseClick(object sender, MouseEventArgs e)
         {
             Userss = string.Empty;
+        }
+
+
+        private void Agenda_Load(object sender, EventArgs e)
+        {
+            button9.Visible = Ajouter_pour_tout_monde_40001 || Ajouter_pour_juste_lui_40002; //Ajouter
+            button14.Visible = button15.Visible = button10.Visible = Supprimer_pour_tous_40005 || Supprimer_pour_juste_lui_40006; //Supprimer            
+            //--------------------------
+            radioButton1.Enabled = radioButton2.Enabled = radioButton3.Enabled = button7.Visible = true;
+            if (!Ajouter_pour_tout_monde_40001) //Ajouter Event pour tout le monde
+            {
+                radioButton2.Enabled = radioButton3.Enabled = button7.Visible = false;
+                if (!Ajouter_pour_juste_lui_40002)
+                {
+                    radioButton1.Enabled = false;
+                    foreach (Control ctrl in panel1.Controls)
+                    {
+                        ctrl.Enabled = false;
+                    }
+                    foreach (Control ctrl in panel2.Controls)
+                    {
+                        if (ctrl.Name != "panel1")
+                            ctrl.Enabled = false;
+                    }
+                }
+                else
+                {
+                    radioButton1.Enabled = button7.Visible = true;
+                }
+            }
+            //----------------------------
         }
     }
 }

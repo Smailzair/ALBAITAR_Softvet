@@ -5,9 +5,17 @@ namespace ALBAITAR_Softvet.Dialogs
 {
     public partial class Non_Autorized_Msg : Form
     {
-        public Non_Autorized_Msg()
+        public Non_Autorized_Msg(string msg_txt)
         {
             InitializeComponent();
+            //--------------
+            if(msg_txt == null || msg_txt.Trim().Length == 0) {
+                label1.Text = "Vous n'avez pas l'autorisations";
+            }
+            else
+            {
+                label1.Text = msg_txt;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -23,12 +23,36 @@ namespace ALBAITAR_Softvet
         DataTable login_data;
         int User_Idd;
         bool In_Modif_Mod = true;
-        //bool Current_Is_Admin = false;
+        bool was_admin = false;
+        bool Mofifier_son_cpt_91001,
+            Supprimer_son_cpt_91002,
+            Ajouter_user_standard_91003,
+            Modifier_user_standard_91004,
+            Supprimer_user_standard_91005 = false;
         public Login_Modif(int? User_ID)
         {
             InitializeComponent();
+            //---------------------------
+            if (Properties.Settings.Default.Last_login_is_admin)
+            {
+                Mofifier_son_cpt_91001 =
+                Supprimer_son_cpt_91002 =
+                Ajouter_user_standard_91003 =
+                Modifier_user_standard_91004 =
+                Supprimer_user_standard_91005 = true;
+            }
+            else
+            {
+                Mofifier_son_cpt_91001 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "91001" && (Int32)QQ[3] == 1).Count() > 0;
+                Supprimer_son_cpt_91002 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "91002" && (Int32)QQ[3] == 1).Count() > 0;
+                Ajouter_user_standard_91003 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "91003" && (Int32)QQ[3] == 1).Count() > 0;
+                Modifier_user_standard_91004 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "91004" && (Int32)QQ[3] == 1).Count() > 0;
+                Supprimer_user_standard_91005 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "91005" && (Int32)QQ[3] == 1).Count() > 0;
+            }
+            button1.Enabled = Ajouter_user_standard_91003;
+            //-------------------------
             User_Idd = (User_ID ?? 0);
-            button1.Enabled = radioButton1.Enabled = radioButton2.Enabled = comboBox1.Enabled = button4.Enabled = Properties.Settings.Default.Last_login_is_admin;
+            //button1.Enabled = radioButton1.Enabled = radioButton2.Enabled = comboBox1.Enabled = button4.Enabled = Properties.Settings.Default.Last_login_is_admin;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -93,6 +117,12 @@ namespace ALBAITAR_Softvet
                         + "`CNI_NUM` = '" + textBox6.Text + "',"
                         + "`ANV_NUM` = '" + textBox7.Text + "'"
                         + "WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() + ";");
+                    if (was_admin && !radioButton1.Checked && MessageBox.Show("Voulez-vous mettre les autorisations 'par defaut' [Oui] \n ou de conserver les autorisations précédentes (avant d'étre 'Admin') ? [Non]", "Autorisations :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        PreConnection.Excut_Cmd("UPDATE tb_autoriz t1 JOIN tb_autoriz t2 ON t1.id = t2.id SET t2.Usr_" + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() + " = t1.`DEFAULT_VALUES`;");
+                    }
+
+
                 }
             }
             else //INSERT
@@ -131,9 +161,9 @@ namespace ALBAITAR_Softvet
 
                     //------Autorisations -------------------
                     DataTable dt = PreConnection.Load_data("SELECT MAX(ID) FROM tb_login_and_users");
-                    PreConnection.Excut_Cmd("ALTER TABLE tb_autoriz ADD COLUMN Usr_" + dt.Rows[0][0].ToString() +" INT; " +
+                    PreConnection.Excut_Cmd("ALTER TABLE tb_autoriz ADD COLUMN Usr_" + dt.Rows[0][0].ToString() + " INT; " +
                         "UPDATE tb_autoriz e1 JOIN tb_autoriz e2 ON e1.ID = e2.ID SET e1.Usr_" + dt.Rows[0][0].ToString() + " = e2.DEFAULT_VALUES;");
-                  
+
                 }
             }
             //--------------------------
@@ -208,7 +238,7 @@ namespace ALBAITAR_Softvet
                     textBox4.Text = dataGridView1.SelectedRows[0].Cells["EMAIL"].Value.ToString();
                     textBox6.Text = dataGridView1.SelectedRows[0].Cells["CNI_NUM"].Value.ToString();
                     textBox7.Text = dataGridView1.SelectedRows[0].Cells["ANV_NUM"].Value.ToString();
-                    radioButton1.Checked = (SByte)dataGridView1.SelectedRows[0].Cells["IS_ADMIN"].Value == 1;
+                    radioButton1.Checked = was_admin = (SByte)dataGridView1.SelectedRows[0].Cells["IS_ADMIN"].Value == 1;
                     radioButton3.Checked = dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString() == "F";
                     comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCTION"].Value.ToString();
                     button4.Enabled = radioButton1.Enabled = radioButton2.Enabled = dataGridView1.Rows.Count > 1;
@@ -217,34 +247,76 @@ namespace ALBAITAR_Softvet
                 }
                 else if (Properties.Settings.Default.Last_login_user_idx == int.Parse(dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString()))
                 {
-                    textBox1.Text = dataGridView1.SelectedRows[0].Cells["USER_NME"].Value.ToString();
-                    textBox5.Text = dataGridView1.SelectedRows[0].Cells["USER_FAMNME"].Value.ToString();
-                    maskedTextBox1.Text = maskedTextBox2.Text = (dataGridView1.SelectedRows[0].Cells["PASSWORD"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["PASSWORD"].Value.ToString() : "");
-                    textBox2.Text = dataGridView1.SelectedRows[0].Cells["QUESTION"].Value.ToString();
-                    textBox3.Text = dataGridView1.SelectedRows[0].Cells["ANSWER"].Value.ToString();
-                    textBox4.Text = dataGridView1.SelectedRows[0].Cells["EMAIL"].Value.ToString();
-                    textBox6.Text = dataGridView1.SelectedRows[0].Cells["CNI_NUM"].Value.ToString();
-                    textBox7.Text = dataGridView1.SelectedRows[0].Cells["ANV_NUM"].Value.ToString();
-                    radioButton1.Checked = (SByte)dataGridView1.SelectedRows[0].Cells["IS_ADMIN"].Value == 1;
-                    radioButton3.Checked = dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString() == "F";
-                    comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCTION"].Value.ToString();
-                    button4.Enabled = radioButton1.Enabled = radioButton2.Enabled = false;
-                    //--------------
-                    In_Modif_Mod = true;
+                    button4.Enabled = Supprimer_son_cpt_91002;
+
+                    if (Mofifier_son_cpt_91001)
+                    {
+                        textBox1.Text = dataGridView1.SelectedRows[0].Cells["USER_NME"].Value.ToString();
+                        textBox5.Text = dataGridView1.SelectedRows[0].Cells["USER_FAMNME"].Value.ToString();
+                        maskedTextBox1.Text = maskedTextBox2.Text = (dataGridView1.SelectedRows[0].Cells["PASSWORD"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["PASSWORD"].Value.ToString() : "");
+                        textBox2.Text = dataGridView1.SelectedRows[0].Cells["QUESTION"].Value.ToString();
+                        textBox3.Text = dataGridView1.SelectedRows[0].Cells["ANSWER"].Value.ToString();
+                        textBox4.Text = dataGridView1.SelectedRows[0].Cells["EMAIL"].Value.ToString();
+                        textBox6.Text = dataGridView1.SelectedRows[0].Cells["CNI_NUM"].Value.ToString();
+                        textBox7.Text = dataGridView1.SelectedRows[0].Cells["ANV_NUM"].Value.ToString();
+                        radioButton1.Checked = was_admin = (SByte)dataGridView1.SelectedRows[0].Cells["IS_ADMIN"].Value == 1;
+                        radioButton3.Checked = dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString() == "F";
+                        comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCTION"].Value.ToString();
+                        radioButton1.Enabled = radioButton2.Enabled = false;
+                        //--------------
+                        In_Modif_Mod = true;
+                    }
+                    else
+                    {
+                        foreach (Control ctr in this.Controls)
+                        {
+                            if (ctr != dataGridView1 && ctr != label13 && ctr != label14)
+                            {
+                                ctr.Visible = false;
+                            }
+                            else if (ctr == label14)
+                            {
+                                ctr.Visible = true;
+                            }
+
+                        }
+                    }
                 }
                 else
                 {
-                    foreach (Control ctr in this.Controls)
-                    {
-                        if (ctr != dataGridView1 && ctr != label13 && ctr != label14)
-                        {
-                            ctr.Visible = false;
-                        }
-                        else if (ctr == label14)
-                        {
-                            ctr.Visible = true;
-                        }
+                    button4.Enabled = Supprimer_user_standard_91005 && (SByte)dataGridView1.SelectedRows[0].Cells["IS_ADMIN"].Value == 0;
 
+                    if (Modifier_user_standard_91004)
+                    {
+                        textBox1.Text = dataGridView1.SelectedRows[0].Cells["USER_NME"].Value.ToString();
+                        textBox5.Text = dataGridView1.SelectedRows[0].Cells["USER_FAMNME"].Value.ToString();
+                        maskedTextBox1.Text = maskedTextBox2.Text = (dataGridView1.SelectedRows[0].Cells["PASSWORD"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["PASSWORD"].Value.ToString() : "");
+                        textBox2.Text = dataGridView1.SelectedRows[0].Cells["QUESTION"].Value.ToString();
+                        textBox3.Text = dataGridView1.SelectedRows[0].Cells["ANSWER"].Value.ToString();
+                        textBox4.Text = dataGridView1.SelectedRows[0].Cells["EMAIL"].Value.ToString();
+                        textBox6.Text = dataGridView1.SelectedRows[0].Cells["CNI_NUM"].Value.ToString();
+                        textBox7.Text = dataGridView1.SelectedRows[0].Cells["ANV_NUM"].Value.ToString();
+                        radioButton1.Checked = was_admin = (SByte)dataGridView1.SelectedRows[0].Cells["IS_ADMIN"].Value == 1;
+                        radioButton3.Checked = dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString() == "F";
+                        comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCTION"].Value.ToString();
+                        radioButton1.Enabled = radioButton2.Enabled = false;
+                        //--------------
+                        In_Modif_Mod = true;
+                    }
+                    else
+                    {
+                        foreach (Control ctr in this.Controls)
+                        {
+                            if (ctr != dataGridView1 && ctr != label13 && ctr != label14)
+                            {
+                                ctr.Visible = false;
+                            }
+                            else if (ctr == label14)
+                            {
+                                ctr.Visible = true;
+                            }
+
+                        }
                     }
                 }
             }
@@ -267,7 +339,7 @@ namespace ALBAITAR_Softvet
                 dataGridView1.Rows[row.Index].Selected = true;
 
             }
-            //------------------------------
+            //-------------------------------
             dataGridView1_SelectionChanged(null, null);
         }
 

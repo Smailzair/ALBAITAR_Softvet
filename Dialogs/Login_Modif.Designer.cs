@@ -608,9 +608,9 @@ namespace ALBAITAR_Softvet
             this.label14.ForeColor = System.Drawing.Color.Firebrick;
             this.label14.Location = new System.Drawing.Point(266, 128);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(234, 17);
+            this.label14.Size = new System.Drawing.Size(170, 17);
             this.label14.TabIndex = 32;
-            this.label14.Text = "(Droits d\'administrateur sont requis)";
+            this.label14.Text = "(Vous n\'avez pas le droit)";
             this.label14.Visible = false;
             // 
             // Login_Modif

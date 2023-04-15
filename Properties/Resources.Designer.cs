@@ -743,6 +743,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_todo_list_20px_copy {
+            get {
+                object obj = ResourceManager.GetObject("icons8_todo_list_20px copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_todo_list_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_todo_list_30px", resourceCulture);

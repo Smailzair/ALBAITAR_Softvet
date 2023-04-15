@@ -103,14 +103,15 @@ namespace ALBAITAR_Softvet
             //----------------------------------
         }
 
-        public static void Excut_Cmd(string cmd)
+        public static int Excut_Cmd(string cmd)
         {
-
+            int rows_nb = 0;
             MySqlCommand cmmd = new MySqlCommand(cmd, mySqlConnection);
             open_conn();
             //try { cmmd.ExecuteNonQuery(); } catch { if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée, veuillez vérifier l'internet et ..."); } }
-            try { cmmd.ExecuteNonQuery(); } catch { if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée !"); } }
+            try { rows_nb = cmmd.ExecuteNonQuery(); } catch { if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée !"); } }
             close_conn();
+            return rows_nb;
         }
 
 

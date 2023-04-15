@@ -187,7 +187,7 @@ namespace ALBAITAR_Softvet
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login_Pass_Forgot";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Récuperer le mot de passe () :";
+            this.Text = "Récuperer le mot de passe :";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_Pass_Forgot_FormClosed);
             this.Load += new System.EventHandler(this.Login_Load);
             this.groupBox1.ResumeLayout(false);

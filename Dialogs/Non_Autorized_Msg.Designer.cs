@@ -38,7 +38,7 @@
             // 
             this.pictureBox1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_private_120px;
             this.pictureBox1.Location = new System.Drawing.Point(1, 2);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(89, 95);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -50,9 +50,9 @@
             // 
             this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Brown;
-            this.label1.Location = new System.Drawing.Point(98, 13);
+            this.label1.Location = new System.Drawing.Point(97, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(121, 38);
+            this.label1.Size = new System.Drawing.Size(192, 95);
             this.label1.TabIndex = 1;
             this.label1.Text = "Vous n\'avez pas l\'autorisations";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -60,7 +60,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(128, 59);
+            this.button1.Location = new System.Drawing.Point(312, 63);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(58, 29);
             this.button1.TabIndex = 0;
@@ -73,14 +73,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(225, 99);
+            this.ClientSize = new System.Drawing.Size(378, 99);
             this.ControlBox = false;
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Non_Autorized_Msg";

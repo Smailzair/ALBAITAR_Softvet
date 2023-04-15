@@ -843,6 +843,7 @@
             this.Name = "Animaux";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Animaux - [ALBAITAR Softvet]";
+            this.Load += new System.EventHandler(this.Animaux_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

@@ -13,6 +13,10 @@ namespace ALBAITAR_Softvet.Resources
         DataTable Autoriz_data;
         DataTable Users;
         DataTable tmp_db;
+
+        bool Theres_changes = false;
+
+        bool Consulter_autors_d_autres_92001, Modifier_ses_autor_92002, Modifier_autor_d_autres_92003 = false;
         public Autorizations()
         {
             InitializeComponent();
@@ -23,14 +27,26 @@ namespace ALBAITAR_Softvet.Resources
             tmp_db.Columns.Add("ID", typeof(int));
             tmp_db.Columns.Add("CODE", typeof(int));
             tmp_db.Columns.Add("AUTOR_TEXT", typeof(string));
+            tmp_db.Columns.Add("FORM_NME", typeof(string));
             tmp_db.Columns.Add("VALUES", typeof(SByte));
+            //--------------------
+            if(Properties.Settings.Default.Last_login_is_admin)
+            {
+                Consulter_autors_d_autres_92001 =Modifier_ses_autor_92002 = Modifier_autor_d_autres_92003 = true;
+            }
+            else
+            {
+                Consulter_autors_d_autres_92001 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92001" && (Int32)QQ[3] == 1).Count() > 0;
+                Modifier_ses_autor_92002 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92002" && (Int32)QQ[3] == 1).Count() > 0;
+                Modifier_autor_d_autres_92003 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92003" && (Int32)QQ[3] == 1).Count() > 0;                
+            }
 
         }
 
         private void Autorizations_Load(object sender, System.EventArgs e)
         {
             //----------------------
-            Autoriz_data = PreConnection.Load_data("SELECT * FROM tb_autoriz ORDER BY CODE;");
+            Autoriz_data = PreConnection.Load_data("SELECT * FROM tb_autoriz WHERE LENGTH(TRIM(`AUTOR_TEXT`)) > 0 ORDER BY `CODE`;");
 
             dataGridView1.DataSource = Autoriz_data;
             //-----------------------------
@@ -47,9 +63,10 @@ namespace ALBAITAR_Softvet.Resources
         }
         private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            Autoriz_data = PreConnection.Load_data("SELECT * FROM tb_autoriz WHERE LENGTH(TRIM(`AUTOR_TEXT`)) > 0 ORDER BY `CODE`;");
+            //----------
             dataGridView1.Visible = true;
             tmp_db.Rows.Clear();
-
             if (comboBox1.SelectedIndex > 0)
             {
                 foreach (DataRow row in Autoriz_data.Rows)
@@ -60,6 +77,7 @@ namespace ALBAITAR_Softvet.Resources
                     newRow["ID"] = row["ID"];
                     newRow["CODE"] = row["CODE"];
                     newRow["AUTOR_TEXT"] = row["AUTOR_TEXT"];
+                    newRow["FORM_NME"] = row["FORM_NME"];
                     newRow["VALUES"] = row["Usr_" + comboBox1.SelectedValue.ToString()];
 
                     tmp_db.Rows.Add(newRow);
@@ -74,13 +92,30 @@ namespace ALBAITAR_Softvet.Resources
                     newRow["ID"] = row["ID"];
                     newRow["CODE"] = row["CODE"];
                     newRow["AUTOR_TEXT"] = row["AUTOR_TEXT"];
+                    newRow["FORM_NME"] = row["FORM_NME"];
                     newRow["VALUES"] = row["DEFAULT_VALUES"];
 
                     tmp_db.Rows.Add(newRow);
                 }
             }
+            //---------
             dataGridView1.DataSource = tmp_db;
             button2.Visible = comboBox1.SelectedIndex > 0;
+            //------------
+            if(comboBox1.SelectedValue.ToString() == Properties.Settings.Default.Last_login_user_idx.ToString())
+            {
+                dataGridView1.Visible = true;
+                button1.Visible = button2.Visible = button3.Visible = Modifier_ses_autor_92002;
+            }
+            else
+            {
+                dataGridView1.Visible = Consulter_autors_d_autres_92001 || Modifier_autor_d_autres_92003;
+                button1.Visible = button2.Visible = button3.Visible = Modifier_autor_d_autres_92003;
+            }
+            //---------
+            textBox1.Clear();
+
+
         }
 
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -110,11 +145,32 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button3_Click(object sender, EventArgs e)
         {
+            Theres_changes = true;
             DataGridViewSelectedRowCollection rwss = dataGridView1.SelectedRows;
+            bool tmmmmp = false;
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
-                PreConnection.Excut_Cmd("UPDATE tb_autoriz SET Usr_" + comboBox1.SelectedValue + " = 1 WHERE CODE = " + row.Cells["CODE"].Value);
-                row.Cells["VALUES"].Value = 1;
+                if (Properties.Settings.Default.Last_login_is_admin)
+                {
+                    PreConnection.Excut_Cmd("UPDATE tb_autoriz SET " + (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue : "DEFAULT_VALUES") + " = 1 WHERE CODE = " + row.Cells["CODE"].Value);
+                    row.Cells["VALUES"].Value = 1;
+                }
+                else
+                {
+                    if ((int)row.Cells["CODE"].Value < 92000)
+                    {
+                        PreConnection.Excut_Cmd("UPDATE tb_autoriz SET " + (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue : "DEFAULT_VALUES") + " = 1 WHERE CODE = " + row.Cells["CODE"].Value);
+                        row.Cells["VALUES"].Value = 1;
+                    }
+                    else
+                    {
+                        tmmmmp = true;
+                    }
+                }    
+            }
+            if (tmmmmp)
+            {
+                MessageBox.Show("Vous ne pouvez pas de changer la situation des élements de fenétre 'Autorisations & priviléges',\n\nDemandez ça d'un 'Admin'.\n ","Information :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             dataGridView1.ClearSelection();
             dataGridView1.Refresh();
@@ -126,11 +182,32 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Theres_changes = true; 
             DataGridViewSelectedRowCollection rwss = dataGridView1.SelectedRows;
+            bool tmmmmp = false;
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
-                PreConnection.Excut_Cmd("UPDATE tb_autoriz SET Usr_" + comboBox1.SelectedValue + " = 0 WHERE CODE = " + row.Cells["CODE"].Value);
-                row.Cells["VALUES"].Value = 0;
+                if (Properties.Settings.Default.Last_login_is_admin)
+                {
+                    PreConnection.Excut_Cmd("UPDATE tb_autoriz SET " + (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue : "DEFAULT_VALUES") + " = 0 WHERE CODE = " + row.Cells["CODE"].Value);
+                    row.Cells["VALUES"].Value = 0;
+                }
+                else
+                {
+                    if ((int)row.Cells["CODE"].Value < 92000)
+                    {
+                        PreConnection.Excut_Cmd("UPDATE tb_autoriz SET " + (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue : "DEFAULT_VALUES") + " = 0 WHERE CODE = " + row.Cells["CODE"].Value);
+                        row.Cells["VALUES"].Value = 0;
+                    }
+                    else
+                    {
+                        tmmmmp = true;
+                    }
+                }
+            }
+            if (tmmmmp)
+            {
+                MessageBox.Show("Vous ne pouvez pas de changer la situation des élements de fenétre 'Autorisations & priviléges',\n\nDemandez ça d'un 'Admin'.\n ", "Information :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             dataGridView1.ClearSelection();
             dataGridView1.Refresh();
@@ -155,12 +232,34 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Theres_changes = true;
             DataGridViewSelectedRowCollection rwss = dataGridView1.SelectedRows;
+            bool tmmmmp = false;
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
-                int default_val = int.Parse(Autoriz_data.Rows.Cast<DataRow>().FirstOrDefault(x => x["CODE"].ToString() == row.Cells["CODE"].Value.ToString())["DEFAULT_VALUES"].ToString());
-                PreConnection.Excut_Cmd("UPDATE tb_autoriz SET Usr_" + comboBox1.SelectedValue + " = "+ default_val + " WHERE CODE = " + row.Cells["CODE"].Value +";");
-                row.Cells["VALUES"].Value = default_val;
+                if (Properties.Settings.Default.Last_login_is_admin)
+                {
+                    int default_val = int.Parse(Autoriz_data.Rows.Cast<DataRow>().FirstOrDefault(x => x["CODE"].ToString() == row.Cells["CODE"].Value.ToString())["DEFAULT_VALUES"].ToString());
+                    PreConnection.Excut_Cmd("UPDATE tb_autoriz SET Usr_" + comboBox1.SelectedValue + " = " + default_val + " WHERE CODE = " + row.Cells["CODE"].Value + ";");
+                    row.Cells["VALUES"].Value = default_val;
+                }
+                else
+                {
+                    if ((int)row.Cells["CODE"].Value < 92000)
+                    {
+                        int default_val = int.Parse(Autoriz_data.Rows.Cast<DataRow>().FirstOrDefault(x => x["CODE"].ToString() == row.Cells["CODE"].Value.ToString())["DEFAULT_VALUES"].ToString());
+                        PreConnection.Excut_Cmd("UPDATE tb_autoriz SET Usr_" + comboBox1.SelectedValue + " = " + default_val + " WHERE CODE = " + row.Cells["CODE"].Value + ";");
+                        row.Cells["VALUES"].Value = default_val;
+                    }
+                    else
+                    {
+                        tmmmmp = true;
+                    }
+                }
+            }
+            if (tmmmmp)
+            {
+                MessageBox.Show("Vous ne pouvez pas de changer la situation des élements de fenétre 'Autorisations & priviléges',\n\nDemandez ça d'un 'Admin'.\n ", "Information :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             dataGridView1.ClearSelection();
             dataGridView1.Refresh();
@@ -169,5 +268,14 @@ namespace ALBAITAR_Softvet.Resources
                 row.Selected = true;
             }
         }
+
+        private void Autorizations_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(Theres_changes && !Properties.Settings.Default.Last_login_is_admin)
+            {
+                Application.Restart();
+            }
+        }
+
     }
 }
