@@ -83,8 +83,8 @@ namespace ALBAITAR_Softvet
                 Mssg.Subject = "ALBAITAR Softvet - Récuperation de mot de passe";
                 Mssg.Body = new TextPart("plain")
                 {
-                    Text = @"Bonjour,
-                           Voici votre mot de passe de logiciel '" + Application.ProductName.ToString() + "' : " + ((datatt.Rows[0]["PASSWORD"].ToString() ?? "").Length > 0 ? (datatt.Rows[0]["PASSWORD"].ToString() ?? "") : "'Vide !'")
+                    Text = @"Bonjour "+ (datatt.Rows[0]["USER_NME"].ToString() == "M" ? "Mr." : "Mlle.") + datatt.Rows[0]["USER_NME"].ToString() + " " + datatt.Rows[0]["USER_FAMNME"].ToString() + @",
+Voici votre mot de passe de logiciel '" + Application.ProductName.ToString() + "' : " + ((datatt.Rows[0]["PASSWORD"].ToString() ?? "").Length > 0 ? (datatt.Rows[0]["PASSWORD"].ToString() ?? "") : "'Vide !'")
                 };
 
 

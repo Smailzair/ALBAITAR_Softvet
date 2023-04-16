@@ -609,6 +609,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\icons8_alarm_20px.png" />
     <None Include="Resources\icons8_todo_list_20px copy.png" />
     <None Include="Resources\icons8_private_120px.png" />
     <None Include="Resources\icons8_private_50px.png" />
