@@ -136,12 +136,12 @@ namespace ALBAITAR_Softvet
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(10, 76);
+            this.checkBox1.Location = new System.Drawing.Point(13, 82);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(84, 20);
+            this.checkBox1.Size = new System.Drawing.Size(94, 20);
             this.checkBox1.TabIndex = 8;
-            this.checkBox1.Text = "Enregistrer";
+            this.checkBox1.Text = "Auto Connect";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Login

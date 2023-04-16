@@ -1,7 +1,9 @@
 ﻿//using Microsoft.Office.Interop.Excel;
+using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,12 +21,43 @@ namespace ALBAITAR_Softvet
 
         private void button1_Click(object sender, EventArgs e)
         {
-            (new Login_Modif(Properties.Settings.Default.Last_login_user_idx)).ShowDialog();
+            if (Properties.Settings.Default.Login_Auto_Enter)
+            {
+                new Login(false, Properties.Settings.Default.Last_login_user_idx).ShowDialog();
+                if (Login.enter_allow)
+                {
+                    new Login_Modif(Properties.Settings.Default.Last_login_user_idx).ShowDialog();
+                }
+                else
+                {
+                    new Non_Autorized_Msg("Mot de passe fausse !").Show();
+                }
+            }
+            else
+            {
+                new Login_Modif(Properties.Settings.Default.Last_login_user_idx).ShowDialog();
+            }          
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new Autorizations().ShowDialog();
+            if (Properties.Settings.Default.Login_Auto_Enter)
+            {
+                new Login(false, Properties.Settings.Default.Last_login_user_idx).ShowDialog();
+                if (Login.enter_allow)
+                {
+                    new Autorizations().ShowDialog();
+                }
+                else
+                {
+                    new Non_Autorized_Msg("Mot de passe fausse !").Show();
+                }
+            }
+            else
+            {
+                new Autorizations().ShowDialog();
+            }
+                        
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

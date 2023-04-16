@@ -22,6 +22,8 @@ namespace ALBAITAR_Softvet
         public Main_Frm()
         {
             InitializeComponent();
+            //------------------------
+           
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
                 Autorisations = PreConnection.Load_data("SELECT `ID`,`CODE`,`AUTOR_TEXT`,Usr_" + Properties.Settings.Default.Last_login_user_idx + " FROM tb_autoriz;");
@@ -118,11 +120,14 @@ namespace ALBAITAR_Softvet
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.Login_Auto_Enter = false;
+            Properties.Settings.Default.Save();
             Application.Restart();
         }
 
         private void Main_Frm_Load(object sender, EventArgs e)
         {
+            Text = "ALBAITAR Softvet - " + Properties.Settings.Default.Last_login_user_full_nme;
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
                 button9.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10000" && (Int32)QQ[3] == 1).Count() > 0;

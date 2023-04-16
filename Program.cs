@@ -28,6 +28,7 @@ namespace ALBAITAR_Softvet
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Properties.Settings.Default.Reload();
             //------------------------------------
             CultureInfo c = new System.Globalization.CultureInfo("en-EN");
             NumberFormatInfo nfi = new NumberFormatInfo();
@@ -48,15 +49,26 @@ namespace ALBAITAR_Softvet
 
             if (processes.Length <= 1)
             {
-                Login log = new Login(false);
-                Application.Run(log);
-                log.BringToFront();
-                //--------------
-                if (Login.enter_allow)
+                
+                if (Properties.Settings.Default.Login_Auto_Enter && (DateTime.Now - Properties.Settings.Default.Last_entred_date_by_Auto_Enter).Days < 7)
                 {
+                    Properties.Settings.Default.Last_entred_date_by_Auto_Enter = DateTime.Now;
+                    Properties.Settings.Default.Save();
                     Application.Run(new Main_Frm());
                 }
-
+                else
+                {
+                    Properties.Settings.Default.Login_Auto_Enter = false;
+                    Properties.Settings.Default.Save();
+                    Login log = new Login(false, null);
+                    Application.Run(log);
+                    log.BringToFront();
+                    //--------------
+                    if (Login.enter_allow)
+                    {
+                        Application.Run(new Main_Frm());
+                    }
+                }
             }
             else
             {

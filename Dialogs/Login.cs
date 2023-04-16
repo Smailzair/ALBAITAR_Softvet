@@ -16,6 +16,7 @@ namespace ALBAITAR_Softvet
         static bool accept = false;
         static bool change_infos_there = false;
         bool just_return_answer1 = false;
+        int specified_usr_id = -1;
         public static bool enter_allow
         {
             get
@@ -40,24 +41,36 @@ namespace ALBAITAR_Softvet
             }
         }
 
-        public Login(bool? just_return_answer)
+        public Login(bool? just_return_answer, int? specified_user_id)
         {
             InitializeComponent();
             just_return_answer1  = just_return_answer ?? false;
+            specified_usr_id = specified_user_id ?? -1;
         }
         DataTable datat;
         private void Login_Load(object sender, EventArgs e)
         {
+            accept = false;
+            //------------
             datat = PreConnection.Load_data("SELECT * ,CONCAT(IF(SEX = 'F','Mme. ','Mr. '),`USER_NME`,' ',`USER_FAMNME`) AS USER_FULL_NME FROM tb_login_and_users;");
             //-----------------------
             comboBox1.DataSource = datat;
             comboBox1.ValueMember = "ID";
             comboBox1.DisplayMember = "USER_FULL_NME";
-            if(datat.Rows.Cast<DataRow>().Where(er => er["ID"].ToString() == Properties.Settings.Default.Last_login_user_idx.ToString()).Count() > 0)
+            if(specified_usr_id > 0)
+            {
+                if (datat.Rows.Cast<DataRow>().Where(er => er["ID"].ToString() == specified_usr_id.ToString()).Count() > 0)
+                {
+                    comboBox1.SelectedValue = specified_usr_id;
+                }
+                comboBox1.Enabled = false;
+            }
+            else if(datat.Rows.Cast<DataRow>().Where(er => er["ID"].ToString() == Properties.Settings.Default.Last_login_user_idx.ToString()).Count() > 0)
             {
                 comboBox1.SelectedValue = Properties.Settings.Default.Last_login_user_idx;
             }
-            
+            checkBox1.Checked = Properties.Settings.Default.Login_Auto_Enter;            
+            checkBox1.Visible = !just_return_answer1 && comboBox1.Enabled;
             //-----------------------            
             maskedTextBox1.Select();
         }
@@ -70,7 +83,6 @@ namespace ALBAITAR_Softvet
         private void button1_Click(object sender, EventArgs e)
         {
             if (datat.Rows.Cast<DataRow>().Where(rr => int.Parse(rr["ID"].ToString()) == int.Parse(comboBox1.SelectedValue.ToString()) && (rr["PASSWORD"].Equals(maskedTextBox1.Text) || (rr.IsNull("PASSWORD") && maskedTextBox1.Text.Length == 0))).Count() > 0)
-            //if (datat.Rows.Cast<DataRow>().AsEnumerable().Select(rr => int.Parse(rr["ID"].ToString()) == int.Parse(comboBox1.SelectedValue.ToString()) && (rr["PASS"].Equals(maskedTextBox1.Text) || (rr.IsNull("PASS") && maskedTextBox1.Text.Length == 0))).First())
             {
                 accept = true;
                 //-----------------------------
@@ -78,8 +90,15 @@ namespace ALBAITAR_Softvet
                 Properties.Settings.Default.Last_login_user_idx = int.Parse(comboBox1.SelectedValue.ToString());
                 Properties.Settings.Default.Last_login_user_full_nme = comboBox1.Text;
                 Properties.Settings.Default.Last_login_is_admin = datat.Rows.Cast<DataRow>().Where(rr => int.Parse(rr["ID"].ToString()) == int.Parse(comboBox1.SelectedValue.ToString()) && (SByte)rr["IS_ADMIN"] == 1).Count() > 0;
+                if (checkBox1.Visible)
+                {
+                    Properties.Settings.Default.Login_Auto_Enter = checkBox1.Checked;
+                    if (checkBox1.Checked)
+                    {
+                        Properties.Settings.Default.Last_entred_date_by_Auto_Enter = DateTime.Now;
+                    }
+                }
                 Properties.Settings.Default.Save();
-                //------------------                
                 Close();
             }
             else
@@ -105,7 +124,6 @@ namespace ALBAITAR_Softvet
         {
             (new Login_Pass_Forgot(comboBox1.SelectedValue.ToString())).ShowDialog();
         }
-
 
     }
 }

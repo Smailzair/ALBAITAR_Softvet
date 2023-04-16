@@ -43,7 +43,7 @@ namespace ALBAITAR_Softvet
             //--------------------------
             if (!groupBox1.Enabled && !groupBox2.Enabled)
             {
-                MessageBox.Show("Votre mot de passe est vide !");
+                MessageBox.Show("Vous n'avez aucune mot de passe à récupirer (Vide)");
                 Close();
             }
         }

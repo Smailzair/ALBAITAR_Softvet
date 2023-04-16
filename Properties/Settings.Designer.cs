@@ -12,7 +12,7 @@ namespace ALBAITAR_Softvet.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -164,6 +164,30 @@ namespace ALBAITAR_Softvet.Properties {
             }
             set {
                 this["Last_login_user_full_nme"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Login_Auto_Enter {
+            get {
+                return ((bool)(this["Login_Auto_Enter"]));
+            }
+            set {
+                this["Login_Auto_Enter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1900-01-01")]
+        public global::System.DateTime Last_entred_date_by_Auto_Enter {
+            get {
+                return ((global::System.DateTime)(this["Last_entred_date_by_Auto_Enter"]));
+            }
+            set {
+                this["Last_entred_date_by_Auto_Enter"] = value;
             }
         }
     }
