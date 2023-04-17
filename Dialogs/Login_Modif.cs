@@ -104,7 +104,7 @@ namespace ALBAITAR_Softvet
                 //----------------
                 if (ready_to_save)
                 {
-                    PreConnection.Excut_Cmd("UPDATE `albaitar_db`.`tb_login_and_users` SET "
+                    PreConnection.Excut_Cmd("UPDATE `tb_login_and_users` SET "
                         + "`USER_NME` = '" + textBox1.Text + "',"
                         + "`USER_FAMNME` = '" + textBox5.Text + "',"
                         + "`SEX` = '" + (radioButton4.Checked ? "M" : "F") + "',"

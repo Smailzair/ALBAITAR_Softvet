@@ -187,7 +187,7 @@ namespace ALBAITAR_Softvet.Resources
                 else //UPDATE
                 {
                     byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
-                    string insert_cmnd = "UPDATE `albaitar_db`.`tb_animaux` SET "
+                    string insert_cmnd = "UPDATE `tb_animaux` SET "
                             + "`NME` = '" + textBox3.Text + "',"
                             + "`NUM_IDENTIF` = '" + textBox2.Text + "',"
                             + "`NUM_PASSPORT` = '" + textBox4.Text + "',"
