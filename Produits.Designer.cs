@@ -78,6 +78,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -96,19 +101,19 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.ID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SLD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OP_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CODE2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NME2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OBSERV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QNT2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MOUV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PROD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SLD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -387,12 +392,12 @@
             // 
             // button8
             // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button8.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button8.FlatAppearance.BorderSize = 0;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(544, 17);
+            this.button8.Location = new System.Drawing.Point(8, 483);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(26, 29);
             this.button8.TabIndex = 11;
@@ -402,12 +407,12 @@
             // 
             // button9
             // 
-            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button9.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
             this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(576, 17);
+            this.button9.Location = new System.Drawing.Point(55, 483);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(26, 29);
             this.button9.TabIndex = 11;
@@ -735,6 +740,12 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.textBox6);
+            this.groupBox2.Controls.Add(this.label22);
+            this.groupBox2.Controls.Add(this.label23);
+            this.groupBox2.Controls.Add(this.panel3);
+            this.groupBox2.Controls.Add(this.panel4);
+            this.groupBox2.Controls.Add(this.label21);
             this.groupBox2.Controls.Add(this.button9);
             this.groupBox2.Controls.Add(this.button8);
             this.groupBox2.Controls.Add(this.panel1);
@@ -745,10 +756,63 @@
             this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(374, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(608, 658);
+            this.groupBox2.Size = new System.Drawing.Size(518, 658);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "--";
+            // 
+            // label22
+            // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label22.AutoSize = true;
+            this.label22.ForeColor = System.Drawing.Color.Maroon;
+            this.label22.Location = new System.Drawing.Point(349, 484);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(61, 16);
+            this.label22.TabIndex = 39;
+            this.label22.Text = "Sortant (-)";
+            // 
+            // label23
+            // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label23.AutoSize = true;
+            this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label23.Location = new System.Drawing.Point(259, 484);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(63, 16);
+            this.label23.TabIndex = 38;
+            this.label23.Text = "Entrant (+)";
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Location = new System.Drawing.Point(328, 483);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(18, 18);
+            this.panel3.TabIndex = 37;
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Location = new System.Drawing.Point(239, 483);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(18, 18);
+            this.panel4.TabIndex = 36;
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.Font = new System.Drawing.Font("Century Gothic", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(387, 483);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(125, 16);
+            this.label21.TabIndex = 35;
+            this.label21.Text = "Total : --";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel1
             // 
@@ -772,7 +836,7 @@
             this.panel1.Controls.Add(this.textBox4);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Location = new System.Drawing.Point(10, 515);
+            this.panel1.Location = new System.Drawing.Point(-80, 515);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(592, 137);
             this.panel1.TabIndex = 34;
@@ -904,6 +968,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(270, 48);
             this.textBox5.TabIndex = 34;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label12
             // 
@@ -984,14 +1049,13 @@
             this.dataGridView2.ColumnHeadersHeight = 30;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID2,
-            this.SLD,
             this.OP_DATE,
             this.CODE2,
             this.NME2,
             this.OBSERV,
             this.QNT2,
-            this.MOUV,
-            this.PROD_ID});
+            this.PROD_ID,
+            this.SLD});
             this.dataGridView2.EnableHeadersVisualStyles = false;
             this.dataGridView2.Location = new System.Drawing.Point(6, 47);
             this.dataGridView2.Name = "dataGridView2";
@@ -999,8 +1063,10 @@
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(596, 463);
+            this.dataGridView2.Size = new System.Drawing.Size(506, 433);
             this.dataGridView2.TabIndex = 33;
+            this.dataGridView2.DataSourceChanged += new System.EventHandler(this.dataGridView2_DataSourceChanged);
+            this.dataGridView2.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView2_RowPrePaint);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
             // ID2
@@ -1010,14 +1076,6 @@
             this.ID2.Name = "ID2";
             this.ID2.ReadOnly = true;
             this.ID2.Visible = false;
-            // 
-            // SLD
-            // 
-            this.SLD.DataPropertyName = "SLD";
-            this.SLD.HeaderText = "SLD";
-            this.SLD.Name = "SLD";
-            this.SLD.ReadOnly = true;
-            this.SLD.Visible = false;
             // 
             // OP_DATE
             // 
@@ -1063,14 +1121,6 @@
             this.QNT2.ReadOnly = true;
             this.QNT2.Width = 55;
             // 
-            // MOUV
-            // 
-            this.MOUV.DataPropertyName = "MOUV";
-            this.MOUV.HeaderText = "MOUV";
-            this.MOUV.Name = "MOUV";
-            this.MOUV.ReadOnly = true;
-            this.MOUV.Visible = false;
-            // 
             // PROD_ID
             // 
             this.PROD_ID.DataPropertyName = "PROD_ID";
@@ -1078,6 +1128,14 @@
             this.PROD_ID.Name = "PROD_ID";
             this.PROD_ID.ReadOnly = true;
             this.PROD_ID.Visible = false;
+            // 
+            // SLD
+            // 
+            this.SLD.DataPropertyName = "SLD";
+            this.SLD.HeaderText = "SLD";
+            this.SLD.Name = "SLD";
+            this.SLD.ReadOnly = true;
+            this.SLD.Visible = false;
             // 
             // label1
             // 
@@ -1091,12 +1149,11 @@
             // 
             // radioButton2
             // 
-            this.radioButton2.AutoSize = true;
             this.radioButton2.Checked = true;
             this.radioButton2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton2.Location = new System.Drawing.Point(194, 21);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(33, 20);
+            this.radioButton2.Size = new System.Drawing.Size(216, 20);
             this.radioButton2.TabIndex = 29;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "--";
@@ -1134,11 +1191,21 @@
             this.label19.TabIndex = 35;
             this.label19.Text = "Mouvement (Quantité) : ";
             // 
+            // textBox6
+            // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox6.Location = new System.Drawing.Point(417, 18);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(95, 21);
+            this.textBox6.TabIndex = 12;
+            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            // 
             // Produits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 682);
+            this.ClientSize = new System.Drawing.Size(904, 682);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.groupBox2);
@@ -1242,13 +1309,18 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SLD;
         private System.Windows.Forms.DataGridViewTextBoxColumn OP_DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn CODE2;
         private System.Windows.Forms.DataGridViewTextBoxColumn NME2;
         private System.Windows.Forms.DataGridViewTextBoxColumn OBSERV;
         private System.Windows.Forms.DataGridViewTextBoxColumn QNT2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MOUV;
         private System.Windows.Forms.DataGridViewTextBoxColumn PROD_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SLD;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TextBox textBox6;
     }
 }

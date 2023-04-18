@@ -1373,7 +1373,7 @@ namespace ALBAITAR_Softvet.Resources
         private void Agenda_Load(object sender, EventArgs e)
         {
             button9.Visible = Ajouter_pour_tout_monde_40001 || Ajouter_pour_juste_lui_40002; //Ajouter
-            button14.Visible = button15.Visible = button10.Visible = Supprimer_pour_tous_40005 || Supprimer_pour_juste_lui_40006; //Supprimer            
+            //button14.Visible = button15.Visible = button10.Visible = Supprimer_pour_tous_40005 || Supprimer_pour_juste_lui_40006; //Supprimer            
             //--------------------------
             radioButton1.Enabled = radioButton2.Enabled = radioButton3.Enabled = button7.Visible = true;
             if (!Ajouter_pour_tout_monde_40001) //Ajouter Event pour tout le monde
