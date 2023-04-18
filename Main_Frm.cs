@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet
@@ -59,6 +60,7 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Clients"].BringToFront();
             }
             Cursor = Cursors.Default;
+            panel1.Visible = false;
 
 
         }
@@ -70,7 +72,7 @@ namespace ALBAITAR_Softvet
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            panel1.Visible = false;
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -85,6 +87,7 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
                 Application.OpenForms["Animaux"].BringToFront();
             }
+            panel1.Visible = false;
 
         }
 
@@ -100,7 +103,7 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Produits"].WindowState = Application.OpenForms["Produits"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Produits"].WindowState;
                 Application.OpenForms["Produits"].BringToFront();
             }
-
+            panel1.Visible = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -115,7 +118,7 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Agenda"].WindowState = Application.OpenForms["Agenda"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Agenda"].WindowState;
                 Application.OpenForms["Agenda"].BringToFront();
             }
-
+            panel1.Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -137,6 +140,34 @@ namespace ALBAITAR_Softvet
                 button7.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50000" && (Int32)QQ[3] == 1).Count() > 0;
             }
 
+        }
+
+        private void button3_MouseEnter(object sender, EventArgs e)
+        {
+            panel1.Visible = true;
+        }
+
+        private void button3_MouseLeave(object sender, EventArgs e)
+        {
+            Rectangle panelBounds = panel1.RectangleToScreen(panel1.ClientRectangle);
+            if (!panelBounds.Contains(MousePosition))
+            {
+                panel1.Visible = false;
+            }
+        }
+
+        private void panel1_MouseLeave(object sender, EventArgs e)
+        {
+            Rectangle panelBounds = panel1.RectangleToScreen(panel1.ClientRectangle);
+            if (!panelBounds.Contains(MousePosition))
+            {
+                panel1.Visible = false;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = !panel1.Visible;
         }
     }
 }
