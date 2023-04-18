@@ -3,6 +3,7 @@ using K4os.Hash.xxHash;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Crypto.Fpe;
 using ServiceStack;
+using ServiceStack.Script;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace ALBAITAR_Softvet.Resources
         bool Is_New_Stock = true;
         DataTable Products;
         DataTable Stock;
+        decimal prev_sld = 0;
         public Produits()
         {
             InitializeComponent();
@@ -37,21 +39,23 @@ namespace ALBAITAR_Softvet.Resources
         private void button1_Click(object sender, EventArgs e)
         {
             double des = 0.00;
-            bool ssq = textBox4.Text.Contains("-");
-            double.TryParse(textBox4.Text.Trim().Replace("-", ""), out des);
-            des = des * (ssq ? -1 : 1) + 1;
-            textBox4.Text = des.ToString("# ##0.00");
+            double.TryParse(textBox4.Text.Trim().Replace(" ",""), out des);
+            des += 1;
+            textBox4.Text = des.ToString("# ##0.00");            
+            textBox4.BackColor = (des + (double)prev_sld) > 0 ? SystemColors.Window : Color.LightCoral;
         }
 
         private void textBox4_Validating(object sender, CancelEventArgs e)
         {
+            //textBox4.TextChanged -= textBox4_TextChanged;
             if (textBox4.Text.Trim() == string.Empty) { textBox4.Text = "0"; }
             textBox4.Text = textBox4.Text.Replace(",", ".");
+            //textBox4.TextChanged += textBox4_TextChanged;
+            //------------------------
             double dd = 0.00;
-            bool sss = textBox4.Text != string.Empty && !double.TryParse(textBox4.Text.Replace("-", ""), out dd);
+            bool sss = !double.TryParse(textBox4.Text, out dd);
             if (sss)
             {
-                e.Cancel = true;
                 textBox4.BackColor = Color.LightCoral;
                 textBox4.SelectAll();
             }
@@ -67,10 +71,10 @@ namespace ALBAITAR_Softvet.Resources
         private void button2_Click(object sender, EventArgs e)
         {
             double des = 0.00;
-            bool ssq = textBox4.Text.Contains("-");
-            double.TryParse(textBox4.Text.Trim().Replace("-", ""), out des);
-            des = des * (ssq ? -1 : 1) - 1;
+            double.TryParse(textBox4.Text.Trim().Replace(" ",""), out des);
+            des -= (des - 1 + (double)prev_sld) >= 0 ? 1 : 0;
             textBox4.Text = des.ToString("# ##0.00");
+            textBox4.BackColor = (des + (double)prev_sld) > 0 ? SystemColors.Window : Color.LightCoral;
 
         }
 
@@ -240,7 +244,7 @@ namespace ALBAITAR_Softvet.Resources
             {
                 prec_select = dataGridView2.SelectedRows[0].Index;
             }
-            Stock = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`OP_DATE`,tb1.`PROD_ID`,tb2.`CODE`,tb2.`NME`,tb1.`OBSERV`,IF(tb1.`QNT_IN` > 0, tb1.`QNT_IN`,tb1.QNT_OUT) AS QNT,IF(tb1.QNT_IN > 0, 2,IF(tb1.QNT_OUT > 0, 1,0)) AS MOUV FROM tb_stock_mouv tb1 LEFT JOIN tb_produits tb2 ON tb2.`ID` = tb1.`PROD_ID`;");
+            Stock = PreConnection.Load_data("SELECT tb1.*,tb2.SLD FROM (SELECT tb1.`ID`,tb1.`OP_DATE`,tb1.`PROD_ID`,tb2.`CODE`,tb2.`NME`,tb1.`OBSERV`,IF(tb1.`QNT_IN` > 0, tb1.`QNT_IN`,tb1.QNT_OUT) AS QNT,IF(tb1.QNT_IN > 0, 2,IF(tb1.QNT_OUT > 0, 1,0)) AS MOUV FROM tb_stock_mouv tb1 LEFT JOIN tb_produits tb2 ON tb2.`ID` = tb1.`PROD_ID`) tb1 LEFT JOIN (SELECT `PROD_ID`,SUM(`QNT_IN`) - SUM(`QNT_OUT`) AS SLD FROM tb_stock_mouv GROUP BY `PROD_ID`) tb2 ON tb1.`PROD_ID` = tb2.`PROD_ID`;");
             dataGridView2.DataSource = Stock;
             if (dataGridView2.Rows.Count > prec_select)
             {
@@ -317,9 +321,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button8_Click(object sender, EventArgs e)
         {
-            textBox4.Focus();
-            pictureBox2.Image = Properties.Resources.NOUVEAU;
-            Is_New_Stock = true;
+            initial_stock_fields();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -389,14 +391,10 @@ namespace ALBAITAR_Softvet.Resources
         private void initial_stock_fields()
         {
             Is_New_Stock = true;
-            label10.Text = label20.Text = "--";
             dateTimePicker1.Value = DateTime.Now;
             textBox5.Clear();
             textBox4.Text = "0";
             comboBox1.SelectedIndex = 0;
-
-
-
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -471,6 +469,44 @@ namespace ALBAITAR_Softvet.Resources
             {
                 label20.Text = "--";
             }
+            load_sld();
+        }
+
+
+
+        private void load_sld()
+        {
+            label10.Visible = label9.Visible = false;
+            label10.Text = "--";
+            prev_sld = 0;
+            if (Stock != null && comboBox3.SelectedValue != null && comboBox3.BackColor == SystemColors.Window)
+            {
+                var edd = Stock.Rows.Cast<DataRow>().Where(FF => int.Parse(FF["PROD_ID"].ToString()) == (int)comboBox3.SelectedValue).FirstOrDefault();
+                if (edd != null)
+                {
+                    label10.Visible = label9.Visible = true;
+                    label10.Text = ((decimal)edd["SLD"]).ToString("# ##0.00");
+                    prev_sld = (decimal)edd["SLD"];
+                }
+            }
+            textBox4_TextChanged(null,null);
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            double des = 0.00;
+            double.TryParse(textBox4.Text.Trim().Replace(" ",""), out des);
+            if (label10.Visible)
+            {
+                label10.Text = (des + (double)prev_sld).ToString("# ##0.00");
+            }
+            textBox4.BackColor = (des + (double)prev_sld) >= 0 ? SystemColors.Window : Color.LightCoral;
+            label10.ForeColor = (des + (double)prev_sld) > 0 ? SystemColors.ControlText : Color.Red;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
