@@ -108,7 +108,6 @@ namespace ALBAITAR_Softvet
 
         private void button5_Click(object sender, EventArgs e)
         {
-
             if (Application.OpenForms["Agenda"] == null)
             {
                 new Agenda().Show();
@@ -168,6 +167,20 @@ namespace ALBAITAR_Softvet
         private void button3_Click(object sender, EventArgs e)
         {
             panel1.Visible = !panel1.Visible;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["Laboratoire"] == null)
+            {
+                new Laboratoire().Show();
+            }
+            else
+            {
+                Application.OpenForms["Laboratoire"].WindowState = Application.OpenForms["Laboratoire"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Laboratoire"].WindowState;
+                Application.OpenForms["Laboratoire"].BringToFront();
+            }
+            panel1.Visible = false;
         }
     }
 }

@@ -305,6 +305,12 @@
     <Compile Include="Agenda.Designer.cs">
       <DependentUpon>Agenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Laboratoire.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Laboratoire.Designer.cs">
+      <DependentUpon>Laboratoire.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Agenda_Filter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -340,6 +346,12 @@
     </Compile>
     <Compile Include="Dialogs\Clients_List.Designer.cs">
       <DependentUpon>Clients_List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Labo\Hemogramme.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Labo\Hemogramme.Designer.cs">
+      <DependentUpon>Hemogramme.cs</DependentUpon>
     </Compile>
     <Compile Include="Statistic.cs">
       <SubType>Form</SubType>
@@ -407,6 +419,9 @@
     <EmbeddedResource Include="Agenda.resx">
       <DependentUpon>Agenda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Laboratoire.resx">
+      <DependentUpon>Laboratoire.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Agenda_Filter.resx">
       <DependentUpon>Agenda_Filter.cs</DependentUpon>
     </EmbeddedResource>
@@ -424,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Clients_List.resx">
       <DependentUpon>Clients_List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Labo\Hemogramme.resx">
+      <DependentUpon>Hemogramme.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Statistic.resx">
       <DependentUpon>Statistic.cs</DependentUpon>
@@ -609,6 +627,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
+    <None Include="Resources\icons8_laboratory_30px.png" />
     <None Include="Resources\icons8_menu_30px.png" />
     <None Include="Resources\icons8_alarm_20px.png" />
     <None Include="Resources\icons8_todo_list_20px copy.png" />

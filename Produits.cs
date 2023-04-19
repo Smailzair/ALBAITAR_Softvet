@@ -428,6 +428,8 @@ namespace ALBAITAR_Softvet.Resources
                         if (ttt) { load_sld(); }
                         textBox5.Text = (string)dataGridView2.SelectedRows[0].Cells["OBSERV"].Value;
                         textBox4.Text = ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value).ToString("# ##0.00");
+                        //-------------------------
+                        textBox5.Enabled = comboBox1.Enabled = comboBox3.Enabled = !textBox5.Text.Equals("Achat (Premier Stock)");                        
                         //----------
                         Is_New_Stock = false;
                     }
@@ -465,7 +467,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             Is_New_Stock = true;
             pictureBox2.Image = Properties.Resources.NOUVEAU;
-
+            textBox5.Enabled = comboBox1.Enabled = comboBox3.Enabled = true;
             dateTimePicker1.Value = DateTime.Now;
             textBox5.Clear();
             textBox4.TextChanged -= textBox4_TextChanged;
@@ -639,10 +641,6 @@ namespace ALBAITAR_Softvet.Resources
 
         }
 
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-            textBox5.Enabled = !textBox5.Text.Equals("Achat (Premier Stock)");
-        }
 
         private void dataGridView2_DataSourceChanged(object sender, EventArgs e)
         {
