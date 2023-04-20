@@ -863,6 +863,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MODIF_003 {
+            get {
+                object obj = ResourceManager.GetObject("MODIF_003", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NOUVEAU {
             get {
                 object obj = ResourceManager.GetObject("NOUVEAU", resourceCulture);
@@ -876,6 +886,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap NOUVEAU_002 {
             get {
                 object obj = ResourceManager.GetObject("NOUVEAU_002", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NOUVEAU_003 {
+            get {
+                object obj = ResourceManager.GetObject("NOUVEAU_003", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

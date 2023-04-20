@@ -294,7 +294,7 @@ namespace ALBAITAR_Softvet.Resources
                 });
 
                 fff = fff.Substring(1);
-                if (MessageBox.Show("Vous étes sures de supprimer [" + dataGridView1.SelectedRows.Count + "] animaux ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Vous étes sures de supprimer [" + dataGridView1.SelectedRows.Count + "] animaux ?\n\nAttention: Tous "+ (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " infos associées seront supprimés (Laboratires, Agenda ...).", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     PreConnection.Excut_Cmd("DELETE FROM tb_animaux WHERE ID IN (" + fff + ");");
                     Load_anims_from_DB();

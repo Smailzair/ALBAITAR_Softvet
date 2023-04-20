@@ -24,6 +24,7 @@ namespace ALBAITAR_Softvet.Resources
     public partial class Laboratoire : Form
     {
         DataTable animaux;
+        public static DataTable labo;
         DataGridViewRow selected_anim = null;
         public Laboratoire()
         {
@@ -56,6 +57,8 @@ namespace ALBAITAR_Softvet.Resources
                                                 + "tb1.`OBSERVATIONS`,"
                                                 + "tb1.`IS_RADIATED`"
                                                 + "FROM `tb_animaux` tb1 LEFT JOIN(SELECT ID, CONCAT(`SEX`, ' ',`FAMNME`, ' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb2.ID = tb1.CLIENT_ID; ");
+            labo = PreConnection.Load_data("SELECT 'hemogramme' AS LABO_NME ,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
+                                         + "SELECT 'bilan_sanguin' AS LABO_NME ,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_bilan_sanguin;");
             dataGridView1.DataSource = animaux;
         }
 
