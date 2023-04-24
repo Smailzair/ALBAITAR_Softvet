@@ -47,6 +47,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LABO_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OBSERV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -63,12 +69,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LABO_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OBSERV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button5 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -85,7 +85,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(316, 14);
+            this.label1.Location = new System.Drawing.Point(239, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(171, 23);
             this.label1.TabIndex = 1;
@@ -284,6 +284,55 @@
             this.dataGridView2.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDown);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // DATE
+            // 
+            this.DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DATE.DataPropertyName = "DATE_TIME";
+            this.DATE.HeaderText = "Date";
+            this.DATE.Name = "DATE";
+            this.DATE.ReadOnly = true;
+            // 
+            // REF
+            // 
+            this.REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.REF.DataPropertyName = "REF";
+            this.REF.HeaderText = "Réf.";
+            this.REF.Name = "REF";
+            this.REF.ReadOnly = true;
+            this.REF.Width = 5;
+            // 
+            // ANIM_ID
+            // 
+            this.ANIM_ID.DataPropertyName = "ANIM_ID";
+            this.ANIM_ID.HeaderText = "ANIM_ID";
+            this.ANIM_ID.Name = "ANIM_ID";
+            this.ANIM_ID.ReadOnly = true;
+            this.ANIM_ID.Visible = false;
+            // 
+            // LABO_NME
+            // 
+            this.LABO_NME.DataPropertyName = "LABO_NME";
+            this.LABO_NME.HeaderText = "LABO_NME";
+            this.LABO_NME.Name = "LABO_NME";
+            this.LABO_NME.ReadOnly = true;
+            this.LABO_NME.Visible = false;
+            // 
+            // OBSERV
+            // 
+            this.OBSERV.DataPropertyName = "OBSERV";
+            this.OBSERV.HeaderText = "OBSERV";
+            this.OBSERV.Name = "OBSERV";
+            this.OBSERV.ReadOnly = true;
+            this.OBSERV.Visible = false;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -382,7 +431,7 @@
             this.DEFAULT_MIN2.Name = "DEFAULT_MIN2";
             this.DEFAULT_MIN2.ReadOnly = true;
             this.DEFAULT_MIN2.Visible = false;
-            this.DEFAULT_MIN2.Width = 18;
+            this.DEFAULT_MIN2.Width = 19;
             // 
             // DEFAULT_MAX2
             // 
@@ -392,7 +441,7 @@
             this.DEFAULT_MAX2.Name = "DEFAULT_MAX2";
             this.DEFAULT_MAX2.ReadOnly = true;
             this.DEFAULT_MAX2.Visible = false;
-            this.DEFAULT_MAX2.Width = 18;
+            this.DEFAULT_MAX2.Width = 19;
             // 
             // DEFAULT_FULL
             // 
@@ -479,55 +528,6 @@
             this.label20.Text = "Déja existe !";
             this.label20.Visible = false;
             // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // DATE
-            // 
-            this.DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DATE.DataPropertyName = "DATE_TIME";
-            this.DATE.HeaderText = "Date";
-            this.DATE.Name = "DATE";
-            this.DATE.ReadOnly = true;
-            // 
-            // REF
-            // 
-            this.REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.REF.DataPropertyName = "REF";
-            this.REF.HeaderText = "Réf.";
-            this.REF.Name = "REF";
-            this.REF.ReadOnly = true;
-            this.REF.Width = 5;
-            // 
-            // ANIM_ID
-            // 
-            this.ANIM_ID.DataPropertyName = "ANIM_ID";
-            this.ANIM_ID.HeaderText = "ANIM_ID";
-            this.ANIM_ID.Name = "ANIM_ID";
-            this.ANIM_ID.ReadOnly = true;
-            this.ANIM_ID.Visible = false;
-            // 
-            // LABO_NME
-            // 
-            this.LABO_NME.DataPropertyName = "LABO_NME";
-            this.LABO_NME.HeaderText = "LABO_NME";
-            this.LABO_NME.Name = "LABO_NME";
-            this.LABO_NME.ReadOnly = true;
-            this.LABO_NME.Visible = false;
-            // 
-            // OBSERV
-            // 
-            this.OBSERV.DataPropertyName = "OBSERV";
-            this.OBSERV.HeaderText = "OBSERV";
-            this.OBSERV.Name = "OBSERV";
-            this.OBSERV.ReadOnly = true;
-            this.OBSERV.Visible = false;
-            // 
             // button5
             // 
             this.button5.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
@@ -578,7 +578,7 @@
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(830, 10);
+            this.button3.Location = new System.Drawing.Point(710, 5);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(36, 38);
             this.button3.TabIndex = 49;
@@ -587,6 +587,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.button1.FlatAppearance.BorderSize = 2;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
@@ -594,7 +595,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.Purple;
             this.button1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_back_to_25px;
-            this.button1.Location = new System.Drawing.Point(4, 4);
+            this.button1.Location = new System.Drawing.Point(767, 5);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(99, 38);

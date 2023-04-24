@@ -33,6 +33,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             if(selected_anim != null)
             {
+                this.ControlBox = false;
                 Hemogramme hemogramme = new Hemogramme(selected_anim);
                 hemogramme.Dock = DockStyle.Fill;
                 this.Controls.Add(hemogramme);

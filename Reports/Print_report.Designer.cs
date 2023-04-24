@@ -43,16 +43,15 @@
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.ShowRefreshButton = false;
             this.reportViewer1.ShowStopButton = false;
-            this.reportViewer1.Size = new System.Drawing.Size(751, 360);
+            this.reportViewer1.Size = new System.Drawing.Size(930, 360);
             this.reportViewer1.TabIndex = 0;
             this.reportViewer1.ReportExport += new Microsoft.Reporting.WinForms.ExportEventHandler(this.reportViewer1_ReportExport);
-            this.reportViewer1.RenderingComplete += new Microsoft.Reporting.WinForms.RenderingCompleteEventHandler(this.reportViewer1_RenderingComplete);
             // 
             // Print_report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(751, 360);
+            this.ClientSize = new System.Drawing.Size(930, 360);
             this.Controls.Add(this.reportViewer1);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

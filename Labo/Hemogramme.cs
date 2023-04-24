@@ -105,6 +105,7 @@ namespace ALBAITAR_Softvet.Labo
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.ParentForm.ControlBox = true;
             Dispose();
         }
 
@@ -415,13 +416,28 @@ namespace ALBAITAR_Softvet.Labo
 
         private void button5_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("PARAM_NME", typeof(string));
-            dt.Columns.Add("PARAM_VAL", typeof(string));
-            //----------------
-            dt.Rows.Add(new object[] { "DATE" , "25/05/2025"});
-            //-------------
-            new Print_report("hemogramme", dt).ShowDialog();
+            if(dataGridView1.Rows.Count > 0 && !label20.Visible)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("PARAM_NME", typeof(string));
+                dt.Columns.Add("PARAM_VAL", typeof(string));
+                //----------------
+                dt.Rows.Add(new object[] { "DATE", dateTimePicker1.Value.ToString("dd/MM/yyyy") });
+                dt.Rows.Add(new object[] { "ANIM_NME", label3.Text });
+                dt.Rows.Add(new object[] { "PRIOR", label4.Text });
+                dt.Rows.Add(new object[] { "ESPECE", label6.Text });
+                dt.Rows.Add(new object[] { "RACE", label8.Text });
+                dt.Rows.Add(new object[] { "SEX", label13.Text });
+                dt.Rows.Add(new object[] { "DATE_NISS", label14.Text });
+                dt.Rows.Add(new object[] { "REF", textBox3.Text });
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    dt.Rows.Add(new object[] { "HEM_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["VALUE2"].Value.ToString() : "" });
+                }
+                //-------------
+                new Print_report("hemogramme", dt).ShowDialog();
+            }
+            
         }
     }
 }
