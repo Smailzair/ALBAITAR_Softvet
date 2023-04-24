@@ -1,13 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using Mysqlx.Prepare;
-using Org.BouncyCastle.Utilities.Collections;
-using Org.BouncyCastle.Utilities.Zlib;
-using ServiceStack.OrmLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;

@@ -201,6 +201,16 @@ namespace ALBAITAR_Softvet.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] hemogramme {
+            get {
+                object obj = ResourceManager.GetObject("hemogramme", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap icons8_access_denied_30px {
@@ -493,6 +503,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_lock_30px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_lock_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_menu_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_menu_30px", resourceCulture);
@@ -586,6 +606,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap icons8_person_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_person_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_print_25px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_print_25px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

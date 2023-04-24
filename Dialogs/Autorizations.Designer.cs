@@ -36,11 +36,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AUTOR_TEXT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FORM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VALUES = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -51,6 +46,11 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AUTOR_TEXT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FORM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VALUES = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,53 +124,6 @@
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // CODE
-            // 
-            this.CODE.DataPropertyName = "CODE";
-            this.CODE.HeaderText = "CODE";
-            this.CODE.Name = "CODE";
-            this.CODE.ReadOnly = true;
-            this.CODE.Visible = false;
-            // 
-            // AUTOR_TEXT
-            // 
-            this.AUTOR_TEXT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.AUTOR_TEXT.DataPropertyName = "AUTOR_TEXT";
-            this.AUTOR_TEXT.HeaderText = "Objet";
-            this.AUTOR_TEXT.Name = "AUTOR_TEXT";
-            this.AUTOR_TEXT.ReadOnly = true;
-            this.AUTOR_TEXT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // FORM_NME
-            // 
-            this.FORM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-            this.FORM_NME.DataPropertyName = "FORM_NME";
-            this.FORM_NME.HeaderText = "Fenêtre";
-            this.FORM_NME.Name = "FORM_NME";
-            this.FORM_NME.ReadOnly = true;
-            this.FORM_NME.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.FORM_NME.Width = 5;
-            // 
-            // VALUES
-            // 
-            this.VALUES.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.VALUES.DataPropertyName = "VALUES";
-            this.VALUES.HeaderText = "Autorisation";
-            this.VALUES.Name = "VALUES";
-            this.VALUES.ReadOnly = true;
-            this.VALUES.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.VALUES.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.VALUES.Visible = false;
-            this.VALUES.Width = 94;
             // 
             // textBox1
             // 
@@ -303,6 +256,53 @@
             this.label14.TabIndex = 33;
             this.label14.Text = "(Vous n\'avez pas le droit)";
             // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // CODE
+            // 
+            this.CODE.DataPropertyName = "CODE";
+            this.CODE.HeaderText = "CODE";
+            this.CODE.Name = "CODE";
+            this.CODE.ReadOnly = true;
+            this.CODE.Visible = false;
+            // 
+            // AUTOR_TEXT
+            // 
+            this.AUTOR_TEXT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.AUTOR_TEXT.DataPropertyName = "AUTOR_TEXT";
+            this.AUTOR_TEXT.HeaderText = "Objet";
+            this.AUTOR_TEXT.Name = "AUTOR_TEXT";
+            this.AUTOR_TEXT.ReadOnly = true;
+            this.AUTOR_TEXT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // FORM_NME
+            // 
+            this.FORM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FORM_NME.DataPropertyName = "FORM_NME";
+            this.FORM_NME.HeaderText = "Fenêtre";
+            this.FORM_NME.Name = "FORM_NME";
+            this.FORM_NME.ReadOnly = true;
+            this.FORM_NME.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.FORM_NME.Width = 52;
+            // 
+            // VALUES
+            // 
+            this.VALUES.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.VALUES.DataPropertyName = "VALUES";
+            this.VALUES.HeaderText = "Autorisation";
+            this.VALUES.Name = "VALUES";
+            this.VALUES.ReadOnly = true;
+            this.VALUES.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.VALUES.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.VALUES.Visible = false;
+            this.VALUES.Width = 93;
+            // 
             // Autorizations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -353,11 +353,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn CODE;
         private System.Windows.Forms.DataGridViewTextBoxColumn AUTOR_TEXT;
         private System.Windows.Forms.DataGridViewTextBoxColumn FORM_NME;
         private System.Windows.Forms.DataGridViewCheckBoxColumn VALUES;
-        private System.Windows.Forms.Label label14;
     }
 }

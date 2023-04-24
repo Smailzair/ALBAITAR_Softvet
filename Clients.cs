@@ -1,5 +1,4 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
-using Org.BouncyCastle.Crypto.Fpe;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

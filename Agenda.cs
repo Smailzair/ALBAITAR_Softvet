@@ -1,8 +1,6 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
-using Microsoft.Office.Core;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
-using Org.BouncyCastle.Utilities;
 using ServiceStack;
 using System;
 using System.Collections.Generic;

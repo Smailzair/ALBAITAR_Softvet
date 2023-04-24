@@ -1,8 +1,6 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Labo;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Crypto.Fpe;
-using Org.BouncyCastle.Utilities.Encoders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,7 +23,7 @@ namespace ALBAITAR_Softvet.Resources
     {
         DataTable animaux;
         public static DataTable labo;
-        DataGridViewRow selected_anim = null;
+        static DataGridViewRow selected_anim = null;
         public Laboratoire()
         {
             InitializeComponent();
@@ -57,10 +55,23 @@ namespace ALBAITAR_Softvet.Resources
                                                 + "tb1.`OBSERVATIONS`,"
                                                 + "tb1.`IS_RADIATED`"
                                                 + "FROM `tb_animaux` tb1 LEFT JOIN(SELECT ID, CONCAT(`SEX`, ' ',`FAMNME`, ' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb2.ID = tb1.CLIENT_ID; ");
-            labo = PreConnection.Load_data("SELECT 'hemogramme' AS LABO_NME ,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
-                                         + "SELECT 'bilan_sanguin' AS LABO_NME ,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_bilan_sanguin;");
+            load_labos_data();
             dataGridView1.DataSource = animaux;
         }
+
+        static public void load_labos_data()
+        {
+            labo = PreConnection.Load_data("SELECT 'Hemogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
+                                         + "SELECT 'Bilan Sanguin' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_bilan_sanguin;");
+
+            Lab_Main_Historique.DataSource = labo;
+            if(selected_anim != null)
+            {
+                ((DataTable)Lab_Main_Historique.DataSource).DefaultView.RowFilter = "ANIM_ID = " + selected_anim.Cells["ID"].Value;
+            }
+            
+        }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -79,6 +90,9 @@ namespace ALBAITAR_Softvet.Resources
                 label13.Text = (string)dataGridView1.SelectedRows[0].Cells["SEXE"].Value;
                 label14.Text = dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value != DBNull.Value ? ((DateTime)dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value).ToString("d") : "--";
                 textBox2.Text = (string)dataGridView1.SelectedRows[0].Cells["OBSERVATIONS"].Value;
+                //------------------------              
+                ((DataTable)Lab_Main_Historique.DataSource).DefaultView.RowFilter = "ANIM_ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value;
+                
             }
             else
             {

@@ -1,5 +1,7 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Windows.Forms;
 using System;
 using System.Data;
 using System.Diagnostics;
@@ -9,7 +11,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet
@@ -61,6 +62,7 @@ namespace ALBAITAR_Softvet
             }
             Cursor = Cursors.Default;
             panel1.Visible = false;
+            
 
 
         }
@@ -88,6 +90,7 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Animaux"].BringToFront();
             }
             panel1.Visible = false;
+            
 
         }
 
@@ -104,6 +107,7 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Produits"].BringToFront();
             }
             panel1.Visible = false;
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -118,6 +122,7 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Agenda"].BringToFront();
             }
             panel1.Visible = false;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -181,7 +186,22 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Laboratoire"].BringToFront();
             }
             panel1.Visible = false;
+            
         }
+
+        private void panel1_VisibleChanged(object sender, EventArgs e)
+        {
+            if(panel1.Visible)
+            {
+                button9.Focus();
+            }
+            else
+            {
+                button3.Select();
+            }
+        }
+
+
     }
 }
 

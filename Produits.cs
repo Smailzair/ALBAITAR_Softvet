@@ -1,9 +1,6 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
-using K4os.Hash.xxHash;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Crypto.Fpe;
 using ServiceStack;
-using ServiceStack.Script;
 using System;
 using System.Collections;
 using System.Collections.Generic;

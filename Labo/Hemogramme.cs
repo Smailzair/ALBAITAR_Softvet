@@ -6,9 +6,11 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Xamarin.Forms.Internals;
 
 namespace ALBAITAR_Softvet.Labo
 {
@@ -98,6 +100,7 @@ namespace ALBAITAR_Softvet.Labo
             new_initial_tbl.Rows[14]["DEFAULT_FULL"] = "0.15-1.35";
             dataGridView1.DataSource = new_initial_tbl;
             //------------------------------
+            button3.PerformClick();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -116,12 +119,27 @@ namespace ALBAITAR_Softvet.Labo
             label14.Text = selected_animm.Cells["NISS_DATE"].Value != DBNull.Value ? ((DateTime)selected_animm.Cells["NISS_DATE"].Value).ToString("d") : "--";
             textBox2.Text = (string)selected_animm.Cells["OBSERVATIONS"].Value;
             //-------------------------
-            if(Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && (string)P["LABO_NME"] == "Hemogramme").Count() > 0)
+            Load_histor();
+
+
+        }
+
+        private void Load_histor()
+        {
+            if (Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && (string)P["LABO_NME"] == "Hemogramme").Count() > 0)
             {
-                lab_histor = Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && (string)P["LABO_NME"] == "hemogramme").CopyToDataTable();
+                lab_histor = Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && (string)P["LABO_NME"] == "Hemogramme").CopyToDataTable();                
                 dataGridView2.DataSource = lab_histor;
             }
-            
+            else
+            {
+                if(dataGridView2.DataSource != null)
+                {
+                    DataTable dt = ((DataTable)dataGridView2.DataSource).Clone();
+                    dataGridView2.DataSource = dt;
+                }
+                
+            }
         }
 
         private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -203,12 +221,22 @@ namespace ALBAITAR_Softvet.Labo
         {
             bool ready = true;
             bool tmpp = true;
+            int tt = 0;
+            int null_nb = 0;
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 tmpp &= dataGridView1.Rows[i].Cells["VALUE2"].Style.BackColor != Color.LightCoral;
+                //--------
+                tt++;
+                null_nb += dataGridView1.Rows[i].Cells["VALUE2"].Value == DBNull.Value ? 1 : 0;
             }
             ready &= !label20.Visible;
             ready &= textBox3.BackColor != Color.LightCoral;
+            if(tt == null_nb)
+            {
+                ready = false;
+                MessageBox.Show("Il n'y a pas de données !","Vide :",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            }
             if (!tmpp && ready)
             {
                 ready = MessageBox.Show("Il y a des erreurs dans votre bilan,\n\nVoulez-vous continuer?\n","Attention :",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes;
@@ -216,8 +244,8 @@ namespace ALBAITAR_Softvet.Labo
             if (ready)
             {
                 if (is_new)
-                {
-                    PreConnection.Excut_Cmd("INSERT INTO `tb_labo_hemogramme`"
+                {   
+                    PreConnection.Excut_Cmd("INSERT INTO `tb_labo_hemogramme` "
                                           + "(`REF`,"
                                           + "`DATE_TIME`,"
                                           + "`ANIM_ID`,"
@@ -237,31 +265,52 @@ namespace ALBAITAR_Softvet.Labo
                                           + "`Basophiles`,"
                                           + "`Lymphocytes`,"
                                           + "`Monocytes`)"
-                                          + "VALUES"
-                                          + "('"+textBox3.Text+"'," //REF
-                                          + "<{DATE_TIME: }>," //DATE_TIME
-                                          + "<{ANIM_ID: }>," //ANIM_ID
-                                          + "<{OBSERV: }>," //OBSERV
-                                          + "<{Hematies: }>," //Hematies
-                                          + "<{Hemoglobine: }>," //Hemoglobine
-                                          + "<{Hematocrite: }>," //Hematocrite
-                                          + "<{VGM: }>," //VGM
-                                          + "<{CCMH: }>," //CCMH
-                                          + "<{TCMH: }>," //TCMH
-                                          + "<{Reticulocytes: }>," //Reticulocytes
-                                          + "<{Plaquettes: }>," //Plaquettes
-                                          + "<{Leucocytes: }>," //Leucocytes
-                                          + "<{Granulocytes: }>," // Granulocytes
-                                          + "<{Neutrophiles: }>," //Neutrophiles
-                                          + "<{Eosinophiles: }>," //Eosinophiles
-                                          + "<{Basophiles: }>," //Basophiles
-                                          + "<{Lymphocytes: }>," //Lymphocytes
-                                          + "<{Monocytes: }>);"); //Monocytes
+                                          + " VALUES "
+                                          + "('" + textBox3.Text + "'," //REF
+                                          + "'"+dateTimePicker1.Value.ToString("yyyy-MM-dd")+"'," //DATE_TIME
+                                          + selected_animm.Cells["ID"].Value + "," //ANIM_ID
+                                          + "'"+textBox1.Text+"'," //OBSERV
+                                          + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value : "NULL") + "," //Hematies
+                                          + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value : "NULL") + "," //Hemoglobine
+                                          + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value : "NULL") + "," //Hematocrite
+                                          + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value : "NULL") + "," //VGM
+                                          + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value : "NULL") + "," //CCMH
+                                          + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value : "NULL") + "," //TCMH
+                                          + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value : "NULL") + "," //Reticulocytes
+                                          + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value : "NULL") + "," //Plaquettes
+                                          + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value : "NULL") + "," //Leucocytes
+                                          + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value : "NULL") + "," // Granulocytes
+                                          + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value : "NULL") + "," //Neutrophiles
+                                          + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value : "NULL") + "," //Eosinophiles
+                                          + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value : "NULL") + "," //Basophiles
+                                          + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value : "NULL") + "," //Lymphocytes
+                                          + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value : "NULL") + ");"); //Monocytes
                 }
                 else
                 {
-
+                    PreConnection.Excut_Cmd("UPDATE `tb_labo_hemogramme` SET "
+                                          + "`REF` = '"+ textBox3.Text + "',"
+                                          + "`DATE_TIME` = '"+dateTimePicker1.Value.ToString("yyyy-MM-dd")+"',"
+                                          + "`OBSERV` = '"+textBox1.Text+"',"
+                                          + "`Hematies` = "+ (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`Hemoglobine` = " + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`Hematocrite` = " + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`VGM` = " + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`CCMH` = " + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`TCMH` = " + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`Reticulocytes` = " + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`Plaquettes` = " + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`Leucocytes` = " + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`Granulocytes` = " + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`Neutrophiles` = " + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`Eosinophiles` = " + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`Basophiles` = " + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`Lymphocytes` = " + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value : "NULL") + ","
+                                          + "`Monocytes` = " + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value : "NULL")
+                                          + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value +";");
                 }
+                Laboratoire.load_labos_data();
+                Load_histor();
             }
         }
 
@@ -294,6 +343,85 @@ namespace ALBAITAR_Softvet.Labo
                 textBox3.Text = ref_tmp = "HEM_" + dateTimePicker1.Value.ToString("ddMMyyyy") + "_" + selected_animm.Cells["ID"].Value;
             }
             
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            {
+                dataGridView1.CurrentCell.Value = DBNull.Value;
+            }
+        }
+
+        private void dataGridView2_SelectionChanged(object sender, EventArgs e)
+        {
+            if(dataGridView2.SelectedRows.Count > 0)
+            {
+                DataTable dt = PreConnection.Load_data("SELECT * FROM tb_labo_hemogramme WHERE ID = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        is_new = false;
+                        pictureBox1.Image = Properties.Resources.MODIF_003;
+                        ref_tmp = string.Empty;
+                        dateTimePicker1.Value = (DateTime)dt.Rows[0]["DATE_TIME"];
+                        textBox3.Text = (string)dt.Rows[0]["REF"];
+                        textBox1.Text = (string)dt.Rows[0]["OBSERV"];
+                        for (int f = 5; f < dt.Columns.Count; f++)
+                        {
+                            dataGridView1.Rows[f - 5].Cells["VALUE2"].Value = dt.Rows[0][f];
+                        }
+                    }
+                    else
+                    {
+                        button3.PerformClick();
+                    }
+                }
+                else
+                {
+                    button3.PerformClick();
+                }
+            }
+            else
+            {
+                button3.PerformClick();
+            }
+            
+        }
+
+        private void dataGridView2_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dataGridView2.Rows[e.RowIndex].Selected)
+            {
+                dataGridView2_SelectionChanged(null, null);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if(dataGridView2.SelectedRows.Count > 0) { 
+                if(MessageBox.Show("Sures de supprimer ("+dataGridView2.SelectedRows.Count+") bilan ?","Confirmation : ",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string dq = "";
+                    dataGridView2.SelectedRows.Cast<DataGridViewRow>().ForEach(row => { dq += "," + row.Cells["ID"].Value; });
+                    dq = dq.Substring(1, dq.Length - 1);
+                    PreConnection.Excut_Cmd("DELETE FROM tb_labo_hemogramme WHERE ID IN ("+dq+");");
+                    Laboratoire.load_labos_data();
+                    Load_histor();
+                }
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("PARAM_NME", typeof(string));
+            dt.Columns.Add("PARAM_VAL", typeof(string));
+            //----------------
+            dt.Rows.Add(new object[] { "DATE" , "25/05/2025"});
+            //-------------
+            new Print_report("hemogramme", dt).ShowDialog();
         }
     }
 }

@@ -47,11 +47,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LABO_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OBSERV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -65,14 +60,21 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label18 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LABO_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OBSERV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button5 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -83,7 +85,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(266, 14);
+            this.label1.Location = new System.Drawing.Point(316, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(171, 23);
             this.label1.TabIndex = 1;
@@ -266,6 +268,7 @@
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.ColumnHeadersVisible = false;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
             this.DATE,
             this.REF,
             this.ANIM_ID,
@@ -278,47 +281,8 @@
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView2.Size = new System.Drawing.Size(236, 231);
             this.dataGridView2.TabIndex = 23;
-            // 
-            // DATE
-            // 
-            this.DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DATE.DataPropertyName = "DATE";
-            this.DATE.HeaderText = "Date";
-            this.DATE.Name = "DATE";
-            this.DATE.ReadOnly = true;
-            // 
-            // REF
-            // 
-            this.REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.REF.DataPropertyName = "REF";
-            this.REF.HeaderText = "Réf.";
-            this.REF.Name = "REF";
-            this.REF.ReadOnly = true;
-            this.REF.Width = 5;
-            // 
-            // ANIM_ID
-            // 
-            this.ANIM_ID.DataPropertyName = "ANIM_ID";
-            this.ANIM_ID.HeaderText = "ANIM_ID";
-            this.ANIM_ID.Name = "ANIM_ID";
-            this.ANIM_ID.ReadOnly = true;
-            this.ANIM_ID.Visible = false;
-            // 
-            // LABO_NME
-            // 
-            this.LABO_NME.DataPropertyName = "LABO_NME";
-            this.LABO_NME.HeaderText = "LABO_NME";
-            this.LABO_NME.Name = "LABO_NME";
-            this.LABO_NME.ReadOnly = true;
-            this.LABO_NME.Visible = false;
-            // 
-            // OBSERV
-            // 
-            this.OBSERV.DataPropertyName = "OBSERV";
-            this.OBSERV.HeaderText = "OBSERV";
-            this.OBSERV.Name = "OBSERV";
-            this.OBSERV.ReadOnly = true;
-            this.OBSERV.Visible = false;
+            this.dataGridView2.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDown);
+            this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
             // label2
             // 
@@ -381,6 +345,7 @@
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
             // PARAM_NME2
             // 
@@ -417,7 +382,7 @@
             this.DEFAULT_MIN2.Name = "DEFAULT_MIN2";
             this.DEFAULT_MIN2.ReadOnly = true;
             this.DEFAULT_MIN2.Visible = false;
-            this.DEFAULT_MIN2.Width = 19;
+            this.DEFAULT_MIN2.Width = 18;
             // 
             // DEFAULT_MAX2
             // 
@@ -427,7 +392,7 @@
             this.DEFAULT_MAX2.Name = "DEFAULT_MAX2";
             this.DEFAULT_MAX2.ReadOnly = true;
             this.DEFAULT_MAX2.Visible = false;
-            this.DEFAULT_MAX2.Width = 19;
+            this.DEFAULT_MAX2.Width = 18;
             // 
             // DEFAULT_FULL
             // 
@@ -480,6 +445,101 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(163, 107);
             this.textBox1.TabIndex = 58;
+            // 
+            // label19
+            // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(720, 203);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(33, 15);
+            this.label19.TabIndex = 60;
+            this.label19.Text = "Réf. :";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox3.Location = new System.Drawing.Point(710, 221);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(163, 21);
+            this.textBox3.TabIndex = 61;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            // 
+            // label20
+            // 
+            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label20.Location = new System.Drawing.Point(799, 203);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(74, 15);
+            this.label20.TabIndex = 62;
+            this.label20.Text = "Déja existe !";
+            this.label20.Visible = false;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // DATE
+            // 
+            this.DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DATE.DataPropertyName = "DATE_TIME";
+            this.DATE.HeaderText = "Date";
+            this.DATE.Name = "DATE";
+            this.DATE.ReadOnly = true;
+            // 
+            // REF
+            // 
+            this.REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.REF.DataPropertyName = "REF";
+            this.REF.HeaderText = "Réf.";
+            this.REF.Name = "REF";
+            this.REF.ReadOnly = true;
+            this.REF.Width = 5;
+            // 
+            // ANIM_ID
+            // 
+            this.ANIM_ID.DataPropertyName = "ANIM_ID";
+            this.ANIM_ID.HeaderText = "ANIM_ID";
+            this.ANIM_ID.Name = "ANIM_ID";
+            this.ANIM_ID.ReadOnly = true;
+            this.ANIM_ID.Visible = false;
+            // 
+            // LABO_NME
+            // 
+            this.LABO_NME.DataPropertyName = "LABO_NME";
+            this.LABO_NME.HeaderText = "LABO_NME";
+            this.LABO_NME.Name = "LABO_NME";
+            this.LABO_NME.ReadOnly = true;
+            this.LABO_NME.Visible = false;
+            // 
+            // OBSERV
+            // 
+            this.OBSERV.DataPropertyName = "OBSERV";
+            this.OBSERV.HeaderText = "OBSERV";
+            this.OBSERV.Name = "OBSERV";
+            this.OBSERV.ReadOnly = true;
+            this.OBSERV.Visible = false;
+            // 
+            // button5
+            // 
+            this.button5.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(163, 193);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(26, 29);
+            this.button5.TabIndex = 63;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // pictureBox1
             // 
@@ -555,39 +615,7 @@
             this.button4.Size = new System.Drawing.Size(26, 29);
             this.button4.TabIndex = 50;
             this.button4.UseVisualStyleBackColor = true;
-            // 
-            // label19
-            // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(720, 203);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(33, 15);
-            this.label19.TabIndex = 60;
-            this.label19.Text = "Réf. :";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Location = new System.Drawing.Point(710, 221);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(163, 21);
-            this.textBox3.TabIndex = 61;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
-            // label20
-            // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label20.Location = new System.Drawing.Point(799, 203);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(74, 15);
-            this.label20.TabIndex = 62;
-            this.label20.Text = "Déja existe !";
-            this.label20.Visible = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Hemogramme
             // 
@@ -612,6 +640,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button4);
+            this.Controls.Add(this.button5);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(877, 459);
@@ -668,10 +697,12 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn REF;
         private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn LABO_NME;
         private System.Windows.Forms.DataGridViewTextBoxColumn OBSERV;
+        private System.Windows.Forms.Button button5;
     }
 }
