@@ -430,6 +430,7 @@ namespace ALBAITAR_Softvet.Labo
                 dt.Rows.Add(new object[] { "SEX", label13.Text });
                 dt.Rows.Add(new object[] { "DATE_NISS", label14.Text });
                 dt.Rows.Add(new object[] { "REF", textBox3.Text });
+                dt.Rows.Add(new object[] { "OBSERV", textBox1.Text });
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     dt.Rows.Add(new object[] { "HEM_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["VALUE2"].Value.ToString() : "" });
