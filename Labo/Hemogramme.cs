@@ -110,15 +110,16 @@ namespace ALBAITAR_Softvet.Labo
         }
 
         private void Hemogramme_Load(object sender, EventArgs e)
-        {            
+        {
             
+            //--------En-tete
             label3.Text = (string)selected_animm.Cells["NME"].Value;
             label4.Text = (string)selected_animm.Cells["CLIENT_FULL_NME"].Value;
             label6.Text = (string)selected_animm.Cells["ESPECE"].Value;
             label8.Text = (string)selected_animm.Cells["RACE"].Value;
             label13.Text = (string)selected_animm.Cells["SEXE"].Value;
             label14.Text = selected_animm.Cells["NISS_DATE"].Value != DBNull.Value ? ((DateTime)selected_animm.Cells["NISS_DATE"].Value).ToString("d") : "--";
-            textBox2.Text = (string)selected_animm.Cells["OBSERVATIONS"].Value;
+            textBox2.Text = (string)selected_animm.Cells["OBSERVATIONS"].Value;                     
             //-------------------------
             Load_histor();
 
@@ -189,9 +190,10 @@ namespace ALBAITAR_Softvet.Labo
         {
             is_new = true;
             pictureBox1.Image = Properties.Resources.NOUVEAU_003;
+            button5.Visible = false;
             dateTimePicker1.Value = DateTime.Now;
             textBox1.Clear();
-            textBox3.Text = ref_tmp = "HEM_" + DateTime.Now.ToString("ddMMyyyy") + "_" + selected_animm.Cells["ID"].Value;            
+            textBox3.Text = ref_tmp = "HEM_" + DateTime.Now.ToString("ddMMyyyy") + "_" + DateTime.Now.ToString("HHffff") + "_" + selected_animm.Cells["ID"].Value;            
             //label20.Visible = false;
             for(int i = 0;  i < dataGridView1.Rows.Count; i++)
             {
@@ -220,6 +222,7 @@ namespace ALBAITAR_Softvet.Labo
 
         private void button2_Click(object sender, EventArgs e)
         {
+            int current_row_to_select = is_new ? -1 : dataGridView2.SelectedRows[0].Index;
             bool ready = true;
             bool tmpp = true;
             int tt = 0;
@@ -310,8 +313,14 @@ namespace ALBAITAR_Softvet.Labo
                                           + "`Monocytes` = " + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value : "NULL")
                                           + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value +";");
                 }
-                Laboratoire.load_labos_data();
+                //--------
+                Laboratoire.labo = PreConnection.Load_data("SELECT 'Hemogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
+                                         + "SELECT 'Bilan Sanguin' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_bilan_sanguin;");
+                Laboratoire.make_historic_refesh = true;
+                //------------
                 Load_histor();
+                dataGridView2.ClearSelection();
+                dataGridView2.Rows[current_row_to_select == -1 ? dataGridView2.Rows.Count- 1 : current_row_to_select].Selected = true;
             }
         }
 
@@ -341,7 +350,7 @@ namespace ALBAITAR_Softvet.Labo
         {
             if(textBox3.Text == ref_tmp)
             {
-                textBox3.Text = ref_tmp = "HEM_" + dateTimePicker1.Value.ToString("ddMMyyyy") + "_" + selected_animm.Cells["ID"].Value;
+                textBox3.Text = ref_tmp = "HEM_" + DateTime.Now.ToString("ddMMyyyy") + "_" + DateTime.Now.ToString("HHffff") + "_" + selected_animm.Cells["ID"].Value;
             }
             
         }
@@ -365,6 +374,7 @@ namespace ALBAITAR_Softvet.Labo
                     {
                         is_new = false;
                         pictureBox1.Image = Properties.Resources.MODIF_003;
+                        button5.Visible = true;
                         ref_tmp = string.Empty;
                         dateTimePicker1.Value = (DateTime)dt.Rows[0]["DATE_TIME"];
                         textBox3.Text = (string)dt.Rows[0]["REF"];
@@ -408,7 +418,11 @@ namespace ALBAITAR_Softvet.Labo
                     dataGridView2.SelectedRows.Cast<DataGridViewRow>().ForEach(row => { dq += "," + row.Cells["ID"].Value; });
                     dq = dq.Substring(1, dq.Length - 1);
                     PreConnection.Excut_Cmd("DELETE FROM tb_labo_hemogramme WHERE ID IN ("+dq+");");
-                    Laboratoire.load_labos_data();
+                    //--------
+                    Laboratoire.labo = PreConnection.Load_data("SELECT 'Hemogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
+                                             + "SELECT 'Bilan Sanguin' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_bilan_sanguin;");
+                    Laboratoire.make_historic_refesh = true;
+                    //------------
                     Load_histor();
                 }
             }
@@ -431,6 +445,18 @@ namespace ALBAITAR_Softvet.Labo
                 dt.Rows.Add(new object[] { "DATE_NISS", label14.Text });
                 dt.Rows.Add(new object[] { "REF", textBox3.Text });
                 dt.Rows.Add(new object[] { "OBSERV", textBox1.Text });
+
+
+
+                dt.Rows.Add(new object[] { "CLIENT_NUM_CNI", (string)selected_animm.Cells["CLIENT_NUM_CNI"].Value });
+                dt.Rows.Add(new object[] { "CLIENT_ADRESS", (string)selected_animm.Cells["CLIENT_ADRESS"].Value });
+                dt.Rows.Add(new object[] { "CLIENT_CITY", (string)selected_animm.Cells["CLIENT_CITY"].Value });
+                dt.Rows.Add(new object[] { "CLIENT_WILAYA", (string)selected_animm.Cells["CLIENT_WILAYA"].Value });
+                dt.Rows.Add(new object[] { "CLIENT_NUM_PHONE", (string)selected_animm.Cells["CLIENT_NUM_PHONE"].Value });
+                dt.Rows.Add(new object[] { "CLIENT_EMAIL", (string)selected_animm.Cells["CLIENT_EMAIL"].Value });
+
+
+
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     dt.Rows.Add(new object[] { "HEM_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["VALUE2"].Value.ToString() : "" });

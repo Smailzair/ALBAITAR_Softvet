@@ -606,6 +606,9 @@
   <ItemGroup>
     <Content Include="icons8_veterinarian_male.ico" />
     <None Include="Resources\icons8_lock_30px.png" />
+    <None Include="Resources\icons8_microsoft_excel_20px.png" />
+    <None Include="Resources\icons8_microsoft_word_20px.png" />
+    <None Include="Resources\icons8_pdf_20px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

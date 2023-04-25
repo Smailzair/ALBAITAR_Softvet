@@ -518,9 +518,6 @@ namespace ALBAITAR_Softvet.Resources
             if (infos.Rows.Count > 0 && dtt > DateTime.Parse("01/01/1999"))
             {
                 int y = 11;
-                int idx = -1;
-                Image img = null;
-                bool exist = false;
                 infos.Rows.Cast<DataRow>().Where(EE => dtt >= (DateTime)EE["START_TIME"] && dtt <= (DateTime)EE["END_TIME"]).ToList().ForEach(ZZ =>
                 {
                     y++;

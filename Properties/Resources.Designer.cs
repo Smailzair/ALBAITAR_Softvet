@@ -523,6 +523,26 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_microsoft_excel_20px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_microsoft_excel_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_microsoft_word_20px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_microsoft_word_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_minus_25px {
             get {
                 object obj = ResourceManager.GetObject("icons8_minus_25px", resourceCulture);
@@ -566,6 +586,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap icons8_opened_folder_25px {
             get {
                 object obj = ResourceManager.GetObject("icons8_opened_folder_25px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_pdf_20px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_pdf_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

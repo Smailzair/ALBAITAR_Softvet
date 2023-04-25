@@ -21,6 +21,7 @@ namespace ALBAITAR_Softvet.Resources
 {
     public partial class Laboratoire : Form
     {
+        public static bool make_historic_refesh = false;
         DataTable animaux;
         public static DataTable labo;
         static DataGridViewRow selected_anim = null;
@@ -45,30 +46,50 @@ namespace ALBAITAR_Softvet.Resources
 
         private void Laboratoire_Load(object sender, EventArgs e)
         {
+            //animaux = PreConnection.Load_data("SELECT tb1.`ID`,"
+            //                                    + "tb1.`NME`,"
+            //                                    + "tb1.`CLIENT_ID`,"
+            //                                    + "tb2.`CLIENT_FULL_NME`,"
+            //                                    + "tb1.`ESPECE`,"
+            //                                    + "tb1.`RACE`,"
+            //                                    + "tb1.`SEXE`,"
+            //                                    + "tb1.`NISS_DATE`,"
+            //                                    + "tb1.`OBSERVATIONS`,"
+            //                                    + "tb1.`IS_RADIATED`"
+            //                                    + "FROM `tb_animaux` tb1 LEFT JOIN(SELECT ID, CONCAT(`SEX`, ' ',`FAMNME`, ' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb2.ID = tb1.CLIENT_ID; ");
             animaux = PreConnection.Load_data("SELECT tb1.`ID`,"
-                                                + "tb1.`NME`,"
-                                                + "tb1.`CLIENT_ID`,"
-                                                + "tb2.`CLIENT_FULL_NME`,"
-                                                + "tb1.`ESPECE`,"
-                                                + "tb1.`RACE`,"
-                                                + "tb1.`SEXE`,"
-                                                + "tb1.`NISS_DATE`,"
-                                                + "tb1.`OBSERVATIONS`,"
-                                                + "tb1.`IS_RADIATED`"
-                                                + "FROM `tb_animaux` tb1 LEFT JOIN(SELECT ID, CONCAT(`SEX`, ' ',`FAMNME`, ' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb2.ID = tb1.CLIENT_ID; ");
+        + "tb1.`NME`,"
+        + "tb1.`ESPECE`,"
+        + "tb1.`RACE`,"
+        + "tb1.`SEXE`,"
+        + "tb1.`NISS_DATE`,"
+        + "tb1.`OBSERVATIONS`,"
+        + "tb1.`IS_RADIATED`,"
+        + "tb2.*"
+    + "FROM `tb_animaux` tb1 LEFT JOIN (SELECT "
+    + "ID AS CLIENT_ID,"
+    + "CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME,"
+    + "`NUM_CNI` AS CLIENT_NUM_CNI,"
+    + "`ADRESS` AS CLIENT_ADRESS,"
+    + "`CITY` AS CLIENT_CITY,"
+    + "`WILAYA` AS CLIENT_WILAYA,"
+    + "`NUM_PHONE` AS CLIENT_NUM_PHONE,"
+    + "`EMAIL` AS CLIENT_EMAIL "
+    + "FROM tb_clients) tb2 ON tb2.CLIENT_ID = tb1.CLIENT_ID;");
+
             load_labos_data();
             dataGridView1.DataSource = animaux;
         }
 
-        static public void load_labos_data()
+        private void load_labos_data()
         {
             labo = PreConnection.Load_data("SELECT 'Hemogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
                                          + "SELECT 'Bilan Sanguin' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_bilan_sanguin;");
-
-            Lab_Main_Historique.DataSource = labo;
+            
+            dataGridView2.DataSource = labo;
             if(selected_anim != null)
             {
-                ((DataTable)Lab_Main_Historique.DataSource).DefaultView.RowFilter = "ANIM_ID = " + selected_anim.Cells["ID"].Value;
+                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "ANIM_ID = " + selected_anim.Cells["ID"].Value;
             }
             
         }
@@ -92,7 +113,7 @@ namespace ALBAITAR_Softvet.Resources
                 label14.Text = dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value != DBNull.Value ? ((DateTime)dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value).ToString("d") : "--";
                 textBox2.Text = (string)dataGridView1.SelectedRows[0].Cells["OBSERVATIONS"].Value;
                 //------------------------              
-                ((DataTable)Lab_Main_Historique.DataSource).DefaultView.RowFilter = "ANIM_ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value;
+                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "ANIM_ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value;
                 
             }
             else
@@ -105,6 +126,19 @@ namespace ALBAITAR_Softvet.Resources
         {
             selected_anim = null;
             label3.Text = label4.Text = label6.Text = label8.Text = label13.Text = label14.Text = textBox2.Text = "--";
+        }
+
+        private void Laboratoire_ControlRemoved(object sender, ControlEventArgs e)
+        {           
+            if (make_historic_refesh)
+            {
+                dataGridView2.DataSource = labo;
+                if (selected_anim != null)
+                {
+                    ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "ANIM_ID = " + selected_anim.Cells["ID"].Value;
+                }
+                make_historic_refesh = false;
+            }
         }
     }
 }

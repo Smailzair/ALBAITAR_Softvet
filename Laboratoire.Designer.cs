@@ -35,21 +35,27 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CLIENT_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ESPECE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RACE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SEXE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NISS_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OBSERVATIONS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IS_RADIATED = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CLIENT_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Laboratoire.Lab_Main_Historique = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_NUM_CNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_ADRESS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_CITY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_WILAYA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_NUM_PHONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_EMAIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.LABO_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OBSERV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATE_TIME2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REF2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_ID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OBSERV2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -72,13 +78,18 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OBSERV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(Laboratoire.Lab_Main_Historique)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -101,7 +112,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer1.Panel2.Controls.Add(Laboratoire.Lab_Main_Historique);
+            this.splitContainer1.Panel2.Controls.Add(this.dataGridView2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
@@ -131,14 +142,20 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.NME,
-            this.CLIENT_ID,
             this.ESPECE,
             this.RACE,
             this.SEXE,
             this.NISS_DATE,
             this.OBSERVATIONS,
             this.IS_RADIATED,
-            this.CLIENT_FULL_NME});
+            this.CLIENT_ID,
+            this.CLIENT_FULL_NME,
+            this.CLIENT_NUM_CNI,
+            this.CLIENT_ADRESS,
+            this.CLIENT_CITY,
+            this.CLIENT_WILAYA,
+            this.CLIENT_NUM_PHONE,
+            this.CLIENT_EMAIL});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView1.Location = new System.Drawing.Point(0, 39);
             this.dataGridView1.MultiSelect = false;
@@ -165,14 +182,6 @@
             this.NME.HeaderText = "NME";
             this.NME.Name = "NME";
             this.NME.ReadOnly = true;
-            // 
-            // CLIENT_ID
-            // 
-            this.CLIENT_ID.DataPropertyName = "CLIENT_ID";
-            this.CLIENT_ID.HeaderText = "CLIENT_ID";
-            this.CLIENT_ID.Name = "CLIENT_ID";
-            this.CLIENT_ID.ReadOnly = true;
-            this.CLIENT_ID.Visible = false;
             // 
             // ESPECE
             // 
@@ -222,6 +231,14 @@
             this.IS_RADIATED.ReadOnly = true;
             this.IS_RADIATED.Visible = false;
             // 
+            // CLIENT_ID
+            // 
+            this.CLIENT_ID.DataPropertyName = "CLIENT_ID";
+            this.CLIENT_ID.HeaderText = "CLIENT_ID";
+            this.CLIENT_ID.Name = "CLIENT_ID";
+            this.CLIENT_ID.ReadOnly = true;
+            this.CLIENT_ID.Visible = false;
+            // 
             // CLIENT_FULL_NME
             // 
             this.CLIENT_FULL_NME.DataPropertyName = "CLIENT_FULL_NME";
@@ -230,81 +247,129 @@
             this.CLIENT_FULL_NME.ReadOnly = true;
             this.CLIENT_FULL_NME.Visible = false;
             // 
-            // Lab_Main_Historique
+            // CLIENT_NUM_CNI
             // 
-            Laboratoire.Lab_Main_Historique.AllowUserToAddRows = false;
-            Laboratoire.Lab_Main_Historique.AllowUserToDeleteRows = false;
-            Laboratoire.Lab_Main_Historique.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.CLIENT_NUM_CNI.DataPropertyName = "CLIENT_NUM_CNI";
+            this.CLIENT_NUM_CNI.HeaderText = "CLIENT_NUM_CNI";
+            this.CLIENT_NUM_CNI.Name = "CLIENT_NUM_CNI";
+            this.CLIENT_NUM_CNI.ReadOnly = true;
+            this.CLIENT_NUM_CNI.Visible = false;
+            // 
+            // CLIENT_ADRESS
+            // 
+            this.CLIENT_ADRESS.DataPropertyName = "CLIENT_ADRESS";
+            this.CLIENT_ADRESS.HeaderText = "CLIENT_ADRESS";
+            this.CLIENT_ADRESS.Name = "CLIENT_ADRESS";
+            this.CLIENT_ADRESS.ReadOnly = true;
+            this.CLIENT_ADRESS.Visible = false;
+            // 
+            // CLIENT_CITY
+            // 
+            this.CLIENT_CITY.DataPropertyName = "CLIENT_CITY";
+            this.CLIENT_CITY.HeaderText = "CLIENT_CITY";
+            this.CLIENT_CITY.Name = "CLIENT_CITY";
+            this.CLIENT_CITY.ReadOnly = true;
+            this.CLIENT_CITY.Visible = false;
+            // 
+            // CLIENT_WILAYA
+            // 
+            this.CLIENT_WILAYA.HeaderText = "CLIENT_WILAYA";
+            this.CLIENT_WILAYA.Name = "CLIENT_WILAYA";
+            this.CLIENT_WILAYA.ReadOnly = true;
+            this.CLIENT_WILAYA.Visible = false;
+            // 
+            // CLIENT_NUM_PHONE
+            // 
+            this.CLIENT_NUM_PHONE.DataPropertyName = "CLIENT_NUM_PHONE";
+            this.CLIENT_NUM_PHONE.HeaderText = "CLIENT_NUM_PHONE";
+            this.CLIENT_NUM_PHONE.Name = "CLIENT_NUM_PHONE";
+            this.CLIENT_NUM_PHONE.ReadOnly = true;
+            this.CLIENT_NUM_PHONE.Visible = false;
+            // 
+            // CLIENT_EMAIL
+            // 
+            this.CLIENT_EMAIL.DataPropertyName = "CLIENT_EMAIL";
+            this.CLIENT_EMAIL.HeaderText = "CLIENT_EMAIL";
+            this.CLIENT_EMAIL.Name = "CLIENT_EMAIL";
+            this.CLIENT_EMAIL.ReadOnly = true;
+            this.CLIENT_EMAIL.Visible = false;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            Laboratoire.Lab_Main_Historique.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            Laboratoire.Lab_Main_Historique.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            Laboratoire.Lab_Main_Historique.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Laboratoire.Lab_Main_Historique.ColumnHeadersVisible = false;
-            Laboratoire.Lab_Main_Historique.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.DATE,
-            this.REF,
-            this.ANIM_ID,
+            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.ColumnHeadersVisible = false;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LABO_NME,
-            this.OBSERV});
-            Laboratoire.Lab_Main_Historique.Location = new System.Drawing.Point(343, 167);
-            Laboratoire.Lab_Main_Historique.Name = "Lab_Main_Historique";
-            Laboratoire.Lab_Main_Historique.ReadOnly = true;
-            Laboratoire.Lab_Main_Historique.RowHeadersVisible = false;
-            Laboratoire.Lab_Main_Historique.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            Laboratoire.Lab_Main_Historique.Size = new System.Drawing.Size(293, 278);
-            Laboratoire.Lab_Main_Historique.TabIndex = 24;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // DATE
-            // 
-            this.DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DATE.DataPropertyName = "DATE_TIME";
-            this.DATE.HeaderText = "Date";
-            this.DATE.Name = "DATE";
-            this.DATE.ReadOnly = true;
-            // 
-            // REF
-            // 
-            this.REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.REF.DataPropertyName = "REF";
-            this.REF.HeaderText = "Réf.";
-            this.REF.Name = "REF";
-            this.REF.ReadOnly = true;
-            this.REF.Width = 5;
-            // 
-            // ANIM_ID
-            // 
-            this.ANIM_ID.DataPropertyName = "ANIM_ID";
-            this.ANIM_ID.HeaderText = "ANIM_ID";
-            this.ANIM_ID.Name = "ANIM_ID";
-            this.ANIM_ID.ReadOnly = true;
-            this.ANIM_ID.Visible = false;
+            this.DATE_TIME2,
+            this.REF2,
+            this.IDD2,
+            this.ANIM_ID2,
+            this.OBSERV2});
+            this.dataGridView2.Location = new System.Drawing.Point(345, 167);
+            this.dataGridView2.MultiSelect = false;
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView2.Size = new System.Drawing.Size(291, 278);
+            this.dataGridView2.TabIndex = 22;
             // 
             // LABO_NME
             // 
             this.LABO_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.LABO_NME.DataPropertyName = "LABO_NME";
-            this.LABO_NME.HeaderText = "Type";
+            this.LABO_NME.HeaderText = "LABO_NME";
             this.LABO_NME.Name = "LABO_NME";
             this.LABO_NME.ReadOnly = true;
             this.LABO_NME.Width = 5;
             // 
-            // OBSERV
+            // DATE_TIME2
             // 
-            this.OBSERV.DataPropertyName = "OBSERV";
-            this.OBSERV.HeaderText = "OBSERV";
-            this.OBSERV.Name = "OBSERV";
-            this.OBSERV.ReadOnly = true;
-            this.OBSERV.Visible = false;
+            this.DATE_TIME2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATE_TIME2.DataPropertyName = "DATE_TIME";
+            this.DATE_TIME2.HeaderText = "DATE_TIME";
+            this.DATE_TIME2.Name = "DATE_TIME2";
+            this.DATE_TIME2.ReadOnly = true;
+            this.DATE_TIME2.Width = 5;
+            // 
+            // REF2
+            // 
+            this.REF2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.REF2.DataPropertyName = "REF";
+            this.REF2.HeaderText = "REF";
+            this.REF2.Name = "REF2";
+            this.REF2.ReadOnly = true;
+            // 
+            // IDD2
+            // 
+            this.IDD2.DataPropertyName = "ID";
+            this.IDD2.HeaderText = "ID";
+            this.IDD2.Name = "IDD2";
+            this.IDD2.ReadOnly = true;
+            this.IDD2.Visible = false;
+            // 
+            // ANIM_ID2
+            // 
+            this.ANIM_ID2.DataPropertyName = "ANIM_ID";
+            this.ANIM_ID2.HeaderText = "ANIM_ID";
+            this.ANIM_ID2.Name = "ANIM_ID2";
+            this.ANIM_ID2.ReadOnly = true;
+            this.ANIM_ID2.Visible = false;
+            // 
+            // OBSERV2
+            // 
+            this.OBSERV2.DataPropertyName = "OBSERV";
+            this.OBSERV2.HeaderText = "OBSERV";
+            this.OBSERV2.Name = "OBSERV2";
+            this.OBSERV2.ReadOnly = true;
+            this.OBSERV2.Visible = false;
             // 
             // groupBox3
             // 
@@ -578,6 +643,46 @@
             this.label2.TabIndex = 19;
             this.label2.Text = "HISTORIQUE :";
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // DATE
+            // 
+            this.DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DATE.DataPropertyName = "DATE_TIME";
+            this.DATE.HeaderText = "Date";
+            this.DATE.Name = "DATE";
+            this.DATE.ReadOnly = true;
+            // 
+            // REF
+            // 
+            this.REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.REF.DataPropertyName = "REF";
+            this.REF.HeaderText = "Réf.";
+            this.REF.Name = "REF";
+            this.REF.ReadOnly = true;
+            // 
+            // ANIM_ID
+            // 
+            this.ANIM_ID.DataPropertyName = "ANIM_ID";
+            this.ANIM_ID.HeaderText = "ANIM_ID";
+            this.ANIM_ID.Name = "ANIM_ID";
+            this.ANIM_ID.ReadOnly = true;
+            this.ANIM_ID.Visible = false;
+            // 
+            // OBSERV
+            // 
+            this.OBSERV.DataPropertyName = "OBSERV";
+            this.OBSERV.HeaderText = "OBSERV";
+            this.OBSERV.Name = "OBSERV";
+            this.OBSERV.ReadOnly = true;
+            this.OBSERV.Visible = false;
+            // 
             // Laboratoire
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -592,6 +697,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Laboratoire - [ALBAITAR Softvet]";
             this.Load += new System.EventHandler(this.Laboratoire_Load);
+            this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.Laboratoire_ControlRemoved);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -599,7 +705,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(Laboratoire.Lab_Main_Historique)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -636,22 +742,33 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DATE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn REF;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OBSERV;        
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn NME;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ESPECE;
         private System.Windows.Forms.DataGridViewTextBoxColumn RACE;
         private System.Windows.Forms.DataGridViewTextBoxColumn SEXE;
         private System.Windows.Forms.DataGridViewTextBoxColumn NISS_DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn OBSERVATIONS;
         private System.Windows.Forms.DataGridViewTextBoxColumn IS_RADIATED;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_FULL_NME;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DATE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn REF;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_NUM_CNI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_ADRESS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_CITY;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_WILAYA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_NUM_PHONE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_EMAIL;
+        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridViewTextBoxColumn LABO_NME;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OBSERV;
-        public static System.Windows.Forms.DataGridView Lab_Main_Historique;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DATE_TIME2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn REF2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDD2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_ID2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OBSERV2;
     }
 }
