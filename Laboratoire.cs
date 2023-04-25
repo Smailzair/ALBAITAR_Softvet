@@ -140,6 +140,11 @@ namespace ALBAITAR_Softvet.Resources
                 make_historic_refesh = false;
             }
         }
+
+        private void Laboratoire_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            selected_anim = null;
+        }
     }
 }
 

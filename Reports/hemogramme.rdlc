@@ -6454,44 +6454,14 @@
           </Textbox>
           <Rectangle Name="Rectangle1">
             <ReportItems>
-              <Textbox Name="PRIOR1">
+              <Textbox Name="Textbox139">
                 <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Parameters!PRIOR.Value</Value>
-                        <Style>
-                          <FontFamily>Candara</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>PRIOR1</rd:DefaultName>
-                <Left>3.62697cm</Left>
-                <Height>0.6cm</Height>
-                <Width>2.5cm</Width>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox16">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>- Nom Complet:</Value>
+                        <Value>- N° Tél :</Value>
                         <Style>
                           <FontStyle>Italic</FontStyle>
                           <FontFamily>Century Gothic</FontFamily>
@@ -6504,10 +6474,44 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>0.10583cm</Top>
-                <Left>0.03338cm</Left>
+                <Top>2.50927cm</Top>
+                <Left>0.10394cm</Left>
                 <Height>0.6cm</Height>
-                <Width>3.45248cm</Width>
+                <Width>1.94435cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox140">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>- Email :</Value>
+                        <Style>
+                          <FontStyle>Italic</FontStyle>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>3.10927cm</Top>
+                <Left>0.10394cm</Left>
+                <Height>0.6cm</Height>
+                <Width>1.94435cm</Width>
                 <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
@@ -6539,8 +6543,8 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>0.70583cm</Top>
-                <Left>0.03338cm</Left>
+                <Top>0.67056cm</Top>
+                <Left>0.10394cm</Left>
                 <Height>0.6cm</Height>
                 <Width>1.49456cm</Width>
                 <ZIndex>2</ZIndex>
@@ -6574,10 +6578,10 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>1.30583cm</Top>
-                <Left>0.03338cm</Left>
+                <Top>1.27056cm</Top>
+                <Left>0.10394cm</Left>
                 <Height>0.6cm</Height>
-                <Width>1.94435cm</Width>
+                <Width>1.76796cm</Width>
                 <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
@@ -6589,14 +6593,14 @@
                   <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
-              <Textbox Name="Textbox139">
+              <Textbox Name="Textbox16">
                 <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>- N° Tél :</Value>
+                        <Value>- Nom Complet:</Value>
                         <Style>
                           <FontStyle>Italic</FontStyle>
                           <FontFamily>Century Gothic</FontFamily>
@@ -6609,10 +6613,10 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>2.9676cm</Top>
-                <Left>0.03338cm</Left>
+                <Top>0.07056cm</Top>
+                <Left>0.10394cm</Left>
                 <Height>0.6cm</Height>
-                <Width>1.94435cm</Width>
+                <Width>2.44706cm</Width>
                 <ZIndex>4</ZIndex>
                 <Style>
                   <Border>
@@ -6624,31 +6628,188 @@
                   <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
-              <Textbox Name="Textbox140">
+              <Textbox Name="PRIOR1">
                 <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>- Email :</Value>
+                        <Value>=Parameters!PRIOR.Value</Value>
                         <Style>
-                          <FontStyle>Italic</FontStyle>
-                          <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
+                          <FontFamily>Candara</FontFamily>
                         </Style>
                       </TextRun>
                     </TextRuns>
                     <Style />
                   </Paragraph>
                 </Paragraphs>
-                <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>3.5676cm</Top>
-                <Left>0.03338cm</Left>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>0.07056cm</Top>
+                <Left>2.551cm</Left>
                 <Height>0.6cm</Height>
-                <Width>1.94435cm</Width>
+                <Width>7.09877cm</Width>
                 <ZIndex>5</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR2">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!CLIENT_NUM_CNI.Value</Value>
+                        <Style>
+                          <FontFamily>Candara</FontFamily>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>0.67056cm</Top>
+                <Left>1.5985cm</Left>
+                <Height>0.6cm</Height>
+                <Width>8.05127cm</Width>
+                <ZIndex>6</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR3">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!CLIENT_ADRESS.Value</Value>
+                        <Style>
+                          <FontFamily>Candara</FontFamily>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>1.27056cm</Top>
+                <Left>1.8719cm</Left>
+                <Height>0.6cm</Height>
+                <Width>7.77787cm</Width>
+                <ZIndex>7</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR4">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!CLIENT_CITY.Value &amp; " - " &amp; Parameters!CLIENT_WILAYA.Value</Value>
+                        <Style>
+                          <FontFamily>Candara</FontFamily>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>1.90927cm</Top>
+                <Left>1.8719cm</Left>
+                <Height>0.6cm</Height>
+                <Width>7.77787cm</Width>
+                <ZIndex>8</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR5">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!CLIENT_NUM_PHONE.Value</Value>
+                        <Style>
+                          <FontFamily>Candara</FontFamily>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>2.50927cm</Top>
+                <Left>2.04829cm</Left>
+                <Height>0.6cm</Height>
+                <Width>7.60148cm</Width>
+                <ZIndex>9</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR6">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!CLIENT_EMAIL.Value</Value>
+                        <Style>
+                          <FontFamily>Candara</FontFamily>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>3.10927cm</Top>
+                <Left>2.04829cm</Left>
+                <Height>0.6cm</Height>
+                <Width>7.60148cm</Width>
+                <ZIndex>10</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -6662,9 +6823,9 @@
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Top>14.46266cm</Top>
-            <Left>1.00006cm</Left>
-            <Height>4.41854cm</Height>
-            <Width>9.64977cm</Width>
+            <Left>0.99999cm</Left>
+            <Height>3.88938cm</Height>
+            <Width>9.82616cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -6947,7 +7108,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>0.10671cm</Top>
-              <Left>7.41032cm</Left>
+              <Left>6.45782cm</Left>
               <Height>0.81167cm</Height>
               <Width>9.32427cm</Width>
               <ZIndex>7</ZIndex>
