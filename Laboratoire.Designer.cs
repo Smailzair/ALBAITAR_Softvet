@@ -487,6 +487,7 @@
             this.button1.Text = "Biochimie Sanguine";
             this.toolTip1.SetToolTip(this.button1, "Enregistrer");
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 

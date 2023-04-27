@@ -263,6 +263,12 @@
     <Compile Include="Agenda.Designer.cs">
       <DependentUpon>Agenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Labo\Biochimie.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Labo\Biochimie.Designer.cs">
+      <DependentUpon>Biochimie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Print_report.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -384,6 +390,10 @@
     <EmbeddedResource Include="Agenda.resx">
       <DependentUpon>Agenda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Labo\Biochimie.resx">
+      <DependentUpon>Biochimie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\biochimie.rdlc" />
     <EmbeddedResource Include="Reports\Print_report.resx">
       <DependentUpon>Print_report.cs</DependentUpon>
     </EmbeddedResource>

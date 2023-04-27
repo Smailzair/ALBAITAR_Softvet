@@ -46,7 +46,6 @@
             this.reportViewer1.Margin = new System.Windows.Forms.Padding(0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.ShowExportButton = false;
             this.reportViewer1.ShowRefreshButton = false;
             this.reportViewer1.ShowStopButton = false;
             this.reportViewer1.Size = new System.Drawing.Size(930, 360);

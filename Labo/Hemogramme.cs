@@ -68,6 +68,7 @@ namespace ALBAITAR_Softvet.Labo
             new_initial_tbl.Rows[9]["DEFAULT_MIN"] = 3;
             new_initial_tbl.Rows[10]["DEFAULT_MIN"] = 0;
             new_initial_tbl.Rows[11]["DEFAULT_MIN"] = 0.1;
+            //new_initial_tbl.Rows[12]["DEFAULT_MIN"] = (Rare)
             new_initial_tbl.Rows[13]["DEFAULT_MIN"] = 1;
             new_initial_tbl.Rows[14]["DEFAULT_MIN"] = 0.15;
             new_initial_tbl.Rows[0]["DEFAULT_MAX"] = 8.5;
@@ -82,22 +83,158 @@ namespace ALBAITAR_Softvet.Labo
             new_initial_tbl.Rows[9]["DEFAULT_MAX"] = 11.5;
             new_initial_tbl.Rows[10]["DEFAULT_MAX"] = 0.3;
             new_initial_tbl.Rows[11]["DEFAULT_MAX"] = 1.25;
+            //new_initial_tbl.Rows[12]["DEFAULT_MIN"] = (Rare)
             new_initial_tbl.Rows[13]["DEFAULT_MAX"] = 4.8;
             new_initial_tbl.Rows[14]["DEFAULT_MAX"] = 1.35;
-            new_initial_tbl.Rows[0]["DEFAULT_FULL"] = "5.5-8.5";
-            new_initial_tbl.Rows[1]["DEFAULT_FULL"] = "12-18";
-            new_initial_tbl.Rows[2]["DEFAULT_FULL"] = "37-55";
-            new_initial_tbl.Rows[3]["DEFAULT_FULL"] = "60-77";
-            new_initial_tbl.Rows[4]["DEFAULT_FULL"] = "32-36";
-            new_initial_tbl.Rows[5]["DEFAULT_FULL"] = "19.5-24.5";
-            new_initial_tbl.Rows[6]["DEFAULT_FULL"] = "0-127";
-            new_initial_tbl.Rows[7]["DEFAULT_FULL"] = "200-500";
-            new_initial_tbl.Rows[8]["DEFAULT_FULL"] = "6.0-17";
-            new_initial_tbl.Rows[9]["DEFAULT_FULL"] = "3-11.5";
-            new_initial_tbl.Rows[10]["DEFAULT_FULL"] = "0-0.3";
-            new_initial_tbl.Rows[11]["DEFAULT_FULL"] = "0.1-1.25";
-            new_initial_tbl.Rows[13]["DEFAULT_FULL"] = "1-4.8";
-            new_initial_tbl.Rows[14]["DEFAULT_FULL"] = "0.15-1.35";
+
+
+
+
+            switch ((string)selected_animm.Cells["ESPECE"].Value)
+            {
+                case "Canine":
+                    new_initial_tbl.Rows[0]["DEFAULT_MIN"] = 5.5;
+                    new_initial_tbl.Rows[1]["DEFAULT_MIN"] = 12;
+                    new_initial_tbl.Rows[2]["DEFAULT_MIN"] = 37;
+                    new_initial_tbl.Rows[3]["DEFAULT_MIN"] = 60;
+                    new_initial_tbl.Rows[4]["DEFAULT_MIN"] = 32;
+                    new_initial_tbl.Rows[5]["DEFAULT_MIN"] = 19.5;
+                    new_initial_tbl.Rows[6]["DEFAULT_MIN"] = 0;
+                    new_initial_tbl.Rows[7]["DEFAULT_MIN"] = 200;
+                    new_initial_tbl.Rows[8]["DEFAULT_MIN"] = 6.0;
+                    new_initial_tbl.Rows[9]["DEFAULT_MIN"] = 3;
+                    new_initial_tbl.Rows[10]["DEFAULT_MIN"] = 0;
+                    new_initial_tbl.Rows[11]["DEFAULT_MIN"] = 0.1;
+                    //new_initial_tbl.Rows[12]["DEFAULT_MIN"] = (Rare)
+                    new_initial_tbl.Rows[13]["DEFAULT_MIN"] = 1;
+                    new_initial_tbl.Rows[14]["DEFAULT_MIN"] = 0.15;
+                    //--------------
+                    new_initial_tbl.Rows[0]["DEFAULT_MAX"] = 8.5;
+                    new_initial_tbl.Rows[1]["DEFAULT_MAX"] = 18;
+                    new_initial_tbl.Rows[2]["DEFAULT_MAX"] = 55;
+                    new_initial_tbl.Rows[3]["DEFAULT_MAX"] = 77;
+                    new_initial_tbl.Rows[4]["DEFAULT_MAX"] = 36;
+                    new_initial_tbl.Rows[5]["DEFAULT_MAX"] = 24.5;
+                    new_initial_tbl.Rows[6]["DEFAULT_MAX"] = 127;
+                    new_initial_tbl.Rows[7]["DEFAULT_MAX"] = 500;
+                    new_initial_tbl.Rows[8]["DEFAULT_MAX"] = 17;
+                    new_initial_tbl.Rows[9]["DEFAULT_MAX"] = 11.5;
+                    new_initial_tbl.Rows[10]["DEFAULT_MAX"] = 0.3;
+                    new_initial_tbl.Rows[11]["DEFAULT_MAX"] = 1.25;
+                    //new_initial_tbl.Rows[12]["DEFAULT_MIN"] = (Rare)
+                    new_initial_tbl.Rows[13]["DEFAULT_MAX"] = 4.8;
+                    new_initial_tbl.Rows[14]["DEFAULT_MAX"] = 1.35;
+                    break;
+                case "Feline":
+                    new_initial_tbl.Rows[0]["DEFAULT_MIN"] = 5;
+                    new_initial_tbl.Rows[1]["DEFAULT_MIN"] = 8;
+                    new_initial_tbl.Rows[2]["DEFAULT_MIN"] = 24;
+                    new_initial_tbl.Rows[3]["DEFAULT_MIN"] = 39;
+                    new_initial_tbl.Rows[4]["DEFAULT_MIN"] = 31;
+                    new_initial_tbl.Rows[5]["DEFAULT_MIN"] = 12.5;
+                    new_initial_tbl.Rows[6]["DEFAULT_MIN"] = 7;
+                    new_initial_tbl.Rows[7]["DEFAULT_MIN"] = 300;
+                    new_initial_tbl.Rows[8]["DEFAULT_MIN"] = 5.5;
+                    new_initial_tbl.Rows[9]["DEFAULT_MIN"] = 2.5;
+                    new_initial_tbl.Rows[10]["DEFAULT_MIN"] = 0;
+                    new_initial_tbl.Rows[11]["DEFAULT_MIN"] = 0;
+                    //new_initial_tbl.Rows[12]["DEFAULT_MIN"] = (Rare)
+                    new_initial_tbl.Rows[13]["DEFAULT_MIN"] = 1.5;
+                    new_initial_tbl.Rows[14]["DEFAULT_MIN"] = 0;
+                    //--------------
+                    new_initial_tbl.Rows[0]["DEFAULT_MAX"] = 10;
+                    new_initial_tbl.Rows[1]["DEFAULT_MAX"] = 15;
+                    new_initial_tbl.Rows[2]["DEFAULT_MAX"] = 45;
+                    new_initial_tbl.Rows[3]["DEFAULT_MAX"] = 55;
+                    new_initial_tbl.Rows[4]["DEFAULT_MAX"] = 35;
+                    new_initial_tbl.Rows[5]["DEFAULT_MAX"] = 17.5;
+                    new_initial_tbl.Rows[6]["DEFAULT_MAX"] = 1120;
+                    new_initial_tbl.Rows[7]["DEFAULT_MAX"] = 800;
+                    new_initial_tbl.Rows[8]["DEFAULT_MAX"] = 19.5;
+                    new_initial_tbl.Rows[9]["DEFAULT_MAX"] = 12.5;
+                    new_initial_tbl.Rows[10]["DEFAULT_MAX"] = 0.3;
+                    new_initial_tbl.Rows[11]["DEFAULT_MAX"] = 1.5;
+                    //new_initial_tbl.Rows[12]["DEFAULT_MIN"] = (Rare)
+                    new_initial_tbl.Rows[13]["DEFAULT_MAX"] = 7;
+                    new_initial_tbl.Rows[14]["DEFAULT_MAX"] = 0.85;
+                    break;
+                case "Equine":
+                    new_initial_tbl.Rows[0]["DEFAULT_MIN"] = 6.8;
+                    new_initial_tbl.Rows[1]["DEFAULT_MIN"] = 11;
+                    new_initial_tbl.Rows[2]["DEFAULT_MIN"] = 32;
+                    new_initial_tbl.Rows[3]["DEFAULT_MIN"] = 37;
+                    new_initial_tbl.Rows[4]["DEFAULT_MIN"] = 31;
+                    new_initial_tbl.Rows[5]["DEFAULT_MIN"] = 12.3;
+                    //new_initial_tbl.Rows[6]["DEFAULT_MIN"] = ; //ND
+                    new_initial_tbl.Rows[7]["DEFAULT_MIN"] = 100;
+                    new_initial_tbl.Rows[8]["DEFAULT_MIN"] = 5.4;
+                    new_initial_tbl.Rows[9]["DEFAULT_MIN"] = 2.26;
+                    new_initial_tbl.Rows[10]["DEFAULT_MIN"] = 0;
+                    new_initial_tbl.Rows[11]["DEFAULT_MIN"] = 0;
+                    new_initial_tbl.Rows[12]["DEFAULT_MIN"] = 0;
+                    new_initial_tbl.Rows[13]["DEFAULT_MIN"] = 1.5;
+                    new_initial_tbl.Rows[14]["DEFAULT_MIN"] = 0;
+                    //--------------
+                    new_initial_tbl.Rows[0]["DEFAULT_MAX"] = 12.9;
+                    new_initial_tbl.Rows[1]["DEFAULT_MAX"] = 19;
+                    new_initial_tbl.Rows[2]["DEFAULT_MAX"] = 53;
+                    new_initial_tbl.Rows[3]["DEFAULT_MAX"] = 58;
+                    new_initial_tbl.Rows[4]["DEFAULT_MAX"] = 38.6;
+                    new_initial_tbl.Rows[5]["DEFAULT_MAX"] = 19.9;
+                    //new_initial_tbl.Rows[6]["DEFAULT_MAX"] = ; //ND
+                    new_initial_tbl.Rows[7]["DEFAULT_MAX"] = 350;
+                    new_initial_tbl.Rows[8]["DEFAULT_MAX"] = 14.3;
+                    new_initial_tbl.Rows[9]["DEFAULT_MAX"] = 8.58;
+                    new_initial_tbl.Rows[10]["DEFAULT_MAX"] = 0.1;
+                    new_initial_tbl.Rows[11]["DEFAULT_MAX"] = 1;
+                    new_initial_tbl.Rows[12]["DEFAULT_MIN"] = 0.29;
+                    new_initial_tbl.Rows[13]["DEFAULT_MAX"] = 7.7;
+                    new_initial_tbl.Rows[14]["DEFAULT_MAX"] = 1;
+                    break;
+                case "Ovine":
+                    new_initial_tbl.Rows[0]["DEFAULT_MIN"] = 5;
+                    new_initial_tbl.Rows[1]["DEFAULT_MIN"] = 8;
+                    new_initial_tbl.Rows[2]["DEFAULT_MIN"] = 24;
+                    new_initial_tbl.Rows[3]["DEFAULT_MIN"] = 40;
+                    new_initial_tbl.Rows[4]["DEFAULT_MIN"] = 30;
+                    new_initial_tbl.Rows[5]["DEFAULT_MIN"] = 11;
+                    //new_initial_tbl.Rows[6]["DEFAULT_MIN"] = ; //ND
+                    new_initial_tbl.Rows[7]["DEFAULT_MIN"] = 110;
+                    new_initial_tbl.Rows[8]["DEFAULT_MIN"] = 4;
+                    new_initial_tbl.Rows[9]["DEFAULT_MIN"] = 0.6;
+                    new_initial_tbl.Rows[10]["DEFAULT_MIN"] = 0;
+                    new_initial_tbl.Rows[11]["DEFAULT_MIN"] = 0;
+                    new_initial_tbl.Rows[12]["DEFAULT_MIN"] = 0;
+                    new_initial_tbl.Rows[13]["DEFAULT_MIN"] = 2.5;
+                    new_initial_tbl.Rows[14]["DEFAULT_MIN"] = 0.025;
+                    //--------------
+                    new_initial_tbl.Rows[0]["DEFAULT_MAX"] = 10;
+                    new_initial_tbl.Rows[1]["DEFAULT_MAX"] = 15;
+                    new_initial_tbl.Rows[2]["DEFAULT_MAX"] = 46;
+                    new_initial_tbl.Rows[3]["DEFAULT_MAX"] = 60;
+                    new_initial_tbl.Rows[4]["DEFAULT_MAX"] = 36;
+                    new_initial_tbl.Rows[5]["DEFAULT_MAX"] = 17;
+                    //new_initial_tbl.Rows[6]["DEFAULT_MAX"] = ; //ND
+                    new_initial_tbl.Rows[7]["DEFAULT_MAX"] = 800;
+                    new_initial_tbl.Rows[8]["DEFAULT_MAX"] = 12;
+                    new_initial_tbl.Rows[9]["DEFAULT_MAX"] = 4;
+                    new_initial_tbl.Rows[10]["DEFAULT_MAX"] = 12;
+                    new_initial_tbl.Rows[11]["DEFAULT_MAX"] = 0.2;
+                    new_initial_tbl.Rows[12]["DEFAULT_MIN"] = 0.29;
+                    new_initial_tbl.Rows[13]["DEFAULT_MAX"] = 7.5;
+                    new_initial_tbl.Rows[14]["DEFAULT_MAX"] = 0.84;
+                    break;
+            }
+
+
+            for (int i = 0; i < paramss.Length; i++)
+            {
+                string val = (new_initial_tbl.Rows[i]["DEFAULT_MIN"] != DBNull.Value ? new_initial_tbl.Rows[i]["DEFAULT_MIN"].ToString() + "-" : "inf ") + (new_initial_tbl.Rows[i]["DEFAULT_MAX"] != null ? new_initial_tbl.Rows[i]["DEFAULT_MAX"].ToString() : "");
+                new_initial_tbl.Rows[i]["DEFAULT_FULL"] = val.Equals("inf ") ? "" : val;
+            }
+            new_initial_tbl.Rows[12]["DEFAULT_FULL"] = "Rares";
+
+
             dataGridView1.DataSource = new_initial_tbl;
             //------------------------------
             button3.PerformClick();
@@ -248,7 +385,7 @@ namespace ALBAITAR_Softvet.Labo
             if (ready)
             {
                 if (is_new)
-                {   
+                {                    
                     PreConnection.Excut_Cmd("INSERT INTO `tb_labo_hemogramme` "
                                           + "(`REF`,"
                                           + "`DATE_TIME`,"
@@ -314,13 +451,15 @@ namespace ALBAITAR_Softvet.Labo
                                           + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value +";");
                 }
                 //--------
-                Laboratoire.labo = PreConnection.Load_data("SELECT 'Hemogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
-                                         + "SELECT 'Bilan Sanguin' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_bilan_sanguin;");
+                Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
                 Laboratoire.make_historic_refesh = true;
                 //------------
                 Load_histor();
                 dataGridView2.ClearSelection();
-                dataGridView2.Rows[current_row_to_select == -1 ? dataGridView2.Rows.Count- 1 : current_row_to_select].Selected = true;
+                if (dataGridView2.Rows.Count > 0)
+                {
+                    dataGridView2.Rows[current_row_to_select == -1 ? dataGridView2.Rows.Count - 1 : current_row_to_select].Selected = true;
+                }                
             }
         }
 
@@ -419,8 +558,7 @@ namespace ALBAITAR_Softvet.Labo
                     dq = dq.Substring(1, dq.Length - 1);
                     PreConnection.Excut_Cmd("DELETE FROM tb_labo_hemogramme WHERE ID IN ("+dq+");");
                     //--------
-                    Laboratoire.labo = PreConnection.Load_data("SELECT 'Hemogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
-                                             + "SELECT 'Bilan Sanguin' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_bilan_sanguin;");
+                    Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
                     Laboratoire.make_historic_refesh = true;
                     //------------
                     Load_histor();
