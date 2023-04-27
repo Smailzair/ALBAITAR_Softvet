@@ -1,4 +1,5 @@
 ﻿using ALBAITAR_Softvet.Labo;
+using Microsoft.ReportingServices.Diagnostics.Internal;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -55,6 +56,8 @@ namespace ALBAITAR_Softvet.Resources
 
             load_labos_data();
             dataGridView1.DataSource = animaux;
+            //---------
+            comboBox1.SelectedIndex = 0;
         }
 
         private void load_labos_data()
@@ -62,10 +65,10 @@ namespace ALBAITAR_Softvet.Resources
             labo = PreConnection.Load_data(labo_load_cmd);
 
             dataGridView2.DataSource = labo;
-            if (selected_anim != null)
-            {
-                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "ANIM_ID = " + selected_anim.Cells["ID"].Value;
-            }
+            textBox3.TextChanged -= textBox3_TextChanged;
+            textBox3.Text = "";
+            textBox3.TextChanged += textBox3_TextChanged;
+            comboBox1_SelectedIndexChanged(null, null);
 
         }
 
@@ -87,8 +90,11 @@ namespace ALBAITAR_Softvet.Resources
                 label13.Text = (string)dataGridView1.SelectedRows[0].Cells["SEXE"].Value;
                 label14.Text = dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value != DBNull.Value ? ((DateTime)dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value).ToString("d") : "--";
                 textBox2.Text = (string)dataGridView1.SelectedRows[0].Cells["OBSERVATIONS"].Value;
-                //------------------------              
-                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "ANIM_ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value;
+                //------------------------
+                textBox3.TextChanged -= textBox3_TextChanged;
+                textBox3.Text = "";
+                textBox3.TextChanged += textBox3_TextChanged;
+                comboBox1_SelectedIndexChanged(null, null);
 
             }
             else
@@ -107,11 +113,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             if (make_historic_refesh)
             {
-                dataGridView2.DataSource = labo;
-                if (selected_anim != null)
-                {
-                    ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "ANIM_ID = " + selected_anim.Cells["ID"].Value;
-                }
+                load_labos_data();
                 make_historic_refesh = false;
             }
         }
@@ -131,6 +133,50 @@ namespace ALBAITAR_Softvet.Resources
                 this.Controls.Add(biochimie);
                 biochimie.BringToFront();
             }
+        }
+        string histo_filter = "";
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (selected_anim != null)
+            {
+                histo_filter = "ANIM_ID = " + selected_anim.Cells["ID"].Value;
+                if (comboBox1.SelectedIndex == 1) //Hemogramme
+                {
+                    histo_filter += " AND LABO_NME LIKE 'Hemogramme'";
+                }
+                else if (comboBox1.SelectedIndex == 2) //Biochimie
+                {
+                    histo_filter += " AND LABO_NME LIKE 'Biochimie'";
+                }
+                else if (comboBox1.SelectedIndex == 3) //Immunologie
+                {
+                    histo_filter += " AND LABO_NME LIKE 'Immunologie'";
+                }
+                else if (comboBox1.SelectedIndex == 4) //Protéinogramme
+                {
+                    histo_filter += " AND LABO_NME LIKE 'Protéinogramme'";
+                }
+            }
+            else
+            {
+                histo_filter = "";
+            }
+
+          //  if(textBox3.Text.Length > 0)
+          //  {
+                textBox3_TextChanged(null,null);
+           // }
+            ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = histo_filter;
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+            DateTime tmp = DateTime.Now;
+            bool tmp2 = DateTime.TryParse(textBox3.Text, out tmp);           
+            ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = (histo_filter != "" ? histo_filter + " AND " : "") + "(" +
+                (tmp2 ? "DATE_TIME = '" + tmp.ToString("yyyy-MM-dd") + "'" : string.Format("CONVERT(Date_Time, System.String) LIKE '{0}%'", textBox3.Text))  + 
+                " OR REF LIKE '%" + textBox3.Text + "%')";
         }
     }
 }
