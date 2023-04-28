@@ -1,4 +1,5 @@
-﻿using ALBAITAR_Softvet.Resources;
+﻿using ALBAITAR_Softvet.Dialogs;
+using ALBAITAR_Softvet.Resources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -212,7 +213,14 @@ namespace ALBAITAR_Softvet.Labo
 
         private void Hemogramme_Load(object sender, EventArgs e)
         {
-            
+            //----------- Autorisations --------------------
+            if (!Properties.Settings.Default.Last_login_is_admin)
+            {
+                button3.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31001" && (Int32)QQ[3] == 1).Count() > 0; //Ajouter
+                button4.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31002" && (Int32)QQ[3] == 1).Count() > 0; //Supprimer
+                dataGridView1.ReadOnly = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31003" && (Int32)QQ[3] == 1).Count() == 0 && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31001" && (Int32)QQ[3] == 1).Count() == 0; //Modifier (1)
+                textBox3.Enabled = dateTimePicker1.Enabled = textBox1.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31003" && (Int32)QQ[3] == 1).Count() > 0 || Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31001" && (Int32)QQ[3] == 1).Count() > 0; //Modifier (2)
+            }
             //--------En-tete
             label3.Text = (string)selected_animm.Cells["NME"].Value;
             label4.Text = (string)selected_animm.Cells["CLIENT_FULL_NME"].Value;
@@ -323,148 +331,156 @@ namespace ALBAITAR_Softvet.Labo
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int current_row_to_select = is_new ? -1 : dataGridView2.SelectedRows[0].Index;
-            bool ready = true;
-            bool tmpp = true;
-            int tt = 0;
-            int null_nb = 0;
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            bool autorisat = Properties.Settings.Default.Last_login_is_admin || (is_new && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31001" && (Int32)QQ[3] == 1).Count() > 0) || (!is_new && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31003" && (Int32)QQ[3] == 1).Count() > 0);
+            if (autorisat)
             {
-                tmpp &= dataGridView1.Rows[i].Cells["VALUE2"].Style.BackColor != Color.LightCoral;
-                //--------
-                tt++;
-                null_nb += dataGridView1.Rows[i].Cells["VALUE2"].Value == DBNull.Value ? 1 : 0;
-            }
-            ready &= !label20.Visible;
-            ready &= textBox3.BackColor != Color.LightCoral;
-            if(tt == null_nb)
-            {
-                ready = false;
-                MessageBox.Show("Il n'y a pas de données !","Vide :",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-            }
-            if (!tmpp && ready)
-            {
-                ready = MessageBox.Show("Il y a des erreurs dans votre bilan,\n\nVoulez-vous continuer?\n","Attention :",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes;
-            }
-            if (ready)
-            {
-                if (is_new)
+                int current_row_to_select = is_new ? -1 : dataGridView2.SelectedRows[0].Index;
+                bool ready = true;
+                bool tmpp = true;
+                int tt = 0;
+                int null_nb = 0;
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    
-                    PreConnection.Excut_Cmd("INSERT INTO `tb_labo_biochimie`"
-                                          + "(`REF`,"
-                                          + "`DATE_TIME`,"
-                                          + "`ANIM_ID`,"
-                                          + "`OBSERV`,"
-                                          + "`Glucose`,"
-                                          + "`Urée (BUN)`,"
-                                          + "`Créatinine`,"
-                                          + "`Acide Urique`,"
-                                          + "`Cholesterol`,"
-                                          + "`Triglycérides`,"
-                                          + "`Proteines Totales`,"
-                                          + "`Albumina`,"
-                                          + "`Globulines`,"
-                                          + "`Indice alb/glb`,"
-                                          + "`Bilirubine Totale`,"
-                                          + "`Bilirubine Conjuguée`,"
-                                          + "`GPT(ALT)`,"
-                                          + "`GOT(AST)`,"
-                                          + "`Phosphatases Alc`,"
-                                          + "`Gamma-GT`,"
-                                          + "`L.D.H`,"
-                                          + "`C.P.K`,"
-                                          + "`Lipase`,"
-                                          + "`Amylase`,"
-                                          + "`Fructosamine`,"
-                                          + "`Calcium`,"
-                                          + "`Phosphore`,"
-                                          + "`Chlore`,"
-                                          + "`Potassium`,"
-                                          + "`Sodium`,"
-                                          + "`Amoniac`,"
-                                          + "`Fer`)"
-                                          + " VALUES "
-                                          + "('" + textBox3.Text + "'," //REF
-                                          + "'"+dateTimePicker1.Value.ToString("yyyy-MM-dd")+"'," //DATE_TIME
-                                          + selected_animm.Cells["ID"].Value + "," //ANIM_ID
-                                          + "'"+textBox1.Text+"'," //OBSERV
-                                          + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value : "NULL") + "," 
-                                          + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[15].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[15].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[16].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[16].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[17].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[17].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[18].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[18].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[19].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[19].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[20].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[20].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[21].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[21].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[22].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[22].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[23].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[23].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[24].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[24].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[25].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[25].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[26].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[26].Cells["VALUE2"].Value : "NULL") + ","
-                                          + (dataGridView1.Rows[27].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[27].Cells["VALUE2"].Value : "NULL") + ");"); 
+                    tmpp &= dataGridView1.Rows[i].Cells["VALUE2"].Style.BackColor != Color.LightCoral;
+                    //--------
+                    tt++;
+                    null_nb += dataGridView1.Rows[i].Cells["VALUE2"].Value == DBNull.Value ? 1 : 0;
                 }
-                else
+                ready &= !label20.Visible;
+                ready &= textBox3.BackColor != Color.LightCoral;
+                if (tt == null_nb)
                 {
-                    PreConnection.Excut_Cmd("UPDATE `tb_labo_biochimie` SET "
-                                          + "`REF` = '"+ textBox3.Text + "',"
-                                          + "`DATE_TIME` = '"+dateTimePicker1.Value.ToString("yyyy-MM-dd")+"',"
-                                          + "`OBSERV` = '"+textBox1.Text+"',"
-                                          + "`Glucose` = " + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Urée (BUN)` = " + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Créatinine` = " + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Acide Urique` = " + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Cholesterol` = " + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Triglycérides` = " + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Proteines Totales` = " + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Albumina` = " + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Globulines` = " + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Indice alb/glb` = " + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Bilirubine Totale` = " + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Bilirubine Conjuguée` = " + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`GPT(ALT)` = " + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`GOT(AST)` = " + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Phosphatases Alc` = " + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Gamma-GT` = " + (dataGridView1.Rows[15].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[15].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`L.D.H` = " + (dataGridView1.Rows[16].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[16].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`C.P.K` = " + (dataGridView1.Rows[17].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[17].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Lipase` = " + (dataGridView1.Rows[18].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[18].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Amylase` = " + (dataGridView1.Rows[19].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[19].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Fructosamine` = " + (dataGridView1.Rows[20].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[20].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Calcium` = " + (dataGridView1.Rows[21].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[21].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Phosphore` = " + (dataGridView1.Rows[22].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[22].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Chlore` = " + (dataGridView1.Rows[23].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[23].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Potassium` = " + (dataGridView1.Rows[24].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[24].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Sodium` = " + (dataGridView1.Rows[25].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[25].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Amoniac` = " + (dataGridView1.Rows[26].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[26].Cells["VALUE2"].Value : "NULL") + ","
-                                          + "`Fer` = " + (dataGridView1.Rows[27].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[27].Cells["VALUE2"].Value : "NULL")
-                                          + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value +";");
+                    ready = false;
+                    MessageBox.Show("Il n'y a pas de données !", "Vide :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                //--------
-                Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
-                Laboratoire.make_historic_refesh = true;
-                //------------
-                Load_histor();
-                dataGridView2.ClearSelection();
-                if(dataGridView2.Rows.Count > 0)
+                if (!tmpp && ready)
                 {
-                    dataGridView2.Rows[current_row_to_select == -1 ? dataGridView2.Rows.Count - 1 : current_row_to_select].Selected = true;
+                    ready = MessageBox.Show("Il y a des erreurs dans votre bilan,\n\nVoulez-vous continuer?\n", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
                 }
-                
+                if (ready)
+                {
+                    if (is_new)
+                    {
+
+                        PreConnection.Excut_Cmd("INSERT INTO `tb_labo_biochimie`"
+                                              + "(`REF`,"
+                                              + "`DATE_TIME`,"
+                                              + "`ANIM_ID`,"
+                                              + "`OBSERV`,"
+                                              + "`Glucose`,"
+                                              + "`Urée (BUN)`,"
+                                              + "`Créatinine`,"
+                                              + "`Acide Urique`,"
+                                              + "`Cholesterol`,"
+                                              + "`Triglycérides`,"
+                                              + "`Proteines Totales`,"
+                                              + "`Albumina`,"
+                                              + "`Globulines`,"
+                                              + "`Indice alb/glb`,"
+                                              + "`Bilirubine Totale`,"
+                                              + "`Bilirubine Conjuguée`,"
+                                              + "`GPT(ALT)`,"
+                                              + "`GOT(AST)`,"
+                                              + "`Phosphatases Alc`,"
+                                              + "`Gamma-GT`,"
+                                              + "`L.D.H`,"
+                                              + "`C.P.K`,"
+                                              + "`Lipase`,"
+                                              + "`Amylase`,"
+                                              + "`Fructosamine`,"
+                                              + "`Calcium`,"
+                                              + "`Phosphore`,"
+                                              + "`Chlore`,"
+                                              + "`Potassium`,"
+                                              + "`Sodium`,"
+                                              + "`Amoniac`,"
+                                              + "`Fer`)"
+                                              + " VALUES "
+                                              + "('" + textBox3.Text + "'," //REF
+                                              + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," //DATE_TIME
+                                              + selected_animm.Cells["ID"].Value + "," //ANIM_ID
+                                              + "'" + textBox1.Text + "'," //OBSERV
+                                              + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[15].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[15].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[16].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[16].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[17].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[17].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[18].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[18].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[19].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[19].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[20].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[20].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[21].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[21].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[22].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[22].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[23].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[23].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[24].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[24].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[25].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[25].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[26].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[26].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[27].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[27].Cells["VALUE2"].Value : "NULL") + ");");
+                    }
+                    else
+                    {
+                        PreConnection.Excut_Cmd("UPDATE `tb_labo_biochimie` SET "
+                                              + "`REF` = '" + textBox3.Text + "',"
+                                              + "`DATE_TIME` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
+                                              + "`OBSERV` = '" + textBox1.Text + "',"
+                                              + "`Glucose` = " + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Urée (BUN)` = " + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Créatinine` = " + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Acide Urique` = " + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Cholesterol` = " + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Triglycérides` = " + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Proteines Totales` = " + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Albumina` = " + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Globulines` = " + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Indice alb/glb` = " + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Bilirubine Totale` = " + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Bilirubine Conjuguée` = " + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`GPT(ALT)` = " + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`GOT(AST)` = " + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Phosphatases Alc` = " + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Gamma-GT` = " + (dataGridView1.Rows[15].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[15].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`L.D.H` = " + (dataGridView1.Rows[16].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[16].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`C.P.K` = " + (dataGridView1.Rows[17].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[17].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Lipase` = " + (dataGridView1.Rows[18].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[18].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Amylase` = " + (dataGridView1.Rows[19].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[19].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Fructosamine` = " + (dataGridView1.Rows[20].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[20].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Calcium` = " + (dataGridView1.Rows[21].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[21].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Phosphore` = " + (dataGridView1.Rows[22].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[22].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Chlore` = " + (dataGridView1.Rows[23].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[23].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Potassium` = " + (dataGridView1.Rows[24].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[24].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Sodium` = " + (dataGridView1.Rows[25].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[25].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Amoniac` = " + (dataGridView1.Rows[26].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[26].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Fer` = " + (dataGridView1.Rows[27].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[27].Cells["VALUE2"].Value : "NULL")
+                                              + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
+                    }
+                    //--------
+                    Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
+                    Laboratoire.make_historic_refesh = true;
+                    //------------
+                    Load_histor();
+                    dataGridView2.ClearSelection();
+                    if (dataGridView2.Rows.Count > 0)
+                    {
+                        dataGridView2.Rows[current_row_to_select == -1 ? dataGridView2.Rows.Count - 1 : current_row_to_select].Selected = true;
+                    }
+
+                }
+            }
+            else
+            {
+                new Non_Autorized_Msg("").ShowDialog();
             }
         }
 
@@ -588,6 +604,7 @@ namespace ALBAITAR_Softvet.Labo
                 dt.Rows.Add(new object[] { "DATE_NISS", label14.Text });
                 dt.Rows.Add(new object[] { "REF", textBox3.Text });
                 dt.Rows.Add(new object[] { "OBSERV", textBox1.Text });
+                dt.Rows.Add(new object[] { "CABINET", Main_Frm.label_cab_nme.Text });
 
 
 

@@ -253,63 +253,72 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bool all_ready = true;
-            textBox2.BackColor = textBox2.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
-            textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
-            all_ready &= textBox2.Text.TrimStart().TrimEnd() != string.Empty;
-            all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
-            all_ready &= !label13.Visible;
-            //-------------
-            label12.Visible = !all_ready;
-            //-------------
-            if (all_ready)
+            bool autorisat = Properties.Settings.Default.Last_login_is_admin || (Is_New && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10001" && (Int32)QQ[3] == 1).Count() > 0) || (!Is_New && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10003" && (Int32)QQ[3] == 1).Count() > 0);
+            if (autorisat)
             {
-                if (Is_New) //INSERT
+                bool all_ready = true;
+                textBox2.BackColor = textBox2.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
+                textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
+                all_ready &= textBox2.Text.TrimStart().TrimEnd() != string.Empty;
+                all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+                all_ready &= !label13.Visible;
+                //-------------
+                label12.Visible = !all_ready;
+                //-------------
+                if (all_ready)
                 {
-                    PreConnection.Excut_Cmd("INSERT INTO `tb_clients` "
-                            + "(`SEX`,"
-                            + "`FAMNME`,"
-                            + "`NME`,"
-                            + "`NUM_CNI`,"
-                            + "`ADRESS`,"
-                            + "`POSTAL_CODE`,"
-                            + "`CITY`,"
-                            + "`WILAYA`,"
-                            + "`NUM_PHONE`,"
-                            + "`EMAIL`,"
-                            + "`OBSERVATIONS`)"
-                            + "VALUES"
-                            + "('" + comboBox1.Text + "',"
-                            + "'" + textBox3.Text + "',"
-                            + "'" + textBox2.Text + "',"
-                            + "'" + textBox4.Text + "',"
-                            + "'" + textBox5.Text + "',"
-                            + "'" + textBox6.Text + "',"
-                            + "'" + comboBox2.Text + "',"
-                            + "'" + comboBox3.Text + "',"
-                            + "'" + maskedTextBox1.Text + "',"
-                            + "'" + textBox7.Text + "',"
-                            + "'" + textBox8.Text + "');");
+                    if (Is_New) //INSERT
+                    {
+                        PreConnection.Excut_Cmd("INSERT INTO `tb_clients` "
+                                + "(`SEX`,"
+                                + "`FAMNME`,"
+                                + "`NME`,"
+                                + "`NUM_CNI`,"
+                                + "`ADRESS`,"
+                                + "`POSTAL_CODE`,"
+                                + "`CITY`,"
+                                + "`WILAYA`,"
+                                + "`NUM_PHONE`,"
+                                + "`EMAIL`,"
+                                + "`OBSERVATIONS`)"
+                                + "VALUES"
+                                + "('" + comboBox1.Text + "',"
+                                + "'" + textBox3.Text + "',"
+                                + "'" + textBox2.Text + "',"
+                                + "'" + textBox4.Text + "',"
+                                + "'" + textBox5.Text + "',"
+                                + "'" + textBox6.Text + "',"
+                                + "'" + comboBox2.Text + "',"
+                                + "'" + comboBox3.Text + "',"
+                                + "'" + maskedTextBox1.Text + "',"
+                                + "'" + textBox7.Text + "',"
+                                + "'" + textBox8.Text + "');");
+                    }
+                    else //UPDATE
+                    {
+                        PreConnection.Excut_Cmd("UPDATE `tb_clients` SET "
+                                + "`SEX` = '" + comboBox1.Text + "',"
+                                + "`FAMNME` = '" + textBox3.Text + "',"
+                                + "`NME` = '" + textBox2.Text + "',"
+                                + "`NUM_CNI` = '" + textBox4.Text + "',"
+                                + "`ADRESS` = '" + textBox5.Text + "',"
+                                + "`POSTAL_CODE` = '" + textBox6.Text + "',"
+                                + "`CITY` = '" + comboBox2.Text + "',"
+                                + "`WILAYA` = '" + comboBox3.Text + "',"
+                                + "`NUM_PHONE` = '" + maskedTextBox1.Text + "',"
+                                + "`EMAIL` = '" + textBox7.Text + "',"
+                                + "`OBSERVATIONS` = '" + textBox8.Text + "' "
+                                + "WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
+                    }
+                    //----------------
+                    Load_clients_from_DB();
                 }
-                else //UPDATE
-                {
-                    PreConnection.Excut_Cmd("UPDATE `tb_clients` SET "
-                            + "`SEX` = '"+comboBox1.Text+"',"
-                            + "`FAMNME` = '"+textBox3.Text+"',"
-                            + "`NME` = '"+textBox2.Text+"',"
-                            + "`NUM_CNI` = '"+textBox4.Text+"',"
-                            + "`ADRESS` = '"+textBox5.Text+"',"
-                            + "`POSTAL_CODE` = '"+textBox6.Text+"',"
-                            + "`CITY` = '"+comboBox2.Text+"',"
-                            + "`WILAYA` = '"+comboBox3.Text+"',"
-                            + "`NUM_PHONE` = '" + maskedTextBox1.Text + "',"
-                            + "`EMAIL` = '"+textBox7.Text+"',"
-                            + "`OBSERVATIONS` = '"+textBox8.Text+"' "
-                            + "WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value +";");
-                }
-                //----------------
-                Load_clients_from_DB();
             }
+            else
+            {
+                new Non_Autorized_Msg("").ShowDialog();
+            }
+            
 
         }
 

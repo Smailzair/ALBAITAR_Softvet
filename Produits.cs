@@ -105,6 +105,9 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button7_Click(object sender, EventArgs e)
         {
+            bool autorisat = Properties.Settings.Default.Last_login_is_admin || (Is_New_Product && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30001" && (Int32)QQ[3] == 1).Count() > 0) || (!Is_New_Product && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30003" && (Int32)QQ[3] == 1).Count() > 0);
+            if (autorisat)
+            { 
             textBox2.BackColor = textBox2.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;
             textBox3.BackColor = textBox3.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;
             numericUpDown1.BackColor = numericUpDown1.Value > 0 ? SystemColors.Window : Color.LightCoral;
@@ -161,6 +164,12 @@ namespace ALBAITAR_Softvet.Resources
                 load_prods(Is_New_Product);
                 load_stocks(false);
             }
+            }
+            else
+            {
+                new Non_Autorized_Msg("").ShowDialog();
+            }
+
 
 
         }
@@ -598,43 +607,52 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button5_Click(object sender, EventArgs e)
         {
-            bool ready = true;
-            ready &= comboBox3.SelectedValue != null && comboBox3.Text.Trim().Length > 0;
-            ready &= textBox4.BackColor != Color.LightCoral;
-            double mnnt = 0.00;
-            double.TryParse(textBox4.Text.Trim().Replace(" ", ""), out mnnt);
-            ready &= mnnt != 0;
-            textBox4.BackColor = mnnt != 0 ? textBox4.BackColor : Color.LightCoral;
-            if (ready)
+            bool autorisat = Properties.Settings.Default.Last_login_is_admin ||  Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30005" && (Int32)QQ[3] == 1).Count() > 0;
+            if (autorisat)
             {
-                if (Is_New_Stock)
+                bool ready = true;
+                ready &= comboBox3.SelectedValue != null && comboBox3.Text.Trim().Length > 0;
+                ready &= textBox4.BackColor != Color.LightCoral;
+                double mnnt = 0.00;
+                double.TryParse(textBox4.Text.Trim().Replace(" ", ""), out mnnt);
+                ready &= mnnt != 0;
+                textBox4.BackColor = mnnt != 0 ? textBox4.BackColor : Color.LightCoral;
+                if (ready)
                 {
-                    PreConnection.Excut_Cmd("INSERT INTO `tb_stock_mouv`"
-                                        + "(`OP_DATE`,"
-                                        + "`PROD_ID`,"
-                                        + "`QNT_IN`,"
-                                        + "`QNT_OUT`,"
-                                        + "`OBSERV`)"
-                                        + "VALUES"
-                                        + "('" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
-                                        + comboBox3.SelectedValue + ","//PROD_ID
-                                        + (mnnt > 0 ? mnnt : 0) + ","//QNT_IN
-                                        + (mnnt < 0 ? mnnt * -1 : 0) + ","//QNT_OUT
-                                        + "'" + textBox5.Text + "');");//OBSERV
-                }
-                else
-                {
-                    PreConnection.Excut_Cmd("UPDATE `tb_stock_mouv` SET "
-                                        + "`OP_DATE` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
-                                        + "`PROD_ID` = " + comboBox3.SelectedValue + ","//OP_DATE
-                                        + "`QNT_IN` = " + (mnnt > 0 ? mnnt : 0) + ","//QNT_IN
-                                        + "`QNT_OUT` = " + (mnnt < 0 ? mnnt * -1 : 0) + ","//QNT_OUT
-                                        + "`OBSERV` = '" + textBox5.Text + "' "//OBSERV
-                                        + "WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID2"].Value + ";");
-                }
-                load_stocks(Is_New_Stock);
+                    if (Is_New_Stock)
+                    {
+                        PreConnection.Excut_Cmd("INSERT INTO `tb_stock_mouv`"
+                                            + "(`OP_DATE`,"
+                                            + "`PROD_ID`,"
+                                            + "`QNT_IN`,"
+                                            + "`QNT_OUT`,"
+                                            + "`OBSERV`)"
+                                            + "VALUES"
+                                            + "('" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
+                                            + comboBox3.SelectedValue + ","//PROD_ID
+                                            + (mnnt > 0 ? mnnt : 0) + ","//QNT_IN
+                                            + (mnnt < 0 ? mnnt * -1 : 0) + ","//QNT_OUT
+                                            + "'" + textBox5.Text + "');");//OBSERV
+                    }
+                    else
+                    {
+                        PreConnection.Excut_Cmd("UPDATE `tb_stock_mouv` SET "
+                                            + "`OP_DATE` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
+                                            + "`PROD_ID` = " + comboBox3.SelectedValue + ","//OP_DATE
+                                            + "`QNT_IN` = " + (mnnt > 0 ? mnnt : 0) + ","//QNT_IN
+                                            + "`QNT_OUT` = " + (mnnt < 0 ? mnnt * -1 : 0) + ","//QNT_OUT
+                                            + "`OBSERV` = '" + textBox5.Text + "' "//OBSERV
+                                            + "WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID2"].Value + ";");
+                    }
+                    load_stocks(Is_New_Stock);
 
+                }
             }
+            else
+            {
+                new Non_Autorized_Msg("").ShowDialog();
+            }
+            
 
         }
 

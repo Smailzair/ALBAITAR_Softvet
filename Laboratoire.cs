@@ -2,6 +2,7 @@
 using Microsoft.ReportingServices.Diagnostics.Internal;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Resources
@@ -33,7 +34,8 @@ namespace ALBAITAR_Softvet.Resources
 
         private void Laboratoire_Load(object sender, EventArgs e)
         {
-
+            
+            //--------------------------
             animaux = PreConnection.Load_data("SELECT tb1.`ID`,"
                      + "tb1.`NME`,"
                      + "tb1.`ESPECE`,"

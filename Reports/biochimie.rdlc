@@ -9427,7 +9427,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.17083cm</Top>
+              <Top>1.52361cm</Top>
               <Left>4.30953cm</Left>
               <Height>0.6cm</Height>
               <Width>1.25646cm</Width>
@@ -9461,7 +9461,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.94722cm</Top>
+              <Top>2.12361cm</Top>
               <Left>4.30953cm</Left>
               <Height>0.6cm</Height>
               <Width>2.02375cm</Width>
@@ -9529,7 +9529,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.17083cm</Top>
+              <Top>1.52361cm</Top>
               <Left>12.99656cm</Left>
               <Height>0.6cm</Height>
               <Width>1.25646cm</Width>
@@ -9563,7 +9563,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.94722cm</Top>
+              <Top>2.12361cm</Top>
               <Left>12.99656cm</Left>
               <Height>0.6cm</Height>
               <Width>1.25646cm</Width>
@@ -9619,7 +9619,24 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value> - Bilan Sanguin (biochimie) -</Value>
+                      <Value>=Parameters!CABINET.Value</Value>
+                      <Style>
+                        <FontStyle>Normal</FontStyle>
+                        <FontFamily>Century Gothic</FontFamily>
+                        <FontSize>15pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                        <Color>Indigo</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>- Bilan Sanguin (biochimie) -</Value>
                       <Style>
                         <FontStyle>Normal</FontStyle>
                         <FontFamily>Century Gothic</FontFamily>
@@ -9636,7 +9653,7 @@
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>0.10671cm</Top>
               <Left>6.45782cm</Left>
-              <Height>0.81167cm</Height>
+              <Height>1.38162cm</Height>
               <Width>9.32427cm</Width>
               <ZIndex>7</ZIndex>
               <Style>
@@ -9666,7 +9683,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>ANIM_NME</rd:DefaultName>
-              <Top>1.17083cm</Top>
+              <Top>1.52361cm</Top>
               <Left>5.56599cm</Left>
               <Height>0.6cm</Height>
               <Width>7.25418cm</Width>
@@ -9698,7 +9715,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>PRIOR</rd:DefaultName>
-              <Top>1.94722cm</Top>
+              <Top>2.12361cm</Top>
               <Left>6.33328cm</Left>
               <Height>0.6cm</Height>
               <Width>6.48689cm</Width>
@@ -9762,7 +9779,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>RACE</rd:DefaultName>
-              <Top>1.17083cm</Top>
+              <Top>1.52361cm</Top>
               <Left>14.25302cm</Left>
               <Height>0.6cm</Height>
               <Width>5.27812cm</Width>
@@ -9794,7 +9811,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>SEX</rd:DefaultName>
-              <Top>1.94722cm</Top>
+              <Top>2.12361cm</Top>
               <Left>14.25302cm</Left>
               <Height>0.6cm</Height>
               <Width>5.27812cm</Width>
@@ -10338,11 +10355,22 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="CABINET">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value>=""</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>11</NumberOfRows>
+      <NumberOfRows>12</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -10558,6 +10586,11 @@
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>10</RowIndex>
           <ParameterName>BIO_028</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>11</RowIndex>
+          <ParameterName>CABINET</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

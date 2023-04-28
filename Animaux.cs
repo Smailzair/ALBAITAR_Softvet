@@ -132,84 +132,93 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bool all_ready = true;            
-            textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
-            comboBox1.BackColor = comboBox1.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
-            all_ready &= comboBox1.BackColor == SystemColors.Window;
-            all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
-            if (all_ready && label13.Visible) { all_ready &= MessageBox.Show("Ce animal déja existe pour ce client,\n\nVoulez vous continuer comme meme ?\n\n", "Attention :", MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes; }
-            //-------------
-            label12.Visible = !all_ready;
-            //-------------
-            if (all_ready)
+            bool autorisat = Properties.Settings.Default.Last_login_is_admin || (Is_New && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20001" && (Int32)QQ[3] == 1).Count() > 0) || (!Is_New && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20003" && (Int32)QQ[3] == 1).Count() > 0);
+            if (autorisat)
             {
-                if (Is_New) //INSERT
+                bool all_ready = true;
+                textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
+                comboBox1.BackColor = comboBox1.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
+                all_ready &= comboBox1.BackColor == SystemColors.Window;
+                all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+                if (all_ready && label13.Visible) { all_ready &= MessageBox.Show("Ce animal déja existe pour ce client,\n\nVoulez vous continuer comme meme ?\n\n", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes; }
+                //-------------
+                label12.Visible = !all_ready;
+                //-------------
+                if (all_ready)
                 {
-                    //byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : (pictureBox2.Image != null ? PreConnection.ImageToByteArray(pictureBox2.Image) : null);
-                    byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
-                    string insert_cmnd = "INSERT INTO `tb_animaux`"
-                            + "(`NME`,"
-                            + "`NUM_IDENTIF`,"
-                            + "`NUM_PASSPORT`,"
-                            + "`CLIENT_ID`,"
-                            + "`ESPECE`,"
-                            + "`RACE`,"
-                            + "`SEXE`,"
-                            + "`NISS_DATE`,"
-                            + "`ROBE`,"
-                            + "`OBSERVATIONS`,"
-                            + "`IS_RADIATED`,"
-                            + "`RADIATION_DATE`,"
-                            + "`RADIATION_CAUSES`"
-                            + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE`" : "")
-                            + ") VALUES "
-                            + "('" + textBox3.Text + "',"//<{ NME: }>,
-                            + "'" + textBox2.Text + "',"//{ NUM_IDENTIF: }>,
-                            + "'" + textBox4.Text + "',"//{ NUM_PASSPORT: }>,
-                            + comboBox1.SelectedValue + ","//{ CLIENT_ID: }>,
-                            + "'" + comboBox2.Text + "',"//{ ESPECE: }>,
-                            + "'" + comboBox3.Text + "',"//{ RACE: }>,
-                            + "'" + comboBox4.Text + "',"//{ SEXE: }>,
-                            + (dateTimePicker1.Value.Date != DateTime.Now.Date ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ NISS_DATE: }>,
-                            + "'" + textBox6.Text + "',"//{ ROBE: }>,
-                            + "'" + textBox8.Text + "',"//{ OBSERVATIONS: }>,
-                            + (checkBox1.Checked ? "TRUE" : "FALSE") + ","//{ IS_RADIATED: 0}>,
-                            + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ RADIATION_DATE: }>,
-                            + "'" + (checkBox1.Checked ? textBox5.Text : "") + "'" //{ RADIATION_CAUSES 
-                            + (File.Exists(openFileDialog1.FileName) ? ",@Pic" : "") 
-                            + ");";
-                    MySqlCommand cmd= new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
-                    if(File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
-                    PreConnection.open_conn();
-                    cmd.ExecuteNonQuery();
+                    if (Is_New) //INSERT
+                    {
+                        //byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : (pictureBox2.Image != null ? PreConnection.ImageToByteArray(pictureBox2.Image) : null);
+                        byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
+                        string insert_cmnd = "INSERT INTO `tb_animaux`"
+                                + "(`NME`,"
+                                + "`NUM_IDENTIF`,"
+                                + "`NUM_PASSPORT`,"
+                                + "`CLIENT_ID`,"
+                                + "`ESPECE`,"
+                                + "`RACE`,"
+                                + "`SEXE`,"
+                                + "`NISS_DATE`,"
+                                + "`ROBE`,"
+                                + "`OBSERVATIONS`,"
+                                + "`IS_RADIATED`,"
+                                + "`RADIATION_DATE`,"
+                                + "`RADIATION_CAUSES`"
+                                + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE`" : "")
+                                + ") VALUES "
+                                + "('" + textBox3.Text + "',"//<{ NME: }>,
+                                + "'" + textBox2.Text + "',"//{ NUM_IDENTIF: }>,
+                                + "'" + textBox4.Text + "',"//{ NUM_PASSPORT: }>,
+                                + comboBox1.SelectedValue + ","//{ CLIENT_ID: }>,
+                                + "'" + comboBox2.Text + "',"//{ ESPECE: }>,
+                                + "'" + comboBox3.Text + "',"//{ RACE: }>,
+                                + "'" + comboBox4.Text + "',"//{ SEXE: }>,
+                                + (dateTimePicker1.Value.Date != DateTime.Now.Date ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ NISS_DATE: }>,
+                                + "'" + textBox6.Text + "',"//{ ROBE: }>,
+                                + "'" + textBox8.Text + "',"//{ OBSERVATIONS: }>,
+                                + (checkBox1.Checked ? "TRUE" : "FALSE") + ","//{ IS_RADIATED: 0}>,
+                                + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ RADIATION_DATE: }>,
+                                + "'" + (checkBox1.Checked ? textBox5.Text : "") + "'" //{ RADIATION_CAUSES 
+                                + (File.Exists(openFileDialog1.FileName) ? ",@Pic" : "")
+                                + ");";
+                        MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
+                        if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
+                        PreConnection.open_conn();
+                        cmd.ExecuteNonQuery();
+                    }
+                    else //UPDATE
+                    {
+                        byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
+                        string insert_cmnd = "UPDATE `tb_animaux` SET "
+                                + "`NME` = '" + textBox3.Text + "',"
+                                + "`NUM_IDENTIF` = '" + textBox2.Text + "',"
+                                + "`NUM_PASSPORT` = '" + textBox4.Text + "',"
+                                + "`CLIENT_ID` = " + comboBox1.SelectedValue + ","
+                                + "`ESPECE` = '" + comboBox2.Text + "',"
+                                + "`RACE` = '" + comboBox3.Text + "',"
+                                + "`SEXE` = '" + comboBox4.Text + "',"
+                                + "`NISS_DATE` = " + (dateTimePicker1.Value.Date != DateTime.Now.Date ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
+                                + "`ROBE` = '" + textBox6.Text + "',"
+                                + "`OBSERVATIONS` = '" + textBox8.Text + "',"
+                                + "`IS_RADIATED` = " + (checkBox1.Checked ? "TRUE" : "FALSE") + ","
+                                + "`RADIATION_DATE` = " + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
+                                + "`RADIATION_CAUSES` = '" + (checkBox1.Checked ? textBox5.Text : "") + "'"
+                                + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE` = @Pic" : (!button7.Visible ? ",`PICTURE` = NULL" : ""))
+                                + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";";
+                        MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
+                        if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
+                        PreConnection.open_conn();
+                        cmd.ExecuteNonQuery();
+                    }
+                    //----------------
+                    Load_anims_from_DB();
                 }
-                else //UPDATE
-                {
-                    byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
-                    string insert_cmnd = "UPDATE `tb_animaux` SET "
-                            + "`NME` = '" + textBox3.Text + "',"
-                            + "`NUM_IDENTIF` = '" + textBox2.Text + "',"
-                            + "`NUM_PASSPORT` = '" + textBox4.Text + "',"
-                            + "`CLIENT_ID` = " + comboBox1.SelectedValue + ","
-                            + "`ESPECE` = '" + comboBox2.Text + "',"
-                            + "`RACE` = '" + comboBox3.Text + "',"
-                            + "`SEXE` = '" + comboBox4.Text + "',"
-                            + "`NISS_DATE` = " + (dateTimePicker1.Value.Date != DateTime.Now.Date ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
-                            + "`ROBE` = '" + textBox6.Text + "',"
-                            + "`OBSERVATIONS` = '" + textBox8.Text + "',"
-                            + "`IS_RADIATED` = " + (checkBox1.Checked ? "TRUE" : "FALSE") + ","
-                            + "`RADIATION_DATE` = " + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
-                            + "`RADIATION_CAUSES` = '" + (checkBox1.Checked ? textBox5.Text : "") + "'"
-                            + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE` = @Pic" : (!button7.Visible ? ",`PICTURE` = NULL" : ""))
-                            + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";";
-                    MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
-                    if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
-                    PreConnection.open_conn();
-                    cmd.ExecuteNonQuery();
-                }
-                //----------------
-                Load_anims_from_DB();
             }
+            else
+            {
+                new Non_Autorized_Msg("").ShowDialog();
+            }
+            
 
         }
 

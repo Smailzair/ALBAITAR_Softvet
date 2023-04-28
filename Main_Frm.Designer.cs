@@ -45,6 +45,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            label_cab_nme = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -291,6 +292,17 @@
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
+            // label_cab_nme
+            // 
+            label_cab_nme.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label_cab_nme.ForeColor = System.Drawing.Color.Purple;
+            label_cab_nme.Location = new System.Drawing.Point(209, 13);
+            label_cab_nme.Name = "label_cab_nme";
+            label_cab_nme.Size = new System.Drawing.Size(350, 25);
+            label_cab_nme.TabIndex = 21;
+            label_cab_nme.Text = "Cabinet : --";
+            label_cab_nme.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // Main_Frm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -306,6 +318,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(label_cab_nme);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -338,5 +351,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        public static System.Windows.Forms.Label label_cab_nme;
     }
 }

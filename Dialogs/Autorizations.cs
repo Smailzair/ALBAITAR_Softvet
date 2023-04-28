@@ -40,7 +40,7 @@ namespace ALBAITAR_Softvet.Resources
                 Modifier_ses_autor_92002 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92002" && (Int32)QQ[3] == 1).Count() > 0;
                 Modifier_autor_d_autres_92003 = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92003" && (Int32)QQ[3] == 1).Count() > 0;                
             }
-
+            button2.Visible = comboBox1.SelectedIndex > 0;
         }
 
         private void Autorizations_Load(object sender, System.EventArgs e)
@@ -99,8 +99,7 @@ namespace ALBAITAR_Softvet.Resources
                 }
             }
             //---------
-            dataGridView1.DataSource = tmp_db;
-            button2.Visible = comboBox1.SelectedIndex > 0;
+            dataGridView1.DataSource = tmp_db;            
             //------------
             if(comboBox1.SelectedValue.ToString() == Properties.Settings.Default.Last_login_user_idx.ToString())
             {
@@ -112,6 +111,7 @@ namespace ALBAITAR_Softvet.Resources
                 dataGridView1.Visible = Consulter_autors_d_autres_92001 || Modifier_autor_d_autres_92003;
                 button1.Visible = button2.Visible = button3.Visible = Modifier_autor_d_autres_92003;
             }
+            button2.Visible = comboBox1.SelectedIndex > 0;
             //---------
             textBox1.Clear();
 

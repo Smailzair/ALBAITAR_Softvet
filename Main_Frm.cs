@@ -21,6 +21,7 @@ namespace ALBAITAR_Softvet
         public static DataTable ADRESSES_SITES;
         bool sites_table_ready = false;
         public static DataTable Autorisations;
+        public static DataTable Params;
         public Main_Frm()
         {
             InitializeComponent();
@@ -31,6 +32,8 @@ namespace ALBAITAR_Softvet
                 Autorisations = PreConnection.Load_data("SELECT `ID`,`CODE`,`AUTOR_TEXT`,Usr_" + Properties.Settings.Default.Last_login_user_idx + " FROM tb_autoriz;");
             }
             //----------------------------
+            Params = PreConnection.Load_data("SELECT * FROM tb_params;");
+            //------------------------------
             th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting perfermance of "Clients" from
             th.Start();
             //--------------
@@ -135,11 +138,44 @@ namespace ALBAITAR_Softvet
         private void Main_Frm_Load(object sender, EventArgs e)
         {
             Text = "ALBAITAR Softvet - " + Properties.Settings.Default.Last_login_user_full_nme;
+            string cab_doct = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();                        
+            if(cab_doct == null || cab_doct.Trim() == string.Empty)
+            {
+                if(Properties.Settings.Default.Last_login_is_admin || Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92004" && (Int32)QQ[3] == 1).Count() > 0)
+                {
+                    string dd = "";
+                    int p = 3;
+                    while (dd == string.Empty && p > 0)
+                    {
+                        PreConnection.InputBox("Veuillez saisir votre identification : ", "Exp : Dr.xxx , Cabinet xxx, ...", ref dd);
+                        p--;
+                    }
+                    if (dd != string.Empty)
+                    {
+                        PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '" + dd + "' WHERE `ID` = 1;");
+                        Params = PreConnection.Load_data("SELECT * FROM tb_params;");
+                    }
+                    else
+                    {
+                        Application.Exit();
+                    }
+                }
+                else
+                {
+                    Application.Exit();
+                }
+            }
+            else
+            {
+                label_cab_nme.Text = cab_doct;
+            }
+            
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
                 button9.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10000" && (Int32)QQ[3] == 1).Count() > 0;
                 button11.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20000" && (Int32)QQ[3] == 1).Count() > 0;
                 button12.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30000" && (Int32)QQ[3] == 1).Count() > 0;
+                button4.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31000" && (Int32)QQ[3] == 1).Count() > 0;
                 button5.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40000" && (Int32)QQ[3] == 1).Count() > 0;
                 button7.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50000" && (Int32)QQ[3] == 1).Count() > 0;
             }
