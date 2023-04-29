@@ -294,6 +294,8 @@
             // 
             // label_cab_nme
             // 
+            label_cab_nme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             label_cab_nme.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             label_cab_nme.ForeColor = System.Drawing.Color.Purple;
             label_cab_nme.Location = new System.Drawing.Point(209, 13);

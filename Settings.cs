@@ -74,6 +74,9 @@ namespace ALBAITAR_Softvet
             button2.Enabled = Properties.Settings.Default.Last_login_is_admin || Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92000" && (Int32)QQ[3] == 1).Count() > 0 || Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92001" && (Int32)QQ[3] == 1).Count() > 0;
             groupBox1.Enabled = Properties.Settings.Default.Last_login_is_admin || Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92004" && (Int32)QQ[3] == 1).Count() > 0;
             textBox1.Text = Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
+            textBox2.Text = Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
+            textBox3.Text = Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
+            textBox4.Text = Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
         }
 
 
@@ -81,8 +84,12 @@ namespace ALBAITAR_Softvet
         {
             textBox1.BackColor = textBox1.Text.Trim().Length == 0 ? Color.LightCoral : SystemColors.Window;
             if(textBox1.BackColor == SystemColors.Window)
-            {                
-                PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '"+textBox1.Text+"' WHERE `ID` = 1;");
+            {
+                string cmmd = "UPDATE tb_params SET `VAL` = '" + textBox1.Text + "' WHERE `ID` = 1;";
+                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox2.Text + "' WHERE `ID` = 2;";
+                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox3.Text + "' WHERE `ID` = 3;";
+                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox4.Text + "' WHERE `ID` = 4;";
+                PreConnection.Excut_Cmd(cmmd);
                 Main_Frm.Params = PreConnection.Load_data("SELECT * FROM tb_params;");
                 Main_Frm.label_cab_nme.Text = textBox1.Text;
             }
