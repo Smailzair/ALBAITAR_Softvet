@@ -22,7 +22,7 @@ namespace ALBAITAR_Softvet.Labo
         DataTable new_initial_tbl;
         bool is_new = true;
         string ref_tmp = string.Empty;
-
+        bool default_modif_autorized = false;
         public Biochimie(DataGridViewRow selected_anim)
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace ALBAITAR_Softvet.Labo
             new_initial_tbl.Columns.Add("DEFAULT_MIN", typeof(decimal));
             new_initial_tbl.Columns.Add("DEFAULT_MAX", typeof(decimal));
             new_initial_tbl.Columns.Add("DEFAULT_FULL", typeof(string));
-            string[] paramss = { "Glucose", "Urée (BUN)", "Créatinine", "Acide Urique", "Cholesterol", "Triglycérides", "Proteines Totales", "Albumina", "Globulines", "Indice alb/glb", "Bilirubine Totale", "Bilirubine Conjuguée", "GPT(ALT)", "GOT(AST)", "Phosphatases Alc", "Gamma-GT", "L.D.H", "C.P.K", "Lipase", "Amylase", "Fructosamine", "Calcium", "Phosphore", "Chlore", "Potassium", "Sodium", "Amoniac", "Fer"};
+            string[] paramss = { "Glucose", "Urée (BUN)", "Créatinine", "Acide Urique", "Cholesterol", "Triglycérides", "Proteines Totales", "Albumina", "Globulines", "Indice alb/glb", "Bilirubine Totale", "Bilirubine Conjuguée", "GPT(ALT)", "GOT(AST)", "Phosphatases Alc", "Gamma-GT", "L.D.H", "C.P.K", "Lipase", "Amylase", "Fructosamine", "Calcium", "Phosphore", "Chlore", "Potassium", "Sodium", "Amoniac", "Fer" };
             foreach (string param in paramss)
             {
                 DataRow rw = new_initial_tbl.NewRow();
@@ -70,141 +70,353 @@ namespace ALBAITAR_Softvet.Labo
             new_initial_tbl.Rows[25]["UNIT"] = "mmol/l";
             new_initial_tbl.Rows[26]["UNIT"] = "mmol/l";
             new_initial_tbl.Rows[27]["UNIT"] = "ug/dl";
+            /*
+                        switch ((string)selected_animm.Cells["ESPECE"].Value)
+                        {
+                            case "Canine":
+                                new_initial_tbl.Rows[0]["DEFAULT_MIN"] = 70;
+                                new_initial_tbl.Rows[1]["DEFAULT_MIN"] = 8;
+                                new_initial_tbl.Rows[2]["DEFAULT_MIN"] = 0.7;
+                                new_initial_tbl.Rows[3]["DEFAULT_MIN"] = 0;
+                                new_initial_tbl.Rows[4]["DEFAULT_MIN"] = 70;
+                                new_initial_tbl.Rows[5]["DEFAULT_MIN"] = 16;
+                                new_initial_tbl.Rows[6]["DEFAULT_MIN"] = 5;
+                                new_initial_tbl.Rows[7]["DEFAULT_MIN"] = 2;
+                                new_initial_tbl.Rows[8]["DEFAULT_MIN"] = 1.5;
+                                new_initial_tbl.Rows[9]["DEFAULT_MIN"] = 0.62;
+                                new_initial_tbl.Rows[10]["DEFAULT_MIN"] = 0;
+                                new_initial_tbl.Rows[11]["DEFAULT_MIN"] = 0;
+                                new_initial_tbl.Rows[12]["DEFAULT_MIN"] = 28;
+                                new_initial_tbl.Rows[13]["DEFAULT_MIN"] = 18;
+                                new_initial_tbl.Rows[14]["DEFAULT_MIN"] = 12;
+                                new_initial_tbl.Rows[15]["DEFAULT_MIN"] = 4;
+                                new_initial_tbl.Rows[16]["DEFAULT_MIN"] = 50;
+                                new_initial_tbl.Rows[17]["DEFAULT_MIN"] = DBNull.Value;
+                                new_initial_tbl.Rows[18]["DEFAULT_MIN"] = 5;
+                                new_initial_tbl.Rows[19]["DEFAULT_MIN"] = 580;
+                                new_initial_tbl.Rows[20]["DEFAULT_MIN"] = 1.9;
+                                new_initial_tbl.Rows[21]["DEFAULT_MIN"] = 6;
+                                new_initial_tbl.Rows[22]["DEFAULT_MIN"] = 2;
+                                new_initial_tbl.Rows[23]["DEFAULT_MIN"] = 107;
+                                new_initial_tbl.Rows[24]["DEFAULT_MIN"] = 3.5;
+                                new_initial_tbl.Rows[25]["DEFAULT_MIN"] = 138;
+                                new_initial_tbl.Rows[26]["DEFAULT_MIN"] = DBNull.Value;
+                                new_initial_tbl.Rows[27]["DEFAULT_MIN"] = 90;
+                                //--------------
+                                new_initial_tbl.Rows[0]["DEFAULT_MAX"] = 120;
+                                new_initial_tbl.Rows[1]["DEFAULT_MAX"] = 33;
+                                new_initial_tbl.Rows[2]["DEFAULT_MAX"] = 1.6;
+                                new_initial_tbl.Rows[3]["DEFAULT_MAX"] = 10;
+                                new_initial_tbl.Rows[4]["DEFAULT_MAX"] = 250;
+                                new_initial_tbl.Rows[5]["DEFAULT_MAX"] = 120;
+                                new_initial_tbl.Rows[6]["DEFAULT_MAX"] = 7;
+                                new_initial_tbl.Rows[7]["DEFAULT_MAX"] = 4;
+                                new_initial_tbl.Rows[8]["DEFAULT_MAX"] = 5;
+                                new_initial_tbl.Rows[9]["DEFAULT_MAX"] = 1.28;
+                                new_initial_tbl.Rows[10]["DEFAULT_MAX"] = 0.9;
+                                new_initial_tbl.Rows[11]["DEFAULT_MAX"] = 0.3;
+                                new_initial_tbl.Rows[12]["DEFAULT_MAX"] = 78;
+                                new_initial_tbl.Rows[13]["DEFAULT_MAX"] = 70;
+                                new_initial_tbl.Rows[14]["DEFAULT_MAX"] = 121;
+                                new_initial_tbl.Rows[15]["DEFAULT_MAX"] = 23;
+                                new_initial_tbl.Rows[16]["DEFAULT_MAX"] = 450;
+                                new_initial_tbl.Rows[17]["DEFAULT_MAX"] = DBNull.Value;
+                                new_initial_tbl.Rows[18]["DEFAULT_MAX"] = 500;
+                                new_initial_tbl.Rows[19]["DEFAULT_MAX"] = 2000;
+                                new_initial_tbl.Rows[20]["DEFAULT_MAX"] = 2.7;
+                                new_initial_tbl.Rows[21]["DEFAULT_MAX"] = 12;
+                                new_initial_tbl.Rows[22]["DEFAULT_MAX"] = 7;
+                                new_initial_tbl.Rows[23]["DEFAULT_MAX"] = 120;
+                                new_initial_tbl.Rows[24]["DEFAULT_MAX"] = 5;
+                                new_initial_tbl.Rows[25]["DEFAULT_MAX"] = 150;
+                                new_initial_tbl.Rows[26]["DEFAULT_MAX"] = 98;
+                                new_initial_tbl.Rows[27]["DEFAULT_MAX"] = 150;
+                                break;
+                            case "Feline":
+                                new_initial_tbl.Rows[0]["DEFAULT_MIN"] = 75;
+                                new_initial_tbl.Rows[1]["DEFAULT_MIN"] = 15;
+                                new_initial_tbl.Rows[2]["DEFAULT_MIN"] = 0.8;
+                                new_initial_tbl.Rows[3]["DEFAULT_MIN"] = 0;
+                                new_initial_tbl.Rows[4]["DEFAULT_MIN"] = 73;
+                                new_initial_tbl.Rows[5]["DEFAULT_MIN"] = 21;
+                                new_initial_tbl.Rows[6]["DEFAULT_MIN"] = 5.5;
+                                new_initial_tbl.Rows[7]["DEFAULT_MIN"] = 2.5;
+                                new_initial_tbl.Rows[8]["DEFAULT_MIN"] = 2.5;
+                                new_initial_tbl.Rows[9]["DEFAULT_MIN"] = 0.4;
+                                new_initial_tbl.Rows[10]["DEFAULT_MIN"] = 0;
+                                new_initial_tbl.Rows[11]["DEFAULT_MIN"] = 0;
+                                new_initial_tbl.Rows[12]["DEFAULT_MIN"] = 10;
+                                new_initial_tbl.Rows[13]["DEFAULT_MIN"] = 10;
+                                new_initial_tbl.Rows[14]["DEFAULT_MIN"] = 10;
+                                new_initial_tbl.Rows[15]["DEFAULT_MIN"] = 1;
+                                new_initial_tbl.Rows[16]["DEFAULT_MIN"] = 75;
+                                new_initial_tbl.Rows[17]["DEFAULT_MIN"] = DBNull.Value;
+                                new_initial_tbl.Rows[18]["DEFAULT_MIN"] = 25;
+                                new_initial_tbl.Rows[19]["DEFAULT_MIN"] = 500;
+                                new_initial_tbl.Rows[20]["DEFAULT_MIN"] = 2;
+                                new_initial_tbl.Rows[21]["DEFAULT_MIN"] = 9;
+                                new_initial_tbl.Rows[22]["DEFAULT_MIN"] = 2.5;
+                                new_initial_tbl.Rows[23]["DEFAULT_MIN"] = 115;
+                                new_initial_tbl.Rows[24]["DEFAULT_MIN"] = 3.5;
+                                new_initial_tbl.Rows[25]["DEFAULT_MIN"] = 145;
+                                new_initial_tbl.Rows[26]["DEFAULT_MIN"] = DBNull.Value;
+                                new_initial_tbl.Rows[27]["DEFAULT_MIN"] = 68;
+                                //--------------
+                                new_initial_tbl.Rows[0]["DEFAULT_MAX"] = 200;
+                                new_initial_tbl.Rows[1]["DEFAULT_MAX"] = 30;
+                                new_initial_tbl.Rows[2]["DEFAULT_MAX"] = 1.8;
+                                new_initial_tbl.Rows[3]["DEFAULT_MAX"] = 0.3;
+                                new_initial_tbl.Rows[4]["DEFAULT_MAX"] = 300;
+                                new_initial_tbl.Rows[5]["DEFAULT_MAX"] = 156;
+                                new_initial_tbl.Rows[6]["DEFAULT_MAX"] = 7.1;
+                                new_initial_tbl.Rows[7]["DEFAULT_MAX"] = 4;
+                                new_initial_tbl.Rows[8]["DEFAULT_MAX"] = 5;
+                                new_initial_tbl.Rows[9]["DEFAULT_MAX"] = 1.4;
+                                new_initial_tbl.Rows[10]["DEFAULT_MAX"] = 0.9;
+                                new_initial_tbl.Rows[11]["DEFAULT_MAX"] = 0.1;
+                                new_initial_tbl.Rows[12]["DEFAULT_MAX"] = 80;
+                                new_initial_tbl.Rows[13]["DEFAULT_MAX"] = 80;
+                                new_initial_tbl.Rows[14]["DEFAULT_MAX"] = 80;
+                                new_initial_tbl.Rows[15]["DEFAULT_MAX"] = 10;
+                                new_initial_tbl.Rows[16]["DEFAULT_MAX"] = 600;
+                                new_initial_tbl.Rows[17]["DEFAULT_MAX"] = DBNull.Value;
+                                new_initial_tbl.Rows[18]["DEFAULT_MAX"] = 200;
+                                new_initial_tbl.Rows[19]["DEFAULT_MAX"] = 1800;
+                                new_initial_tbl.Rows[20]["DEFAULT_MAX"] = 3;
+                                new_initial_tbl.Rows[21]["DEFAULT_MAX"] = 12;
+                                new_initial_tbl.Rows[22]["DEFAULT_MAX"] = 9;
+                                new_initial_tbl.Rows[23]["DEFAULT_MAX"] = 130;
+                                new_initial_tbl.Rows[24]["DEFAULT_MAX"] = 5.1;
+                                new_initial_tbl.Rows[25]["DEFAULT_MAX"] = 160;
+                                new_initial_tbl.Rows[26]["DEFAULT_MAX"] = 98;
+                                new_initial_tbl.Rows[27]["DEFAULT_MAX"] = 215;
+                                break;
+                        }
 
-            switch ((string)selected_animm.Cells["ESPECE"].Value)
-            {
-                case "Canine":
-                    new_initial_tbl.Rows[0]["DEFAULT_MIN"] = 70;
-                    new_initial_tbl.Rows[1]["DEFAULT_MIN"] = 8;
-                    new_initial_tbl.Rows[2]["DEFAULT_MIN"] = 0.7;
-                    new_initial_tbl.Rows[3]["DEFAULT_MIN"] = 0;
-                    new_initial_tbl.Rows[4]["DEFAULT_MIN"] = 70;
-                    new_initial_tbl.Rows[5]["DEFAULT_MIN"] = 16;
-                    new_initial_tbl.Rows[6]["DEFAULT_MIN"] = 5;
-                    new_initial_tbl.Rows[7]["DEFAULT_MIN"] = 2;
-                    new_initial_tbl.Rows[8]["DEFAULT_MIN"] = 1.5;
-                    new_initial_tbl.Rows[9]["DEFAULT_MIN"] = 0.62;
-                    new_initial_tbl.Rows[10]["DEFAULT_MIN"] = 0;
-                    new_initial_tbl.Rows[11]["DEFAULT_MIN"] = 0;
-                    new_initial_tbl.Rows[12]["DEFAULT_MIN"] = 28;
-                    new_initial_tbl.Rows[13]["DEFAULT_MIN"] = 18;
-                    new_initial_tbl.Rows[14]["DEFAULT_MIN"] = 12;
-                    new_initial_tbl.Rows[15]["DEFAULT_MIN"] = 4;
-                    new_initial_tbl.Rows[16]["DEFAULT_MIN"] = 50;
-                    //new_initial_tbl.Rows[17]["DEFAULT_MIN"] = null;
-                    new_initial_tbl.Rows[18]["DEFAULT_MIN"] = 5;
-                    new_initial_tbl.Rows[19]["DEFAULT_MIN"] = 580;
-                    new_initial_tbl.Rows[20]["DEFAULT_MIN"] = 1.9;
-                    new_initial_tbl.Rows[21]["DEFAULT_MIN"] = 6;
-                    new_initial_tbl.Rows[22]["DEFAULT_MIN"] = 2;
-                    new_initial_tbl.Rows[23]["DEFAULT_MIN"] = 107;
-                    new_initial_tbl.Rows[24]["DEFAULT_MIN"] = 3.5;
-                    new_initial_tbl.Rows[25]["DEFAULT_MIN"] = 138;
-                    new_initial_tbl.Rows[26]["DEFAULT_MIN"] = DBNull.Value;
-                    new_initial_tbl.Rows[27]["DEFAULT_MIN"] = 90;
-                    //--------------
-                    new_initial_tbl.Rows[0]["DEFAULT_MAX"] = 120;
-                    new_initial_tbl.Rows[1]["DEFAULT_MAX"] = 33;
-                    new_initial_tbl.Rows[2]["DEFAULT_MAX"] = 1.6;
-                    new_initial_tbl.Rows[3]["DEFAULT_MAX"] = 10;
-                    new_initial_tbl.Rows[4]["DEFAULT_MAX"] = 250;
-                    new_initial_tbl.Rows[5]["DEFAULT_MAX"] = 120;
-                    new_initial_tbl.Rows[6]["DEFAULT_MAX"] = 7;
-                    new_initial_tbl.Rows[7]["DEFAULT_MAX"] = 4;
-                    new_initial_tbl.Rows[8]["DEFAULT_MAX"] = 5;
-                    new_initial_tbl.Rows[9]["DEFAULT_MAX"] = 1.28;
-                    new_initial_tbl.Rows[10]["DEFAULT_MAX"] = 0.9;
-                    new_initial_tbl.Rows[11]["DEFAULT_MAX"] = 0.3;
-                    new_initial_tbl.Rows[12]["DEFAULT_MAX"] = 78;
-                    new_initial_tbl.Rows[13]["DEFAULT_MAX"] = 70;
-                    new_initial_tbl.Rows[14]["DEFAULT_MAX"] = 121;
-                    new_initial_tbl.Rows[15]["DEFAULT_MAX"] = 23;
-                    new_initial_tbl.Rows[16]["DEFAULT_MAX"] = 450;
-                    new_initial_tbl.Rows[17]["DEFAULT_MAX"] = DBNull.Value;
-                    new_initial_tbl.Rows[18]["DEFAULT_MAX"] = 500;
-                    new_initial_tbl.Rows[19]["DEFAULT_MAX"] = 2000;
-                    new_initial_tbl.Rows[20]["DEFAULT_MAX"] = 2.7;
-                    new_initial_tbl.Rows[21]["DEFAULT_MAX"] = 12;
-                    new_initial_tbl.Rows[22]["DEFAULT_MAX"] = 7;
-                    new_initial_tbl.Rows[23]["DEFAULT_MAX"] = 120;
-                    new_initial_tbl.Rows[24]["DEFAULT_MAX"] = 5;
-                    new_initial_tbl.Rows[25]["DEFAULT_MAX"] = 150;
-                    new_initial_tbl.Rows[26]["DEFAULT_MAX"] = 98;
-                    new_initial_tbl.Rows[27]["DEFAULT_MAX"] = 150;
-                    break;
-                case "Feline":
-                    new_initial_tbl.Rows[0]["DEFAULT_MIN"] = 75;
-                    new_initial_tbl.Rows[1]["DEFAULT_MIN"] = 15;
-                    new_initial_tbl.Rows[2]["DEFAULT_MIN"] = 0.8;
-                    new_initial_tbl.Rows[3]["DEFAULT_MIN"] = 0;
-                    new_initial_tbl.Rows[4]["DEFAULT_MIN"] = 73;
-                    new_initial_tbl.Rows[5]["DEFAULT_MIN"] = 21;
-                    new_initial_tbl.Rows[6]["DEFAULT_MIN"] = 5.5;
-                    new_initial_tbl.Rows[7]["DEFAULT_MIN"] = 2.5;
-                    new_initial_tbl.Rows[8]["DEFAULT_MIN"] = 2.5;
-                    new_initial_tbl.Rows[9]["DEFAULT_MIN"] = 0.4;
-                    new_initial_tbl.Rows[10]["DEFAULT_MIN"] = 0;
-                    new_initial_tbl.Rows[11]["DEFAULT_MIN"] = 0;
-                    new_initial_tbl.Rows[12]["DEFAULT_MIN"] = 10;
-                    new_initial_tbl.Rows[13]["DEFAULT_MIN"] = 10;
-                    new_initial_tbl.Rows[14]["DEFAULT_MIN"] = 10;
-                    new_initial_tbl.Rows[15]["DEFAULT_MIN"] = 1;
-                    new_initial_tbl.Rows[16]["DEFAULT_MIN"] = 75;
-                    //new_initial_tbl.Rows[17]["DEFAULT_MIN"] = null;
-                    new_initial_tbl.Rows[18]["DEFAULT_MIN"] = 25;
-                    new_initial_tbl.Rows[19]["DEFAULT_MIN"] = 500;
-                    new_initial_tbl.Rows[20]["DEFAULT_MIN"] = 2;
-                    new_initial_tbl.Rows[21]["DEFAULT_MIN"] = 9;
-                    new_initial_tbl.Rows[22]["DEFAULT_MIN"] = 2.5;
-                    new_initial_tbl.Rows[23]["DEFAULT_MIN"] = 115;
-                    new_initial_tbl.Rows[24]["DEFAULT_MIN"] = 3.5;
-                    new_initial_tbl.Rows[25]["DEFAULT_MIN"] = 145;
-                    new_initial_tbl.Rows[26]["DEFAULT_MIN"] = DBNull.Value;
-                    new_initial_tbl.Rows[27]["DEFAULT_MIN"] = 68;
-                    //--------------
-                    new_initial_tbl.Rows[0]["DEFAULT_MAX"] = 200;
-                    new_initial_tbl.Rows[1]["DEFAULT_MAX"] = 30;
-                    new_initial_tbl.Rows[2]["DEFAULT_MAX"] = 1.8;
-                    new_initial_tbl.Rows[3]["DEFAULT_MAX"] = 0.3;
-                    new_initial_tbl.Rows[4]["DEFAULT_MAX"] = 300;
-                    new_initial_tbl.Rows[5]["DEFAULT_MAX"] = 156;
-                    new_initial_tbl.Rows[6]["DEFAULT_MAX"] = 7.1;
-                    new_initial_tbl.Rows[7]["DEFAULT_MAX"] = 4;
-                    new_initial_tbl.Rows[8]["DEFAULT_MAX"] = 5;
-                    new_initial_tbl.Rows[9]["DEFAULT_MAX"] = 1.4;
-                    new_initial_tbl.Rows[10]["DEFAULT_MAX"] = 0.9;
-                    new_initial_tbl.Rows[11]["DEFAULT_MAX"] = 0.1;
-                    new_initial_tbl.Rows[12]["DEFAULT_MAX"] = 80;
-                    new_initial_tbl.Rows[13]["DEFAULT_MAX"] = 80;
-                    new_initial_tbl.Rows[14]["DEFAULT_MAX"] = 80;
-                    new_initial_tbl.Rows[15]["DEFAULT_MAX"] = 10;
-                    new_initial_tbl.Rows[16]["DEFAULT_MAX"] = 600;
-                    new_initial_tbl.Rows[17]["DEFAULT_MAX"] = DBNull.Value;
-                    new_initial_tbl.Rows[18]["DEFAULT_MAX"] = 200;
-                    new_initial_tbl.Rows[19]["DEFAULT_MAX"] = 1800;
-                    new_initial_tbl.Rows[20]["DEFAULT_MAX"] = 3;
-                    new_initial_tbl.Rows[21]["DEFAULT_MAX"] = 12;
-                    new_initial_tbl.Rows[22]["DEFAULT_MAX"] = 9;
-                    new_initial_tbl.Rows[23]["DEFAULT_MAX"] = 130;
-                    new_initial_tbl.Rows[24]["DEFAULT_MAX"] = 5.1;
-                    new_initial_tbl.Rows[25]["DEFAULT_MAX"] = 160;
-                    new_initial_tbl.Rows[26]["DEFAULT_MAX"] = 98;
-                    new_initial_tbl.Rows[27]["DEFAULT_MAX"] = 215;
-                    break;
-            }
-                       
-
-            for (int i = 0; i < paramss.Length; i++)
-            {
-                string val = (new_initial_tbl.Rows[i]["DEFAULT_MIN"] != DBNull.Value ? new_initial_tbl.Rows[i]["DEFAULT_MIN"].ToString() + "-" : "inf ") + (new_initial_tbl.Rows[i]["DEFAULT_MAX"] != null ? new_initial_tbl.Rows[i]["DEFAULT_MAX"].ToString() : "");
-                new_initial_tbl.Rows[i]["DEFAULT_FULL"] = val.Equals("inf ") ? "" : val;
-            }
-
+                        for (int i = 0; i < paramss.Length; i++)
+                        {
+                            string val = (new_initial_tbl.Rows[i]["DEFAULT_MIN"] != DBNull.Value ? new_initial_tbl.Rows[i]["DEFAULT_MIN"].ToString() + "-" : "inf ") + (new_initial_tbl.Rows[i]["DEFAULT_MAX"] != null ? new_initial_tbl.Rows[i]["DEFAULT_MAX"].ToString() : "");
+                            new_initial_tbl.Rows[i]["DEFAULT_FULL"] = val.Equals("inf ") ? "" : val;
+                        }
+            */
             dataGridView1.DataSource = new_initial_tbl;
             //------------------------------
             button3.PerformClick();
         }
+        private void initial_normatifs_defaults()
+        {
+            bool rr = true;
+            string cc = comboBox1.Visible ? (string)comboBox1.SelectedItem : selected_animm.Cells["ESPECE"].Value.ToString();
+            switch (cc)
+            {
+                case "Canine":
+                    dataGridView1.Rows[0].Cells["DEFAULT_MIN2"].Value = 70;
+                    dataGridView1.Rows[1].Cells["DEFAULT_MIN2"].Value = 8;
+                    dataGridView1.Rows[2].Cells["DEFAULT_MIN2"].Value = 0.7;
+                    dataGridView1.Rows[3].Cells["DEFAULT_MIN2"].Value = 0;
+                    dataGridView1.Rows[4].Cells["DEFAULT_MIN2"].Value = 70;
+                    dataGridView1.Rows[5].Cells["DEFAULT_MIN2"].Value = 16;
+                    dataGridView1.Rows[6].Cells["DEFAULT_MIN2"].Value = 5;
+                    dataGridView1.Rows[7].Cells["DEFAULT_MIN2"].Value = 2;
+                    dataGridView1.Rows[8].Cells["DEFAULT_MIN2"].Value = 1.5;
+                    dataGridView1.Rows[9].Cells["DEFAULT_MIN2"].Value = 0.62;
+                    dataGridView1.Rows[10].Cells["DEFAULT_MIN2"].Value = 0;
+                    dataGridView1.Rows[11].Cells["DEFAULT_MIN2"].Value = 0;
+                    dataGridView1.Rows[12].Cells["DEFAULT_MIN2"].Value = 28;
+                    dataGridView1.Rows[13].Cells["DEFAULT_MIN2"].Value = 18;
+                    dataGridView1.Rows[14].Cells["DEFAULT_MIN2"].Value = 12;
+                    dataGridView1.Rows[15].Cells["DEFAULT_MIN2"].Value = 4;
+                    dataGridView1.Rows[16].Cells["DEFAULT_MIN2"].Value = 50;
+                    dataGridView1.Rows[17].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[18].Cells["DEFAULT_MIN2"].Value = 5;
+                    dataGridView1.Rows[19].Cells["DEFAULT_MIN2"].Value = 580;
+                    dataGridView1.Rows[20].Cells["DEFAULT_MIN2"].Value = 1.9;
+                    dataGridView1.Rows[21].Cells["DEFAULT_MIN2"].Value = 6;
+                    dataGridView1.Rows[22].Cells["DEFAULT_MIN2"].Value = 2;
+                    dataGridView1.Rows[23].Cells["DEFAULT_MIN2"].Value = 107;
+                    dataGridView1.Rows[24].Cells["DEFAULT_MIN2"].Value = 3.5;
+                    dataGridView1.Rows[25].Cells["DEFAULT_MIN2"].Value = 138;
+                    dataGridView1.Rows[26].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[27].Cells["DEFAULT_MIN2"].Value = 90;
+                    //--------------
+                    dataGridView1.Rows[0].Cells["DEFAULT_MAX2"].Value = 120;
+                    dataGridView1.Rows[1].Cells["DEFAULT_MAX2"].Value = 33;
+                    dataGridView1.Rows[2].Cells["DEFAULT_MAX2"].Value = 1.6;
+                    dataGridView1.Rows[3].Cells["DEFAULT_MAX2"].Value = 10;
+                    dataGridView1.Rows[4].Cells["DEFAULT_MAX2"].Value = 250;
+                    dataGridView1.Rows[5].Cells["DEFAULT_MAX2"].Value = 120;
+                    dataGridView1.Rows[6].Cells["DEFAULT_MAX2"].Value = 7;
+                    dataGridView1.Rows[7].Cells["DEFAULT_MAX2"].Value = 4;
+                    dataGridView1.Rows[8].Cells["DEFAULT_MAX2"].Value = 5;
+                    dataGridView1.Rows[9].Cells["DEFAULT_MAX2"].Value = 1.28;
+                    dataGridView1.Rows[10].Cells["DEFAULT_MAX2"].Value = 0.9;
+                    dataGridView1.Rows[11].Cells["DEFAULT_MAX2"].Value = 0.3;
+                    dataGridView1.Rows[12].Cells["DEFAULT_MAX2"].Value = 78;
+                    dataGridView1.Rows[13].Cells["DEFAULT_MAX2"].Value = 70;
+                    dataGridView1.Rows[14].Cells["DEFAULT_MAX2"].Value = 121;
+                    dataGridView1.Rows[15].Cells["DEFAULT_MAX2"].Value = 23;
+                    dataGridView1.Rows[16].Cells["DEFAULT_MAX2"].Value = 450;
+                    dataGridView1.Rows[17].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[18].Cells["DEFAULT_MAX2"].Value = 500;
+                    dataGridView1.Rows[19].Cells["DEFAULT_MAX2"].Value = 2000;
+                    dataGridView1.Rows[20].Cells["DEFAULT_MAX2"].Value = 2.7;
+                    dataGridView1.Rows[21].Cells["DEFAULT_MAX2"].Value = 12;
+                    dataGridView1.Rows[22].Cells["DEFAULT_MAX2"].Value = 7;
+                    dataGridView1.Rows[23].Cells["DEFAULT_MAX2"].Value = 120;
+                    dataGridView1.Rows[24].Cells["DEFAULT_MAX2"].Value = 5;
+                    dataGridView1.Rows[25].Cells["DEFAULT_MAX2"].Value = 150;
+                    dataGridView1.Rows[26].Cells["DEFAULT_MAX2"].Value = 98;
+                    dataGridView1.Rows[27].Cells["DEFAULT_MAX2"].Value = 150;
+                    break;
+                case "Feline":
+                    dataGridView1.Rows[0].Cells["DEFAULT_MIN2"].Value = 75;
+                    dataGridView1.Rows[1].Cells["DEFAULT_MIN2"].Value = 15;
+                    dataGridView1.Rows[2].Cells["DEFAULT_MIN2"].Value = 0.8;
+                    dataGridView1.Rows[3].Cells["DEFAULT_MIN2"].Value = 0;
+                    dataGridView1.Rows[4].Cells["DEFAULT_MIN2"].Value = 73;
+                    dataGridView1.Rows[5].Cells["DEFAULT_MIN2"].Value = 21;
+                    dataGridView1.Rows[6].Cells["DEFAULT_MIN2"].Value = 5.5;
+                    dataGridView1.Rows[7].Cells["DEFAULT_MIN2"].Value = 2.5;
+                    dataGridView1.Rows[8].Cells["DEFAULT_MIN2"].Value = 2.5;
+                    dataGridView1.Rows[9].Cells["DEFAULT_MIN2"].Value = 0.4;
+                    dataGridView1.Rows[10].Cells["DEFAULT_MIN2"].Value = 0;
+                    dataGridView1.Rows[11].Cells["DEFAULT_MIN2"].Value = 0;
+                    dataGridView1.Rows[12].Cells["DEFAULT_MIN2"].Value = 10;
+                    dataGridView1.Rows[13].Cells["DEFAULT_MIN2"].Value = 10;
+                    dataGridView1.Rows[14].Cells["DEFAULT_MIN2"].Value = 10;
+                    dataGridView1.Rows[15].Cells["DEFAULT_MIN2"].Value = 1;
+                    dataGridView1.Rows[16].Cells["DEFAULT_MIN2"].Value = 75;
+                    dataGridView1.Rows[17].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[18].Cells["DEFAULT_MIN2"].Value = 25;
+                    dataGridView1.Rows[19].Cells["DEFAULT_MIN2"].Value = 500;
+                    dataGridView1.Rows[20].Cells["DEFAULT_MIN2"].Value = 2;
+                    dataGridView1.Rows[21].Cells["DEFAULT_MIN2"].Value = 9;
+                    dataGridView1.Rows[22].Cells["DEFAULT_MIN2"].Value = 2.5;
+                    dataGridView1.Rows[23].Cells["DEFAULT_MIN2"].Value = 115;
+                    dataGridView1.Rows[24].Cells["DEFAULT_MIN2"].Value = 3.5;
+                    dataGridView1.Rows[25].Cells["DEFAULT_MIN2"].Value = 145;
+                    dataGridView1.Rows[26].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[27].Cells["DEFAULT_MIN2"].Value = 68;
 
+                    //--------------
+                    dataGridView1.Rows[0].Cells["DEFAULT_MAX2"].Value = 200;
+                    dataGridView1.Rows[1].Cells["DEFAULT_MAX2"].Value = 30;
+                    dataGridView1.Rows[2].Cells["DEFAULT_MAX2"].Value = 1.8;
+                    dataGridView1.Rows[3].Cells["DEFAULT_MAX2"].Value = 0.3;
+                    dataGridView1.Rows[4].Cells["DEFAULT_MAX2"].Value = 300;
+                    dataGridView1.Rows[5].Cells["DEFAULT_MAX2"].Value = 156;
+                    dataGridView1.Rows[6].Cells["DEFAULT_MAX2"].Value = 7.1;
+                    dataGridView1.Rows[7].Cells["DEFAULT_MAX2"].Value = 4;
+                    dataGridView1.Rows[8].Cells["DEFAULT_MAX2"].Value = 5;
+                    dataGridView1.Rows[9].Cells["DEFAULT_MAX2"].Value = 1.4;
+                    dataGridView1.Rows[10].Cells["DEFAULT_MAX2"].Value = 0.9;
+                    dataGridView1.Rows[11].Cells["DEFAULT_MAX2"].Value = 0.1;
+                    dataGridView1.Rows[12].Cells["DEFAULT_MAX2"].Value = 80;
+                    dataGridView1.Rows[13].Cells["DEFAULT_MAX2"].Value = 80;
+                    dataGridView1.Rows[14].Cells["DEFAULT_MAX2"].Value = 80;
+                    dataGridView1.Rows[15].Cells["DEFAULT_MAX2"].Value = 10;
+                    dataGridView1.Rows[16].Cells["DEFAULT_MAX2"].Value = 600;
+                    dataGridView1.Rows[17].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[18].Cells["DEFAULT_MAX2"].Value = 200;
+                    dataGridView1.Rows[19].Cells["DEFAULT_MAX2"].Value = 1800;
+                    dataGridView1.Rows[20].Cells["DEFAULT_MAX2"].Value = 3;
+                    dataGridView1.Rows[21].Cells["DEFAULT_MAX2"].Value = 12;
+                    dataGridView1.Rows[22].Cells["DEFAULT_MAX2"].Value = 9;
+                    dataGridView1.Rows[23].Cells["DEFAULT_MAX2"].Value = 130;
+                    dataGridView1.Rows[24].Cells["DEFAULT_MAX2"].Value = 5.1;
+                    dataGridView1.Rows[25].Cells["DEFAULT_MAX2"].Value = 160;
+                    dataGridView1.Rows[26].Cells["DEFAULT_MAX2"].Value = 98;
+                    dataGridView1.Rows[27].Cells["DEFAULT_MAX2"].Value = 215;
+                    break;
+                default:
+                    dataGridView1.Rows[0].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[1].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[2].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[3].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[4].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[5].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[6].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[7].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[8].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[9].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[10].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[11].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[12].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[13].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[14].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[15].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[16].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[17].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[18].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[19].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[20].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[21].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[22].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[23].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[24].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[25].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[26].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+                    dataGridView1.Rows[27].Cells["DEFAULT_MIN2"].Value = DBNull.Value;
+
+                    //--------------
+                    dataGridView1.Rows[0].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[1].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[2].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[3].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[4].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[5].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[6].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[7].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[8].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[9].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[10].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[11].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[12].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[13].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[14].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[15].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[16].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[17].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[18].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[19].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[20].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[21].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[22].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[23].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[24].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[25].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[26].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    dataGridView1.Rows[27].Cells["DEFAULT_MAX2"].Value = DBNull.Value;
+                    //----------
+                    rr = false;
+                    break;
+            }
+            if (rr)
+            {
+                for (int i = 0; i < 28; i++)
+                {
+                    string val = (dataGridView1.Rows[i].Cells["DEFAULT_MIN2"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["DEFAULT_MIN2"].Value.ToString() + "-" : "inf ") + (dataGridView1.Rows[i].Cells["DEFAULT_MAX2"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["DEFAULT_MAX2"].Value.ToString() : "");
+                    dataGridView1.Rows[i].Cells["DEFAULT_FULL"].Value = val.Equals("inf ") ? "" : val;
+                }
+            }
+
+
+            //------------
+            if (comboBox1.Visible && comboBox1.SelectedIndex == 0)
+            {
+                default_modif_autorized = true;
+                dataGridView1.Columns["DEFAULT_FULL"].ReadOnly = false;
+                dataGridView1.Columns["DEFAULT_FULL"].DefaultCellStyle.BackColor = Color.FromArgb(255, 224, 192);
+            }
+            else
+            {
+                default_modif_autorized = false;
+                dataGridView1.Columns["DEFAULT_FULL"].ReadOnly = true;
+                dataGridView1.Columns["DEFAULT_FULL"].DefaultCellStyle.BackColor = Color.White;
+            }
+            //----------------
+            dataGridView1.Refresh();
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             this.ParentForm.ControlBox = true;
@@ -228,8 +440,11 @@ namespace ALBAITAR_Softvet.Labo
             label8.Text = (string)selected_animm.Cells["RACE"].Value;
             label13.Text = (string)selected_animm.Cells["SEXE"].Value;
             label14.Text = selected_animm.Cells["NISS_DATE"].Value != DBNull.Value ? ((DateTime)selected_animm.Cells["NISS_DATE"].Value).ToString("d") : "--";
-            textBox2.Text = (string)selected_animm.Cells["OBSERVATIONS"].Value;                     
-            //-------------------------
+            textBox2.Text = (string)selected_animm.Cells["OBSERVATIONS"].Value;
+            //-------------------------            
+            label21.Visible = comboBox1.Visible = !comboBox1.Items.Contains(selected_animm.Cells["ESPECE"].Value.ToString());
+            if (comboBox1.Visible) { comboBox1.SelectedIndex = 0; }
+            //---------------------------
             Load_histor();
 
 
@@ -239,17 +454,17 @@ namespace ALBAITAR_Softvet.Labo
         {
             if (Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && (string)P["LABO_NME"] == "Biochimie").Count() > 0)
             {
-                lab_histor = Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && (string)P["LABO_NME"] == "Biochimie").CopyToDataTable();                
+                lab_histor = Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && (string)P["LABO_NME"] == "Biochimie").CopyToDataTable();
                 dataGridView2.DataSource = lab_histor;
             }
             else
             {
-                if(dataGridView2.DataSource != null)
+                if (dataGridView2.DataSource != null)
                 {
                     DataTable dt = ((DataTable)dataGridView2.DataSource).Clone();
                     dataGridView2.DataSource = dt;
                 }
-                
+
             }
         }
 
@@ -276,25 +491,33 @@ namespace ALBAITAR_Softvet.Labo
                 {
                     dataGridView1.Rows[e.RowIndex].Cells["VALUE2"].Style.BackColor = Color.FromArgb(255, 224, 192);
                 }
-                
+
             }
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        {            
-            if(dataGridView1.SelectedCells.Count > 0) {
+        {
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
                 if (dataGridView1.Columns[dataGridView1.SelectedCells[0].ColumnIndex].Name != "VALUE2")
                 {
-                    dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
-                    int rww = dataGridView1.SelectedCells[0].RowIndex;
-                    dataGridView1.ClearSelection();
-                    dataGridView1.Rows[rww].Cells["VALUE2"].Selected = true;
-                    dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                    if (dataGridView1.Columns[dataGridView1.SelectedCells[0].ColumnIndex].Name == "DEFAULT_FULL" && default_modif_autorized)
+                    {
+
+                    }
+                    else
+                    {
+                        dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                        int rww = dataGridView1.SelectedCells[0].RowIndex;
+                        dataGridView1.ClearSelection();
+                        dataGridView1.Rows[rww].Cells["VALUE2"].Selected = true;
+                        dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                    }
                 }
             }
-            
+
         }
-        
+
         private void button3_Click(object sender, EventArgs e)
         {
             is_new = true;
@@ -302,12 +525,13 @@ namespace ALBAITAR_Softvet.Labo
             button5.Visible = false;
             dateTimePicker1.Value = DateTime.Now;
             textBox1.Clear();
-            textBox3.Text = ref_tmp = "BIO_" + DateTime.Now.ToString("ddMMyyyy") + "_" + DateTime.Now.ToString("HHffff") + "_" + selected_animm.Cells["ID"].Value;            
+            textBox3.Text = ref_tmp = "BIO_" + DateTime.Now.ToString("ddMMyyyy") + "_" + DateTime.Now.ToString("HHffff") + "_" + selected_animm.Cells["ID"].Value;
             //label20.Visible = false;
-            for(int i = 0;  i < dataGridView1.Rows.Count; i++)
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 dataGridView1.Rows[i].Cells["VALUE2"].Value = DBNull.Value;
             }
+            initial_normatifs_defaults();
         }
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -323,7 +547,7 @@ namespace ALBAITAR_Softvet.Labo
         private void Hemogramme_TextChanged(object sender, EventArgs e)
         {
             if (((TextBox)sender).Text.EndsWith(","))
-            {                
+            {
                 ((TextBox)sender).Text = ((TextBox)sender).Text.Substring(0, ((TextBox)sender).Text.Length - 1) + ".";
                 ((TextBox)sender).SelectionStart = ((TextBox)sender).Text.Length;
             }
@@ -361,7 +585,6 @@ namespace ALBAITAR_Softvet.Labo
                 {
                     if (is_new)
                     {
-
                         PreConnection.Excut_Cmd("INSERT INTO `tb_labo_biochimie`"
                                               + "(`REF`,"
                                               + "`DATE_TIME`,"
@@ -394,7 +617,35 @@ namespace ALBAITAR_Softvet.Labo
                                               + "`Potassium`,"
                                               + "`Sodium`,"
                                               + "`Amoniac`,"
-                                              + "`Fer`)"
+                                              + "`Fer`,"
+                                              + "`Glucose_NORMATIF`,"
+                                              + "`Urée (BUN)_NORMATIF`,"
+                                              + "`Créatinine_NORMATIF`,"
+                                              + "`Acide Urique_NORMATIF`,"
+                                              + "`Cholesterol_NORMATIF`,"
+                                              + "`Triglycérides_NORMATIF`,"
+                                              + "`Proteines Totales_NORMATIF`,"
+                                              + "`Albumina_NORMATIF`,"
+                                              + "`Globulines_NORMATIF`,"
+                                              + "`Indice alb/glb_NORMATIF`,"
+                                              + "`Bilirubine Totale_NORMATIF`,"
+                                              + "`Bilirubine Conjuguée_NORMATIF`,"
+                                              + "`GPT(ALT)_NORMATIF`,"
+                                              + "`GOT(AST)_NORMATIF`,"
+                                              + "`Phosphatases Alc_NORMATIF`,"
+                                              + "`Gamma-GT_NORMATIF`,"
+                                              + "`L.D.H_NORMATIF`,"
+                                              + "`C.P.K_NORMATIF`,"
+                                              + "`Lipase_NORMATIF`,"
+                                              + "`Amylase_NORMATIF`,"
+                                              + "`Fructosamine_NORMATIF`,"
+                                              + "`Calcium_NORMATIF`,"
+                                              + "`Phosphore_NORMATIF`,"
+                                              + "`Chlore_NORMATIF`,"
+                                              + "`Potassium_NORMATIF`,"
+                                              + "`Sodium_NORMATIF`,"
+                                              + "`Amoniac_NORMATIF`,"
+                                              + "`Fer_NORMATIF`)"
                                               + " VALUES "
                                               + "('" + textBox3.Text + "'," //REF
                                               + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," //DATE_TIME
@@ -427,7 +678,35 @@ namespace ALBAITAR_Softvet.Labo
                                               + (dataGridView1.Rows[24].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[24].Cells["VALUE2"].Value : "NULL") + ","
                                               + (dataGridView1.Rows[25].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[25].Cells["VALUE2"].Value : "NULL") + ","
                                               + (dataGridView1.Rows[26].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[26].Cells["VALUE2"].Value : "NULL") + ","
-                                              + (dataGridView1.Rows[27].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[27].Cells["VALUE2"].Value : "NULL") + ");");
+                                              + (dataGridView1.Rows[27].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[27].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[8].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[8].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[9].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[9].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[10].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[10].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[11].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[11].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[12].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[12].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[13].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[13].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[14].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[14].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[15].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[15].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[16].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[16].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[17].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[17].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[18].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[18].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[19].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[19].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[20].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[20].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[21].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[21].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[22].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[22].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[23].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[23].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[24].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[24].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[25].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[25].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[26].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[26].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ","
+                                              + (dataGridView1.Rows[27].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[27].Cells["DEFAULT_FULL"].Value + "'" : "NULL") + ");");
                     }
                     else
                     {
@@ -462,7 +741,35 @@ namespace ALBAITAR_Softvet.Labo
                                               + "`Potassium` = " + (dataGridView1.Rows[24].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[24].Cells["VALUE2"].Value : "NULL") + ","
                                               + "`Sodium` = " + (dataGridView1.Rows[25].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[25].Cells["VALUE2"].Value : "NULL") + ","
                                               + "`Amoniac` = " + (dataGridView1.Rows[26].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[26].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Fer` = " + (dataGridView1.Rows[27].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[27].Cells["VALUE2"].Value : "NULL")
+                                              + "`Fer` = " + (dataGridView1.Rows[27].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[27].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Glucose_NORMATIF` = " + (dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Urée (BUN)_NORMATIF` = " + (dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Créatinine_NORMATIF` = " + (dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Acide Urique_NORMATIF` = " + (dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Cholesterol_NORMATIF` = " + (dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Triglycérides_NORMATIF` = " + (dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Proteines Totales_NORMATIF` = " + (dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Albumina_NORMATIF` = " + (dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Globulines_NORMATIF` = " + (dataGridView1.Rows[8].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Indice alb/glb_NORMATIF` = " + (dataGridView1.Rows[9].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Bilirubine Totale_NORMATIF` = " + (dataGridView1.Rows[10].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Bilirubine Conjuguée_NORMATIF` = " + (dataGridView1.Rows[11].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`GPT(ALT)_NORMATIF` = " + (dataGridView1.Rows[12].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`GOT(AST)_NORMATIF` = " + (dataGridView1.Rows[13].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Phosphatases Alc_NORMATIF` = " + (dataGridView1.Rows[14].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Gamma-GT_NORMATIF` = " + (dataGridView1.Rows[15].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[15].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`L.D.H_NORMATIF` = " + (dataGridView1.Rows[16].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[16].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`C.P.K_NORMATIF` = " + (dataGridView1.Rows[17].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[17].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Lipase_NORMATIF` = " + (dataGridView1.Rows[18].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[18].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Amylase_NORMATIF` = " + (dataGridView1.Rows[19].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[19].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Fructosamine_NORMATIF` = " + (dataGridView1.Rows[20].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[20].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Calcium_NORMATIF` = " + (dataGridView1.Rows[21].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[21].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Phosphore_NORMATIF` = " + (dataGridView1.Rows[22].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[22].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Chlore_NORMATIF` = " + (dataGridView1.Rows[23].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[23].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Potassium_NORMATIF` = " + (dataGridView1.Rows[24].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[24].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Sodium_NORMATIF` = " + (dataGridView1.Rows[25].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[25].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Amoniac_NORMATIF` = " + (dataGridView1.Rows[26].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[26].Cells["DEFAULT_FULL"].Value : "NULL") + ","
+                                              + "`Fer_NORMATIF` = " + (dataGridView1.Rows[27].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[27].Cells["DEFAULT_FULL"].Value : "NULL")
                                               + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
                     }
                     //--------
@@ -497,27 +804,27 @@ namespace ALBAITAR_Softvet.Labo
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            if(lab_histor != null)
+            if (lab_histor != null)
             {
                 int nmb = lab_histor.AsEnumerable().Where(P => ((string)P["REF"]).Trim().Length > 0 && (string)P["REF"] == textBox3.Text).Count();
                 label20.Visible = is_new ? nmb > 0 : nmb > 1;
                 textBox3.BackColor = label20.Visible ? Color.LightCoral : SystemColors.Window;
-            }            
+            }
             textBox3.BackColor = textBox3.Text.Trim().Length > 0 ? textBox3.BackColor : Color.LightCoral;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            if(textBox3.Text == ref_tmp)
+            if (textBox3.Text == ref_tmp)
             {
                 textBox3.Text = ref_tmp = "BIO_" + DateTime.Now.ToString("ddMMyyyy") + "_" + DateTime.Now.ToString("HHffff") + "_" + selected_animm.Cells["ID"].Value;
             }
-            
+
         }
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Delete)
+            if (e.KeyCode == Keys.Delete && !dataGridView1.CurrentCell.ReadOnly)
             {
                 dataGridView1.CurrentCell.Value = DBNull.Value;
             }
@@ -525,7 +832,7 @@ namespace ALBAITAR_Softvet.Labo
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
-            if(dataGridView2.SelectedRows.Count > 0)
+            if (dataGridView2.SelectedRows.Count > 0)
             {
                 DataTable dt = PreConnection.Load_data("SELECT * FROM tb_labo_biochimie WHERE ID = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
                 if (dt != null)
@@ -539,10 +846,14 @@ namespace ALBAITAR_Softvet.Labo
                         dateTimePicker1.Value = (DateTime)dt.Rows[0]["DATE_TIME"];
                         textBox3.Text = (string)dt.Rows[0]["REF"];
                         textBox1.Text = (string)dt.Rows[0]["OBSERV"];
-                        for (int f = 5; f < dt.Columns.Count; f++)
+                        for (int f = 5; f < 33; f++)
                         {
                             dataGridView1.Rows[f - 5].Cells["VALUE2"].Value = dt.Rows[0][f];
                         }
+                        for (int f = 33; f < dt.Columns.Count; f++)
+                        {
+                            dataGridView1.Rows[f - 33].Cells["DEFAULT_FULL"].Value = dt.Rows[0][f];
+                        }                        
                     }
                     else
                     {
@@ -558,7 +869,7 @@ namespace ALBAITAR_Softvet.Labo
             {
                 button3.PerformClick();
             }
-            
+
         }
 
         private void dataGridView2_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -571,13 +882,14 @@ namespace ALBAITAR_Softvet.Labo
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if(dataGridView2.SelectedRows.Count > 0) { 
-                if(MessageBox.Show("Sures de supprimer ("+dataGridView2.SelectedRows.Count+") bilan ?","Confirmation : ",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                if (MessageBox.Show("Sures de supprimer (" + dataGridView2.SelectedRows.Count + ") bilan ?", "Confirmation : ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     string dq = "";
                     dataGridView2.SelectedRows.Cast<DataGridViewRow>().ForEach(row => { dq += "," + row.Cells["ID"].Value; });
                     dq = dq.Substring(1, dq.Length - 1);
-                    PreConnection.Excut_Cmd("DELETE FROM tb_labo_biochimie WHERE ID IN (" + dq+");");
+                    PreConnection.Excut_Cmd("DELETE FROM tb_labo_biochimie WHERE ID IN (" + dq + ");");
                     //--------
                     Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
                     Laboratoire.make_historic_refesh = true;
@@ -589,7 +901,7 @@ namespace ALBAITAR_Softvet.Labo
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if(dataGridView1.Rows.Count > 0 && !label20.Visible)
+            if (dataGridView1.Rows.Count > 0 && !label20.Visible)
             {
                 DataTable dt = new DataTable();
                 dt.Columns.Add("PARAM_NME", typeof(string));
@@ -610,7 +922,6 @@ namespace ALBAITAR_Softvet.Labo
                 dt.Rows.Add(new object[] { "CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
 
 
-
                 dt.Rows.Add(new object[] { "CLIENT_NUM_CNI", (string)selected_animm.Cells["CLIENT_NUM_CNI"].Value });
                 dt.Rows.Add(new object[] { "CLIENT_ADRESS", (string)selected_animm.Cells["CLIENT_ADRESS"].Value });
                 dt.Rows.Add(new object[] { "CLIENT_CITY", (string)selected_animm.Cells["CLIENT_CITY"].Value });
@@ -621,13 +932,22 @@ namespace ALBAITAR_Softvet.Labo
 
 
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                {                    
+                {
                     dt.Rows.Add(new object[] { "BIO_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["VALUE2"].Value.ToString() : "" });
+                    dt.Rows.Add(new object[] { "BIO2_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["DEFAULT_FULL"].Value.ToString() : "" });
                 }
                 //-------------
                 new Print_report("biochimie", dt).ShowDialog();
             }
-            
+
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            initial_normatifs_defaults();
+        }
+
+
+
     }
 }

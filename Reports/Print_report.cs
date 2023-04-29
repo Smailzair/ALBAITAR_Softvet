@@ -11,6 +11,7 @@ using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Word;
 using Excel = Microsoft.Office.Interop.Excel.Application;
 using Microsoft.ReportingServices.Interfaces;
+using System.Diagnostics;
 
 namespace ALBAITAR_Softvet
 {
@@ -69,7 +70,6 @@ namespace ALBAITAR_Softvet
 
                 // Set the embedded resource name of the RDLC file
                 reportViewer1.LocalReport.ReportEmbeddedResource = filee;
-
 
 
                 if (parr.Rows.Count > 0) { reportViewer1.LocalReport.SetParameters(reportParameters); }

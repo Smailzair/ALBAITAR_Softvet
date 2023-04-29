@@ -2,6 +2,7 @@
 using Microsoft.ReportingServices.Diagnostics.Internal;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -93,21 +94,23 @@ namespace ALBAITAR_Softvet.Resources
                 label14.Text = dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value != DBNull.Value ? ((DateTime)dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value).ToString("d") : "--";
                 textBox2.Text = (string)dataGridView1.SelectedRows[0].Cells["OBSERVATIONS"].Value;
                 //------------------------
+                button3.Enabled = dataGridView1.SelectedRows[0].Cells["ESPECE"].Value.ToString() == "Canine" || dataGridView1.SelectedRows[0].Cells["ESPECE"].Value.ToString() == "Feline";
+                //---------------------------
                 textBox3.TextChanged -= textBox3_TextChanged;
                 textBox3.Text = "";
                 textBox3.TextChanged += textBox3_TextChanged;
-                comboBox1_SelectedIndexChanged(null, null);
-
             }
             else
             {
                 initial_infos_fields();
             }
+            comboBox1_SelectedIndexChanged(null, null);
         }
 
         private void initial_infos_fields()
         {
             selected_anim = null;
+            button3.Enabled = false;
             label3.Text = label4.Text = label6.Text = label8.Text = label13.Text = label14.Text = textBox2.Text = "--";
         }
 
@@ -168,17 +171,36 @@ namespace ALBAITAR_Softvet.Resources
           //  {
                 textBox3_TextChanged(null,null);
            // }
-            ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = histo_filter;
+           // ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = histo_filter;
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
             DateTime tmp = DateTime.Now;
-            bool tmp2 = DateTime.TryParse(textBox3.Text, out tmp);           
-            ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = (histo_filter != "" ? histo_filter + " AND " : "") + "(" +
-                (tmp2 ? "DATE_TIME = '" + tmp.ToString("yyyy-MM-dd") + "'" : string.Format("CONVERT(Date_Time, System.String) LIKE '{0}%'", textBox3.Text))  + 
+            bool tmp2 = DateTime.TryParse(textBox3.Text, out tmp);
+            if(dataGridView1.Rows.Count > 0) {
+                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = (histo_filter != "" ? histo_filter + " AND " : "") + "(" +
+                (tmp2 ? "DATE_TIME = '" + tmp.ToString("yyyy-MM-dd") + "'" : string.Format("CONVERT(Date_Time, System.String) LIKE '{0}%'", textBox3.Text)) +
                 " OR REF LIKE '%" + textBox3.Text + "%')";
+            }
+            else
+            {
+                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "DATE_TIME = '1970-12-12'"; //Just to clean the list
+            }
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (selected_anim != null)
+            {
+                this.ControlBox = false;
+                Immunologie immunologie = new Immunologie(selected_anim);
+                immunologie.Dock = DockStyle.Fill;
+                this.Controls.Add(immunologie);
+                immunologie.BringToFront();
+            }
         }
     }
 }
