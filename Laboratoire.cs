@@ -14,7 +14,8 @@ namespace ALBAITAR_Softvet.Resources
         DataTable animaux;
         public static DataTable labo;
         public static string labo_load_cmd = "SELECT 'Hemogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
-                                         + "SELECT 'Biochimie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_Biochimie;";
+                                         + "SELECT 'Biochimie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_biochimie  UNION ALL "
+                                         + "SELECT 'Immunologie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_immunologie;";
         static DataGridViewRow selected_anim = null;
         public Laboratoire()
         {
