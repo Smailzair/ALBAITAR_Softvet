@@ -137,6 +137,7 @@ namespace ALBAITAR_Softvet
 
         private void Main_Frm_Load(object sender, EventArgs e)
         {
+            WindowState = Properties.Settings.Default.Maximize_Main_Frm ? FormWindowState.Maximized : FormWindowState.Normal;
             Text = "ALBAITAR Softvet - " + Properties.Settings.Default.Last_login_user_full_nme;
             string cab_doct = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();                        
             if(cab_doct == null || cab_doct.Trim() == string.Empty)
@@ -237,7 +238,11 @@ namespace ALBAITAR_Softvet
             }
         }
 
-
+        private void Main_Frm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.Maximize_Main_Frm = WindowState == FormWindowState.Maximized;
+            Properties.Settings.Default.Save();
+        }
     }
 }
 

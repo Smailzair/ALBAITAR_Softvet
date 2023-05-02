@@ -263,6 +263,12 @@
     <Compile Include="Agenda.Designer.cs">
       <DependentUpon>Agenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Labo\Protéinogramme.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Labo\Protéinogramme.Designer.cs">
+      <DependentUpon>Protéinogramme.cs</DependentUpon>
+    </Compile>
     <Compile Include="Labo\Immunologie.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -396,6 +402,9 @@
     <EmbeddedResource Include="Agenda.resx">
       <DependentUpon>Agenda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Labo\Protéinogramme.resx">
+      <DependentUpon>Protéinogramme.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Labo\Immunologie.resx">
       <DependentUpon>Immunologie.cs</DependentUpon>
     </EmbeddedResource>
@@ -403,6 +412,8 @@
       <DependentUpon>Biochimie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\biochimie.rdlc" />
+    <EmbeddedResource Include="Reports\proteinogramme.rdlc" />
+    <EmbeddedResource Include="Reports\immunologie.rdlc" />
     <EmbeddedResource Include="Reports\Print_report.resx">
       <DependentUpon>Print_report.cs</DependentUpon>
     </EmbeddedResource>

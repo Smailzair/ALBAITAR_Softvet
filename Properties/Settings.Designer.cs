@@ -190,5 +190,17 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Last_entred_date_by_Auto_Enter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Maximize_Main_Frm {
+            get {
+                return ((bool)(this["Maximize_Main_Frm"]));
+            }
+            set {
+                this["Maximize_Main_Frm"] = value;
+            }
+        }
     }
 }

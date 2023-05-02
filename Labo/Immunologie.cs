@@ -508,16 +508,19 @@ namespace ALBAITAR_Softvet.Labo
 
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    dt.Rows.Add(new object[] { "BIO_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["VALUE2"].Value.ToString() : "" });
-                    dt.Rows.Add(new object[] { "BIO2_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["DEFAULT_FULL"].Value.ToString() : "" });
+                    dt.Rows.Add(new object[] { "IMUN_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["MALAD_NME"].Value.ToString() : "" });
+                    dt.Rows.Add(new object[] { "IMUN2_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["METHODE"].Value.ToString() : "" });
+                    dt.Rows.Add(new object[] { "IMUN3_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["VALUE2"].Value.ToString() : "" });
                 }
                 //-------------
-                new Print_report("biochimie", dt).ShowDialog();
+                new Print_report("immunologie", dt).ShowDialog();
             }
 
         }
 
-
-
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            button5.Visible = false;
+        }
     }
 }

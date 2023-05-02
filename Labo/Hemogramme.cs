@@ -737,5 +737,10 @@ namespace ALBAITAR_Softvet.Labo
                 initial_normatifs_defaults();
            // }
         }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            button5.Visible = false;
+        }
     }
 }

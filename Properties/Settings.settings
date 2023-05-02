@@ -44,5 +44,8 @@
     <Setting Name="Last_entred_date_by_Auto_Enter" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">1900-01-01</Value>
     </Setting>
+    <Setting Name="Maximize_Main_Frm" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

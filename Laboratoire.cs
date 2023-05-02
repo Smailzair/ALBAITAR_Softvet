@@ -14,8 +14,9 @@ namespace ALBAITAR_Softvet.Resources
         DataTable animaux;
         public static DataTable labo;
         public static string labo_load_cmd = "SELECT 'Hemogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
-                                         + "SELECT 'Biochimie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_biochimie  UNION ALL "
-                                         + "SELECT 'Immunologie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_immunologie;";
+                                           + "SELECT 'Biochimie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_biochimie  UNION ALL "
+                                           + "SELECT 'Immunologie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_immunologie  UNION ALL "
+                                           + "SELECT 'Protéinogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_proteinogramme;";
         static DataGridViewRow selected_anim = null;
         public Laboratoire()
         {
@@ -201,6 +202,18 @@ namespace ALBAITAR_Softvet.Resources
                 immunologie.Dock = DockStyle.Fill;
                 this.Controls.Add(immunologie);
                 immunologie.BringToFront();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (selected_anim != null)
+            {
+                this.ControlBox = false;
+                Protéinogramme prot = new Protéinogramme(selected_anim);
+                prot.Dock = DockStyle.Fill;
+                this.Controls.Add(prot);
+                prot.BringToFront();
             }
         }
     }

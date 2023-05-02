@@ -59,6 +59,7 @@
             this.ANIM_ID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OBSERV2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -405,6 +406,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox3.Location = new System.Drawing.Point(15, 263);
@@ -413,6 +415,23 @@
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "PROTEINOGRAMME - AUTRES";
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.button4.FlatAppearance.BorderSize = 2;
+            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.Location = new System.Drawing.Point(165, 20);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(143, 37);
+            this.button4.TabIndex = 19;
+            this.button4.Text = "Autres Analyses";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
@@ -429,8 +448,8 @@
             this.button6.Size = new System.Drawing.Size(143, 37);
             this.button6.TabIndex = 18;
             this.button6.Text = "Protéinogramme";
-            this.toolTip1.SetToolTip(this.button6, "Enregistrer");
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // groupBox2
             // 
@@ -805,5 +824,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_EMAIL;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button4;
     }
 }
