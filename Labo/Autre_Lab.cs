@@ -22,15 +22,15 @@ namespace ALBAITAR_Softvet.Labo
     {
         DataGridViewRow selected_animm = null;
         DataTable lab_histor;
-        DataTable new_initial_tbl;
         bool is_new = true;
         string ref_tmp = string.Empty;
-        bool default_modif_autorized = false;
         string current_analys_type = "Coprologie";
-        public Autre_Lab(DataGridViewRow selected_anim)
+        string IDD_to_select = "";
+        public Autre_Lab(DataGridViewRow selected_anim, string ID_to_select)
         {
             InitializeComponent();
             selected_animm = selected_anim;
+            IDD_to_select = ID_to_select;
             //------------------------------
             button3.PerformClick();
         }
@@ -60,24 +60,26 @@ namespace ALBAITAR_Softvet.Labo
             textBox2.Text = (string)selected_animm.Cells["OBSERVATIONS"].Value;
             //-------------------------
             Load_histor();
-
+            //-----------------
+            ccc = true;
+            //------------------
 
         }
-
+        bool ccc = false;
         private void Load_histor()
         {
             string[] sss = { "Hemogramme", "Biochimie", "Immunologie", "Protéinogramme"};
             if (Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && !sss.Contains((string)P["LABO_NME"])).Count() > 0)
             {
                 lab_histor = Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && !sss.Contains((string)P["LABO_NME"])).CopyToDataTable();
-                dataGridView2.DataSource = lab_histor;
+                dataGridView22.DataSource = lab_histor;
             }
             else
             {
-                if (dataGridView2.DataSource != null)
+                if (dataGridView22.DataSource != null)
                 {
-                    DataTable dt = ((DataTable)dataGridView2.DataSource).Clone();
-                    dataGridView2.DataSource = dt;
+                    DataTable dt = ((DataTable)dataGridView22.DataSource).Clone();
+                    dataGridView22.DataSource = dt;
                 }
 
             }
@@ -109,7 +111,7 @@ namespace ALBAITAR_Softvet.Labo
             bool autorisat = Properties.Settings.Default.Last_login_is_admin || (is_new && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31001" && (Int32)QQ[3] == 1).Count() > 0) || (!is_new && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31003" && (Int32)QQ[3] == 1).Count() > 0);
             if (autorisat)
             {
-                int current_row_to_select = is_new ? -1 : dataGridView2.SelectedRows[0].Index;
+                int current_row_to_select = is_new ? -1 : dataGridView22.SelectedRows[0].Index;
                 bool ready = true;
                 ready &= !label20.Visible;
                 ready &= textBox3.BackColor != Color.LightCoral;
@@ -147,17 +149,17 @@ namespace ALBAITAR_Softvet.Labo
                                               + "`TYPE_ANAL` = '" + current_analys_type + "',"
                                               + "`METHODE` = '" + textBox5.Text + "',"
                                               + "`RESULT` = '" + textBox6.Text + "'"
-                                              + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
+                                              + " WHERE `ID` = " + dataGridView22.SelectedRows[0].Cells["ID"].Value + ";");
                     }
                     //--------
                     Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
                     Laboratoire.make_historic_refesh = true;
                     //------------
                     Load_histor();
-                    dataGridView2.ClearSelection();
-                    if (dataGridView2.Rows.Count > 0)
+                    dataGridView22.ClearSelection();
+                    if (dataGridView22.Rows.Count > 0)
                     {
-                        dataGridView2.Rows[current_row_to_select == -1 ? dataGridView2.Rows.Count - 1 : current_row_to_select].Selected = true;
+                        dataGridView22.Rows[current_row_to_select == -1 ? dataGridView22.Rows.Count - 1 : current_row_to_select].Selected = true;
                     }
                 }
                 else
@@ -205,9 +207,26 @@ namespace ALBAITAR_Softvet.Labo
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView2.SelectedRows.Count > 0)
+            if (dataGridView22.SelectedRows.Count > 0)
             {
-                DataTable dt = PreConnection.Load_data("SELECT * FROM tb_labo_autre WHERE ID = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
+                string hh = IDD_to_select != null && ccc ? IDD_to_select : dataGridView22.SelectedRows[0].Cells["ID"].Value.ToString();
+                DataTable dt = PreConnection.Load_data("SELECT * FROM tb_labo_autre WHERE ID = " + hh + ";");
+                //--------------------
+                if (hh == IDD_to_select)
+                {
+                    dataGridView22.SelectionChanged -= dataGridView2_SelectionChanged;
+                    dataGridView22.ClearSelection();
+                    dataGridView22.Rows.Cast<DataGridViewRow>()
+                                 .Where(row => row.Cells["ID"].Value.ToString() == hh)
+                                 .ToList()
+                                 .ForEach(row =>
+                                 {
+                                     row.Selected = true;
+                                 });
+                    dataGridView22.SelectionChanged += dataGridView2_SelectionChanged;
+                    IDD_to_select = null;
+                }
+                //--------------------
                 if (dt != null)
                 {
                     if (dt.Rows.Count > 0)
@@ -228,6 +247,7 @@ namespace ALBAITAR_Softvet.Labo
                             {
                                 rr = true;
                                 rd.Checked = true;
+                                break;
                             }
                         }
                         if (!rr)
@@ -239,8 +259,8 @@ namespace ALBAITAR_Softvet.Labo
                         {
                             textBox4.Clear();
                         }
-                        
 
+                       
 
                         button5.Visible = true;
                     }
@@ -263,7 +283,7 @@ namespace ALBAITAR_Softvet.Labo
 
         private void dataGridView2_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (dataGridView2.Rows[e.RowIndex].Selected)
+            if (dataGridView22.Rows[e.RowIndex].Selected)
             {
                 dataGridView2_SelectionChanged(null, null);
             }
@@ -271,14 +291,14 @@ namespace ALBAITAR_Softvet.Labo
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (dataGridView2.SelectedRows.Count > 0)
+            if (dataGridView22.SelectedRows.Count > 0)
             {
-                if (MessageBox.Show("Sures de supprimer (" + dataGridView2.SelectedRows.Count + ") bilan ?", "Confirmation : ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Sures de supprimer (" + dataGridView22.SelectedRows.Count + ") bilan ?", "Confirmation : ", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     string dq = "";
-                    dataGridView2.SelectedRows.Cast<DataGridViewRow>().ForEach(row => { dq += "," + row.Cells["ID"].Value; });
+                    dataGridView22.SelectedRows.Cast<DataGridViewRow>().ForEach(row => { dq += "," + row.Cells["ID"].Value; });
                     dq = dq.Substring(1, dq.Length - 1);
-                    PreConnection.Excut_Cmd("DELETE FROM tb_labo_proteinogramme WHERE ID IN (" + dq + ");");
+                    PreConnection.Excut_Cmd("DELETE FROM tb_labo_autre WHERE ID IN (" + dq + ");");
                     //--------
                     Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
                     Laboratoire.make_historic_refesh = true;
@@ -361,5 +381,6 @@ namespace ALBAITAR_Softvet.Labo
             }
             textBox4.BackColor = SystemColors.Window;
         }
+
     }
 }

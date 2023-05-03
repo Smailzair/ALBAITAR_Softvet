@@ -87,6 +87,7 @@
             this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OBSERV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label15 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -109,6 +110,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.label15);
             this.splitContainer1.Panel1.Controls.Add(this.textBox1);
             this.splitContainer1.Panel1.Controls.Add(this.dataGridView1);
             // 
@@ -130,9 +132,9 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Location = new System.Drawing.Point(12, 30);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(246, 21);
+            this.textBox1.Size = new System.Drawing.Size(247, 21);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -140,6 +142,9 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -161,14 +166,13 @@
             this.CLIENT_WILAYA,
             this.CLIENT_NUM_PHONE,
             this.CLIENT_EMAIL});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 39);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 57);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(270, 418);
+            this.dataGridView1.Size = new System.Drawing.Size(264, 400);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -304,9 +308,9 @@
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Location = new System.Drawing.Point(345, 174);
+            this.textBox3.Location = new System.Drawing.Point(218, 174);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(291, 21);
+            this.textBox3.Size = new System.Drawing.Size(418, 21);
             this.textBox3.TabIndex = 24;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
@@ -322,9 +326,9 @@
             "Immunologie",
             "Protéinogramme",
             "- Autres -"});
-            this.comboBox1.Location = new System.Drawing.Point(442, 147);
+            this.comboBox1.Location = new System.Drawing.Point(303, 147);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(194, 24);
+            this.comboBox1.Size = new System.Drawing.Size(236, 24);
             this.comboBox1.TabIndex = 23;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -346,14 +350,15 @@
             this.IDD2,
             this.ANIM_ID2,
             this.OBSERV2});
-            this.dataGridView2.Location = new System.Drawing.Point(345, 199);
+            this.dataGridView2.Location = new System.Drawing.Point(218, 199);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(291, 246);
+            this.dataGridView2.Size = new System.Drawing.Size(418, 246);
             this.dataGridView2.TabIndex = 22;
+            this.dataGridView2.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellDoubleClick);
             // 
             // LABO_NME
             // 
@@ -410,9 +415,9 @@
             this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox3.Location = new System.Drawing.Point(15, 263);
+            this.groupBox3.Location = new System.Drawing.Point(15, 323);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(322, 110);
+            this.groupBox3.Size = new System.Drawing.Size(197, 110);
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "PROTEINOGRAMME - AUTRES";
@@ -427,9 +432,9 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(165, 20);
+            this.button4.Location = new System.Drawing.Point(16, 63);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(143, 37);
+            this.button4.Size = new System.Drawing.Size(167, 37);
             this.button4.TabIndex = 19;
             this.button4.Text = "Autres Analyses";
             this.button4.UseVisualStyleBackColor = true;
@@ -447,7 +452,7 @@
             this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button6.Location = new System.Drawing.Point(16, 20);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(143, 37);
+            this.button6.Size = new System.Drawing.Size(167, 37);
             this.button6.TabIndex = 18;
             this.button6.Text = "Protéinogramme";
             this.button6.UseVisualStyleBackColor = true;
@@ -627,7 +632,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox1.Location = new System.Drawing.Point(15, 147);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(322, 110);
+            this.groupBox1.Size = new System.Drawing.Size(197, 170);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "HEMATOLOGIE";
@@ -644,7 +649,7 @@
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.Location = new System.Drawing.Point(16, 63);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(143, 37);
+            this.button3.Size = new System.Drawing.Size(167, 37);
             this.button3.TabIndex = 20;
             this.button3.Text = "Immunologie";
             this.toolTip1.SetToolTip(this.button3, "Distiné au : Canine et Feline");
@@ -661,9 +666,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.MidnightBlue;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(165, 20);
+            this.button1.Location = new System.Drawing.Point(16, 106);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 37);
+            this.button1.Size = new System.Drawing.Size(167, 37);
             this.button1.TabIndex = 19;
             this.button1.Text = "Biochimie Sanguine";
             this.button1.UseVisualStyleBackColor = true;
@@ -681,7 +686,7 @@
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.Location = new System.Drawing.Point(16, 20);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(143, 37);
+            this.button2.Size = new System.Drawing.Size(167, 37);
             this.button2.TabIndex = 18;
             this.button2.Text = "Hemogramme";
             this.button2.UseVisualStyleBackColor = true;
@@ -690,7 +695,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(353, 150);
+            this.label2.Location = new System.Drawing.Point(218, 152);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 16);
             this.label2.TabIndex = 19;
@@ -735,6 +740,15 @@
             this.OBSERV.Name = "OBSERV";
             this.OBSERV.ReadOnly = true;
             this.OBSERV.Visible = false;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(12, 12);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(64, 16);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "ANIMAUX :";
             // 
             // Laboratoire
             // 
@@ -827,5 +841,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label15;
     }
 }

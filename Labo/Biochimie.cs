@@ -23,10 +23,12 @@ namespace ALBAITAR_Softvet.Labo
         bool is_new = true;
         string ref_tmp = string.Empty;
         bool default_modif_autorized = false;
-        public Biochimie(DataGridViewRow selected_anim)
+        string IDD_to_select = "";
+        public Biochimie(DataGridViewRow selected_anim, string ID_to_select)
         {
             InitializeComponent();
             selected_animm = selected_anim;
+            IDD_to_select = ID_to_select;
             //------------------------------------
             new_initial_tbl = new DataTable();
             new_initial_tbl.Columns.Add("PARAM_NME", typeof(string));
@@ -446,7 +448,21 @@ namespace ALBAITAR_Softvet.Labo
             if (comboBox1.Visible) { comboBox1.SelectedIndex = 0; }
             //---------------------------
             Load_histor();
-
+            //-----------------
+            if (IDD_to_select != null)
+            {
+                if (IDD_to_select.Trim().Length > 0)
+                {
+                    dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
+                    dataGridView2.ClearSelection();
+                    dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
+                    dataGridView2.Rows.Cast<DataGridViewRow>()
+                                 .Where(row => row.Cells["ID"].Value.ToString() == IDD_to_select)
+                                 .ToList()
+                                 .ForEach(row => row.Selected = true);
+                }
+            }
+            //------------------
 
         }
 

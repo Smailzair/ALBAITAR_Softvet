@@ -24,11 +24,12 @@ namespace ALBAITAR_Softvet.Labo
         DataTable new_initial_tbl;
         bool is_new = true;
         string ref_tmp = string.Empty;
-        bool default_modif_autorized = false;
-        public Immunologie(DataGridViewRow selected_anim)
+        string IDD_to_select = "";
+        public Immunologie(DataGridViewRow selected_anim, string ID_to_select)
         {
             InitializeComponent();
             selected_animm = selected_anim;
+            IDD_to_select = ID_to_select;
             //------------------------------------
             new_initial_tbl = new DataTable();
             new_initial_tbl.Columns.Add("MALAD_NME", typeof(string));
@@ -72,7 +73,21 @@ namespace ALBAITAR_Softvet.Labo
             textBox2.Text = (string)selected_animm.Cells["OBSERVATIONS"].Value;
             //-------------------------            
             Load_histor();
-
+            //-----------------
+            if (IDD_to_select != null)
+            {
+                if (IDD_to_select.Trim().Length > 0)
+                {
+                    dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
+                    dataGridView2.ClearSelection();
+                    dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
+                    dataGridView2.Rows.Cast<DataGridViewRow>()
+                                 .Where(row => row.Cells["ID"].Value.ToString() == IDD_to_select)
+                                 .ToList()
+                                 .ForEach(row => row.Selected = true);
+                }
+            }
+            //------------------
 
         }
 

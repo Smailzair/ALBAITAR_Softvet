@@ -23,10 +23,13 @@ namespace ALBAITAR_Softvet.Labo
         bool is_new = true;
         string ref_tmp = string.Empty;
         bool default_modif_autorized = false;
-        public Hemogramme(DataGridViewRow selected_anim)
+        string IDD_to_select = "";
+
+        public Hemogramme(DataGridViewRow selected_anim, string ID_to_select)
         {
             InitializeComponent();
             selected_animm = selected_anim;
+            IDD_to_select = ID_to_select;
             //------------------------------------
             new_initial_tbl = new DataTable();
             new_initial_tbl.Columns.Add("PARAM_NME", typeof(string));
@@ -58,9 +61,11 @@ namespace ALBAITAR_Softvet.Labo
             new_initial_tbl.Rows[13]["UNIT"] = "%";
             new_initial_tbl.Rows[14]["UNIT"] = "%";
 
-            dataGridView1.DataSource = new_initial_tbl;
+            dataGridView1.DataSource = new_initial_tbl;            
             //------------------------------
             button3.PerformClick();
+            //----------
+            
         }
         private void initial_normatifs_defaults()
         {
@@ -311,8 +316,21 @@ namespace ALBAITAR_Softvet.Labo
             }            
             //---------------------------
             Load_histor();
-
-
+            //-----------------
+            if(IDD_to_select != null)
+            {
+                if (IDD_to_select.Trim().Length > 0)
+                {
+                    dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
+                    dataGridView2.ClearSelection();
+                    dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
+                    dataGridView2.Rows.Cast<DataGridViewRow>()
+                                 .Where(row => row.Cells["ID"].Value.ToString() == IDD_to_select)
+                                 .ToList()
+                                 .ForEach(row => row.Selected = true);
+                }
+            }
+            //------------------
         }
 
         private void Load_histor()

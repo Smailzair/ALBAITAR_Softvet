@@ -29,7 +29,7 @@ namespace ALBAITAR_Softvet.Resources
             if (selected_anim != null)
             {
                 this.ControlBox = false;
-                Hemogramme hemogramme = new Hemogramme(selected_anim);
+                Hemogramme hemogramme = new Hemogramme(selected_anim,null);
                 hemogramme.Dock = DockStyle.Fill;
                 this.Controls.Add(hemogramme);
                 hemogramme.BringToFront();
@@ -136,7 +136,7 @@ namespace ALBAITAR_Softvet.Resources
             if (selected_anim != null)
             {
                 this.ControlBox = false;
-                Biochimie biochimie = new Biochimie(selected_anim);
+                Biochimie biochimie = new Biochimie(selected_anim, null);
                 biochimie.Dock = DockStyle.Fill;
                 this.Controls.Add(biochimie);
                 biochimie.BringToFront();
@@ -203,7 +203,7 @@ namespace ALBAITAR_Softvet.Resources
             if (selected_anim != null)
             {
                 this.ControlBox = false;
-                Immunologie immunologie = new Immunologie(selected_anim);
+                Immunologie immunologie = new Immunologie(selected_anim, null);
                 immunologie.Dock = DockStyle.Fill;
                 this.Controls.Add(immunologie);
                 immunologie.BringToFront();
@@ -215,7 +215,7 @@ namespace ALBAITAR_Softvet.Resources
             if (selected_anim != null)
             {
                 this.ControlBox = false;
-                Protéinogramme prot = new Protéinogramme(selected_anim);
+                Protéinogramme prot = new Protéinogramme(selected_anim, null);
                 prot.Dock = DockStyle.Fill;
                 this.Controls.Add(prot);
                 prot.BringToFront();
@@ -227,10 +227,57 @@ namespace ALBAITAR_Softvet.Resources
             if (selected_anim != null)
             {
                 this.ControlBox = false;
-                Autre_Lab atr = new Autre_Lab(selected_anim);
+                Autre_Lab atr = new Autre_Lab(selected_anim, null);
                 atr.Dock = DockStyle.Fill;
                 this.Controls.Add(atr);
                 atr.BringToFront();
+            }
+        }
+
+        private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {            
+            if (dataGridView2[e.ColumnIndex, e.RowIndex].Value != null && selected_anim != null)
+            {
+                               
+                switch ((string)dataGridView2.Rows[e.RowIndex].Cells["LABO_NME"].Value)
+                {
+                    case "Hemogramme":                        
+                        this.ControlBox = false;
+                        Hemogramme labb = new Hemogramme(selected_anim, dataGridView2.Rows[e.RowIndex].Cells["IDD2"].Value.ToString());
+                        labb.Dock = DockStyle.Fill;
+                        this.Controls.Add(labb);
+                        labb.BringToFront();
+                        break;
+                    case "Biochimie":
+                        this.ControlBox = false;
+                        Biochimie biochimie = new Biochimie(selected_anim, dataGridView2.Rows[e.RowIndex].Cells["IDD2"].Value.ToString());
+                        biochimie.Dock = DockStyle.Fill;
+                        this.Controls.Add(biochimie);
+                        biochimie.BringToFront();
+                        break;
+                    case "Immunologie":
+                        this.ControlBox = false;
+                        Immunologie immunologie = new Immunologie(selected_anim, dataGridView2.Rows[e.RowIndex].Cells["IDD2"].Value.ToString());
+                        immunologie.Dock = DockStyle.Fill;
+                        this.Controls.Add(immunologie);
+                        immunologie.BringToFront();
+                        break;
+                    case "Protéinogramme":
+                        this.ControlBox = false;
+                        Protéinogramme prot = new Protéinogramme(selected_anim, dataGridView2.Rows[e.RowIndex].Cells["IDD2"].Value.ToString());
+                        prot.Dock = DockStyle.Fill;
+                        this.Controls.Add(prot);
+                        prot.BringToFront();
+                        break;
+                    default:
+                        this.ControlBox = false;
+                        Autre_Lab atr = new Autre_Lab(selected_anim, dataGridView2.Rows[e.RowIndex].Cells["IDD2"].Value.ToString());
+                        atr.Dock = DockStyle.Fill;
+                        this.Controls.Add(atr);
+                        atr.BringToFront();
+                        break;
+                }
+                
             }
         }
     }
