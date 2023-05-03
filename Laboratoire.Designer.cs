@@ -320,7 +320,8 @@
             "Hemogramme",
             "Biochimie Sanguine",
             "Immunologie",
-            "Protéinogramme"});
+            "Protéinogramme",
+            "- Autres -"});
             this.comboBox1.Location = new System.Drawing.Point(442, 147);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(194, 24);
@@ -432,6 +433,7 @@
             this.button4.TabIndex = 19;
             this.button4.Text = "Autres Analyses";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button6
             // 

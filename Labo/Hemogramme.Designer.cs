@@ -86,10 +86,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("BankGothic Md BT", 15.75F);
             this.label1.Location = new System.Drawing.Point(239, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(171, 23);
+            this.label1.Size = new System.Drawing.Size(190, 22);
             this.label1.TabIndex = 1;
             this.label1.Text = "- Hemogramme -";
             // 

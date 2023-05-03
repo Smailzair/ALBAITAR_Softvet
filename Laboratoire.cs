@@ -16,7 +16,8 @@ namespace ALBAITAR_Softvet.Resources
         public static string labo_load_cmd = "SELECT 'Hemogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
                                            + "SELECT 'Biochimie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_biochimie  UNION ALL "
                                            + "SELECT 'Immunologie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_immunologie  UNION ALL "
-                                           + "SELECT 'Protéinogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_proteinogramme;";
+                                           + "SELECT 'Protéinogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_proteinogramme  UNION ALL "
+                                           + "SELECT TYPE_ANAL AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_autre;";
         static DataGridViewRow selected_anim = null;
         public Laboratoire()
         {
@@ -163,6 +164,10 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     histo_filter += " AND LABO_NME LIKE 'Protéinogramme'";
                 }
+                else if (comboBox1.SelectedIndex == 5) //Autres
+                {
+                    histo_filter += " AND LABO_NME NOT LIKE 'Hemogramme' AND LABO_NME NOT LIKE 'Biochimie' AND LABO_NME NOT LIKE 'Immunologie' AND LABO_NME NOT LIKE 'Protéinogramme'";
+                }
             }
             else
             {
@@ -214,6 +219,18 @@ namespace ALBAITAR_Softvet.Resources
                 prot.Dock = DockStyle.Fill;
                 this.Controls.Add(prot);
                 prot.BringToFront();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (selected_anim != null)
+            {
+                this.ControlBox = false;
+                Autre_Lab atr = new Autre_Lab(selected_anim);
+                atr.Dock = DockStyle.Fill;
+                this.Controls.Add(atr);
+                atr.BringToFront();
             }
         }
     }

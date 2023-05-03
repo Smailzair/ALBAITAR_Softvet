@@ -1,6 +1,6 @@
 ﻿namespace ALBAITAR_Softvet.Labo
 {
-    partial class Immunologie
+    partial class Autre_Lab
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -54,11 +52,6 @@
             this.LABO_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OBSERV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.MALAD_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.METHODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VALUE2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.label17 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label18 = new System.Windows.Forms.Label();
@@ -72,21 +65,43 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
+            this.radioButton12 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("BankGothic Md BT", 15.75F);
+            this.label1.Font = new System.Drawing.Font("BankGothic Md BT", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(239, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(185, 22);
+            this.label1.Size = new System.Drawing.Size(241, 22);
             this.label1.TabIndex = 1;
-            this.label1.Text = "- Immunologie -";
+            this.label1.Text = "- Autres Analyses -";
             // 
             // groupBox2
             // 
@@ -341,86 +356,6 @@
             this.label2.TabIndex = 51;
             this.label2.Text = "HISTORIQUE :";
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(273, 203);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(54, 15);
-            this.label16.TabIndex = 53;
-            this.label16.Text = "DÉTAILS :";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeight = 30;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MALAD_NME,
-            this.METHODE,
-            this.VALUE2});
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(252, 221);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(453, 231);
-            this.dataGridView1.TabIndex = 52;
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
-            this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
-            this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
-            // 
-            // MALAD_NME
-            // 
-            this.MALAD_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.MALAD_NME.DataPropertyName = "MALAD_NME";
-            this.MALAD_NME.HeaderText = "Maladies Virales";
-            this.MALAD_NME.Name = "MALAD_NME";
-            // 
-            // METHODE
-            // 
-            this.METHODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.METHODE.DataPropertyName = "METHODE";
-            this.METHODE.HeaderText = "Méthodes Utilisées";
-            this.METHODE.Name = "METHODE";
-            this.METHODE.Width = 129;
-            // 
-            // VALUE2
-            // 
-            this.VALUE2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.VALUE2.DataPropertyName = "VALUE";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.VALUE2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.VALUE2.DisplayStyleForCurrentCellOnly = true;
-            this.VALUE2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.VALUE2.HeaderText = "Résultats";
-            this.VALUE2.Items.AddRange(new object[] {
-            "",
-            "Positif",
-            "Négatif"});
-            this.VALUE2.Name = "VALUE2";
-            this.VALUE2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.VALUE2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.VALUE2.Width = 78;
-            // 
             // label17
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -514,7 +449,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::ALBAITAR_Softvet.Properties.Resources.NOUVEAU_003;
-            this.pictureBox1.Location = new System.Drawing.Point(600, 187);
+            this.pictureBox1.Location = new System.Drawing.Point(600, 186);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(77, 35);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -587,22 +522,243 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // Immunologie
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.textBox4);
+            this.groupBox3.Controls.Add(this.radioButton10);
+            this.groupBox3.Controls.Add(this.radioButton11);
+            this.groupBox3.Controls.Add(this.radioButton12);
+            this.groupBox3.Controls.Add(this.radioButton5);
+            this.groupBox3.Controls.Add(this.radioButton6);
+            this.groupBox3.Controls.Add(this.radioButton7);
+            this.groupBox3.Controls.Add(this.radioButton8);
+            this.groupBox3.Controls.Add(this.radioButton4);
+            this.groupBox3.Controls.Add(this.radioButton3);
+            this.groupBox3.Controls.Add(this.radioButton2);
+            this.groupBox3.Controls.Add(this.radioButton1);
+            this.groupBox3.Location = new System.Drawing.Point(252, 213);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(452, 121);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Type d\'analyse : ";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox4.Enabled = false;
+            this.textBox4.Location = new System.Drawing.Point(273, 92);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(173, 21);
+            this.textBox4.TabIndex = 12;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            // 
+            // radioButton10
+            // 
+            this.radioButton10.AutoSize = true;
+            this.radioButton10.Location = new System.Drawing.Point(273, 71);
+            this.radioButton10.Name = "radioButton10";
+            this.radioButton10.Size = new System.Drawing.Size(53, 20);
+            this.radioButton10.TabIndex = 11;
+            this.radioButton10.Text = "Autre";
+            this.radioButton10.UseVisualStyleBackColor = true;
+            this.radioButton10.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Location = new System.Drawing.Point(273, 48);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(66, 20);
+            this.radioButton11.TabIndex = 10;
+            this.radioButton11.Text = "Vaginal";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            this.radioButton11.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton12
+            // 
+            this.radioButton12.AutoSize = true;
+            this.radioButton12.Location = new System.Drawing.Point(273, 24);
+            this.radioButton12.Name = "radioButton12";
+            this.radioButton12.Size = new System.Drawing.Size(97, 20);
+            this.radioButton12.TabIndex = 9;
+            this.radioButton12.Text = "Dermatologie";
+            this.radioButton12.UseVisualStyleBackColor = true;
+            this.radioButton12.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(119, 95);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(126, 20);
+            this.radioButton5.TabIndex = 8;
+            this.radioButton5.Text = "Citologie-Histologie";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(119, 71);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(107, 20);
+            this.radioButton6.TabIndex = 7;
+            this.radioButton6.Text = "Moélle Osseuse";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Location = new System.Drawing.Point(119, 48);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(77, 20);
+            this.radioButton7.TabIndex = 6;
+            this.radioButton7.Text = "Hormonal";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton8
+            // 
+            this.radioButton8.AutoSize = true;
+            this.radioButton8.Location = new System.Drawing.Point(119, 24);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(141, 20);
+            this.radioButton8.TabIndex = 5;
+            this.radioButton8.Text = "Liquide Céphalotach";
+            this.radioButton8.UseVisualStyleBackColor = true;
+            this.radioButton8.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(9, 93);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(83, 20);
+            this.radioButton4.TabIndex = 4;
+            this.radioButton4.Text = "Transsudat";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(9, 69);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(68, 20);
+            this.radioButton3.TabIndex = 3;
+            this.radioButton3.Text = "Exsudat";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(9, 46);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(93, 20);
+            this.radioButton2.TabIndex = 2;
+            this.radioButton2.Text = "Parasitologie";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(9, 22);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(84, 20);
+            this.radioButton1.TabIndex = 1;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Coprologie";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox5.Location = new System.Drawing.Point(4, 21);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(218, 94);
+            this.textBox5.TabIndex = 65;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(6, 3);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(113, 15);
+            this.label16.TabIndex = 64;
+            this.label16.Text = "Téchnique utilisée :";
+            // 
+            // textBox6
+            // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox6.Location = new System.Drawing.Point(2, 21);
+            this.textBox6.Multiline = true;
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(221, 94);
+            this.textBox6.TabIndex = 67;
+            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(3, 3);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(59, 15);
+            this.label21.TabIndex = 66;
+            this.label21.Text = "Résultat :";
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(252, 340);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.textBox5);
+            this.splitContainer1.Panel1.Controls.Add(this.label16);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.textBox6);
+            this.splitContainer1.Panel2.Controls.Add(this.label21);
+            this.splitContainer1.Size = new System.Drawing.Size(452, 115);
+            this.splitContainer1.SplitterDistance = 225;
+            this.splitContainer1.TabIndex = 68;
+            // 
+            // Autre_Lab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label19);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button3);
@@ -611,17 +767,25 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button5);
+            this.Controls.Add(this.groupBox3);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(877, 459);
-            this.Name = "Immunologie";
+            this.Name = "Autre_Lab";
             this.Size = new System.Drawing.Size(877, 459);
             this.Load += new System.EventHandler(this.Hemogramme_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -650,8 +814,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
@@ -668,8 +830,23 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LABO_NME;
         private System.Windows.Forms.DataGridViewTextBoxColumn OBSERV;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MALAD_NME;
-        private System.Windows.Forms.DataGridViewTextBoxColumn METHODE;
-        private System.Windows.Forms.DataGridViewComboBoxColumn VALUE2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.RadioButton radioButton10;
+        private System.Windows.Forms.RadioButton radioButton11;
+        private System.Windows.Forms.RadioButton radioButton12;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }

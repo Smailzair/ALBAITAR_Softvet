@@ -56,6 +56,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.PARAM_NME2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VALUE2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UNIT2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.DEFAULT_MIN2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DEFAULT_MAX2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DEFAULT_FULL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label17 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label18 = new System.Windows.Forms.Label();
@@ -71,12 +77,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.PARAM_NME2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VALUE2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UNIT2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.DEFAULT_MIN2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DEFAULT_MAX2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DEFAULT_FULL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -86,10 +86,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("BankGothic Md BT", 15.75F);
             this.label1.Location = new System.Drawing.Point(239, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(191, 23);
+            this.label1.Size = new System.Drawing.Size(234, 22);
             this.label1.TabIndex = 1;
             this.label1.Text = "- Protéinogramme -";
             // 
@@ -401,6 +401,66 @@
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
+            // PARAM_NME2
+            // 
+            this.PARAM_NME2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PARAM_NME2.DataPropertyName = "PARAM_NME";
+            this.PARAM_NME2.HeaderText = "Paramètres";
+            this.PARAM_NME2.Name = "PARAM_NME2";
+            // 
+            // VALUE2
+            // 
+            this.VALUE2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.VALUE2.DataPropertyName = "VALUE";
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.VALUE2.DefaultCellStyle = dataGridViewCellStyle2;
+            this.VALUE2.HeaderText = "Résultats";
+            this.VALUE2.Name = "VALUE2";
+            this.VALUE2.Width = 78;
+            // 
+            // UNIT2
+            // 
+            this.UNIT2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.UNIT2.DataPropertyName = "UNIT";
+            this.UNIT2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UNIT2.HeaderText = "Unités";
+            this.UNIT2.Items.AddRange(new object[] {
+            "g/dl",
+            "%"});
+            this.UNIT2.Name = "UNIT2";
+            this.UNIT2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.UNIT2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.UNIT2.Width = 63;
+            // 
+            // DEFAULT_MIN2
+            // 
+            this.DEFAULT_MIN2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DEFAULT_MIN2.DataPropertyName = "DEFAULT_MIN";
+            this.DEFAULT_MIN2.HeaderText = "";
+            this.DEFAULT_MIN2.Name = "DEFAULT_MIN2";
+            this.DEFAULT_MIN2.ReadOnly = true;
+            this.DEFAULT_MIN2.Visible = false;
+            this.DEFAULT_MIN2.Width = 19;
+            // 
+            // DEFAULT_MAX2
+            // 
+            this.DEFAULT_MAX2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DEFAULT_MAX2.DataPropertyName = "DEFAULT_MAX";
+            this.DEFAULT_MAX2.HeaderText = "";
+            this.DEFAULT_MAX2.Name = "DEFAULT_MAX2";
+            this.DEFAULT_MAX2.ReadOnly = true;
+            this.DEFAULT_MAX2.Visible = false;
+            this.DEFAULT_MAX2.Width = 19;
+            // 
+            // DEFAULT_FULL
+            // 
+            this.DEFAULT_FULL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DEFAULT_FULL.DataPropertyName = "DEFAULT_FULL";
+            this.DEFAULT_FULL.HeaderText = "Normatif";
+            this.DEFAULT_FULL.Name = "DEFAULT_FULL";
+            this.DEFAULT_FULL.ReadOnly = true;
+            this.DEFAULT_FULL.Width = 76;
+            // 
             // label17
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -592,66 +652,6 @@
             this.label21.TabIndex = 66;
             this.label21.Text = "NORMATIFS DE :";
             this.label21.Visible = false;
-            // 
-            // PARAM_NME2
-            // 
-            this.PARAM_NME2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PARAM_NME2.DataPropertyName = "PARAM_NME";
-            this.PARAM_NME2.HeaderText = "Paramètres";
-            this.PARAM_NME2.Name = "PARAM_NME2";
-            // 
-            // VALUE2
-            // 
-            this.VALUE2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.VALUE2.DataPropertyName = "VALUE";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.VALUE2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.VALUE2.HeaderText = "Résultats";
-            this.VALUE2.Name = "VALUE2";
-            this.VALUE2.Width = 78;
-            // 
-            // UNIT2
-            // 
-            this.UNIT2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.UNIT2.DataPropertyName = "UNIT";
-            this.UNIT2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.UNIT2.HeaderText = "Unités";
-            this.UNIT2.Items.AddRange(new object[] {
-            "g/dl",
-            "%"});
-            this.UNIT2.Name = "UNIT2";
-            this.UNIT2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.UNIT2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.UNIT2.Width = 63;
-            // 
-            // DEFAULT_MIN2
-            // 
-            this.DEFAULT_MIN2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DEFAULT_MIN2.DataPropertyName = "DEFAULT_MIN";
-            this.DEFAULT_MIN2.HeaderText = "";
-            this.DEFAULT_MIN2.Name = "DEFAULT_MIN2";
-            this.DEFAULT_MIN2.ReadOnly = true;
-            this.DEFAULT_MIN2.Visible = false;
-            this.DEFAULT_MIN2.Width = 18;
-            // 
-            // DEFAULT_MAX2
-            // 
-            this.DEFAULT_MAX2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DEFAULT_MAX2.DataPropertyName = "DEFAULT_MAX";
-            this.DEFAULT_MAX2.HeaderText = "";
-            this.DEFAULT_MAX2.Name = "DEFAULT_MAX2";
-            this.DEFAULT_MAX2.ReadOnly = true;
-            this.DEFAULT_MAX2.Visible = false;
-            this.DEFAULT_MAX2.Width = 18;
-            // 
-            // DEFAULT_FULL
-            // 
-            this.DEFAULT_FULL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DEFAULT_FULL.DataPropertyName = "DEFAULT_FULL";
-            this.DEFAULT_FULL.HeaderText = "Normatif";
-            this.DEFAULT_FULL.Name = "DEFAULT_FULL";
-            this.DEFAULT_FULL.ReadOnly = true;
-            this.DEFAULT_FULL.Width = 76;
             // 
             // Protéinogramme
             // 
