@@ -161,6 +161,8 @@ namespace ALBAITAR_Softvet.Labo
                     {
                         dataGridView22.Rows[current_row_to_select == -1 ? dataGridView22.Rows.Count - 1 : current_row_to_select].Selected = true;
                     }
+                    //----------------
+                    button5.Visible = true;
                 }
                 else
                 {
@@ -194,6 +196,7 @@ namespace ALBAITAR_Softvet.Labo
                 textBox3.BackColor = label20.Visible ? Color.LightCoral : SystemColors.Window;
             }
             textBox3.BackColor = textBox3.Text.Trim().Length > 0 ? textBox3.BackColor : Color.LightCoral;
+            button5.Visible = false;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -202,7 +205,7 @@ namespace ALBAITAR_Softvet.Labo
             {
                 textBox3.Text = ref_tmp = "ATR_" + DateTime.Now.ToString("ddMMyyyy") + "_" + DateTime.Now.ToString("HHffff") + "_" + selected_animm.Cells["ID"].Value;
             }
-
+            button5.Visible = false;
         }
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
@@ -350,11 +353,13 @@ namespace ALBAITAR_Softvet.Labo
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
             textBox5.BackColor = SystemColors.Window;
+            button5.Visible = false;
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
             textBox6.BackColor = SystemColors.Window;
+            button5.Visible = false;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -370,7 +375,7 @@ namespace ALBAITAR_Softvet.Labo
             {
                 current_analys_type = ((RadioButton)sender).Text;
             }
-            
+            button5.Visible = false;
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -380,7 +385,12 @@ namespace ALBAITAR_Softvet.Labo
                 current_analys_type = textBox4.Text;
             }
             textBox4.BackColor = SystemColors.Window;
+            button5.Visible = false;
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            button5.Visible = false;
+        }
     }
 }

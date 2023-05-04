@@ -21,14 +21,14 @@ using Excc = Microsoft.Office.Interop.Excel;
 
 namespace ALBAITAR_Softvet.Resources
 {
-    public partial class Produits : Form
+    public partial class Finance : Form
     {
         bool Is_New_Product = true;
         bool Is_New_Stock = true;
         DataTable Products;
         DataTable Stock;
         decimal prev_sld = 0;
-        public Produits()
+        public Finance()
         {
             InitializeComponent();
             //----------------------
@@ -107,88 +107,63 @@ namespace ALBAITAR_Softvet.Resources
         {
             bool autorisat = Properties.Settings.Default.Last_login_is_admin || (Is_New_Product && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30001" && (Int32)QQ[3] == 1).Count() > 0) || (!Is_New_Product && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30003" && (Int32)QQ[3] == 1).Count() > 0);
             if (autorisat)
+            { 
+            textBox2.BackColor = textBox2.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;
+            textBox3.BackColor = textBox3.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;
+            numericUpDown1.BackColor = numericUpDown1.Value > 0 ? SystemColors.Window : Color.LightCoral;
+            numericUpDown4.BackColor = numericUpDown4.Value > 0 ? SystemColors.Window : Color.LightCoral;
+            //--------------------
+            bool ready = true;
+            ready &= textBox2.Text.Trim().Length > 0;
+            ready &= textBox3.Text.Trim().Length > 0;
+            ready &= numericUpDown4.Value > 0;
+            ready &= numericUpDown1.Value > 0;
+            if (ready)
             {
-                textBox2.BackColor = textBox2.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;                
-                textBox3.BackColor = textBox3.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;
-                if (Is_New_Product && textBox2.Text.Trim().Length > 0 && textBox3.Text.Trim().Length > 0)
+                if (Is_New_Product)
                 {
-                    int sdf = Products.Rows.Cast<DataRow>().Where(cc => cc["CODE"].ToString() == textBox2.Text && cc["NME"].ToString() == textBox3.Text).Count();
-                    label24.Visible = sdf > 0;
-                    textBox2.BackColor = textBox3.BackColor = sdf > 0 ? Color.LightCoral : SystemColors.Window;                    
-                }else if(!Is_New_Product)
-                {
-                    DateTime minDate = Stock.AsEnumerable()
-                            .Where(row => row["PROD_ID"].ToString() == dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() && row["OBSERV"].ToString() != "Achat (Premier Stock)")
-                            .Min(row => row.Field<DateTime>("OP_DATE"));
-                    if(minDate != null)
-                    {
-                        label13.BackColor = dateTimePicker2.Value > minDate ? Color.LightCoral : SystemColors.Control;
-                    }
-                    if(label13.BackColor == Color.LightCoral)
-                    {
-                        MessageBox.Show("Dans les opérations de stock de cet produit, il y a une date avec une valeur supérieure à la date sélectionnée.\n\nVous avez deux choix :\n1- Changer la date à une valeur inférieure ou égale à '"+minDate.ToString("dd/MM/yyyy")+"'.\nOu\n2- Changer les dates d'opérations de stock de date '"+minDate.ToString("dd/MM/yyyy")+"' à '"+dateTimePicker2.Value.ToString("dd/MM/yyyy") +"' ou plus superieur.\n","Probleme de date :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    
-                }
-                numericUpDown1.BackColor = numericUpDown1.Value > 0 ? SystemColors.Window : Color.LightCoral;
-                numericUpDown4.BackColor = numericUpDown4.Value > 0 ? SystemColors.Window : Color.LightCoral;
+                    PreConnection.Excut_Cmd("INSERT INTO `tb_produits`"
+                                          + "(`CODE`,"
+                                          + "`NME`,"
+                                          + "`CATEGOR`,"
+                                          + "`QNT`,"
+                                          + "`ALERT_MIN_ON`,"
+                                          + "`QNT_MIN`,"
+                                          + "`REVIENT_PRTICE`,"
+                                          + "`TAXES`,"
+                                          + "`VENTE_PRICE`,"
+                                          + "`TMP_FIRST_INSERT_DATE`)"
+                                          + "VALUES"
+                                          + "('" + textBox2.Text + "'," //CODE
+                                          + "'" + textBox3.Text + "'," //NME
+                                          + "'" + comboBox2.SelectedItem + "'," //CATEGOR
+                                          + numericUpDown4.Value + "," //QNT
+                                          + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
+                                          + numericUpDown5.Value + "," //QNT_MIN
+                                          + numericUpDown1.Value + "," //REVIENT_PRTICE
+                                          + numericUpDown2.Value + "," //TAXES
+                                          + numericUpDown3.Value + "," //VENTE_PRICE
+                                          + "'" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "');" //TMP_FIRST_INSERT_DATE
+                                          );
 
-                //--------------------
-                bool ready = true;
-                ready &= label13.BackColor != Color.LightCoral;
-                ready &= textBox2.BackColor != Color.LightCoral;
-                ready &= textBox3.BackColor != Color.LightCoral;
-                ready &= label24.Visible == false;
-                ready &= numericUpDown4.Value > 0;
-                ready &= numericUpDown1.Value > 0;
-                //---------------------------
-                if (ready)
-                {
-                    if (Is_New_Product)
-                    {
-                        PreConnection.Excut_Cmd("INSERT INTO `tb_produits`"
-                                              + "(`CODE`,"
-                                              + "`NME`,"
-                                              + "`CATEGOR`,"
-                                              + "`QNT`,"
-                                              + "`ALERT_MIN_ON`,"
-                                              + "`QNT_MIN`,"
-                                              + "`REVIENT_PRTICE`,"
-                                              + "`TAXES`,"
-                                              + "`VENTE_PRICE`,"
-                                              + "`TMP_FIRST_INSERT_DATE`)"
-                                              + "VALUES"
-                                              + "('" + textBox2.Text + "'," //CODE
-                                              + "'" + textBox3.Text + "'," //NME
-                                              + "'" + comboBox2.SelectedItem + "'," //CATEGOR
-                                              + numericUpDown4.Value + "," //QNT
-                                              + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
-                                              + numericUpDown5.Value + "," //QNT_MIN
-                                              + numericUpDown1.Value + "," //REVIENT_PRTICE
-                                              + numericUpDown2.Value + "," //TAXES
-                                              + numericUpDown3.Value + "," //VENTE_PRICE
-                                              + "'" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "');" //TMP_FIRST_INSERT_DATE
-                                              );
-
-                    }
-                    else
-                    {
-                        PreConnection.Excut_Cmd("UPDATE `tb_produits` SET "
-                                              + "`CODE` = '" + textBox2.Text + "'," //CODE
-                                              + "`NME` = '" + textBox3.Text + "'," //NME
-                                              + "`CATEGOR` = '" + comboBox2.SelectedItem + "'," //CATEGOR
-                                              + "`QNT` = " + numericUpDown4.Value + "," //QNT
-                                              + "`ALERT_MIN_ON` = " + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
-                                              + "`QNT_MIN` = " + numericUpDown5.Value + "," //QNT_MIN
-                                              + "`REVIENT_PRTICE` = " + numericUpDown1.Value + "," //REVIENT_PRTICE
-                                              + "`TAXES` = " + numericUpDown2.Value + "," //TAXES
-                                              + "`VENTE_PRICE` = " + numericUpDown3.Value + ","//VENTE_PRICE
-                                              + "`TMP_FIRST_INSERT_DATE` = '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "'"//TMP_FIRST_INSERT_DATE
-                                              + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
-                    }
-                    load_prods(Is_New_Product);
-                    load_stocks(false);
                 }
+                else
+                {
+                    PreConnection.Excut_Cmd("UPDATE `tb_produits` SET "
+                                          + "`CODE` = '" + textBox2.Text + "'," //CODE
+                                          + "`NME` = '" + textBox3.Text + "'," //NME
+                                          + "`CATEGOR` = '" + comboBox2.SelectedItem + "'," //CATEGOR
+                                          + "`QNT` = " + numericUpDown4.Value + "," //QNT
+                                          + "`ALERT_MIN_ON` = " + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
+                                          + "`QNT_MIN` = " + numericUpDown5.Value + "," //QNT_MIN
+                                          + "`REVIENT_PRTICE` = " + numericUpDown1.Value + "," //REVIENT_PRTICE
+                                          + "`TAXES` = " + numericUpDown2.Value + "," //TAXES
+                                          + "`VENTE_PRICE` = " + numericUpDown3.Value //VENTE_PRICE
+                                          + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
+                }
+                load_prods(Is_New_Product);
+                load_stocks(false);
+            }
             }
             else
             {
@@ -210,29 +185,14 @@ namespace ALBAITAR_Softvet.Resources
             numericUpDown4.Value = 1;
             checkBox1.Checked = false;
             textBox2.BackColor = textBox3.BackColor = SystemColors.Window;
-            label13.BackColor = SystemColors.Control;
             pictureBox1.Image = Properties.Resources.NOUVEAU;
             radioButton2.Text = "--";
             radioButton1.Checked = true;
-            label24.Visible = false;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             ((TextBox)sender).BackColor = SystemColors.Window;
-            if (label24.Visible)
-            {
-                if (((TextBox)sender).Name == "textBox2")
-                {
-                    if(textBox3.Text.Trim().Length > 0) { textBox3.BackColor = SystemColors.Window; }
-                }
-                else if(((TextBox)sender).Name == "textBox3")
-                {
-                    if (textBox2.Text.Trim().Length > 0) { textBox2.BackColor = SystemColors.Window; }
-                }
-                label24.Visible = false;
-            }
-            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -436,7 +396,7 @@ namespace ALBAITAR_Softvet.Resources
             //textBox6.TextChanged -= textBox6_TextChanged;
             //textBox6.Clear();
             //textBox6.TextChanged += textBox6_TextChanged;
-            textBox6_TextChanged(null, null);
+            textBox6_TextChanged(null,null);
             //if (dataGridView2.DataSource != null)
             //{
             //    if (radioButton2.Checked)
@@ -475,7 +435,7 @@ namespace ALBAITAR_Softvet.Resources
                         textBox5.Text = (string)dataGridView2.SelectedRows[0].Cells["OBSERV"].Value;
                         textBox4.Text = ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value).ToString("# ##0.00");
                         //-------------------------
-                        textBox5.Enabled = comboBox1.Enabled = comboBox3.Enabled = !textBox5.Text.Equals("Achat (Premier Stock)");
+                        textBox5.Enabled = comboBox1.Enabled = comboBox3.Enabled = !textBox5.Text.Equals("Achat (Premier Stock)");                        
                         //----------
                         Is_New_Stock = false;
                     }
@@ -647,7 +607,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button5_Click(object sender, EventArgs e)
         {
-            bool autorisat = Properties.Settings.Default.Last_login_is_admin || Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30005" && (Int32)QQ[3] == 1).Count() > 0;
+            bool autorisat = Properties.Settings.Default.Last_login_is_admin ||  Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30005" && (Int32)QQ[3] == 1).Count() > 0;
             if (autorisat)
             {
                 bool ready = true;
@@ -692,7 +652,7 @@ namespace ALBAITAR_Softvet.Resources
             {
                 new Non_Autorized_Msg("").ShowDialog();
             }
-
+            
 
         }
 
@@ -731,7 +691,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             if (dataGridView2.DataSource != null)
             {
-                if (textBox6.Text.Length > 0)
+                if(textBox6.Text.Length > 0)
                 {
                     if (radioButton2.Checked)
                     {
@@ -762,18 +722,13 @@ namespace ALBAITAR_Softvet.Resources
                         ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "";
                     }
                 }
-
+                
             }
             if (dataGridView2.SelectedRows.Count < 2)
             {
                 decimal sum = dataGridView2.Rows.Cast<DataGridViewRow>().Sum(row => Convert.ToDecimal(row.Cells["QNT2"].Value));
                 label21.Text = "Total : " + sum.ToString("# ##0.00");
             }
-        }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-            label13.BackColor = SystemColors.Control;
         }
     }
 }

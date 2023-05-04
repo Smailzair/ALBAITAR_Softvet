@@ -1039,7 +1039,6 @@ namespace ALBAITAR_Softvet.Resources
                            + " WHERE `ID` = " + Current_items_id + ";";
                 }
                 PreConnection.open_conn();
-                MessageBox.Show(">>>>>>>>>>>>>>> " + cmmd);
                 MySqlCommand mySqlCommand = new MySqlCommand(cmmd, PreConnection.mySqlConnection);
                 //-------------------
 

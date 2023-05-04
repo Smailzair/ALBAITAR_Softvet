@@ -243,6 +243,20 @@ namespace ALBAITAR_Softvet
             Properties.Settings.Default.Maximize_Main_Frm = WindowState == FormWindowState.Maximized;
             Properties.Settings.Default.Save();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["Finance"] == null)
+            {
+                new Finance().Show();
+            }
+            else
+            {
+                Application.OpenForms["Finance"].WindowState = Application.OpenForms["Finance"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Finance"].WindowState;
+                Application.OpenForms["Finance"].BringToFront();
+            }
+            panel1.Visible = false;
+        }
     }
 }
 

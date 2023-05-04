@@ -405,8 +405,7 @@ namespace ALBAITAR_Softvet.Labo
         private void button3_Click(object sender, EventArgs e)
         {
             is_new = true;
-            pictureBox1.Image = Properties.Resources.NOUVEAU_003;
-            button5.Visible = false;
+            pictureBox1.Image = Properties.Resources.NOUVEAU_003;            
             dateTimePicker1.Value = DateTime.Now;
             textBox1.Clear();
             textBox3.Text = ref_tmp = "HEM_" + DateTime.Now.ToString("ddMMyyyy") + "_" + DateTime.Now.ToString("HHffff") + "_" + selected_animm.Cells["ID"].Value;
@@ -416,6 +415,7 @@ namespace ALBAITAR_Softvet.Labo
                 dataGridView1.Rows[i].Cells["VALUE2"].Value = DBNull.Value;
             }
             initial_normatifs_defaults();
+            button5.Visible = false;
         }
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -617,6 +617,7 @@ namespace ALBAITAR_Softvet.Labo
                 textBox3.BackColor = label20.Visible ? Color.LightCoral : SystemColors.Window;
             }
             textBox3.BackColor = textBox3.Text.Trim().Length > 0 ? textBox3.BackColor : Color.LightCoral;
+            button5.Visible = false;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -625,6 +626,7 @@ namespace ALBAITAR_Softvet.Labo
             {
                 textBox3.Text = ref_tmp = "HEM_" + DateTime.Now.ToString("ddMMyyyy") + "_" + DateTime.Now.ToString("HHffff") + "_" + selected_animm.Cells["ID"].Value;
             }
+            button5.Visible = false;
 
         }
 
@@ -646,8 +648,7 @@ namespace ALBAITAR_Softvet.Labo
                     if (dt.Rows.Count > 0)
                     {
                         is_new = false;
-                        pictureBox1.Image = Properties.Resources.MODIF_003;
-                        button5.Visible = true;
+                        pictureBox1.Image = Properties.Resources.MODIF_003;                        
                         ref_tmp = string.Empty;
                         dateTimePicker1.Value = (DateTime)dt.Rows[0]["DATE_TIME"];
                         textBox3.Text = (string)dt.Rows[0]["REF"];
@@ -660,6 +661,7 @@ namespace ALBAITAR_Softvet.Labo
                         {
                             dataGridView1.Rows[f - 20].Cells["DEFAULT_FULL"].Value = dt.Rows[0][f];
                         }
+                        button5.Visible = true;
                     }
                     else
                     {
@@ -757,6 +759,11 @@ namespace ALBAITAR_Softvet.Labo
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            button5.Visible = false;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
             button5.Visible = false;
         }

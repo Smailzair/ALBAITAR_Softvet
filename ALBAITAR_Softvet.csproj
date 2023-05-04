@@ -287,6 +287,12 @@
     <Compile Include="Labo\Biochimie.Designer.cs">
       <DependentUpon>Biochimie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Finance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finance.Designer.cs">
+      <DependentUpon>Finance.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Print_report.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -419,6 +425,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Labo\Biochimie.resx">
       <DependentUpon>Biochimie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finance.resx">
+      <DependentUpon>Finance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\biochimie.rdlc" />
     <EmbeddedResource Include="Reports\autre.rdlc" />
@@ -649,6 +658,7 @@
     <None Include="Resources\icons8_microsoft_excel_20px.png" />
     <None Include="Resources\icons8_microsoft_word_20px.png" />
     <None Include="Resources\icons8_pdf_20px.png" />
+    <None Include="Resources\icons8_profit_30px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

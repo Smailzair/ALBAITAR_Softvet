@@ -390,6 +390,7 @@ namespace ALBAITAR_Softvet.Labo
                 textBox3.BackColor = label20.Visible ? Color.LightCoral : SystemColors.Window;
             }
             textBox3.BackColor = textBox3.Text.Trim().Length > 0 ? textBox3.BackColor : Color.LightCoral;
+            button5.Visible = false;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -398,6 +399,7 @@ namespace ALBAITAR_Softvet.Labo
             {
                 textBox3.Text = ref_tmp = "PROT_" + DateTime.Now.ToString("ddMMyyyy") + "_" + DateTime.Now.ToString("HHffff") + "_" + selected_animm.Cells["ID"].Value;
             }
+            button5.Visible = false;
 
         }
 
@@ -564,7 +566,6 @@ namespace ALBAITAR_Softvet.Labo
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            button5.Visible = false;
             if (dataGridView1.Rows.Count > 0)
             {                
                 if ((!comboBox1.Visible || (comboBox1.Visible && comboBox1.SelectedIndex == 1)) && e.ColumnIndex == dataGridView1.Columns["UNIT2"].Index)
@@ -615,13 +616,12 @@ namespace ALBAITAR_Softvet.Labo
                     
                 }
             }
-            
+            button5.Visible = false;
         }
 
-        private void dataGridView1_CellValidated(object sender, DataGridViewCellEventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            //Debug.WriteLine("001 >>>>>>>> Col >>>> " + dataGridView1.Columns[e.ColumnIndex].Name + " >>>>>>>>> Row >>>>>>>>> " + e.RowIndex + " >>>>>>>>>>>>> Val >>>>>>>>> " + dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
-            //Debug.WriteLine("002 >>>>>>>> Col >>>> " + dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].Name + " >>>>>>>>> Row >>>>>>>>> " + dataGridView1.CurrentCell.RowIndex + " >>>>>>>>>>>>> Val >>>>>>>>> " + dataGridView1.CurrentCell.Value);
+            button5.Visible = false;
         }
     }
 }
