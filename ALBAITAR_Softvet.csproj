@@ -287,11 +287,11 @@
     <Compile Include="Labo\Biochimie.Designer.cs">
       <DependentUpon>Biochimie.cs</DependentUpon>
     </Compile>
-    <Compile Include="Finance.cs">
+    <Compile Include="Vente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Finance.Designer.cs">
-      <DependentUpon>Finance.cs</DependentUpon>
+    <Compile Include="Vente.Designer.cs">
+      <DependentUpon>Vente.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Print_report.cs">
       <SubType>Form</SubType>
@@ -426,8 +426,8 @@
     <EmbeddedResource Include="Labo\Biochimie.resx">
       <DependentUpon>Biochimie.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Finance.resx">
-      <DependentUpon>Finance.cs</DependentUpon>
+    <EmbeddedResource Include="Vente.resx">
+      <DependentUpon>Vente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\biochimie.rdlc" />
     <EmbeddedResource Include="Reports\autre.rdlc" />

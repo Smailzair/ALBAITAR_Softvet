@@ -469,7 +469,7 @@ namespace ALBAITAR_Softvet.Resources
                         }
                         textBox5.Text = (string)dataGridView2.SelectedRows[0].Cells["OBSERV"].Value;
                         //textBox4.Text = ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value).ToString("# ##0.00");
-                        numericUpDown2.Minimum = ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value - prev_sld);
+                        numericUpDown2.Minimum = textBox5.Text == "Achat (Premier Stock)" ? (((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value - prev_sld) > 0 ? ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value - prev_sld) : 0) : ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value - prev_sld);
                         numericUpDown2.Value = numericUpDown2_old_val = (decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value;                                                
                         //-------------------------
                         textBox5.Enabled = comboBox1.Enabled = comboBox3.Enabled = dateTimePicker1.Enabled = !textBox5.Text.Equals("Achat (Premier Stock)");
@@ -525,11 +525,11 @@ namespace ALBAITAR_Softvet.Resources
             textBox5.Clear();
             comboBox1.SelectedIndex = 0;
             //-----------
-            numericUpDown2.ValueChanged -= numericUpDown2_ValueChanged;
-            numericUpDown2.Value = 0;
+            numericUpDown2.ValueChanged -= numericUpDown2_ValueChanged;            
             numericUpDown2_old_val = 0;
             numericUpDown2.BackColor = SystemColors.Window;
             numericUpDown2.Minimum = prev_sld * -1;
+            numericUpDown2.Value = numericUpDown2.Minimum <= 0 ? 0 : numericUpDown2.Minimum;
             numericUpDown2.ValueChanged += numericUpDown2_ValueChanged;
             //--------------------
             label25.Visible = false;
@@ -693,11 +693,17 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         PreConnection.Excut_Cmd("UPDATE `tb_stock_mouv` SET "
                                             + "`OP_DATE` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
-                                            + "`PROD_ID` = " + comboBox3.SelectedValue + ","//OP_DATE
+                                            + "`PROD_ID` = " + comboBox3.SelectedValue + ","//PROD_ID
                                             + "`QNT_IN` = " + (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0) + ","//QNT_IN
                                             + "`QNT_OUT` = " + (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0) + ","//QNT_OUT
                                             + "`OBSERV` = '" + textBox5.Text + "' "//OBSERV
                                             + "WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID2"].Value + ";");
+                        if (textBox5.Text == "Achat (Premier Stock)")
+                        {
+                            Debug.WriteLine("UPDATE tb_produits SET `QNT` = " + numericUpDown2.Value + " WHERE `ID` = " + comboBox3.SelectedValue + ";");
+                            PreConnection.Excut_Cmd("UPDATE tb_produits SET `QNT` = "+ numericUpDown2.Value + " WHERE `ID` = " + comboBox3.SelectedValue + ";");
+                            load_prods(false);
+                        }
                     }
                     load_stocks(Is_New_Stock);
 

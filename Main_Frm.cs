@@ -246,14 +246,14 @@ namespace ALBAITAR_Softvet
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms["Finance"] == null)
+            if (Application.OpenForms["Vente"] == null)
             {
-                new Finance().Show();
+                new Vente().Show();
             }
             else
             {
-                Application.OpenForms["Finance"].WindowState = Application.OpenForms["Finance"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Finance"].WindowState;
-                Application.OpenForms["Finance"].BringToFront();
+                Application.OpenForms["Vente"].WindowState = Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Vente"].WindowState;
+                Application.OpenForms["Vente"].BringToFront();
             }
             panel1.Visible = false;
         }

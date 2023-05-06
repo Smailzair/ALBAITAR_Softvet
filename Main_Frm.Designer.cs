@@ -31,10 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Frm));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            label_cab_nme = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -43,67 +39,18 @@
             this.button12 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            label_cab_nme = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // listView1
-            // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(556, 272);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(181, 285);
-            this.listView1.TabIndex = 17;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(623, 253);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 16);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Notificaions :";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(239)))), ((int)(((byte)(247)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button6);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button9);
-            this.panel1.Controls.Add(this.button7);
-            this.panel1.Controls.Add(this.button11);
-            this.panel1.Controls.Add(this.button12);
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Location = new System.Drawing.Point(54, 13);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(295, 380);
-            this.panel1.TabIndex = 20;
-            this.panel1.Visible = false;
-            this.panel1.VisibleChanged += new System.EventHandler(this.panel1_VisibleChanged);
-            this.panel1.MouseLeave += new System.EventHandler(this.panel1_MouseLeave);
-            // 
-            // label_cab_nme
-            // 
-            label_cab_nme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            label_cab_nme.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            label_cab_nme.ForeColor = System.Drawing.Color.Purple;
-            label_cab_nme.Location = new System.Drawing.Point(209, 13);
-            label_cab_nme.Name = "label_cab_nme";
-            label_cab_nme.Size = new System.Drawing.Size(350, 25);
-            label_cab_nme.TabIndex = 21;
-            label_cab_nme.Text = "Cabinet : --";
-            label_cab_nme.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // button6
             // 
@@ -120,7 +67,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(282, 46);
             this.button6.TabIndex = 17;
-            this.button6.Text = "Finance && Facturation";
+            this.button6.Text = "Vente && Facturation";
             this.toolTip1.SetToolTip(this.button6, "Produits");
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
@@ -270,16 +217,6 @@
             this.button3.MouseEnter += new System.EventHandler(this.button3_MouseEnter);
             this.button3.MouseLeave += new System.EventHandler(this.button3_MouseLeave);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_20px;
-            this.pictureBox2.Location = new System.Drawing.Point(594, 249);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(23, 22);
-            this.pictureBox2.TabIndex = 19;
-            this.pictureBox2.TabStop = false;
-            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -315,6 +252,69 @@
             this.toolTip1.SetToolTip(this.button2, "Parametres");
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // listView1
+            // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(556, 272);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(181, 285);
+            this.listView1.TabIndex = 17;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(623, 253);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 16);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Notificaions :";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(239)))), ((int)(((byte)(247)))));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button6);
+            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.button9);
+            this.panel1.Controls.Add(this.button7);
+            this.panel1.Controls.Add(this.button11);
+            this.panel1.Controls.Add(this.button12);
+            this.panel1.Controls.Add(this.button5);
+            this.panel1.Location = new System.Drawing.Point(54, 13);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(295, 380);
+            this.panel1.TabIndex = 20;
+            this.panel1.Visible = false;
+            this.panel1.VisibleChanged += new System.EventHandler(this.panel1_VisibleChanged);
+            this.panel1.MouseLeave += new System.EventHandler(this.panel1_MouseLeave);
+            // 
+            // label_cab_nme
+            // 
+            label_cab_nme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            label_cab_nme.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label_cab_nme.ForeColor = System.Drawing.Color.Purple;
+            label_cab_nme.Location = new System.Drawing.Point(209, 13);
+            label_cab_nme.Name = "label_cab_nme";
+            label_cab_nme.Size = new System.Drawing.Size(350, 25);
+            label_cab_nme.TabIndex = 21;
+            label_cab_nme.Text = "Cabinet : --";
+            label_cab_nme.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_20px;
+            this.pictureBox2.Location = new System.Drawing.Point(594, 249);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(23, 22);
+            this.pictureBox2.TabIndex = 19;
+            this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
