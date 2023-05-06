@@ -28,50 +28,28 @@ namespace ALBAITAR_Softvet.Resources
         DataTable Products;
         DataTable Stock;
         decimal prev_sld = 0;
+        decimal prev_sld2 = 0;
+        decimal numericUpDown2_old_val = 0;
         public Produits()
         {
             InitializeComponent();
             //----------------------
+            numericUpDown2.Controls[0].Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            double des = 0.00;
-            double.TryParse(textBox4.Text.Trim().Replace(" ", ""), out des);
-            des += 1;
-            textBox4.Text = des.ToString("# ##0.00");
-            textBox4.BackColor = (des + (double)prev_sld) >= 0 ? ((des + (double)prev_sld) == 0 ? Color.Khaki : SystemColors.Window) : Color.LightCoral;
+            numericUpDown2.Value += 1;
         }
 
-        private void textBox4_Validating(object sender, CancelEventArgs e)
-        {
-            if (textBox4.Text.Trim() == string.Empty) { textBox4.Text = "0"; }
-            textBox4.Text = textBox4.Text.Replace(",", ".");
-            //------------------------
-            double dd = 0.00;
-            bool sss = !double.TryParse(textBox4.Text.Trim().Replace(" ", ""), out dd);
-            if (sss)
-            {
-                textBox4.BackColor = Color.LightCoral;
-                textBox4.SelectAll();
-            }
-            else
-            {
-                textBox4.Text = dd.ToString("# ##0.00");
-                textBox4.BackColor = SystemColors.Window;
-            }
-
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            double des = 0.00;
-            double.TryParse(textBox4.Text.Trim().Replace(" ", ""), out des);
-            des = (des - 1 + (double)prev_sld) >= 0 ? des - 1 : (double)prev_sld * -1;
-            textBox4.Text = des.ToString("# ##0.00");
-            textBox4.BackColor = (des + (double)prev_sld) >= 0 ? ((des + (double)prev_sld) == 0 ? Color.Khaki : SystemColors.Window) : Color.LightCoral;
-
+            if((numericUpDown2.Value - 1) >= numericUpDown2.Minimum)
+            {
+                numericUpDown2.Value -= 1;
+            }
+            
         }
 
         private void Produits_Load(object sender, EventArgs e)
@@ -108,30 +86,31 @@ namespace ALBAITAR_Softvet.Resources
             bool autorisat = Properties.Settings.Default.Last_login_is_admin || (Is_New_Product && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30001" && (Int32)QQ[3] == 1).Count() > 0) || (!Is_New_Product && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30003" && (Int32)QQ[3] == 1).Count() > 0);
             if (autorisat)
             {
-                textBox2.BackColor = textBox2.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;                
+                textBox2.BackColor = textBox2.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;
                 textBox3.BackColor = textBox3.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;
-                if (Is_New_Product && textBox2.Text.Trim().Length > 0 && textBox3.Text.Trim().Length > 0)
+                if (Is_New_Product && textBox2.Text.Trim().Length > 0)
                 {
-                    int sdf = Products.Rows.Cast<DataRow>().Where(cc => cc["CODE"].ToString() == textBox2.Text && cc["NME"].ToString() == textBox3.Text).Count();
+                    int sdf = Products.Rows.Cast<DataRow>().Where(cc => cc["CODE"].ToString() == textBox2.Text).Count();
                     label24.Visible = sdf > 0;
-                    textBox2.BackColor = textBox3.BackColor = sdf > 0 ? Color.LightCoral : SystemColors.Window;                    
-                }else if(!Is_New_Product)
+                    textBox2.BackColor = sdf > 0 ? Color.LightCoral : SystemColors.Window;
+                }
+                else if (!Is_New_Product)
                 {
                     DateTime minDate = Stock.AsEnumerable()
                             .Where(row => row["PROD_ID"].ToString() == dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() && row["OBSERV"].ToString() != "Achat (Premier Stock)")
                             .Min(row => row.Field<DateTime>("OP_DATE"));
-                    if(minDate != null)
+                    if (minDate != null)
                     {
                         label13.BackColor = dateTimePicker2.Value > minDate ? Color.LightCoral : SystemColors.Control;
                     }
-                    if(label13.BackColor == Color.LightCoral)
+                    if (label13.BackColor == Color.LightCoral)
                     {
-                        MessageBox.Show("Dans les opérations de stock de cet produit, il y a une date avec une valeur supérieure à la date sélectionnée.\n\nVous avez deux choix :\n1- Changer la date à une valeur inférieure ou égale à '"+minDate.ToString("dd/MM/yyyy")+"'.\nOu\n2- Changer les dates d'opérations de stock de date '"+minDate.ToString("dd/MM/yyyy")+"' à '"+dateTimePicker2.Value.ToString("dd/MM/yyyy") +"' ou plus superieur.\n","Probleme de date :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Dans les opérations de stock de cet produit, il y a une date avec une valeur supérieure à la date sélectionnée.\n\nVous avez deux choix :\n1- Changer la date à une valeur inférieure ou égale à '" + minDate.ToString("dd/MM/yyyy") + "'.\nOu\n2- Changer les dates d'opérations de stock de date '" + minDate.ToString("dd/MM/yyyy") + "' à '" + dateTimePicker2.Value.ToString("dd/MM/yyyy") + "' ou plus superieur.\n", "Probleme de date :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
-                    
+
                 }
                 numericUpDown1.BackColor = numericUpDown1.Value > 0 ? SystemColors.Window : Color.LightCoral;
-                numericUpDown4.BackColor = numericUpDown4.Value > 0 ? SystemColors.Window : Color.LightCoral;
+                numericUpDown4.BackColor = numericUpDown4.Value > 0 ? numericUpDown4.BackColor : Color.LightCoral;
 
                 //--------------------
                 bool ready = true;
@@ -154,7 +133,6 @@ namespace ALBAITAR_Softvet.Resources
                                               + "`ALERT_MIN_ON`,"
                                               + "`QNT_MIN`,"
                                               + "`REVIENT_PRTICE`,"
-                                              + "`TAXES`,"
                                               + "`VENTE_PRICE`,"
                                               + "`TMP_FIRST_INSERT_DATE`)"
                                               + "VALUES"
@@ -165,7 +143,6 @@ namespace ALBAITAR_Softvet.Resources
                                               + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
                                               + numericUpDown5.Value + "," //QNT_MIN
                                               + numericUpDown1.Value + "," //REVIENT_PRTICE
-                                              + numericUpDown2.Value + "," //TAXES
                                               + numericUpDown3.Value + "," //VENTE_PRICE
                                               + "'" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "');" //TMP_FIRST_INSERT_DATE
                                               );
@@ -181,7 +158,6 @@ namespace ALBAITAR_Softvet.Resources
                                               + "`ALERT_MIN_ON` = " + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
                                               + "`QNT_MIN` = " + numericUpDown5.Value + "," //QNT_MIN
                                               + "`REVIENT_PRTICE` = " + numericUpDown1.Value + "," //REVIENT_PRTICE
-                                              + "`TAXES` = " + numericUpDown2.Value + "," //TAXES
                                               + "`VENTE_PRICE` = " + numericUpDown3.Value + ","//VENTE_PRICE
                                               + "`TMP_FIRST_INSERT_DATE` = '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "'"//TMP_FIRST_INSERT_DATE
                                               + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
@@ -206,7 +182,8 @@ namespace ALBAITAR_Softvet.Resources
             textBox2.Clear();
             textBox3.Clear();
             comboBox2.SelectedIndex = 0;
-            numericUpDown1.Value = numericUpDown2.Value = numericUpDown3.Value = numericUpDown5.Value = 0;
+            numericUpDown1.Value = numericUpDown3.Value = numericUpDown5.Value = 0;
+            numericUpDown4.Minimum = 0;
             numericUpDown4.Value = 1;
             checkBox1.Checked = false;
             textBox2.BackColor = textBox3.BackColor = SystemColors.Window;
@@ -220,19 +197,10 @@ namespace ALBAITAR_Softvet.Resources
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             ((TextBox)sender).BackColor = SystemColors.Window;
-            if (label24.Visible)
+            if (((TextBox)sender).Name == "textBox2")
             {
-                if (((TextBox)sender).Name == "textBox2")
-                {
-                    if(textBox3.Text.Trim().Length > 0) { textBox3.BackColor = SystemColors.Window; }
-                }
-                else if(((TextBox)sender).Name == "textBox3")
-                {
-                    if (textBox2.Text.Trim().Length > 0) { textBox2.BackColor = SystemColors.Window; }
-                }
                 label24.Visible = false;
             }
-            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -331,26 +299,27 @@ namespace ALBAITAR_Softvet.Resources
                     initial_stock_fields();
                 }
             }
-
+            dataGridView1_SelectionChanged(null, null);
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+            numericUpDown4.Minimum = prev_sld2 = 0;
             if (dataGridView1.SelectedRows.Count > 0)
             {
-
+                //-------------------
+                panel1.Enabled = button8.Enabled = true;
                 //--------------
                 pictureBox1.Image = Properties.Resources.MODIF;
                 //-----------------------------------                              
                 dateTimePicker2.Value = (DateTime)dataGridView1.SelectedRows[0].Cells["TMP_FIRST_INSERT_DATE"].Value; //TMP_FIRST_INSERT_DATE
                 textBox2.Text = dataGridView1.SelectedRows[0].Cells["CODE"].Value.ToString(); //CODE
                 textBox3.Text = dataGridView1.SelectedRows[0].Cells["NME"].Value.ToString(); //NME
-                comboBox2.SelectedItem = dataGridView1.SelectedRows[0].Cells["CATEGOR"].Value.ToString(); //CATEGOR
+                comboBox2.SelectedItem = dataGridView1.SelectedRows[0].Cells["CATEGOR"].Value.ToString(); //CATEGOR                
                 numericUpDown4.Value = (decimal)dataGridView1.SelectedRows[0].Cells["QNT"].Value; //QNT                
                 checkBox1.Checked = Convert.ToSByte(dataGridView1.SelectedRows[0].Cells["ALERT_MIN_ON"].Value) == 1; //ALERT_MIN_ON
                 numericUpDown5.Value = (decimal)dataGridView1.SelectedRows[0].Cells["QNT_MIN"].Value; //QNT_MIN
                 numericUpDown1.Value = (decimal)dataGridView1.SelectedRows[0].Cells["REVIENT_PRTICE"].Value; //REVIENT_PRTICE
-                numericUpDown2.Value = (decimal)dataGridView1.SelectedRows[0].Cells["TAXES"].Value; //TAXES
                 numericUpDown3.Value = (decimal)dataGridView1.SelectedRows[0].Cells["VENTE_PRICE"].Value; //VENTE_PRICE
                 //----------
                 Is_New_Product = false;
@@ -364,22 +333,41 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     radioButton1_CheckedChanged(null, null);
                 }
+                //--------------------
+                if (Stock != null)
+                {
+                    var edd = Stock.Rows.Cast<DataRow>().Where(FF => int.Parse(FF["PROD_ID"].ToString()) == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).FirstOrDefault();
+
+                    if (edd != null)
+                    {
+
+                        prev_sld2 = (decimal)edd["SLD"];
+
+                    }
+                }
+                numericUpDown4.Minimum = (numericUpDown4.Value - prev_sld2) > 0 ? (numericUpDown4.Value - prev_sld2) : 0;
             }
             else
             {
                 initial_details_fields();
                 radioButton2.Text = "--";
                 radioButton1.Checked = true;
+                //-------------------
+                panel1.Enabled = button8.Enabled = false;
             }
 
         }
 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (dataGridView1.Rows[e.RowIndex].Selected)
+            if (dataGridView1.Rows.Count > 0)
             {
-                dataGridView1_SelectionChanged(null, null);
+                if (dataGridView1.Rows[e.RowIndex].Selected)
+                {
+                    dataGridView1_SelectionChanged(null, null);
+                }
             }
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -471,11 +459,20 @@ namespace ALBAITAR_Softvet.Resources
                         comboBox1.SelectedItem = (string)rw["CATEGOR"] == "--" ? "- Autre -" : rw["CATEGOR"];
                         bool ttt = (int)comboBox3.SelectedValue == (int)rw["ID"];
                         comboBox3.SelectedValue = (int)rw["ID"];
-                        if (ttt) { load_sld(); }
+                        if (ttt)
+                        {
+                            load_sld();
+                        }
+                        else
+                        {
+                            label9.Visible = label10.Visible = false;
+                        }
                         textBox5.Text = (string)dataGridView2.SelectedRows[0].Cells["OBSERV"].Value;
-                        textBox4.Text = ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value).ToString("# ##0.00");
+                        //textBox4.Text = ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value).ToString("# ##0.00");
+                        numericUpDown2.Minimum = ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value - prev_sld);
+                        numericUpDown2.Value = numericUpDown2_old_val = (decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value;                                                
                         //-------------------------
-                        textBox5.Enabled = comboBox1.Enabled = comboBox3.Enabled = !textBox5.Text.Equals("Achat (Premier Stock)");
+                        textBox5.Enabled = comboBox1.Enabled = comboBox3.Enabled = dateTimePicker1.Enabled = !textBox5.Text.Equals("Achat (Premier Stock)");
                         //----------
                         Is_New_Stock = false;
                     }
@@ -513,13 +510,31 @@ namespace ALBAITAR_Softvet.Resources
         {
             Is_New_Stock = true;
             pictureBox2.Image = Properties.Resources.NOUVEAU;
-            textBox5.Enabled = comboBox1.Enabled = comboBox3.Enabled = true;
-            dateTimePicker1.Value = DateTime.Now;
+            textBox5.Enabled = comboBox1.Enabled = comboBox3.Enabled = dateTimePicker1.Enabled = true;
+            //-------------
+            DateTime minDate = new DateTime(1900, 01, 01);
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                minDate = Stock.AsEnumerable()
+                                 .Where(row => row.Field<int>("PROD_ID") == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value)
+                                   .Min(row => row.Field<DateTime>("OP_DATE"));
+            }
+            dateTimePicker1.MinDate = minDate;
+            dateTimePicker1.Value = DateTime.Now >= minDate ? DateTime.Now : minDate;
+            //------------------------
             textBox5.Clear();
-            textBox4.TextChanged -= textBox4_TextChanged;
-            textBox4.Text = "0";
-            textBox4.TextChanged += textBox4_TextChanged;
             comboBox1.SelectedIndex = 0;
+            //-----------
+            numericUpDown2.ValueChanged -= numericUpDown2_ValueChanged;
+            numericUpDown2.Value = 0;
+            numericUpDown2_old_val = 0;
+            numericUpDown2.BackColor = SystemColors.Window;
+            numericUpDown2.Minimum = prev_sld * -1;
+            numericUpDown2.ValueChanged += numericUpDown2_ValueChanged;
+            //--------------------
+            label25.Visible = false;
+            label10.ForeColor = SystemColors.ControlText;
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -605,43 +620,43 @@ namespace ALBAITAR_Softvet.Resources
             label10.Visible = label9.Visible = false;
             label10.Text = "--";
             prev_sld = 0;
-            if (Stock != null && comboBox3.SelectedValue != null && comboBox3.BackColor == SystemColors.Window)
+            if (Stock != null && comboBox3.SelectedValue != null && comboBox3.BackColor == SystemColors.Window && dataGridView2.SelectedRows.Count > 0)
             {
                 var edd = Stock.Rows.Cast<DataRow>().Where(FF => int.Parse(FF["PROD_ID"].ToString()) == (int)comboBox3.SelectedValue).FirstOrDefault();
                 if (edd != null)
                 {
                     label10.Visible = label9.Visible = true;
-                    if (Is_New_Stock)
-                    {
+                    //if (Is_New_Stock)
+                    //{
                         prev_sld = (decimal)edd["SLD"];
-                    }
-                    else
-                    {
-                        prev_sld = (decimal)edd["SLD"] - (decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    prev_sld = (decimal)edd["SLD"] - (decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value;
+                    //}
                     label10.Text = prev_sld.ToString("# ##0.00");
                 }
             }
-            textBox4_TextChanged(null, null);
+            //textBox4_TextChanged(null, null);
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            double des = 0.00;
-            double.TryParse(textBox4.Text.Trim().Replace(" ", ""), out des);
-            if ((des + (double)prev_sld) < 0)
-            {
-                textBox4.Text = ((double)prev_sld * -1).ToString("# ##0.00");
-            }
-            else
-            {
-                if (label10.Visible)
-                {
-                    label10.Text = (des + (double)prev_sld).ToString("# ##0.00");
-                }
-                textBox4.BackColor = (des + (double)prev_sld) >= 0 ? ((des + (double)prev_sld) == 0 ? Color.Khaki : SystemColors.Window) : Color.LightCoral;
-                label10.ForeColor = (des + (double)prev_sld) > 0 ? SystemColors.ControlText : Color.Red;
-            }
+            //double des = 0.00;
+            //double.TryParse(textBox4.Text.Trim().Replace(" ", ""), out des);
+            //if ((des + (double)prev_sld) < 0)
+            //{
+            //    textBox4.Text = ((double)prev_sld * -1).ToString("# ##0.00");
+            //}
+            //else
+            //{
+            //    if (label10.Visible)
+            //    {
+            //        label10.Text = (des + (double)prev_sld).ToString("# ##0.00");
+            //    }
+            //    textBox4.BackColor = (des + (double)prev_sld) >= 0 ? ((des + (double)prev_sld) == 0 ? Color.Khaki : SystemColors.Window) : Color.LightCoral;
+            //    label10.ForeColor = (des + (double)prev_sld) > 0 ? SystemColors.ControlText : Color.Red;
+            //}
 
         }
 
@@ -652,11 +667,11 @@ namespace ALBAITAR_Softvet.Resources
             {
                 bool ready = true;
                 ready &= comboBox3.SelectedValue != null && comboBox3.Text.Trim().Length > 0;
-                ready &= textBox4.BackColor != Color.LightCoral;
-                double mnnt = 0.00;
-                double.TryParse(textBox4.Text.Trim().Replace(" ", ""), out mnnt);
-                ready &= mnnt != 0;
-                textBox4.BackColor = mnnt != 0 ? textBox4.BackColor : Color.LightCoral;
+                ready &= numericUpDown2.BackColor != Color.LightCoral;
+                //double mnnt = 0.00;
+                //double.TryParse(numericUpDown2.Text.Trim().Replace(" ", ""), out mnnt);
+                //ready &= mnnt != 0;
+                //numericUpDown2.BackColor = mnnt != 0 ? numericUpDown2.BackColor : Color.LightCoral;
                 if (ready)
                 {
                     if (Is_New_Stock)
@@ -670,8 +685,8 @@ namespace ALBAITAR_Softvet.Resources
                                             + "VALUES"
                                             + "('" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
                                             + comboBox3.SelectedValue + ","//PROD_ID
-                                            + (mnnt > 0 ? mnnt : 0) + ","//QNT_IN
-                                            + (mnnt < 0 ? mnnt * -1 : 0) + ","//QNT_OUT
+                                            + (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0) + ","//QNT_IN
+                                            + (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0) + ","//QNT_OUT
                                             + "'" + textBox5.Text + "');");//OBSERV
                     }
                     else
@@ -679,8 +694,8 @@ namespace ALBAITAR_Softvet.Resources
                         PreConnection.Excut_Cmd("UPDATE `tb_stock_mouv` SET "
                                             + "`OP_DATE` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
                                             + "`PROD_ID` = " + comboBox3.SelectedValue + ","//OP_DATE
-                                            + "`QNT_IN` = " + (mnnt > 0 ? mnnt : 0) + ","//QNT_IN
-                                            + "`QNT_OUT` = " + (mnnt < 0 ? mnnt * -1 : 0) + ","//QNT_OUT
+                                            + "`QNT_IN` = " + (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0) + ","//QNT_IN
+                                            + "`QNT_OUT` = " + (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0) + ","//QNT_OUT
                                             + "`OBSERV` = '" + textBox5.Text + "' "//OBSERV
                                             + "WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID2"].Value + ";");
                     }
@@ -775,6 +790,48 @@ namespace ALBAITAR_Softvet.Resources
         {
             label13.BackColor = SystemColors.Control;
         }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown1.BackColor = SystemColors.Control;
+        }
+
+        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
+        {
+            label6.Visible = numericUpDown4.Value <= numericUpDown4.Minimum && !Is_New_Product;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.DataSource != null)
+            {
+
+                string ddd = "Convert([CODE], System.String) LIKE '%{0}%'";
+                ddd += " OR Convert([NME], System.String) LIKE '%{0}%'";
+                ddd += " OR Convert([CATEGOR], System.String) LIKE '%{0}%'";
+                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox1.Text);
+            }
+            else
+            {
+                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = "";
+            }
+        }
+        
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            decimal diff = numericUpDown2.Value - numericUpDown2_old_val;
+            decimal prev_sld_tmp = prev_sld + diff;
+            //---------------------------
+            if (label10.Visible)
+            {
+                label10.Text = (prev_sld_tmp).ToString("# ##0.00");
+            }
+            numericUpDown2.BackColor = prev_sld_tmp >= 0 ? (prev_sld_tmp == 0 ? Color.Khaki : SystemColors.Window) : Color.LightCoral;
+            label10.ForeColor = prev_sld_tmp > 0 ? SystemColors.ControlText : Color.Red;
+            //-----------------------
+            label25.Visible = prev_sld_tmp == 0;
+        }
+
     }
 }
 
