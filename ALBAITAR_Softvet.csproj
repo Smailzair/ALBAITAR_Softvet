@@ -426,6 +426,7 @@
     <EmbeddedResource Include="Labo\Biochimie.resx">
       <DependentUpon>Biochimie.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\certificat_enreg.rdlc" />
     <EmbeddedResource Include="Vente.resx">
       <DependentUpon>Vente.cs</DependentUpon>
     </EmbeddedResource>
@@ -659,6 +660,7 @@
     <None Include="Resources\icons8_microsoft_word_20px.png" />
     <None Include="Resources\icons8_pdf_20px.png" />
     <None Include="Resources\icons8_profit_30px.png" />
+    <None Include="Resources\icons8_sync_25px_1.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

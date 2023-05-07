@@ -29,7 +29,8 @@ namespace ALBAITAR_Softvet.Resources
             //----------------------
             comboBox2.SelectedIndex = comboBox3.SelectedIndex = comboBox4.SelectedIndex = 0;
             //----------------------
-            clients = PreConnection.Load_data_keeping_duplicates("SELECT ID,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
+            //clients = PreConnection.Load_data_keeping_duplicates("SELECT ID,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
+            clients = PreConnection.Load_data_keeping_duplicates("SELECT *,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
             comboBox1.DataSource= clients;            
             comboBox1.DisplayMember = "FULL_NME";
             comboBox1.ValueMember = "ID";
@@ -46,10 +47,13 @@ namespace ALBAITAR_Softvet.Resources
         }
         private void Load_anims_from_DB()
         {
-            int fd = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
+            int fd = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 99999999;
             animaux = PreConnection.Load_data_keeping_duplicates("SELECT * FROM tb_animaux;");
             dataGridView1.DataSource = animaux;
-            if(dataGridView1.Rows.Count > fd) { dataGridView1.ClearSelection(); dataGridView1.Rows[fd].Selected = true; }
+            if(dataGridView1.Rows.Count > fd) 
+            { dataGridView1.ClearSelection(); dataGridView1.Rows[fd].Selected = true; }
+            else if (dataGridView1.Rows.Count > 0)
+            {          dataGridView1.ClearSelection();  dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true; }
 
         }
         private void Load_selected_anim_fields()
@@ -65,7 +69,10 @@ namespace ALBAITAR_Softvet.Resources
                 pictureBox1.Image = Properties.Resources.MODIF;
                 pictureBox2.Image = null;    
                 button7.Visible = false;
-                //----------------------------------------------
+                button9.Visible = false;
+                button8.Visible = true;
+                //----------------------------------------------                
+                dateTimePicker3.Value = (DateTime)dataGridView1.SelectedRows[0].Cells["DATE_ADDED"].Value;
                 textBox3.Text = (string)dataGridView1.SelectedRows[0].Cells["NME"].Value;
                 textBox2.Text = (string)dataGridView1.SelectedRows[0].Cells["NUM_IDENTIF"].Value;
                 textBox4.Text = (string)dataGridView1.SelectedRows[0].Cells["NUM_PASSPORT"].Value;
@@ -73,11 +80,12 @@ namespace ALBAITAR_Softvet.Resources
                 comboBox2.SelectedItem = (string)dataGridView1.SelectedRows[0].Cells["ESPECE"].Value;
                 comboBox3.SelectedItem = (string)dataGridView1.SelectedRows[0].Cells["RACE"].Value;
                 comboBox4.SelectedItem = (string)dataGridView1.SelectedRows[0].Cells["SEXE"].Value;
-                dateTimePicker1.Value = dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value != DBNull.Value ? (DateTime)dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value : DateTime.Now.Date;
+                checkBox2.Checked = dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value != DBNull.Value;
+                dateTimePicker1.Value = dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value != DBNull.Value ? (DateTime)dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value : (DateTime)dataGridView1.SelectedRows[0].Cells["DATE_ADDED"].Value;// DateTime.Now.Date;
                 textBox6.Text = (string)dataGridView1.SelectedRows[0].Cells["ROBE"].Value;
                 textBox8.Text = (string)dataGridView1.SelectedRows[0].Cells["OBSERVATIONS"].Value;
                 checkBox1.Checked = (SByte)dataGridView1.SelectedRows[0].Cells["IS_RADIATED"].Value != 0;
-                dateTimePicker2.Value = dataGridView1.SelectedRows[0].Cells["RADIATION_DATE"].Value != DBNull.Value ? (DateTime)dataGridView1.SelectedRows[0].Cells["RADIATION_DATE"].Value : DateTime.Now.Date;
+                dateTimePicker2.Value = dataGridView1.SelectedRows[0].Cells["RADIATION_DATE"].Value != DBNull.Value ? (DateTime)dataGridView1.SelectedRows[0].Cells["RADIATION_DATE"].Value : (DateTime)dataGridView1.SelectedRows[0].Cells["DATE_ADDED"].Value;// DateTime.Now.Date;
                 textBox5.Text = (string)dataGridView1.SelectedRows[0].Cells["RADIATION_CAUSES"].Value;
                 pictureBox2.Image = dataGridView1.SelectedRows[0].Cells["picture"].Value != DBNull.Value ? PreConnection.ByteArrayToImage((byte[])dataGridView1.SelectedRows[0].Cells["picture"].Value) : (Properties.Settings.Default.Use_animals_logo ? (Image)Properties.Resources.ResourceManager.GetObject(comboBox2.Text) : null);
                 button7.Visible = dataGridView1.SelectedRows[0].Cells["picture"].Value != DBNull.Value;
@@ -104,10 +112,11 @@ namespace ALBAITAR_Softvet.Resources
                
                 int cntt = animaux.Rows.Cast<DataRow>().Where(zz =>
                 
-                (zz["NME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) &&
-                (zz["ESPECE"] != DBNull.Value ? zz["ESPECE"].ToString() : "--").ToLower().Equals(comboBox2.Text.ToLower()) &&
-                (zz["RACE"] != DBNull.Value ? zz["RACE"].ToString() : "--").ToLower().Equals(comboBox3.Text.ToLower()) &&
-                (zz["SEXE"] != DBNull.Value ? zz["SEXE"].ToString() : "--").ToLower().Equals(comboBox4.Text.ToLower())) &&
+                ((string)zz["NUM_IDENTIF"] == textBox2.Text.Trim().Replace(" ", "") &&
+                zz["NME"].ToString().ToLower() == textBox3.Text.ToLower() &&
+                (zz["ESPECE"] != DBNull.Value ? zz["ESPECE"].ToString() : "--").ToLower() == comboBox2.Text.ToLower() &&
+                (zz["RACE"] != DBNull.Value ? zz["RACE"].ToString() : "--").ToLower() == comboBox3.Text.ToLower() &&
+                (zz["SEXE"] != DBNull.Value ? zz["SEXE"].ToString() : "--").ToLower() == comboBox4.Text.ToLower()) &&
                 int.Parse(zz["CLIENT_ID"].ToString()) == (comboBox1.SelectedValue != null ? (int)comboBox1.SelectedValue : -2) &&
                 (!Is_New && dataGridView1.SelectedRows.Count > 0 ? (int)zz["ID"] != (int)dataGridView1.SelectedRows[0].Cells["ID"].Value : true)
                 
@@ -138,81 +147,101 @@ namespace ALBAITAR_Softvet.Resources
                 bool all_ready = true;
                 textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
                 comboBox1.BackColor = comboBox1.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
-                all_ready &= comboBox1.BackColor == SystemColors.Window;
-                all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
-                if (all_ready && label13.Visible) { all_ready &= MessageBox.Show("Ce animal déja existe pour ce client,\n\nVoulez vous continuer comme meme ?\n\n", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes; }
-                //-------------
-                label12.Visible = !all_ready;
-                //-------------
-                if (all_ready)
+                int mm = 0;
+                if (Is_New) {mm= animaux.Rows.Cast<DataRow>().Where(XX => XX["NUM_IDENTIF"].ToString().Length > 0 && (string)XX["NUM_IDENTIF"] == textBox2.Text.Trim().Replace(" ", "")).ToList().Count; }
+                else { mm = animaux.Rows.Cast<DataRow>().Where(XX => (int)XX["ID"] != (int)dataGridView1.SelectedRows[0].Cells["ID"].Value && XX["NUM_IDENTIF"].ToString().Length > 0 && (string)XX["NUM_IDENTIF"] == textBox2.Text.Trim().Replace(" ", "")).ToList().Count; }
+             
+                if (textBox2.Text.Trim().Replace(" ", "").Length == 0 || mm > 0)
                 {
-                    if (Is_New) //INSERT
-                    {
-                        //byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : (pictureBox2.Image != null ? PreConnection.ImageToByteArray(pictureBox2.Image) : null);
-                        byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
-                        string insert_cmnd = "INSERT INTO `tb_animaux`"
-                                + "(`NME`,"
-                                + "`NUM_IDENTIF`,"
-                                + "`NUM_PASSPORT`,"
-                                + "`CLIENT_ID`,"
-                                + "`ESPECE`,"
-                                + "`RACE`,"
-                                + "`SEXE`,"
-                                + "`NISS_DATE`,"
-                                + "`ROBE`,"
-                                + "`OBSERVATIONS`,"
-                                + "`IS_RADIATED`,"
-                                + "`RADIATION_DATE`,"
-                                + "`RADIATION_CAUSES`"
-                                + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE`" : "")
-                                + ") VALUES "
-                                + "('" + textBox3.Text + "',"//<{ NME: }>,
-                                + "'" + textBox2.Text + "',"//{ NUM_IDENTIF: }>,
-                                + "'" + textBox4.Text + "',"//{ NUM_PASSPORT: }>,
-                                + comboBox1.SelectedValue + ","//{ CLIENT_ID: }>,
-                                + "'" + comboBox2.Text + "',"//{ ESPECE: }>,
-                                + "'" + comboBox3.Text + "',"//{ RACE: }>,
-                                + "'" + comboBox4.Text + "',"//{ SEXE: }>,
-                                + (dateTimePicker1.Value.Date != DateTime.Now.Date ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ NISS_DATE: }>,
-                                + "'" + textBox6.Text + "',"//{ ROBE: }>,
-                                + "'" + textBox8.Text + "',"//{ OBSERVATIONS: }>,
-                                + (checkBox1.Checked ? "TRUE" : "FALSE") + ","//{ IS_RADIATED: 0}>,
-                                + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ RADIATION_DATE: }>,
-                                + "'" + (checkBox1.Checked ? textBox5.Text : "") + "'" //{ RADIATION_CAUSES 
-                                + (File.Exists(openFileDialog1.FileName) ? ",@Pic" : "")
-                                + ");";
-                        MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
-                        if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
-                        PreConnection.open_conn();
-                        cmd.ExecuteNonQuery();
-                    }
-                    else //UPDATE
-                    {
-                        byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
-                        string insert_cmnd = "UPDATE `tb_animaux` SET "
-                                + "`NME` = '" + textBox3.Text + "',"
-                                + "`NUM_IDENTIF` = '" + textBox2.Text + "',"
-                                + "`NUM_PASSPORT` = '" + textBox4.Text + "',"
-                                + "`CLIENT_ID` = " + comboBox1.SelectedValue + ","
-                                + "`ESPECE` = '" + comboBox2.Text + "',"
-                                + "`RACE` = '" + comboBox3.Text + "',"
-                                + "`SEXE` = '" + comboBox4.Text + "',"
-                                + "`NISS_DATE` = " + (dateTimePicker1.Value.Date != DateTime.Now.Date ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
-                                + "`ROBE` = '" + textBox6.Text + "',"
-                                + "`OBSERVATIONS` = '" + textBox8.Text + "',"
-                                + "`IS_RADIATED` = " + (checkBox1.Checked ? "TRUE" : "FALSE") + ","
-                                + "`RADIATION_DATE` = " + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
-                                + "`RADIATION_CAUSES` = '" + (checkBox1.Checked ? textBox5.Text : "") + "'"
-                                + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE` = @Pic" : (!button7.Visible ? ",`PICTURE` = NULL" : ""))
-                                + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";";
-                        MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
-                        if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
-                        PreConnection.open_conn();
-                        cmd.ExecuteNonQuery();
-                    }
-                    //----------------
-                    Load_anims_from_DB();
+                    textBox2.BackColor = Color.LightCoral;
+                    if (textBox2.Text.Trim().Replace(" ", "").Length > 0) { MessageBox.Show("Ce N° d'identification déja existe pour un autre animal,\n\nVeuillez le changer puis réesayer.\n\n", "Attention :", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+                    else { MessageBox.Show("Le N° d'identification est obligé,\n\nVeuillez le saisir puis réesayer.\n\n", "Attention :", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+
                 }
+                else
+                {
+                    all_ready &= comboBox1.BackColor == SystemColors.Window;
+                    all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+                    if (all_ready && label13.Visible) { all_ready &= MessageBox.Show("Ce animal déja existe pour ce client,\n\nVoulez vous continuer comme meme ?\n\n", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes; }
+                    //-------------
+                    label12.Visible = !all_ready;
+                    //-------------
+                    if (all_ready)
+                    {
+                        if (Is_New) //INSERT
+                        {
+                            //byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : (pictureBox2.Image != null ? PreConnection.ImageToByteArray(pictureBox2.Image) : null);
+                            byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
+                            string insert_cmnd = "INSERT INTO `tb_animaux`"
+                                    + "(`DATE_ADDED`,"
+                                    + "`NME`,"
+                                    + "`NUM_IDENTIF`,"
+                                    + "`NUM_PASSPORT`,"
+                                    + "`CLIENT_ID`,"
+                                    + "`ESPECE`,"
+                                    + "`RACE`,"
+                                    + "`SEXE`,"
+                                    + "`NISS_DATE`,"
+                                    + "`ROBE`,"
+                                    + "`OBSERVATIONS`,"
+                                    + "`IS_RADIATED`,"
+                                    + "`RADIATION_DATE`,"
+                                    + "`RADIATION_CAUSES`"
+                                    + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE`" : "")
+                                    + ") VALUES "
+                                    + "('" + dateTimePicker3.Value.Date.ToString("yyyy-MM-dd") + "',"//<{ DATE_ADDED: }>,
+                                    + "'" + textBox3.Text + "',"//<{ NME: }>,
+                                    + "'" + textBox2.Text + "',"//{ NUM_IDENTIF: }>,
+                                    + "'" + textBox4.Text + "',"//{ NUM_PASSPORT: }>,
+                                    + comboBox1.SelectedValue + ","//{ CLIENT_ID: }>,
+                                    + "'" + comboBox2.Text + "',"//{ ESPECE: }>,
+                                    + "'" + comboBox3.Text + "',"//{ RACE: }>,
+                                    + "'" + comboBox4.Text + "',"//{ SEXE: }>,
+                                    + (checkBox2.Checked ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ NISS_DATE: }>,
+                                    + "'" + textBox6.Text + "',"//{ ROBE: }>,
+                                    + "'" + textBox8.Text + "',"//{ OBSERVATIONS: }>,
+                                    + (checkBox1.Checked ? "TRUE" : "FALSE") + ","//{ IS_RADIATED: 0}>,
+                                    + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ RADIATION_DATE: }>,
+                                    + "'" + (checkBox1.Checked ? textBox5.Text : "") + "'" //{ RADIATION_CAUSES 
+                                    + (File.Exists(openFileDialog1.FileName) ? ",@Pic" : "")
+                                    + ");";
+                            MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
+                            if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
+                            PreConnection.open_conn();
+                            cmd.ExecuteNonQuery();
+                        }
+                        else //UPDATE
+                        {
+                            byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
+                            string insert_cmnd = "UPDATE `tb_animaux` SET "
+                                    + "`DATE_ADDED` = '" + dateTimePicker3.Value.Date.ToString("yyyy-MM-dd") + "',"
+                                    + "`NME` = '" + textBox3.Text + "',"
+                                    + "`NUM_IDENTIF` = '" + textBox2.Text + "',"
+                                    + "`NUM_PASSPORT` = '" + textBox4.Text + "',"
+                                    + "`CLIENT_ID` = " + comboBox1.SelectedValue + ","
+                                    + "`ESPECE` = '" + comboBox2.Text + "',"
+                                    + "`RACE` = '" + comboBox3.Text + "',"
+                                    + "`SEXE` = '" + comboBox4.Text + "',"
+                                    + "`NISS_DATE` = " + (checkBox2.Checked ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
+                                    + "`ROBE` = '" + textBox6.Text + "',"
+                                    + "`OBSERVATIONS` = '" + textBox8.Text + "',"
+                                    + "`IS_RADIATED` = " + (checkBox1.Checked ? "TRUE" : "FALSE") + ","
+                                    + "`RADIATION_DATE` = " + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
+                                    + "`RADIATION_CAUSES` = '" + (checkBox1.Checked ? textBox5.Text : "") + "'"
+                                    + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE` = @Pic" : (!button7.Visible ? ",`PICTURE` = NULL" : ""))
+                                    + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";";
+                            MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
+                            if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
+                            PreConnection.open_conn();
+                            cmd.ExecuteNonQuery();
+                        }
+                        //----------------
+                        Load_anims_from_DB();
+                    }
+                }
+
+                
+                
             }
             else
             {
@@ -280,11 +309,18 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     ((ComboBox)ctrl).SelectedValue = -1;
                 }
-                else if (ctrl.GetType() == typeof(DateTimePicker))
-                {
-                    ((DateTimePicker)ctrl).Value = DateTime.Now;
-                }
+                //else if (ctrl.GetType() == typeof(DateTimePicker))
+                //{
+                //    ((DateTimePicker)ctrl).Value = DateTime.Now;
+                //}
             }
+            dateTimePicker3.Value = DateTime.Now;
+            dateTimePicker1.Value = DateTime.Now;
+            dateTimePicker2.Value = DateTime.Now;
+            button9.Visible = true;
+            button9.PerformClick();
+            button8.Visible = false;
+            checkBox1.Checked = checkBox2.Checked = false;
             label13.Visible=false;
             pictureBox1.Image = Properties.Resources.NOUVEAU;
             if (!textBox1.Focused) { textBox3.Select(); }
@@ -324,6 +360,9 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     switch (g.HeaderText)
                     {
+                        case "DATE_ADDED":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Ajouté le";
+                            break;
                         case "NME":
                             xcelApp.Cells[1, g.Index + 1].Value = "Nom";
                             break;
@@ -389,10 +428,8 @@ namespace ALBAITAR_Softvet.Resources
                         else
                         {
                             xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").Replace("00:00:00","").TrimStart().TrimEnd() : "";
-                        }
-                        
+                        }                        
                     });
-
                 });
                 xcelApp.Columns[dataGridView1.Columns["ID"].Index + 1].Delete();
                 xcelApp.Columns[dataGridView1.Columns["IS_RADIATED"].Index].Delete();
@@ -439,7 +476,8 @@ namespace ALBAITAR_Softvet.Resources
             new Small_New_Client().ShowDialog();
 
             comboBox1.Validating -= comboBox1_Validating;
-            clients = PreConnection.Load_data_keeping_duplicates("SELECT ID,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
+            //clients = PreConnection.Load_data_keeping_duplicates("SELECT ID,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
+            clients = PreConnection.Load_data_keeping_duplicates("SELECT *,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
             comboBox1.DataSource = clients;            
             comboBox1.DisplayMember = "FULL_NME";
             comboBox1.ValueMember = "ID";
@@ -540,6 +578,85 @@ namespace ALBAITAR_Softvet.Resources
 
                 button1.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10001" && (Int32)QQ[3] == 1).Count() > 0; //Ajouter Client
             }
+        }
+
+        private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+        {            
+            dateTimePicker1.MaxDate = dateTimePicker3.Value.Date.AddDays(1).AddSeconds(-1);
+            dateTimePicker2.MinDate = dateTimePicker3.Value.Date;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (!label12.Visible && !Is_New)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("PARAM_NME", typeof(string));
+                dt.Columns.Add("PARAM_VAL", typeof(string));
+                //----------------
+                dt.Rows.Add(new object[] { "DATE_ADDED", dateTimePicker3.Value.ToString("dd/MM/yyyy") });
+                dt.Rows.Add(new object[] { "ANIM_NME", textBox3.Text });                
+                dt.Rows.Add(new object[] { "ESPECE", comboBox2.Text });
+                dt.Rows.Add(new object[] { "RACE", comboBox3.Text });
+                dt.Rows.Add(new object[] { "SEX", comboBox4.Text });
+                dt.Rows.Add(new object[] { "DATE_NISS", checkBox2.Checked ? dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") : null });
+                dt.Rows.Add(new object[] { "REF", dateTimePicker3.Value.ToString("MM") + textBox3.Text.Substring(0, 1).ToUpper() + dateTimePicker3.Value.ToString("dd") + textBox3.Text.Substring(2, 1).ToUpper() + comboBox1.SelectedValue + dataGridView1.SelectedRows[0].Cells["ID"].Value + dateTimePicker3.Value.Month + (dateTimePicker3.Value.Month + dateTimePicker3.Value.Day) + (dateTimePicker3.Value.Month * 2) });
+                dt.Rows.Add(new object[] { "NUM_PASSPORT", textBox4.Text });
+                dt.Rows.Add(new object[] { "NUM_IDENTIF", textBox2.Text });
+                dt.Rows.Add(new object[] { "CABINET", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+                dt.Rows.Add(new object[] { "CABINET_TEL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+                dt.Rows.Add(new object[] { "CABINET_EMAIL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+                dt.Rows.Add(new object[] { "CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+
+                DataRow rww = clients.Rows.Cast<DataRow>().Where(FF => (int)FF["ID"] == (int)comboBox1.SelectedValue).FirstOrDefault();
+                dt.Rows.Add(new object[] { "CLIENT_SEX", rww["SEX"] != DBNull.Value ? rww["SEX"].ToString() : null});
+                dt.Rows.Add(new object[] { "CLIENT_FAMNME", rww["FAMNME"] != DBNull.Value ? rww["FAMNME"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_NME", rww["NME"] != DBNull.Value ? rww["NME"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_NUM_CNI", rww["NUM_CNI"] != DBNull.Value ? rww["NUM_CNI"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_ADRESS", rww["ADRESS"] != DBNull.Value ? rww["ADRESS"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_CITY", rww["CITY"] != DBNull.Value ? rww["CITY"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_WILAYA", rww["WILAYA"] != DBNull.Value ? rww["WILAYA"].ToString() : null });
+                dt.Rows.Add(new object[] { "POSTAL_CODE", rww["POSTAL_CODE"] != DBNull.Value ? rww["POSTAL_CODE"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_NUM_PHONE", rww["NUM_PHONE"] != DBNull.Value ? rww["NUM_PHONE"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_EMAIL", rww["EMAIL"] != DBNull.Value ? rww["EMAIL"].ToString() : null });
+
+                
+                //-------------
+                new Print_report("certificat_enreg", dt).ShowDialog();
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePicker1.Enabled = checkBox2.Checked;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (Is_New)
+            {
+                string vall = string.Concat(DateTime.Now.Millisecond.ToString("D3"), DateTime.Now.ToString("MMMM").Substring(1, 2), int.Parse((DateTime.Now.Minute * DateTime.Now.Second).ToString().Substring(0, (DateTime.Now.Minute * DateTime.Now.Second).ToString().Length > 4 ? 4 : (DateTime.Now.Minute * DateTime.Now.Second).ToString().Length)).ToString("D4"), DateTime.Now.ToString("dddd").Substring(2, 2), DateTime.Now.ToString("yy"), int.Parse((DateTime.Now.Month + DateTime.Now.Millisecond).ToString().Substring(0, (DateTime.Now.Month + DateTime.Now.Millisecond).ToString().Length > 4 ? 4 : (DateTime.Now.Month + DateTime.Now.Millisecond).ToString().Length)).ToString("D4")).ToUpper();
+                if (animaux != null)
+                {
+                    if (animaux.Rows.Count > 0)
+                    {
+                        while (animaux.Rows.Cast<DataRow>().Where(XX => (string)XX["NUM_IDENTIF"] == vall).ToList().Count > 0)
+                        {
+                            vall = string.Concat(DateTime.Now.Millisecond.ToString("D3"), DateTime.Now.ToString("MMMM").Substring(1, 2), int.Parse((DateTime.Now.Minute * DateTime.Now.Second).ToString().Substring(0, (DateTime.Now.Minute * DateTime.Now.Second).ToString().Length > 4 ? 4 : (DateTime.Now.Minute * DateTime.Now.Second).ToString().Length)).ToString("D4"), DateTime.Now.ToString("dddd").Substring(2, 2), DateTime.Now.ToString("yy"), int.Parse((DateTime.Now.Month + DateTime.Now.Millisecond).ToString().Substring(0, (DateTime.Now.Month + DateTime.Now.Millisecond).ToString().Length > 4 ? 4 : (DateTime.Now.Month + DateTime.Now.Millisecond).ToString().Length)).ToString("D4")).ToUpper();
+                        }
+                    }
+                }                
+                textBox2.Text = vall;
+            }
+            
+        }
+
+        private void textBox2_Enter(object sender, EventArgs e)
+        {
+            if (!Is_New)
+            {
+                MessageBox.Show("Le N° d'identification est trés sensible, il peut etre utilisé précedemment (Certificat d'identification ...)\n\nDonc confirmer bien avant de faire la modification.", "Attention :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }            
         }
     }
 }
