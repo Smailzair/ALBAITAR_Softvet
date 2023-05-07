@@ -30,7 +30,10 @@ namespace ALBAITAR_Softvet.Resources
             //----------------------
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new Add_Vente_Fact_Item().ShowDialog();
+        }
     }
 }
 
