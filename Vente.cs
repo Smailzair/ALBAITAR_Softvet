@@ -30,14 +30,16 @@ namespace ALBAITAR_Softvet.Resources
             InitializeComponent();
             //----------------------
             stock_to_modify.Columns.Add("PROD_ID", typeof(int));
+            stock_to_modify.Columns.Add("PROD_CODE", typeof(string));
             stock_to_modify.Columns.Add("QNT_DIMIN", typeof(decimal));
             //----------------------------
             selected_item = new DataGridViewRow();
-            //foreach(DataGridViewColumn col in dataGridView2.Columns)
-            //{
-            //    selected_item.Cells.Add(new DataGridViewTextBoxCell());
-            //}
             //--------------------------
+            dataGridView3.Rows.Add(new DataGridViewRow());
+            dataGridView3.Rows.Add(new DataGridViewRow());
+            dataGridView3.Rows.Add(new DataGridViewRow());            
+            dataGridView3.Rows[0].Height = dataGridView3.Rows[1].Height = dataGridView3.Rows[2].Height = 30;
+            dataGridView3.Rows[0].Cells[0].Value = "Total HT :";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -56,6 +58,30 @@ namespace ALBAITAR_Softvet.Resources
         {
             stock_to_modify.Rows.Clear();
             selected_item = new DataGridViewRow();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow rwx in dataGridView2.SelectedRows)
+            {
+                stock_to_modify.Rows.Cast<DataRow>().Where(x => x["PROD_CODE"].ToString() == rwx.Cells["PRODUCT_CODE"].Value.ToString()).ToList().ForEach(x => x.Delete());
+                dataGridView2.Rows.Remove(rwx);
+            }
+        }
+
+        private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            calcul_bill_tot();
+        }
+
+        private void calcul_bill_tot()
+        {
+            decimal tot = 0;
+            foreach(DataGridViewRow rw in dataGridView2.Rows)
+            {
+                tot += rw.Cells["SLD"].Value != DBNull.Value ? (decimal)rw.Cells["SLD"].Value : 0;
+            }                        
+            dataGridView3.Rows[0].Cells[1].Value = tot;
         }
     }
 }
