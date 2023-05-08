@@ -202,5 +202,17 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Maximize_Main_Frm"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Faire_consom_stock_apres_vente {
+            get {
+                return ((bool)(this["Faire_consom_stock_apres_vente"]));
+            }
+            set {
+                this["Faire_consom_stock_apres_vente"] = value;
+            }
+        }
     }
 }

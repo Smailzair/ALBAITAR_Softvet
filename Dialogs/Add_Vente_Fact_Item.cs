@@ -25,6 +25,10 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void Add_Vente_Fact_Item_Load(object sender, EventArgs e)
         {
+            checkBox1.CheckedChanged -= checkBox1_CheckedChanged;
+            checkBox1.Checked = Properties.Settings.Default.Faire_consom_stock_apres_vente;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            //------------------------------------------
             services = PreConnection.Load_data("SELECT `ITEM_NME_01` AS 'SERVICE' FROM tb_factures_vente WHERE `ITEM_IS_PROD_01` IS FALSE AND `ITEM_NME_01` IS NOT NULL UNION "
                                                + "SELECT `ITEM_NME_02` AS 'SERVICE' FROM tb_factures_vente WHERE `ITEM_IS_PROD_02` IS FALSE AND `ITEM_NME_02` IS NOT NULL UNION "
                                                + "SELECT `ITEM_NME_03` AS 'SERVICE' FROM tb_factures_vente WHERE `ITEM_IS_PROD_03` IS FALSE AND `ITEM_NME_03` IS NOT NULL UNION "
@@ -98,13 +102,213 @@ namespace ALBAITAR_Softvet.Dialogs
                                                 );
             dataGridView1.DataSource = services;
             //------------------------------------------------------------
-            products = PreConnection.Load_data("SELECT `ID`,`CODE`,`CATEGOR`,`NME` FROM tb_produits;");
+            products = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`CODE`,tb1.`CATEGOR`,tb1.`NME`,tb1.`REVIENT_PRTICE`,tb1.`VENTE_PRICE`,tb2.SLD FROM tb_produits AS tb1 LEFT JOIN (SELECT `PROD_ID`,SUM(`QNT_IN`) - SUM(`QNT_OUT`) AS SLD FROM tb_stock_mouv GROUP BY `PROD_ID`) AS tb2 ON tb2.`PROD_ID` = tb1.`ID`;");
+            foreach(DataRow rww in Vente.stock_to_modify.Rows)
+            {
+                products.Rows.Cast<DataRow>().Where(x => x["ID"].ToString() == rww["PROD_ID"].ToString()).ToList().ForEach(f => { 
+                    f.SetField("SLD", ((decimal)f["SLD"] - (decimal)rww["QNT_DIMIN"])); });
+            }            
+            dataGridView2.DataSource = products;
+            //-------------------------------------------------------------
             
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = "SERVICE LIKE '%" + textBox1.Text+"%'";
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            string fltr = "CODE LIKE '%" + textBox3.Text + "%'";
+            fltr += " OR CATEGOR LIKE '%" + textBox3.Text + "%'";
+            fltr += " OR NME LIKE '%" + textBox3.Text + "%'";
+            ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = fltr;
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox2.Enabled = radioButton1.Checked;
+            textBox1.Enabled = dataGridView1.Enabled = radioButton2.Checked;
+            //------------
+            make_select();
+        }
+
+        private void make_select()
+        {
+            if(tabControl1.SelectedTab == tabPage1)
+            {                
+                if (radioButton1.Checked)
+                {
+                    label2.Text = textBox2.Text.Trim().Length > 0 ? textBox2.Text : "--";
+                }
+                else
+                {
+                    if (dataGridView1.SelectedRows.Count > 0)
+                    {
+                        label2.Text = (string)dataGridView1.SelectedRows[0].Cells["SERVICESS"].Value;
+                    }
+                    else
+                    {
+                        label2.Text = "--";
+                    }
+                }
+            }
+            else
+            {
+                if (dataGridView2.SelectedRows.Count > 0)
+                {
+                    label2.Text = string.Concat("[", dataGridView2.SelectedRows[0].Cells["CODE"].Value, "] - ", dataGridView2.SelectedRows[0].Cells["NME"].Value);
+                    numericUpDown2.Value = (decimal)(dataGridView2.SelectedRows[0].Cells["VENTE_PRICE"].Value != DBNull.Value ? dataGridView2.SelectedRows[0].Cells["VENTE_PRICE"].Value : (dataGridView2.SelectedRows[0].Cells["REVIENT_PRTICE"].Value != DBNull.Value ? dataGridView2.SelectedRows[0].Cells["REVIENT_PRTICE"].Value : 0));
+                }
+                else
+                {
+                    label2.Text = "--";
+                    numericUpDown2.Value = 0;
+                }
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            label2.Text = textBox2.Text.Trim().Length > 0 ? textBox2.Text : "--";
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {            
+            if(dataGridView1.Enabled && tabControl1.SelectedTab == tabPage1)
+            {
+                if(dataGridView1.SelectedRows.Count > 0)
+                {
+                    label2.Text = (string)dataGridView1.SelectedRows[0].Cells["SERVICESS"].Value;
+                }
+                else
+                {
+                    label2.Text = "--";
+                }
+            }
+        }
+
+        private void dataGridView2_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView2.Enabled && tabControl1.SelectedTab == tabPage2)
+            {
+                if (dataGridView2.SelectedRows.Count > 0)
+                {
+                    label2.Text = string.Concat("[", dataGridView2.SelectedRows[0].Cells["CODE"].Value, "] - ", dataGridView2.SelectedRows[0].Cells["NME"].Value);
+                    numericUpDown2.Value = (decimal)(dataGridView2.SelectedRows[0].Cells["VENTE_PRICE"].Value != DBNull.Value ? dataGridView2.SelectedRows[0].Cells["VENTE_PRICE"].Value : (dataGridView2.SelectedRows[0].Cells["REVIENT_PRTICE"].Value != DBNull.Value ? dataGridView2.SelectedRows[0].Cells["REVIENT_PRTICE"].Value : 0));
+                }
+                else
+                {
+                    label2.Text = "--";
+                    numericUpDown2.Value = 0;
+                }
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            numericUpDown2.Value = 0;
+            checkBox1.Visible = tabControl1.SelectedTab == tabPage2;
+            make_select();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            bool all_ready = true;
+            all_ready &= label2.Text.Length > 0 && label2.Text != "--";
+            all_ready &= numericUpDown1.Value > 0;
+            all_ready &= numericUpDown2.Value > 0;
+            numericUpDown1.BackColor = numericUpDown1.Value > 0 ? SystemColors.Window : Color.LightCoral;
+            numericUpDown2.BackColor = numericUpDown2.Value > 0 ? SystemColors.Window : Color.LightCoral;
+
+            if(tabControl1.SelectedTab == tabPage2 && dataGridView2.SelectedRows.Count > 0 && checkBox1.Checked)
+            {
+                if (numericUpDown1.Value > (decimal)dataGridView2.SelectedRows[0].Cells["SLD"].Value)
+                {
+                    all_ready = false;
+                    numericUpDown1.BackColor = Color.LightCoral;
+                    MessageBox.Show("Le stock actuel (avec d'autres élemnents de cette facture) ne permet pas cette consommation.\n\nDeux choix:\n**Réduisez le montant.\n** Décocher l'option 'Faire consommation stock', puis suivre le control manuallement.\n", "Stock insuffisant:",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                }
+            }
+            if (all_ready)
+            {
+                if (tabControl1.SelectedTab == tabPage1) //SERVICE
+                {
+                    Vente.selected_item.Cells.Add(new DataGridViewTextBoxCell());
+                    Vente.selected_item.Cells[0].Value = "Service";
+                    //----------------------
+                    Vente.selected_item.Cells.Add(new DataGridViewTextBoxCell());
+                    Vente.selected_item.Cells[1].Value = label2.Text;
+                    //----------------------
+                    Vente.selected_item.Cells.Add(new DataGridViewTextBoxCell());
+                    Vente.selected_item.Cells[2].Value = numericUpDown1.Value;
+                    //----------------------    
+                    Vente.selected_item.Cells.Add(new DataGridViewTextBoxCell());
+                    Vente.selected_item.Cells[3].Value = numericUpDown2.Value;
+                    //----------------------
+                    Vente.selected_item.Cells.Add(new DataGridViewTextBoxCell());
+                    Vente.selected_item.Cells[4].Value = numericUpDown1.Value * numericUpDown2.Value;
+                    //----------------------
+                    Vente.selected_item.Cells.Add(new DataGridViewTextBoxCell());
+                    Vente.selected_item.Cells[5].Value = DBNull.Value;
+                    //----------------------
+                }
+                else //PRODUIT
+                {
+                    if (checkBox1.Checked)
+                    {
+                        //-----------------Stock ---
+                        DataRow rw = Vente.stock_to_modify.NewRow();
+                        rw["PROD_ID"] = (int)dataGridView2.SelectedRows[0].Cells["ID"].Value;
+                        rw["QNT_DIMIN"] = numericUpDown1.Value;
+                        Vente.stock_to_modify.Rows.Add(rw);
+                    }
+                    //----------------------------------------
+
+                }
+                Close();
+
+            }
+            else {
+                Vente.selected_item = null;
+                   }
+
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown1.BackColor = SystemColors.Window;
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown2.BackColor = SystemColors.Window;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Visible)
+            {
+                if(!checkBox1.Checked)
+                {
+                    if(MessageBox.Show("Avec cette sélection, le contrôle des stocks ne sera pas automatique.\n\nVous devez l'ajuster manuellement après la vente.\n\nVoulez-vous continuer?", "Attention :",MessageBoxButtons.YesNo,MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                    {
+                        
+                        
+                    }
+                    else
+                    {
+                        checkBox1.CheckedChanged -= checkBox1_CheckedChanged;
+                        checkBox1.Checked = true;
+                        checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+                    }
+                }                
+            }
+            Properties.Settings.Default.Faire_consom_stock_apres_vente = checkBox1.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }
