@@ -110,7 +110,13 @@ namespace ALBAITAR_Softvet.Dialogs
                 products.Rows.Cast<DataRow>().Where(x => x["ID"].ToString() == rww["PROD_ID"].ToString()).ToList().ForEach(f =>
                 {
                     f.SetField("SLD", ((decimal)f["SLD"] - (decimal)rww["QNT_DIMIN"]));
+
+                    if ((decimal)f["SLD"] <= 0)
+                    {
+                        f.Delete();
+                    }
                 });
+                
             }
             dataGridView2.DataSource = products;
             //-------------------------------------------------------------
@@ -233,7 +239,7 @@ namespace ALBAITAR_Softvet.Dialogs
             all_ready &= numericUpDown2.Value > 0;
             numericUpDown1.BackColor = numericUpDown1.Value > 0 ? SystemColors.Window : Color.LightCoral;
             numericUpDown2.BackColor = numericUpDown2.Value > 0 ? SystemColors.Window : Color.LightCoral;
-            textBox2.BackColor = textBox2.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;
+            textBox2.BackColor = radioButton1.Checked && textBox2.Text.Trim().Length == 0 ? Color.LightCoral : SystemColors.Window;
             if (tabControl1.SelectedTab == tabPage2 && dataGridView2.SelectedRows.Count > 0)
             {
                 if (numericUpDown1.Value > (decimal)dataGridView2.SelectedRows[0].Cells["SLD"].Value && checkBox1.Checked)
@@ -383,28 +389,6 @@ namespace ALBAITAR_Softvet.Dialogs
 
         }
 
-        private void Add_Vente_Fact_Item_MouseClick(object sender, MouseEventArgs e)
-        {
 
-        }
-
-        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_EnabledChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void Add_Vente_Fact_Item_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-
-        }
     }
 }

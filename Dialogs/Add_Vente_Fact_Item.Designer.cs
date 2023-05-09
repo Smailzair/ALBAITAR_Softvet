@@ -162,10 +162,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(434, 95);
             this.dataGridView1.TabIndex = 23;
-            this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            this.dataGridView1.EnabledChanged += new System.EventHandler(this.dataGridView1_EnabledChanged);
-            this.dataGridView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDoubleClick);
             // 
             // SERVICESS
             // 
@@ -472,8 +469,6 @@
             this.Text = "Choisir un (01) élément à ajouter :";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.Add_Vente_Fact_Item_Load);
-            this.Click += new System.EventHandler(this.Add_Vente_Fact_Item_Click);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Add_Vente_Fact_Item_MouseClick);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
