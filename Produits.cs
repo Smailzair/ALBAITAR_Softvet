@@ -534,6 +534,11 @@ namespace ALBAITAR_Softvet.Resources
             //--------------------
             label25.Visible = false;
             label10.ForeColor = SystemColors.ControlText;
+            //---------------------
+            if(dataGridView1.SelectedRows.Count > 0)
+            {
+                comboBox3.SelectedValue = dataGridView1.SelectedRows[0].Cells["ID"].Value;
+            }
 
         }
 

@@ -28,6 +28,7 @@ namespace ALBAITAR_Softvet.Resources
         static public DataTable stock_to_modify = new DataTable();
         decimal TVA_percent = 9;
         DataTable clients;
+        DataTable factures;
         public Vente()
         {
             InitializeComponent();
@@ -35,11 +36,14 @@ namespace ALBAITAR_Softvet.Resources
             clients = PreConnection.Load_data("SELECT `ID`,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
             comboBox1.DataSource = clients;
             comboBox1.DisplayMember = "FULL_NME";
-            comboBox1.ValueMember = "ID";
+            comboBox1.ValueMember = "ID";            
             //----------------------
-            stock_to_modify.Columns.Add("PROD_IDDD", typeof(int));
-            stock_to_modify.Columns.Add("PROD_CODEEE", typeof(string));
-            stock_to_modify.Columns.Add("QNT_DIMINNN", typeof(decimal));
+            if(stock_to_modify.Columns.Count == 0)
+            {
+                stock_to_modify.Columns.Add("PROD_ID", typeof(int));
+                stock_to_modify.Columns.Add("PROD_CODE", typeof(string));
+                stock_to_modify.Columns.Add("QNT_DIMIN", typeof(decimal));
+            }            
             //----------------------------
             selected_item = new DataGridViewRow();
             //--------------------------
@@ -81,7 +85,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             foreach (DataGridViewRow rwx in dataGridView2.SelectedRows)
             {
-                stock_to_modify.Rows.Cast<DataRow>().Where(x => x["PROD_CODEEE"].ToString() == rwx.Cells["PRODUCT_CODE"].Value.ToString()).ToList().ForEach(x => x.Delete());
+                stock_to_modify.Rows.Cast<DataRow>().Where(x => x["PROD_CODE"].ToString() == rwx.Cells["PRODUCT_CODE"].Value.ToString()).ToList().ForEach(x => x.Delete());
                 dataGridView2.Rows.Remove(rwx);
             }
             calcul_bill_tot();
@@ -129,7 +133,13 @@ namespace ALBAITAR_Softvet.Resources
 
         private void Vente_Load(object sender, EventArgs e)
         {
+            load_factures();
+        }
 
+        private void load_factures()
+        {
+            factures = PreConnection.Load_data("SELECT * FROM tb_factures_vente;");
+            dataGridView1.DataSource = factures;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -148,7 +158,60 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button5_Click(object sender, EventArgs e)
         {
+            string msg_txt = "";
+            bool All_Ready = true;
+            //--------
+            All_Ready &= dataGridView2.Rows.Count > 0;
+            msg_txt += "\n- Aucun élement dans la facture.";
+            //------------
+            All_Ready &= !label3.Visible;
 
+            //-----------------
+            if (All_Ready)
+            {
+
+            }
+            else if(msg_txt.Length > 0)
+            {
+                MessageBox.Show(msg_txt,"Vérifiez s'il vous plaît:",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void dataGridView3_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            textBox2.Text = numericUpDown1.Value.ToString("0000");
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void textBox2_Validating(object sender, CancelEventArgs e)
+        {
+            int dd = 1;
+            if (int.TryParse(textBox2.Text, out dd))
+            {
+                if(dd <= 9999)
+                {
+                    numericUpDown1.Value = dd;
+                }
+                else
+                {                    
+                    MessageBox.Show("N° de facture ne doit superieur à 9999.", "Ref. de facture :", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    numericUpDown1_ValueChanged(null, null);
+                }                
+            }
+            else
+            {
+                MessageBox.Show("La Ref. ne doit pas vide.\nEt les 4 derniers chiffres de Ref. de facture n'accepte que les nombres.", "Ref. de facture :", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                numericUpDown1_ValueChanged(null, null);
+            }
         }
     }
 }
