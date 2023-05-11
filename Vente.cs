@@ -88,9 +88,16 @@ namespace ALBAITAR_Softvet.Resources
             comboBox1.Text = "";
             comboBox1.SelectedValue = DBNull.Value;
             dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Now;
-            int dds = factures.AsEnumerable()
+            int dds = 0;
+            if(factures != null)
+            {
+                if(factures.Rows.Count > 0)
+                {
+                    dds = factures.AsEnumerable()
                                   .Where(row => row["REF"].ToString().Substring(3, 4) == DateTime.Now.Year.ToString())
                                   .Max(row => int.Parse(row["REF"].ToString().Substring(8)));
+                }
+            }                
             numericUpDown1.Value = dds != null ? (dds + 1) : 1;
             dataGridView2.Rows.Clear();
             checkBox1.Checked = Properties.Settings.Default.Faire_reg_espece_facture_vente;
@@ -168,12 +175,15 @@ namespace ALBAITAR_Softvet.Resources
             int prev_idx = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : -1;
             factures = PreConnection.Load_data("SELECT `ID`,`DATE`,`CLIENT_ID`,`CLIENT_FULL_NME`,`REF`,`TVA_PERC`,`DROIT_TIMBRE`,`TOTAL_HT`,`TOTAL_TTC` FROM tb_factures_vente;");
             dataGridView1.DataSource = factures;
-            if (prev_idx > -1 && dataGridView1.Rows[prev_idx] != null)
+            if (prev_idx > -1 && dataGridView1.Rows.Count > prev_idx)
             {
-                dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
-                dataGridView1.ClearSelection();
-                dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-                dataGridView1.Rows[prev_idx].Selected = true;
+                
+                    dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                    dataGridView1.ClearSelection();
+                    dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                    dataGridView1.Rows[prev_idx].Selected = true;
+                
+                
             }
         }
 
@@ -263,7 +273,7 @@ namespace ALBAITAR_Softvet.Resources
                             inti += ",`ITEM_PRIX_UNIT_" + (f < 10 ? "0" : "") + f + "` = NULL";
                         }
                         PreConnection.Excut_Cmd("UPDATE `tb_factures_vente` SET " + inti.Substring(1) + ",");
-                    }                        
+                    }
                     //------------
                     string cmmd = "UPDATE `tb_factures_vente` SET "
                             + "`DATE` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
@@ -312,7 +322,7 @@ namespace ALBAITAR_Softvet.Resources
                                             + (sumSLD > 0 ? sumSLD : 0) + "," //QNT_OUT
                                             + "'Vente (Facture [" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) + "]) -" + (Is_New ? "Crée" : "Modifiée") + "-');"); //OBSERV
                         }
-                    }     
+                    }
                 }
                 //-------------
                 load_factures();
@@ -456,23 +466,48 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if(dataGridView1.SelectedRows.Count > 0){
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
                 if (MessageBox.Show("Êtes-vous sûr de supprimer (" + dataGridView1.SelectedRows.Count + ") factures ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     string idx = "";
-                    dataGridView1.SelectedRows.Cast<DataGridViewRow>().ForEach(row => idx += "," + row.Cells["ID"].Value);
+                    dataGridView1.SelectedRows.Cast<DataGridViewRow>().ForEach(row => {
+                        Debug.WriteLine(">>>>>>>>>>>>>>>> row.Cells[\"ID\"].Value >>>>>>> " + row.Cells["ID"].Value);
+                        idx += "," + row.Cells["ID"].Value; });
                     idx = idx.Substring(1);
+                    
                     bool ZZZ = MessageBox.Show("Retourner la quantité des produits au stock ?", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
                     if (ZZZ)
                     {
+                        string cmd_tmp = "";
+                        for (int f = 1; f < 71; f++)
+                        {
+                            //cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` FROM tb_factures_vente WHERE `ID` IN (" + idx + ") AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ";
+                            cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_NME',`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_PROD_CODE',SUM(`ITEM_QNT_" + (f < 10 ? "0" : "") + f + "`) AS 'ITEM_QNT' FROM tb_factures_vente WHERE `ID` IN ("+idx+") AND `ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f + "` AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ";
+                        }
+                        cmd_tmp += ";";
+                        cmd_tmp = cmd_tmp.Replace(" UNION ;", "");
+                        DataTable codes = PreConnection.Load_data("SELECT  tb1.ITEM_NME,SUM(tb1.ITEM_QNT) AS ITEM_QNT, PROD.`ID` AS 'PROD_ID' FROM (" + cmd_tmp + ") AS tb1 LEFT JOIN tb_produits AS PROD ON PROD.CODE = tb1.ITEM_PROD_CODE WHERE tb1.ITEM_NME IS NOT NULL GROUP BY tb1.ITEM_NME;");
+                        
+                        //RESULT COLUMNS >>> : ITEM_NME / ITEM_QNT / PROD_ID
+                        foreach (DataRow row in codes.Rows)
+                        {
+                                PreConnection.Excut_Cmd("INSERT INTO `tb_stock_mouv`(`OP_DATE`,`PROD_ID`,`QNT_IN`,`QNT_OUT`,`OBSERV`) VALUES ("
+                                                               + "'" + DateTime.Now.ToString("yyyy-MM-dd") + "',"
+                                                               + "'" + row["PROD_ID"] + "',"
+                                                               + row["ITEM_QNT"] + ","
+                                                               + "0,"
+                                                               + "'Vente (Facture Annulé)');");                                                               
+                            
 
-                    
+                        }
                     }
                     //-------
-                    PreConnection.Excut_Cmd("DELETE FROM tb_factures_vente WHERE ID IN (" + idx+")");
+                    PreConnection.Excut_Cmd("DELETE FROM tb_factures_vente WHERE ID IN (" + idx + ")");
+                    load_factures();
                 }
             }
-            
+
         }
     }
 }

@@ -449,6 +449,11 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (dataGridView2.SelectedRows.Count == 1)
                 {
+                    //--------------------
+                    decimal sum = dataGridView2.Rows.Cast<DataGridViewRow>()
+                   .Sum(row => Convert.ToDecimal(row.Cells["QNT2"].Value));
+                    label21.Text = "Total : " + sum.ToString("# ##0.00");
+                    //--------------
                     DataRow rw = Products.Rows.Cast<DataRow>().Where(XX => (int)XX["ID"] == (int)dataGridView2.SelectedRows[0].Cells["PROD_ID"].Value).FirstOrDefault();
                     if (rw != null)
                     {
@@ -469,7 +474,18 @@ namespace ALBAITAR_Softvet.Resources
                         }
                         textBox5.Text = (string)dataGridView2.SelectedRows[0].Cells["OBSERV"].Value;
                         //textBox4.Text = ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value).ToString("# ##0.00");
-                        numericUpDown2.Minimum = textBox5.Text == "Achat (Premier Stock)" ? (((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value - prev_sld) > 0 ? ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value - prev_sld) : 0) : ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value - prev_sld);
+
+                        if (sum >= 0)
+                        {
+                            numericUpDown2.Minimum = textBox5.Text == "Achat (Premier Stock)" ? (((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value - prev_sld) > 0 ? ((decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value - prev_sld) : 0) : (decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value - prev_sld;
+                        }
+                        else
+                        {
+                            numericUpDown2.Minimum = -10000000000;
+                        }
+
+
+
                         numericUpDown2.Value = numericUpDown2_old_val = (decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value;                                                
                         //-------------------------
                         textBox5.Enabled = comboBox1.Enabled = comboBox3.Enabled = dateTimePicker1.Enabled = !textBox5.Text.Equals("Achat (Premier Stock)");
@@ -480,11 +496,7 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         initial_stock_fields();
                     }
-                    //--------------------
-                    decimal sum = dataGridView2.Rows.Cast<DataGridViewRow>()
-                   .Sum(row => Convert.ToDecimal(row.Cells["QNT2"].Value));
-
-                    label21.Text = "Total : " + sum.ToString("# ##0.00");
+                    
 
                 }
                 else
@@ -523,14 +535,8 @@ namespace ALBAITAR_Softvet.Resources
             dateTimePicker1.Value = DateTime.Now >= minDate ? DateTime.Now : minDate;
             //------------------------
             textBox5.Clear();
-            comboBox1.SelectedIndex = 0;
-            //-----------
-            numericUpDown2.ValueChanged -= numericUpDown2_ValueChanged;            
-            numericUpDown2_old_val = 0;
-            numericUpDown2.BackColor = SystemColors.Window;
-            numericUpDown2.Minimum = prev_sld * -1;
-            numericUpDown2.Value = numericUpDown2.Minimum <= 0 ? 0 : numericUpDown2.Minimum;
-            numericUpDown2.ValueChanged += numericUpDown2_ValueChanged;
+            comboBox1.SelectedIndex = 0;            
+            
             //--------------------
             label25.Visible = false;
             label10.ForeColor = SystemColors.ControlText;
@@ -539,7 +545,15 @@ namespace ALBAITAR_Softvet.Resources
             {
                 comboBox3.SelectedValue = dataGridView1.SelectedRows[0].Cells["ID"].Value;
             }
-
+            //-----------
+            numericUpDown2.ValueChanged -= numericUpDown2_ValueChanged;
+            numericUpDown2_old_val = 0;
+            numericUpDown2.BackColor = SystemColors.Window;
+            numericUpDown2.Minimum = prev_sld * -1;
+            numericUpDown2.Value = numericUpDown2.Minimum <= 0 ? 0 : numericUpDown2.Minimum;
+            //numericUpDown2.Value = numericUpDown2.Minimum;
+            Debug.WriteLine(" >>>>>>>>>>>>>> 001 >>>>>>> " + numericUpDown2.Minimum);
+            numericUpDown2.ValueChanged += numericUpDown2_ValueChanged;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
