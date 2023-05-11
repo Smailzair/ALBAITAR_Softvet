@@ -340,11 +340,17 @@ namespace ALBAITAR_Softvet.Dialogs
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             numericUpDown1.BackColor = SystemColors.Window;
+            //-----------------
+            decimal mnt = numericUpDown1.Value * numericUpDown2.Value;
+            label7.Text = mnt.ToString("N2") + " DA";
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
             numericUpDown2.BackColor = SystemColors.Window;
+            //-----------------
+            decimal mnt  = numericUpDown1.Value * numericUpDown2.Value;
+            label7.Text = mnt.ToString("N2") + " DA";
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

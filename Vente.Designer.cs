@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Vente));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -41,11 +44,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TVA_PERC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DROIT_TIMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TOTAL_TTC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TOTAL_HT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button7 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -68,9 +77,9 @@
             this.label19 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.TYPE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OP_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ITEM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QNT2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PROD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PRIX_UNIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SLD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PRODUCT_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
@@ -80,18 +89,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CLIENT_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CLIENT_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TVA_PERC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DROIT_TIMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TOTAL_TTC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ITEM_NME_01 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ITEM_NME_02 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ITEM_NME_03 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ITEM_NME_04 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -107,7 +104,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(6, 25);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(272, 21);
+            this.textBox1.Size = new System.Drawing.Size(421, 21);
             this.textBox1.TabIndex = 0;
             // 
             // dataGridView1
@@ -138,10 +135,7 @@
             this.TVA_PERC,
             this.DROIT_TIMBRE,
             this.TOTAL_TTC,
-            this.ITEM_NME_01,
-            this.ITEM_NME_02,
-            this.ITEM_NME_03,
-            this.ITEM_NME_04});
+            this.TOTAL_HT});
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.Location = new System.Drawing.Point(6, 52);
             this.dataGridView1.Name = "dataGridView1";
@@ -150,12 +144,97 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView1.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(272, 387);
+            this.dataGridView1.Size = new System.Drawing.Size(421, 387);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // DATE
+            // 
+            this.DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATE.DataPropertyName = "DATE";
+            this.DATE.HeaderText = "Date";
+            this.DATE.Name = "DATE";
+            this.DATE.ReadOnly = true;
+            this.DATE.Width = 58;
+            // 
+            // REF
+            // 
+            this.REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.REF.DataPropertyName = "REF";
+            this.REF.HeaderText = "Ref.";
+            this.REF.Name = "REF";
+            this.REF.ReadOnly = true;
+            this.REF.Width = 51;
+            // 
+            // CLIENT_ID
+            // 
+            this.CLIENT_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CLIENT_ID.DataPropertyName = "CLIENT_ID";
+            this.CLIENT_ID.HeaderText = "CLIENT_ID";
+            this.CLIENT_ID.Name = "CLIENT_ID";
+            this.CLIENT_ID.ReadOnly = true;
+            this.CLIENT_ID.Visible = false;
+            this.CLIENT_ID.Width = 85;
+            // 
+            // CLIENT_FULL_NME
+            // 
+            this.CLIENT_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CLIENT_FULL_NME.DataPropertyName = "CLIENT_FULL_NME";
+            this.CLIENT_FULL_NME.HeaderText = "Client";
+            this.CLIENT_FULL_NME.Name = "CLIENT_FULL_NME";
+            this.CLIENT_FULL_NME.ReadOnly = true;
+            // 
+            // TVA_PERC
+            // 
+            this.TVA_PERC.DataPropertyName = "TVA_PERC";
+            dataGridViewCellStyle2.Format = "N2";
+            this.TVA_PERC.DefaultCellStyle = dataGridViewCellStyle2;
+            this.TVA_PERC.HeaderText = "TVA_PERC";
+            this.TVA_PERC.Name = "TVA_PERC";
+            this.TVA_PERC.ReadOnly = true;
+            this.TVA_PERC.Visible = false;
+            // 
+            // DROIT_TIMBRE
+            // 
+            this.DROIT_TIMBRE.DataPropertyName = "DROIT_TIMBRE";
+            dataGridViewCellStyle3.Format = "N2";
+            this.DROIT_TIMBRE.DefaultCellStyle = dataGridViewCellStyle3;
+            this.DROIT_TIMBRE.HeaderText = "DROIT_TIMBRE";
+            this.DROIT_TIMBRE.Name = "DROIT_TIMBRE";
+            this.DROIT_TIMBRE.ReadOnly = true;
+            this.DROIT_TIMBRE.Visible = false;
+            // 
+            // TOTAL_TTC
+            // 
+            this.TOTAL_TTC.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.TOTAL_TTC.DataPropertyName = "TOTAL_TTC";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.TOTAL_TTC.DefaultCellStyle = dataGridViewCellStyle4;
+            this.TOTAL_TTC.HeaderText = "Total TTC";
+            this.TOTAL_TTC.Name = "TOTAL_TTC";
+            this.TOTAL_TTC.ReadOnly = true;
+            this.TOTAL_TTC.Width = 79;
+            // 
+            // TOTAL_HT
+            // 
+            this.TOTAL_HT.DataPropertyName = "TOTAL_HT";
+            this.TOTAL_HT.HeaderText = "TOTAL_HT";
+            this.TOTAL_HT.Name = "TOTAL_HT";
+            this.TOTAL_HT.ReadOnly = true;
+            this.TOTAL_HT.Visible = false;
             // 
             // button7
             // 
-            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button7.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_20px_2;
             this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button7.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
@@ -213,7 +292,7 @@
             this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.button5.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_save_close_25px;
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(391, 417);
+            this.button5.Location = new System.Drawing.Point(386, 417);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(133, 36);
             this.button5.TabIndex = 27;
@@ -221,6 +300,7 @@
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.button5, "Ajouter");
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button3
@@ -259,15 +339,17 @@
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(226, 445);
+            this.button4.Location = new System.Drawing.Point(401, 445);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(26, 29);
             this.button4.TabIndex = 3;
             this.toolTip1.SetToolTip(this.button4, "Supprimer");
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // checkBox1
             // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(135, 359);
             this.checkBox1.Name = "checkBox1";
@@ -279,6 +361,7 @@
         "\n");
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkBox1_MouseClick);
             // 
             // groupBox1
             // 
@@ -292,7 +375,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(287, 480);
+            this.groupBox1.Size = new System.Drawing.Size(436, 480);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "--";
@@ -321,7 +404,7 @@
             this.groupBox2.Controls.Add(this.textBox2);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(305, 33);
+            this.groupBox2.Location = new System.Drawing.Point(454, 33);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(527, 459);
             this.groupBox2.TabIndex = 10;
@@ -336,6 +419,7 @@
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(45, 21);
             this.dateTimePicker2.TabIndex = 45;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // numericUpDown1
             // 
@@ -362,14 +446,15 @@
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(409, 25);
+            this.label3.Location = new System.Drawing.Point(409, 14);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 16);
+            this.label3.Size = new System.Drawing.Size(110, 31);
             this.label3.TabIndex = 43;
             this.label3.Text = "Existe déja !";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label3.Visible = false;
             // 
             // dataGridView3
             // 
@@ -377,9 +462,7 @@
             this.dataGridView3.AllowUserToDeleteRows = false;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView3.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -413,7 +496,7 @@
             this.dataGridView3.RowTemplate.Height = 40;
             this.dataGridView3.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(263, 121);
+            this.dataGridView3.Size = new System.Drawing.Size(258, 121);
             this.dataGridView3.TabIndex = 40;
             this.dataGridView3.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellValueChanged);
             // 
@@ -446,6 +529,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(384, 24);
             this.comboBox1.TabIndex = 37;
+            this.comboBox1.TextUpdate += new System.EventHandler(this.comboBox1_TextUpdate);
             // 
             // label2
             // 
@@ -492,9 +576,9 @@
             this.dataGridView2.ColumnHeadersHeight = 30;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TYPE,
-            this.OP_DATE,
+            this.ITEM_NME,
             this.QNT2,
-            this.PROD_ID,
+            this.PRIX_UNIT,
             this.SLD,
             this.PRODUCT_CODE});
             this.dataGridView2.EnableHeadersVisualStyles = false;
@@ -503,7 +587,7 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(515, 207);
+            this.dataGridView2.Size = new System.Drawing.Size(510, 207);
             this.dataGridView2.TabIndex = 33;
             this.dataGridView2.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView2_RowsAdded);
             // 
@@ -516,13 +600,13 @@
             this.TYPE.ReadOnly = true;
             this.TYPE.Width = 57;
             // 
-            // OP_DATE
+            // ITEM_NME
             // 
-            this.OP_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OP_DATE.DataPropertyName = "OP_DATE";
-            this.OP_DATE.HeaderText = "Elément";
-            this.OP_DATE.Name = "OP_DATE";
-            this.OP_DATE.ReadOnly = true;
+            this.ITEM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ITEM_NME.DataPropertyName = "ITEM_NME";
+            this.ITEM_NME.HeaderText = "Elément";
+            this.ITEM_NME.Name = "ITEM_NME";
+            this.ITEM_NME.ReadOnly = true;
             // 
             // QNT2
             // 
@@ -537,17 +621,17 @@
             this.QNT2.ReadOnly = true;
             this.QNT2.Width = 55;
             // 
-            // PROD_ID
+            // PRIX_UNIT
             // 
-            this.PROD_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.PROD_ID.DataPropertyName = "PROD_ID";
+            this.PRIX_UNIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.PRIX_UNIT.DataPropertyName = "PRIX_UNIT";
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
             dataGridViewCellStyle13.Format = "N2";
-            this.PROD_ID.DefaultCellStyle = dataGridViewCellStyle13;
-            this.PROD_ID.HeaderText = "Prix Unit";
-            this.PROD_ID.Name = "PROD_ID";
-            this.PROD_ID.ReadOnly = true;
-            this.PROD_ID.Width = 73;
+            this.PRIX_UNIT.DefaultCellStyle = dataGridViewCellStyle13;
+            this.PRIX_UNIT.HeaderText = "Prix Unit";
+            this.PRIX_UNIT.Name = "PRIX_UNIT";
+            this.PRIX_UNIT.ReadOnly = true;
+            this.PRIX_UNIT.Width = 73;
             // 
             // SLD
             // 
@@ -605,7 +689,6 @@
             this.textBox2.Size = new System.Drawing.Size(59, 21);
             this.textBox2.TabIndex = 47;
             this.textBox2.Text = "0001";
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.Validating += new System.ComponentModel.CancelEventHandler(this.textBox2_Validating);
             // 
             // label4
@@ -634,125 +717,18 @@
             this.pictureBox2.ErrorImage = null;
             this.pictureBox2.Image = global::ALBAITAR_Softvet.Properties.Resources.NOUVEAU_003;
             this.pictureBox2.InitialImage = null;
-            this.pictureBox2.Location = new System.Drawing.Point(375, 2);
+            this.pictureBox2.Location = new System.Drawing.Point(524, 2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(110, 39);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 34;
             this.pictureBox2.TabStop = false;
             // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // DATE
-            // 
-            this.DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DATE.DataPropertyName = "DATE";
-            this.DATE.HeaderText = "Date";
-            this.DATE.Name = "DATE";
-            this.DATE.ReadOnly = true;
-            this.DATE.Width = 58;
-            // 
-            // REF
-            // 
-            this.REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.REF.DataPropertyName = "REF";
-            this.REF.HeaderText = "Ref.";
-            this.REF.Name = "REF";
-            this.REF.ReadOnly = true;
-            this.REF.Width = 51;
-            // 
-            // CLIENT_ID
-            // 
-            this.CLIENT_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CLIENT_ID.DataPropertyName = "CLIENT_ID";
-            this.CLIENT_ID.HeaderText = "CLIENT_ID";
-            this.CLIENT_ID.Name = "CLIENT_ID";
-            this.CLIENT_ID.ReadOnly = true;
-            this.CLIENT_ID.Visible = false;
-            this.CLIENT_ID.Width = 84;
-            // 
-            // CLIENT_FULL_NME
-            // 
-            this.CLIENT_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CLIENT_FULL_NME.DataPropertyName = "CLIENT_FULL_NME";
-            this.CLIENT_FULL_NME.HeaderText = "Client";
-            this.CLIENT_FULL_NME.Name = "CLIENT_FULL_NME";
-            this.CLIENT_FULL_NME.ReadOnly = true;
-            // 
-            // TVA_PERC
-            // 
-            this.TVA_PERC.DataPropertyName = "TVA_PERC";
-            dataGridViewCellStyle2.Format = "N2";
-            this.TVA_PERC.DefaultCellStyle = dataGridViewCellStyle2;
-            this.TVA_PERC.HeaderText = "TVA_PERC";
-            this.TVA_PERC.Name = "TVA_PERC";
-            this.TVA_PERC.ReadOnly = true;
-            this.TVA_PERC.Visible = false;
-            // 
-            // DROIT_TIMBRE
-            // 
-            this.DROIT_TIMBRE.DataPropertyName = "DROIT_TIMBRE";
-            dataGridViewCellStyle3.Format = "N2";
-            this.DROIT_TIMBRE.DefaultCellStyle = dataGridViewCellStyle3;
-            this.DROIT_TIMBRE.HeaderText = "DROIT_TIMBRE";
-            this.DROIT_TIMBRE.Name = "DROIT_TIMBRE";
-            this.DROIT_TIMBRE.ReadOnly = true;
-            this.DROIT_TIMBRE.Visible = false;
-            // 
-            // TOTAL_TTC
-            // 
-            this.TOTAL_TTC.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.TOTAL_TTC.DataPropertyName = "TOTAL_TTC";
-            dataGridViewCellStyle4.Format = "N2";
-            this.TOTAL_TTC.DefaultCellStyle = dataGridViewCellStyle4;
-            this.TOTAL_TTC.HeaderText = "Total TTC";
-            this.TOTAL_TTC.Name = "TOTAL_TTC";
-            this.TOTAL_TTC.ReadOnly = true;
-            this.TOTAL_TTC.Width = 79;
-            // 
-            // ITEM_NME_01
-            // 
-            this.ITEM_NME_01.DataPropertyName = "ITEM_NME_01";
-            this.ITEM_NME_01.HeaderText = "ITEM_NME_01";
-            this.ITEM_NME_01.Name = "ITEM_NME_01";
-            this.ITEM_NME_01.ReadOnly = true;
-            this.ITEM_NME_01.Visible = false;
-            // 
-            // ITEM_NME_02
-            // 
-            this.ITEM_NME_02.DataPropertyName = "ITEM_NME_02";
-            this.ITEM_NME_02.HeaderText = "ITEM_NME_02";
-            this.ITEM_NME_02.Name = "ITEM_NME_02";
-            this.ITEM_NME_02.ReadOnly = true;
-            this.ITEM_NME_02.Visible = false;
-            // 
-            // ITEM_NME_03
-            // 
-            this.ITEM_NME_03.DataPropertyName = "ITEM_NME_03";
-            this.ITEM_NME_03.HeaderText = "ITEM_NME_03";
-            this.ITEM_NME_03.Name = "ITEM_NME_03";
-            this.ITEM_NME_03.ReadOnly = true;
-            this.ITEM_NME_03.Visible = false;
-            // 
-            // ITEM_NME_04
-            // 
-            this.ITEM_NME_04.DataPropertyName = "ITEM_NME_04";
-            this.ITEM_NME_04.HeaderText = "ITEM_NME_04";
-            this.ITEM_NME_04.Name = "ITEM_NME_04";
-            this.ITEM_NME_04.ReadOnly = true;
-            this.ITEM_NME_04.Visible = false;
-            // 
             // Vente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(836, 504);
+            this.ClientSize = new System.Drawing.Size(987, 504);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.groupBox2);
@@ -760,7 +736,7 @@
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(852, 410);
+            this.MinimumSize = new System.Drawing.Size(1003, 543);
             this.Name = "Vente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vente - [ALBAITAR Softvet]";
@@ -799,12 +775,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TYPE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OP_DATE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QNT2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PROD_ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SLD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PRODUCT_CODE;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.DataGridViewTextBoxColumn TITLES;
@@ -816,6 +786,12 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TYPE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ITEM_NME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QNT2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PRIX_UNIT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SLD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PRODUCT_CODE;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn REF;
@@ -824,9 +800,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TVA_PERC;
         private System.Windows.Forms.DataGridViewTextBoxColumn DROIT_TIMBRE;
         private System.Windows.Forms.DataGridViewTextBoxColumn TOTAL_TTC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ITEM_NME_01;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ITEM_NME_02;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ITEM_NME_03;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ITEM_NME_04;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TOTAL_HT;
     }
 }

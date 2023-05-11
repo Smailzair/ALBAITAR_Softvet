@@ -1,24 +1,13 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
-using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
 using ServiceStack;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Excc = Microsoft.Office.Interop.Excel;
+using Xamarin.Forms.Internals;
 
 namespace ALBAITAR_Softvet.Resources
 {
@@ -29,6 +18,7 @@ namespace ALBAITAR_Softvet.Resources
         decimal TVA_percent = 9;
         DataTable clients;
         DataTable factures;
+        bool Is_New = true;
         public Vente()
         {
             InitializeComponent();
@@ -36,14 +26,14 @@ namespace ALBAITAR_Softvet.Resources
             clients = PreConnection.Load_data("SELECT `ID`,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
             comboBox1.DataSource = clients;
             comboBox1.DisplayMember = "FULL_NME";
-            comboBox1.ValueMember = "ID";            
+            comboBox1.ValueMember = "ID";
             //----------------------
-            if(stock_to_modify.Columns.Count == 0)
+            if (stock_to_modify.Columns.Count == 0)
             {
                 stock_to_modify.Columns.Add("PROD_ID", typeof(int));
                 stock_to_modify.Columns.Add("PROD_CODE", typeof(string));
                 stock_to_modify.Columns.Add("QNT_DIMIN", typeof(decimal));
-            }            
+            }
             //----------------------------
             selected_item = new DataGridViewRow();
             //--------------------------
@@ -59,6 +49,18 @@ namespace ALBAITAR_Softvet.Resources
             dataGridView3.Rows[1].Cells[0].Value = "TVA :";
             dataGridView3.Rows[2].Cells[0].Value = "--";
             dataGridView3.Rows[3].Cells[0].Value = "Total TTC :";
+            //------------------------
+            foreach (Control c in groupBox2.Controls)
+            {
+                if (c is CheckBox)
+                {
+                    ((CheckBox)c).CheckedChanged += c_ControlChanged;
+                }
+                else
+                {
+                    c.TextChanged += new EventHandler(c_ControlChanged);
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -75,17 +77,41 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button3_Click(object sender, EventArgs e)
         {
+            Is_New = true;
+            pictureBox2.Image = Properties.Resources.NOUVEAU_003;
             stock_to_modify.Rows.Clear();
             selected_item = new DataGridViewRow();
             TVA_percent = decimal.Parse(Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 5).Select(QQ => QQ["VAL"]).First().ToString());
             dataGridView3.Rows[1].Cells[0].Value = "TVA (" + TVA_percent.ToString("N2") + " %):";
+            label3.Visible = false;
+            comboBox1.BackColor = SystemColors.Window;
+            comboBox1.Text = "";
+            comboBox1.SelectedValue = DBNull.Value;
+            dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Now;
+            int dds = factures.AsEnumerable()
+                                  .Where(row => row["REF"].ToString().Substring(3, 4) == DateTime.Now.Year.ToString())
+                                  .Max(row => int.Parse(row["REF"].ToString().Substring(8)));
+            numericUpDown1.Value = dds != null ? (dds + 1) : 1;
+            dataGridView2.Rows.Clear();
+            checkBox1.Checked = Properties.Settings.Default.Faire_reg_espece_facture_vente;
+            button5.Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            bool fff = true;
+            if (!Is_New) { fff = MessageBox.Show("Retourner la quantité au stock ?", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes; }
             foreach (DataGridViewRow rwx in dataGridView2.SelectedRows)
             {
-                stock_to_modify.Rows.Cast<DataRow>().Where(x => x["PROD_CODE"].ToString() == rwx.Cells["PRODUCT_CODE"].Value.ToString()).ToList().ForEach(x => x.Delete());
+                if (fff)
+                {
+                    DataRow rw = Vente.stock_to_modify.NewRow();
+                    rw["PROD_ID"] = DBNull.Value;
+                    rw["PROD_CODE"] = rwx.Cells["PRODUCT_CODE"].Value;
+                    rw["QNT_DIMIN"] = (decimal)rwx.Cells["QNT2"].Value * -1;
+                    Vente.stock_to_modify.Rows.Add(rw);
+                    //stock_to_modify.Rows.Cast<DataRow>().Where(x => x["PROD_CODE"].ToString() == rwx.Cells["PRODUCT_CODE"].Value.ToString()).ToList().ForEach(x => x.Delete());
+                }
                 dataGridView2.Rows.Remove(rwx);
             }
             calcul_bill_tot();
@@ -127,7 +153,8 @@ namespace ALBAITAR_Softvet.Resources
             }
             //-----------------------------            
             dataGridView3.Rows[3].Cells[1].Value = (decimal)dataGridView3.Rows[0].Cells[1].Value + (decimal)dataGridView3.Rows[1].Cells[1].Value + (checkBox1.Checked ? decimal.Parse(dataGridView3.Rows[2].Cells[1].Value.ToString()) : 0); //TTC
-
+            //---------
+            button5.Visible = true;
 
         }
 
@@ -138,8 +165,16 @@ namespace ALBAITAR_Softvet.Resources
 
         private void load_factures()
         {
-            factures = PreConnection.Load_data("SELECT * FROM tb_factures_vente;");
+            int prev_idx = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : -1;
+            factures = PreConnection.Load_data("SELECT `ID`,`DATE`,`CLIENT_ID`,`CLIENT_FULL_NME`,`REF`,`TVA_PERC`,`DROIT_TIMBRE`,`TOTAL_HT`,`TOTAL_TTC` FROM tb_factures_vente;");
             dataGridView1.DataSource = factures;
+            if (prev_idx > -1 && dataGridView1.Rows[prev_idx] != null)
+            {
+                dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                dataGridView1.ClearSelection();
+                dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                dataGridView1.Rows[prev_idx].Selected = true;
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -153,7 +188,6 @@ namespace ALBAITAR_Softvet.Resources
                 }
             }
 
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -162,18 +196,130 @@ namespace ALBAITAR_Softvet.Resources
             bool All_Ready = true;
             //--------
             All_Ready &= dataGridView2.Rows.Count > 0;
-            msg_txt += "\n- Aucun élement dans la facture.";
+            msg_txt += dataGridView2.Rows.Count == 0 ? "\n- Aucun élement dans la facture." : "";
+            //------------
+            All_Ready &= dataGridView2.Rows.Count < 71;
+            msg_txt += dataGridView2.Rows.Count > 70 ? "\n- Le nombre d'élements de la facture ne doit dépasse 70 élemnt." : "";
             //------------
             All_Ready &= !label3.Visible;
-
+            msg_txt += label3.Visible ? "\n- Référence déja utilisée précedemment." : "";
+            //---------------
+            All_Ready &= comboBox1.Text.Trim().Length > 0;
+            comboBox1.BackColor = comboBox1.Text.Trim().Length == 0 ? Color.LightCoral : SystemColors.Window;
             //-----------------
             if (All_Ready)
             {
+                if (Is_New) //INSERT
+                {
+                    string cmmd = "INSERT INTO `tb_factures_vente`"
+                                + "(`DATE`,"
+                                + "`CLIENT_ID`,"
+                                + "`CLIENT_FULL_NME`,"
+                                + "`REF`,"
+                                + "`TVA_PERC`,"
+                                + "`DROIT_TIMBRE`,"
+                                + "`TOTAL_HT`,"
+                                + "`TOTAL_TTC`";
+                    string cmmd2 = " VALUES (" +
+                        "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," + //DATE
+                        (comboBox1.SelectedValue != null ? (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text).ToList().Count > 0 ? comboBox1.SelectedValue : "NULL") : "NULL") + "," + //CLIENT_ID
+                        "'" + comboBox1.Text + "'," + //CLIENT_FULL_NME
+                        "'" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) + "'," + //REF
+                        dataGridView3.Rows[1].Cells[1].Value + "," + //TVA_PERC
+                        dataGridView3.Rows[2].Cells[1].Value + "," + //DROIT_TIMBRE
+                        dataGridView3.Rows[0].Cells[1].Value + "," + //TOTAL_HT
+                        dataGridView3.Rows[3].Cells[1].Value; //TOTAL_TTC
 
+                    foreach (DataGridViewRow row in dataGridView2.Rows)
+                    {
+                        cmmd += ",`ITEM_NME_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "`";
+                        cmmd += ",`ITEM_QNT_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "`";
+                        cmmd += ",`ITEM_IS_PROD_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "`";
+                        cmmd += ",`ITEM_PROD_CODE_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "`";
+                        cmmd += ",`ITEM_PRIX_UNIT_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "`";
+                        //----------------
+                        cmmd2 += ",'" + row.Cells["ITEM_NME"].Value.ToString() + "'";
+                        cmmd2 += "," + row.Cells["QNT2"].Value;
+                        cmmd2 += "," + (row.Cells["TYPE"].Value.ToString() == "Produit" ? 1 : 0);
+                        cmmd2 += "," + (row.Cells["TYPE"].Value.ToString() == "Produit" ? "'" + row.Cells["PRODUCT_CODE"].Value.ToString() + "'" : "NULL");
+                        cmmd2 += "," + row.Cells["PRIX_UNIT"].Value.ToString();
+                    }
+
+                    cmmd += ")";
+                    cmmd2 += ");";
+                    PreConnection.Excut_Cmd(cmmd + cmmd2);
+                }
+                else //UPDATE
+                {
+                    if (stock_to_modify != null)
+                    {
+                        string inti = "";
+                        for (int f = 1; f < 71; f++)
+                        {
+                            inti += ",`ITEM_NME_" + (f < 10 ? "0" : "") + f + "` = NULL";
+                            inti += ",`ITEM_QNT_" + (f < 10 ? "0" : "") + f + "` = NULL";
+                            inti += ",`ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f + "` = NULL";
+                            inti += ",`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` = NULL";
+                            inti += ",`ITEM_PRIX_UNIT_" + (f < 10 ? "0" : "") + f + "` = NULL";
+                        }
+                        PreConnection.Excut_Cmd("UPDATE `tb_factures_vente` SET " + inti.Substring(1) + ",");
+                    }                        
+                    //------------
+                    string cmmd = "UPDATE `tb_factures_vente` SET "
+                            + "`DATE` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
+                            + "`CLIENT_ID` = " + (comboBox1.SelectedValue != null ? (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text).ToList().Count > 0 ? comboBox1.SelectedValue : "NULL") : "NULL") + ","
+                            + "`CLIENT_FULL_NME` = '" + comboBox1.Text + "',"
+                            + "`REF` = '" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) + "',"
+                            + "`TVA_PERC` = " + dataGridView3.Rows[1].Cells[1].Value + ","
+                            + "`DROIT_TIMBRE` = " + dataGridView3.Rows[2].Cells[1].Value + ","
+                            + "`TOTAL_HT` = " + dataGridView3.Rows[0].Cells[1].Value + ","
+                            + "`TOTAL_TTC` = " + dataGridView3.Rows[3].Cells[1].Value;
+                    foreach (DataGridViewRow row in dataGridView2.Rows)
+                    {
+                        cmmd += ",`ITEM_NME_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "` = '" + row.Cells["ITEM_NME"].Value.ToString() + "'";
+                        cmmd += ",`ITEM_QNT_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "` = " + row.Cells["QNT2"].Value;
+                        cmmd += ",`ITEM_IS_PROD_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "` = " + (row.Cells["TYPE"].Value.ToString() == "Produit" ? 1 : 0);
+                        cmmd += ",`ITEM_PROD_CODE_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "` = " + (row.Cells["TYPE"].Value.ToString() == "Produit" ? "'" + row.Cells["PRODUCT_CODE"].Value.ToString() + "'" : "NULL");
+                        cmmd += ",`ITEM_PRIX_UNIT_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "` = " + row.Cells["PRIX_UNIT"].Value.ToString();
+                        //----------------
+                    }
+
+                    cmmd += " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() + ";";
+                    PreConnection.Excut_Cmd(cmmd);
+                }
+                //-------
+                if (stock_to_modify != null)
+                {
+                    var groupedRows = from row in stock_to_modify.AsEnumerable()
+                                      group row by row.Field<string>("PROD_CODE") into grp
+                                      select grp;
+
+                    foreach (var group in groupedRows)
+                    {
+                        decimal sumSLD = group.Sum(row => row.Field<decimal>("QNT_DIMIN"));
+                        if (sumSLD != 0)
+                        {
+                            PreConnection.Excut_Cmd("INSERT INTO `tb_stock_mouv`"
+                                            + "(`OP_DATE`,"
+                                            + "`PROD_ID`,"
+                                            + "`QNT_IN`,"
+                                            + "`QNT_OUT`,"
+                                            + "`OBSERV`)"
+                                            + "VALUES"
+                                            + "('" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
+                                            + "(SELECT `ID` FROM tb_produits WHERE `CODE` LIKE '" + group.First()["PROD_CODE"] + "' LIMIT 1),"//PROD_ID
+                                            + (sumSLD < 0 ? sumSLD * -1 : 0) + ","//QNT_IN
+                                            + (sumSLD > 0 ? sumSLD : 0) + "," //QNT_OUT
+                                            + "'Vente (Facture [" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) + "]) -" + (Is_New ? "Crée" : "Modifiée") + "-');"); //OBSERV
+                        }
+                    }     
+                }
+                //-------------
+                load_factures();
             }
-            else if(msg_txt.Length > 0)
+            else if (msg_txt.Length > 0)
             {
-                MessageBox.Show(msg_txt,"Vérifiez s'il vous plaît:",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+                MessageBox.Show(msg_txt, "Vérifiez s'il vous plaît:", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -185,33 +331,148 @@ namespace ALBAITAR_Softvet.Resources
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             textBox2.Text = numericUpDown1.Value.ToString("0000");
+            verif_ref_exist();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void verif_ref_exist()
         {
-            
+            string reff = "FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text;
+            int cnt = Is_New ? factures.AsEnumerable().Count(rw => rw["REF"].ToString() == reff) : factures.AsEnumerable().Count(rw => rw["REF"].ToString() == reff && rw["ID"].ToString() != dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString());
+            label3.Text = "Existe déja !\n(" + reff + ")";
+            label3.Visible = cnt > 0;
         }
-
         private void textBox2_Validating(object sender, CancelEventArgs e)
         {
             int dd = 1;
             if (int.TryParse(textBox2.Text, out dd))
             {
-                if(dd <= 9999)
+                if (dd <= 9999)
                 {
                     numericUpDown1.Value = dd;
+                    verif_ref_exist();
                 }
                 else
-                {                    
-                    MessageBox.Show("N° de facture ne doit superieur à 9999.", "Ref. de facture :", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                {
+                    MessageBox.Show("N° de facture ne doit superieur à 9999.", "Ref. de facture :", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     numericUpDown1_ValueChanged(null, null);
-                }                
+                }
             }
             else
             {
                 MessageBox.Show("La Ref. ne doit pas vide.\nEt les 4 derniers chiffres de Ref. de facture n'accepte que les nombres.", "Ref. de facture :", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 numericUpDown1_ValueChanged(null, null);
             }
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            verif_ref_exist();
+        }
+
+        private void comboBox1_TextUpdate(object sender, EventArgs e)
+        {
+            comboBox1.BackColor = SystemColors.Window;
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                Is_New = false;
+                pictureBox2.Image = Properties.Resources.MODIF_003;
+                stock_to_modify.Rows.Clear();
+                selected_item = new DataGridViewRow();
+                label3.Visible = false;
+                dataGridView2.Rows.Clear();
+                button5.Visible = false;
+                //-------------------
+                DataTable data = PreConnection.Load_data("SELECT * FROM tb_factures_vente WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
+                if (data != null)
+                {
+                    if (data.Rows.Count > 0)
+                    {
+                        int ref_year = int.Parse(data.Rows[0]["REF"].ToString().Substring(3, 4));
+                        int ref_num = int.Parse(data.Rows[0]["REF"].ToString().Substring(8));
+                        numericUpDown1.Value = ref_num;
+                        dateTimePicker2.Value = new DateTime(ref_year, 1, 1);
+                        dateTimePicker1.Value = (DateTime)data.Rows[0]["DATE"];
+                        comboBox1.SelectedValue = data.Rows[0]["CLIENT_ID"] != DBNull.Value ? data.Rows[0]["CLIENT_ID"] : DBNull.Value;
+                        if (comboBox1.Text == string.Empty) { comboBox1.Text = data.Rows[0]["CLIENT_FULL_NME"].ToString(); }
+                        checkBox1.CheckedChanged -= checkBox1_CheckedChanged;
+                        checkBox1.Checked = data.Rows[0]["DROIT_TIMBRE"] != DBNull.Value ? ((decimal)data.Rows[0]["DROIT_TIMBRE"] > 0) : false;
+                        checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+                        //-----------------
+                        for (int f = 1; f < 71; f++)
+                        {
+                            if (data.Rows[0]["ITEM_NME_" + (f < 10 ? "0" : "") + f] != DBNull.Value)
+                            {
+                                if (data.Rows[0]["ITEM_NME_" + (f < 10 ? "0" : "") + f].ToString().Length > 0)
+                                {
+                                    DataGridViewRow row = new DataGridViewRow();
+                                    row.CreateCells(dataGridView2);
+
+                                    row.Cells[0].Value = data.Rows[0]["ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f] != DBNull.Value ? ((SByte)data.Rows[0]["ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f] == 1 ? "Produit" : "Service") : "Service";
+                                    row.Cells[1].Value = data.Rows[0]["ITEM_NME_" + (f < 10 ? "0" : "") + f];
+                                    row.Cells[2].Value = data.Rows[0]["ITEM_QNT_" + (f < 10 ? "0" : "") + f];
+                                    row.Cells[3].Value = data.Rows[0]["ITEM_PRIX_UNIT_" + (f < 10 ? "0" : "") + f];
+                                    row.Cells[4].Value = (decimal)row.Cells[2].Value * (decimal)row.Cells[3].Value;
+                                    row.Cells[5].Value = data.Rows[0]["ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f];
+
+                                    dataGridView2.Rows.Add(row);
+                                }
+                            }
+                        }
+                        //--------------
+                        button5.Visible = false;
+                    }
+                    else
+                    {
+                        button3.PerformClick();
+                    }
+                }
+                else
+                {
+                    button3.PerformClick();
+                }
+
+            }
+            else
+            {
+                button3.PerformClick();
+            }
+        }
+
+        private void checkBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Properties.Settings.Default.Faire_reg_espece_facture_vente = checkBox1.Checked;
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+        }
+
+        void c_ControlChanged(object sender, EventArgs e)
+        {
+            button5.Visible = true;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if(dataGridView1.SelectedRows.Count > 0){
+                if (MessageBox.Show("Êtes-vous sûr de supprimer (" + dataGridView1.SelectedRows.Count + ") factures ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string idx = "";
+                    dataGridView1.SelectedRows.Cast<DataGridViewRow>().ForEach(row => idx += "," + row.Cells["ID"].Value);
+                    idx = idx.Substring(1);
+                    bool ZZZ = MessageBox.Show("Retourner la quantité des produits au stock ?", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+                    if (ZZZ)
+                    {
+
+                    
+                    }
+                    //-------
+                    PreConnection.Excut_Cmd("DELETE FROM tb_factures_vente WHERE ID IN (" + idx+")");
+                }
+            }
+            
         }
     }
 }

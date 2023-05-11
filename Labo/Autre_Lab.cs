@@ -368,11 +368,11 @@ namespace ALBAITAR_Softvet.Labo
             ((RadioButton)sender).ForeColor = ((RadioButton)sender).Checked ? Color.Sienna : SystemColors.ControlText;
             if (((RadioButton)sender).Name == "radioButton10")
             {
-                textBox4.Enabled = radioButton10.Checked;
+                textBox4.Enabled = ((RadioButton)sender).Checked;
                 current_analys_type = textBox4.Text;
             }
             else
-            {
+            {                
                 current_analys_type = ((RadioButton)sender).Text;
             }
             button5.Visible = false;

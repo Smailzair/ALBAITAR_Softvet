@@ -214,5 +214,17 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Faire_consom_stock_apres_vente"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Faire_reg_espece_facture_vente {
+            get {
+                return ((bool)(this["Faire_reg_espece_facture_vente"]));
+            }
+            set {
+                this["Faire_reg_espece_facture_vente"] = value;
+            }
+        }
     }
 }

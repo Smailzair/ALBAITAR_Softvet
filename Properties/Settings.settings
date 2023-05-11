@@ -50,5 +50,8 @@
     <Setting Name="Faire_consom_stock_apres_vente" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="Faire_reg_espece_facture_vente" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
