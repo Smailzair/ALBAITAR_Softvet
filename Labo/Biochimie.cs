@@ -954,7 +954,7 @@ namespace ALBAITAR_Softvet.Labo
                     dt.Rows.Add(new object[] { "BIO2_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["DEFAULT_FULL"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["DEFAULT_FULL"].Value.ToString() : "" });
                 }
                 //-------------
-                new Print_report("biochimie", dt).ShowDialog();
+                new Print_report("biochimie", dt, null).ShowDialog();
             }
 
         }

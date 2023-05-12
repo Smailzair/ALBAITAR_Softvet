@@ -19,7 +19,8 @@ namespace ALBAITAR_Softvet
     {
         string repprot_nmme = "";
         System.Data.DataTable parr;
-        public Print_report(string report_nme, System.Data.DataTable paramss)
+        System.Data.DataTable datasrc;
+        public Print_report(string report_nme, System.Data.DataTable paramss, System.Data.DataTable src)
         {
             InitializeComponent();
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
@@ -37,6 +38,11 @@ namespace ALBAITAR_Softvet
             //------------
             repprot_nmme = report_nme;
             parr = paramss;
+            //------
+            if(src != null)
+            {
+                datasrc = src;
+            }
 
 
 
@@ -69,10 +75,24 @@ namespace ALBAITAR_Softvet
                 reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
 
                 // Set the embedded resource name of the RDLC file
-                reportViewer1.LocalReport.ReportEmbeddedResource = filee;
-
+                reportViewer1.LocalReport.ReportEmbeddedResource = filee;       
 
                 if (parr.Rows.Count > 0) { reportViewer1.LocalReport.SetParameters(reportParameters); }
+
+                if (datasrc != null)
+                {
+                    // Define a dataset with the same name as the data source
+                    DataSet ds = new DataSet("MyDataSource");
+
+                    // Add a table to the dataset with the same schema as the DataTable
+                    System.Data.DataTable table = datasrc.Copy();
+                    table.TableName = "MyTable";
+                    ds.Tables.Add(table);
+
+                    // Set the LocalReport object's data source to the dataset
+                    reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("MyDataSource", ds.Tables[0]));
+                }
+
                 reportViewer1.RefreshReport();
             }
             else

@@ -1,4 +1,5 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
+using Microsoft.Reporting.WinForms;
 using ServiceStack;
 using System;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ALBAITAR_Softvet.Resources
 {
@@ -18,12 +20,13 @@ namespace ALBAITAR_Softvet.Resources
         decimal TVA_percent = 9;
         DataTable clients;
         DataTable factures;
+        DataTable facture_to_print;
         bool Is_New = true;
         public Vente()
         {
             InitializeComponent();
             //-----------------------
-            clients = PreConnection.Load_data("SELECT `ID`,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
+            clients = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
             comboBox1.DataSource = clients;
             comboBox1.DisplayMember = "FULL_NME";
             comboBox1.ValueMember = "ID";
@@ -61,6 +64,13 @@ namespace ALBAITAR_Softvet.Resources
                     c.TextChanged += new EventHandler(c_ControlChanged);
                 }
             }
+            //----------------------
+            facture_to_print = new DataTable();
+            facture_to_print.Columns.Add("Type", typeof(string));
+            facture_to_print.Columns.Add("Item", typeof(string));
+            facture_to_print.Columns.Add("Qnt", typeof(decimal));
+            facture_to_print.Columns.Add("Unit", typeof(decimal));
+            facture_to_print.Columns.Add("Tot", typeof(decimal));
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -106,22 +116,26 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bool fff = true;
-            if (!Is_New) { fff = MessageBox.Show("Retourner la quantité au stock ?", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes; }
-            foreach (DataGridViewRow rwx in dataGridView2.SelectedRows)
+            if(MessageBox.Show("Sur de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (fff)
+                bool fff = true;
+                if (!Is_New) { fff = MessageBox.Show("Retourner la quantité au stock ?", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes; }
+                foreach (DataGridViewRow rwx in dataGridView2.SelectedRows)
                 {
-                    DataRow rw = Vente.stock_to_modify.NewRow();
-                    rw["PROD_ID"] = DBNull.Value;
-                    rw["PROD_CODE"] = rwx.Cells["PRODUCT_CODE"].Value;
-                    rw["QNT_DIMIN"] = (decimal)rwx.Cells["QNT2"].Value * -1;
-                    Vente.stock_to_modify.Rows.Add(rw);
-                    //stock_to_modify.Rows.Cast<DataRow>().Where(x => x["PROD_CODE"].ToString() == rwx.Cells["PRODUCT_CODE"].Value.ToString()).ToList().ForEach(x => x.Delete());
+                    if (fff)
+                    {
+                        DataRow rw = Vente.stock_to_modify.NewRow();
+                        rw["PROD_ID"] = DBNull.Value;
+                        rw["PROD_CODE"] = rwx.Cells["PRODUCT_CODE"].Value;
+                        rw["QNT_DIMIN"] = (decimal)rwx.Cells["QNT2"].Value * -1;
+                        Vente.stock_to_modify.Rows.Add(rw);
+                        //stock_to_modify.Rows.Cast<DataRow>().Where(x => x["PROD_CODE"].ToString() == rwx.Cells["PRODUCT_CODE"].Value.ToString()).ToList().ForEach(x => x.Delete());
+                    }
+                    dataGridView2.Rows.Remove(rwx);
                 }
-                dataGridView2.Rows.Remove(rwx);
+                calcul_bill_tot();
             }
-            calcul_bill_tot();
+            
         }
 
         private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -508,6 +522,47 @@ namespace ALBAITAR_Softvet.Resources
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBox1.BackColor = SystemColors.Window;
+        }
+
+        private void button5_VisibleChanged(object sender, EventArgs e)
+        {
+            button8.Visible = !button5.Visible;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            facture_to_print.Rows.Clear();
+            foreach (DataGridViewRow rwwd in dataGridView2.Rows)
+            {
+                facture_to_print.Rows.Add(rwwd.Cells[0].Value, rwwd.Cells[1].Value, rwwd.Cells[2].Value, rwwd.Cells[3].Value, rwwd.Cells[4].Value);
+            }            
+            //--------------
+            DataTable dt = new DataTable();
+            dt.Columns.Add("PARAM_NME", typeof(string));
+            dt.Columns.Add("PARAM_VAL", typeof(string));
+            //----------------
+            dt.Rows.Add(new object[] { "CABINET", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+            dt.Rows.Add(new object[] { "CABINET_TEL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+            dt.Rows.Add(new object[] { "CABINET_EMAIL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+            dt.Rows.Add(new object[] { "CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+
+            dt.Rows.Add(new object[] { "REF", ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) });
+            dt.Rows.Add(new object[] { "DATE", dateTimePicker1.Value.ToString("dd/MM/yyyy") });
+
+
+            DataRow rww = clients.Rows.Cast<DataRow>().Where(FF => (int)FF["ID"] == (int)comboBox1.SelectedValue).FirstOrDefault();
+            dt.Rows.Add(new object[] { "CLIENT_SEX", rww["SEX"] != DBNull.Value ? rww["SEX"].ToString() : null });
+            dt.Rows.Add(new object[] { "CLIENT_FAMNME", rww["FAMNME"] != DBNull.Value ? rww["FAMNME"].ToString() : null });
+            dt.Rows.Add(new object[] { "CLIENT_NME", rww["NME"] != DBNull.Value ? rww["NME"].ToString() : null });
+            dt.Rows.Add(new object[] { "CLIENT_NUM_CNI", rww["NUM_CNI"] != DBNull.Value ? rww["NUM_CNI"].ToString() : null });
+            dt.Rows.Add(new object[] { "CLIENT_ADRESS", rww["ADRESS"] != DBNull.Value ? rww["ADRESS"].ToString() : null });
+            dt.Rows.Add(new object[] { "CLIENT_CITY", rww["CITY"] != DBNull.Value ? rww["CITY"].ToString() : null });
+            dt.Rows.Add(new object[] { "CLIENT_WILAYA", rww["WILAYA"] != DBNull.Value ? rww["WILAYA"].ToString() : null });
+            dt.Rows.Add(new object[] { "POSTAL_CODE", rww["POSTAL_CODE"] != DBNull.Value ? rww["POSTAL_CODE"].ToString() : null });
+            dt.Rows.Add(new object[] { "CLIENT_NUM_PHONE", rww["NUM_PHONE"] != DBNull.Value ? rww["NUM_PHONE"].ToString() : null });
+            dt.Rows.Add(new object[] { "CLIENT_EMAIL", rww["EMAIL"] != DBNull.Value ? rww["EMAIL"].ToString() : null });
+            //-------------
+            new Print_report("facture_vente", dt, facture_to_print).ShowDialog();
         }
     }
 }

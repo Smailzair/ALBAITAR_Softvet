@@ -529,7 +529,7 @@ namespace ALBAITAR_Softvet.Labo
                     dt.Rows.Add(new object[] { "IMUN3_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["VALUE2"].Value.ToString() : "" });
                 }
                 //-------------
-                new Print_report("immunologie", dt).ShowDialog();
+                new Print_report("immunologie", dt,null).ShowDialog();
             }
 
         }

@@ -526,7 +526,7 @@ namespace ALBAITAR_Softvet.Labo
                     dt.Rows.Add(new object[] { "HEM3_0" + (i + 1).ToString("D2"), dataGridView1.Rows[i].Cells["UNIT2"].Value != DBNull.Value ? dataGridView1.Rows[i].Cells["UNIT2"].Value.ToString() : "" });
                 }
                 //-------------
-                new Print_report("proteinogramme", dt).ShowDialog();
+                new Print_report("proteinogramme", dt, null).ShowDialog();
             }
 
         }

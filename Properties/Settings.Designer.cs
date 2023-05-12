@@ -226,5 +226,15 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Faire_reg_espece_facture_vente"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\DB_TMP.accdb")]
+        public string DB_TMPConnectionString {
+            get {
+                return ((string)(this["DB_TMPConnectionString"]));
+            }
+        }
     }
 }

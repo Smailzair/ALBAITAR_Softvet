@@ -627,7 +627,7 @@ namespace ALBAITAR_Softvet.Resources
 
                 
                 //-------------
-                new Print_report("certificat_enreg", dt).ShowDialog();
+                new Print_report("certificat_enreg", dt, null).ShowDialog();
             }
         }
 

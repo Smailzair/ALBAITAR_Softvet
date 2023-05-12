@@ -345,7 +345,7 @@ namespace ALBAITAR_Softvet.Labo
                 dt.Rows.Add(new object[] { "TECHN", textBox5.Text });
                 dt.Rows.Add(new object[] { "RESULTT", textBox6.Text });
                 //-------------
-                new Print_report("autre", dt).ShowDialog();
+                new Print_report("autre", dt, null).ShowDialog();
             }
 
         }      

@@ -263,6 +263,11 @@
     <Compile Include="Agenda.Designer.cs">
       <DependentUpon>Agenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="DB_TMPDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB_TMPDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Add_Vente_Fact_Item.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -435,6 +440,7 @@
     <EmbeddedResource Include="Labo\Biochimie.resx">
       <DependentUpon>Biochimie.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\facture_vente.rdlc" />
     <EmbeddedResource Include="Reports\certificat_enreg.rdlc" />
     <EmbeddedResource Include="Vente.resx">
       <DependentUpon>Vente.cs</DependentUpon>
@@ -511,8 +517,20 @@
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DB_TMPDataSet.xsc">
+      <DependentUpon>DB_TMPDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DB_TMPDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DB_TMPDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DB_TMPDataSet.xss">
+      <DependentUpon>DB_TMPDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\PreConnection.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -663,6 +681,9 @@
     <None Include="Resources\icons8_dog_30px.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DB_TMP.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons8_veterinarian_male.ico" />
     <None Include="Resources\icons8_lock_30px.png" />
     <None Include="Resources\icons8_microsoft_excel_20px.png" />
