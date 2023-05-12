@@ -344,6 +344,10 @@ namespace ALBAITAR_Softvet
                         {
                             ((Excc.Range)xcelApp.Columns[g.Index + 1]).NumberFormat = "dd/MM/yyyy" + (dgv.Columns[g.Index].DefaultCellStyle.Format.Contains("HH") ? " HH:mm:ss" : "");
                         }
+                        else
+                        {
+                            ((Excc.Range)xcelApp.Columns[g.Index + 1]).NumberFormat = "@";
+                        }
                     }
                     catch { }
                 });

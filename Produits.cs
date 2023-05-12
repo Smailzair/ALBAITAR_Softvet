@@ -857,6 +857,71 @@ namespace ALBAITAR_Softvet.Resources
             label25.Visible = prev_sld_tmp == 0;
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if ((dataGridView1.Rows.Count - (dataGridView1.AllowUserToAddRows ? 1 : 0)) > 0)
+            {
+                Excc.Application xcelApp = new Excc.Application();
+                xcelApp.Application.Workbooks.Add(Type.Missing);
+                xcelApp.Application.Workbooks[1].Title = "Produits";
+                xcelApp.Application.Workbooks[1].Worksheets[1].Name = "Produits";
+                List<string> cols = new List<string>();
+                cols.AddRange(new string[] { "CODE", "NME", "CATEGOR", "QNT", "REVIENT_PRTICE", "VENTE_PRICE" });
+                dataGridView1.Columns.Cast<DataGridViewColumn>().Where(cc => cols.Contains(cc.Name)).ToList().ForEach(g =>
+                {
+                    xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)].Value = g.HeaderText;
+                    ((Excc.Range)xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
+                    ((Excc.Range)xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)]).Font.Bold = true;
+                    ((Excc.Range)xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
+                    try
+                    {
+                        if (dataGridView1.Columns[g.Index].DefaultCellStyle.Format == "N2")
+                        {
+                            ((Excc.Range)xcelApp.Columns[(g.Index > 4 ? g.Index - 2 : g.Index)]).NumberFormat = "#,##0.00 [$Da-fr-dz]";
+                        }
+                        else if (dataGridView1.Columns[g.Index].DefaultCellStyle.Format.Contains("MM/yyyy"))
+                        {
+                            ((Excc.Range)xcelApp.Columns[(g.Index > 4 ? g.Index - 2 : g.Index)]).NumberFormat = "dd/MM/yyyy" + (dataGridView1.Columns[g.Index].DefaultCellStyle.Format.Contains("HH") ? " HH:mm:ss" : "");
+                        }
+                        else
+                        {
+                            ((Excc.Range)xcelApp.Columns[(g.Index > 4 ? g.Index - 2 : g.Index)]).NumberFormat = "@";
+                        }
+                    }
+                    catch { }
+                });
+
+
+                dataGridView1.Rows.Cast<DataGridViewRow>().ToList().ForEach(t =>
+                {
+                    t.Cells.Cast<DataGridViewCell>().Where(cc => cols.Contains(cc.OwningColumn.Name)).ToList().ForEach(b =>
+                    {
+                        xcelApp.Cells[t.Index + 2, (b.ColumnIndex > 4 ? b.ColumnIndex - 2 : b.ColumnIndex)].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : "";
+                    });
+
+                });
+
+                xcelApp.Columns.AutoFit();
+                //------------------
+                SaveFileDialog svd = new SaveFileDialog();
+                svd.Filter = "Excel | *.xlsx";
+                svd.DefaultExt = "*.xlsx";
+                svd.FileName = xcelApp.Application.Workbooks[1].Title + "_" + DateTime.Now.ToString("ddMMyyyy_HHmmss") + ".xlsx";
+                if (svd.ShowDialog() == DialogResult.OK)
+                {
+                    xcelApp.Workbooks[1].SaveAs(Path.GetFullPath(svd.FileName));
+                    Process.Start(Path.GetFullPath(svd.FileName));
+                }
+                xcelApp.Application.Workbooks[1].Close(false);
+                //Marshal.ReleaseComObject(xcelApp.Application.Workbooks[1]);
+                xcelApp.Quit();
+                //-------------------
+            }
+            else
+            {
+                MessageBox.Show("Aucun donnés !", ".", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
     }
 }
 

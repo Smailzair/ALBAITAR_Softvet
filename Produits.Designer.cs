@@ -29,23 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Produits));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CATEGOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ALERT_MIN_ON = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QNT_MIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.REVIENT_PRTICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TAXES = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VENTE_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TMP_FIRST_INSERT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -57,6 +47,7 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -85,7 +76,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label20 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
@@ -100,7 +90,13 @@
             this.label11 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.ID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OP_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CODE2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -109,12 +105,16 @@
             this.QNT2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PROD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SLD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CATEGOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ALERT_MIN_ON = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QNT_MIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REVIENT_PRTICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VENTE_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TMP_FIRST_INSERT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -125,8 +125,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,14 +148,14 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeight = 30;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -166,7 +166,6 @@
             this.ALERT_MIN_ON,
             this.QNT_MIN,
             this.REVIENT_PRTICE,
-            this.TAXES,
             this.VENTE_PRICE,
             this.TMP_FIRST_INSERT_DATE});
             this.dataGridView1.EnableHeadersVisualStyles = false;
@@ -181,96 +180,6 @@
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // CODE
-            // 
-            this.CODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CODE.DataPropertyName = "CODE";
-            this.CODE.HeaderText = "Code";
-            this.CODE.Name = "CODE";
-            this.CODE.ReadOnly = true;
-            this.CODE.Width = 62;
-            // 
-            // NME
-            // 
-            this.NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NME.DataPropertyName = "NME";
-            this.NME.HeaderText = "Nom";
-            this.NME.Name = "NME";
-            this.NME.ReadOnly = true;
-            // 
-            // CATEGOR
-            // 
-            this.CATEGOR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CATEGOR.DataPropertyName = "CATEGOR";
-            this.CATEGOR.HeaderText = "Catégorie";
-            this.CATEGOR.Name = "CATEGOR";
-            this.CATEGOR.ReadOnly = true;
-            this.CATEGOR.Width = 85;
-            // 
-            // QNT
-            // 
-            this.QNT.DataPropertyName = "QNT";
-            this.QNT.HeaderText = "QNT";
-            this.QNT.Name = "QNT";
-            this.QNT.ReadOnly = true;
-            this.QNT.Visible = false;
-            // 
-            // ALERT_MIN_ON
-            // 
-            this.ALERT_MIN_ON.DataPropertyName = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.HeaderText = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.Name = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.ReadOnly = true;
-            this.ALERT_MIN_ON.Visible = false;
-            // 
-            // QNT_MIN
-            // 
-            this.QNT_MIN.DataPropertyName = "QNT_MIN";
-            this.QNT_MIN.HeaderText = "QNT_MIN";
-            this.QNT_MIN.Name = "QNT_MIN";
-            this.QNT_MIN.ReadOnly = true;
-            this.QNT_MIN.Visible = false;
-            // 
-            // REVIENT_PRTICE
-            // 
-            this.REVIENT_PRTICE.DataPropertyName = "REVIENT_PRTICE";
-            this.REVIENT_PRTICE.HeaderText = "REVIENT_PRTICE";
-            this.REVIENT_PRTICE.Name = "REVIENT_PRTICE";
-            this.REVIENT_PRTICE.ReadOnly = true;
-            this.REVIENT_PRTICE.Visible = false;
-            // 
-            // TAXES
-            // 
-            this.TAXES.DataPropertyName = "TAXES";
-            this.TAXES.HeaderText = "TAXES";
-            this.TAXES.Name = "TAXES";
-            this.TAXES.ReadOnly = true;
-            this.TAXES.Visible = false;
-            // 
-            // VENTE_PRICE
-            // 
-            this.VENTE_PRICE.DataPropertyName = "VENTE_PRICE";
-            this.VENTE_PRICE.HeaderText = "VENTE_PRICE";
-            this.VENTE_PRICE.Name = "VENTE_PRICE";
-            this.VENTE_PRICE.ReadOnly = true;
-            this.VENTE_PRICE.Visible = false;
-            // 
-            // TMP_FIRST_INSERT_DATE
-            // 
-            this.TMP_FIRST_INSERT_DATE.DataPropertyName = "TMP_FIRST_INSERT_DATE";
-            this.TMP_FIRST_INSERT_DATE.HeaderText = "TMP_FIRST_INSERT_DATE";
-            this.TMP_FIRST_INSERT_DATE.Name = "TMP_FIRST_INSERT_DATE";
-            this.TMP_FIRST_INSERT_DATE.ReadOnly = true;
-            this.TMP_FIRST_INSERT_DATE.Visible = false;
             // 
             // button5
             // 
@@ -361,6 +270,7 @@
             this.button6.TabIndex = 4;
             this.toolTip1.SetToolTip(this.button6, "Exporter en Excel");
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button4
             // 
@@ -434,6 +344,19 @@
             this.label6.Text = "Minimum !";
             this.toolTip1.SetToolTip(this.label6, "Par rapport au solde actuel des mouvements de ce produit");
             this.label6.Visible = false;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.label25.Location = new System.Drawing.Point(371, 83);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(62, 16);
+            this.label25.TabIndex = 42;
+            this.label25.Text = "Minimum !";
+            this.toolTip1.SetToolTip(this.label25, "Par rapport au solde actuel des mouvements de ce produit");
+            this.label25.Visible = false;
             // 
             // label2
             // 
@@ -853,35 +776,6 @@
             this.panel1.Size = new System.Drawing.Size(592, 137);
             this.panel1.TabIndex = 34;
             // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.DecimalPlaces = 2;
-            this.numericUpDown2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown2.Location = new System.Drawing.Point(356, 62);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            1215752192,
-            23,
-            0,
-            -2147483648});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.numericUpDown2.Size = new System.Drawing.Size(73, 21);
-            this.numericUpDown2.TabIndex = 41;
-            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown2.ThousandsSeparator = true;
-            this.numericUpDown2.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.numericUpDown2.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
-            // 
             // label20
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1053,26 +947,55 @@
             this.pictureBox2.TabIndex = 34;
             this.pictureBox2.TabStop = false;
             // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.DecimalPlaces = 2;
+            this.numericUpDown2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown2.Location = new System.Drawing.Point(356, 62);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            -2147483648});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.numericUpDown2.Size = new System.Drawing.Size(73, 21);
+            this.numericUpDown2.TabIndex = 41;
+            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown2.ThousandsSeparator = true;
+            this.numericUpDown2.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
+            // 
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView2.ColumnHeadersHeight = 30;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID2,
@@ -1095,74 +1018,6 @@
             this.dataGridView2.DataSourceChanged += new System.EventHandler(this.dataGridView2_DataSourceChanged);
             this.dataGridView2.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView2_RowPrePaint);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
-            // 
-            // ID2
-            // 
-            this.ID2.DataPropertyName = "ID";
-            this.ID2.HeaderText = "ID";
-            this.ID2.Name = "ID2";
-            this.ID2.ReadOnly = true;
-            this.ID2.Visible = false;
-            // 
-            // OP_DATE
-            // 
-            this.OP_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.OP_DATE.DataPropertyName = "OP_DATE";
-            this.OP_DATE.HeaderText = "Date";
-            this.OP_DATE.Name = "OP_DATE";
-            this.OP_DATE.ReadOnly = true;
-            this.OP_DATE.Width = 58;
-            // 
-            // CODE2
-            // 
-            this.CODE2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CODE2.DataPropertyName = "CODE";
-            this.CODE2.HeaderText = "Code";
-            this.CODE2.Name = "CODE2";
-            this.CODE2.ReadOnly = true;
-            this.CODE2.Width = 62;
-            // 
-            // NME2
-            // 
-            this.NME2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.NME2.DataPropertyName = "NME";
-            this.NME2.HeaderText = "Nom";
-            this.NME2.Name = "NME2";
-            this.NME2.ReadOnly = true;
-            this.NME2.Width = 56;
-            // 
-            // OBSERV
-            // 
-            this.OBSERV.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OBSERV.DataPropertyName = "OBSERV";
-            this.OBSERV.HeaderText = "Déscript.";
-            this.OBSERV.Name = "OBSERV";
-            this.OBSERV.ReadOnly = true;
-            // 
-            // QNT2
-            // 
-            this.QNT2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.QNT2.DataPropertyName = "QNT";
-            this.QNT2.HeaderText = "Qnt.";
-            this.QNT2.Name = "QNT2";
-            this.QNT2.ReadOnly = true;
-            this.QNT2.Width = 55;
-            // 
-            // PROD_ID
-            // 
-            this.PROD_ID.DataPropertyName = "PROD_ID";
-            this.PROD_ID.HeaderText = "PROD_ID";
-            this.PROD_ID.Name = "PROD_ID";
-            this.PROD_ID.ReadOnly = true;
-            this.PROD_ID.Visible = false;
-            // 
-            // SLD
-            // 
-            this.SLD.DataPropertyName = "SLD";
-            this.SLD.HeaderText = "SLD";
-            this.SLD.Name = "SLD";
-            this.SLD.ReadOnly = true;
-            this.SLD.Visible = false;
             // 
             // label1
             // 
@@ -1218,18 +1073,158 @@
             this.label19.TabIndex = 35;
             this.label19.Text = "Mouvement (Quantité) : ";
             // 
-            // label25
+            // ID2
             // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label25.Location = new System.Drawing.Point(371, 83);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(62, 16);
-            this.label25.TabIndex = 42;
-            this.label25.Text = "Minimum !";
-            this.toolTip1.SetToolTip(this.label25, "Par rapport au solde actuel des mouvements de ce produit");
-            this.label25.Visible = false;
+            this.ID2.DataPropertyName = "ID";
+            this.ID2.HeaderText = "ID";
+            this.ID2.Name = "ID2";
+            this.ID2.ReadOnly = true;
+            this.ID2.Visible = false;
+            // 
+            // OP_DATE
+            // 
+            this.OP_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.OP_DATE.DataPropertyName = "OP_DATE";
+            this.OP_DATE.HeaderText = "Date";
+            this.OP_DATE.Name = "OP_DATE";
+            this.OP_DATE.ReadOnly = true;
+            this.OP_DATE.Width = 58;
+            // 
+            // CODE2
+            // 
+            this.CODE2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CODE2.DataPropertyName = "CODE";
+            this.CODE2.HeaderText = "Code";
+            this.CODE2.Name = "CODE2";
+            this.CODE2.ReadOnly = true;
+            this.CODE2.Width = 62;
+            // 
+            // NME2
+            // 
+            this.NME2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.NME2.DataPropertyName = "NME";
+            this.NME2.HeaderText = "Nom";
+            this.NME2.Name = "NME2";
+            this.NME2.ReadOnly = true;
+            this.NME2.Width = 56;
+            // 
+            // OBSERV
+            // 
+            this.OBSERV.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OBSERV.DataPropertyName = "OBSERV";
+            this.OBSERV.HeaderText = "Déscript.";
+            this.OBSERV.Name = "OBSERV";
+            this.OBSERV.ReadOnly = true;
+            // 
+            // QNT2
+            // 
+            this.QNT2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.QNT2.DataPropertyName = "QNT";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.QNT2.DefaultCellStyle = dataGridViewCellStyle4;
+            this.QNT2.HeaderText = "Qnt.";
+            this.QNT2.Name = "QNT2";
+            this.QNT2.ReadOnly = true;
+            this.QNT2.Width = 55;
+            // 
+            // PROD_ID
+            // 
+            this.PROD_ID.DataPropertyName = "PROD_ID";
+            this.PROD_ID.HeaderText = "PROD_ID";
+            this.PROD_ID.Name = "PROD_ID";
+            this.PROD_ID.ReadOnly = true;
+            this.PROD_ID.Visible = false;
+            // 
+            // SLD
+            // 
+            this.SLD.DataPropertyName = "SLD";
+            this.SLD.HeaderText = "SLD";
+            this.SLD.Name = "SLD";
+            this.SLD.ReadOnly = true;
+            this.SLD.Visible = false;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // CODE
+            // 
+            this.CODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CODE.DataPropertyName = "CODE";
+            this.CODE.HeaderText = "Code";
+            this.CODE.Name = "CODE";
+            this.CODE.ReadOnly = true;
+            this.CODE.Width = 62;
+            // 
+            // NME
+            // 
+            this.NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NME.DataPropertyName = "NME";
+            this.NME.HeaderText = "Nom";
+            this.NME.Name = "NME";
+            this.NME.ReadOnly = true;
+            // 
+            // CATEGOR
+            // 
+            this.CATEGOR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CATEGOR.DataPropertyName = "CATEGOR";
+            this.CATEGOR.HeaderText = "Catégorie";
+            this.CATEGOR.Name = "CATEGOR";
+            this.CATEGOR.ReadOnly = true;
+            this.CATEGOR.Width = 85;
+            // 
+            // QNT
+            // 
+            this.QNT.DataPropertyName = "QNT";
+            this.QNT.HeaderText = "Quantité";
+            this.QNT.Name = "QNT";
+            this.QNT.ReadOnly = true;
+            this.QNT.Visible = false;
+            // 
+            // ALERT_MIN_ON
+            // 
+            this.ALERT_MIN_ON.DataPropertyName = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.HeaderText = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.Name = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.ReadOnly = true;
+            this.ALERT_MIN_ON.Visible = false;
+            // 
+            // QNT_MIN
+            // 
+            this.QNT_MIN.DataPropertyName = "QNT_MIN";
+            this.QNT_MIN.HeaderText = "Quantité Min";
+            this.QNT_MIN.Name = "QNT_MIN";
+            this.QNT_MIN.ReadOnly = true;
+            this.QNT_MIN.Visible = false;
+            // 
+            // REVIENT_PRTICE
+            // 
+            this.REVIENT_PRTICE.DataPropertyName = "REVIENT_PRTICE";
+            this.REVIENT_PRTICE.HeaderText = "Prix de revient";
+            this.REVIENT_PRTICE.Name = "REVIENT_PRTICE";
+            this.REVIENT_PRTICE.ReadOnly = true;
+            this.REVIENT_PRTICE.Visible = false;
+            // 
+            // VENTE_PRICE
+            // 
+            this.VENTE_PRICE.DataPropertyName = "VENTE_PRICE";
+            this.VENTE_PRICE.HeaderText = "Prix de vente";
+            this.VENTE_PRICE.Name = "VENTE_PRICE";
+            this.VENTE_PRICE.ReadOnly = true;
+            this.VENTE_PRICE.Visible = false;
+            // 
+            // TMP_FIRST_INSERT_DATE
+            // 
+            this.TMP_FIRST_INSERT_DATE.DataPropertyName = "TMP_FIRST_INSERT_DATE";
+            this.TMP_FIRST_INSERT_DATE.HeaderText = "TMP_FIRST_INSERT_DATE";
+            this.TMP_FIRST_INSERT_DATE.Name = "TMP_FIRST_INSERT_DATE";
+            this.TMP_FIRST_INSERT_DATE.ReadOnly = true;
+            this.TMP_FIRST_INSERT_DATE.Visible = false;
             // 
             // Produits
             // 
@@ -1262,8 +1257,8 @@
             this.groupBox2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1304,17 +1299,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CODE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NME;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CATEGOR;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QNT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ALERT_MIN_ON;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QNT_MIN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn REVIENT_PRTICE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TAXES;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VENTE_PRICE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TMP_FIRST_INSERT_DATE;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton radioButton2;
@@ -1335,14 +1319,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OP_DATE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CODE2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NME2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OBSERV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QNT2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PROD_ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SLD;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
@@ -1353,5 +1329,23 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OP_DATE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CODE2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NME2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OBSERV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QNT2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PROD_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SLD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CODE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CATEGOR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QNT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ALERT_MIN_ON;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QNT_MIN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn REVIENT_PRTICE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VENTE_PRICE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TMP_FIRST_INSERT_DATE;
     }
 }

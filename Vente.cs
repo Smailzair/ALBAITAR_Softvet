@@ -471,11 +471,8 @@ namespace ALBAITAR_Softvet.Resources
                 if (MessageBox.Show("Êtes-vous sûr de supprimer (" + dataGridView1.SelectedRows.Count + ") factures ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     string idx = "";
-                    dataGridView1.SelectedRows.Cast<DataGridViewRow>().ForEach(row => {
-                        Debug.WriteLine(">>>>>>>>>>>>>>>> row.Cells[\"ID\"].Value >>>>>>> " + row.Cells["ID"].Value);
-                        idx += "," + row.Cells["ID"].Value; });
-                    idx = idx.Substring(1);
-                    
+                    dataGridView1.SelectedRows.Cast<DataGridViewRow>().ForEach(row =>  idx += "," + row.Cells["ID"].Value);
+                    idx = idx.Substring(1);                    
                     bool ZZZ = MessageBox.Show("Retourner la quantité des produits au stock ?", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
                     if (ZZZ)
                     {
@@ -492,14 +489,12 @@ namespace ALBAITAR_Softvet.Resources
                         //RESULT COLUMNS >>> : ITEM_NME / ITEM_QNT / PROD_ID
                         foreach (DataRow row in codes.Rows)
                         {
-                                PreConnection.Excut_Cmd("INSERT INTO `tb_stock_mouv`(`OP_DATE`,`PROD_ID`,`QNT_IN`,`QNT_OUT`,`OBSERV`) VALUES ("
-                                                               + "'" + DateTime.Now.ToString("yyyy-MM-dd") + "',"
-                                                               + "'" + row["PROD_ID"] + "',"
-                                                               + row["ITEM_QNT"] + ","
-                                                               + "0,"
-                                                               + "'Vente (Facture Annulé)');");                                                               
-                            
-
+                            PreConnection.Excut_Cmd("INSERT INTO `tb_stock_mouv`(`OP_DATE`,`PROD_ID`,`QNT_IN`,`QNT_OUT`,`OBSERV`) VALUES ("
+                                                           + "'" + DateTime.Now.ToString("yyyy-MM-dd") + "',"
+                                                           + "'" + row["PROD_ID"] + "',"
+                                                           + row["ITEM_QNT"] + ","
+                                                           + "0,"
+                                                           + "'Vente (Factures Annulées)');");
                         }
                     }
                     //-------
@@ -508,6 +503,11 @@ namespace ALBAITAR_Softvet.Resources
                 }
             }
 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox1.BackColor = SystemColors.Window;
         }
     }
 }
