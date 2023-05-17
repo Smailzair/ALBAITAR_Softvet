@@ -63,6 +63,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap aaaaaaaaaaa {
+            get {
+                object obj = ResourceManager.GetObject("aaaaaaaaaaa", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap agenda_001 {
             get {
                 object obj = ResourceManager.GetObject("agenda_001", resourceCulture);
@@ -1053,6 +1063,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pngtree_vet_doctors_with_animals_png_image_8768727_copy1_copy {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-vet-doctors-with-animals-png-image_8768727 copy1 copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pngtree_vet_doctors_with_animals_png_image_876872799 {
             get {
                 object obj = ResourceManager.GetObject("pngtree-vet-doctors-with-animals-png-image_876872799", resourceCulture);
@@ -1103,9 +1123,29 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap rrrrrr {
+            get {
+                object obj = ResourceManager.GetObject("rrrrrr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap stethoscope_forme_chien_isole_blanc_1401_2360 {
             get {
                 object obj = ResourceManager.GetObject("stethoscope-forme-chien-isole-blanc_1401-2360", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Transp_Backg {
+            get {
+                object obj = ResourceManager.GetObject("Transp_Backg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

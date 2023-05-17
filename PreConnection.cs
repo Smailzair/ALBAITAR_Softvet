@@ -19,9 +19,10 @@ namespace ALBAITAR_Softvet
 {
     internal class PreConnection
     {
-      //  public static Loading loading = new Loading();
-        //public static MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine
-        public static MySqlConnection mySqlConnection = new MySqlConnection("Server=192.168.1.50;Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine
+        //  public static Loading loading = new Loading();
+        
+        public static MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine
+        //public static MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine
 
         static bool Connection_opened = false;
         public static void open_conn()
@@ -38,7 +39,7 @@ namespace ALBAITAR_Softvet
             }
             catch
             {
-                Connection_opened = false; MessageBox.Show("Probleme de connection avec la base donnée, veuillez vérifier l'internet et ...", "--", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Connection_opened = false; MessageBox.Show("Probleme de connection avec la base donnée, veuillez vérifier ...", "--", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Process.GetCurrentProcess().Kill();
             }
 
@@ -126,62 +127,17 @@ namespace ALBAITAR_Softvet
         {
 
             ////--------------------------
-            bool good = false;
-            bool not_autorized = false;
+            //bool good = false;
+            //bool not_autorized = false;
             try
             {
-                int previous_id = Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID;
-                int ch = send_infos_to_server(previous_id);
-                Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE = DateTime.Now.ToString();
-                Properties.Settings.Default.Save();
-                Properties.Settings.Default.Reload();
-                if (ch > 0)
-                {
-                    Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = ch;
-                    Properties.Settings.Default.Save();
-                    Properties.Settings.Default.Reload();
-                    good = true;
-                    WriteIntoRegistry(Application.ProductName + "_Activ", Codify_txt(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE + Environment.MachineName + System.Security.Principal.WindowsIdentity.GetCurrent().Name + SERIAL.Substring(SERIAL.Length - 4)));
-                }
-                else
-                {
-                    int ch2 = -2;
-                    if (previous_id > 0)
-                    {
-                        try { ch2 = send_infos_to_server(0); } catch{ }
-                        if (ch2 > 0)
-                        {
-                            Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = ch2;
-                            Properties.Settings.Default.Save();
-                            Properties.Settings.Default.Reload();
-                            good = true;
-                            WriteIntoRegistry(Application.ProductName + "_Activ", Codify_txt(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE + Environment.MachineName + System.Security.Principal.WindowsIdentity.GetCurrent().Name + SERIAL.Substring(SERIAL.Length - 4)));
-                        }
-                        else
-                        {
-                            not_autorized = true;
-                            Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = 0;
-                            Properties.Settings.Default.Save();
-                            Properties.Settings.Default.Reload();
-                            WriteIntoRegistry(Application.ProductName + "_Activ", "No");
-                        }
-                    }
-                    else
-                    {
-                        not_autorized = true;
-                        Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = 0;
-                        Properties.Settings.Default.Save();
-                        Properties.Settings.Default.Reload();
-                        WriteIntoRegistry(Application.ProductName + "_Activ", "No");
-                    }
-                    
-                }
-            }
-            catch
-            { }
-            if (!good)
-            {
-                if (not_autorized)
+                //int previous_id = Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID;
+                //int ch = send_infos_to_server(previous_id);
+                //Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE = DateTime.Now.ToString();
+                //Properties.Settings.Default.Save();
+                //Properties.Settings.Default.Reload();
+                //==== temporarment (juste pour 1er ver de ALBAITAR) ===============
+                if (DateTime.Now > new DateTime(2023,09,30))
                 {
                     foreach (Form frm in Application.OpenForms)
                     {
@@ -191,30 +147,87 @@ namespace ALBAITAR_Softvet
                     MessageBox.Show("Contactez votre fournisseur de logiciel.", "Attention :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Application.Exit();
                 }
-                else
-                {
-                    DateTime dte = new DateTime(1990, 01, 01);
-                    if (Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE.Length > 0)
-                    {
-                        DateTime.TryParse(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE, out dte);
-                    }
-                    else
-                    {
-                        dte = DateTime.Now;
-                    }
-                    if ((DateTime.Now - dte).TotalDays > 30 || ReadFromRegistry(Application.ProductName + "_Activ") != Codify_txt(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE + Environment.MachineName + System.Security.Principal.WindowsIdentity.GetCurrent().Name + SERIAL.Substring(SERIAL.Length - 4)))
-                    {
-                        foreach (Form frm in Application.OpenForms)
-                        {
-                            frm.Dispose();
-                        }
-                        MessageBox.Show("Vous avez obligatoirement besoin d'internet ... !\nVeuillez vérifier la connection puis lancer logiciel.", "Besoin d'une connection Internet", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                        Application.Exit();
-                    }
-                }
+                //===================================================================
+                //    if (ch > 0)
+                //    {
+                //        Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = ch;
+                //        Properties.Settings.Default.Save();
+                //        Properties.Settings.Default.Reload();
+                //        good = true;
+                //        WriteIntoRegistry(Application.ProductName + "_Activ", Codify_txt(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE + Environment.MachineName + System.Security.Principal.WindowsIdentity.GetCurrent().Name + SERIAL.Substring(SERIAL.Length - 4)));
+                //    }
+                //    else
+                //    {
+                //        int ch2 = -2;
+                //        if (previous_id > 0)
+                //        {
+                //            try { ch2 = send_infos_to_server(0); } catch{ }
+                //            if (ch2 > 0)
+                //            {
+                //                Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = ch2;
+                //                Properties.Settings.Default.Save();
+                //                Properties.Settings.Default.Reload();
+                //                good = true;
+                //                WriteIntoRegistry(Application.ProductName + "_Activ", Codify_txt(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE + Environment.MachineName + System.Security.Principal.WindowsIdentity.GetCurrent().Name + SERIAL.Substring(SERIAL.Length - 4)));
+                //            }
+                //            else
+                //            {
+                //                not_autorized = true;
+                //                Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = 0;
+                //                Properties.Settings.Default.Save();
+                //                Properties.Settings.Default.Reload();
+                //                WriteIntoRegistry(Application.ProductName + "_Activ", "No");
+                //            }
+                //        }
+                //        else
+                //        {
+                //            not_autorized = true;
+                //            Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = 0;
+                //            Properties.Settings.Default.Save();
+                //            Properties.Settings.Default.Reload();
+                //            WriteIntoRegistry(Application.ProductName + "_Activ", "No");
+                //        }
 
-
+                //    }
             }
+            catch
+            { }
+            //if (!good)
+            //{
+            //    if (not_autorized)
+            //    {
+            //        foreach (Form frm in Application.OpenForms)
+            //        {
+
+            //            frm.Dispose();
+            //        }
+            //        MessageBox.Show("Contactez votre fournisseur de logiciel.", "Attention :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //        Application.Exit();
+            //    }
+            //    else
+            //    {
+            //        DateTime dte = new DateTime(1990, 01, 01);
+            //        if (Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE.Length > 0)
+            //        {
+            //            DateTime.TryParse(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE, out dte);
+            //        }
+            //        else
+            //        {
+            //            dte = DateTime.Now;
+            //        }
+            //        if ((DateTime.Now - dte).TotalDays > 30 || ReadFromRegistry(Application.ProductName + "_Activ") != Codify_txt(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE + Environment.MachineName + System.Security.Principal.WindowsIdentity.GetCurrent().Name + SERIAL.Substring(SERIAL.Length - 4)))
+            //        {
+            //            foreach (Form frm in Application.OpenForms)
+            //            {
+            //                frm.Dispose();
+            //            }
+            //            MessageBox.Show("Vous avez obligatoirement besoin d'internet ... !\nVeuillez vérifier la connection puis lancer logiciel.", "Besoin d'une connection Internet", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //            Application.Exit();
+            //        }
+            //    }
+
+
+        //}
         }
 
 
@@ -503,7 +516,7 @@ namespace ALBAITAR_Softvet
             string ret = "";
             try
             {
-                ret = sk.GetValue(keyName).ToString();
+                ret = sk.GetValue(keyName) != null ? sk.GetValue(keyName).ToString() : "";
             }
             catch { }
             return ret;

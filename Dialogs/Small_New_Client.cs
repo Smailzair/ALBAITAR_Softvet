@@ -47,7 +47,7 @@ namespace ALBAITAR_Softvet.Dialogs
                             + "('" + comboBox1.Text + "',"
                             + "'" + textBox3.Text + "',"
                             + "'" + textBox2.Text + "',"
-                            + "'',"
+                            + "'" + textBox4.Text + "',"
                             + "'',"
                             + "'',"
                             + "'',"
@@ -70,7 +70,7 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             if (textBox2.Text.Length > 0 && textBox3.Text.Length > 0)
             {
-                int cnt = clients.Rows.Cast<DataRow>().Where(zz => zz["FAMNME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) && zz["NME"].ToString().ToLower().Equals(textBox2.Text.ToLower())).ToList().Count();
+                int cnt = clients.Rows.Cast<DataRow>().Where(zz => zz["FAMNME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) && zz["NME"].ToString().ToLower().Equals(textBox2.Text.ToLower()) && zz["NUM_CNI"].ToString().ToLower().Equals(textBox2.Text.ToLower())).ToList().Count();
                 label13.Visible = cnt > 0;
             }
             else { label13.Visible = false; }

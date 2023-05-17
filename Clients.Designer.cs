@@ -609,7 +609,7 @@
             this.MinimumSize = new System.Drawing.Size(783, 441);
             this.Name = "Clients";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Clients - [ALBAITAR Softvet]";
+            this.Text = "Propriétaires - [ALBAITAR Softvet]";
             this.Load += new System.EventHandler(this.Clients_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

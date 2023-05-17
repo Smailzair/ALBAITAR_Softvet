@@ -22,7 +22,7 @@ namespace ALBAITAR_Softvet.Labo
         DataTable new_initial_tbl;
         bool is_new = true;
         string ref_tmp = string.Empty;
-        bool default_modif_autorized = false;
+        //bool default_modif_autorized = false;
         string IDD_to_select = "";
 
         public Hemogramme(DataGridViewRow selected_anim, string ID_to_select)
@@ -269,18 +269,18 @@ namespace ALBAITAR_Softvet.Labo
                     break;
             }
             //------------
-            if (comboBox1.Visible && comboBox1.SelectedIndex == 0)
-            {
-                default_modif_autorized = true;
-                dataGridView1.Columns["DEFAULT_FULL"].ReadOnly = false;
-                dataGridView1.Columns["DEFAULT_FULL"].DefaultCellStyle.BackColor = Color.FromArgb(255, 224, 192);
-            }
-            else
-            {
-                default_modif_autorized = false;
-                dataGridView1.Columns["DEFAULT_FULL"].ReadOnly = true;
-                dataGridView1.Columns["DEFAULT_FULL"].DefaultCellStyle.BackColor = Color.White;
-            }
+            //if (comboBox1.Visible && comboBox1.SelectedIndex == 0)
+            //{
+            //    default_modif_autorized = true;
+            //    dataGridView1.Columns["DEFAULT_FULL"].ReadOnly = false;
+            //    dataGridView1.Columns["DEFAULT_FULL"].DefaultCellStyle.BackColor = Color.FromArgb(255, 224, 192);
+            //}
+            //else
+            //{
+            //    default_modif_autorized = false;
+            //    dataGridView1.Columns["DEFAULT_FULL"].ReadOnly = true;
+            //    dataGridView1.Columns["DEFAULT_FULL"].DefaultCellStyle.BackColor = Color.White;
+            //}
             //----------------
             dataGridView1.Refresh();
         }
@@ -351,52 +351,52 @@ namespace ALBAITAR_Softvet.Labo
             }
         }
 
-        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "VALUE2" && e.RowIndex > -1)
-            {
-                if (dataGridView1.Rows[e.RowIndex].Cells["VALUE2"].Value.ToString().Trim().Length > 0)
-                {
-                    bool gd = true;
-                    decimal dd = (decimal)-0.01;
-                    gd &= decimal.TryParse(dataGridView1.Rows[e.RowIndex].Cells["VALUE2"].Value.ToString(), out dd);
-                    if (dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MIN2"].Value != null && dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MIN2"].Value.ToString().Trim().Length > 0)
-                    {
-                        gd &= dd >= (decimal)dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MIN2"].Value;
-                    }
-                    if (dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MAX2"].Value != null && dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MAX2"].Value.ToString().Trim().Length > 0)
-                    {
-                        gd &= dd <= (decimal)dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MAX2"].Value;
-                    }
-                    dataGridView1.Rows[e.RowIndex].Cells["VALUE2"].Style.BackColor = gd ? Color.FromArgb(149, 238, 163) : Color.LightCoral;
-                }
-                else
-                {
-                    dataGridView1.Rows[e.RowIndex].Cells["VALUE2"].Style.BackColor = Color.FromArgb(255, 224, 192);
-                }
+        //private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        //{
+            //if (dataGridView1.Columns[e.ColumnIndex].Name == "VALUE2" && e.RowIndex > -1)
+            //{
+            //    if (dataGridView1.Rows[e.RowIndex].Cells["VALUE2"].Value.ToString().Trim().Length > 0)
+            //    {
+            //        bool gd = true;
+            //        decimal dd = (decimal)-0.01;
+            //        gd &= decimal.TryParse(dataGridView1.Rows[e.RowIndex].Cells["VALUE2"].Value.ToString(), out dd);
+            //        if (dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MIN2"].Value != null && dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MIN2"].Value.ToString().Trim().Length > 0)
+            //        {
+            //            gd &= dd >= (decimal)dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MIN2"].Value;
+            //        }
+            //        if (dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MAX2"].Value != null && dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MAX2"].Value.ToString().Trim().Length > 0)
+            //        {
+            //            gd &= dd <= (decimal)dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MAX2"].Value;
+            //        }
+            //        dataGridView1.Rows[e.RowIndex].Cells["VALUE2"].Style.BackColor = gd ? Color.FromArgb(149, 238, 163) : Color.LightCoral;
+            //    }
+            //    else
+            //    {
+            //        dataGridView1.Rows[e.RowIndex].Cells["VALUE2"].Style.BackColor = Color.FromArgb(255, 224, 192);
+            //    }
 
-            }
-        }
+            //}
+        //}
         
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedCells.Count > 0)
             {
-                if (dataGridView1.Columns[dataGridView1.SelectedCells[0].ColumnIndex].Name != "VALUE2")
+                if (dataGridView1.Columns[dataGridView1.SelectedCells[0].ColumnIndex].ReadOnly)
                 {
-                    if(dataGridView1.Columns[dataGridView1.SelectedCells[0].ColumnIndex].Name == "DEFAULT_FULL" && default_modif_autorized)
-                    {
-                        
-                    }
-                    else
-                    {
+                    //if (dataGridView1.Columns[dataGridView1.SelectedCells[0].ColumnIndex].Name == "DEFAULT_FULL" && default_modif_autorized)
+                    //{
+
+                    //}
+                    //else
+                    //{
                         dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
                         int rww = dataGridView1.SelectedCells[0].RowIndex;
                         dataGridView1.ClearSelection();
                         dataGridView1.Rows[rww].Cells["VALUE2"].Selected = true;
                         dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-                    }
-                    
+                    //}
+
                 }
             }
 
@@ -444,12 +444,12 @@ namespace ALBAITAR_Softvet.Labo
             {
                 int current_row_to_select = is_new ? -1 : dataGridView2.SelectedRows[0].Index;
                 bool ready = true;
-                bool tmpp = true;
+                //bool tmpp = true;
                 int tt = 0;
                 int null_nb = 0;
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    tmpp &= dataGridView1.Rows[i].Cells["VALUE2"].Style.BackColor != Color.LightCoral;
+                    //tmpp &= dataGridView1.Rows[i].Cells["VALUE2"].Style.BackColor != Color.LightCoral;
                     //--------
                     tt++;
                     null_nb += dataGridView1.Rows[i].Cells["VALUE2"].Value == DBNull.Value ? 1 : 0;
@@ -459,12 +459,12 @@ namespace ALBAITAR_Softvet.Labo
                 if (tt == null_nb)
                 {
                     ready = false;
-                    MessageBox.Show("Il n'y a pas de données !", "Vide :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Il n'y a pas des résultats !", "Vide :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                if (!tmpp && ready)
-                {
-                    ready = MessageBox.Show("Il y a des erreurs dans votre bilan,\n\nVoulez-vous continuer?\n", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
-                }
+                //if (!tmpp && ready)
+                //{
+                //    ready = MessageBox.Show("Il y a des erreurs dans votre bilan,\n\nVoulez-vous continuer?\n", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+                //}
                 if (ready)
                 {
                     if (is_new)

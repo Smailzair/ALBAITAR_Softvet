@@ -213,10 +213,7 @@ namespace ALBAITAR_Softvet
                 footerRange.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
 
 
-                Microsoft.Office.Interop.Word.Range firstPageRange = wordDocument.GoTo(WdGoToItem.wdGoToPage, WdGoToDirection.wdGoToFirst, 2);
-                firstPageRange.End = wordDocument.Content.End;
-                firstPageRange.Delete();
-
+                
 
                 wordDocument.Save();
 
@@ -241,77 +238,9 @@ namespace ALBAITAR_Softvet
             {
                 string without_ext_for_pdf = dlg.FileName.Contains(".") ? dlg.FileName.Substring(0, dlg.FileName.LastIndexOf(".")) : dlg.FileName;
 
-                //// Get all printers installed on the system
-                //PrinterSettings.StringCollection installedPrinters = PrinterSettings.InstalledPrinters;
-
-                //// Check if "Microsoft Print to PDF" is in the list of installed printers
-                //bool isMicrosoftPrintToPDFInstalled = false;
-                //foreach (string printer in installedPrinters)
-                //{
-                //    if (printer.Equals("Microsoft Print to PDF", StringComparison.InvariantCultureIgnoreCase))
-                //    {
-                //        isMicrosoftPrintToPDFInstalled = true;
-                //        break;
-                //    }
-                //}
-
-                //if (isMicrosoftPrintToPDFInstalled)
-                //{
+              
                     byte[] reportBytes = reportViewer1.LocalReport.Render("PDF");
                         File.WriteAllBytes(without_ext_for_pdf + ".pdf", reportBytes);
-                    
-                //}
-                //else
-                //{
-                //    string inputFilePath_for_pdf = without_ext_for_pdf + ".docx";
-
-                //    byte[] renderedBytes = reportViewer1.LocalReport.Render("WordOpenXML", null, out string mimeType, out string encoding, out string fileNameExtension, out string[] streams, out Warning[] warnings);
-
-
-                //    using (FileStream stream = new FileStream(inputFilePath_for_pdf, FileMode.Create))
-                //    {
-                //        stream.Write(renderedBytes, 0, renderedBytes.Length);
-                //    }
-                //    File.SetAttributes(inputFilePath_for_pdf, FileAttributes.Hidden);
-                //    //===========================
-                //    string outputFilePath = without_ext_for_pdf + ".pdf";
-                //    word wordApplication = new word();
-                //    Document wordDocument = wordApplication.Documents.Open(inputFilePath_for_pdf);
-
-                //    // Get the first section of the document
-                //    Section firstSection = wordDocument.Sections[1];
-
-                //    // Get the header of the first section
-                //    Microsoft.Office.Interop.Word.HeaderFooter header = firstSection.Headers[WdHeaderFooterIndex.wdHeaderFooterPrimary];
-
-                //    // Get the first paragraph in the header
-                //    Paragraph firstParagraph = header.Range.Paragraphs[1];
-
-                //    // Set the top spacing of the first line of the paragraph to 0.5 inches
-                //    float topSpacingInInches = 0.5f;
-                //    float topSpacingInPoints = topSpacingInInches * 72f;
-                //    firstParagraph.SpaceBefore = topSpacingInPoints;
-
-
-                //    Microsoft.Office.Interop.Word.Range footerRange = wordDocument.Sections[wordDocument.Sections.Count].Footers[WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
-                //    footerRange.Text = "01/01";
-                //    footerRange.InsertAfter("\r");
-                //    footerRange.InsertAfter("\r");
-                //    footerRange.Font.Name = "Century Gothic";
-                //    footerRange.Font.Size = 10;
-                //    footerRange.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
-
-
-
-
-                //    wordDocument.Save();
-
-                //    wordDocument.ExportAsFixedFormat(outputFilePath, WdExportFormat.wdExportFormatPDF, false, WdExportOptimizeFor.wdExportOptimizeForPrint, WdExportRange.wdExportFromTo, 1, 1);
-
-                //    wordDocument.Close();
-                //    wordApplication.Quit();
-                //    //-----------------------
-                //    File.Delete(inputFilePath_for_pdf);
                 }
 
                 //----------------

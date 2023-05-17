@@ -1,8 +1,9 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
-using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Windows.Forms;
+//using CrystalDecisions.CrystalReports.Engine;
+//using CrystalDecisions.Windows.Forms;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -26,7 +27,7 @@ namespace ALBAITAR_Softvet
         {
             InitializeComponent();
             //------------------------
-           
+
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
                 Autorisations = PreConnection.Load_data("SELECT `ID`,`CODE`,`AUTOR_TEXT`,Usr_" + Properties.Settings.Default.Last_login_user_idx + " FROM tb_autoriz;");
@@ -48,7 +49,6 @@ namespace ALBAITAR_Softvet
         }
         private void button9_Click(object sender, EventArgs e)
         {
-
             Cursor = Cursors.WaitCursor;
             if (!sites_table_ready)
             {
@@ -65,7 +65,7 @@ namespace ALBAITAR_Softvet
             }
             Cursor = Cursors.Default;
             panel1.Visible = false;
-            
+
 
 
         }
@@ -93,7 +93,7 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Animaux"].BringToFront();
             }
             panel1.Visible = false;
-            
+
 
         }
 
@@ -110,7 +110,7 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Produits"].BringToFront();
             }
             panel1.Visible = false;
-            
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -125,7 +125,7 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Agenda"].BringToFront();
             }
             panel1.Visible = false;
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -139,10 +139,10 @@ namespace ALBAITAR_Softvet
         {
             WindowState = Properties.Settings.Default.Maximize_Main_Frm ? FormWindowState.Maximized : FormWindowState.Normal;
             Text = "ALBAITAR Softvet - " + Properties.Settings.Default.Last_login_user_full_nme;
-            string cab_doct = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();                        
-            if(cab_doct == null || cab_doct.Trim() == string.Empty)
+            string cab_doct = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
+            if (cab_doct == null || cab_doct.Trim() == string.Empty)
             {
-                if(Properties.Settings.Default.Last_login_is_admin || Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92004" && (Int32)QQ[3] == 1).Count() > 0)
+                if (Properties.Settings.Default.Last_login_is_admin || Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92004" && (Int32)QQ[3] == 1).Count() > 0)
                 {
                     string dd = "";
                     int p = 3;
@@ -155,6 +155,7 @@ namespace ALBAITAR_Softvet
                     {
                         PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '" + dd + "' WHERE `ID` = 1;");
                         Params = PreConnection.Load_data("SELECT * FROM tb_params;");
+                        label_cab_nme.Text = dd;
                     }
                     else
                     {
@@ -170,7 +171,30 @@ namespace ALBAITAR_Softvet
             {
                 label_cab_nme.Text = cab_doct;
             }
-            
+            ///--------------------
+            foreach (Control ctrr in this.Controls)
+            {
+                if(ctrr.Name != "button8" && ctrr.Name != "listView1")
+                {
+                    EventHandlerList events = (EventHandlerList)typeof(Control)
+                                     .GetProperty("Events", BindingFlags.NonPublic | BindingFlags.Instance)
+                                      .GetValue(ctrr);
+
+                    object mouseClickEventKey = typeof(Control)
+                        .GetField("EventMouseClick", BindingFlags.NonPublic | BindingFlags.Static)
+                        .GetValue(ctrr);
+
+                    Delegate mouseClickDelegate = events[mouseClickEventKey] as Delegate;
+                    if (mouseClickDelegate == null)
+                    {
+                        Debug.WriteLine(">>>>>>>>>>>>>> " + ctrr.Name);
+                        ctrr.MouseClick += tmp_MouseClick;
+                    }
+                }
+                
+
+            }
+            ///---------------------
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
                 button9.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10000" && (Int32)QQ[3] == 1).Count() > 0;
@@ -223,12 +247,12 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Laboratoire"].BringToFront();
             }
             panel1.Visible = false;
-            
+
         }
 
         private void panel1_VisibleChanged(object sender, EventArgs e)
         {
-            if(panel1.Visible)
+            if (panel1.Visible)
             {
                 button9.Focus();
             }
@@ -256,6 +280,60 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Vente"].BringToFront();
             }
             panel1.Visible = false;
+        }
+        
+        private void button8_Click(object sender, EventArgs e)
+        {
+            
+            if (!listView1.Visible)
+            {
+                listView1.Visible = true;
+                button8.Location = new Point(button8.Location.X - listView1.Width, button8.Location.Y);
+                button1.Location = new Point(button1.Location.X - listView1.Width, button1.Location.Y);
+                button2.Location = new Point(button2.Location.X - listView1.Width, button2.Location.Y);
+            }
+            else
+            {
+                listView1.Visible = false;
+                button8.Location = new Point(button8.Location.X + listView1.Width, button8.Location.Y);
+                button1.Location = new Point(button1.Location.X + listView1.Width, button1.Location.Y);
+                button2.Location = new Point(button2.Location.X + listView1.Width, button2.Location.Y);
+            }
+
+        }
+
+
+        private void Main_Frm_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (listView1.Visible)
+            {
+                listView1.Visible = false;
+                button8.Location = new Point(button8.Location.X + listView1.Width, button8.Location.Y);
+                button1.Location = new Point(button1.Location.X + listView1.Width, button1.Location.Y);
+                button2.Location = new Point(button2.Location.X + listView1.Width, button2.Location.Y);
+            }
+        }
+
+        private void tmp_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (listView1.Visible && !listView1.Bounds.Contains(e.Location))
+            {
+                listView1.Visible = false;
+                button8.Location = new Point(button8.Location.X + listView1.Width, button8.Location.Y);
+                button1.Location = new Point(button1.Location.X + listView1.Width, button1.Location.Y);
+                button2.Location = new Point(button2.Location.X + listView1.Width, button2.Location.Y);
+            }
+        }
+
+        private void Main_Frm_Deactivate(object sender, EventArgs e)
+        {
+            if (listView1.Visible)
+            {
+                listView1.Visible = false;
+                button8.Location = new Point(button8.Location.X + listView1.Width, button8.Location.Y);
+                button1.Location = new Point(button1.Location.X + listView1.Width, button1.Location.Y);
+                button2.Location = new Point(button2.Location.X + listView1.Width, button2.Location.Y);
+            }
         }
     }
 }

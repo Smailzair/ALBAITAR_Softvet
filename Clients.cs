@@ -259,8 +259,10 @@ namespace ALBAITAR_Softvet.Resources
                 bool all_ready = true;
                 textBox2.BackColor = textBox2.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
                 textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
+                textBox4.BackColor = textBox4.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
                 all_ready &= textBox2.Text.TrimStart().TrimEnd() != string.Empty;
                 all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+                all_ready &= textBox4.Text.TrimStart().TrimEnd() != string.Empty;
                 all_ready &= !label13.Visible;
                 //-------------
                 label12.Visible = !all_ready;

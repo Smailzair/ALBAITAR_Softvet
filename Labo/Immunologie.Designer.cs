@@ -56,9 +56,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.MALAD_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.METHODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VALUE2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.label17 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label18 = new System.Windows.Forms.Label();
@@ -72,6 +69,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.MALAD_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.METHODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VALUE2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -388,39 +388,6 @@
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
-            // MALAD_NME
-            // 
-            this.MALAD_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.MALAD_NME.DataPropertyName = "MALAD_NME";
-            this.MALAD_NME.HeaderText = "Maladies Virales";
-            this.MALAD_NME.Name = "MALAD_NME";
-            // 
-            // METHODE
-            // 
-            this.METHODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.METHODE.DataPropertyName = "METHODE";
-            this.METHODE.HeaderText = "Méthodes Utilisées";
-            this.METHODE.Name = "METHODE";
-            this.METHODE.Width = 129;
-            // 
-            // VALUE2
-            // 
-            this.VALUE2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.VALUE2.DataPropertyName = "VALUE";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.VALUE2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.VALUE2.DisplayStyleForCurrentCellOnly = true;
-            this.VALUE2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.VALUE2.HeaderText = "Résultats";
-            this.VALUE2.Items.AddRange(new object[] {
-            "",
-            "Positif",
-            "Négatif"});
-            this.VALUE2.Name = "VALUE2";
-            this.VALUE2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.VALUE2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.VALUE2.Width = 78;
-            // 
             // label17
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -587,6 +554,41 @@
             this.button4.TabIndex = 50;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // MALAD_NME
+            // 
+            this.MALAD_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.MALAD_NME.DataPropertyName = "MALAD_NME";
+            this.MALAD_NME.HeaderText = "Maladies Virales";
+            this.MALAD_NME.Name = "MALAD_NME";
+            this.MALAD_NME.ReadOnly = true;
+            // 
+            // METHODE
+            // 
+            this.METHODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.METHODE.DataPropertyName = "METHODE";
+            this.METHODE.HeaderText = "Méthodes Utilisées";
+            this.METHODE.Name = "METHODE";
+            this.METHODE.ReadOnly = true;
+            this.METHODE.Width = 129;
+            // 
+            // VALUE2
+            // 
+            this.VALUE2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.VALUE2.DataPropertyName = "VALUE";
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.VALUE2.DefaultCellStyle = dataGridViewCellStyle2;
+            this.VALUE2.DisplayStyleForCurrentCellOnly = true;
+            this.VALUE2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.VALUE2.HeaderText = "Résultats";
+            this.VALUE2.Items.AddRange(new object[] {
+            "",
+            "Positif",
+            "Négatif"});
+            this.VALUE2.Name = "VALUE2";
+            this.VALUE2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.VALUE2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.VALUE2.Width = 78;
             // 
             // Immunologie
             // 

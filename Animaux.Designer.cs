@@ -90,6 +90,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -156,6 +158,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.textBox2);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
+            this.splitContainer1.Panel2.Controls.Add(this.panel2);
+            this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Size = new System.Drawing.Size(812, 469);
             this.splitContainer1.SplitterDistance = 219;
             this.splitContainer1.TabIndex = 0;
@@ -398,7 +402,6 @@
             // 
             // checkBox2
             // 
-            this.checkBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBox2.AutoSize = true;
             this.checkBox2.Location = new System.Drawing.Point(91, 240);
             this.checkBox2.Name = "checkBox2";
@@ -497,9 +500,8 @@
             // 
             // checkBox1
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(14, 351);
+            this.checkBox1.Location = new System.Drawing.Point(26, 321);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(68, 20);
             this.checkBox1.TabIndex = 15;
@@ -900,6 +902,26 @@
             this.pictureBox1.TabIndex = 25;
             this.pictureBox1.TabStop = false;
             // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_15px_1;
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panel2.Location = new System.Drawing.Point(16, 146);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(18, 26);
+            this.panel2.TabIndex = 54;
+            this.toolTip1.SetToolTip(this.panel2, "Obligé !");
+            // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_15px_1;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panel1.Location = new System.Drawing.Point(28, 206);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(18, 26);
+            this.panel1.TabIndex = 53;
+            this.toolTip1.SetToolTip(this.panel1, "Obligé !");
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "Images |*.bmp;*.jpg;*.jpeg;*.png";
@@ -999,5 +1021,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel1;
     }
 }

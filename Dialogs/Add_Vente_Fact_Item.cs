@@ -1,5 +1,5 @@
 ﻿using ALBAITAR_Softvet.Resources;
-using CrystalDecisions.Shared.Json;
+//using CrystalDecisions.Shared.Json;
 using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
@@ -178,10 +178,13 @@ namespace ALBAITAR_Softvet.Dialogs
             + "SELECT `ITEM_NME_70` AS 'SERVICE' FROM tb_factures_vente WHERE `ITEM_IS_PROD_70` IS FALSE AND `ITEM_NME_70` IS NOT NULL"
                                     +         ");"
                                                 );
-            DataTable services2 = services.AsEnumerable()
+            if(services.Rows.Count > 0)
+            {
+                DataTable services2 = services.AsEnumerable()
                                         .GroupBy(row => row.Field<string>("SERVICE"))
                                         .Select(group => group.First()).CopyToDataTable();
-            dataGridView1.DataSource = services2;
+                dataGridView1.DataSource = services2;
+            }
             //------------------------------------------------------------
             products = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`CODE`,tb1.`CATEGOR`,tb1.`NME`,tb1.`REVIENT_PRTICE`,tb1.`VENTE_PRICE`,tb2.SLD FROM tb_produits AS tb1 LEFT JOIN (SELECT `PROD_ID`,SUM(`QNT_IN`) - SUM(`QNT_OUT`) AS SLD FROM tb_stock_mouv GROUP BY `PROD_ID`) AS tb2 ON tb2.`PROD_ID` = tb1.`ID`;");
             foreach (DataRow rww in Vente.stock_to_modify.Rows)
@@ -205,7 +208,11 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = "SERVICE LIKE '%" + textBox1.Text + "%'";
+           if(dataGridView1.Rows.Count > 0)
+            {
+                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = "SERVICE LIKE '%" + textBox1.Text + "%'";
+            }
+            
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)

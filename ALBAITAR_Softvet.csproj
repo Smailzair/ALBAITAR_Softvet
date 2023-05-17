@@ -692,6 +692,10 @@
     <None Include="Resources\icons8_profit_30px.png" />
     <None Include="Resources\icons8_sync_25px_1.png" />
     <None Include="Resources\icons8_info_20px_2.png" />
+    <None Include="Resources\Transp_Backg.png" />
+    <None Include="Resources\pngtree-vet-doctors-with-animals-png-image_8768727 copy1 copy.png" />
+    <None Include="Resources\rrrrrr.png" />
+    <None Include="Resources\aaaaaaaaaaa.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

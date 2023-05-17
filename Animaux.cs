@@ -39,6 +39,7 @@ namespace ALBAITAR_Softvet.Resources
             clients.Rows.Cast<DataRow>().ToList().ForEach(clt => {
                 full_nme_clients.Add((string)clt["FULL_NME"]);
             });
+            
             //---------------------
             Load_anims_from_DB();
             //---------------------
@@ -54,6 +55,7 @@ namespace ALBAITAR_Softvet.Resources
             { dataGridView1.ClearSelection(); dataGridView1.Rows[fd].Selected = true; }
             else if (dataGridView1.Rows.Count > 0)
             {          dataGridView1.ClearSelection();  dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true; }
+            
 
         }
         private void Load_selected_anim_fields()
@@ -71,6 +73,8 @@ namespace ALBAITAR_Softvet.Resources
                 button7.Visible = false;
                 button9.Visible = false;
                 button8.Visible = true;
+                panel1.Visible = false;
+                panel2.Visible = false;
                 //----------------------------------------------                
                 dateTimePicker3.Value = (DateTime)dataGridView1.SelectedRows[0].Cells["DATE_ADDED"].Value;
                 textBox3.Text = (string)dataGridView1.SelectedRows[0].Cells["NME"].Value;
@@ -146,7 +150,9 @@ namespace ALBAITAR_Softvet.Resources
             {
                 bool all_ready = true;
                 textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
-                comboBox1.BackColor = comboBox1.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
+                comboBox1.BackColor = comboBox1.Text.TrimStart().TrimEnd() != string.Empty && comboBox1.SelectedValue != null ? SystemColors.Window : Color.LightCoral;
+                panel2.Visible = comboBox2.Text.Length == 0 || comboBox2.Text == "--";//Espece (Obligé !)
+                panel1.Visible = comboBox4.Text.Length == 0 || comboBox4.Text == "--"; //Sexe (Obligé !)
                 int mm = 0;
                 if (Is_New) {mm= animaux.Rows.Cast<DataRow>().Where(XX => XX["NUM_IDENTIF"].ToString().Length > 0 && (string)XX["NUM_IDENTIF"] == textBox2.Text.Trim().Replace(" ", "")).ToList().Count; }
                 else { mm = animaux.Rows.Cast<DataRow>().Where(XX => (int)XX["ID"] != (int)dataGridView1.SelectedRows[0].Cells["ID"].Value && XX["NUM_IDENTIF"].ToString().Length > 0 && (string)XX["NUM_IDENTIF"] == textBox2.Text.Trim().Replace(" ", "")).ToList().Count; }
@@ -161,7 +167,9 @@ namespace ALBAITAR_Softvet.Resources
                 else
                 {
                     all_ready &= comboBox1.BackColor == SystemColors.Window;
-                    all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+                    all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;                    
+                    all_ready &= !panel2.Visible;                     
+                    all_ready &= !panel1.Visible;
                     if (all_ready && label13.Visible) { all_ready &= MessageBox.Show("Ce animal déja existe pour ce client,\n\nVoulez vous continuer comme meme ?\n\n", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes; }
                     //-------------
                     label12.Visible = !all_ready;
@@ -208,6 +216,7 @@ namespace ALBAITAR_Softvet.Resources
                             MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
                             if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
                             PreConnection.open_conn();
+                            Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>> " + insert_cmnd);
                             cmd.ExecuteNonQuery();
                         }
                         else //UPDATE
@@ -513,7 +522,8 @@ namespace ALBAITAR_Softvet.Resources
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {            
+        {          
+            panel2.Visible = comboBox2.SelectedIndex == 0;
             if (!button7.Visible)
             {
                 if (Properties.Settings.Default.Use_animals_logo)
@@ -555,6 +565,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
+            panel1.Visible = comboBox4.SelectedIndex == 0;
             verif_if_déja_exist_animal();
         }
 
@@ -583,6 +594,9 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 button1.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10001" && (Int32)QQ[3] == 1).Count() > 0; //Ajouter Client
             }
+            //-------------------
+            //-----------
+            button9.PerformClick();
         }
 
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)

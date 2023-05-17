@@ -421,26 +421,12 @@ namespace ALBAITAR_Softvet.Resources
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            //textBox6.TextChanged -= textBox6_TextChanged;
-            //textBox6.Clear();
-            //textBox6.TextChanged += textBox6_TextChanged;
+            if(radioButton2.Checked && radioButton2.Text == "--" && dataGridView1.SelectedRows.Count > 0)
+            {
+                radioButton2.Text = dataGridView1.SelectedRows[0].Cells["NME"].Value.ToString();
+            }
+            //-----------------------
             textBox6_TextChanged(null, null);
-            //if (dataGridView2.DataSource != null)
-            //{
-            //    if (radioButton2.Checked)
-            //    {
-            //        ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "PROD_ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value;
-            //    }
-            //    else
-            //    {
-            //        ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "";
-            //    }
-            //}
-            //if (dataGridView2.SelectedRows.Count < 2)
-            //{
-            //    decimal sum = dataGridView2.Rows.Cast<DataGridViewRow>().Sum(row => Convert.ToDecimal(row.Cells["QNT2"].Value));
-            //    label21.Text = "Total : " + sum.ToString("# ##0.00");
-            //}
         }
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
@@ -535,7 +521,7 @@ namespace ALBAITAR_Softvet.Resources
             dateTimePicker1.Value = DateTime.Now >= minDate ? DateTime.Now : minDate;
             //------------------------
             textBox5.Clear();
-            comboBox1.SelectedIndex = 0;            
+            comboBox1.SelectedIndex = dataGridView1.SelectedRows.Count == 0 ? 0 : comboBox1.SelectedIndex;            
             
             //--------------------
             label25.Visible = false;
@@ -551,8 +537,6 @@ namespace ALBAITAR_Softvet.Resources
             numericUpDown2.BackColor = SystemColors.Window;
             numericUpDown2.Minimum = prev_sld * -1;
             numericUpDown2.Value = numericUpDown2.Minimum <= 0 ? 0 : numericUpDown2.Minimum;
-            //numericUpDown2.Value = numericUpDown2.Minimum;
-            Debug.WriteLine(" >>>>>>>>>>>>>> 001 >>>>>>> " + numericUpDown2.Minimum);
             numericUpDown2.ValueChanged += numericUpDown2_ValueChanged;
         }
 

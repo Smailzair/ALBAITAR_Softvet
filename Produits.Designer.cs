@@ -36,6 +36,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CATEGOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ALERT_MIN_ON = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QNT_MIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REVIENT_PRTICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VENTE_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TMP_FIRST_INSERT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -92,11 +102,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.ID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OP_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CODE2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,16 +110,11 @@
             this.QNT2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PROD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SLD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CATEGOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ALERT_MIN_ON = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QNT_MIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.REVIENT_PRTICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VENTE_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TMP_FIRST_INSERT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -180,6 +180,88 @@
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // CODE
+            // 
+            this.CODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CODE.DataPropertyName = "CODE";
+            this.CODE.HeaderText = "Code";
+            this.CODE.Name = "CODE";
+            this.CODE.ReadOnly = true;
+            this.CODE.Width = 62;
+            // 
+            // NME
+            // 
+            this.NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NME.DataPropertyName = "NME";
+            this.NME.HeaderText = "Nom";
+            this.NME.Name = "NME";
+            this.NME.ReadOnly = true;
+            // 
+            // CATEGOR
+            // 
+            this.CATEGOR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CATEGOR.DataPropertyName = "CATEGOR";
+            this.CATEGOR.HeaderText = "Catégorie";
+            this.CATEGOR.Name = "CATEGOR";
+            this.CATEGOR.ReadOnly = true;
+            this.CATEGOR.Width = 85;
+            // 
+            // QNT
+            // 
+            this.QNT.DataPropertyName = "QNT";
+            this.QNT.HeaderText = "Quantité";
+            this.QNT.Name = "QNT";
+            this.QNT.ReadOnly = true;
+            this.QNT.Visible = false;
+            // 
+            // ALERT_MIN_ON
+            // 
+            this.ALERT_MIN_ON.DataPropertyName = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.HeaderText = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.Name = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.ReadOnly = true;
+            this.ALERT_MIN_ON.Visible = false;
+            // 
+            // QNT_MIN
+            // 
+            this.QNT_MIN.DataPropertyName = "QNT_MIN";
+            this.QNT_MIN.HeaderText = "Quantité Min";
+            this.QNT_MIN.Name = "QNT_MIN";
+            this.QNT_MIN.ReadOnly = true;
+            this.QNT_MIN.Visible = false;
+            // 
+            // REVIENT_PRTICE
+            // 
+            this.REVIENT_PRTICE.DataPropertyName = "REVIENT_PRTICE";
+            this.REVIENT_PRTICE.HeaderText = "Prix de revient";
+            this.REVIENT_PRTICE.Name = "REVIENT_PRTICE";
+            this.REVIENT_PRTICE.ReadOnly = true;
+            this.REVIENT_PRTICE.Visible = false;
+            // 
+            // VENTE_PRICE
+            // 
+            this.VENTE_PRICE.DataPropertyName = "VENTE_PRICE";
+            this.VENTE_PRICE.HeaderText = "Prix de vente";
+            this.VENTE_PRICE.Name = "VENTE_PRICE";
+            this.VENTE_PRICE.ReadOnly = true;
+            this.VENTE_PRICE.Visible = false;
+            // 
+            // TMP_FIRST_INSERT_DATE
+            // 
+            this.TMP_FIRST_INSERT_DATE.DataPropertyName = "TMP_FIRST_INSERT_DATE";
+            this.TMP_FIRST_INSERT_DATE.HeaderText = "TMP_FIRST_INSERT_DATE";
+            this.TMP_FIRST_INSERT_DATE.Name = "TMP_FIRST_INSERT_DATE";
+            this.TMP_FIRST_INSERT_DATE.ReadOnly = true;
+            this.TMP_FIRST_INSERT_DATE.Visible = false;
             // 
             // button5
             // 
@@ -1019,60 +1101,6 @@
             this.dataGridView2.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView2_RowPrePaint);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(22, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 16);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "De :";
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.Checked = true;
-            this.radioButton2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.Location = new System.Drawing.Point(194, 21);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(216, 20);
-            this.radioButton2.TabIndex = 29;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "--";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton1.Location = new System.Drawing.Point(71, 21);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(94, 20);
-            this.radioButton1.TabIndex = 28;
-            this.radioButton1.Text = "Tous produits";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(19, 11);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(59, 15);
-            this.label18.TabIndex = 34;
-            this.label18.Text = "Produits : ";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(381, 10);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(136, 15);
-            this.label19.TabIndex = 35;
-            this.label19.Text = "Mouvement (Quantité) : ";
-            // 
             // ID2
             // 
             this.ID2.DataPropertyName = "ID";
@@ -1144,87 +1172,59 @@
             this.SLD.ReadOnly = true;
             this.SLD.Visible = false;
             // 
-            // ID
+            // label1
             // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(22, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(28, 16);
+            this.label1.TabIndex = 32;
+            this.label1.Text = "De :";
             // 
-            // CODE
+            // radioButton2
             // 
-            this.CODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CODE.DataPropertyName = "CODE";
-            this.CODE.HeaderText = "Code";
-            this.CODE.Name = "CODE";
-            this.CODE.ReadOnly = true;
-            this.CODE.Width = 62;
+            this.radioButton2.Checked = true;
+            this.radioButton2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton2.Location = new System.Drawing.Point(194, 21);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(216, 20);
+            this.radioButton2.TabIndex = 29;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "--";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
-            // NME
+            // radioButton1
             // 
-            this.NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NME.DataPropertyName = "NME";
-            this.NME.HeaderText = "Nom";
-            this.NME.Name = "NME";
-            this.NME.ReadOnly = true;
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton1.Location = new System.Drawing.Point(71, 21);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(94, 20);
+            this.radioButton1.TabIndex = 28;
+            this.radioButton1.Text = "Tous produits";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
-            // CATEGOR
+            // label18
             // 
-            this.CATEGOR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CATEGOR.DataPropertyName = "CATEGOR";
-            this.CATEGOR.HeaderText = "Catégorie";
-            this.CATEGOR.Name = "CATEGOR";
-            this.CATEGOR.ReadOnly = true;
-            this.CATEGOR.Width = 85;
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(19, 11);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(59, 15);
+            this.label18.TabIndex = 34;
+            this.label18.Text = "Produits : ";
             // 
-            // QNT
+            // label19
             // 
-            this.QNT.DataPropertyName = "QNT";
-            this.QNT.HeaderText = "Quantité";
-            this.QNT.Name = "QNT";
-            this.QNT.ReadOnly = true;
-            this.QNT.Visible = false;
-            // 
-            // ALERT_MIN_ON
-            // 
-            this.ALERT_MIN_ON.DataPropertyName = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.HeaderText = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.Name = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.ReadOnly = true;
-            this.ALERT_MIN_ON.Visible = false;
-            // 
-            // QNT_MIN
-            // 
-            this.QNT_MIN.DataPropertyName = "QNT_MIN";
-            this.QNT_MIN.HeaderText = "Quantité Min";
-            this.QNT_MIN.Name = "QNT_MIN";
-            this.QNT_MIN.ReadOnly = true;
-            this.QNT_MIN.Visible = false;
-            // 
-            // REVIENT_PRTICE
-            // 
-            this.REVIENT_PRTICE.DataPropertyName = "REVIENT_PRTICE";
-            this.REVIENT_PRTICE.HeaderText = "Prix de revient";
-            this.REVIENT_PRTICE.Name = "REVIENT_PRTICE";
-            this.REVIENT_PRTICE.ReadOnly = true;
-            this.REVIENT_PRTICE.Visible = false;
-            // 
-            // VENTE_PRICE
-            // 
-            this.VENTE_PRICE.DataPropertyName = "VENTE_PRICE";
-            this.VENTE_PRICE.HeaderText = "Prix de vente";
-            this.VENTE_PRICE.Name = "VENTE_PRICE";
-            this.VENTE_PRICE.ReadOnly = true;
-            this.VENTE_PRICE.Visible = false;
-            // 
-            // TMP_FIRST_INSERT_DATE
-            // 
-            this.TMP_FIRST_INSERT_DATE.DataPropertyName = "TMP_FIRST_INSERT_DATE";
-            this.TMP_FIRST_INSERT_DATE.HeaderText = "TMP_FIRST_INSERT_DATE";
-            this.TMP_FIRST_INSERT_DATE.Name = "TMP_FIRST_INSERT_DATE";
-            this.TMP_FIRST_INSERT_DATE.ReadOnly = true;
-            this.TMP_FIRST_INSERT_DATE.Visible = false;
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(381, 10);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(136, 15);
+            this.label19.TabIndex = 35;
+            this.label19.Text = "Mouvement (Quantité) : ";
             // 
             // Produits
             // 

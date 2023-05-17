@@ -189,7 +189,22 @@ namespace ALBAITAR_Softvet.Labo
                 bool ready = true;
                 ready &= !label20.Visible;
                 ready &= textBox3.BackColor != Color.LightCoral;
-                if (!ready)
+                //-------------
+                bool tttmmmp = true;
+                int tt = 0;
+                int null_nb = 0;
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    tt++;
+                    null_nb += dataGridView1.Rows[i].Cells["VALUE2"].Value == DBNull.Value ? 1 : 0;
+                }
+                if (tt == null_nb)
+                {
+                    ready = tttmmmp = false;
+                    MessageBox.Show("Il n'y a pas des résultats !", "Vide :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                //------------------
+                if (tttmmmp && !ready)
                 {
                     ready = MessageBox.Show("Il y a des erreurs dans votre bilan,\n\nVoulez-vous continuer?\n", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
                 }

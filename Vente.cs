@@ -119,7 +119,7 @@ namespace ALBAITAR_Softvet.Resources
             if(MessageBox.Show("Sur de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bool fff = true;
-                if (!Is_New) { fff = MessageBox.Show("Retourner la quantité au stock ?", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes; }
+                if (!Is_New) { fff = MessageBox.Show("Retourner la quantité au stock ?\n\n(Excepte les produits connus dans la base donné)", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes; }
                 foreach (DataGridViewRow rwx in dataGridView2.SelectedRows)
                 {
                     if (fff)
@@ -286,7 +286,7 @@ namespace ALBAITAR_Softvet.Resources
                             inti += ",`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` = NULL";
                             inti += ",`ITEM_PRIX_UNIT_" + (f < 10 ? "0" : "") + f + "` = NULL";
                         }
-                        PreConnection.Excut_Cmd("UPDATE `tb_factures_vente` SET " + inti.Substring(1) + ",");
+                        PreConnection.Excut_Cmd("UPDATE `tb_factures_vente` SET " + inti.Substring(1) + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() + ";");
                     }
                     //------------
                     string cmmd = "UPDATE `tb_factures_vente` SET "
@@ -334,7 +334,9 @@ namespace ALBAITAR_Softvet.Resources
                                             + "(SELECT `ID` FROM tb_produits WHERE `CODE` LIKE '" + group.First()["PROD_CODE"] + "' LIMIT 1),"//PROD_ID
                                             + (sumSLD < 0 ? sumSLD * -1 : 0) + ","//QNT_IN
                                             + (sumSLD > 0 ? sumSLD : 0) + "," //QNT_OUT
-                                            + "'Vente (Facture [" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) + "]) -" + (Is_New ? "Crée" : "Modifiée") + "-');"); //OBSERV
+                                            + "'Vente (Facture [" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) + "]) -" + (Is_New ? "Crée" : "Modifiée") + "-') "  //OBSERV
+                                            + "WHERE (SELECT COUNT(`CODE`) FROM tb_produits WHERE `CODE` LIKE '" + group.First()["PROD_CODE"] + "') > 0"
+                                            + ";");
                         }
                     }
                 }
@@ -487,19 +489,20 @@ namespace ALBAITAR_Softvet.Resources
                     string idx = "";
                     dataGridView1.SelectedRows.Cast<DataGridViewRow>().ForEach(row =>  idx += "," + row.Cells["ID"].Value);
                     idx = idx.Substring(1);                    
-                    bool ZZZ = MessageBox.Show("Retourner la quantité des produits au stock ?", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+                    bool ZZZ = MessageBox.Show("Retourner la quantité des produits au stock ?\n\n(Excepte les produits connus dans la base donné)", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
                     if (ZZZ)
                     {
                         string cmd_tmp = "";
                         for (int f = 1; f < 71; f++)
                         {
-                            //cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` FROM tb_factures_vente WHERE `ID` IN (" + idx + ") AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ";
-                            cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_NME',`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_PROD_CODE',SUM(`ITEM_QNT_" + (f < 10 ? "0" : "") + f + "`) AS 'ITEM_QNT' FROM tb_factures_vente WHERE `ID` IN ("+idx+") AND `ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f + "` AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ";
+
+                            //cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_NME',`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_PROD_CODE',SUM(`ITEM_QNT_" + (f < 10 ? "0" : "") + f + "`) AS 'ITEM_QNT' FROM tb_factures_vente WHERE `ID` IN ("+idx+") AND `ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f + "` AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ";
+                            cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_NME',`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_PROD_CODE',`ITEM_QNT_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_QNT' FROM tb_factures_vente WHERE `ID` IN (" + idx + ") AND `ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f + "` AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ALL ";
                         }
                         cmd_tmp += ";";
-                        cmd_tmp = cmd_tmp.Replace(" UNION ;", "");
-                        DataTable codes = PreConnection.Load_data("SELECT  tb1.ITEM_NME,SUM(tb1.ITEM_QNT) AS ITEM_QNT, PROD.`ID` AS 'PROD_ID' FROM (" + cmd_tmp + ") AS tb1 LEFT JOIN tb_produits AS PROD ON PROD.CODE = tb1.ITEM_PROD_CODE WHERE tb1.ITEM_NME IS NOT NULL GROUP BY tb1.ITEM_NME;");
-                        
+                        cmd_tmp = cmd_tmp.Replace(" UNION ALL ;", "");
+                        DataTable codes = PreConnection.Load_data("SELECT  tb1.ITEM_NME,SUM(tb1.ITEM_QNT) AS ITEM_QNT, PROD.`ID` AS 'PROD_ID' FROM (" + cmd_tmp + ") AS tb1 LEFT JOIN tb_produits AS PROD ON PROD.CODE = tb1.ITEM_PROD_CODE WHERE tb1.ITEM_NME IS NOT NULL AND PROD.`ID` IS NOT NULL GROUP BY tb1.ITEM_NME;");
+
                         //RESULT COLUMNS >>> : ITEM_NME / ITEM_QNT / PROD_ID
                         foreach (DataRow row in codes.Rows)
                         {

@@ -97,7 +97,7 @@ namespace ALBAITAR_Softvet.Resources
                 label14.Text = dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value != DBNull.Value ? ((DateTime)dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value).ToString("d") : "--";
                 textBox2.Text = (string)dataGridView1.SelectedRows[0].Cells["OBSERVATIONS"].Value;
                 //------------------------
-                button3.Enabled = dataGridView1.SelectedRows[0].Cells["ESPECE"].Value.ToString() == "Canine" || dataGridView1.SelectedRows[0].Cells["ESPECE"].Value.ToString() == "Feline";
+               // button3.Enabled = dataGridView1.SelectedRows[0].Cells["ESPECE"].Value.ToString() == "Canine" || dataGridView1.SelectedRows[0].Cells["ESPECE"].Value.ToString() == "Feline";
                 //---------------------------
                 textBox3.TextChanged -= textBox3_TextChanged;
                 textBox3.Text = "";
@@ -113,7 +113,7 @@ namespace ALBAITAR_Softvet.Resources
         private void initial_infos_fields()
         {
             selected_anim = null;
-            button3.Enabled = false;
+            //button3.Enabled = false;
             label3.Text = label4.Text = label6.Text = label8.Text = label13.Text = label14.Text = textBox2.Text = "--";
         }
 
