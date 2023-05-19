@@ -186,8 +186,7 @@ namespace ALBAITAR_Softvet
 
                     Delegate mouseClickDelegate = events[mouseClickEventKey] as Delegate;
                     if (mouseClickDelegate == null)
-                    {
-                        Debug.WriteLine(">>>>>>>>>>>>>> " + ctrr.Name);
+                    {                        
                         ctrr.MouseClick += tmp_MouseClick;
                     }
                 }
