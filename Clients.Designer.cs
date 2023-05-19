@@ -664,7 +664,7 @@
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(18, 332);
+            this.label15.Location = new System.Drawing.Point(18, 326);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(83, 15);
             this.label15.TabIndex = 58;
@@ -676,7 +676,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label14.Location = new System.Drawing.Point(107, 332);
+            this.label14.Location = new System.Drawing.Point(107, 326);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(17, 15);
             this.label14.TabIndex = 57;
@@ -689,7 +689,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(462, 283);
+            this.button1.Location = new System.Drawing.Point(462, 277);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 31);
             this.button1.TabIndex = 56;
@@ -703,7 +703,7 @@
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(494, 284);
+            this.button5.Location = new System.Drawing.Point(494, 278);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(26, 29);
             this.button5.TabIndex = 55;
@@ -718,7 +718,7 @@
             this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button7.FlatAppearance.BorderSize = 0;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(6, 283);
+            this.button7.Location = new System.Drawing.Point(6, 277);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(26, 29);
             this.button7.TabIndex = 54;
@@ -759,7 +759,7 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(522, 275);
+            this.dataGridView2.Size = new System.Drawing.Size(522, 269);
             this.dataGridView2.TabIndex = 53;
             this.dataGridView2.DataSourceChanged += new System.EventHandler(this.dataGridView2_DataSourceChanged);
             this.dataGridView2.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView2_CellValidating);

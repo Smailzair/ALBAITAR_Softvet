@@ -26,6 +26,7 @@ namespace ALBAITAR_Softvet.Resources
         public Animaux()
         {
             InitializeComponent();
+            tabControl1.TabPages.Remove(tabPage2);
             //----------------------
             comboBox2.SelectedIndex = comboBox3.SelectedIndex = comboBox4.SelectedIndex = 0;
             //----------------------
@@ -75,6 +76,7 @@ namespace ALBAITAR_Softvet.Resources
                 button8.Visible = true;
                 panel1.Visible = false;
                 panel2.Visible = false;
+                if (tabControl1.TabPages.Count < 2) { tabControl1.TabPages.Add(tabPage2); }
                 //----------------------------------------------                
                 dateTimePicker3.Value = (DateTime)dataGridView1.SelectedRows[0].Cells["DATE_ADDED"].Value;
                 textBox3.Text = (string)dataGridView1.SelectedRows[0].Cells["NME"].Value;
@@ -139,9 +141,6 @@ namespace ALBAITAR_Softvet.Resources
             ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = String.Format("NME LIKE '%{0}%'", textBox1.Text);
             
         }
-
-
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -306,7 +305,10 @@ namespace ALBAITAR_Softvet.Resources
             openFileDialog1.FileName = "";
             pictureBox2.Image = null;
             Is_New = true;
-            foreach(Control ctrl in splitContainer1.Panel2.Controls)
+            comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
+            comboBox4.SelectedIndexChanged -= comboBox4_SelectedIndexChanged;
+
+            foreach (Control ctrl in tabPage1.Controls)
             {                
                 if(ctrl.GetType() == typeof(TextBox) || ctrl.GetType() == typeof(MaskedTextBox))
                 {
@@ -323,6 +325,8 @@ namespace ALBAITAR_Softvet.Resources
                 //    ((DateTimePicker)ctrl).Value = DateTime.Now;
                 //}
             }
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            comboBox4.SelectedIndexChanged += comboBox4_SelectedIndexChanged;
             dateTimePicker3.Value = DateTime.Now;
             dateTimePicker1.Value = DateTime.Now;
             dateTimePicker2.Value = DateTime.Now;
@@ -332,6 +336,7 @@ namespace ALBAITAR_Softvet.Resources
             checkBox1.Checked = checkBox2.Checked = false;
             label13.Visible=false;
             pictureBox1.Image = Properties.Resources.NOUVEAU;
+            if (tabControl1.TabPages.Count > 1) { tabControl1.TabPages.Remove(tabPage2); }
             if (!textBox1.Focused) { textBox3.Select(); }
         }
 
@@ -347,7 +352,7 @@ namespace ALBAITAR_Softvet.Resources
                 });
 
                 fff = fff.Substring(1);
-                if (MessageBox.Show("Vous étes sures de supprimer [" + dataGridView1.SelectedRows.Count + "] animaux ?\n\nAttention: Tous "+ (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " infos associées seront supprimés (Laboratires, Agenda ...).", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Vous étes sures de supprimer [" + dataGridView1.SelectedRows.Count + "] animaux ?\n\nAttention: Tous "+ (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " infos associées seront supprimés (Laboratires, Visies, Agenda ...).", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     PreConnection.Excut_Cmd("DELETE FROM tb_animaux WHERE ID IN (" + fff + ");");
                     Load_anims_from_DB();
@@ -585,7 +590,7 @@ namespace ALBAITAR_Softvet.Resources
             {
                 button4.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20002" && (Int32)QQ[3] == 1).Count() > 0; //Supprimer
                 button3.Visible = button1.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20001" && (Int32)QQ[3] == 1).Count() > 0; //Ajouter Animal                                
-                foreach(Control ctrl in splitContainer1.Panel2.Controls)
+                foreach(Control ctrl in tabPage1.Controls)
                 {
                     if(ctrl.Name != "button8")
                     {

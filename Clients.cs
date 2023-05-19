@@ -31,6 +31,7 @@ namespace ALBAITAR_Softvet.Resources
         public Clients()
         {
             InitializeComponent();
+            tabControl1.TabPages.Remove(tabPage1);
             //----------------------
             Load_clients_from_DB();
             //---------------------
@@ -64,6 +65,8 @@ namespace ALBAITAR_Softvet.Resources
                 textBox6.Validating += textBox6_Validating;
                 textBox6.Validated += textBox6_Validated;
             }
+            //------------------------
+
 
         }
         private void Load_clients_from_DB()
@@ -522,6 +525,8 @@ namespace ALBAITAR_Softvet.Resources
                 button3.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10001" && (Int32)QQ[3] == 1).Count() > 0; //Ajouter
                 splitContainer1.Panel2.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
             }
+            //--------------
+
 
         }
 

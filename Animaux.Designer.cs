@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Animaux));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.button6 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -94,6 +98,20 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.IDD_FINANC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OP_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OBJECT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DEBIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CREDIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FACT_NUM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -102,6 +120,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -124,43 +146,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer1.Panel2.Controls.Add(this.button9);
-            this.splitContainer1.Panel2.Controls.Add(this.checkBox2);
-            this.splitContainer1.Panel2.Controls.Add(this.button8);
-            this.splitContainer1.Panel2.Controls.Add(this.label15);
-            this.splitContainer1.Panel2.Controls.Add(this.dateTimePicker3);
-            this.splitContainer1.Panel2.Controls.Add(this.button7);
-            this.splitContainer1.Panel2.Controls.Add(this.button5);
-            this.splitContainer1.Panel2.Controls.Add(this.pictureBox2);
-            this.splitContainer1.Panel2.Controls.Add(this.checkBox1);
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Panel2.Controls.Add(this.dateTimePicker1);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox6);
-            this.splitContainer1.Panel2.Controls.Add(this.label9);
-            this.splitContainer1.Panel2.Controls.Add(this.comboBox4);
-            this.splitContainer1.Panel2.Controls.Add(this.label8);
-            this.splitContainer1.Panel2.Controls.Add(this.comboBox3);
-            this.splitContainer1.Panel2.Controls.Add(this.label7);
-            this.splitContainer1.Panel2.Controls.Add(this.comboBox2);
-            this.splitContainer1.Panel2.Controls.Add(this.label6);
-            this.splitContainer1.Panel2.Controls.Add(this.button1);
-            this.splitContainer1.Panel2.Controls.Add(this.comboBox1);
-            this.splitContainer1.Panel2.Controls.Add(this.label4);
-            this.splitContainer1.Panel2.Controls.Add(this.label13);
-            this.splitContainer1.Panel2.Controls.Add(this.label12);
-            this.splitContainer1.Panel2.Controls.Add(this.button2);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox8);
-            this.splitContainer1.Panel2.Controls.Add(this.label11);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox4);
-            this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Panel2.Controls.Add(this.label2);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox3);
-            this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox2);
-            this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
-            this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(812, 469);
+            this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
+            this.splitContainer1.Size = new System.Drawing.Size(845, 508);
             this.splitContainer1.SplitterDistance = 219;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -171,7 +158,7 @@
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(149, 432);
+            this.button6.Location = new System.Drawing.Point(148, 473);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(26, 31);
             this.button6.TabIndex = 4;
@@ -196,7 +183,7 @@
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(181, 433);
+            this.button4.Location = new System.Drawing.Point(180, 474);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(26, 29);
             this.button4.TabIndex = 3;
@@ -211,7 +198,7 @@
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(12, 433);
+            this.button3.Location = new System.Drawing.Point(11, 474);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(26, 29);
             this.button3.TabIndex = 2;
@@ -246,12 +233,12 @@
             this.RADIATION_CAUSES,
             this.PICTURE,
             this.DATE_ADDED});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 42);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 39);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(213, 387);
+            this.dataGridView1.Size = new System.Drawing.Size(213, 433);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -392,7 +379,7 @@
             this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(348, 63);
+            this.button9.Location = new System.Drawing.Point(373, 64);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(25, 24);
             this.button9.TabIndex = 49;
@@ -403,7 +390,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(91, 240);
+            this.checkBox2.Location = new System.Drawing.Point(88, 241);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(126, 20);
             this.checkBox2.TabIndex = 48;
@@ -421,7 +408,7 @@
             this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
-            this.button8.Location = new System.Drawing.Point(251, 415);
+            this.button8.Location = new System.Drawing.Point(276, 425);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(136, 48);
             this.button8.TabIndex = 47;
@@ -433,7 +420,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(23, 12);
+            this.label15.Location = new System.Drawing.Point(20, 13);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(59, 16);
             this.label15.TabIndex = 46;
@@ -443,7 +430,7 @@
             // 
             this.dateTimePicker3.CustomFormat = "dddd    dd/MM/yyyy";
             this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(88, 10);
+            this.dateTimePicker3.Location = new System.Drawing.Point(85, 11);
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.Size = new System.Drawing.Size(165, 21);
             this.dateTimePicker3.TabIndex = 45;
@@ -459,7 +446,7 @@
             this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_eraser_tool_30px;
-            this.button7.Location = new System.Drawing.Point(537, 232);
+            this.button7.Location = new System.Drawing.Point(562, 233);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(34, 31);
             this.button7.TabIndex = 44;
@@ -478,7 +465,7 @@
             this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_slr_small_lens_30px;
-            this.button5.Location = new System.Drawing.Point(379, 232);
+            this.button5.Location = new System.Drawing.Point(404, 233);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(34, 31);
             this.button5.TabIndex = 43;
@@ -491,7 +478,7 @@
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(379, 68);
+            this.pictureBox2.Location = new System.Drawing.Point(404, 69);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(192, 195);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -501,7 +488,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(26, 321);
+            this.checkBox1.Location = new System.Drawing.Point(23, 322);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(68, 20);
             this.checkBox1.TabIndex = 15;
@@ -517,9 +504,9 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Location = new System.Drawing.Point(352, 293);
+            this.groupBox1.Location = new System.Drawing.Point(377, 294);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(229, 115);
+            this.groupBox1.Size = new System.Drawing.Size(229, 124);
             this.groupBox1.TabIndex = 41;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Radiation : ";
@@ -559,7 +546,7 @@
             this.textBox5.Location = new System.Drawing.Point(6, 72);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(217, 33);
+            this.textBox5.Size = new System.Drawing.Size(217, 42);
             this.textBox5.TabIndex = 17;
             this.toolTip1.SetToolTip(this.textBox5, "ex: Euthanasie");
             // 
@@ -567,7 +554,7 @@
             // 
             this.dateTimePicker1.Enabled = false;
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(223, 239);
+            this.dateTimePicker1.Location = new System.Drawing.Point(220, 240);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(100, 21);
             this.dateTimePicker1.TabIndex = 12;
@@ -577,9 +564,9 @@
             // 
             this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox6.Location = new System.Drawing.Point(91, 266);
+            this.textBox6.Location = new System.Drawing.Point(88, 267);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(255, 21);
+            this.textBox6.Size = new System.Drawing.Size(283, 21);
             this.textBox6.TabIndex = 13;
             this.textBox6.Tag = "";
             this.toolTip1.SetToolTip(this.textBox6, "ex : Noire et Fauvre");
@@ -587,7 +574,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(43, 269);
+            this.label9.Location = new System.Drawing.Point(40, 270);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(42, 16);
             this.label9.TabIndex = 35;
@@ -605,16 +592,16 @@
             "Femelle",
             "Mâle castré",
             "Femelle castrée"});
-            this.comboBox4.Location = new System.Drawing.Point(91, 208);
+            this.comboBox4.Location = new System.Drawing.Point(88, 209);
             this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(255, 24);
+            this.comboBox4.Size = new System.Drawing.Size(283, 24);
             this.comboBox4.TabIndex = 11;
             this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(45, 211);
+            this.label8.Location = new System.Drawing.Point(42, 212);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(39, 16);
             this.label8.TabIndex = 33;
@@ -679,16 +666,16 @@
             "Westhiland West terrier",
             "Whippet",
             "Yorkshire Terrier"});
-            this.comboBox3.Location = new System.Drawing.Point(91, 178);
+            this.comboBox3.Location = new System.Drawing.Point(88, 179);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(255, 24);
+            this.comboBox3.Size = new System.Drawing.Size(283, 24);
             this.comboBox3.TabIndex = 10;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(42, 181);
+            this.label7.Location = new System.Drawing.Point(39, 182);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 16);
             this.label7.TabIndex = 31;
@@ -710,16 +697,16 @@
             "Oiseaux",
             "Reptile",
             "Rongeur"});
-            this.comboBox2.Location = new System.Drawing.Point(91, 148);
+            this.comboBox2.Location = new System.Drawing.Point(88, 149);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(255, 24);
+            this.comboBox2.Size = new System.Drawing.Size(283, 24);
             this.comboBox2.TabIndex = 9;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(32, 151);
+            this.label6.Location = new System.Drawing.Point(29, 152);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 16);
             this.label6.TabIndex = 29;
@@ -732,7 +719,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(348, 118);
+            this.button1.Location = new System.Drawing.Point(373, 119);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(25, 24);
             this.button1.TabIndex = 28;
@@ -747,9 +734,9 @@
             this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(91, 118);
+            this.comboBox1.Location = new System.Drawing.Point(88, 119);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(255, 24);
+            this.comboBox1.Size = new System.Drawing.Size(283, 24);
             this.comboBox1.TabIndex = 8;
             this.comboBox1.DropDown += new System.EventHandler(this.comboBox1_DropDown);
             this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
@@ -758,7 +745,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 121);
+            this.label4.Location = new System.Drawing.Point(8, 122);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 16);
             this.label4.TabIndex = 26;
@@ -769,7 +756,7 @@
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label13.Location = new System.Drawing.Point(349, 40);
+            this.label13.Location = new System.Drawing.Point(374, 41);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(134, 16);
             this.label13.TabIndex = 24;
@@ -779,10 +766,10 @@
             // 
             // label12
             // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.Color.Red;
-            this.label12.Location = new System.Drawing.Point(399, 407);
+            this.label12.Location = new System.Drawing.Point(424, 417);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(178, 16);
             this.label12.TabIndex = 23;
@@ -802,7 +789,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_save_close_25px;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(393, 426);
+            this.button2.Location = new System.Drawing.Point(418, 436);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(188, 37);
             this.button2.TabIndex = 18;
@@ -816,16 +803,16 @@
             this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox8.Location = new System.Drawing.Point(102, 293);
+            this.textBox8.Location = new System.Drawing.Point(99, 294);
             this.textBox8.Multiline = true;
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(244, 115);
+            this.textBox8.Size = new System.Drawing.Size(272, 124);
             this.textBox8.TabIndex = 14;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(11, 296);
+            this.label11.Location = new System.Drawing.Point(8, 297);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(85, 16);
             this.label11.TabIndex = 20;
@@ -835,16 +822,16 @@
             // 
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox4.Location = new System.Drawing.Point(126, 91);
+            this.textBox4.Location = new System.Drawing.Point(123, 92);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(220, 21);
+            this.textBox4.Size = new System.Drawing.Size(248, 21);
             this.textBox4.TabIndex = 7;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 94);
+            this.label3.Location = new System.Drawing.Point(25, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(92, 16);
             this.label3.TabIndex = 4;
@@ -853,7 +840,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 67);
+            this.label2.Location = new System.Drawing.Point(8, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 16);
             this.label2.TabIndex = 3;
@@ -863,9 +850,9 @@
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Location = new System.Drawing.Point(71, 37);
+            this.textBox3.Location = new System.Drawing.Point(68, 38);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(275, 21);
+            this.textBox3.Size = new System.Drawing.Size(303, 21);
             this.textBox3.TabIndex = 5;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox3.Validated += new System.EventHandler(this.textBox2_Validated);
@@ -873,7 +860,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 40);
+            this.label1.Location = new System.Drawing.Point(23, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 16);
             this.label1.TabIndex = 1;
@@ -883,9 +870,9 @@
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(125, 64);
+            this.textBox2.Location = new System.Drawing.Point(122, 65);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(221, 21);
+            this.textBox2.Size = new System.Drawing.Size(249, 21);
             this.textBox2.TabIndex = 6;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.Enter += new System.EventHandler(this.textBox2_Enter);
@@ -895,7 +882,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox1.Image = global::ALBAITAR_Softvet.Properties.Resources.NOUVEAU;
-            this.pictureBox1.Location = new System.Drawing.Point(1, 377);
+            this.pictureBox1.Location = new System.Drawing.Point(-2, 387);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 92);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -906,7 +893,7 @@
             // 
             this.panel2.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_15px_1;
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel2.Location = new System.Drawing.Point(16, 146);
+            this.panel2.Location = new System.Drawing.Point(13, 147);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(18, 26);
             this.panel2.TabIndex = 54;
@@ -916,7 +903,7 @@
             // 
             this.panel1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_info_15px_1;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel1.Location = new System.Drawing.Point(28, 206);
+            this.panel1.Location = new System.Drawing.Point(25, 207);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(18, 26);
             this.panel1.TabIndex = 53;
@@ -928,16 +915,228 @@
             this.openFileDialog1.Title = "Choisir une image :";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(622, 508);
+            this.tabControl1.TabIndex = 1;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.button9);
+            this.tabPage1.Controls.Add(this.dateTimePicker3);
+            this.tabPage1.Controls.Add(this.checkBox2);
+            this.tabPage1.Controls.Add(this.panel1);
+            this.tabPage1.Controls.Add(this.button8);
+            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Controls.Add(this.label15);
+            this.tabPage1.Controls.Add(this.pictureBox1);
+            this.tabPage1.Controls.Add(this.textBox2);
+            this.tabPage1.Controls.Add(this.button7);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.button5);
+            this.tabPage1.Controls.Add(this.textBox3);
+            this.tabPage1.Controls.Add(this.pictureBox2);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.checkBox1);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.textBox4);
+            this.tabPage1.Controls.Add(this.dateTimePicker1);
+            this.tabPage1.Controls.Add(this.label11);
+            this.tabPage1.Controls.Add(this.textBox6);
+            this.tabPage1.Controls.Add(this.textBox8);
+            this.tabPage1.Controls.Add(this.label9);
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.comboBox4);
+            this.tabPage1.Controls.Add(this.label12);
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.label13);
+            this.tabPage1.Controls.Add(this.comboBox3);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.label7);
+            this.tabPage1.Controls.Add(this.comboBox1);
+            this.tabPage1.Controls.Add(this.comboBox2);
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(614, 479);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Détails : ";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage2.Controls.Add(this.button10);
+            this.tabPage2.Controls.Add(this.button11);
+            this.tabPage2.Controls.Add(this.button12);
+            this.tabPage2.Controls.Add(this.dataGridView2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(614, 479);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Report de visites : ";
+            // 
+            // button10
+            // 
+            this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button10.BackgroundImage")));
+            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button10.FlatAppearance.BorderSize = 0;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Location = new System.Drawing.Point(548, 441);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(26, 31);
+            this.button10.TabIndex = 60;
+            this.toolTip1.SetToolTip(this.button10, "Exporter en Excel");
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button11.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
+            this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button11.FlatAppearance.BorderSize = 0;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button11.Location = new System.Drawing.Point(580, 442);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(26, 29);
+            this.button11.TabIndex = 59;
+            this.toolTip1.SetToolTip(this.button11, "Supprimer");
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button12.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
+            this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button12.FlatAppearance.BorderSize = 0;
+            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button12.Location = new System.Drawing.Point(6, 444);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(26, 29);
+            this.button12.TabIndex = 58;
+            this.toolTip1.SetToolTip(this.button12, "Ajouter");
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView2.ColumnHeadersHeight = 30;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDD_FINANC,
+            this.OP_DATE,
+            this.OBJECT,
+            this.DEBIT,
+            this.CREDIT,
+            this.dataGridViewTextBoxColumn1,
+            this.FACT_NUM});
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dataGridView2.EnableHeadersVisualStyles = false;
+            this.dataGridView2.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dataGridView2.Size = new System.Drawing.Size(608, 438);
+            this.dataGridView2.TabIndex = 57;
+            // 
+            // IDD_FINANC
+            // 
+            this.IDD_FINANC.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.IDD_FINANC.DataPropertyName = "ID";
+            this.IDD_FINANC.HeaderText = "ID";
+            this.IDD_FINANC.Name = "IDD_FINANC";
+            this.IDD_FINANC.ReadOnly = true;
+            this.IDD_FINANC.Visible = false;
+            this.IDD_FINANC.Width = 43;
+            // 
+            // OP_DATE
+            // 
+            this.OP_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.OP_DATE.DataPropertyName = "OP_DATE";
+            dataGridViewCellStyle2.Format = "dd/MM/yyyy HH:mm";
+            this.OP_DATE.DefaultCellStyle = dataGridViewCellStyle2;
+            this.OP_DATE.HeaderText = "Date";
+            this.OP_DATE.Name = "OP_DATE";
+            this.OP_DATE.Width = 58;
+            // 
+            // OBJECT
+            // 
+            this.OBJECT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OBJECT.DataPropertyName = "OBJECT";
+            this.OBJECT.HeaderText = "Objet";
+            this.OBJECT.Name = "OBJECT";
+            // 
+            // DEBIT
+            // 
+            this.DEBIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DEBIT.DataPropertyName = "DEBIT";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.DEBIT.DefaultCellStyle = dataGridViewCellStyle3;
+            this.DEBIT.HeaderText = "[+] Endetté ";
+            this.DEBIT.Name = "DEBIT";
+            this.DEBIT.Width = 95;
+            // 
+            // CREDIT
+            // 
+            this.CREDIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CREDIT.DataPropertyName = "CREDIT";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.CREDIT.DefaultCellStyle = dataGridViewCellStyle4;
+            this.CREDIT.HeaderText = "[-] Dois";
+            this.CREDIT.Name = "CREDIT";
+            this.CREDIT.Width = 68;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CLIENT_ID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "CLIENT_ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // FACT_NUM
+            // 
+            this.FACT_NUM.DataPropertyName = "FACT_NUM";
+            this.FACT_NUM.HeaderText = "FACT_NUM";
+            this.FACT_NUM.Name = "FACT_NUM";
+            this.FACT_NUM.ReadOnly = true;
+            this.FACT_NUM.Visible = false;
+            // 
             // Animaux
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 469);
+            this.ClientSize = new System.Drawing.Size(845, 508);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(783, 441);
+            this.MinimumSize = new System.Drawing.Size(861, 547);
             this.Name = "Animaux";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Animaux - [ALBAITAR Softvet]";
@@ -945,7 +1144,6 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -953,6 +1151,11 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1023,5 +1226,19 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDD_FINANC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OP_DATE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OBJECT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DEBIT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CREDIT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FACT_NUM;
     }
 }
