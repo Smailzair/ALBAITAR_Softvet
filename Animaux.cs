@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Xamarin.Forms.Internals;
 using Excc = Microsoft.Office.Interop.Excel;
 //using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -23,6 +24,7 @@ namespace ALBAITAR_Softvet.Resources
         DataTable animaux;
         List<string> full_nme_clients;
         bool Is_New = true;
+        bool Is_New_Visite = true;
         public Animaux()
         {
             InitializeComponent();
@@ -32,15 +34,17 @@ namespace ALBAITAR_Softvet.Resources
             //----------------------
             //clients = PreConnection.Load_data_keeping_duplicates("SELECT ID,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
             clients = PreConnection.Load_data_keeping_duplicates("SELECT *,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
-            comboBox1.DataSource= clients;            
+            comboBox1.DataSource = clients;
             comboBox1.DisplayMember = "FULL_NME";
             comboBox1.ValueMember = "ID";
-            if (clients.Rows.Count> 0 ) { comboBox1.SelectedIndex = 0; }
-            full_nme_clients= new List<string>();
-            clients.Rows.Cast<DataRow>().ToList().ForEach(clt => {
+            if (clients.Rows.Count > 0) { comboBox1.SelectedIndex = 0; }
+            full_nme_clients = new List<string>();
+            clients.Rows.Cast<DataRow>().ToList().ForEach(clt =>
+            {
                 full_nme_clients.Add((string)clt["FULL_NME"]);
             });
-            
+            //--------------------
+            comboBox5.AutoCompleteCustomSource.AddRange(clients.AsEnumerable().Select(row => row.Field<string>("FULL_NME")).ToArray());
             //---------------------
             Load_anims_from_DB();
             //---------------------
@@ -52,11 +56,11 @@ namespace ALBAITAR_Softvet.Resources
             int fd = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 99999999;
             animaux = PreConnection.Load_data_keeping_duplicates("SELECT * FROM tb_animaux;");
             dataGridView1.DataSource = animaux;
-            if(dataGridView1.Rows.Count > fd) 
+            if (dataGridView1.Rows.Count > fd)
             { dataGridView1.ClearSelection(); dataGridView1.Rows[fd].Selected = true; }
             else if (dataGridView1.Rows.Count > 0)
-            {          dataGridView1.ClearSelection();  dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true; }
-            
+            { dataGridView1.ClearSelection(); dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true; }
+
 
         }
         private void Load_selected_anim_fields()
@@ -68,9 +72,9 @@ namespace ALBAITAR_Softvet.Resources
                 textBox2.Validated -= textBox2_Validated;
                 textBox3.Validated -= textBox2_Validated;
                 comboBox1.Validating -= comboBox1_Validating;
-                comboBox2.SelectedIndexChanged-= comboBox2_SelectedIndexChanged;
+                comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
                 pictureBox1.Image = Properties.Resources.MODIF;
-                pictureBox2.Image = null;    
+                pictureBox2.Image = null;
                 button7.Visible = false;
                 button9.Visible = false;
                 button8.Visible = true;
@@ -103,21 +107,21 @@ namespace ALBAITAR_Softvet.Resources
             }
             else
             {
-               button3.PerformClick();                
+                button3.PerformClick();
             }
 
         }
 
         private void verif_if_déja_exist_animal()
         {
-            
+
             bool exist = false;
-            
-            if(animaux != null && (Is_New || (!Is_New && dataGridView1.SelectedRows.Count > 0)))
+
+            if (animaux != null && (Is_New || (!Is_New && dataGridView1.SelectedRows.Count > 0)))
             {
-               
+
                 int cntt = animaux.Rows.Cast<DataRow>().Where(zz =>
-                
+
                 ((string)zz["NUM_IDENTIF"] == textBox2.Text.Trim().Replace(" ", "") &&
                 zz["NME"].ToString().ToLower() == textBox3.Text.ToLower() &&
                 (zz["ESPECE"] != DBNull.Value ? zz["ESPECE"].ToString() : "--").ToLower() == comboBox2.Text.ToLower() &&
@@ -125,21 +129,21 @@ namespace ALBAITAR_Softvet.Resources
                 (zz["SEXE"] != DBNull.Value ? zz["SEXE"].ToString() : "--").ToLower() == comboBox4.Text.ToLower()) &&
                 int.Parse(zz["CLIENT_ID"].ToString()) == (comboBox1.SelectedValue != null ? (int)comboBox1.SelectedValue : -2) &&
                 (!Is_New && dataGridView1.SelectedRows.Count > 0 ? (int)zz["ID"] != (int)dataGridView1.SelectedRows[0].Cells["ID"].Value : true)
-                
+
                 ).ToList().Count();
 
-               
+
                 exist = cntt > 0;
 
-                
+
             }
-            
+
             label13.Visible = exist;
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = String.Format("NME LIKE '%{0}%'", textBox1.Text);
-            
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -153,9 +157,9 @@ namespace ALBAITAR_Softvet.Resources
                 panel2.Visible = comboBox2.Text.Length == 0 || comboBox2.Text == "--";//Espece (Obligé !)
                 panel1.Visible = comboBox4.Text.Length == 0 || comboBox4.Text == "--"; //Sexe (Obligé !)
                 int mm = 0;
-                if (Is_New) {mm= animaux.Rows.Cast<DataRow>().Where(XX => XX["NUM_IDENTIF"].ToString().Length > 0 && (string)XX["NUM_IDENTIF"] == textBox2.Text.Trim().Replace(" ", "")).ToList().Count; }
+                if (Is_New) { mm = animaux.Rows.Cast<DataRow>().Where(XX => XX["NUM_IDENTIF"].ToString().Length > 0 && (string)XX["NUM_IDENTIF"] == textBox2.Text.Trim().Replace(" ", "")).ToList().Count; }
                 else { mm = animaux.Rows.Cast<DataRow>().Where(XX => (int)XX["ID"] != (int)dataGridView1.SelectedRows[0].Cells["ID"].Value && XX["NUM_IDENTIF"].ToString().Length > 0 && (string)XX["NUM_IDENTIF"] == textBox2.Text.Trim().Replace(" ", "")).ToList().Count; }
-             
+
                 if (textBox2.Text.Trim().Replace(" ", "").Length == 0 || mm > 0)
                 {
                     textBox2.BackColor = Color.LightCoral;
@@ -166,8 +170,8 @@ namespace ALBAITAR_Softvet.Resources
                 else
                 {
                     all_ready &= comboBox1.BackColor == SystemColors.Window;
-                    all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;                    
-                    all_ready &= !panel2.Visible;                     
+                    all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+                    all_ready &= !panel2.Visible;
                     all_ready &= !panel1.Visible;
                     if (all_ready && label13.Visible) { all_ready &= MessageBox.Show("Ce animal déja existe pour ce client,\n\nVoulez vous continuer comme meme ?\n\n", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes; }
                     //-------------
@@ -248,14 +252,14 @@ namespace ALBAITAR_Softvet.Resources
                     }
                 }
 
-                
-                
+
+
             }
             else
             {
                 new Non_Autorized_Msg("").ShowDialog();
             }
-            
+
 
         }
 
@@ -295,8 +299,9 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-                Is_New = false;
-                Load_selected_anim_fields();            
+            Is_New = false;
+            Load_selected_anim_fields();
+            load_visites();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -309,14 +314,16 @@ namespace ALBAITAR_Softvet.Resources
             comboBox4.SelectedIndexChanged -= comboBox4_SelectedIndexChanged;
 
             foreach (Control ctrl in tabPage1.Controls)
-            {                
-                if(ctrl.GetType() == typeof(TextBox) || ctrl.GetType() == typeof(MaskedTextBox))
+            {
+                if (ctrl.GetType() == typeof(TextBox) || ctrl.GetType() == typeof(MaskedTextBox))
                 {
                     ctrl.Text = string.Empty;
-                }else if (ctrl.GetType() == typeof(ComboBox) && ((ComboBox)ctrl).DropDownStyle == ComboBoxStyle.DropDownList){
-                    ((ComboBox)ctrl).SelectedIndex= 0;
                 }
-                else if(ctrl.GetType() == typeof(ComboBox))
+                else if (ctrl.GetType() == typeof(ComboBox) && ((ComboBox)ctrl).DropDownStyle == ComboBoxStyle.DropDownList)
+                {
+                    ((ComboBox)ctrl).SelectedIndex = 0;
+                }
+                else if (ctrl.GetType() == typeof(ComboBox))
                 {
                     ((ComboBox)ctrl).SelectedValue = -1;
                 }
@@ -334,7 +341,7 @@ namespace ALBAITAR_Softvet.Resources
             button9.PerformClick();
             button8.Visible = false;
             checkBox1.Checked = checkBox2.Checked = false;
-            label13.Visible=false;
+            label13.Visible = false;
             pictureBox1.Image = Properties.Resources.NOUVEAU;
             if (tabControl1.TabPages.Count > 1) { tabControl1.TabPages.Remove(tabPage2); }
             if (!textBox1.Focused) { textBox3.Select(); }
@@ -342,18 +349,14 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string fff = "";
+            
             if (dataGridView1.SelectedRows.Count > 0)
             {
-
-                dataGridView1.SelectedRows.Cast<DataGridViewRow>().ToList().ForEach(row =>
+                if (MessageBox.Show("Vous étes sures de supprimer [" + dataGridView1.SelectedRows.Count + "] animaux ?\n\nAttention: Tous " + (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " infos associées seront supprimés (Laboratires, Visies, Agenda ...).", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    fff += "," + row.Cells["ID"].Value;
-                });
-
-                fff = fff.Substring(1);
-                if (MessageBox.Show("Vous étes sures de supprimer [" + dataGridView1.SelectedRows.Count + "] animaux ?\n\nAttention: Tous "+ (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " infos associées seront supprimés (Laboratires, Visies, Agenda ...).", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
+                    string fff = "";
+                    dataGridView1.SelectedRows.Cast<DataGridViewRow>().ToList().ForEach(row => fff += "," + row.Cells["ID"].Value );
+                    fff = fff.Substring(1);
                     PreConnection.Excut_Cmd("DELETE FROM tb_animaux WHERE ID IN (" + fff + ");");
                     Load_anims_from_DB();
                 }
@@ -364,7 +367,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if(dataGridView1.Rows.Count > 0)
+            if (dataGridView1.Rows.Count > 0)
             {
                 Excc.Application xcelApp = new Excc.Application();
                 xcelApp.Application.Workbooks.Add(Type.Missing);
@@ -435,14 +438,14 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     t.Cells.Cast<DataGridViewCell>().ToList().ForEach(b =>
                     {
-                        if(xcelApp.Cells[1, b.ColumnIndex + 1].Value == "Propriétaire")
+                        if (xcelApp.Cells[1, b.ColumnIndex + 1].Value == "Propriétaire")
                         {
                             xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? (((DataRow)clients.AsEnumerable().FirstOrDefault(row => row.Field<int>("ID") == (int)dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value))["FULL_NME"]) : "";
                         }
                         else
                         {
-                            xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").Replace("00:00:00","").TrimStart().TrimEnd() : "";
-                        }                        
+                            xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").Replace("00:00:00", "").TrimStart().TrimEnd() : "";
+                        }
                     });
                 });
                 xcelApp.Columns[dataGridView1.Columns["ID"].Index + 1].Delete();
@@ -473,16 +476,17 @@ namespace ALBAITAR_Softvet.Resources
         {
             groupBox1.Visible = checkBox1.Checked;
             //------------------------------
-            if (checkBox1.Checked) {
+            if (checkBox1.Checked)
+            {
                 checkBox1.Location = new Point(groupBox1.Location.X + 160, groupBox1.Location.Y - 20);
                 checkBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             }
             else
-            {                
+            {
                 checkBox1.Location = new Point(14, pictureBox1.Location.Y - 20);
                 checkBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             }
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -492,21 +496,23 @@ namespace ALBAITAR_Softvet.Resources
             comboBox1.Validating -= comboBox1_Validating;
             //clients = PreConnection.Load_data_keeping_duplicates("SELECT ID,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
             clients = PreConnection.Load_data_keeping_duplicates("SELECT *,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
-            comboBox1.DataSource = clients;            
+            comboBox1.DataSource = clients;
             comboBox1.DisplayMember = "FULL_NME";
             comboBox1.ValueMember = "ID";
-            if(clients.Rows.Count > 0) { comboBox1.SelectedValue = (int)clients.AsEnumerable().Max(row => row.Field<int>("ID")); }
+            if (clients.Rows.Count > 0) { comboBox1.SelectedValue = (int)clients.AsEnumerable().Max(row => row.Field<int>("ID")); }
             full_nme_clients.Clear();
-            clients.Rows.Cast<DataRow>().ToList().ForEach(clt => {
+            clients.Rows.Cast<DataRow>().ToList().ForEach(clt =>
+            {
                 full_nme_clients.Add((string)clt["FULL_NME"]);
             });
             comboBox1.Validating += comboBox1_Validating;
         }
 
         private void comboBox1_Validating(object sender, CancelEventArgs e)
-        {            
-            if (comboBox1.Text.Length  > 0 && !full_nme_clients.Contains(comboBox1.Text)) { 
-                comboBox1.BackColor= Color.LightCoral;
+        {
+            if (comboBox1.Text.Length > 0 && !full_nme_clients.Contains(comboBox1.Text))
+            {
+                comboBox1.BackColor = Color.LightCoral;
             }
             verif_if_déja_exist_animal();
         }
@@ -527,7 +533,7 @@ namespace ALBAITAR_Softvet.Resources
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {          
+        {
             panel2.Visible = comboBox2.SelectedIndex == 0;
             if (!button7.Visible)
             {
@@ -539,7 +545,7 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     pictureBox2.Image = null;
                 }
-                
+
             }
             verif_if_déja_exist_animal();
         }
@@ -558,8 +564,8 @@ namespace ALBAITAR_Softvet.Resources
         private void button7_Click(object sender, EventArgs e)
         {
             pictureBox2.Image = null;
-            openFileDialog1.FileName= "";          
-            button7.Visible= false;
+            openFileDialog1.FileName = "";
+            button7.Visible = false;
             comboBox2_SelectedIndexChanged(null, null);
         }
 
@@ -585,14 +591,14 @@ namespace ALBAITAR_Softvet.Resources
         }
 
         private void Animaux_Load(object sender, EventArgs e)
-        {         
+        {
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
                 button4.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20002" && (Int32)QQ[3] == 1).Count() > 0; //Supprimer
                 button3.Visible = button1.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20001" && (Int32)QQ[3] == 1).Count() > 0; //Ajouter Animal                                
-                foreach(Control ctrl in tabPage1.Controls)
+                foreach (Control ctrl in tabPage1.Controls)
                 {
-                    if(ctrl.Name != "button8")
+                    if (ctrl.Name != "button8")
                     {
                         ctrl.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
                     }
@@ -605,7 +611,7 @@ namespace ALBAITAR_Softvet.Resources
         }
 
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
-        {            
+        {
             dateTimePicker1.MaxDate = dateTimePicker3.Value.Date.AddDays(1).AddSeconds(-1);
             dateTimePicker2.MinDate = dateTimePicker3.Value.Date;
         }
@@ -619,7 +625,7 @@ namespace ALBAITAR_Softvet.Resources
                 dt.Columns.Add("PARAM_VAL", typeof(string));
                 //----------------
                 dt.Rows.Add(new object[] { "DATE_ADDED", dateTimePicker3.Value.ToString("dd/MM/yyyy") });
-                dt.Rows.Add(new object[] { "ANIM_NME", textBox3.Text });                
+                dt.Rows.Add(new object[] { "ANIM_NME", textBox3.Text });
                 dt.Rows.Add(new object[] { "ESPECE", comboBox2.Text });
                 dt.Rows.Add(new object[] { "RACE", comboBox3.Text });
                 dt.Rows.Add(new object[] { "SEX", comboBox4.Text });
@@ -633,7 +639,7 @@ namespace ALBAITAR_Softvet.Resources
                 dt.Rows.Add(new object[] { "CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
 
                 DataRow rww = clients.Rows.Cast<DataRow>().Where(FF => (int)FF["ID"] == (int)comboBox1.SelectedValue).FirstOrDefault();
-                dt.Rows.Add(new object[] { "CLIENT_SEX", rww["SEX"] != DBNull.Value ? rww["SEX"].ToString() : null});
+                dt.Rows.Add(new object[] { "CLIENT_SEX", rww["SEX"] != DBNull.Value ? rww["SEX"].ToString() : null });
                 dt.Rows.Add(new object[] { "CLIENT_FAMNME", rww["FAMNME"] != DBNull.Value ? rww["FAMNME"].ToString() : null });
                 dt.Rows.Add(new object[] { "CLIENT_NME", rww["NME"] != DBNull.Value ? rww["NME"].ToString() : null });
                 dt.Rows.Add(new object[] { "CLIENT_NUM_CNI", rww["NUM_CNI"] != DBNull.Value ? rww["NUM_CNI"].ToString() : null });
@@ -644,7 +650,7 @@ namespace ALBAITAR_Softvet.Resources
                 dt.Rows.Add(new object[] { "CLIENT_NUM_PHONE", rww["NUM_PHONE"] != DBNull.Value ? rww["NUM_PHONE"].ToString() : null });
                 dt.Rows.Add(new object[] { "CLIENT_EMAIL", rww["EMAIL"] != DBNull.Value ? rww["EMAIL"].ToString() : null });
 
-                
+
                 //-------------
                 new Print_report("certificat_enreg", dt, null).ShowDialog();
             }
@@ -669,10 +675,10 @@ namespace ALBAITAR_Softvet.Resources
                             vall = string.Concat(DateTime.Now.Millisecond.ToString("D3"), DateTime.Now.ToString("MMMM").Substring(1, 2), int.Parse((DateTime.Now.Minute * DateTime.Now.Second).ToString().Substring(0, (DateTime.Now.Minute * DateTime.Now.Second).ToString().Length > 4 ? 4 : (DateTime.Now.Minute * DateTime.Now.Second).ToString().Length)).ToString("D4"), DateTime.Now.ToString("dddd").Substring(2, 2), DateTime.Now.ToString("yy"), int.Parse((DateTime.Now.Month + DateTime.Now.Millisecond).ToString().Substring(0, (DateTime.Now.Month + DateTime.Now.Millisecond).ToString().Length > 4 ? 4 : (DateTime.Now.Month + DateTime.Now.Millisecond).ToString().Length)).ToString("D4")).ToUpper();
                         }
                     }
-                }                
+                }
                 textBox2.Text = vall;
             }
-            
+
         }
 
         private void textBox2_Enter(object sender, EventArgs e)
@@ -680,7 +686,133 @@ namespace ALBAITAR_Softvet.Resources
             if (!Is_New)
             {
                 MessageBox.Show("Le N° d'identification est trés sensible, il peut etre utilisé précedemment (Certificat d'identification ...)\n\nDonc confirmer bien avant de faire la modification.", "Attention :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }            
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            Is_New_Visite = true;
+            dateTimePicker4.Value = DateTime.Now;
+            comboBox5.Text = comboBox1.Text;
+            richTextBox1.Text = string.Empty;
+            richTextBox1.BackColor = SystemColors.Window;
+            pictureBox3.Image = Properties.Resources.NOUVEAU_003;
+            dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
+            dataGridView2.ClearSelection();
+            dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            richTextBox1.BackColor = richTextBox1.Text.Length > 0 ? SystemColors.Window : Color.LightCoral;
+            if (richTextBox1.BackColor == SystemColors.Window)
+            {
+                if (Is_New_Visite)
+                {
+                    PreConnection.Excut_Cmd("INSERT INTO `tb_visites`"
+                                          + "(`DATETIME`,"
+                                          + "`ANIM_ID`,"
+                                          + "`VISITOR_FULL_NME`,"
+                                          + "`OBJECT`)"
+                                          + "VALUES"
+                                          + "('" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
+                                          + dataGridView1.SelectedRows[0].Cells["ID"].Value + ","
+                                          + "'" + comboBox5.Text + "',"
+                                          + "'" + richTextBox1.Text + "');");
+                }
+                else
+                {
+                    PreConnection.Excut_Cmd("UPDATE `tb_visites` SET "
+                                          + "`DATETIME` = '" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
+                                          + "`VISITOR_FULL_NME` = '" + comboBox5.Text + "',"
+                                          + "`OBJECT` = '" + richTextBox1.Text + "'"
+                                          + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value + ";");
+                }
+                load_visites();
+            }
+        }
+
+        private void load_visites()
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int prev_select = dataGridView2.SelectedRows.Count > 0 ? (int)dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value : -1;
+                DataTable visites = PreConnection.Load_data("SELECT * FROM tb_visites WHERE `ANIM_ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + " ORDER BY DATETIME;");
+                dataGridView2.DataSource = visites;
+                if (dataGridView2.DisplayedRowCount(false) < dataGridView2.RowCount) { dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.Rows.Count - 1; }
+                dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
+                dataGridView2.ClearSelection();
+                if (prev_select > -1)
+                {
+                    DataGridViewRow rww = dataGridView2.Rows.Cast<DataGridViewRow>().Where(ZZ => (int)ZZ.Cells["ID_VISITE"].Value == prev_select).FirstOrDefault();
+                    if (rww != null) { rww.Selected = true; }
+
+                }
+                else if (dataGridView2.Rows.Count > 0)
+                {
+                    int idd_max = dataGridView2.Rows.Cast<DataGridViewRow>().Max(row => Convert.ToInt32(row.Cells["ID_VISITE"].Value));
+                    DataGridViewRow rww = dataGridView2.Rows.Cast<DataGridViewRow>().Where(ZZ => (int)ZZ.Cells["ID_VISITE"].Value == idd_max).FirstOrDefault();
+                    if (rww != null) { rww.Selected = true; }
+                }
+                dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
+                dataGridView2_SelectionChanged(null, null);
+
+            }
+            else
+            {
+                ((DataTable)dataGridView2.DataSource).Rows.Clear();
+            }
+
+        }
+
+        private void dataGridView2_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                Is_New_Visite = false;
+                pictureBox3.Image = Properties.Resources.MODIF_003;
+                DataGridViewRow row = dataGridView2.SelectedRows[0];
+                dateTimePicker4.Value = (DateTime)row.Cells["DATETIME"].Value;
+                comboBox5.Text = (string)row.Cells["VISITOR_FULL_NME"].Value;
+                richTextBox1.Text = (string)row.Cells["OBJECT"].Value;
+                richTextBox1.BackColor = SystemColors.Window;
+            }
+            else
+            {
+                button12_Click(null, null);
+            }
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView2.Rows.Count == 1)
+            {
+                dataGridView2_SelectionChanged(null, null);
+            }
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            richTextBox1.BackColor = SystemColors.Window;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedCells.Count > 0)
+            {
+                if (MessageBox.Show("Vous-étes sur de faire la suppression de (" + dataGridView2.SelectedRows.Count + ") visites ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    string ids = "";
+                    List<int> selected_row_delete_db = new List<int>();
+                    dataGridView2.SelectedRows.Cast<DataGridViewRow>().ForEach(rw => ids += "," + rw.Cells["ID_VISITE"].Value);
+                    if (ids.Length > 0)
+                    {
+                        ids = ids.Substring(1);
+                        PreConnection.Excut_Cmd("DELETE FROM tb_visites WHERE `ID` IN (" + ids + ");");
+                    }
+                    load_visites();
+                }
+            }
         }
     }
 }

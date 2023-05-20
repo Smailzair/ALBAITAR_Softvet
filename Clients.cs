@@ -402,25 +402,21 @@ namespace ALBAITAR_Softvet.Resources
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {
-            string fff = "";
+        {            
             if (dataGridView1.SelectedRows.Count > 0)
             {
-
-                dataGridView1.SelectedRows.Cast<DataGridViewRow>().ToList().ForEach(row =>
-                {
-                    fff += "," + row.Cells["ID"].Value;
-                });
-
-                fff = fff.Substring(1);
-                if (MessageBox.Show("Vous étes sures de supprimer " + (dataGridView1.SelectedRows.Count > 1 ? ("ces [" + dataGridView1.SelectedRows.Count + "] clients ?") : "ce client ?") + "\n\n\nAttention :\nTous " + (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " animaux seront supprimés!\n(Avec tous informations associés (Laboratires, Agenda ...))\n", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
+                string fff = "";
+                dataGridView1.SelectedRows.Cast<DataGridViewRow>().ToList().ForEach(row => fff += "," + row.Cells["ID"].Value);
+                fff = fff.Substring(1);                
+                DataTable dt = PreConnection.Load_data("SELECT SUM(`DEBIT`-`CREDIT`) AS SLLD FROM tb_clients_finance WHERE CLIENT_ID IN (" + fff + ");");                
+                decimal dd = dt.Rows[0][0] != DBNull.Value ? (decimal)dt.Rows[0][0] : 0;
+                string slld = dd != 0 ? "- Il y a des soldes monétiques non réglés !" : "";
+                if (MessageBox.Show("Vous étes sures de supprimer " + (dataGridView1.SelectedRows.Count > 1 ? ("ces [" + dataGridView1.SelectedRows.Count + "] clients ?") : "ce client ?") + "\n\n\nAttention :\n\n"+slld+"\n\n-Tous " + (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " animaux seront supprimés!\n(Avec tous informations associés (Laboratires, Agenda ...))\n", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {                                 
                     PreConnection.Excut_Cmd("DELETE FROM tb_clients WHERE ID IN (" + fff + ");");
                     Load_clients_from_DB();
                 }
-
             }
-
         }
 
         private void button6_Click(object sender, EventArgs e)
