@@ -737,7 +737,78 @@ namespace ALBAITAR_Softvet.Resources
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 int prev_select = dataGridView2.SelectedRows.Count > 0 ? (int)dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value : -1;
-                DataTable visites = PreConnection.Load_data("SELECT * FROM tb_visites WHERE `ANIM_ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + " ORDER BY DATETIME;");
+                DataTable visites = PreConnection.Load_data("SELECT tb1.*,tb2.REF AS 'FACTURE_REF' FROM tb_visites tb1 LEFT JOIN ("
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_01` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_01` IS FALSE AND `ITEM_PROD_CODE_01` IS NOT NULL AND `ITEM_NME_01` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_02` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_02` IS FALSE AND `ITEM_PROD_CODE_02` IS NOT NULL AND `ITEM_NME_02` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_03` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_03` IS FALSE AND `ITEM_PROD_CODE_03` IS NOT NULL AND `ITEM_NME_03` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_04` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_04` IS FALSE AND `ITEM_PROD_CODE_04` IS NOT NULL AND `ITEM_NME_04` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_05` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_05` IS FALSE AND `ITEM_PROD_CODE_05` IS NOT NULL AND `ITEM_NME_05` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_06` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_06` IS FALSE AND `ITEM_PROD_CODE_06` IS NOT NULL AND `ITEM_NME_06` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_07` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_07` IS FALSE AND `ITEM_PROD_CODE_07` IS NOT NULL AND `ITEM_NME_07` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_08` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_08` IS FALSE AND `ITEM_PROD_CODE_08` IS NOT NULL AND `ITEM_NME_08` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_09` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_09` IS FALSE AND `ITEM_PROD_CODE_09` IS NOT NULL AND `ITEM_NME_09` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_10` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_10` IS FALSE AND `ITEM_PROD_CODE_10` IS NOT NULL AND `ITEM_NME_10` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_11` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_11` IS FALSE AND `ITEM_PROD_CODE_11` IS NOT NULL AND `ITEM_NME_11` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_12` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_12` IS FALSE AND `ITEM_PROD_CODE_12` IS NOT NULL AND `ITEM_NME_12` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_13` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_13` IS FALSE AND `ITEM_PROD_CODE_13` IS NOT NULL AND `ITEM_NME_13` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_14` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_14` IS FALSE AND `ITEM_PROD_CODE_14` IS NOT NULL AND `ITEM_NME_14` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_15` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_15` IS FALSE AND `ITEM_PROD_CODE_15` IS NOT NULL AND `ITEM_NME_15` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_16` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_16` IS FALSE AND `ITEM_PROD_CODE_16` IS NOT NULL AND `ITEM_NME_16` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_17` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_17` IS FALSE AND `ITEM_PROD_CODE_17` IS NOT NULL AND `ITEM_NME_17` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_18` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_18` IS FALSE AND `ITEM_PROD_CODE_18` IS NOT NULL AND `ITEM_NME_18` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_19` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_19` IS FALSE AND `ITEM_PROD_CODE_19` IS NOT NULL AND `ITEM_NME_19` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_20` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_20` IS FALSE AND `ITEM_PROD_CODE_20` IS NOT NULL AND `ITEM_NME_20` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_21` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_21` IS FALSE AND `ITEM_PROD_CODE_21` IS NOT NULL AND `ITEM_NME_21` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_22` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_22` IS FALSE AND `ITEM_PROD_CODE_22` IS NOT NULL AND `ITEM_NME_22` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_23` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_23` IS FALSE AND `ITEM_PROD_CODE_23` IS NOT NULL AND `ITEM_NME_23` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_24` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_24` IS FALSE AND `ITEM_PROD_CODE_24` IS NOT NULL AND `ITEM_NME_24` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_25` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_25` IS FALSE AND `ITEM_PROD_CODE_25` IS NOT NULL AND `ITEM_NME_25` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_26` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_26` IS FALSE AND `ITEM_PROD_CODE_26` IS NOT NULL AND `ITEM_NME_26` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_27` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_27` IS FALSE AND `ITEM_PROD_CODE_27` IS NOT NULL AND `ITEM_NME_27` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_28` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_28` IS FALSE AND `ITEM_PROD_CODE_28` IS NOT NULL AND `ITEM_NME_28` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_29` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_29` IS FALSE AND `ITEM_PROD_CODE_29` IS NOT NULL AND `ITEM_NME_29` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_30` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_30` IS FALSE AND `ITEM_PROD_CODE_30` IS NOT NULL AND `ITEM_NME_30` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_31` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_31` IS FALSE AND `ITEM_PROD_CODE_31` IS NOT NULL AND `ITEM_NME_31` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_32` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_32` IS FALSE AND `ITEM_PROD_CODE_32` IS NOT NULL AND `ITEM_NME_32` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_33` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_33` IS FALSE AND `ITEM_PROD_CODE_33` IS NOT NULL AND `ITEM_NME_33` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_34` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_34` IS FALSE AND `ITEM_PROD_CODE_34` IS NOT NULL AND `ITEM_NME_34` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_35` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_35` IS FALSE AND `ITEM_PROD_CODE_35` IS NOT NULL AND `ITEM_NME_35` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_36` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_36` IS FALSE AND `ITEM_PROD_CODE_36` IS NOT NULL AND `ITEM_NME_36` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_37` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_37` IS FALSE AND `ITEM_PROD_CODE_37` IS NOT NULL AND `ITEM_NME_37` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_38` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_38` IS FALSE AND `ITEM_PROD_CODE_38` IS NOT NULL AND `ITEM_NME_38` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_39` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_39` IS FALSE AND `ITEM_PROD_CODE_39` IS NOT NULL AND `ITEM_NME_39` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_40` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_40` IS FALSE AND `ITEM_PROD_CODE_40` IS NOT NULL AND `ITEM_NME_40` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_41` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_41` IS FALSE AND `ITEM_PROD_CODE_41` IS NOT NULL AND `ITEM_NME_41` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_42` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_42` IS FALSE AND `ITEM_PROD_CODE_42` IS NOT NULL AND `ITEM_NME_42` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_43` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_43` IS FALSE AND `ITEM_PROD_CODE_43` IS NOT NULL AND `ITEM_NME_43` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_44` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_44` IS FALSE AND `ITEM_PROD_CODE_44` IS NOT NULL AND `ITEM_NME_44` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_45` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_45` IS FALSE AND `ITEM_PROD_CODE_45` IS NOT NULL AND `ITEM_NME_45` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_46` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_46` IS FALSE AND `ITEM_PROD_CODE_46` IS NOT NULL AND `ITEM_NME_46` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_47` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_47` IS FALSE AND `ITEM_PROD_CODE_47` IS NOT NULL AND `ITEM_NME_47` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_48` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_48` IS FALSE AND `ITEM_PROD_CODE_48` IS NOT NULL AND `ITEM_NME_48` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_49` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_49` IS FALSE AND `ITEM_PROD_CODE_49` IS NOT NULL AND `ITEM_NME_49` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_50` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_50` IS FALSE AND `ITEM_PROD_CODE_50` IS NOT NULL AND `ITEM_NME_50` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_51` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_51` IS FALSE AND `ITEM_PROD_CODE_51` IS NOT NULL AND `ITEM_NME_51` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_52` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_52` IS FALSE AND `ITEM_PROD_CODE_52` IS NOT NULL AND `ITEM_NME_52` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_53` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_53` IS FALSE AND `ITEM_PROD_CODE_53` IS NOT NULL AND `ITEM_NME_53` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_54` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_54` IS FALSE AND `ITEM_PROD_CODE_54` IS NOT NULL AND `ITEM_NME_54` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_55` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_55` IS FALSE AND `ITEM_PROD_CODE_55` IS NOT NULL AND `ITEM_NME_55` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_56` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_56` IS FALSE AND `ITEM_PROD_CODE_56` IS NOT NULL AND `ITEM_NME_56` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_57` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_57` IS FALSE AND `ITEM_PROD_CODE_57` IS NOT NULL AND `ITEM_NME_57` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_58` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_58` IS FALSE AND `ITEM_PROD_CODE_58` IS NOT NULL AND `ITEM_NME_58` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_59` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_59` IS FALSE AND `ITEM_PROD_CODE_59` IS NOT NULL AND `ITEM_NME_59` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_60` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_60` IS FALSE AND `ITEM_PROD_CODE_60` IS NOT NULL AND `ITEM_NME_60` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_61` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_61` IS FALSE AND `ITEM_PROD_CODE_61` IS NOT NULL AND `ITEM_NME_61` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_62` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_62` IS FALSE AND `ITEM_PROD_CODE_62` IS NOT NULL AND `ITEM_NME_62` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_63` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_63` IS FALSE AND `ITEM_PROD_CODE_63` IS NOT NULL AND `ITEM_NME_63` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_64` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_64` IS FALSE AND `ITEM_PROD_CODE_64` IS NOT NULL AND `ITEM_NME_64` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_65` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_65` IS FALSE AND `ITEM_PROD_CODE_65` IS NOT NULL AND `ITEM_NME_65` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_66` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_66` IS FALSE AND `ITEM_PROD_CODE_66` IS NOT NULL AND `ITEM_NME_66` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_67` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_67` IS FALSE AND `ITEM_PROD_CODE_67` IS NOT NULL AND `ITEM_NME_67` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_68` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_68` IS FALSE AND `ITEM_PROD_CODE_68` IS NOT NULL AND `ITEM_NME_68` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_69` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_69` IS FALSE AND `ITEM_PROD_CODE_69` IS NOT NULL AND `ITEM_NME_69` IS NOT NULL UNION "
+                                                          + "SELECT `REF`,`ITEM_PROD_CODE_70` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_70` IS FALSE AND `ITEM_PROD_CODE_70` IS NOT NULL AND `ITEM_NME_70` IS NOT NULL "
+                                    + ") tb2 ON tb1.`ID` = tb2.`VISIT` WHERE tb1.`ANIM_ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + " ORDER BY DATETIME;");
                 dataGridView2.DataSource = visites;
                 if (dataGridView2.DisplayedRowCount(false) < dataGridView2.RowCount) { dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.Rows.Count - 1; }
                 dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
@@ -802,14 +873,97 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (MessageBox.Show("Vous-étes sur de faire la suppression de (" + dataGridView2.SelectedRows.Count + ") visites ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
+                    string fact_ref = "";
                     string ids = "";
                     List<int> selected_row_delete_db = new List<int>();
-                    dataGridView2.SelectedRows.Cast<DataGridViewRow>().ForEach(rw => ids += "," + rw.Cells["ID_VISITE"].Value);
+                    dataGridView2.SelectedRows.Cast<DataGridViewRow>().ForEach(rw => { ids += "," + rw.Cells["ID_VISITE"].Value;
+                        if (rw.Cells["FACTURE_REF"].Value != DBNull.Value)
+                        {
+                            fact_ref += ",'" + rw.Cells["FACTURE_REF"].Value + "'";
+                        }
+                    });
                     if (ids.Length > 0)
                     {
                         ids = ids.Substring(1);
                         PreConnection.Excut_Cmd("DELETE FROM tb_visites WHERE `ID` IN (" + ids + ");");
+                        //-----------
+                        if (fact_ref.Length > 0)
+                        {
+                            PreConnection.Excut_Cmd("UPDATE tb_factures_vente SET "
+                                                     + "`ITEM_PROD_CODE_01` = IF(`ITEM_IS_PROD_01` = FALSE AND `ITEM_PROD_CODE_01` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_01`),"
+                                                    + "`ITEM_PROD_CODE_02` = IF(`ITEM_IS_PROD_02` = FALSE AND `ITEM_PROD_CODE_02` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_02`),"
+                                                    + "`ITEM_PROD_CODE_03` = IF(`ITEM_IS_PROD_03` = FALSE AND `ITEM_PROD_CODE_03` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_03`),"
+                                                    + "`ITEM_PROD_CODE_04` = IF(`ITEM_IS_PROD_04` = FALSE AND `ITEM_PROD_CODE_04` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_04`),"
+                                                    + "`ITEM_PROD_CODE_05` = IF(`ITEM_IS_PROD_05` = FALSE AND `ITEM_PROD_CODE_05` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_05`),"
+                                                    + "`ITEM_PROD_CODE_06` = IF(`ITEM_IS_PROD_06` = FALSE AND `ITEM_PROD_CODE_06` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_06`),"
+                                                    + "`ITEM_PROD_CODE_07` = IF(`ITEM_IS_PROD_07` = FALSE AND `ITEM_PROD_CODE_07` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_07`),"
+                                                    + "`ITEM_PROD_CODE_08` = IF(`ITEM_IS_PROD_08` = FALSE AND `ITEM_PROD_CODE_08` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_08`),"
+                                                    + "`ITEM_PROD_CODE_09` = IF(`ITEM_IS_PROD_09` = FALSE AND `ITEM_PROD_CODE_09` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_09`),"
+                                                    + "`ITEM_PROD_CODE_10` = IF(`ITEM_IS_PROD_10` = FALSE AND `ITEM_PROD_CODE_10` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_10`),"
+                                                    + "`ITEM_PROD_CODE_11` = IF(`ITEM_IS_PROD_11` = FALSE AND `ITEM_PROD_CODE_11` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_11`),"
+                                                    + "`ITEM_PROD_CODE_12` = IF(`ITEM_IS_PROD_12` = FALSE AND `ITEM_PROD_CODE_12` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_12`),"
+                                                    + "`ITEM_PROD_CODE_13` = IF(`ITEM_IS_PROD_13` = FALSE AND `ITEM_PROD_CODE_13` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_13`),"
+                                                    + "`ITEM_PROD_CODE_14` = IF(`ITEM_IS_PROD_14` = FALSE AND `ITEM_PROD_CODE_14` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_14`),"
+                                                    + "`ITEM_PROD_CODE_15` = IF(`ITEM_IS_PROD_15` = FALSE AND `ITEM_PROD_CODE_15` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_15`),"
+                                                    + "`ITEM_PROD_CODE_16` = IF(`ITEM_IS_PROD_16` = FALSE AND `ITEM_PROD_CODE_16` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_16`),"
+                                                    + "`ITEM_PROD_CODE_17` = IF(`ITEM_IS_PROD_17` = FALSE AND `ITEM_PROD_CODE_17` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_17`),"
+                                                    + "`ITEM_PROD_CODE_18` = IF(`ITEM_IS_PROD_18` = FALSE AND `ITEM_PROD_CODE_18` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_18`),"
+                                                    + "`ITEM_PROD_CODE_19` = IF(`ITEM_IS_PROD_19` = FALSE AND `ITEM_PROD_CODE_19` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_19`),"
+                                                    + "`ITEM_PROD_CODE_20` = IF(`ITEM_IS_PROD_20` = FALSE AND `ITEM_PROD_CODE_20` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_20`),"
+                                                    + "`ITEM_PROD_CODE_21` = IF(`ITEM_IS_PROD_21` = FALSE AND `ITEM_PROD_CODE_21` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_21`),"
+                                                    + "`ITEM_PROD_CODE_22` = IF(`ITEM_IS_PROD_22` = FALSE AND `ITEM_PROD_CODE_22` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_22`),"
+                                                    + "`ITEM_PROD_CODE_23` = IF(`ITEM_IS_PROD_23` = FALSE AND `ITEM_PROD_CODE_23` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_23`),"
+                                                    + "`ITEM_PROD_CODE_24` = IF(`ITEM_IS_PROD_24` = FALSE AND `ITEM_PROD_CODE_24` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_24`),"
+                                                    + "`ITEM_PROD_CODE_25` = IF(`ITEM_IS_PROD_25` = FALSE AND `ITEM_PROD_CODE_25` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_25`),"
+                                                    + "`ITEM_PROD_CODE_26` = IF(`ITEM_IS_PROD_26` = FALSE AND `ITEM_PROD_CODE_26` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_26`),"
+                                                    + "`ITEM_PROD_CODE_27` = IF(`ITEM_IS_PROD_27` = FALSE AND `ITEM_PROD_CODE_27` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_27`),"
+                                                    + "`ITEM_PROD_CODE_28` = IF(`ITEM_IS_PROD_28` = FALSE AND `ITEM_PROD_CODE_28` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_28`),"
+                                                    + "`ITEM_PROD_CODE_29` = IF(`ITEM_IS_PROD_29` = FALSE AND `ITEM_PROD_CODE_29` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_29`),"
+                                                    + "`ITEM_PROD_CODE_30` = IF(`ITEM_IS_PROD_30` = FALSE AND `ITEM_PROD_CODE_30` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_30`),"
+                                                    + "`ITEM_PROD_CODE_31` = IF(`ITEM_IS_PROD_31` = FALSE AND `ITEM_PROD_CODE_31` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_31`),"
+                                                    + "`ITEM_PROD_CODE_32` = IF(`ITEM_IS_PROD_32` = FALSE AND `ITEM_PROD_CODE_32` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_32`),"
+                                                    + "`ITEM_PROD_CODE_33` = IF(`ITEM_IS_PROD_33` = FALSE AND `ITEM_PROD_CODE_33` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_33`),"
+                                                    + "`ITEM_PROD_CODE_34` = IF(`ITEM_IS_PROD_34` = FALSE AND `ITEM_PROD_CODE_34` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_34`),"
+                                                    + "`ITEM_PROD_CODE_35` = IF(`ITEM_IS_PROD_35` = FALSE AND `ITEM_PROD_CODE_35` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_35`),"
+                                                    + "`ITEM_PROD_CODE_36` = IF(`ITEM_IS_PROD_36` = FALSE AND `ITEM_PROD_CODE_36` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_36`),"
+                                                    + "`ITEM_PROD_CODE_37` = IF(`ITEM_IS_PROD_37` = FALSE AND `ITEM_PROD_CODE_37` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_37`),"
+                                                    + "`ITEM_PROD_CODE_38` = IF(`ITEM_IS_PROD_38` = FALSE AND `ITEM_PROD_CODE_38` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_38`),"
+                                                    + "`ITEM_PROD_CODE_39` = IF(`ITEM_IS_PROD_39` = FALSE AND `ITEM_PROD_CODE_39` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_39`),"
+                                                    + "`ITEM_PROD_CODE_40` = IF(`ITEM_IS_PROD_40` = FALSE AND `ITEM_PROD_CODE_40` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_40`),"
+                                                    + "`ITEM_PROD_CODE_41` = IF(`ITEM_IS_PROD_41` = FALSE AND `ITEM_PROD_CODE_41` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_41`),"
+                                                    + "`ITEM_PROD_CODE_42` = IF(`ITEM_IS_PROD_42` = FALSE AND `ITEM_PROD_CODE_42` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_42`),"
+                                                    + "`ITEM_PROD_CODE_43` = IF(`ITEM_IS_PROD_43` = FALSE AND `ITEM_PROD_CODE_43` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_43`),"
+                                                    + "`ITEM_PROD_CODE_44` = IF(`ITEM_IS_PROD_44` = FALSE AND `ITEM_PROD_CODE_44` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_44`),"
+                                                    + "`ITEM_PROD_CODE_45` = IF(`ITEM_IS_PROD_45` = FALSE AND `ITEM_PROD_CODE_45` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_45`),"
+                                                    + "`ITEM_PROD_CODE_46` = IF(`ITEM_IS_PROD_46` = FALSE AND `ITEM_PROD_CODE_46` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_46`),"
+                                                    + "`ITEM_PROD_CODE_47` = IF(`ITEM_IS_PROD_47` = FALSE AND `ITEM_PROD_CODE_47` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_47`),"
+                                                    + "`ITEM_PROD_CODE_48` = IF(`ITEM_IS_PROD_48` = FALSE AND `ITEM_PROD_CODE_48` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_48`),"
+                                                    + "`ITEM_PROD_CODE_49` = IF(`ITEM_IS_PROD_49` = FALSE AND `ITEM_PROD_CODE_49` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_49`),"
+                                                    + "`ITEM_PROD_CODE_50` = IF(`ITEM_IS_PROD_50` = FALSE AND `ITEM_PROD_CODE_50` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_50`),"
+                                                    + "`ITEM_PROD_CODE_51` = IF(`ITEM_IS_PROD_51` = FALSE AND `ITEM_PROD_CODE_51` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_51`),"
+                                                    + "`ITEM_PROD_CODE_52` = IF(`ITEM_IS_PROD_52` = FALSE AND `ITEM_PROD_CODE_52` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_52`),"
+                                                    + "`ITEM_PROD_CODE_53` = IF(`ITEM_IS_PROD_53` = FALSE AND `ITEM_PROD_CODE_53` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_53`),"
+                                                    + "`ITEM_PROD_CODE_54` = IF(`ITEM_IS_PROD_54` = FALSE AND `ITEM_PROD_CODE_54` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_54`),"
+                                                    + "`ITEM_PROD_CODE_55` = IF(`ITEM_IS_PROD_55` = FALSE AND `ITEM_PROD_CODE_55` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_55`),"
+                                                    + "`ITEM_PROD_CODE_56` = IF(`ITEM_IS_PROD_56` = FALSE AND `ITEM_PROD_CODE_56` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_56`),"
+                                                    + "`ITEM_PROD_CODE_57` = IF(`ITEM_IS_PROD_57` = FALSE AND `ITEM_PROD_CODE_57` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_57`),"
+                                                    + "`ITEM_PROD_CODE_58` = IF(`ITEM_IS_PROD_58` = FALSE AND `ITEM_PROD_CODE_58` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_58`),"
+                                                    + "`ITEM_PROD_CODE_59` = IF(`ITEM_IS_PROD_59` = FALSE AND `ITEM_PROD_CODE_59` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_59`),"
+                                                    + "`ITEM_PROD_CODE_60` = IF(`ITEM_IS_PROD_60` = FALSE AND `ITEM_PROD_CODE_60` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_60`),"
+                                                    + "`ITEM_PROD_CODE_61` = IF(`ITEM_IS_PROD_61` = FALSE AND `ITEM_PROD_CODE_61` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_61`),"
+                                                    + "`ITEM_PROD_CODE_62` = IF(`ITEM_IS_PROD_62` = FALSE AND `ITEM_PROD_CODE_62` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_62`),"
+                                                    + "`ITEM_PROD_CODE_63` = IF(`ITEM_IS_PROD_63` = FALSE AND `ITEM_PROD_CODE_63` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_63`),"
+                                                    + "`ITEM_PROD_CODE_64` = IF(`ITEM_IS_PROD_64` = FALSE AND `ITEM_PROD_CODE_64` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_64`),"
+                                                    + "`ITEM_PROD_CODE_65` = IF(`ITEM_IS_PROD_65` = FALSE AND `ITEM_PROD_CODE_65` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_65`),"
+                                                    + "`ITEM_PROD_CODE_66` = IF(`ITEM_IS_PROD_66` = FALSE AND `ITEM_PROD_CODE_66` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_66`),"
+                                                    + "`ITEM_PROD_CODE_67` = IF(`ITEM_IS_PROD_67` = FALSE AND `ITEM_PROD_CODE_67` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_67`),"
+                                                    + "`ITEM_PROD_CODE_68` = IF(`ITEM_IS_PROD_68` = FALSE AND `ITEM_PROD_CODE_68` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_68`),"
+                                                    + "`ITEM_PROD_CODE_69` = IF(`ITEM_IS_PROD_69` = FALSE AND `ITEM_PROD_CODE_69` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_69`),"
+                                                    + "`ITEM_PROD_CODE_70` = IF(`ITEM_IS_PROD_70` = FALSE AND `ITEM_PROD_CODE_70` IN ("+ ids + "), NULL, `ITEM_PROD_CODE_70`)"
+                                + ";");
+                        }
                     }
+                    
                     load_visites();
                 }
             }
