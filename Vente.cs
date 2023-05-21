@@ -28,6 +28,7 @@ namespace ALBAITAR_Softvet.Resources
         bool Is_New = true;
         bool Transf_also_caisse = false;
         static public int tmp_current_client_id = -1;
+        bool has_asked_for_Transf_also_caisse = false;
 
         public Vente()
         {
@@ -99,6 +100,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             Is_New = true;
             Transf_also_caisse = false;
+            has_asked_for_Transf_also_caisse = false;
             pictureBox2.Image = Properties.Resources.NOUVEAU_003;
             stock_to_modify.Rows.Clear();
             selected_item = new DataGridViewRow();
@@ -125,6 +127,15 @@ namespace ALBAITAR_Softvet.Resources
             checkBox1.Checked = Properties.Settings.Default.Faire_reg_espece_facture_vente;
             numericUpDown2.Value = 0;
             button5.Visible = false;
+            //---------
+            if (comboBox1.SelectedValue != null)
+            {
+                groupBox3.Enabled = int.TryParse(comboBox1.SelectedValue.ToString(), out int yy) ? (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text).ToList().Count > 0 ? true : false) : false;
+            }
+            else
+            {
+                groupBox3.Enabled = false;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -289,7 +300,7 @@ namespace ALBAITAR_Softvet.Resources
                         cmmd2 += "," + (row.Cells["TYPE"].Value.ToString() == "Produit" ? 1 : 0);
 
                         //cmmd2 += "," + (row.Cells["TYPE"].Value.ToString() == "Produit" ? "'" + row.Cells["PRODUCT_CODE"].Value.ToString() + "'" : "NULL");
-                        cmmd2 += "," + (row.Cells["PRODUCT_CODE"].Value != DBNull.Value ? (row.Cells["PRODUCT_CODE"].Value.ToString().Trim().Length > 0 ?  "'" + row.Cells["PRODUCT_CODE"].Value.ToString() + "'" : "NULL") : "NULL");
+                        cmmd2 += "," + (row.Cells["PRODUCT_CODE"].Value != DBNull.Value ? (row.Cells["PRODUCT_CODE"].Value.ToString().Trim().Length > 0 ?  "'" + row.Cells["PRODUCT_CODE"].Value.ToString().Replace("'", "''") + "'" : "NULL") : "NULL");
 
                         cmmd2 += "," + row.Cells["PRIX_UNIT"].Value.ToString();
                     }
@@ -310,10 +321,10 @@ namespace ALBAITAR_Softvet.Resources
                                           + "VALUES"
                                           + "(" + comboBox1.SelectedValue + ","
                                           + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
-                                          + "'Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "]',"
+                                          + "'Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "]',"
                                           + dataGridView3.Rows[3].Cells[1].Value + ","
                                           + numericUpDown2.Value + ","
-                                          + "'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "');");
+                                          + "'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "');");
                     }
                     //---------------------------
                 }
@@ -336,8 +347,8 @@ namespace ALBAITAR_Softvet.Resources
                     string cmmd = "UPDATE `tb_factures_vente` SET "
                             + "`DATE` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
                             + "`CLIENT_ID` = " + (comboBox1.SelectedValue != null ? (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text).ToList().Count > 0 ? comboBox1.SelectedValue : "NULL") : "NULL") + ","
-                            + "`CLIENT_FULL_NME` = '" + comboBox1.Text + "',"
-                            + "`REF` = '" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) + "',"
+                            + "`CLIENT_FULL_NME` = '" + comboBox1.Text.Replace("'", "''") + "',"
+                            + "`REF` = '" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''")) + "',"
                             + "`TVA_PERC` = " + dataGridView3.Rows[1].Cells[1].Value + ","
                             + "`DROIT_TIMBRE` = " + dataGridView3.Rows[2].Cells[1].Value + ","
                             + "`TOTAL_HT` = " + dataGridView3.Rows[0].Cells[1].Value + ","
@@ -349,7 +360,7 @@ namespace ALBAITAR_Softvet.Resources
                         cmmd += ",`ITEM_IS_PROD_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "` = " + (row.Cells["TYPE"].Value.ToString() == "Produit" ? 1 : 0);
 
                         //cmmd += ",`ITEM_PROD_CODE_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "` = " + (row.Cells["TYPE"].Value.ToString() == "Produit" ? "'" + row.Cells["PRODUCT_CODE"].Value.ToString() + "'" : "NULL");
-                        cmmd += ",`ITEM_PROD_CODE_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "` = " + (row.Cells["PRODUCT_CODE"].Value != DBNull.Value ? (row.Cells["PRODUCT_CODE"].Value.ToString().Trim().Length > 0 ?  "'" + row.Cells["PRODUCT_CODE"].Value.ToString() + "'" : "NULL") : "NULL");
+                        cmmd += ",`ITEM_PROD_CODE_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "` = " + (row.Cells["PRODUCT_CODE"].Value != DBNull.Value ? (row.Cells["PRODUCT_CODE"].Value.ToString().Trim().Length > 0 ?  "'" + row.Cells["PRODUCT_CODE"].Value.ToString().Replace("'", "''") + "'" : "NULL") : "NULL");
 
                         cmmd += ",`ITEM_PRIX_UNIT_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "` = " + row.Cells["PRIX_UNIT"].Value.ToString();
                         //----------------
@@ -361,7 +372,7 @@ namespace ALBAITAR_Softvet.Resources
                     //RMQ : il y a un trigger MySQL pour modifier quelques infos.
                     bool ttm = comboBox1.SelectedValue == dataGridView1.SelectedRows[0].Cells["CLIENT_ID"].Value;
                     bool ttm2 = !ttm ? comboBox1.Text == (dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value != DBNull.Value ? (string)dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value : "") : ttm;
-                    int cb1_selected_value = comboBox1.SelectedValue == DBNull.Value ? -1 : (((comboBox1.SelectedValue == dataGridView1.SelectedRows[0].Cells["CLIENT_ID"].Value && comboBox1.Text == dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value.ToString()) || (clients.AsEnumerable().Where(row => row.Field<int>("ID") == (int)comboBox1.SelectedValue && row.Field<string>("FULL_NME") == comboBox1.Text).Count() > 0)) ? (int)comboBox1.SelectedValue : -1);
+                    int cb1_selected_value = comboBox1.SelectedValue == null ? -1 : (comboBox1.SelectedValue == DBNull.Value ? -1 : (((comboBox1.SelectedValue == dataGridView1.SelectedRows[0].Cells["CLIENT_ID"].Value && comboBox1.Text == dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value.ToString()) || (clients.AsEnumerable().Where(row => row.Field<int>("ID") == (int)comboBox1.SelectedValue && row.Field<string>("FULL_NME") == comboBox1.Text).Count() > 0)) ? (int)comboBox1.SelectedValue : -1));
                     int old_clt_id = dataGridView1.SelectedRows[0].Cells["CLIENT_ID"].Value == DBNull.Value ? -1 : (int)dataGridView1.SelectedRows[0].Cells["CLIENT_ID"].Value;
                     if (!ttm2) //Client était changé
                     {
@@ -376,12 +387,12 @@ namespace ALBAITAR_Softvet.Resources
                                                     "`CLIENT_ID`=" + cb1_selected_value + "," +
                                                     "`DEBIT`=" + dataGridView3.Rows[3].Cells[1].Value + "," +
                                                     "`CREDIT`=" + numericUpDown2.Value +
-                                                    " WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "';");
+                                                    " WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "';");
 
                                 }
                                 else if (cb1_selected_value == -1)
                                 {
-                                    PreConnection.Excut_Cmd("DELETE FROM tb_clients_finance WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "';");
+                                    PreConnection.Excut_Cmd("DELETE FROM tb_clients_finance WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "';");
                                 }
                             }
                             else
@@ -398,7 +409,7 @@ namespace ALBAITAR_Softvet.Resources
                                      + "VALUES"
                                      + "(" + cb1_selected_value + ","
                                      + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
-                                     + "'Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "]',"
+                                     + "'Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "]',"
                                      + dataGridView3.Rows[3].Cells[1].Value + ","
                                      + numericUpDown2.Value + ","
                                      + "'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "');");
@@ -413,7 +424,7 @@ namespace ALBAITAR_Softvet.Resources
                                                     "`OBJECT`=CONCAT(`OBJECT`,'(Annulé)')," +
                                                     "`DEBIT`=0," +
                                                     "`FACT_NUM`=NULL" +
-                                                    " WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "';");
+                                                    " WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "';");
                                 
                             }
 
@@ -429,10 +440,10 @@ namespace ALBAITAR_Softvet.Resources
                                  + "VALUES"
                                  + "(" + cb1_selected_value + ","
                                  + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
-                                 + "'Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "]',"
+                                 + "'Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "]',"
                                  + dataGridView3.Rows[3].Cells[1].Value + ","
                                  + numericUpDown2.Value + ","
-                                 + "'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "');");
+                                 + "'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "');");
                             }
                         }
                     }
@@ -444,7 +455,7 @@ namespace ALBAITAR_Softvet.Resources
                             "`OP_DATE`='" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," +
                             "`DEBIT`=" + dataGridView3.Rows[3].Cells[1].Value + "," +
                             "`CREDIT`=" + numericUpDown2.Value +
-                            " WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "';");
+                            " WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "';");
                         }
                     }
                     //---------------------------
@@ -469,11 +480,11 @@ namespace ALBAITAR_Softvet.Resources
                                             + "`OBSERV`)"
                                             + "VALUES"
                                             + "('" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
-                                            + "(SELECT `ID` FROM tb_produits WHERE `CODE` LIKE '" + group.First()["PROD_CODE"] + "' LIMIT 1),"//PROD_ID
+                                            + "(SELECT `ID` FROM tb_produits WHERE `CODE` LIKE '" + group.First()["PROD_CODE"].ToString().Replace("'", "''") + "' LIMIT 1),"//PROD_ID
                                             + (sumSLD < 0 ? sumSLD * -1 : 0) + ","//QNT_IN
                                             + (sumSLD > 0 ? sumSLD : 0) + "," //QNT_OUT
-                                            + "'Vente (Facture [" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) + "]) -" + (Is_New ? "Crée" : "Modifiée") + "-') "  //OBSERV
-                                            + "WHERE (SELECT COUNT(`CODE`) FROM tb_produits WHERE `CODE` LIKE '" + group.First()["PROD_CODE"] + "') > 0"
+                                            + "'Vente (Facture [" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''")) + "]) -" + (Is_New ? "Crée" : "Modifiée") + "-') "  //OBSERV
+                                            + "WHERE (SELECT COUNT(`CODE`) FROM tb_produits WHERE `CODE` LIKE '" + group.First()["PROD_CODE"].ToString().Replace("'", "''") + "') > 0"
                                             + ";");
                         }
                     }
@@ -528,13 +539,14 @@ namespace ALBAITAR_Softvet.Resources
         {
             verif_ref_exist();
         }
-
+        
         private void comboBox1_TextUpdate(object sender, EventArgs e)
         {
             comboBox1.BackColor = SystemColors.Window;
-            if (!Is_New && numericUpDown2.Value != 0)
+            if (!Is_New && numericUpDown2.Value != 0 && !has_asked_for_Transf_also_caisse)
             {
-                Transf_also_caisse = MessageBox.Show("Voulez-vous rendre le montant " + ((decimal)Selected_facture_old_infos.Rows[0]["SLD_REG_FAC"]).ToString("N2") + " DA au " + dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value + " -qu'il a payé precedement- ?", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+                has_asked_for_Transf_also_caisse = true;
+                Transf_also_caisse = MessageBox.Show("Voulez-vous rendre le montant " + ((decimal)Selected_facture_old_infos.Rows[0]["SLD_REG_FAC"]).ToString("N2") + " DA au " + dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value + " -qu'il a payé precedement- ?", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
             }
             if (comboBox1.SelectedValue != null)
             {
@@ -551,6 +563,7 @@ namespace ALBAITAR_Softvet.Resources
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 Is_New = false;
+                
                 pictureBox2.Image = Properties.Resources.MODIF_003;
                 stock_to_modify.Rows.Clear();
                 selected_item = new DataGridViewRow();
@@ -559,7 +572,9 @@ namespace ALBAITAR_Softvet.Resources
                 button5.Visible = false;
                 numericUpDown2.Value = 0;
                 Transf_also_caisse = false;
+                has_asked_for_Transf_also_caisse = false;
                 visite_to_update_fact_num = new List<int>();
+                comboBox1.SelectedValue = DBNull    .Value;
                 //-------------------
                 //DataTable data = PreConnection.Load_data("SELECT * FROM tb_factures_vente WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
                 Selected_facture_old_infos = PreConnection.Load_data("SELECT tb1.*,tb2.SLD_REG_FAC FROM tb_factures_vente tb1 LEFT JOIN (SELECT `FACT_NUM`,`CREDIT` AS SLD_REG_FAC FROM tb_clients_finance) tb2 ON tb2.`FACT_NUM` LIKE tb1.`REF` WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
@@ -571,9 +586,17 @@ namespace ALBAITAR_Softvet.Resources
                         int ref_num = int.Parse(Selected_facture_old_infos.Rows[0]["REF"].ToString().Substring(8));
                         numericUpDown1.Value = ref_num;
                         dateTimePicker2.Value = new DateTime(ref_year, 1, 1);
-                        dateTimePicker1.Value = (DateTime)Selected_facture_old_infos.Rows[0]["DATE"];
-                        comboBox1.SelectedValue = Selected_facture_old_infos.Rows[0]["CLIENT_ID"] != DBNull.Value ? Selected_facture_old_infos.Rows[0]["CLIENT_ID"] : DBNull.Value;
-                        if (comboBox1.Text == string.Empty) { comboBox1.Text = Selected_facture_old_infos.Rows[0]["CLIENT_FULL_NME"].ToString(); }
+                        dateTimePicker1.Value = (DateTime)Selected_facture_old_infos.Rows[0]["DATE"];                        
+                        if(Selected_facture_old_infos.Rows[0]["CLIENT_ID"] != DBNull.Value)
+                        {
+                            comboBox1.SelectedValue = (int)Selected_facture_old_infos.Rows[0]["CLIENT_ID"];
+                        }
+                        else
+                        {
+                            comboBox1.Text = Selected_facture_old_infos.Rows[0]["CLIENT_FULL_NME"].ToString();
+                        }
+                        //comboBox1.SelectedValue = Selected_facture_old_infos.Rows[0]["CLIENT_ID"] != DBNull.Value ? Selected_facture_old_infos.Rows[0]["CLIENT_ID"] : DBNull.Value;
+                        //if (comboBox1.Text == string.Empty) { comboBox1.Text = Selected_facture_old_infos.Rows[0]["CLIENT_FULL_NME"].ToString(); }
                         checkBox1.CheckedChanged -= checkBox1_CheckedChanged;
                         checkBox1.Checked = Selected_facture_old_infos.Rows[0]["DROIT_TIMBRE"] != DBNull.Value ? ((decimal)Selected_facture_old_infos.Rows[0]["DROIT_TIMBRE"] > 0) : false;
                         checkBox1.CheckedChanged += checkBox1_CheckedChanged;
@@ -611,7 +634,15 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     button3.PerformClick();
                 }
-
+                //---------------------------
+                if (comboBox1.SelectedValue != null)
+                {
+                    groupBox3.Enabled = int.TryParse(comboBox1.SelectedValue.ToString(), out int yy) ? (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text).ToList().Count > 0 ? true : false) : false;
+                }
+                else
+                {
+                    groupBox3.Enabled = false;
+                }
             }
             else
             {
@@ -678,7 +709,7 @@ namespace ALBAITAR_Softvet.Resources
             comboBox1.BackColor = SystemColors.Window;
             if (!Is_New && numericUpDown2.Value != 0)
             {
-                Transf_also_caisse = MessageBox.Show("Voulez-vous rendre le montant " + ((decimal)Selected_facture_old_infos.Rows[0]["SLD_REG_FAC"]).ToString("N2") + " DA au " + dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value + " -qu'il a payé precedement- ?", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+                Transf_also_caisse = MessageBox.Show("Voulez-vous rendre le montant " + ((decimal)Selected_facture_old_infos.Rows[0]["SLD_REG_FAC"]).ToString("N2") + " DA au " + dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value + " -qu'il a payé precedement- ?", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
             }
 
             if (comboBox1.SelectedValue != null)
@@ -717,18 +748,29 @@ namespace ALBAITAR_Softvet.Resources
             dt.Rows.Add(new object[] { "REF", ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) });
             dt.Rows.Add(new object[] { "DATE", dateTimePicker1.Value.ToString("dd/MM/yyyy") });
 
-
-            DataRow rww = clients.Rows.Cast<DataRow>().Where(FF => (int)FF["ID"] == (int)comboBox1.SelectedValue).FirstOrDefault();
-            dt.Rows.Add(new object[] { "CLIENT_SEX", rww["SEX"] != DBNull.Value ? rww["SEX"].ToString() : null });
-            dt.Rows.Add(new object[] { "CLIENT_FAMNME", rww["FAMNME"] != DBNull.Value ? rww["FAMNME"].ToString() : null });
-            dt.Rows.Add(new object[] { "CLIENT_NME", rww["NME"] != DBNull.Value ? rww["NME"].ToString() : null });
-            dt.Rows.Add(new object[] { "CLIENT_NUM_CNI", rww["NUM_CNI"] != DBNull.Value ? rww["NUM_CNI"].ToString() : null });
-            dt.Rows.Add(new object[] { "CLIENT_ADRESS", rww["ADRESS"] != DBNull.Value ? rww["ADRESS"].ToString() : null });
-            dt.Rows.Add(new object[] { "CLIENT_CITY", rww["CITY"] != DBNull.Value ? rww["CITY"].ToString() : null });
-            dt.Rows.Add(new object[] { "CLIENT_WILAYA", rww["WILAYA"] != DBNull.Value ? rww["WILAYA"].ToString() : null });
-            dt.Rows.Add(new object[] { "POSTAL_CODE", rww["POSTAL_CODE"] != DBNull.Value ? rww["POSTAL_CODE"].ToString() : null });
-            dt.Rows.Add(new object[] { "CLIENT_NUM_PHONE", rww["NUM_PHONE"] != DBNull.Value ? rww["NUM_PHONE"].ToString() : null });
-            dt.Rows.Add(new object[] { "CLIENT_EMAIL", rww["EMAIL"] != DBNull.Value ? rww["EMAIL"].ToString() : null });
+            int iddx = comboBox1.SelectedValue != null ? (comboBox1.SelectedValue != DBNull.Value ? (int)comboBox1.SelectedValue : -1) : -1;
+            DataRow rww = clients.Rows.Cast<DataRow>().Where(FF => (int)FF["ID"] == iddx).FirstOrDefault();
+            if (rww != null)
+            {
+                dt.Rows.Add(new object[] { "CLIENT_SEX", rww["SEX"] != DBNull.Value ? rww["SEX"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_FAMNME", rww["FAMNME"] != DBNull.Value ? rww["FAMNME"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_NME", rww["NME"] != DBNull.Value ? rww["NME"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_NUM_CNI", rww["NUM_CNI"] != DBNull.Value ? rww["NUM_CNI"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_ADRESS", rww["ADRESS"] != DBNull.Value ? rww["ADRESS"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_CITY", rww["CITY"] != DBNull.Value ? rww["CITY"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_WILAYA", rww["WILAYA"] != DBNull.Value ? rww["WILAYA"].ToString() : null });
+                dt.Rows.Add(new object[] { "POSTAL_CODE", rww["POSTAL_CODE"] != DBNull.Value ? rww["POSTAL_CODE"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_NUM_PHONE", rww["NUM_PHONE"] != DBNull.Value ? rww["NUM_PHONE"].ToString() : null });
+                dt.Rows.Add(new object[] { "CLIENT_EMAIL", rww["EMAIL"] != DBNull.Value ? rww["EMAIL"].ToString() : null });
+            }
+            else
+            {
+                string full_nme = comboBox1.Text;
+                string sexx = full_nme.Length > 4 ? full_nme.Substring(0,5).Substring(0, full_nme.IndexOf(".")) : "Mr.";
+                string nmme = full_nme.Replace(sexx, "");
+                dt.Rows.Add(new object[] { "CLIENT_SEX", sexx });
+                dt.Rows.Add(new object[] { "CLIENT_FAMNME", nmme });
+            }
             //-------------
             new Print_report("facture_vente", dt, facture_to_print).ShowDialog();
         }

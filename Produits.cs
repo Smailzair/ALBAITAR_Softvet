@@ -136,9 +136,9 @@ namespace ALBAITAR_Softvet.Resources
                                               + "`VENTE_PRICE`,"
                                               + "`TMP_FIRST_INSERT_DATE`)"
                                               + "VALUES"
-                                              + "('" + textBox2.Text + "'," //CODE
-                                              + "'" + textBox3.Text + "'," //NME
-                                              + "'" + comboBox2.SelectedItem + "'," //CATEGOR
+                                              + "('" + textBox2.Text.Replace("'", "''") + "'," //CODE
+                                              + "'" + textBox3.Text.Replace("'", "''") + "'," //NME
+                                              + "'" + ((string)comboBox2.SelectedItem).Replace("'", "''") + "'," //CATEGOR
                                               + numericUpDown4.Value + "," //QNT
                                               + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
                                               + numericUpDown5.Value + "," //QNT_MIN
@@ -151,9 +151,9 @@ namespace ALBAITAR_Softvet.Resources
                     else
                     {
                         PreConnection.Excut_Cmd("UPDATE `tb_produits` SET "
-                                              + "`CODE` = '" + textBox2.Text + "'," //CODE
-                                              + "`NME` = '" + textBox3.Text + "'," //NME
-                                              + "`CATEGOR` = '" + comboBox2.SelectedItem + "'," //CATEGOR
+                                              + "`CODE` = '" + textBox2.Text.Replace("'", "''") + "'," //CODE
+                                              + "`NME` = '" + textBox3.Text.Replace("'", "''") + "'," //NME
+                                              + "`CATEGOR` = '" + ((string)comboBox2.SelectedItem).Replace("'", "''") + "'," //CATEGOR
                                               + "`QNT` = " + numericUpDown4.Value + "," //QNT
                                               + "`ALERT_MIN_ON` = " + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
                                               + "`QNT_MIN` = " + numericUpDown5.Value + "," //QNT_MIN
@@ -690,7 +690,7 @@ namespace ALBAITAR_Softvet.Resources
                                             + comboBox3.SelectedValue + ","//PROD_ID
                                             + (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0) + ","//QNT_IN
                                             + (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0) + ","//QNT_OUT
-                                            + "'" + textBox5.Text + "');");//OBSERV
+                                            + "'" + textBox5.Text.Replace("'", "''") + "');");//OBSERV
                     }
                     else
                     {
@@ -699,7 +699,7 @@ namespace ALBAITAR_Softvet.Resources
                                             + "`PROD_ID` = " + comboBox3.SelectedValue + ","//PROD_ID
                                             + "`QNT_IN` = " + (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0) + ","//QNT_IN
                                             + "`QNT_OUT` = " + (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0) + ","//QNT_OUT
-                                            + "`OBSERV` = '" + textBox5.Text + "' "//OBSERV
+                                            + "`OBSERV` = '" + textBox5.Text.Replace("'", "''") + "' "//OBSERV
                                             + "WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID2"].Value + ";");
                         if (textBox5.Text == "Achat (Premier Stock)")
                         {

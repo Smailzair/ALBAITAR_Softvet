@@ -90,10 +90,10 @@ namespace ALBAITAR_Softvet
             textBox1.BackColor = textBox1.Text.Trim().Length == 0 ? Color.LightCoral : SystemColors.Window;
             if(textBox1.BackColor == SystemColors.Window)
             {
-                string cmmd = "UPDATE tb_params SET `VAL` = '" + textBox1.Text + "' WHERE `ID` = 1;";
-                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox2.Text + "' WHERE `ID` = 2;";
-                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox3.Text + "' WHERE `ID` = 3;";
-                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox4.Text + "' WHERE `ID` = 4;";
+                string cmmd = "UPDATE tb_params SET `VAL` = '" + textBox1.Text.Replace("'", "''") + "' WHERE `ID` = 1;";
+                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox2.Text.Replace("'", "''") + "' WHERE `ID` = 2;";
+                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox3.Text.Replace("'", "''") + "' WHERE `ID` = 3;";
+                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox4.Text.Replace("'", "''") + "' WHERE `ID` = 4;";
                 PreConnection.Excut_Cmd(cmmd);
                 Main_Frm.Params = PreConnection.Load_data("SELECT * FROM tb_params;");
                 Main_Frm.label_cab_nme.Text = textBox1.Text;

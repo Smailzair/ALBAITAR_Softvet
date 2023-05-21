@@ -316,12 +316,6 @@
     <Compile Include="Laboratoire.Designer.cs">
       <DependentUpon>Laboratoire.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Agenda_Filter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\Agenda_Filter.Designer.cs">
-      <DependentUpon>Agenda_Filter.cs</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\Anims_List.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -454,9 +448,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Laboratoire.resx">
       <DependentUpon>Laboratoire.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Agenda_Filter.resx">
-      <DependentUpon>Agenda_Filter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Anims_List.resx">
       <DependentUpon>Anims_List.cs</DependentUpon>

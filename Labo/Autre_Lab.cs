@@ -132,23 +132,23 @@ namespace ALBAITAR_Softvet.Labo
                                               + "`METHODE`,"
                                               + "`RESULT`)"
                                               + " VALUES "
-                                              + "('" + textBox3.Text + "'," //REF
+                                              + "('" + textBox3.Text.Replace("'", "''") + "'," //REF
                                               + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," //DATE_TIME
                                               + selected_animm.Cells["ID"].Value + "," //ANIM_ID
-                                              + "'" + textBox1.Text + "'," //OBSERV
+                                              + "'" + textBox1.Text.Replace("'", "''") + "'," //OBSERV
                                               + "'" + current_analys_type + "'," //TYPE_ANAL
-                                              + "'" + textBox5.Text + "'," //METHODE
-                                              + "'" + textBox6.Text + "');"); //RESULT
+                                              + "'" + textBox5.Text.Replace("'", "''") + "'," //METHODE
+                                              + "'" + textBox6.Text.Replace("'", "''") + "');"); //RESULT
                     }
                     else
                     {
                         PreConnection.Excut_Cmd("UPDATE `tb_labo_autre` SET "
-                                              + "`REF` = '" + textBox3.Text + "',"
+                                              + "`REF` = '" + textBox3.Text.Replace("'", "''") + "',"
                                               + "`DATE_TIME` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
-                                              + "`OBSERV` = '" + textBox1.Text + "',"
+                                              + "`OBSERV` = '" + textBox1.Text.Replace("'", "''") + "',"
                                               + "`TYPE_ANAL` = '" + current_analys_type + "',"
-                                              + "`METHODE` = '" + textBox5.Text + "',"
-                                              + "`RESULT` = '" + textBox6.Text + "'"
+                                              + "`METHODE` = '" + textBox5.Text.Replace("'", "''") + "',"
+                                              + "`RESULT` = '" + textBox6.Text.Replace("'", "''") + "'"
                                               + " WHERE `ID` = " + dataGridView22.SelectedRows[0].Cells["ID"].Value + ";");
                     }
                     //--------

@@ -294,32 +294,32 @@ namespace ALBAITAR_Softvet.Resources
                                 + "`EMAIL`,"
                                 + "`OBSERVATIONS`)"
                                 + "VALUES"
-                                + "('" + comboBox1.Text + "',"
-                                + "'" + textBox3.Text + "',"
-                                + "'" + textBox2.Text + "',"
-                                + "'" + textBox4.Text + "',"
-                                + "'" + textBox5.Text + "',"
-                                + "'" + textBox6.Text + "',"
-                                + "'" + comboBox2.Text + "',"
-                                + "'" + comboBox3.Text + "',"
-                                + "'" + maskedTextBox1.Text + "',"
-                                + "'" + textBox7.Text + "',"
-                                + "'" + textBox8.Text + "');");
+                                + "('" + comboBox1.Text.Replace("'", "''") + "',"
+                                + "'" + textBox3.Text.Replace("'", "''") + "',"
+                                + "'" + textBox2.Text.Replace("'", "''") + "',"
+                                + "'" + textBox4.Text.Replace("'", "''") + "',"
+                                + "'" + textBox5.Text.Replace("'", "''") + "',"
+                                + "'" + textBox6.Text.Replace("'", "''") + "',"
+                                + "'" + comboBox2.Text.Replace("'", "''") + "',"
+                                + "'" + comboBox3.Text.Replace("'", "''") + "',"
+                                + "'" + maskedTextBox1.Text.Replace("'", "''") + "',"
+                                + "'" + textBox7.Text.Replace("'", "''") + "',"
+                                + "'" + textBox8.Text.Replace("'", "''") + "');");
                     }
                     else //UPDATE
                     {
                         PreConnection.Excut_Cmd("UPDATE `tb_clients` SET "
-                                + "`SEX` = '" + comboBox1.Text + "',"
-                                + "`FAMNME` = '" + textBox3.Text + "',"
-                                + "`NME` = '" + textBox2.Text + "',"
-                                + "`NUM_CNI` = '" + textBox4.Text + "',"
-                                + "`ADRESS` = '" + textBox5.Text + "',"
-                                + "`POSTAL_CODE` = '" + textBox6.Text + "',"
-                                + "`CITY` = '" + comboBox2.Text + "',"
-                                + "`WILAYA` = '" + comboBox3.Text + "',"
-                                + "`NUM_PHONE` = '" + maskedTextBox1.Text + "',"
-                                + "`EMAIL` = '" + textBox7.Text + "',"
-                                + "`OBSERVATIONS` = '" + textBox8.Text + "' "
+                                + "`SEX` = '" + comboBox1.Text.Replace("'", "''") + "',"
+                                + "`FAMNME` = '" + textBox3.Text.Replace("'", "''") + "',"
+                                + "`NME` = '" + textBox2.Text.Replace("'", "''") + "',"
+                                + "`NUM_CNI` = '" + textBox4.Text.Replace("'", "''") + "',"
+                                + "`ADRESS` = '" + textBox5.Text.Replace("'", "''") + "',"
+                                + "`POSTAL_CODE` = '" + textBox6.Text.Replace("'", "''") + "',"
+                                + "`CITY` = '" + comboBox2.Text.Replace("'", "''") + "',"
+                                + "`WILAYA` = '" + comboBox3.Text.Replace("'", "''") + "',"
+                                + "`NUM_PHONE` = '" + maskedTextBox1.Text.Replace("'", "''") + "',"
+                                + "`EMAIL` = '" + textBox7.Text.Replace("'", "''") + "',"
+                                + "`OBSERVATIONS` = '" + textBox8.Text.Replace("'", "''") + "' "
                                 + "WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
                     }
                     //----------------
@@ -582,7 +582,7 @@ namespace ALBAITAR_Softvet.Resources
                                           + "VALUES"
                                           + "(" + dataGridView1.SelectedRows[0].Cells["ID"].Value + ","
                                           + "'" + (dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value != DBNull.Value ? ((DateTime)dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value).ToString("yyyy-MM-dd HH:mm:ss") : "NULL") + "',"
-                                          + "'" + dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value + "',"
+                                          + "'" + dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value.ToString().Replace("'", "''") + "',"
                                           + (dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : "0") + ","
                                           + (dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : "0") + ");");
                 }

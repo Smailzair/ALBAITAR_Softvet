@@ -101,17 +101,17 @@ namespace ALBAITAR_Softvet
                 if (ready_to_save)
                 {
                     PreConnection.Excut_Cmd("UPDATE `tb_login_and_users` SET "
-                        + "`USER_NME` = '" + textBox1.Text + "',"
-                        + "`USER_FAMNME` = '" + textBox5.Text + "',"
+                        + "`USER_NME` = '" + textBox1.Text.Replace("'","''") + "',"
+                        + "`USER_FAMNME` = '" + textBox5.Text.Replace("'", "''") + "',"
                         + "`SEX` = '" + (radioButton4.Checked ? "M" : "F") + "',"
-                        + "`PASSWORD` = '" + maskedTextBox1.Text + "',"
-                        + "`FUNCTION` = '" + comboBox1.SelectedItem + "',"
+                        + "`PASSWORD` = '" + maskedTextBox1.Text.Replace("'", "''") + "',"
+                        + "`FUNCTION` = '" + ((string)comboBox1.SelectedItem).Replace("'", "''") + "',"
                         + "`IS_ADMIN` = " + (radioButton1.Checked ? "True" : "False") + ","
-                        + "`QUESTION` = '" + textBox2.Text + "',"
-                        + "`ANSWER` = '" + textBox3.Text + "',"
-                        + "`EMAIL` = '" + textBox4.Text + "',"
-                        + "`CNI_NUM` = '" + textBox6.Text + "',"
-                        + "`ANV_NUM` = '" + textBox7.Text + "'"
+                        + "`QUESTION` = '" + textBox2.Text.Replace("'", "''") + "',"
+                        + "`ANSWER` = '" + textBox3.Text.Replace("'", "''") + "',"
+                        + "`EMAIL` = '" + textBox4.Text.Replace("'", "''") + "',"
+                        + "`CNI_NUM` = '" + textBox6.Text.Replace("'", "''") + "',"
+                        + "`ANV_NUM` = '" + textBox7.Text.Replace("'", "''") + "'"
                         + "WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() + ";");
                     if (was_admin && !radioButton1.Checked && MessageBox.Show("Voulez-vous mettre les autorisations 'par defaut' [Oui] \n ou de conserver les autorisations précédentes (avant d'étre 'Admin') ? [Non]", "Autorisations :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
@@ -143,17 +143,17 @@ namespace ALBAITAR_Softvet
                         + "`CNI_NUM`,"
                         + "`ANV_NUM`)"
                         + "VALUES"
-                        + "('" + textBox1.Text + "',"
-                        + "'" + textBox5.Text + "',"
+                        + "('" + textBox1.Text.Replace("'", "''") + "',"
+                        + "'" + textBox5.Text.Replace("'", "''") + "',"
                         + "'" + (radioButton4.Checked ? "M" : "F") + "',"
-                        + "'" + maskedTextBox1.Text + "',"
-                        + "'" + comboBox1.SelectedItem + "',"
+                        + "'" + maskedTextBox1.Text.Replace("'", "''") + "',"
+                        + "'" + ((string)comboBox1.SelectedItem).Replace("'", "''") + "',"
                         + (radioButton1.Checked ? "True" : "False") + ","
-                        + "'" + textBox2.Text + "',"
-                        + "'" + textBox3.Text + "',"
-                        + "'" + textBox4.Text + "',"
-                        + "'" + textBox6.Text + "',"
-                        + "'" + textBox7.Text + "');");
+                        + "'" + textBox2.Text.Replace("'", "''") + "',"
+                        + "'" + textBox3.Text.Replace("'", "''") + "',"
+                        + "'" + textBox4.Text.Replace("'", "''") + "',"
+                        + "'" + textBox6.Text.Replace("'", "''") + "',"
+                        + "'" + textBox7.Text.Replace("'", "''") + "');");
 
                     //------Autorisations -------------------
                     DataTable dt = PreConnection.Load_data("SELECT MAX(ID) FROM tb_login_and_users");

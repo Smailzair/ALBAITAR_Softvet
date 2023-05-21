@@ -1007,14 +1007,14 @@ namespace ALBAITAR_Softvet.Resources
                            + (loop.Equals("EVERY_MONTH") ? "'" + numericUpDown1.Value + "_TO_" + numericUpDown2.Value + "'" : "NULL") + "," //EVERY_MONTH_DAY
                            + (dateTimePicker3.Visible ? "'" + dateTimePicker3.Value.ToString("HH:mm:ss") + "'" : "NULL") + "," //"<{HOURS_ARRANG_OF: }>,"
                            + (dateTimePicker4.Visible ? "'" + dateTimePicker4.Value.ToString("HH:mm:ss") + "'" : "NULL") + ","//"<{HOURS_ARRANG_TO: }>,"
-                           + "'" + comboBox2.Text + "'," //TYPE
-                           + "'" + textBox1.Text + "'," //OBJECT
-                           + "'" + textBox2.Text + "'," //DESCRIPTION
+                           + "'" + comboBox2.Text.Replace("'","''") + "'," //TYPE
+                           + "'" + textBox1.Text.Replace("'", "''") + "'," //OBJECT
+                           + "'" + textBox2.Text.Replace("'", "''") + "'," //DESCRIPTION
                            + (numericUpDown3.Enabled ? numericUpDown3.Value.ToString() : "NULL") + "," //REPPEL_BEFORE_DAYS
                            + "'" + related_clients + "'," //RELATED_CLIENTS_IDs
                            + "'" + related_Animaux + "'," //RELATED_ANIMALS_IDs
                            + "@Icon," //ICO
-                           + "'" + Userss + "');"; //FOR_THIS_USERS
+                           + "'" + Userss.Replace("'", "''") + "');"; //FOR_THIS_USERS
 
 
                 }
@@ -1028,14 +1028,14 @@ namespace ALBAITAR_Softvet.Resources
                            + "`EVERY_MONTH_DAY` = " + (loop.Equals("EVERY_MONTH") ? "'" + numericUpDown1.Value + "_TO_" + numericUpDown2.Value + "'" : "NULL") + ","
                            + "`HOURS_ARRANG_OF` = " + (dateTimePicker3.Visible ? "'" + dateTimePicker3.Value.ToString("HH:mm:ss") + "'" : "NULL") + ","
                            + "`HOURS_ARRANG_TO` = " + (dateTimePicker4.Visible ? "'" + dateTimePicker4.Value.ToString("HH:mm:ss") + "'" : "NULL") + ","
-                           + "`TYPE` = '" + comboBox2.Text + "',"
-                           + "`OBJECT` = '" + textBox1.Text + "',"
-                           + "`DESCRIPTION` = '" + textBox2.Text + "',"
+                           + "`TYPE` = '" + comboBox2.Text.Replace("'", "''") + "',"
+                           + "`OBJECT` = '" + textBox1.Text.Replace("'", "''") + "',"
+                           + "`DESCRIPTION` = '" + textBox2.Text.Replace("'", "''") + "',"
                            + "`REPPEL_BEFORE_DAYS` = " + (numericUpDown3.Enabled ? numericUpDown3.Value.ToString() : "NULL") + ","
                            + "`RELATED_CLIENTS_IDs` = '" + related_clients + "',"
                            + "`RELATED_ANIMALS_IDs` = '" + related_Animaux + "',"
                            + "`ICON_ID` = @Icon,"
-                           + "`FOR_THIS_USERS` = '" + Userss + "'"
+                           + "`FOR_THIS_USERS` = '" + Userss.Replace("'", "''") + "'"
                            + " WHERE `ID` = " + Current_items_id + ";";
                 }
                 PreConnection.open_conn();

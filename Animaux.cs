@@ -201,25 +201,24 @@ namespace ALBAITAR_Softvet.Resources
                                     + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE`" : "")
                                     + ") VALUES "
                                     + "('" + dateTimePicker3.Value.Date.ToString("yyyy-MM-dd") + "',"//<{ DATE_ADDED: }>,
-                                    + "'" + textBox3.Text + "',"//<{ NME: }>,
-                                    + "'" + textBox2.Text + "',"//{ NUM_IDENTIF: }>,
-                                    + "'" + textBox4.Text + "',"//{ NUM_PASSPORT: }>,
+                                    + "'" + textBox3.Text.Replace("'", "''") + "',"//<{ NME: }>,
+                                    + "'" + textBox2.Text.Replace("'", "''") + "',"//{ NUM_IDENTIF: }>,
+                                    + "'" + textBox4.Text.Replace("'", "''") + "',"//{ NUM_PASSPORT: }>,
                                     + comboBox1.SelectedValue + ","//{ CLIENT_ID: }>,
-                                    + "'" + comboBox2.Text + "',"//{ ESPECE: }>,
-                                    + "'" + comboBox3.Text + "',"//{ RACE: }>,
-                                    + "'" + comboBox4.Text + "',"//{ SEXE: }>,
+                                    + "'" + comboBox2.Text.Replace("'", "''") + "',"//{ ESPECE: }>,
+                                    + "'" + comboBox3.Text.Replace("'", "''") + "',"//{ RACE: }>,
+                                    + "'" + comboBox4.Text.Replace("'", "''") + "',"//{ SEXE: }>,
                                     + (checkBox2.Checked ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ NISS_DATE: }>,
-                                    + "'" + textBox6.Text + "',"//{ ROBE: }>,
-                                    + "'" + textBox8.Text + "',"//{ OBSERVATIONS: }>,
+                                    + "'" + textBox6.Text.Replace("'", "''") + "',"//{ ROBE: }>,
+                                    + "'" + textBox8.Text.Replace("'", "''") + "',"//{ OBSERVATIONS: }>,
                                     + (checkBox1.Checked ? "TRUE" : "FALSE") + ","//{ IS_RADIATED: 0}>,
                                     + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ RADIATION_DATE: }>,
-                                    + "'" + (checkBox1.Checked ? textBox5.Text : "") + "'" //{ RADIATION_CAUSES 
+                                    + "'" + (checkBox1.Checked ? textBox5.Text.Replace("'", "''") : "") + "'" //{ RADIATION_CAUSES 
                                     + (File.Exists(openFileDialog1.FileName) ? ",@Pic" : "")
                                     + ");";
                             MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
                             if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
-                            PreConnection.open_conn();
-                            Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>> " + insert_cmnd);
+                            PreConnection.open_conn();                            
                             cmd.ExecuteNonQuery();
                         }
                         else //UPDATE
@@ -227,19 +226,19 @@ namespace ALBAITAR_Softvet.Resources
                             byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
                             string insert_cmnd = "UPDATE `tb_animaux` SET "
                                     + "`DATE_ADDED` = '" + dateTimePicker3.Value.Date.ToString("yyyy-MM-dd") + "',"
-                                    + "`NME` = '" + textBox3.Text + "',"
-                                    + "`NUM_IDENTIF` = '" + textBox2.Text + "',"
-                                    + "`NUM_PASSPORT` = '" + textBox4.Text + "',"
+                                    + "`NME` = '" + textBox3.Text.Replace("'", "''") + "',"
+                                    + "`NUM_IDENTIF` = '" + textBox2.Text.Replace("'", "''") + "',"
+                                    + "`NUM_PASSPORT` = '" + textBox4.Text.Replace("'", "''") + "',"
                                     + "`CLIENT_ID` = " + comboBox1.SelectedValue + ","
-                                    + "`ESPECE` = '" + comboBox2.Text + "',"
-                                    + "`RACE` = '" + comboBox3.Text + "',"
-                                    + "`SEXE` = '" + comboBox4.Text + "',"
+                                    + "`ESPECE` = '" + comboBox2.Text.Replace("'", "''") + "',"
+                                    + "`RACE` = '" + comboBox3.Text.Replace("'", "''") + "',"
+                                    + "`SEXE` = '" + comboBox4.Text.Replace("'", "''") + "',"
                                     + "`NISS_DATE` = " + (checkBox2.Checked ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
-                                    + "`ROBE` = '" + textBox6.Text + "',"
-                                    + "`OBSERVATIONS` = '" + textBox8.Text + "',"
+                                    + "`ROBE` = '" + textBox6.Text.Replace("'", "''") + "',"
+                                    + "`OBSERVATIONS` = '" + textBox8.Text.Replace("'", "''") + "',"
                                     + "`IS_RADIATED` = " + (checkBox1.Checked ? "TRUE" : "FALSE") + ","
                                     + "`RADIATION_DATE` = " + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
-                                    + "`RADIATION_CAUSES` = '" + (checkBox1.Checked ? textBox5.Text : "") + "'"
+                                    + "`RADIATION_CAUSES` = '" + (checkBox1.Checked ? textBox5.Text.Replace("'", "''") : "") + "'"
                                     + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE` = @Pic" : (!button7.Visible ? ",`PICTURE` = NULL" : ""))
                                     + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";";
                             MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);

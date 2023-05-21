@@ -33,7 +33,7 @@ namespace ALBAITAR_Softvet
                 Autorisations = PreConnection.Load_data("SELECT `ID`,`CODE`,`AUTOR_TEXT`,Usr_" + Properties.Settings.Default.Last_login_user_idx + " FROM tb_autoriz;");
             }
             //----------------------------
-            Params = PreConnection.Load_data("SELECT * FROM tb_params;");
+            Params = PreConnection.Load_data("SELECT * FROM tb_params;");            
             //------------------------------
             th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting perfermance of "Clients" from
             th.Start();
@@ -153,7 +153,7 @@ namespace ALBAITAR_Softvet
                     }
                     if (dd != string.Empty)
                     {
-                        PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '" + dd + "' WHERE `ID` = 1;");
+                        PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '" + dd.Replace("'", "''") + "' WHERE `ID` = 1;");
                         Params = PreConnection.Load_data("SELECT * FROM tb_params;");
                         label_cab_nme.Text = dd;
                     }
