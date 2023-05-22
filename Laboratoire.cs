@@ -3,8 +3,12 @@ using Microsoft.ReportingServices.Diagnostics.Internal;
 using System;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Xamarin.Forms.Internals;
+using Excc = Microsoft.Office.Interop.Excel;
 
 namespace ALBAITAR_Softvet.Resources
 {
@@ -278,6 +282,103 @@ namespace ALBAITAR_Softvet.Resources
                         break;
                 }
                 
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (selected_anim != null)
+            {                
+                if (comboBox1.SelectedIndex == 1) //Hemogramme
+                {                    
+                    DataTable dt_hemo = PreConnection.Load_data("SELECT `REF`,\r\n`DATE_TIME`,\r\n(SELECT `NME` FROM tb_animaux tb2 WHERE tb2.`ID` = tb1.`ANIM_ID`) AS 'ANIM_NME',\r\n(SELECT `NUM_IDENTIF` FROM tb_animaux tb2 WHERE tb2.`ID` = tb1.`ANIM_ID`) AS 'ANIM_IDENT_NUM',\r\n(SELECT CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) FROM tb_clients tb3 WHERE tb3.`ID` = (SELECT `CLIENT_ID` FROM tb_animaux tb2 WHERE tb2.`ID` = tb1.`ANIM_ID`)) AS 'CLIENT_FULL_NME',\r\n(SELECT `NUM_CNI` FROM tb_clients tb3 WHERE tb3.`ID` = (SELECT `CLIENT_ID` FROM tb_animaux tb2 WHERE tb2.`ID` = tb1.`ANIM_ID`)) AS 'CLIENT_NUM_CNI',\r\n(SELECT `NUM_PHONE` FROM tb_clients tb3 WHERE tb3.`ID` = (SELECT `CLIENT_ID` FROM tb_animaux tb2 WHERE tb2.`ID` = tb1.`ANIM_ID`)) AS 'CLIENT_NUM_PHONE',\r\n`OBSERV`,\r\n`Hematies`,\r\n`Hemoglobine`,\r\n`Hematocrite`,\r\n`VGM`,\r\n`CCMH`,\r\n`TCMH`,\r\n`Reticulocytes`,\r\n`Plaquettes`,\r\n`Leucocytes`,\r\n`Granulocytes`,\r\n`Neutrophiles`,\r\n`Eosinophiles`,\r\n`Basophiles`,\r\n`Lymphocytes`,\r\n`Monocytes`,\r\n`Hematies_NORMATIF`,\r\n`Hemoglobine_NORMATIF`,\r\n`Hematocrite_NORMATIF`,\r\n`VGM_NORMATIF`,\r\n`CCMH_NORMATIF`,\r\n`TCMH_NORMATIF`,\r\n`Reticulocytes_NORMATIF`,\r\n`Plaquettes_NORMATIF`,\r\n`Leucocytes_NORMATIF`,\r\n`Granulocytes_NORMATIF`,\r\n`Neutrophiles_NORMATIF`,\r\n`Eosinophiles_NORMATIF`,\r\n`Basophiles_NORMATIF`,\r\n`Lymphocytes_NORMATIF`,\r\n`Monocytes_NORMATIF`\r\nFROM `tb_labo_hemogramme` tb1 WHERE `ANIM_ID` = " + selected_anim.Cells["ID"].Value + " ORDER BY `DATE_TIME`;");
+                    Excc.Application xcelApp = new Excc.Application();
+                    xcelApp.Application.Workbooks.Add(Type.Missing);
+                    xcelApp.Application.Workbooks[1].Title = Application.ProductName + " - Hemogramme";
+                    xcelApp.Application.Workbooks[1].Worksheets[1].Name = "Hemogramme";
+                    //-------------------
+                    xcelApp.Cells[1, 1].Value = "Nom :";
+                    xcelApp.Cells[1, 2].Value = dt_hemo.Rows[0]["ANIM_NME"];
+
+                    xcelApp.Cells[1, 4].Value = "N° d'ident. :";
+                    xcelApp.Cells[1, 5].Value = dt_hemo.Rows[0]["ANIM_IDENT_NUM"];
+
+                    xcelApp.Cells[2, 1].Value = "Analyse de :";
+                    xcelApp.Cells[2, 2].Value = "Hemogramme";
+
+                    xcelApp.Cells[1, 8].Value = "Propriétaire :";
+                    xcelApp.Cells[1, 9].Value = dt_hemo.Rows[0]["CLIENT_FULL_NME"];
+
+                    xcelApp.Cells[1, 11].Value = "N° CNI :";
+                    xcelApp.Cells[1, 12].Value = dt_hemo.Rows[0]["CLIENT_NUM_CNI"];
+
+                    xcelApp.Cells[2, 8].Value = "N° Tél :";
+                    xcelApp.Cells[2, 9].Value = dt_hemo.Rows[0]["CLIENT_NUM_PHONE"];
+
+                    int[] ttt = { 1, 4,8,11};
+                    ttt.ForEach(x => {
+                        ((Excc.Range)xcelApp.Cells[1, x]).Interior.Color = ((Excc.Range)xcelApp.Cells[2, x]).Interior.Color = ColorTranslator.ToOle(Color.PaleTurquoise);
+                        ((Excc.Range)xcelApp.Cells[1, x]).Font.Underline = ((Excc.Range)xcelApp.Cells[2, x]).Font.Underline = true;
+                    });                    
+                    //--------------------
+                    xcelApp.Cells[4, 1].Value = "Date";
+                    ((Excc.Range)xcelApp.Columns[1]).NumberFormat = "dd/MM/yyyy";
+                    xcelApp.Cells[4, 2].Value = "Ref.";
+                    dt_hemo.Columns.Cast<DataColumn>().Where(dd => dt_hemo.Columns.IndexOf(dd) >= 8 && dt_hemo.Columns.IndexOf(dd) < 23).ToList().ForEach(SS => {
+                        xcelApp.Cells[4, dt_hemo.Columns.IndexOf(SS) - 5].Value = SS.ColumnName;
+                    });
+                    xcelApp.Cells[4, 18].Value = "Observ.";
+                    for (int i = 1; i < 19; i++)
+                    {
+                        ((Excc.Range)xcelApp.Cells[4, i]).Interior.Color = ColorTranslator.ToOle(Color.BurlyWood);
+                        ((Excc.Range)xcelApp.Cells[4, i]).Font.Bold = true;
+                        ((Excc.Range)xcelApp.Cells[4, i]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
+                    }
+                    //xcelApp.Columns.AutoFit();
+                    int y = 4;
+                    dt_hemo.Rows.Cast<DataRow>().ForEach(PP => {
+                        y++;
+                        xcelApp.Cells[y , 1].Value = PP["DATE_TIME"];
+                        xcelApp.Cells[y, 2].Value = PP["REF"];
+                        for(int t = 1; t < 16; t++)
+                        {
+                            xcelApp.Cells[y, t + 2].Value = PP[t + 7];
+                        }
+                    });
+                    
+                    //-------------
+
+
+                    //------------------
+                    SaveFileDialog svd = new SaveFileDialog();
+                    svd.Filter = "Excel | *.xlsx";
+                    svd.DefaultExt = "*.xlsx";
+                    svd.FileName = xcelApp.Application.Workbooks[1].Title + "_" + DateTime.Now.ToString("ddMMyyyy_HHmmss") + ".xlsx";
+                    if (svd.ShowDialog() == DialogResult.OK)
+                    {
+                        xcelApp.Workbooks[1].SaveAs(Path.GetFullPath(svd.FileName));
+                        Process.Start(Path.GetFullPath(svd.FileName));
+                    }
+                    xcelApp.Application.Workbooks[1].Close(false);
+                    xcelApp.Quit();
+                    //-------------------
+                }
+                else if (comboBox1.SelectedIndex == 2) //Biochimie
+                {
+                   
+                }
+                else if (comboBox1.SelectedIndex == 3) //Immunologie
+                {
+                    
+                }
+                else if (comboBox1.SelectedIndex == 4) //Protéinogramme
+                {
+                   
+                }
+                else if (comboBox1.SelectedIndex == 5) //Autres
+                {
+                   
+                }
             }
         }
     }

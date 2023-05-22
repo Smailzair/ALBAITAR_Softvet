@@ -576,7 +576,6 @@ namespace ALBAITAR_Softvet.Labo
             {
                 int current_row_to_select = is_new ? -1 : dataGridView2.SelectedRows[0].Index;
                 bool ready = true;
-                bool tmpp = true;
                 int tt = 0;
                 int null_nb = 0;
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)

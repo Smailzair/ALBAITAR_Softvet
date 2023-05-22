@@ -338,6 +338,7 @@
             this.button6.TabIndex = 4;
             this.toolTip1.SetToolTip(this.button6, "Exporter en Excel");
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button4
             // 

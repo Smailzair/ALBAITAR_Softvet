@@ -20,7 +20,10 @@ namespace ALBAITAR_Softvet.Resources
         static public DataGridViewRow selected_item = null;
         static public DataTable stock_to_modify = new DataTable();
         static public List<int> visite_to_update_fact_num = new List<int>();
+        //-------------
         decimal TVA_percent = 9;
+        decimal tot_ht = 0;
+        //------------
         DataTable clients;
         DataTable factures;
         DataTable facture_to_print;
@@ -112,7 +115,7 @@ namespace ALBAITAR_Softvet.Resources
             comboBox1.SelectedValue = DBNull.Value;
             dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Now;
             visite_to_update_fact_num = new List<int>();
-            int dds = 0;
+            int dds = 1;
             if (factures != null)
             {
                 if (factures.Rows.Count > 0)
@@ -122,7 +125,7 @@ namespace ALBAITAR_Softvet.Resources
                                   .Max(row => int.Parse(row["REF"].ToString().Substring(8)));
                 }
             }
-            numericUpDown1.Value = dds != null ? (dds + 1) : 1;
+            numericUpDown1.Value = dds;
             dataGridView2.Rows.Clear();
             checkBox1.Checked = Properties.Settings.Default.Faire_reg_espece_facture_vente;
             numericUpDown2.Value = 0;
@@ -176,16 +179,17 @@ namespace ALBAITAR_Softvet.Resources
             calcul_bill_tot();
         }
 
+        
         private void calcul_bill_tot()
         {
-            decimal tot = 0;
+            tot_ht = 0;
             foreach (DataGridViewRow rw in dataGridView2.Rows)
             {
-                tot += rw.Cells["SLD"].Value != DBNull.Value ? (decimal)rw.Cells["SLD"].Value : 0;
+                tot_ht += rw.Cells["SLD"].Value != DBNull.Value ? (decimal)rw.Cells["SLD"].Value : 0;
             }
-            dataGridView3.Rows[0].Cells[1].Value = tot; //HT
+            dataGridView3.Rows[0].Cells[1].Value = tot_ht; //HT
             //-------------------------------
-            dataGridView3.Rows[1].Cells[1].Value = tot * TVA_percent / 100; //TVA
+            dataGridView3.Rows[1].Cells[1].Value = tot_ht * TVA_percent / 100; //TVA
             //------------------------------
             if (checkBox1.Checked)
             {
@@ -748,6 +752,12 @@ namespace ALBAITAR_Softvet.Resources
             dt.Rows.Add(new object[] { "REF", ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) });
             dt.Rows.Add(new object[] { "DATE", dateTimePicker1.Value.ToString("dd/MM/yyyy") });
 
+            dt.Rows.Add(new object[] { "TOT_HT", tot_ht });
+            dt.Rows.Add(new object[] { "TVA_PERC", TVA_percent });
+            dt.Rows.Add(new object[] { "TVA_MNT", tot_ht * TVA_percent / 100 });
+            dt.Rows.Add(new object[] { "D_TIMBRE", (checkBox1.Checked ? decimal.Parse(dataGridView3.Rows[2].Cells[1].Value.ToString()) : 0) });
+            dt.Rows.Add(new object[] { "TOT_TTC", (decimal)dataGridView3.Rows[0].Cells[1].Value + (decimal)dataGridView3.Rows[1].Cells[1].Value + (checkBox1.Checked ? decimal.Parse(dataGridView3.Rows[2].Cells[1].Value.ToString()) : 0) });
+
             int iddx = comboBox1.SelectedValue != null ? (comboBox1.SelectedValue != DBNull.Value ? (int)comboBox1.SelectedValue : -1) : -1;
             DataRow rww = clients.Rows.Cast<DataRow>().Where(FF => (int)FF["ID"] == iddx).FirstOrDefault();
             if (rww != null)
@@ -766,7 +776,7 @@ namespace ALBAITAR_Softvet.Resources
             else
             {
                 string full_nme = comboBox1.Text;
-                string sexx = full_nme.Length > 4 ? full_nme.Substring(0,5).Substring(0, full_nme.IndexOf(".")) : "Mr.";
+                string sexx = full_nme.Length > 4 ? (full_nme.IndexOf(".") > 0 ? full_nme.Substring(0,5).Substring(0, full_nme.IndexOf(".")) : "Mr.") : "Mr.";
                 string nmme = full_nme.Replace(sexx, "");
                 dt.Rows.Add(new object[] { "CLIENT_SEX", sexx });
                 dt.Rows.Add(new object[] { "CLIENT_FAMNME", nmme });
@@ -781,6 +791,10 @@ namespace ALBAITAR_Softvet.Resources
             toolTip1.SetToolTip(groupBox3, groupBox3.Enabled ? "" : "Juste pour les propriétaires enregistrés !");
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            PreConnection.Excport_to_excel(dataGridView1, "ALBAITAR SoftVet Factures", "Vente", null, false);
+        }
     }
 }
 

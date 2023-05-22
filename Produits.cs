@@ -853,7 +853,7 @@ namespace ALBAITAR_Softvet.Resources
                 cols.AddRange(new string[] { "CODE", "NME", "CATEGOR", "QNT", "REVIENT_PRTICE", "VENTE_PRICE" });
                 dataGridView1.Columns.Cast<DataGridViewColumn>().Where(cc => cols.Contains(cc.Name)).ToList().ForEach(g =>
                 {
-                    xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)].Value = g.HeaderText;
+                    xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)].Value = g.HeaderText.Replace("Prix de revient", "Prix -unitaire- de revient").Replace("Prix de vente", "Prix -unitaire- de vente"); ;
                     ((Excc.Range)xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
                     ((Excc.Range)xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)]).Font.Bold = true;
                     ((Excc.Range)xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;

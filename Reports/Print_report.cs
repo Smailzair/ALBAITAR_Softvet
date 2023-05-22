@@ -12,6 +12,8 @@ using Microsoft.Office.Interop.Word;
 using Excel = Microsoft.Office.Interop.Excel.Application;
 using Microsoft.ReportingServices.Interfaces;
 using System.Diagnostics;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using DataSet = System.Data.DataSet;
 
 namespace ALBAITAR_Softvet
 {
@@ -246,9 +248,6 @@ namespace ALBAITAR_Softvet
                 //----------------
             button1.Enabled = button2.Enabled = button3.Enabled = true;
             
-        }
-
-
-
+        }       
     }
 }
