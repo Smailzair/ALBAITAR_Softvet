@@ -580,7 +580,6 @@ namespace ALBAITAR_Softvet.Labo
                 int null_nb = 0;
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    //tmpp &= dataGridView1.Rows[i].Cells["VALUE2"].Style.BackColor != Color.LightCoral;
                     //--------
                     tt++;
                     null_nb += dataGridView1.Rows[i].Cells["VALUE2"].Value == DBNull.Value ? 1 : 0;
@@ -592,10 +591,6 @@ namespace ALBAITAR_Softvet.Labo
                     ready = false;
                     MessageBox.Show("Il n'y a pas des résultats !", "Vide :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                //if (!tmpp && ready)
-                //{
-                //    ready = MessageBox.Show("Il y a des erreurs dans votre bilan,\n\nVoulez-vous continuer?\n", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
-                //}
                 if (ready)
                 {
                     if (is_new)
