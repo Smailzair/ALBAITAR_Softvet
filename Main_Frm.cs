@@ -201,7 +201,6 @@ namespace ALBAITAR_Softvet
                 button12.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30000" && (Int32)QQ[3] == 1).Count() > 0;
                 button4.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31000" && (Int32)QQ[3] == 1).Count() > 0;
                 button5.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40000" && (Int32)QQ[3] == 1).Count() > 0;
-                button7.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50000" && (Int32)QQ[3] == 1).Count() > 0;
             }
 
         }
@@ -333,6 +332,11 @@ namespace ALBAITAR_Softvet
                 button1.Location = new Point(button1.Location.X + listView1.Width, button1.Location.Y);
                 button2.Location = new Point(button2.Location.X + listView1.Width, button2.Location.Y);
             }
+        }
+
+        private void tabPage2_Enter(object sender, EventArgs e)
+        {
+            MessageBox.Show("Entred !!!!");
         }
     }
 }

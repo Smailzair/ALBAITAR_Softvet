@@ -50,6 +50,7 @@
             this.CLIENT_WILAYA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CLIENT_NUM_PHONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CLIENT_EMAIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button8 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -90,7 +91,6 @@
             this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OBSERV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -317,6 +317,21 @@
             this.CLIENT_EMAIL.ReadOnly = true;
             this.CLIENT_EMAIL.Visible = false;
             // 
+            // button8
+            // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button8.BackgroundImage")));
+            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Location = new System.Drawing.Point(610, 143);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(26, 31);
+            this.button8.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.button8, "Exporter en Excel");
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // textBox3
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -451,6 +466,7 @@
             this.button5.TabIndex = 22;
             this.button5.Text = "Coprologie";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button7
             // 
@@ -468,6 +484,7 @@
             this.button7.TabIndex = 21;
             this.button7.Text = "Urologie (Analyse Biochimique\r\n                 et Bactériologique)";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // groupBox2
             // 
@@ -789,21 +806,6 @@
             this.OBSERV.Name = "OBSERV";
             this.OBSERV.ReadOnly = true;
             this.OBSERV.Visible = false;
-            // 
-            // button8
-            // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button8.BackgroundImage")));
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(610, 143);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(26, 31);
-            this.button8.TabIndex = 25;
-            this.toolTip1.SetToolTip(this.button8, "Exporter en Excel");
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // Laboratoire
             // 

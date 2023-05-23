@@ -1152,6 +1152,16 @@ namespace ALBAITAR_Softvet.Resources
                 }
             }
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
