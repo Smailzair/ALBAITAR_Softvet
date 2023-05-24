@@ -30,7 +30,6 @@ namespace ALBAITAR_Softvet.Dialogs
         int max_nb_to_select = 999999999;
         List<ListViewItem> items2 = new List<ListViewItem>();
         bool btn2_enabled_first_time = false;
-        bool thers_modif = false;
         public Anims_List_Search(int? select_nb)
         {
             if (select_nb != null)
@@ -86,7 +85,6 @@ namespace ALBAITAR_Softvet.Dialogs
             button2.Text = "OK " + (button2.Enabled ? "[" + selected_items_count + "]" : "");
             listView1.Enabled = listView1.Visible = (max_nb_to_select - listView2.Items.Count) > 0;
             label2.Visible = (max_nb_to_select - listView2.Items.Count) <= 0;
-            thers_modif = true;
         }
 
         private void listView2_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -107,7 +105,6 @@ namespace ALBAITAR_Softvet.Dialogs
             button2.Text = "OK " + (button2.Enabled ? "[" + selected_items_count + "]" : "");
             listView1.Enabled = listView1.Visible = (max_nb_to_select - listView2.Items.Count) > 0;
             label2.Visible = (max_nb_to_select - listView2.Items.Count) <= 0;
-            thers_modif = true;
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -1,24 +1,29 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
+using Microsoft.Office.Interop.Word;
 using Npgsql.Logging;
 //using CrystalDecisions.CrystalReports.Engine;
 //using CrystalDecisions.Windows.Forms;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Dynamic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using DataTable = System.Data.DataTable;
 
 namespace ALBAITAR_Softvet
 {
     public partial class Main_Frm : Form
     {
+        DateTime last_update_time = new DateTime(1900, 12, 31);
         Thread th;
         public static DataTable ADRESSES_SITES;
         bool sites_table_ready = false;
@@ -28,15 +33,32 @@ namespace ALBAITAR_Softvet
         int selected_animal_id = -1;
         DataTable clients;
         DataTable animals;
+        ImageList tabcontrol_img_lst;
+        //----------
+        DataTable chosen_anim_from_search;
+        DataTable chosen_client_from_search;
         //-------------
         static DataTable main_visites_tab;
         bool loading_visites_tab = false;
         static bool ended_loading_visites_tab = false;
         //-------------------
+        
         public Main_Frm()
         {
             InitializeComponent();
             //------------------------
+            tabcontrol_img_lst = new ImageList();
+            tabcontrol_img_lst.Images.AddRange(new Image[]
+            {
+                Properties.Resources.agenda_001,//Visite analyse
+                Properties.Resources.agenda_003,//Labo
+                Properties.Resources.icons8_info_30px,//Infos
+                Properties.Resources.icons8_tear_off_calendar_30px,//calendar
+            });
+            tabControl1.ImageList = tabcontrol_img_lst;
+            tabPage_infos_animal.ImageIndex = 2;
+            tabPage_visites_animal.ImageIndex = 0;
+            //-------------------------
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
                 Autorisations = PreConnection.Load_data("SELECT `ID`,`CODE`,`AUTOR_TEXT`,Usr_" + Properties.Settings.Default.Last_login_user_idx + " FROM tb_autoriz;");
@@ -65,14 +87,14 @@ namespace ALBAITAR_Softvet
             {
                 th.Join();
             }
-            if (Application.OpenForms["Clients"] == null)
+            if (System.Windows.Forms.Application.OpenForms["Clients"] == null)
             {
                 new Clients().Show();
             }
             else
             {
-                Application.OpenForms["Clients"].WindowState = Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Clients"].WindowState;
-                Application.OpenForms["Clients"].BringToFront();
+                System.Windows.Forms.Application.OpenForms["Clients"].WindowState = System.Windows.Forms.Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Clients"].WindowState;
+                System.Windows.Forms.Application.OpenForms["Clients"].BringToFront();
             }
             Cursor = Cursors.Default;
             panel1.Visible = false;
@@ -94,14 +116,14 @@ namespace ALBAITAR_Softvet
         private void button11_Click(object sender, EventArgs e)
         {
 
-            if (Application.OpenForms["Animaux"] == null)
+            if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
             {
                 new Animaux().Show();
             }
             else
             {
-                Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
-                Application.OpenForms["Animaux"].BringToFront();
+                System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
+                System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
             }
             panel1.Visible = false;
 
@@ -111,14 +133,14 @@ namespace ALBAITAR_Softvet
         private void button12_Click(object sender, EventArgs e)
         {
 
-            if (Application.OpenForms["Produits"] == null)
+            if (System.Windows.Forms.Application.OpenForms["Produits"] == null)
             {
                 new Produits().Show();
             }
             else
             {
-                Application.OpenForms["Produits"].WindowState = Application.OpenForms["Produits"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Produits"].WindowState;
-                Application.OpenForms["Produits"].BringToFront();
+                System.Windows.Forms.Application.OpenForms["Produits"].WindowState = System.Windows.Forms.Application.OpenForms["Produits"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Produits"].WindowState;
+                System.Windows.Forms.Application.OpenForms["Produits"].BringToFront();
             }
             panel1.Visible = false;
 
@@ -126,14 +148,14 @@ namespace ALBAITAR_Softvet
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms["Agenda"] == null)
+            if (System.Windows.Forms.Application.OpenForms["Agenda"] == null)
             {
                 new Agenda().Show();
             }
             else
             {
-                Application.OpenForms["Agenda"].WindowState = Application.OpenForms["Agenda"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Agenda"].WindowState;
-                Application.OpenForms["Agenda"].BringToFront();
+                System.Windows.Forms.Application.OpenForms["Agenda"].WindowState = System.Windows.Forms.Application.OpenForms["Agenda"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Agenda"].WindowState;
+                System.Windows.Forms.Application.OpenForms["Agenda"].BringToFront();
             }
             panel1.Visible = false;
 
@@ -143,7 +165,7 @@ namespace ALBAITAR_Softvet
         {
             Properties.Settings.Default.Login_Auto_Enter = false;
             Properties.Settings.Default.Save();
-            Application.Restart();
+            System.Windows.Forms.Application.Restart();
         }
 
         private void Main_Frm_Load(object sender, EventArgs e)
@@ -170,12 +192,12 @@ namespace ALBAITAR_Softvet
                     }
                     else
                     {
-                        Application.Exit();
+                        System.Windows.Forms.Application.Exit();
                     }
                 }
                 else
                 {
-                    Application.Exit();
+                    System.Windows.Forms.Application.Exit();
                 }
             }
             else
@@ -185,7 +207,7 @@ namespace ALBAITAR_Softvet
             ///--------------------
             foreach (Control ctrr in this.Controls)
             {
-                if(ctrr.Name != "button8" && ctrr.Name != "listView1")
+                if (ctrr.Name != "button8" && ctrr.Name != "listView1")
                 {
                     EventHandlerList events = (EventHandlerList)typeof(Control)
                                      .GetProperty("Events", BindingFlags.NonPublic | BindingFlags.Instance)
@@ -197,11 +219,11 @@ namespace ALBAITAR_Softvet
 
                     Delegate mouseClickDelegate = events[mouseClickEventKey] as Delegate;
                     if (mouseClickDelegate == null)
-                    {                        
+                    {
                         ctrr.MouseClick += tmp_MouseClick;
                     }
                 }
-                
+
 
             }
             ///---------------------
@@ -221,6 +243,24 @@ namespace ALBAITAR_Softvet
 
         }
 
+        private void refresh_main_tables()
+        {
+            last_update_time = DateTime.Now;
+            //------------
+            int cb1_idx = comboBox1.SelectedIndex > -1 ? comboBox1.SelectedIndex : 0;
+            int cb2_idx = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : 0) : 0;
+            clients = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
+            animals = PreConnection.Load_data("SELECT * FROM tb_animaux;");
+            comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
+            comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
+            comboBox1.SelectedIndex = cb1_idx;
+            try { comboBox2.SelectedValue = cb2_idx; }catch (Exception ex) { comboBox2.SelectedIndex = 0; }
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            comboBox1_SelectedIndexChanged(null,null);
+            Refresh_current_tab();
+        }
+
         private void button3_MouseEnter(object sender, EventArgs e)
         {
             panel1.Visible = true;
@@ -228,7 +268,7 @@ namespace ALBAITAR_Softvet
 
         private void button3_MouseLeave(object sender, EventArgs e)
         {
-            Rectangle panelBounds = panel1.RectangleToScreen(panel1.ClientRectangle);
+            System.Drawing.Rectangle panelBounds = panel1.RectangleToScreen(panel1.ClientRectangle);
             if (!panelBounds.Contains(MousePosition))
             {
                 panel1.Visible = false;
@@ -237,7 +277,7 @@ namespace ALBAITAR_Softvet
 
         private void panel1_MouseLeave(object sender, EventArgs e)
         {
-            Rectangle panelBounds = panel1.RectangleToScreen(panel1.ClientRectangle);
+            System.Drawing.Rectangle panelBounds = panel1.RectangleToScreen(panel1.ClientRectangle);
             if (!panelBounds.Contains(MousePosition))
             {
                 panel1.Visible = false;
@@ -251,14 +291,14 @@ namespace ALBAITAR_Softvet
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms["Laboratoire"] == null)
+            if (System.Windows.Forms.Application.OpenForms["Laboratoire"] == null)
             {
                 new Laboratoire().Show();
             }
             else
             {
-                Application.OpenForms["Laboratoire"].WindowState = Application.OpenForms["Laboratoire"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Laboratoire"].WindowState;
-                Application.OpenForms["Laboratoire"].BringToFront();
+                System.Windows.Forms.Application.OpenForms["Laboratoire"].WindowState = System.Windows.Forms.Application.OpenForms["Laboratoire"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Laboratoire"].WindowState;
+                System.Windows.Forms.Application.OpenForms["Laboratoire"].BringToFront();
             }
             panel1.Visible = false;
         }
@@ -283,34 +323,34 @@ namespace ALBAITAR_Softvet
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms["Vente"] == null)
+            if (System.Windows.Forms.Application.OpenForms["Vente"] == null)
             {
                 new Vente().Show();
             }
             else
             {
-                Application.OpenForms["Vente"].WindowState = Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Vente"].WindowState;
-                Application.OpenForms["Vente"].BringToFront();
+                System.Windows.Forms.Application.OpenForms["Vente"].WindowState = System.Windows.Forms.Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Vente"].WindowState;
+                System.Windows.Forms.Application.OpenForms["Vente"].BringToFront();
             }
             panel1.Visible = false;
         }
-        
+
         private void button8_Click(object sender, EventArgs e)
         {
-            
+
             if (!listView1.Visible)
             {
                 listView1.Visible = true;
-                button8.Location = new Point(button8.Location.X - listView1.Width, button8.Location.Y);
-                button1.Location = new Point(button1.Location.X - listView1.Width, button1.Location.Y);
-                button2.Location = new Point(button2.Location.X - listView1.Width, button2.Location.Y);
+                button8.Location = new System.Drawing.Point(button8.Location.X - listView1.Width, button8.Location.Y);
+                button1.Location = new System.Drawing.Point(button1.Location.X - listView1.Width, button1.Location.Y);
+                button2.Location = new System.Drawing.Point(button2.Location.X - listView1.Width, button2.Location.Y);
             }
             else
             {
                 listView1.Visible = false;
-                button8.Location = new Point(button8.Location.X + listView1.Width, button8.Location.Y);
-                button1.Location = new Point(button1.Location.X + listView1.Width, button1.Location.Y);
-                button2.Location = new Point(button2.Location.X + listView1.Width, button2.Location.Y);
+                button8.Location = new System.Drawing.Point(button8.Location.X + listView1.Width, button8.Location.Y);
+                button1.Location = new System.Drawing.Point(button1.Location.X + listView1.Width, button1.Location.Y);
+                button2.Location = new System.Drawing.Point(button2.Location.X + listView1.Width, button2.Location.Y);
             }
 
         }
@@ -321,9 +361,9 @@ namespace ALBAITAR_Softvet
             if (listView1.Visible)
             {
                 listView1.Visible = false;
-                button8.Location = new Point(button8.Location.X + listView1.Width, button8.Location.Y);
-                button1.Location = new Point(button1.Location.X + listView1.Width, button1.Location.Y);
-                button2.Location = new Point(button2.Location.X + listView1.Width, button2.Location.Y);
+                button8.Location = new System.Drawing.Point(button8.Location.X + listView1.Width, button8.Location.Y);
+                button1.Location = new System.Drawing.Point(button1.Location.X + listView1.Width, button1.Location.Y);
+                button2.Location = new System.Drawing.Point(button2.Location.X + listView1.Width, button2.Location.Y);
             }
         }
 
@@ -332,9 +372,9 @@ namespace ALBAITAR_Softvet
             if (listView1.Visible && !listView1.Bounds.Contains(e.Location))
             {
                 listView1.Visible = false;
-                button8.Location = new Point(button8.Location.X + listView1.Width, button8.Location.Y);
-                button1.Location = new Point(button1.Location.X + listView1.Width, button1.Location.Y);
-                button2.Location = new Point(button2.Location.X + listView1.Width, button2.Location.Y);
+                button8.Location = new System.Drawing.Point(button8.Location.X + listView1.Width, button8.Location.Y);
+                button1.Location = new System.Drawing.Point(button1.Location.X + listView1.Width, button1.Location.Y);
+                button2.Location = new System.Drawing.Point(button2.Location.X + listView1.Width, button2.Location.Y);
             }
         }
 
@@ -343,18 +383,14 @@ namespace ALBAITAR_Softvet
             if (listView1.Visible)
             {
                 listView1.Visible = false;
-                button8.Location = new Point(button8.Location.X + listView1.Width, button8.Location.Y);
-                button1.Location = new Point(button1.Location.X + listView1.Width, button1.Location.Y);
-                button2.Location = new Point(button2.Location.X + listView1.Width, button2.Location.Y);
-            }            
+                button8.Location = new System.Drawing.Point(button8.Location.X + listView1.Width, button8.Location.Y);
+                button1.Location = new System.Drawing.Point(button1.Location.X + listView1.Width, button1.Location.Y);
+                button2.Location = new System.Drawing.Point(button2.Location.X + listView1.Width, button2.Location.Y);
+            }
+            
         }
-        
-        
-        private void tabPage2_Enter(object sender, EventArgs e)
-        {
-            Refresh_current_tab();
-        }
-        
+
+
         static void visites_tab(object anim_id)
         {
             main_visites_tab = PreConnection.Load_data("SELECT tb1.*,tb2.REF AS 'FACTURE_REF' FROM tb_visites tb1 LEFT JOIN ("
@@ -428,37 +464,45 @@ namespace ALBAITAR_Softvet
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_68` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_68` IS FALSE AND `ITEM_PROD_CODE_68` IS NOT NULL AND `ITEM_NME_68` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_69` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_69` IS FALSE AND `ITEM_PROD_CODE_69` IS NOT NULL AND `ITEM_NME_69` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_70` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_70` IS FALSE AND `ITEM_PROD_CODE_70` IS NOT NULL AND `ITEM_NME_70` IS NOT NULL "
-                                    + ") tb2 ON tb1.`ID` = tb2.`VISIT` WHERE tb1.`ANIM_ID` = " + anim_id + " ORDER BY DATETIME;");            
+                                    + ") tb2 ON tb1.`ID` = tb2.`VISIT` WHERE tb1.`ANIM_ID` = " + anim_id + " ORDER BY DATETIME;");
             ended_loading_visites_tab = true;
         }
 
         private void Main_Frm_Activated(object sender, EventArgs e)
-        {
-            tabControl1.Focus();
+        {            
+            Params = PreConnection.Load_data("SELECT * FROM tb_params;");
+            //-----------
+            label_cab_nme.Text = Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 1).First()["VAL"].ToString();
+            //----------
+            DateTime tt = DateTime.Parse(Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 6).First()["VAL"].ToString());            
+            if((tt - last_update_time).Seconds > 0)
+            {
+                refresh_main_tables();
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBox1.SelectedIndex == 0) //CLIENT
+            if (comboBox1.SelectedIndex == 0) //CLIENT
             {
                 comboBox2.DataSource = clients;
                 comboBox2.ValueMember = "ID";
                 comboBox2.DisplayMember = "FULL_NME";
-                
+
             }
             else //ANIMAL
             {
                 comboBox2.DataSource = animals;
                 comboBox2.ValueMember = "ID";
                 comboBox2.DisplayMember = "NME";
-                
+
             }
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             selected_animal_id = selected_client_id = -1;
-            if(comboBox2.SelectedValue != null)
+            if (comboBox2.SelectedValue != null)
             {
                 if (int.TryParse(comboBox2.SelectedValue.ToString(), out int yy))
                 {
@@ -467,7 +511,7 @@ namespace ALBAITAR_Softvet
                         selected_client_id = (int)comboBox2.SelectedValue;
                     }
                     else //ANIMAL
-                    {                     
+                    {
                         selected_animal_id = (int)comboBox2.SelectedValue;
                     }
 
@@ -475,7 +519,7 @@ namespace ALBAITAR_Softvet
             }
             Refresh_current_tab();
         }
-        
+
         private string get_blnk_null(object src)
         {
             if (src is DataGridViewCell)
@@ -516,17 +560,16 @@ namespace ALBAITAR_Softvet
             }
         }
 
-        DataTable chosen_anim_from_search;
-        DataTable chosen_client_from_search;
+        
         private void button7_Click_1(object sender, EventArgs e)
         {
-            if(comboBox1.SelectedIndex == 0)
+            if (comboBox1.SelectedIndex == 0)
             {
                 chosen_client_from_search = new DataTable();
                 Clients_List_Search select = new Clients_List_Search(1);
                 select.DataTableReturned += ChildForm_DataTableReturned2;
                 select.ShowDialog();
-                if (chosen_client_from_search.Rows.Count > 0)
+                if (chosen_client_from_search != null)
                 {
                     comboBox2.SelectedValue = chosen_client_from_search.Rows[0][0];
                 }
@@ -537,7 +580,7 @@ namespace ALBAITAR_Softvet
                 Anims_List_Search select = new Anims_List_Search(1);
                 select.DataTableReturned += ChildForm_DataTableReturned;
                 select.ShowDialog();
-                if (chosen_anim_from_search.Rows.Count > 0)
+                if (chosen_anim_from_search != null)
                 {
                     comboBox2.SelectedValue = chosen_anim_from_search.Rows[0][1];
                 }
@@ -554,7 +597,7 @@ namespace ALBAITAR_Softvet
         {
             chosen_anim_from_search = e.DataTable;
         }
-        
+
         private void Refresh_current_tab()
         {
             switch (tabControl1.SelectedTab.Name)
@@ -572,12 +615,80 @@ namespace ALBAITAR_Softvet
                                 loading_visites_tab = false;
                                 dataGridView2.DataSource = main_visites_tab;
                                 dataGridView2.Refresh();
+                                int fct = main_visites_tab.AsEnumerable().Count(t => t["FACTURE_REF"] != DBNull.Value && ((string)t["FACTURE_REF"]).Trim().Length > 0);
+                                radioButton1.Text = "Tous (" + main_visites_tab.Rows.Count + ")";
+                                radioButton2.Text = "Facturé (" + fct + ")";
+                                radioButton3.Text = "Non Facturé (" + (main_visites_tab.Rows.Count - fct) + ")";
+                                radioButton1_CheckedChanged(null, null);
                             }
                         }
                     }
+                break;
+                case "tabPage_infos_animal":
+                    DataRow inf = animals.AsEnumerable().Where(zz => (int)zz["ID"] == selected_animal_id).FirstOrDefault();                    
+                    if (inf != null)
+                    {                        
+                        label16.Text = inf["DATE_ADDED"] != DBNull.Value ? ((DateTime)inf["DATE_ADDED"]).ToString("dddd dd/MM/yyyy", new CultureInfo("fr-FR")) : "--";
+                        label25.Text = inf["NME"] != DBNull.Value ? (string)inf["NME"] : "--";
+                        label17.Text = inf["NUM_IDENTIF"] != DBNull.Value ? (string)inf["NUM_IDENTIF"] : "--";
+                        label18.Text = inf["NUM_PASSPORT"] != DBNull.Value ? (string)inf["NUM_PASSPORT"] : "--";
+                        DataRow clnt_nme = clients.AsEnumerable().Where(zz => (int)zz["ID"] == (inf["CLIENT_ID"] != DBNull.Value ? (int)inf["CLIENT_ID"] : -1)).FirstOrDefault();
+                        label21.Text = clnt_nme != null ? (string)clnt_nme["FULL_NME"] : "--";                        
+                        label23.Text = inf["ESPECE"] != DBNull.Value ? (string)inf["ESPECE"] : "--";
+                        label22.Text = inf["RACE"] != DBNull.Value ? (string)inf["RACE"] : "--";
+                        label20.Text = inf["SEXE"] != DBNull.Value ? (string)inf["SEXE"] : "--";
+                        label26.Text = inf["NISS_DATE"] != DBNull.Value ? ((DateTime)inf["NISS_DATE"]).ToString("dd/MM/yyyy"): "--";
+                        label19.Text = inf["ROBE"] != DBNull.Value ? (string)inf["ROBE"] : "--";
+                        textBox8.Text = inf["OBSERVATIONS"] != DBNull.Value ? (string)inf["OBSERVATIONS"] : "";
+                        bool ttt = inf["IS_RADIATED"] != DBNull.Value;
+                        ttt = ttt ? (sbyte)inf["IS_RADIATED"] == 1 : false;
+                        if (ttt)
+                        {
+                            label24.Text = "Oui";
+                            groupBox1.Visible = true;
+                            label27.Text = inf["RADIATION_DATE"] != DBNull.Value ? ((DateTime)inf["RADIATION_DATE"]).ToString("dd/MM/yyyy") : "--";
+                            textBox5.Text = inf["RADIATION_CAUSES"] != DBNull.Value ? (string)inf["RADIATION_CAUSES"] : "";
+                        }
+                        else
+                        {
+                            label24.Text = "Non";
+                            groupBox1.Visible = false;
+                            label27.Text = "--";
+                            textBox5.Text = "";
+                        }
+                        pictureBox2.Image = inf["PICTURE"] != DBNull.Value ? PreConnection.ByteArrayToImage((byte[])inf["PICTURE"]) : (Properties.Settings.Default.Use_animals_logo ? (Image)Properties.Resources.ResourceManager.GetObject(label23.Text) : null);
+                    }                    
                     break;
-             //==================================================================
+                    //==================================================================
             }
+        }
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            System.Drawing.Font fnt = new System.Drawing.Font(radioButton1.Font.FontFamily, (float)8.25, FontStyle.Regular);
+            System.Drawing.Font fnt2 = new System.Drawing.Font(radioButton1.Font.FontFamily, (float)9.25, FontStyle.Bold);
+
+            radioButton1.Font = radioButton1.Checked ? fnt2 : fnt;
+            radioButton2.Font = radioButton2.Checked ? fnt2 : fnt;
+            radioButton3.Font = radioButton3.Checked ? fnt2 : fnt;
+            if (radioButton2.Checked) //Facturé
+            {
+                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "LEN(FACTURE_REF) > 0";
+            }
+            else if (radioButton3.Checked) //Non Facturé
+            {
+
+                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "FACTURE_REF IS NULL OR LEN(FACTURE_REF) = 0";
+            }
+            else //Tous
+            {
+                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "";
+
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Refresh_current_tab();
         }
     }
 }

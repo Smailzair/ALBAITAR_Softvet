@@ -47,7 +47,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
             foreach (ListViewItem item in items2)
             {
-                if (item.SubItems[1].Text.ToLower().Contains(filter) || textBox1.Text.Trim().Length == 0)
+                if (item.SubItems[1].Text.ToLower().Contains(filter) || item.SubItems[2].Text.ToLower().Contains(filter) || textBox1.Text.Trim().Length == 0)
                 {
 
                     if (!listView1.Items.Contains(item) && !listView2.Items.Contains(item))
@@ -114,10 +114,12 @@ namespace ALBAITAR_Softvet.Dialogs
             RESULT = new DataTable();
             RESULT.Columns.Add("ID");
             RESULT.Columns.Add("FULL_NME");
+            RESULT.Columns.Add("NUM_CNI");
             for (int i = 0; i < listView2.Items.Count; i++)
             {
                 RESULT.Rows.Add(listView2.Items[i].SubItems[0].Text,
-                    listView2.Items[i].SubItems[1].Text
+                    listView2.Items[i].SubItems[1].Text,
+                    listView2.Items[i].SubItems[2].Text
                     );
             }
             Close();
@@ -131,7 +133,7 @@ namespace ALBAITAR_Softvet.Dialogs
         private void Anims_List_Load(object sender, EventArgs e)
         {
 
-                props = PreConnection.Load_data("SELECT ID, concat(FAMNME, ' ', NME) AS FULL_NME FROM tb_clients;");
+                props = PreConnection.Load_data("SELECT ID, concat(SEX,' ',FAMNME, ' ', NME) AS FULL_NME,NUM_CNI FROM tb_clients;");
                 if (props != null)
                 {
                     if (props.Rows.Count > 0)
@@ -140,6 +142,7 @@ namespace ALBAITAR_Softvet.Dialogs
                         {
                         ListViewItem dd = new ListViewItem(row["ID"].ToString());
                         dd.SubItems.Add(row["FULL_NME"].ToString());
+                        dd.SubItems.Add(row["NUM_CNI"].ToString());
                         listView1.Items.Add(dd);
                         items2.Add(dd);
                     }
@@ -153,13 +156,13 @@ namespace ALBAITAR_Softvet.Dialogs
                     }
                     else
                     {
-                        MessageBox.Show("Aucun animal trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Aucun person trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Close();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Aucun animal trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Aucun person trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }           
             
@@ -169,15 +172,16 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             if (((ListView)sender).Columns.Count > 0)
             {
-                ((ListView)sender).Columns[1].Width = (((ListView)sender).ClientSize.Width - 1);
+                ((ListView)sender).Columns[1].Width = (((ListView)sender).ClientSize.Width - 1) / 2;
+                ((ListView)sender).Columns[2].Width = (((ListView)sender).ClientSize.Width - 1) / 2;
             }
 
         }
 
         private void listView1_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
-            e.Graphics.FillRectangle(Brushes.Peru, e.Bounds);
-            if (e.ColumnIndex == 1)
+            e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.Bounds);
+            if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
             {
                 StringFormat stringFormat = new StringFormat();
                 stringFormat.Alignment = StringAlignment.Center;
@@ -192,7 +196,7 @@ namespace ALBAITAR_Softvet.Dialogs
         private void listView1_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
             e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.Bounds);
-            if (e.ColumnIndex == 1)
+            if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
             {
                 StringFormat stringFormat = new StringFormat();
                 stringFormat.Alignment = StringAlignment.Near;
