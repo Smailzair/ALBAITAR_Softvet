@@ -274,6 +274,18 @@
     <Compile Include="Dialogs\Add_Vente_Fact_Item.Designer.cs">
       <DependentUpon>Add_Vente_Fact_Item.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Clients_List_Search.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Clients_List_Search.Designer.cs">
+      <DependentUpon>Clients_List_Search.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Anims_List_Search.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Anims_List_Search.Designer.cs">
+      <DependentUpon>Anims_List_Search.cs</DependentUpon>
+    </Compile>
     <Compile Include="Labo\Autre_Lab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -421,6 +433,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Add_Vente_Fact_Item.resx">
       <DependentUpon>Add_Vente_Fact_Item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Clients_List_Search.resx">
+      <DependentUpon>Clients_List_Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Anims_List_Search.resx">
+      <DependentUpon>Anims_List_Search.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Labo\Autre_Lab.resx">
       <DependentUpon>Autre_Lab.cs</DependentUpon>

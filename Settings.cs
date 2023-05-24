@@ -94,9 +94,14 @@ namespace ALBAITAR_Softvet
                 cmmd += " UPDATE tb_params SET `VAL` = '" + textBox2.Text.Replace("'", "''") + "' WHERE `ID` = 2;";
                 cmmd += " UPDATE tb_params SET `VAL` = '" + textBox3.Text.Replace("'", "''") + "' WHERE `ID` = 3;";
                 cmmd += " UPDATE tb_params SET `VAL` = '" + textBox4.Text.Replace("'", "''") + "' WHERE `ID` = 4;";
+                /*
                 PreConnection.Excut_Cmd(cmmd);
                 Main_Frm.Params = PreConnection.Load_data("SELECT * FROM tb_params;");
-                Main_Frm.label_cab_nme.Text = textBox1.Text;
+                Main_Frm.label_cab_nme.Text = textBox1.Text;*/
+                MessageBox.Show("Logiciel va redémarrer pour actualiser les modifications.", "Redémarrage requis : ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.Restart();
+                
+
             }
             else
             {

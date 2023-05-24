@@ -1,4 +1,6 @@
-﻿namespace ALBAITAR_Softvet
+﻿using System.Security;
+
+namespace ALBAITAR_Softvet
 {
     partial class Main_Frm
     {
@@ -29,53 +31,61 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Frm));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.panel1 = new System.Windows.Forms.Panel();
-            label_cab_nme = new System.Windows.Forms.Label();
+            this.label_cab_nme = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabPage_visites_animal = new System.Windows.Forms.TabPage();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.ID_VISITE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATETIME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VISITOR_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OBJECT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FACTURE_REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabPage_visites_animal.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
-            // button8
+            // button7
             // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_30px;
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(800, 12);
-            this.button8.Margin = new System.Windows.Forms.Padding(4);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(43, 46);
-            this.button8.TabIndex = 23;
-            this.toolTip1.SetToolTip(this.button8, "Notificaions");
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button7.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_search_20px;
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Location = new System.Drawing.Point(555, 41);
+            this.button7.Margin = new System.Windows.Forms.Padding(4);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(24, 24);
+            this.button7.TabIndex = 32;
+            this.toolTip1.SetToolTip(this.button7, "Verrouiller/Changer l\'utilisateur");
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click_1);
             // 
             // button6
             // 
@@ -202,25 +212,6 @@
             this.button5.Click += new System.EventHandler(this.button5_Click);
             this.button5.MouseLeave += new System.EventHandler(this.panel1_MouseLeave);
             // 
-            // button3
-            // 
-            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_menu_30px;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(13, 13);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(43, 46);
-            this.button3.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.button3, "Parametres");
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            this.button3.MouseEnter += new System.EventHandler(this.button3_MouseEnter);
-            this.button3.MouseLeave += new System.EventHandler(this.button3_MouseLeave);
-            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -257,6 +248,43 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // button8
+            // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button8.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_30px;
+            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Location = new System.Drawing.Point(800, 12);
+            this.button8.Margin = new System.Windows.Forms.Padding(4);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(43, 46);
+            this.button8.TabIndex = 23;
+            this.toolTip1.SetToolTip(this.button8, "Notificaions");
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_menu_30px;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(13, 13);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(43, 46);
+            this.button3.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.button3, "Parametres");
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.MouseEnter += new System.EventHandler(this.button3_MouseEnter);
+            this.button3.MouseLeave += new System.EventHandler(this.button3_MouseLeave);
+            // 
             // listView1
             // 
             this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -290,36 +318,30 @@
             // 
             // label_cab_nme
             // 
-            label_cab_nme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.label_cab_nme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            label_cab_nme.BackColor = System.Drawing.Color.Transparent;
-            label_cab_nme.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            label_cab_nme.ForeColor = System.Drawing.Color.Purple;
-            label_cab_nme.Location = new System.Drawing.Point(209, 13);
-            label_cab_nme.Name = "label_cab_nme";
-            label_cab_nme.Size = new System.Drawing.Size(490, 25);
-            label_cab_nme.TabIndex = 21;
-            label_cab_nme.Text = "Cabinet : --";
-            label_cab_nme.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label_cab_nme.BackColor = System.Drawing.Color.Transparent;
+            this.label_cab_nme.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_cab_nme.ForeColor = System.Drawing.Color.Purple;
+            this.label_cab_nme.Location = new System.Drawing.Point(209, 13);
+            this.label_cab_nme.Name = "label_cab_nme";
+            this.label_cab_nme.Size = new System.Drawing.Size(490, 25);
+            this.label_cab_nme.TabIndex = 21;
+            this.label_cab_nme.Text = "Cabinet : --";
+            this.label_cab_nme.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Animal",
-            "Propriétaire"});
+            "Propriétaire",
+            "Animal"});
             this.comboBox1.Location = new System.Drawing.Point(182, 41);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 27;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(309, 42);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(339, 21);
-            this.textBox1.TabIndex = 28;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -336,7 +358,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage_visites_animal);
             this.tabControl1.Location = new System.Drawing.Point(1, 69);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -354,18 +376,6 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.dataGridView1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(834, 470);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Enter += new System.EventHandler(this.tabPage2_Enter);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -375,13 +385,119 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "label2";
             // 
-            // dataGridView1
+            // tabPage_visites_animal
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(8, 5);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(616, 229);
-            this.dataGridView1.TabIndex = 2;
+            this.tabPage_visites_animal.Controls.Add(this.dataGridView2);
+            this.tabPage_visites_animal.Location = new System.Drawing.Point(4, 25);
+            this.tabPage_visites_animal.Name = "tabPage_visites_animal";
+            this.tabPage_visites_animal.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_visites_animal.Size = new System.Drawing.Size(834, 470);
+            this.tabPage_visites_animal.TabIndex = 1;
+            this.tabPage_visites_animal.Text = "Visites";
+            this.tabPage_visites_animal.UseVisualStyleBackColor = true;
+            this.tabPage_visites_animal.Enter += new System.EventHandler(this.tabPage2_Enter);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView2.ColumnHeadersHeight = 35;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID_VISITE,
+            this.DATETIME,
+            this.VISITOR_FULL_NME,
+            this.OBJECT,
+            this.FACTURE_REF,
+            this.ANIM_ID});
+            this.dataGridView2.EnableHeadersVisualStyles = false;
+            this.dataGridView2.Location = new System.Drawing.Point(6, 6);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView2.Size = new System.Drawing.Size(608, 230);
+            this.dataGridView2.TabIndex = 58;
+            // 
+            // ID_VISITE
+            // 
+            this.ID_VISITE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ID_VISITE.DataPropertyName = "ID";
+            this.ID_VISITE.HeaderText = "ID";
+            this.ID_VISITE.Name = "ID_VISITE";
+            this.ID_VISITE.ReadOnly = true;
+            this.ID_VISITE.Visible = false;
+            this.ID_VISITE.Width = 43;
+            // 
+            // DATETIME
+            // 
+            this.DATETIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATETIME.DataPropertyName = "DATETIME";
+            dataGridViewCellStyle2.Format = "dd/MM/yyyy HH:mm";
+            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DATETIME.HeaderText = "Date";
+            this.DATETIME.Name = "DATETIME";
+            this.DATETIME.ReadOnly = true;
+            this.DATETIME.Width = 58;
+            // 
+            // VISITOR_FULL_NME
+            // 
+            this.VISITOR_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.VISITOR_FULL_NME.DataPropertyName = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME.HeaderText = "Visiteur";
+            this.VISITOR_FULL_NME.Name = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME.ReadOnly = true;
+            this.VISITOR_FULL_NME.Width = 67;
+            // 
+            // OBJECT
+            // 
+            this.OBJECT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OBJECT.DataPropertyName = "OBJECT";
+            this.OBJECT.HeaderText = "Objet";
+            this.OBJECT.Name = "OBJECT";
+            this.OBJECT.ReadOnly = true;
+            // 
+            // FACTURE_REF
+            // 
+            this.FACTURE_REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FACTURE_REF.DataPropertyName = "FACTURE_REF";
+            this.FACTURE_REF.HeaderText = "N° Facture\n(s\'il est facturé)";
+            this.FACTURE_REF.Name = "FACTURE_REF";
+            this.FACTURE_REF.ReadOnly = true;
+            this.FACTURE_REF.Width = 109;
+            // 
+            // ANIM_ID
+            // 
+            this.ANIM_ID.DataPropertyName = "ANIM_ID";
+            this.ANIM_ID.HeaderText = "ANIM_ID";
+            this.ANIM_ID.Name = "ANIM_ID";
+            this.ANIM_ID.ReadOnly = true;
+            this.ANIM_ID.Visible = false;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(309, 41);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(242, 24);
+            this.comboBox2.TabIndex = 31;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // Main_Frm
             // 
@@ -390,16 +506,17 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(843, 569);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button3);
-            this.Controls.Add(label_cab_nme);
+            this.Controls.Add(this.label_cab_nme);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -408,6 +525,7 @@
             this.Name = "Main_Frm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ALBAITAR Softvet";
+            this.Activated += new System.EventHandler(this.Main_Frm_Activated);
             this.Deactivate += new System.EventHandler(this.Main_Frm_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_Frm_FormClosing);
             this.Load += new System.EventHandler(this.Main_Frm_Load);
@@ -416,8 +534,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabPage_visites_animal.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -438,13 +556,20 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        static public System.Windows.Forms.Label label_cab_nme;
+        private System.Windows.Forms.TabPage tabPage_visites_animal;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_VISITE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DATETIME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VISITOR_FULL_NME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OBJECT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FACTURE_REF;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_ID;
+        private System.Windows.Forms.ComboBox comboBox2;
+        public System.Windows.Forms.Label label_cab_nme;
+        private System.Windows.Forms.Button button7;
     }
 }
