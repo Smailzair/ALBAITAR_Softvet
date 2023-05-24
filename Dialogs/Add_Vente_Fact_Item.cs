@@ -22,10 +22,12 @@ namespace ALBAITAR_Softvet.Dialogs
         DataTable visites_non_facturé;
         decimal prix_vente = 0;
         decimal prix_achat = 0;
-        public Add_Vente_Fact_Item()
+        string current_client_nme = "--";
+        public Add_Vente_Fact_Item(string client_nme)
         {
             InitializeComponent();
             //-------------------------        
+            current_client_nme = client_nme;
         }
 
         private void Add_Vente_Fact_Item_Load(object sender, EventArgs e)
@@ -282,6 +284,7 @@ namespace ALBAITAR_Softvet.Dialogs
                                              + "SELECT `ITEM_PROD_CODE_70` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_70` IS FALSE AND `ITEM_PROD_CODE_70` IS NOT NULL AND `ITEM_NME_70` IS NOT NULL"
                     + ");");
                 dataGridView3.DataSource = visites_non_facturé;
+                label9.Text = current_client_nme;
             }
             else
             {

@@ -58,6 +58,7 @@ namespace ALBAITAR_Softvet
             tabControl1.ImageList = tabcontrol_img_lst;
             tabPage_infos_animal.ImageIndex = 2;
             tabPage_visites_animal.ImageIndex = 0;
+            tabPage_labo_animal.ImageIndex = 1;
             //-------------------------
             if (!Properties.Settings.Default.Last_login_is_admin)
             {

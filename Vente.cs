@@ -91,7 +91,7 @@ namespace ALBAITAR_Softvet.Resources
             tmp_current_client_id = comboBox1.SelectedValue != null ? (comboBox1.SelectedValue != DBNull.Value ? (int)comboBox1.SelectedValue : -1) : -1;            
             selected_item = new DataGridViewRow();
             //------------------------
-            new Add_Vente_Fact_Item().ShowDialog();
+            new Add_Vente_Fact_Item(comboBox1.Text).ShowDialog();
             //----------------------
             if (selected_item != null && selected_item.Cells.Count > 0)
             {
