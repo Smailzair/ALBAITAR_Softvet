@@ -25,17 +25,10 @@ namespace ALBAITAR_Softvet.Dialogs
             set { RESULT = value; }
         }
 
-        DataTable props;
-        int selected_items_count = 0;
-        int max_nb_to_select = 999999999;
+        DataTable props;        
         List<ListViewItem> items2 = new List<ListViewItem>();
-        bool btn2_enabled_first_time = false;
-        public Clients_List_Search(int? select_nb)
-        {
-            if (select_nb != null)
-            {
-                max_nb_to_select = (int)select_nb;
-            }
+        public Clients_List_Search()
+        {         
             InitializeComponent();
             //-------------------------
         }
@@ -50,7 +43,7 @@ namespace ALBAITAR_Softvet.Dialogs
                 if (item.SubItems[1].Text.ToLower().Contains(filter) || item.SubItems[2].Text.ToLower().Contains(filter) || textBox1.Text.Trim().Length == 0)
                 {
 
-                    if (!listView1.Items.Contains(item) && !listView2.Items.Contains(item))
+                    if (!listView1.Items.Contains(item))
                     {
                         listView1.Items.Add(item);
                     }
@@ -66,48 +59,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
         }
 
-        private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
 
-
-            if (listView1.SelectedItems.Count > 0)
-            {
-                ListViewItem item = listView1.SelectedItems[0];
-                listView1.Items.Remove(item);
-                items2.Remove(item);
-                listView2.ItemSelectionChanged -= listView2_ItemSelectionChanged;
-                listView2.Items.Add(item);
-                listView2.SelectedIndices.Clear();
-                listView2.ItemSelectionChanged += listView2_ItemSelectionChanged;
-                selected_items_count++;
-            }
-            button2.Enabled = selected_items_count > 0 ? true : btn2_enabled_first_time;
-            button2.Text = "OK " + (button2.Enabled ? "[" + selected_items_count + "]" : "");
-            listView1.Enabled = listView1.Visible = (max_nb_to_select - listView2.Items.Count) > 0;
-            label2.Visible = (max_nb_to_select - listView2.Items.Count) <= 0;
-
-        }
-
-        private void listView2_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            if (listView2.SelectedItems.Count > 0)
-            {
-                ListViewItem item = listView2.SelectedItems[0];
-                listView2.Items.Remove(item);
-                items2.Add(item);
-                listView1.ItemSelectionChanged -= listView1_ItemSelectionChanged;
-                listView1.Items.Add(item);
-                listView1.SelectedIndices.Clear();
-                listView1.ItemSelectionChanged += listView1_ItemSelectionChanged;
-                selected_items_count--;
-
-            }
-            button2.Enabled = selected_items_count > 0 ? true : btn2_enabled_first_time;
-            button2.Text = "OK " + (button2.Enabled ? "[" + selected_items_count + "]" : "");
-            listView1.Enabled = listView1.Visible = (max_nb_to_select - listView2.Items.Count) > 0;
-            label2.Visible = (max_nb_to_select - listView2.Items.Count) <= 0;
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -115,12 +67,16 @@ namespace ALBAITAR_Softvet.Dialogs
             RESULT.Columns.Add("ID");
             RESULT.Columns.Add("FULL_NME");
             RESULT.Columns.Add("NUM_CNI");
-            for (int i = 0; i < listView2.Items.Count; i++)
+            if (listView1.SelectedItems.Count > 0)
             {
-                RESULT.Rows.Add(listView2.Items[i].SubItems[0].Text,
-                    listView2.Items[i].SubItems[1].Text,
-                    listView2.Items[i].SubItems[2].Text
+                RESULT.Rows.Add(listView1.SelectedItems[0].SubItems[0].Text,
+                    listView1.SelectedItems[0].SubItems[1].Text,
+                    listView1.SelectedItems[0].SubItems[2].Text
                     );
+            }
+            else
+            {
+                RESULT = null;
             }
             Close();
         }
@@ -147,12 +103,6 @@ namespace ALBAITAR_Softvet.Dialogs
                         items2.Add(dd);
                     }
 
-                        button2.Enabled = selected_items_count > 0;
-                        button2.Text = "OK " + (button2.Enabled ? "[" + selected_items_count + "]" : "");
-
-
-
-                        btn2_enabled_first_time = button2.Enabled;
                     }
                     else
                     {
@@ -195,7 +145,15 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void listView1_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
-            e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.Bounds);
+            if (e.Item.Selected)
+            {
+                e.Graphics.FillRectangle(Brushes.Yellow, e.Bounds);
+            }
+            else
+            {
+                e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.Bounds);
+            }
+            
             if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
             {
                 StringFormat stringFormat = new StringFormat();

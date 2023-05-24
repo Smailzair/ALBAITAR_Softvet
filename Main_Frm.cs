@@ -255,7 +255,7 @@ namespace ALBAITAR_Softvet
             comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
             comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
             comboBox1.SelectedIndex = cb1_idx;
-            try { comboBox2.SelectedValue = cb2_idx; }catch (Exception ex) { comboBox2.SelectedIndex = 0; }
+            try { comboBox2.SelectedValue = cb2_idx; }catch { comboBox2.SelectedIndex = 0; }
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             comboBox1_SelectedIndexChanged(null,null);
@@ -567,7 +567,7 @@ namespace ALBAITAR_Softvet
             if (comboBox1.SelectedIndex == 0)
             {
                 chosen_client_from_search = new DataTable();
-                Clients_List_Search select = new Clients_List_Search(1);
+                Clients_List_Search select = new Clients_List_Search();
                 select.DataTableReturned += ChildForm_DataTableReturned2;
                 select.ShowDialog();
                 if (chosen_client_from_search != null)
@@ -578,7 +578,7 @@ namespace ALBAITAR_Softvet
             else
             {
                 chosen_anim_from_search = new DataTable();
-                Anims_List_Search select = new Anims_List_Search(1);
+                Anims_List_Search select = new Anims_List_Search();
                 select.DataTableReturned += ChildForm_DataTableReturned;
                 select.ShowDialog();
                 if (chosen_anim_from_search != null)
