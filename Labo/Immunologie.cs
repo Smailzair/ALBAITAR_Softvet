@@ -187,7 +187,6 @@ namespace ALBAITAR_Softvet.Labo
                 int current_row_to_select = is_new ? -1 : dataGridView2.SelectedRows[0].Index;
                 bool ready = true;
                 ready &= label20.Text.Trim().Length == 0;
-                ready &= textBox3.BackColor != Color.LightCoral;
                 //-------------
                 bool tttmmmp = true;
                 int tt = 0;

@@ -265,7 +265,6 @@ namespace ALBAITAR_Softvet.Labo
                     null_nb += dataGridView1.Rows[i].Cells["VALUE2"].Value == DBNull.Value ? 1 : 0;
                 }
                 ready &= label20.Text.Trim().Length == 0;
-                ready &= textBox3.BackColor != Color.LightCoral;
                 if (tt == null_nb)
                 {
                     ready = false;
@@ -278,7 +277,7 @@ namespace ALBAITAR_Softvet.Labo
                 if (ready)
                 {
                     if (is_new)
-                    {
+                    {                        
                         PreConnection.Excut_Cmd("INSERT INTO `tb_labo_proteinogramme` "
                                               + "(`REF`,"
                                               + "`DATE_TIME`,"
