@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -57,13 +57,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.PARAM_NME2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VALUE2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UNIT2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.DEFAULT_MIN2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DEFAULT_MAX2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DEFAULT_FULL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label17 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label18 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -72,12 +77,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.PARAM_NME2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VALUE2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UNIT2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.DEFAULT_MIN2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DEFAULT_MAX2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DEFAULT_FULL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label20 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -368,14 +368,14 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.ColumnHeadersHeight = 30;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PARAM_NME2,
@@ -394,12 +394,72 @@
             this.dataGridView1.TabIndex = 52;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
-            //this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
+            // 
+            // PARAM_NME2
+            // 
+            this.PARAM_NME2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PARAM_NME2.DataPropertyName = "PARAM_NME";
+            this.PARAM_NME2.HeaderText = "Paramètres";
+            this.PARAM_NME2.Name = "PARAM_NME2";
+            // 
+            // VALUE2
+            // 
+            this.VALUE2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.VALUE2.DataPropertyName = "VALUE";
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.VALUE2.DefaultCellStyle = dataGridViewCellStyle5;
+            this.VALUE2.HeaderText = "Résultats";
+            this.VALUE2.Name = "VALUE2";
+            this.VALUE2.Width = 78;
+            // 
+            // UNIT2
+            // 
+            this.UNIT2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.UNIT2.DataPropertyName = "UNIT";
+            this.UNIT2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UNIT2.HeaderText = "Unités";
+            this.UNIT2.Items.AddRange(new object[] {
+            "g/dl",
+            "%"});
+            this.UNIT2.Name = "UNIT2";
+            this.UNIT2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.UNIT2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.UNIT2.Width = 63;
+            // 
+            // DEFAULT_MIN2
+            // 
+            this.DEFAULT_MIN2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DEFAULT_MIN2.DataPropertyName = "DEFAULT_MIN";
+            this.DEFAULT_MIN2.HeaderText = "";
+            this.DEFAULT_MIN2.Name = "DEFAULT_MIN2";
+            this.DEFAULT_MIN2.ReadOnly = true;
+            this.DEFAULT_MIN2.Visible = false;
+            this.DEFAULT_MIN2.Width = 19;
+            // 
+            // DEFAULT_MAX2
+            // 
+            this.DEFAULT_MAX2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DEFAULT_MAX2.DataPropertyName = "DEFAULT_MAX";
+            this.DEFAULT_MAX2.HeaderText = "";
+            this.DEFAULT_MAX2.Name = "DEFAULT_MAX2";
+            this.DEFAULT_MAX2.ReadOnly = true;
+            this.DEFAULT_MAX2.Visible = false;
+            this.DEFAULT_MAX2.Width = 19;
+            // 
+            // DEFAULT_FULL
+            // 
+            this.DEFAULT_FULL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DEFAULT_FULL.DataPropertyName = "DEFAULT_FULL";
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.DEFAULT_FULL.DefaultCellStyle = dataGridViewCellStyle6;
+            this.DEFAULT_FULL.HeaderText = "Normatif";
+            this.DEFAULT_FULL.Name = "DEFAULT_FULL";
+            this.DEFAULT_FULL.Width = 76;
             // 
             // label17
             // 
@@ -464,19 +524,6 @@
             this.textBox3.Size = new System.Drawing.Size(163, 21);
             this.textBox3.TabIndex = 61;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
-            // label20
-            // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label20.Location = new System.Drawing.Point(799, 203);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(74, 15);
-            this.label20.TabIndex = 62;
-            this.label20.Text = "Déja existe !";
-            this.label20.Visible = false;
             // 
             // button5
             // 
@@ -594,75 +641,25 @@
             this.label21.Text = "NORMATIFS DE :";
             this.label21.Visible = false;
             // 
-            // PARAM_NME2
+            // label20
             // 
-            this.PARAM_NME2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PARAM_NME2.DataPropertyName = "PARAM_NME";
-            this.PARAM_NME2.HeaderText = "Paramètres";
-            this.PARAM_NME2.Name = "PARAM_NME2";
-            // 
-            // VALUE2
-            // 
-            this.VALUE2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.VALUE2.DataPropertyName = "VALUE";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.VALUE2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.VALUE2.HeaderText = "Résultats";
-            this.VALUE2.Name = "VALUE2";
-            this.VALUE2.Width = 78;
-            // 
-            // UNIT2
-            // 
-            this.UNIT2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.UNIT2.DataPropertyName = "UNIT";
-            this.UNIT2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.UNIT2.HeaderText = "Unités";
-            this.UNIT2.Items.AddRange(new object[] {
-            "g/dl",
-            "%"});
-            this.UNIT2.Name = "UNIT2";
-            this.UNIT2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.UNIT2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.UNIT2.Width = 63;
-            // 
-            // DEFAULT_MIN2
-            // 
-            this.DEFAULT_MIN2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DEFAULT_MIN2.DataPropertyName = "DEFAULT_MIN";
-            this.DEFAULT_MIN2.HeaderText = "";
-            this.DEFAULT_MIN2.Name = "DEFAULT_MIN2";
-            this.DEFAULT_MIN2.ReadOnly = true;
-            this.DEFAULT_MIN2.Visible = false;
-            this.DEFAULT_MIN2.Width = 18;
-            // 
-            // DEFAULT_MAX2
-            // 
-            this.DEFAULT_MAX2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DEFAULT_MAX2.DataPropertyName = "DEFAULT_MAX";
-            this.DEFAULT_MAX2.HeaderText = "";
-            this.DEFAULT_MAX2.Name = "DEFAULT_MAX2";
-            this.DEFAULT_MAX2.ReadOnly = true;
-            this.DEFAULT_MAX2.Visible = false;
-            this.DEFAULT_MAX2.Width = 18;
-            // 
-            // DEFAULT_FULL
-            // 
-            this.DEFAULT_FULL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DEFAULT_FULL.DataPropertyName = "DEFAULT_FULL";
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.DEFAULT_FULL.DefaultCellStyle = dataGridViewCellStyle3;
-            this.DEFAULT_FULL.HeaderText = "Normatif";
-            this.DEFAULT_FULL.Name = "DEFAULT_FULL";
-            this.DEFAULT_FULL.Width = 76;
+            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label20.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label20.Location = new System.Drawing.Point(746, 189);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(125, 32);
+            this.label20.TabIndex = 70;
+            this.label20.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // Protéinogramme
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label21);
-            this.Controls.Add(this.label20);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.pictureBox1);
@@ -730,7 +727,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn REF;
@@ -746,5 +742,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DEFAULT_MIN2;
         private System.Windows.Forms.DataGridViewTextBoxColumn DEFAULT_MAX2;
         private System.Windows.Forms.DataGridViewTextBoxColumn DEFAULT_FULL;
+        private System.Windows.Forms.Label label20;
     }
 }

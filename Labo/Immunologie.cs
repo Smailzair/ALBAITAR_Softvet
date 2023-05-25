@@ -117,7 +117,6 @@ namespace ALBAITAR_Softvet.Labo
             dateTimePicker1.Value = DateTime.Now;
             textBox1.Clear();
             textBox3.Text = ref_tmp = "IMUN_" + DateTime.Now.ToString("ddMMyyyy") + "_" + DateTime.Now.ToString("HHffff") + "_" + selected_animm.Cells["ID"].Value;
-            //label20.Visible = false;
             for (int i = 0; i < 15; i++)
             {
                 dataGridView1.Rows[i].Cells["VALUE2"].Value = "";
@@ -187,7 +186,7 @@ namespace ALBAITAR_Softvet.Labo
             {
                 int current_row_to_select = is_new ? -1 : dataGridView2.SelectedRows[0].Index;
                 bool ready = true;
-                ready &= !label20.Visible;
+                ready &= label20.Text.Trim().Length == 0;
                 ready &= textBox3.BackColor != Color.LightCoral;
                 //-------------
                 bool tttmmmp = true;
@@ -390,13 +389,22 @@ namespace ALBAITAR_Softvet.Labo
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
+            label20.Text = "";
             if (lab_histor != null)
             {
-                int nmb = lab_histor.AsEnumerable().Where(P => ((string)P["REF"]).Trim().Length > 0 && (string)P["REF"] == textBox3.Text).Count();
-                label20.Visible = is_new ? nmb > 0 : nmb > 1;
-                textBox3.BackColor = label20.Visible ? Color.LightCoral : SystemColors.Window;
+                int nmb = 0;
+                if (is_new)
+                {
+                    nmb = lab_histor.AsEnumerable().Where(P => ((string)P["REF"]).Trim().Length > 0 && (string)P["REF"] == textBox3.Text.Trim()).Count();
+                }
+                else if (dataGridView2.SelectedRows.Count > 0)
+                {
+                    nmb = lab_histor.AsEnumerable().Where(P => (int)dataGridView2.SelectedRows[0].Cells["ID"].Value != (int)P["ID"] && ((string)P["REF"]).Trim().Length > 0 && (string)P["REF"] == textBox3.Text.Trim()).Count();
+                }
+                label20.Text = nmb > 0 ? "-Déja existe !\n" : "";
             }
-            textBox3.BackColor = textBox3.Text.Trim().Length > 0 ? textBox3.BackColor : Color.LightCoral;
+            label20.Text += textBox3.Text.Trim().Length < 10 ? "-Nb Chiffres doit > 9" : "";
+            label20.TextAlign = ContentAlignment.BottomLeft;
             button5.Visible = false;
         }
 
@@ -507,7 +515,7 @@ namespace ALBAITAR_Softvet.Labo
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.Rows.Count > 0 && !label20.Visible)
+            if (dataGridView1.Rows.Count > 0 && label20.Text.Trim().Length == 0)
             {
                 DataTable dt = new DataTable();
                 dt.Columns.Add("PARAM_NME", typeof(string));

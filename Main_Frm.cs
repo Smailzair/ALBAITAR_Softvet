@@ -107,6 +107,10 @@ namespace ALBAITAR_Softvet
         private void button2_Click(object sender, EventArgs e)
         {
             (new Settings()).ShowDialog();
+            if(tabControl1.SelectedTab.Name == "tabPage_infos_animal")
+            {
+                Refresh_current_tab();
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)

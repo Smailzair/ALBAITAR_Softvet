@@ -107,14 +107,12 @@ namespace ALBAITAR_Softvet.Labo
             textBox4.BackColor = textBox4.Enabled && textBox4.Text.Trim().Length == 0 && radioButton10.Checked ? Color.LightCoral : SystemColors.Window;
             textBox5.BackColor = textBox5.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;
             textBox6.BackColor = textBox6.Text.Trim().Length > 0 ? SystemColors.Window : Color.LightCoral;
-            textBox3.BackColor = textBox3.Text.Trim().Length > 0 ? textBox3.BackColor : Color.LightCoral;
             bool autorisat = Properties.Settings.Default.Last_login_is_admin || (is_new && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31001" && (Int32)QQ[3] == 1).Count() > 0) || (!is_new && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31003" && (Int32)QQ[3] == 1).Count() > 0);
             if (autorisat)
             {
                 int current_row_to_select = is_new ? -1 : dataGridView22.SelectedRows[0].Index;
                 bool ready = true;
-                ready &= !label20.Visible;
-                ready &= textBox3.BackColor != Color.LightCoral;
+                ready &= label20.Text.Length == 0;
                 ready &= (!radioButton10.Enabled || !radioButton10.Checked || (radioButton10.Checked && textBox4.BackColor != Color.LightCoral));
                 ready &= textBox5.BackColor != Color.LightCoral;
                 ready &= textBox6.BackColor != Color.LightCoral;
@@ -177,25 +175,25 @@ namespace ALBAITAR_Softvet.Labo
         }
 
 
-        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            button2.Visible = false;
-        }
-
-        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            button2.Visible = true;
-        }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
+            label20.Text = "";
             if (lab_histor != null)
             {
-                int nmb = lab_histor.AsEnumerable().Where(P => ((string)P["REF"]).Trim().Length > 0 && (string)P["REF"] == textBox3.Text).Count();
-                label20.Visible = is_new ? nmb > 0 : nmb > 1;
-                textBox3.BackColor = label20.Visible ? Color.LightCoral : SystemColors.Window;
+                int nmb = 0;
+                if (is_new)
+                {
+                    nmb = lab_histor.AsEnumerable().Where(P => ((string)P["REF"]).Trim().Length > 0 && (string)P["REF"] == textBox3.Text.Trim()).Count();
+                }
+                else if(dataGridView22.SelectedRows.Count > 0)
+                {
+                    nmb = lab_histor.AsEnumerable().Where(P => (int)dataGridView22.SelectedRows[0].Cells["ID"].Value != (int)P["ID"] && ((string)P["REF"]).Trim().Length > 0 && (string)P["REF"] == textBox3.Text.Trim()).Count();
+                }                                
+                label20.Text = nmb > 0 ? "-Déja existe !\n" : "";                                
             }
-            textBox3.BackColor = textBox3.Text.Trim().Length > 0 ? textBox3.BackColor : Color.LightCoral;
+            label20.Text += textBox3.Text.Trim().Length < 10 ? "-Nb Chiffres doit > 9" : "";
+            label20.TextAlign = ContentAlignment.BottomLeft;
             button5.Visible = false;
         }
 
@@ -313,7 +311,7 @@ namespace ALBAITAR_Softvet.Labo
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (!label20.Visible)
+            if (label20.Text.Length == 0)
             {
                 DataTable dt = new DataTable();
                 dt.Columns.Add("PARAM_NME", typeof(string));

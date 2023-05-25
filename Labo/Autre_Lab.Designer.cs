@@ -423,15 +423,13 @@
             // label20
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label20.Location = new System.Drawing.Point(799, 203);
+            this.label20.Location = new System.Drawing.Point(754, 192);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(74, 15);
+            this.label20.Size = new System.Drawing.Size(119, 29);
             this.label20.TabIndex = 62;
-            this.label20.Text = "Déja existe !";
-            this.label20.Visible = false;
+            this.label20.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // button5
             // 
@@ -752,7 +750,6 @@
             this.AutoScroll = true;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label20);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.textBox1);
@@ -769,6 +766,7 @@
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.label20);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(877, 459);

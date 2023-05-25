@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -56,22 +56,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.MALAD_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.METHODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VALUE2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.label17 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label18 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.MALAD_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.METHODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VALUE2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.label20 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -362,14 +362,14 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeight = 30;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MALAD_NME,
@@ -387,6 +387,41 @@
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
+            // 
+            // MALAD_NME
+            // 
+            this.MALAD_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.MALAD_NME.DataPropertyName = "MALAD_NME";
+            this.MALAD_NME.HeaderText = "Maladies Virales";
+            this.MALAD_NME.Name = "MALAD_NME";
+            this.MALAD_NME.ReadOnly = true;
+            // 
+            // METHODE
+            // 
+            this.METHODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.METHODE.DataPropertyName = "METHODE";
+            this.METHODE.HeaderText = "Méthodes Utilisées";
+            this.METHODE.Name = "METHODE";
+            this.METHODE.ReadOnly = true;
+            this.METHODE.Width = 129;
+            // 
+            // VALUE2
+            // 
+            this.VALUE2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.VALUE2.DataPropertyName = "VALUE";
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.VALUE2.DefaultCellStyle = dataGridViewCellStyle4;
+            this.VALUE2.DisplayStyleForCurrentCellOnly = true;
+            this.VALUE2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.VALUE2.HeaderText = "Résultats";
+            this.VALUE2.Items.AddRange(new object[] {
+            "",
+            "Positif",
+            "Négatif"});
+            this.VALUE2.Name = "VALUE2";
+            this.VALUE2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.VALUE2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.VALUE2.Width = 78;
             // 
             // label17
             // 
@@ -451,19 +486,6 @@
             this.textBox3.Size = new System.Drawing.Size(163, 21);
             this.textBox3.TabIndex = 61;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
-            // label20
-            // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label20.Location = new System.Drawing.Point(799, 203);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(74, 15);
-            this.label20.TabIndex = 62;
-            this.label20.Text = "Déja existe !";
-            this.label20.Visible = false;
             // 
             // button5
             // 
@@ -555,40 +577,16 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // MALAD_NME
+            // label20
             // 
-            this.MALAD_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.MALAD_NME.DataPropertyName = "MALAD_NME";
-            this.MALAD_NME.HeaderText = "Maladies Virales";
-            this.MALAD_NME.Name = "MALAD_NME";
-            this.MALAD_NME.ReadOnly = true;
-            // 
-            // METHODE
-            // 
-            this.METHODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.METHODE.DataPropertyName = "METHODE";
-            this.METHODE.HeaderText = "Méthodes Utilisées";
-            this.METHODE.Name = "METHODE";
-            this.METHODE.ReadOnly = true;
-            this.METHODE.Width = 129;
-            // 
-            // VALUE2
-            // 
-            this.VALUE2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.VALUE2.DataPropertyName = "VALUE";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.VALUE2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.VALUE2.DisplayStyleForCurrentCellOnly = true;
-            this.VALUE2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.VALUE2.HeaderText = "Résultats";
-            this.VALUE2.Items.AddRange(new object[] {
-            "",
-            "Positif",
-            "Négatif"});
-            this.VALUE2.Name = "VALUE2";
-            this.VALUE2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.VALUE2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.VALUE2.Width = 78;
+            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label20.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label20.Location = new System.Drawing.Point(748, 188);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(125, 32);
+            this.label20.TabIndex = 69;
+            this.label20.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // Immunologie
             // 
@@ -663,7 +661,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn REF;
@@ -674,5 +671,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MALAD_NME;
         private System.Windows.Forms.DataGridViewTextBoxColumn METHODE;
         private System.Windows.Forms.DataGridViewComboBoxColumn VALUE2;
+        private System.Windows.Forms.Label label20;
     }
 }

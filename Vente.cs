@@ -20,6 +20,7 @@ namespace ALBAITAR_Softvet.Resources
         static public DataGridViewRow selected_item = null;
         static public DataTable stock_to_modify = new DataTable();
         static public List<int> visite_to_update_fact_num = new List<int>();
+        static public List<string> labos_to_update_fact_num = new List<string>();
         //-------------
         decimal TVA_percent = 9;
         decimal tot_ht = 0;
@@ -115,7 +116,8 @@ namespace ALBAITAR_Softvet.Resources
             comboBox1.SelectedValue = DBNull.Value;
             dateTimePicker1.Value = dateTimePicker2.Value = DateTime.Now;
             visite_to_update_fact_num = new List<int>();
-            int dds = 1;
+            labos_to_update_fact_num = new List<string>();
+            int dds = 0;
             if (factures != null)
             {
                 if (factures.Rows.Count > 0)
@@ -125,7 +127,7 @@ namespace ALBAITAR_Softvet.Resources
                                   .Max(row => int.Parse(row["REF"].ToString().Substring(8)));
                 }
             }
-            numericUpDown1.Value = dds;
+            numericUpDown1.Value = dds + 1;
             dataGridView2.Rows.Clear();
             checkBox1.Checked = Properties.Settings.Default.Faire_reg_espece_facture_vente;
             numericUpDown2.Value = 0;
@@ -146,7 +148,8 @@ namespace ALBAITAR_Softvet.Resources
             if (MessageBox.Show("Sur de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 bool fff = true;
-                if (!Is_New) { fff = MessageBox.Show("Retourner la quantité au stock ?\n\n(Excepte les produits connus dans la base donné)", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes; }
+                int yy = dataGridView2.SelectedRows.Cast<DataGridViewRow>().Where(zz => (string)zz.Cells["TYPE"].Value == "Produit" && zz.Cells["PRODUCT_CODE"].Value != DBNull.Value).ToList().Count();
+                if (!Is_New && yy > 0) { fff = MessageBox.Show("Retourner la quantité au stock ?\n\n(Excepte les produits connus dans la base donné)", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes; }
                 foreach (DataGridViewRow rwx in dataGridView2.SelectedRows)
                 {
                     if (fff && (string)rwx.Cells["TYPE"].Value == "Produit" && rwx.Cells["PRODUCT_CODE"].Value != DBNull.Value)
@@ -164,8 +167,14 @@ namespace ALBAITAR_Softvet.Resources
                     if((string)rwx.Cells["TYPE"].Value == "Service" && rwx.Cells["PRODUCT_CODE"].Value != DBNull.Value)
                     {
                         int dds = -1;
-                        int.TryParse(rwx.Cells["PRODUCT_CODE"].Value.ToString(), out dds);
-                        visite_to_update_fact_num.Remove(dds);
+                        if (int.TryParse(rwx.Cells["PRODUCT_CODE"].Value.ToString(), out dds)) //VISIT
+                        {   
+                            visite_to_update_fact_num.Remove(dds);
+                        }
+                        else //LABO (ANALYSE)
+                        {
+                            labos_to_update_fact_num.Remove((string)rwx.Cells["PRODUCT_CODE"].Value);
+                        }                        
                     }
                     dataGridView2.Rows.Remove(rwx);
                 }
@@ -271,7 +280,7 @@ namespace ALBAITAR_Softvet.Resources
             if (All_Ready)
             {
                 if (Is_New) //INSERT
-                {
+                {                    
                     string cmmd = "INSERT INTO `tb_factures_vente`"
                                 + "(`DATE`,"
                                 + "`CLIENT_ID`,"
@@ -289,8 +298,7 @@ namespace ALBAITAR_Softvet.Resources
                         dataGridView3.Rows[1].Cells[1].Value + "," + //TVA_PERC
                         dataGridView3.Rows[2].Cells[1].Value + "," + //DROIT_TIMBRE
                         dataGridView3.Rows[0].Cells[1].Value + "," + //TOTAL_HT
-                        dataGridView3.Rows[3].Cells[1].Value; //TOTAL_TTC
-
+                        dataGridView3.Rows[3].Cells[1].Value; //TOTAL_TTC                    
                     foreach (DataGridViewRow row in dataGridView2.Rows)
                     {
                         cmmd += ",`ITEM_NME_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "`";
@@ -308,9 +316,9 @@ namespace ALBAITAR_Softvet.Resources
 
                         cmmd2 += "," + row.Cells["PRIX_UNIT"].Value.ToString();
                     }
-
                     cmmd += ")";
                     cmmd2 += ");";
+
                     PreConnection.Excut_Cmd(cmmd + cmmd2);
                     //-------Caisse (INSERT)----------                    
                     if (groupBox3.Enabled)
@@ -334,9 +342,10 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 else //UPDATE
                 {
+                    
                     //if (stock_to_modify != null)
-                   // {
-                        string inti = "";
+                    // {
+                    string inti = "";
                         for (int f = 1; f < 71; f++)
                         {
                             inti += ",`ITEM_NME_" + (f < 10 ? "0" : "") + f + "` = NULL";
@@ -345,8 +354,9 @@ namespace ALBAITAR_Softvet.Resources
                             inti += ",`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` = NULL";
                             inti += ",`ITEM_PRIX_UNIT_" + (f < 10 ? "0" : "") + f + "` = NULL";
                         }
-                        PreConnection.Excut_Cmd("UPDATE `tb_factures_vente` SET " + inti.Substring(1) + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() + ";");
-                   // }
+                    
+                    PreConnection.Excut_Cmd("UPDATE `tb_factures_vente` SET " + inti.Substring(1) + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() + ";");
+                    // }
                     //------------
                     string cmmd = "UPDATE `tb_factures_vente` SET "
                             + "`DATE` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
@@ -369,7 +379,6 @@ namespace ALBAITAR_Softvet.Resources
                         cmmd += ",`ITEM_PRIX_UNIT_" + (row.Index < 9 ? "0" : "") + (row.Index + 1) + "` = " + row.Cells["PRIX_UNIT"].Value.ToString();
                         //----------------
                     }
-
                     cmmd += " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() + ";";
                     PreConnection.Excut_Cmd(cmmd);
                     //-------Caisse (UPDATE)----------
@@ -392,7 +401,7 @@ namespace ALBAITAR_Softvet.Resources
                                                     "`DEBIT`=" + dataGridView3.Rows[3].Cells[1].Value + "," +
                                                     "`CREDIT`=" + numericUpDown2.Value +
                                                     " WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "';");
-
+                                    
                                 }
                                 else if (cb1_selected_value == -1)
                                 {
@@ -578,6 +587,7 @@ namespace ALBAITAR_Softvet.Resources
                 Transf_also_caisse = false;
                 has_asked_for_Transf_also_caisse = false;
                 visite_to_update_fact_num = new List<int>();
+                labos_to_update_fact_num = new List<string>();
                 comboBox1.SelectedValue = DBNull    .Value;
                 //-------------------
                 //DataTable data = PreConnection.Load_data("SELECT * FROM tb_factures_vente WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");

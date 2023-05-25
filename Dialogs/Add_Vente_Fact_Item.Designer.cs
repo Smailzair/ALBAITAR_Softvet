@@ -32,6 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Add_Vente_Fact_Item));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -54,6 +56,14 @@
             this.SLD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.IDDD_VISIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATETIME_VISIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VISITOR_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -66,23 +76,28 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.IDDD_VISIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DATETIME_VISIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VISITOR_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.label11 = new System.Windows.Forms.Label();
+            this.LABO_DATE_TIME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LABO_LABO_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LABO_REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LABO_ANIM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LABO_NUM_ANIM_IDENT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDDDDDDDD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_IDDDDDDDDDDDDDDDD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -111,6 +126,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -340,6 +356,107 @@
             this.panel2.Size = new System.Drawing.Size(22, 21);
             this.panel2.TabIndex = 26;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.dataGridView3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(512, 197);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Visites";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(241, 4);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(15, 16);
+            this.label9.TabIndex = 30;
+            this.label9.Text = "--";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 3);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(236, 16);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Les visites NON facturées des animaux de :";
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AllowUserToAddRows = false;
+            this.dataGridView3.AllowUserToDeleteRows = false;
+            this.dataGridView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView3.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.PeachPuff;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView3.ColumnHeadersHeight = 25;
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDDD_VISIT,
+            this.DATETIME_VISIT,
+            this.ANIM_NME,
+            this.VISITOR_FULL_NME});
+            this.dataGridView3.EnableHeadersVisualStyles = false;
+            this.dataGridView3.Location = new System.Drawing.Point(6, 23);
+            this.dataGridView3.MultiSelect = false;
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.ReadOnly = true;
+            this.dataGridView3.RowHeadersVisible = false;
+            this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView3.Size = new System.Drawing.Size(500, 168);
+            this.dataGridView3.TabIndex = 28;
+            this.dataGridView3.SelectionChanged += new System.EventHandler(this.dataGridView3_SelectionChanged);
+            // 
+            // IDDD_VISIT
+            // 
+            this.IDDD_VISIT.DataPropertyName = "ID";
+            this.IDDD_VISIT.HeaderText = "ID";
+            this.IDDD_VISIT.Name = "IDDD_VISIT";
+            this.IDDD_VISIT.ReadOnly = true;
+            this.IDDD_VISIT.Visible = false;
+            // 
+            // DATETIME_VISIT
+            // 
+            this.DATETIME_VISIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATETIME_VISIT.DataPropertyName = "DATETIME";
+            dataGridViewCellStyle4.Format = "G";
+            dataGridViewCellStyle4.NullValue = null;
+            this.DATETIME_VISIT.DefaultCellStyle = dataGridViewCellStyle4;
+            this.DATETIME_VISIT.HeaderText = "Date";
+            this.DATETIME_VISIT.Name = "DATETIME_VISIT";
+            this.DATETIME_VISIT.ReadOnly = true;
+            this.DATETIME_VISIT.Width = 58;
+            // 
+            // ANIM_NME
+            // 
+            this.ANIM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIM_NME.DataPropertyName = "ANIM_NME";
+            this.ANIM_NME.HeaderText = "Animal";
+            this.ANIM_NME.Name = "ANIM_NME";
+            this.ANIM_NME.ReadOnly = true;
+            this.ANIM_NME.Width = 67;
+            // 
+            // VISITOR_FULL_NME
+            // 
+            this.VISITOR_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.VISITOR_FULL_NME.DataPropertyName = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME.HeaderText = "Visiteur";
+            this.VISITOR_FULL_NME.Name = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME.ReadOnly = true;
+            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -501,105 +618,135 @@
             this.label7.TabIndex = 35;
             this.label7.Text = "0.00 DA";
             // 
-            // tabPage3
+            // tabPage4
             // 
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.label8);
-            this.tabPage3.Controls.Add(this.dataGridView3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(512, 197);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Visites";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage4.Controls.Add(this.label11);
+            this.tabPage4.Controls.Add(this.label10);
+            this.tabPage4.Controls.Add(this.dataGridView4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(512, 197);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Analyses";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // dataGridView3
+            // label10
             // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.AllowUserToDeleteRows = false;
-            this.dataGridView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(5, 4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(251, 16);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "Les analyses NON facturées des animaux de :";
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.AllowUserToAddRows = false;
+            this.dataGridView4.AllowUserToDeleteRows = false;
+            this.dataGridView4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView3.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.PeachPuff;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView3.ColumnHeadersHeight = 25;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IDDD_VISIT,
-            this.DATETIME_VISIT,
-            this.ANIM_NME,
-            this.VISITOR_FULL_NME});
-            this.dataGridView3.EnableHeadersVisualStyles = false;
-            this.dataGridView3.Location = new System.Drawing.Point(6, 23);
-            this.dataGridView3.MultiSelect = false;
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.ReadOnly = true;
-            this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(500, 168);
-            this.dataGridView3.TabIndex = 28;
+            this.dataGridView4.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.PeachPuff;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView4.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridView4.ColumnHeadersHeight = 25;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.LABO_DATE_TIME,
+            this.LABO_LABO_NME,
+            this.LABO_REF,
+            this.LABO_ANIM_NME,
+            this.LABO_NUM_ANIM_IDENT,
+            this.IDDDDDDDD,
+            this.ANIM_IDDDDDDDDDDDDDDDD});
+            this.dataGridView4.EnableHeadersVisualStyles = false;
+            this.dataGridView4.Location = new System.Drawing.Point(8, 24);
+            this.dataGridView4.MultiSelect = false;
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.ReadOnly = true;
+            this.dataGridView4.RowHeadersVisible = false;
+            this.dataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView4.Size = new System.Drawing.Size(500, 168);
+            this.dataGridView4.TabIndex = 30;
+            this.dataGridView4.SelectionChanged += new System.EventHandler(this.dataGridView4_SelectionChanged);
             // 
-            // label8
+            // label11
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 3);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(236, 16);
-            this.label8.TabIndex = 29;
-            this.label8.Text = "Les visites NON facturées des animaux de :";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(262, 5);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(15, 16);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "--";
             // 
-            // label9
+            // LABO_DATE_TIME
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(241, 4);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(15, 16);
-            this.label9.TabIndex = 30;
-            this.label9.Text = "--";
+            this.LABO_DATE_TIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.LABO_DATE_TIME.DataPropertyName = "DATE_TIME";
+            dataGridViewCellStyle6.Format = "d";
+            dataGridViewCellStyle6.NullValue = null;
+            this.LABO_DATE_TIME.DefaultCellStyle = dataGridViewCellStyle6;
+            this.LABO_DATE_TIME.HeaderText = "Date";
+            this.LABO_DATE_TIME.Name = "LABO_DATE_TIME";
+            this.LABO_DATE_TIME.ReadOnly = true;
+            this.LABO_DATE_TIME.Width = 58;
             // 
-            // IDDD_VISIT
+            // LABO_LABO_NME
             // 
-            this.IDDD_VISIT.DataPropertyName = "ID";
-            this.IDDD_VISIT.HeaderText = "ID";
-            this.IDDD_VISIT.Name = "IDDD_VISIT";
-            this.IDDD_VISIT.ReadOnly = true;
-            this.IDDD_VISIT.Visible = false;
+            this.LABO_LABO_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.LABO_LABO_NME.DataPropertyName = "LABO_NME";
+            this.LABO_LABO_NME.HeaderText = "Analyse";
+            this.LABO_LABO_NME.Name = "LABO_LABO_NME";
+            this.LABO_LABO_NME.ReadOnly = true;
+            this.LABO_LABO_NME.Visible = false;
+            this.LABO_LABO_NME.Width = 72;
             // 
-            // DATETIME_VISIT
+            // LABO_REF
             // 
-            this.DATETIME_VISIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DATETIME_VISIT.DataPropertyName = "DATETIME";
-            dataGridViewCellStyle4.Format = "G";
-            dataGridViewCellStyle4.NullValue = null;
-            this.DATETIME_VISIT.DefaultCellStyle = dataGridViewCellStyle4;
-            this.DATETIME_VISIT.HeaderText = "Date";
-            this.DATETIME_VISIT.Name = "DATETIME_VISIT";
-            this.DATETIME_VISIT.ReadOnly = true;
-            this.DATETIME_VISIT.Width = 58;
+            this.LABO_REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.LABO_REF.DataPropertyName = "REF";
+            this.LABO_REF.HeaderText = "Réf.";
+            this.LABO_REF.Name = "LABO_REF";
+            this.LABO_REF.ReadOnly = true;
+            this.LABO_REF.Width = 51;
             // 
-            // ANIM_NME
+            // LABO_ANIM_NME
             // 
-            this.ANIM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIM_NME.DataPropertyName = "ANIM_NME";
-            this.ANIM_NME.HeaderText = "Animal";
-            this.ANIM_NME.Name = "ANIM_NME";
-            this.ANIM_NME.ReadOnly = true;
-            this.ANIM_NME.Width = 67;
+            this.LABO_ANIM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.LABO_ANIM_NME.DataPropertyName = "ANIM_NME";
+            this.LABO_ANIM_NME.HeaderText = "Animal";
+            this.LABO_ANIM_NME.Name = "LABO_ANIM_NME";
+            this.LABO_ANIM_NME.ReadOnly = true;
             // 
-            // VISITOR_FULL_NME
+            // LABO_NUM_ANIM_IDENT
             // 
-            this.VISITOR_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.VISITOR_FULL_NME.DataPropertyName = "VISITOR_FULL_NME";
-            this.VISITOR_FULL_NME.HeaderText = "Visiteur";
-            this.VISITOR_FULL_NME.Name = "VISITOR_FULL_NME";
-            this.VISITOR_FULL_NME.ReadOnly = true;
+            this.LABO_NUM_ANIM_IDENT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.LABO_NUM_ANIM_IDENT.DataPropertyName = "NUM_ANIM_IDENT";
+            this.LABO_NUM_ANIM_IDENT.HeaderText = "N° Ident. d\'animal";
+            this.LABO_NUM_ANIM_IDENT.Name = "LABO_NUM_ANIM_IDENT";
+            this.LABO_NUM_ANIM_IDENT.ReadOnly = true;
+            this.LABO_NUM_ANIM_IDENT.Width = 128;
+            // 
+            // IDDDDDDDD
+            // 
+            this.IDDDDDDDD.DataPropertyName = "ID";
+            this.IDDDDDDDD.HeaderText = "--";
+            this.IDDDDDDDD.Name = "IDDDDDDDD";
+            this.IDDDDDDDD.ReadOnly = true;
+            this.IDDDDDDDD.Visible = false;
+            // 
+            // ANIM_IDDDDDDDDDDDDDDDD
+            // 
+            this.ANIM_IDDDDDDDDDDDDDDDD.DataPropertyName = "ANIM_ID";
+            this.ANIM_IDDDDDDDDDDDDDDDD.HeaderText = "--";
+            this.ANIM_IDDDDDDDDDDDDDDDD.Name = "ANIM_IDDDDDDDDDDDDDDDD";
+            this.ANIM_IDDDDDDDDDDDDDDDD.ReadOnly = true;
+            this.ANIM_IDDDDDDDDDDDDDDDD.Visible = false;
             // 
             // Add_Vente_Fact_Item
             // 
@@ -638,11 +785,14 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -690,5 +840,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DATETIME_VISIT;
         private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_NME;
         private System.Windows.Forms.DataGridViewTextBoxColumn VISITOR_FULL_NME;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LABO_DATE_TIME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LABO_LABO_NME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LABO_REF;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LABO_ANIM_NME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LABO_NUM_ANIM_IDENT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDDDDDDDD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_IDDDDDDDDDDDDDDDD;
     }
 }
