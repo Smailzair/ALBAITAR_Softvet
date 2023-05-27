@@ -5868,39 +5868,6 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Pgg">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>01/01</Value>
-                    <Style>
-                      <FontFamily>Century Gothic</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>23.78847cm</Top>
-            <Left>8.53256cm</Left>
-            <Height>0.6cm</Height>
-            <Width>3.94366cm</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="Textbox11">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -5924,7 +5891,7 @@
             <Left>0.99999cm</Left>
             <Height>0.6cm</Height>
             <Width>3.45248cm</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6309,7 +6276,7 @@
             <Left>0.99999cm</Left>
             <Height>3.88938cm</Height>
             <Width>9.08558cm</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Color>DimGray</Color>
@@ -6352,7 +6319,7 @@
             <Left>12.32952cm</Left>
             <Height>0.6cm</Height>
             <Width>0.99187cm</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6384,7 +6351,7 @@
             <Left>13.32139cm</Left>
             <Height>0.6cm</Height>
             <Width>6.89767cm</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6422,7 +6389,7 @@
             <Left>1.10393cm</Left>
             <Height>0.6cm</Height>
             <Width>2.84396cm</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>

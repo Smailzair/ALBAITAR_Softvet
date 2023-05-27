@@ -71,7 +71,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>0.40771cm</Top>
-            <Left>0.49736cm</Left>
+            <Left>0.63839cm</Left>
             <Height>0.6cm</Height>
             <Width>1.67977cm</Width>
             <Style>
@@ -106,7 +106,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>1.68169cm</Top>
-            <Left>0.44262cm</Left>
+            <Left>0.58365cm</Left>
             <Height>0.6cm</Height>
             <Width>1.76796cm</Width>
             <ZIndex>1</ZIndex>
@@ -142,7 +142,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>2.28169cm</Top>
-            <Left>0.44262cm</Left>
+            <Left>0.58365cm</Left>
             <Height>0.6cm</Height>
             <Width>1.94435cm</Width>
             <ZIndex>2</ZIndex>
@@ -178,7 +178,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>1.04642cm</Top>
-            <Left>0.44263cm</Left>
+            <Left>0.58366cm</Left>
             <Height>0.6cm</Height>
             <Width>1.76796cm</Width>
             <ZIndex>3</ZIndex>
@@ -213,8 +213,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>1.04642cm</Top>
-            <Left>10.26943cm</Left>
+            <Top>1.01457cm</Top>
+            <Left>10.61748cm</Left>
             <Height>0.6cm</Height>
             <Width>2.3195cm</Width>
             <ZIndex>4</ZIndex>
@@ -246,7 +246,7 @@
             </Paragraphs>
             <rd:DefaultName>PRIOR1</rd:DefaultName>
             <Top>1.04642cm</Top>
-            <Left>2.45753cm</Left>
+            <Left>2.59856cm</Left>
             <Height>0.6cm</Height>
             <Width>7.63551cm</Width>
             <ZIndex>5</ZIndex>
@@ -309,9 +309,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>PRIOR1</rd:DefaultName>
-            <Top>1.68513cm</Top>
+            <Top>1.64642cm</Top>
             <Left>12.24906cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.63871cm</Height>
             <Width>7.41975cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
@@ -341,9 +341,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>PRIOR1</rd:DefaultName>
-            <Top>1.68169cm</Top>
-            <Left>2.59864cm</Left>
-            <Height>0.6cm</Height>
+            <Top>1.64642cm</Top>
+            <Left>2.73967cm</Left>
+            <Height>0.63527cm</Height>
             <Width>7.4944cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
@@ -374,7 +374,7 @@
             </Paragraphs>
             <rd:DefaultName>PRIOR1</rd:DefaultName>
             <Top>2.28169cm</Top>
-            <Left>2.59864cm</Left>
+            <Left>2.73967cm</Left>
             <Height>0.6cm</Height>
             <Width>7.4944cm</Width>
             <ZIndex>9</ZIndex>
@@ -395,7 +395,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!CLIENT_SEX.Value &amp; Parameters!CLIENT_FAMNME.Value &amp; " " &amp;Parameters!CLIENT_NME.Value</Value>
+                    <Value>=Parameters!CLIENT_SEX.Value &amp; Parameters!CLIENT_FAMNME.Value &amp; " " &amp; Parameters!CLIENT_NME.Value</Value>
                     <Style>
                       <FontFamily>Century Gothic</FontFamily>
                     </Style>
@@ -406,9 +406,9 @@
             </Paragraphs>
             <rd:DefaultName>PRIOR1</rd:DefaultName>
             <Top>0.40771cm</Top>
-            <Left>2.24768cm</Left>
+            <Left>2.48396cm</Left>
             <Height>0.6cm</Height>
-            <Width>7.84536cm</Width>
+            <Width>16.39118cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -441,9 +441,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>2.3204cm</Top>
+            <Top>2.28513cm</Top>
             <Left>10.30463cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.63527cm</Height>
             <Width>3.1838cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
@@ -473,9 +473,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>PRIOR1</rd:DefaultName>
-            <Top>2.3204cm</Top>
+            <Top>2.28513cm</Top>
             <Left>13.77664cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.63527cm</Height>
             <Width>5.96272cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
@@ -1202,6 +1202,9 @@
                 </TablixMember>
                 <TablixMember>
                   <Group Name="Details" />
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
@@ -1221,13 +1224,12 @@
           <Rectangle Name="Rectangle2">
             <ReportItems>
               <Textbox Name="Textbox26">
-                <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Code.ConvertToFrenchLetters(Parameters!TOT_TTC.Value)</Value>
+                        <Value>=Code.chiffrelettre(Parameters!TOT_TTC.Value)</Value>
                         <Style>
                           <FontFamily>Century Gothic</FontFamily>
                           <FontWeight>Bold</FontWeight>
@@ -1646,7 +1648,7 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>237.01528mm</Height>
+        <Height>237.27986mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1900,7 +1902,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>2.44708cm</Height>
+          <Height>2.39416cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2087,6 +2089,9 @@
               <Height>0.6cm</Height>
               <Width>3.62132cm</Width>
               <ZIndex>6</ZIndex>
+              <Visibility>
+                <Hidden>=IIF(Globals!TotalPages&gt;Globals!PageNumber,False,True)</Hidden>
+              </Visibility>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2427,131 +2432,126 @@
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
-  <Code>Function ConvertToFrenchLetters(ByVal value As Double) As String
-    ' Define the words for numbers from 0 to 19 '
-    Dim unitsWords() As String = {"zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix",
-                                  "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf"}
-
-    ' Define the words for tens from 20 to 90 '
-    Dim tensWords() As String = {"", "", "vingt", "trente", "quarante", "cinquante", "soixante", "", "quatre-vingt"}
-
-    ' Convert the value to an integer and handle edge cases '
-    Dim intValue As Integer = CInt(Math.Floor(value))
-    Dim decimalValue As Integer = CInt(Math.Round((value - intValue) * 100)) ' Convert decimal part to integer
-    If intValue = 0 And decimalValue = 0 Then
-        Return "zéro DA" ' Return "zéro DA" if the value is 0
-    ElseIf intValue &lt; 0 Or intValue &gt; 999999999 Or decimalValue &gt; 99 Then
-        Return "" ' Handle invalid or out-of-range values
+  <Code>Function chiffrelettre(chiffre) As String
+    Dim a() As String = {"", "Un", "Deux", "Trois", "Quatre", "Cinq", "Six", "Sept", _
+        "Huit", "Neuf", "Dix", "Onze", "Douze", "Treize", "Quatorze", "Quinze", "Seize", "Dix Sept", _
+        "Dix Huit", "Dix Neuf", "Vingt", "Vingt et Un", "Vingt Deux", "Vingt Trois", "Vingt Quatre", _
+        "Vingt Cinq", "Vingt Six", "Vingt Sept", "Vingt Huit", "Vingt Neuf", "Trente", "Trente et Un", _
+        "Trente Deux", "Trente Trois", "Trente Quatre", "Trente Cinq", "Trente Six", "Trente Sept", _
+        "Trente Huit", "Trente Neuf", "Quarante", "Quarante et Un", "Quarante Deux", "Quarante Trois", _
+        "Quarante Quatre", "Quarante Cinq", "Quarante Six", "Quarante Sept", "Quarante Huit", _
+        "Quarante Neuf", "Cinquante", "Cinquante et Un", "Cinquante Deux", "Cinquante Trois", _
+        "Cinquante Quatre", "Cinquante Cinq", "Cinquante Six", "Cinquante Sept", "Cinquante Huit", _
+        "Cinquante Neuf", "Soixante", "Soixante et Un", "Soixante Deux", "Soixante Trois", _
+        "Soixante Quatre", "Soixante Cinq", "Soixante Six", "Soixante Sept", "Soixante Huit", _
+        "Soixante Neuf", "Soixante Dix", "Soixante et Onze", "Soixante Douze", "Soixante Treize", _
+        "Soixante Quatorze", "Soixante Quinze", "Soixante Seize", "Soixante Dix Sept", _
+        "Soixante Dix Huit", "Soixante Dix Neuf", "Quatre-Vingts", "Quatre-Vingt Un", _
+        "Quatre-Vingt Deux", "Quatre-Vingt Trois", "Quatre-Vingt Quatre", "Quatre-Vingt Cinq", _
+        "Quatre-Vingt Six", "Quatre-Vingt Sept", "Quatre-Vingt Huit", "Quatre-Vingt Neuf", _
+        "Quatre-Vingt Dix", "Quatre-Vingt Onze", "Quatre-Vingt Douze", "Quatre-Vingt Treize", _
+        "Quatre-Vingt Quatorze", "Quatre-Vingt Quinze", "Quatre-Vingt Seize", "Quatre-Vingt Dix Sept", _
+        "Quatre-Vingt Dix Huit", "Quatre-Vingt Dix Neuf"}
+    Dim gros() As String = {"", "Billions", "Milliards", "Millions", "Mille", "Dinars", "Billion", _
+        "Milliard", "Million", "Mille", "Dinar"}
+    Dim sp As String = " "
+    Dim chaine As String = "00000000000000"
+    Dim centime As Double = chiffre * 100 - (Int(chiffre) * 100)
+    chiffre = Str(Int(chiffre))
+    Dim lg As Integer = Len(chiffre) - 1
+    chiffre = Right(chiffre, lg)
+    lg = Len(chiffre)
+    If lg &lt; 15 Then
+        chaine = Mid(chaine, 1, (15 - lg))
+    Else
+        chaine = ""
     End If
+    chiffre = chaine + chiffre
 
-    ' Split the value into billions, millions, thousands, and units '
-    Dim billions As Integer = intValue \ 1000000000
-    Dim millions As Integer = (intValue \ 1000000) Mod 1000
-    Dim thousands As Integer = (intValue \ 1000) Mod 1000
-    Dim units As Integer = intValue Mod 1000
+    Dim t As String = ""
+    Dim t2 As String = ""
+    Dim mydz As String = ""
+    Dim myct As String = ""
+    Dim gp As Integer = 1
+    Dim d As String = ""
 
-    ' Build the result string by converting each part of the value to words '
-    Dim result As String = ""
-    If billions &gt; 0 Then
-        result += ConvertGroupToFrenchLetters(billions) + " milliard"
-        If billions &gt; 1 Then
-            result += "s"
+    For k As Integer = 1 To 5
+        Dim x As String = Mid(chiffre, gp, 1)
+        Dim c As String = a(Val(x))
+        Dim y As String = Mid(chiffre, gp + 1, 2)
+        d = a(Val(y))
+
+        If k = 5 Then
+            If t2 &lt;&gt; "" And c &amp; d = "" Then
+                mydz = "Dinars" &amp; sp
+                GoTo fin
+            End If
+            If t &lt;&gt; "" And c = "" And d = "Un" Then
+                mydz = "Un Dinars" &amp; sp
+                GoTo fin
+            End If
+            If t &lt;&gt; "" And t2 = "" And c &amp; d = "" Then
+                mydz = "Dinars" &amp; sp
+                GoTo fin
+            End If
+            If t &amp; c &amp; d = "" Then
+                myct = ""
+                mydz = ""
+                GoTo fin
+            End If
         End If
-    End If
-    If millions &gt; 0 Then
-        If result &lt;&gt; "" Then
-            result += " "
-        End If
-        result += ConvertGroupToFrenchLetters(millions) + " million"
-        If millions &gt; 1 Then
-            result += "s"
-        End If
-    End If
-    If thousands &gt; 0 Then
-        If result &lt;&gt; "" Then
-            result += " "
-        End If
-        result += ConvertGroupToFrenchLetters(thousands) + " mille"
-    End If
-    If units &gt; 0 Then
-        If result &lt;&gt; "" Then
-            result += " "
-        End If
-        result += ConvertGroupToFrenchLetters(units)
-    End If
 
-    If result &lt;&gt; "" Then
-        result += " DA"
-    End If
-
-    If decimalValue &gt; 0 Then
-        If result &lt;&gt; "" Then
-            result += " et "
+        If c &amp; d = "" Then
+            GoTo fin
         End If
-        result += ConvertGroupToFrenchLetters(decimalValue) + " Cts"      
-    End If
 
-If Not String.IsNullOrEmpty(result) Then
-        result = Char.ToUpper(result(0)) + result.Substring(1) ' Capitalize the first letter
-    End If
+        If d = "" And c &lt;&gt; "" And c &lt;&gt; "Un" Then
+            mydz = c &amp; sp &amp; "Cents " &amp; gros(k) &amp; sp
+            GoTo fin
+        End If
 
-    Return result
+        If d = "" And c = "Un" Then
+            mydz = "Cent " &amp; gros(k) &amp; sp
+            GoTo fin
+        End If
+
+        If d = "Un" And c = "" Then
+            myct = IIf(k = 4, gros(k) &amp; sp, "Un " &amp; gros(k + 5) &amp; sp)
+            GoTo fin
+        End If
+
+        If d &lt;&gt; "" And c = "Un" Then
+            mydz = "Cent" &amp; sp
+        End If
+
+        If d &lt;&gt; "" And c &lt;&gt; "" And c &lt;&gt; "Un" Then
+            mydz = c &amp; sp &amp; "Cent" + sp
+        End If
+
+        myct = d &amp; sp &amp; gros(k) &amp; sp
+fin:
+        t2 = mydz &amp; myct
+        t = t &amp; mydz &amp; myct
+        mydz = ""
+        myct = ""
+        gp = gp + 3
+    Next
+
+    'If centime = 0 Then
+     '   d = ""
+      '  myct = ""
+   ' End If 
+
+    chiffrelettre = t &amp; "et " &amp; CInt(centime) &amp; " Cts"
 End Function
 
-Function ConvertGroupToFrenchLetters(ByVal groupValue As Integer) As String
-    ' Define the words for numbers from 0 to 9 '
-    Dim unitsWords() As String = {"", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf"}
 
-    ' Define the words for tens from 10 to 90 '
-    Dim tensWords() As String = {"", "", "vingt", "trente", "quarante", "cinquante", "soixante", "", "quatre-vingt"}
 
-    ' Convert the group value to words '
-    Dim result As String = ""
 
-    Dim hundreds As Integer = groupValue \ 100
-    Dim tens As Integer = (groupValue \ 10) Mod 10
-    Dim units As Integer = groupValue Mod 10
 
-    If hundreds &gt; 0 Then
-        result += unitsWords(hundreds) + " cent"
-        If tens = 0 AndAlso units = 0 Then
-            result += "s"
-        End If
-    End If
 
-    If tens = 7 Or tens = 9 Then
-        units += 10
-    End If
 
-    If tens &gt; 1 Then
-        result += " " + tensWords(tens)
-        If units &gt; 0 Then
-            result += "-" + unitsWords(units)
-        End If
-    ElseIf tens = 1 Then
-        If units = 0 Then
-            result += " dix"
-        ElseIf units = 1 Then
-            result += " onze"
-        ElseIf units = 2 Then
-            result += " douze"
-        ElseIf units = 3 Then
-            result += " treize"
-        ElseIf units = 4 Then
-            result += " quatorze"
-        ElseIf units = 5 Then
-            result += " quinze"
-        ElseIf units = 6 Then
-            result += " seize"
-        Else
-            result += " dix-" + unitsWords(units)
-        End If
-    ElseIf units &gt; 0 Then
-        result += " " + unitsWords(units)
-    End If
 
-    Return result.Trim()
-End Function
 
 
 Function PageNumber() As String    

@@ -790,6 +790,7 @@ namespace ALBAITAR_Softvet.Resources
                 string nmme = full_nme.Replace(sexx, "");
                 dt.Rows.Add(new object[] { "CLIENT_SEX", sexx });
                 dt.Rows.Add(new object[] { "CLIENT_FAMNME", nmme });
+                dt.Rows.Add(new object[] { "CLIENT_NME", "" });
             }
             //-------------
             new Print_report("facture_vente", dt, facture_to_print).ShowDialog();
