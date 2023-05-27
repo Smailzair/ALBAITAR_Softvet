@@ -23,8 +23,16 @@ namespace ALBAITAR_Softvet.Resources
                                            + "SELECT 'Protéinogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_proteinogramme  UNION ALL "
                                            + "SELECT TYPE_ANAL AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_autre;";
         static DataGridViewRow selected_anim = null;
-        public Laboratoire()
+        string Ref_To_Selectt = "";
+        bool Just_to_printt = false;
+        int id_to_selectt = -1;
+        string lab_nmee = "";
+        public Laboratoire(int id_to_select, string Ref_To_Select, bool? Just_to_print, string Lab_nme)
         {
+            id_to_selectt = id_to_select;
+            Ref_To_Selectt = Ref_To_Select;
+            Just_to_printt = (bool)(Just_to_print != null ? Just_to_print : false);
+            lab_nmee = Lab_nme;
             InitializeComponent();
         }
 
@@ -67,6 +75,44 @@ namespace ALBAITAR_Softvet.Resources
             dataGridView1.DataSource = animaux;
             //---------
             comboBox1.SelectedIndex = 0;
+            //------------------
+            if (id_to_selectt > -1)
+            {                
+                dataGridView1.Rows.Cast<DataGridViewRow>().Where(zz => (int)zz.Cells["ID"].Value == id_to_selectt).ForEach(cc => cc.Selected = true);                
+            }
+
+            if (Ref_To_Selectt.Length > 0)
+            {
+                textBox3.Text = Ref_To_Selectt;
+                if (dataGridView2.Rows.Count > 0)
+                {
+                    dataGridView2.Rows[0].Selected = true;
+                    DataGridViewCellEventArgs arrg = new DataGridViewCellEventArgs(1, 0);
+                    dataGridView2_CellDoubleClick(dataGridView2, arrg);
+                }
+            }
+            else
+            {                
+                switch (lab_nmee)
+                {                    
+                    case "Hemogramme":
+                        button2.PerformClick();
+                        break;
+                    case "Biochimie Sanguine":
+                        button1.PerformClick();
+                        break;
+                    case "Immunologie":
+                        button3.PerformClick();
+                        break;
+                    case "Protéinogramme":
+                        button6.PerformClick();
+                        break;
+                    case "- Autres -":
+                        button4.PerformClick();
+                        break;
+                }
+
+            }
         }
 
         private void load_labos_data()
@@ -122,6 +168,10 @@ namespace ALBAITAR_Softvet.Resources
 
         private void Laboratoire_ControlRemoved(object sender, ControlEventArgs e)
         {
+            if (textBox3.Text == Ref_To_Selectt)
+            {
+                textBox3.Text = Ref_To_Selectt = "";
+            }
             if (make_historic_refesh)
             {
                 load_labos_data();
@@ -242,7 +292,6 @@ namespace ALBAITAR_Softvet.Resources
         {
             if (dataGridView2[e.ColumnIndex, e.RowIndex].Value != null && selected_anim != null)
             {
-
                 switch ((string)dataGridView2.Rows[e.RowIndex].Cells["LABO_NME"].Value)
                 {
                     case "Hemogramme":
@@ -280,6 +329,12 @@ namespace ALBAITAR_Softvet.Resources
                         this.Controls.Add(atr);
                         atr.BringToFront();
                         break;
+                }
+                //----------------------------------
+                if (Just_to_printt)
+                {
+                    ((Button)this.Controls[0].Controls["button5"]).PerformClick();
+                    Close();
                 }
 
             }
@@ -824,13 +879,13 @@ namespace ALBAITAR_Softvet.Resources
 
                     DataTable dt_bioch = PreConnection.Load_data("SELECT `REF`,\r\n`DATE_TIME`,\r\n(SELECT `NME` FROM tb_animaux tb2 WHERE tb2.`ID` = tb1.`ANIM_ID`) AS 'ANIM_NME',\r\n(SELECT `NUM_IDENTIF` FROM tb_animaux tb2 WHERE tb2.`ID` = tb1.`ANIM_ID`) AS 'ANIM_IDENT_NUM',\r\n(SELECT CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) FROM tb_clients tb3 WHERE tb3.`ID` = (SELECT `CLIENT_ID` FROM tb_animaux tb2 WHERE tb2.`ID` = tb1.`ANIM_ID`)) AS 'CLIENT_FULL_NME',\r\n(SELECT `NUM_CNI` FROM tb_clients tb3 WHERE tb3.`ID` = (SELECT `CLIENT_ID` FROM tb_animaux tb2 WHERE tb2.`ID` = tb1.`ANIM_ID`)) AS 'CLIENT_NUM_CNI',\r\n(SELECT `NUM_PHONE` FROM tb_clients tb3 WHERE tb3.`ID` = (SELECT `CLIENT_ID` FROM tb_animaux tb2 WHERE tb2.`ID` = tb1.`ANIM_ID`)) AS 'CLIENT_NUM_PHONE',\r\n`OBSERV`,\r\n`Glucose`,\r\n`Urée (BUN)`,\r\n`Créatinine`,\r\n`Acide Urique`,\r\n`Cholesterol`,\r\n`Triglycérides`,\r\n`Proteines Totales`,\r\n`Albumina`,\r\n`Globulines`,\r\n`Indice alb/glb`,\r\n`Bilirubine Totale`,\r\n`Bilirubine Conjuguée`,\r\n`GPT(ALT)`,\r\n`GOT(AST)`,\r\n`Phosphatases Alc`,\r\n`Gamma-GT`,\r\n`L.D.H`,\r\n`C.P.K`,\r\n`Lipase`,\r\n`Amylase`,\r\n`Fructosamine`,\r\n`Calcium`,\r\n`Phosphore`,\r\n`Chlore`,\r\n`Potassium`,\r\n`Sodium`,\r\n`Amoniac`,\r\n`Fer`,\r\n`Glucose_NORMATIF`,\r\n`Urée (BUN)_NORMATIF`,\r\n`Créatinine_NORMATIF`,\r\n`Acide Urique_NORMATIF`,\r\n`Cholesterol_NORMATIF`,\r\n`Triglycérides_NORMATIF`,\r\n`Proteines Totales_NORMATIF`,\r\n`Albumina_NORMATIF`,\r\n`Globulines_NORMATIF`,\r\n`Indice alb/glb_NORMATIF`,\r\n`Bilirubine Totale_NORMATIF`,\r\n`Bilirubine Conjuguée_NORMATIF`,\r\n`GPT(ALT)_NORMATIF`,\r\n`GOT(AST)_NORMATIF`,\r\n`Phosphatases Alc_NORMATIF`,\r\n`Gamma-GT_NORMATIF`,\r\n`L.D.H_NORMATIF`,\r\n`C.P.K_NORMATIF`,\r\n`Lipase_NORMATIF`,\r\n`Amylase_NORMATIF`,\r\n`Fructosamine_NORMATIF`,\r\n`Calcium_NORMATIF`,\r\n`Phosphore_NORMATIF`,\r\n`Chlore_NORMATIF`,\r\n`Potassium_NORMATIF`,\r\n`Sodium_NORMATIF`,\r\n`Amoniac_NORMATIF`,\r\n`Fer_NORMATIF`\r\nFROM `tb_labo_biochimie` tb1 WHERE `ANIM_ID` = " + selected_anim.Cells["ID"].Value + " ORDER BY `DATE_TIME`;");
                     if (dt_bioch.Rows.Count > 0)
-                    {                       
+                    {
                         Excc.Worksheet worksheet_bioch = workbook.Worksheets.Add();
                         worksheet_bioch.Activate();
                         //--------------------
                         worksheet_bioch.Name = "Biochimie";
                         worksheet_bioch.Rows[4].RowHeight = 30;
-                         //-------------------
+                        //-------------------
                         worksheet_bioch.Cells[1, 1].Value = "Nom :";
                         worksheet_bioch.Cells[1, 2].Value = dt_bioch.Rows[0]["ANIM_NME"];
 
@@ -1133,7 +1188,7 @@ namespace ALBAITAR_Softvet.Resources
 
 
 
-                        
+
 
                     }
                     //===============================
