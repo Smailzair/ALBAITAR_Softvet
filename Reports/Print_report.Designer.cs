@@ -48,7 +48,7 @@
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.ShowRefreshButton = false;
             this.reportViewer1.ShowStopButton = false;
-            this.reportViewer1.Size = new System.Drawing.Size(930, 360);
+            this.reportViewer1.Size = new System.Drawing.Size(836, 360);
             this.reportViewer1.TabIndex = 0;
             // 
             // button3
@@ -97,7 +97,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 360);
+            this.ClientSize = new System.Drawing.Size(836, 360);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);

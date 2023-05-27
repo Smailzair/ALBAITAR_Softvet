@@ -1241,7 +1241,7 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox26</rd:DefaultName>
-                <Top>0.56444cm</Top>
+                <Top>0.6cm</Top>
                 <Left>8.54666cm</Left>
                 <Height>1.83556cm</Height>
                 <Width>10.12336cm</Width>
@@ -1648,7 +1648,7 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>237.27986mm</Height>
+        <Height>226.7341mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1910,7 +1910,7 @@
               <Source>Embedded</Source>
               <Value>icons8_phone_20px_1</Value>
               <Sizing>Clip</Sizing>
-              <Top>0.95278cm</Top>
+              <Top>0.88928cm</Top>
               <Left>1.26932cm</Left>
               <Height>0.62225cm</Height>
               <Width>0.52986cm</Width>
@@ -1928,7 +1928,7 @@
               <Source>Embedded</Source>
               <Value>icons8_address_20px_2</Value>
               <Sizing>Clip</Sizing>
-              <Top>1.64558cm</Top>
+              <Top>1.58208cm</Top>
               <Left>1.26932cm</Left>
               <Height>0.6cm</Height>
               <Width>0.52986cm</Width>
@@ -1962,7 +1962,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>CABINET_ADRESS</rd:DefaultName>
-              <Top>1.64558cm</Top>
+              <Top>1.58208cm</Top>
               <Left>1.97557cm</Left>
               <Height>0.6cm</Height>
               <Width>17.77388cm</Width>
@@ -1996,7 +1996,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>CABINET_TEL</rd:DefaultName>
-              <Top>0.95278cm</Top>
+              <Top>0.88928cm</Top>
               <Left>1.97557cm</Left>
               <Height>0.62225cm</Height>
               <Width>8.37375cm</Width>
@@ -2015,7 +2015,7 @@
               <Source>Embedded</Source>
               <Value>icons8_Letter_20px</Value>
               <Sizing>Clip</Sizing>
-              <Top>0.95278cm</Top>
+              <Top>0.88928cm</Top>
               <Left>10.54937cm</Left>
               <Height>0.62225cm</Height>
               <Width>0.57939cm</Width>
@@ -2049,7 +2049,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>CABINET_EMAIL</rd:DefaultName>
-              <Top>0.95278cm</Top>
+              <Top>0.88928cm</Top>
               <Left>11.26987cm</Left>
               <Height>0.62225cm</Height>
               <Width>8.47958cm</Width>
