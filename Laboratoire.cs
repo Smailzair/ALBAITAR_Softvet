@@ -293,6 +293,7 @@ namespace ALBAITAR_Softvet.Resources
                 atr.Dock = DockStyle.Fill;
                 this.Controls.Add(atr);
                 atr.BringToFront();
+                this.ActiveControl = atr;
             }
         }
 

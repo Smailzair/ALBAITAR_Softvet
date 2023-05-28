@@ -60,13 +60,11 @@ namespace ALBAITAR_Softvet.Labo
             textBox2.Text = (string)selected_animm.Cells["OBSERVATIONS"].Value;
             //-------------------------
             Load_histor();
-            //-----------------
-            ccc = true;            
             //------------------
 
         }
-        int tmp_rw_idx  = 0;
-        bool ccc = false;
+
+        
         private void Load_histor()
         {
             string[] sss = { "Hemogramme", "Biochimie", "Immunologie", "Protéinogramme", "Urologie"};

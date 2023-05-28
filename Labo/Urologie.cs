@@ -81,7 +81,7 @@ namespace ALBAITAR_Softvet.Labo
             //---------------------------
             Load_histor();
             //-----------------
-            if(IDD_to_select != null)
+            if (IDD_to_select != null)
             {
                 if (IDD_to_select.Trim().Length > 0)
                 {
@@ -95,12 +95,14 @@ namespace ALBAITAR_Softvet.Labo
                 }
                 else
                 {
-                    button3.PerformClick();
+                    IDD_to_select = "-9999";
+                    //button3.PerformClick();
                 }
             }
             else
             {
-                button3.PerformClick();
+                IDD_to_select = "-9999";
+                //button3.PerformClick();
             }
             //------------------
         }
@@ -140,7 +142,6 @@ namespace ALBAITAR_Softvet.Labo
             }
 
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             is_new = true;
@@ -148,14 +149,18 @@ namespace ALBAITAR_Softvet.Labo
             dateTimePicker1.Value = DateTime.Now;
             textBox1.Clear();
             textBox3.Text = ref_tmp = "URO_" + DateTime.Now.ToString("ddMMyyyy") + "_" + DateTime.Now.ToString("HHffff") + "_" + selected_animm.Cells["ID"].Value;
+            dataGridView1.CellValueChanged -= dataGridView1_CellValueChanged;
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 dataGridView1.Rows[i].Cells[1].Value = DBNull.Value;
             }
+            dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
+            dataGridView3.CellValueChanged -= dataGridView1_CellValueChanged;
             for (int i = 0; i < dataGridView3.Rows.Count; i++)
             {
                 dataGridView3.Rows[i].Cells[1].Value = DBNull.Value;
             }
+            dataGridView3.CellValueChanged += dataGridView1_CellValueChanged;
             textBox5.Text = string.Empty;
             button5.Visible = false;
         }
@@ -375,6 +380,14 @@ namespace ALBAITAR_Softvet.Labo
                         }
                         textBox5.Text = dt.Rows[0][18] != DBNull.Value ? (string)dt.Rows[0][18] : "";
                         button5.Visible = true;
+                        //--------------------
+                        if (IDD_to_select == "-9999")
+                        {
+                            IDD_to_select = null;
+                            button3.PerformClick();
+                            
+                        }
+                        
                     }
                     else
                     {
@@ -388,7 +401,9 @@ namespace ALBAITAR_Softvet.Labo
             }
             else
             {
-                button3.PerformClick();
+               
+                    button3.PerformClick();
+                                
             }
 
         }
