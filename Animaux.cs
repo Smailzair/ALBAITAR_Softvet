@@ -25,9 +25,68 @@ namespace ALBAITAR_Softvet.Resources
         List<string> full_nme_clients;
         bool Is_New = true;
         bool Is_New_Visite = true;
+        DataTable Races_Especes = new DataTable();
         public Animaux()
         {
             InitializeComponent();
+            //----------------------
+            Races_Especes.Columns.Add("ESPECE", typeof(string));
+            Races_Especes.Columns.Add("RACE", typeof(string));
+            Races_Especes.Rows.Add(new object[] { "Canine", "Husky Siberien" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Jack Russel" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Jagdterrier" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Komodor" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Korthals" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Labrador" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Levrier Afghan" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Levrier Espagnol" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Lhassa Apso" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Malamute de l'Alaska" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Pekinois" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Pinscher" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Pit Bull" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Podenco" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Pointer" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Rhodesian Ridgeback" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Rottweiler" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Saint-Bernard" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Saluki" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Samoyede" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Schnauzer" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Schnauzer Geant" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Schnauzer Moyen" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Schnauzer Nain" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Scottish Terrier" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Setter Anglais" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Setter Gordon" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Setter Irlandais" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Shar-pei" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Shiba Inu" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Shih Tzu" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Sloughi" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Spitz Japonais" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Spitz Nain" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Staffordshire Bull Terrier" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Teckel" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Teckel à poil dur" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Teckel à poil long" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Teckel Nain" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Terre Neuve" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Terrier Tibétain" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Westhiland West terrier" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Whippet" });
+            Races_Especes.Rows.Add(new object[] { "Canine", "Yorkshire Terrier" });
+            Races_Especes.Rows.Add(new object[] { "Feline", "Main Coon" });
+            Races_Especes.Rows.Add(new object[] { "Feline", "Persan" });
+            Races_Especes.Rows.Add(new object[] { "Feline", "Savannah" });
+            Races_Especes.Rows.Add(new object[] { "Feline", "Siamois" });
+            Races_Especes.Rows.Add(new object[] { "Feline", "Sphynx" });
+            Races_Especes.Rows.Add(new object[] { "Oiseaux", "Perroquet" });
+            Races_Especes.Rows.Add(new object[] { "Oiseaux", "Perruche" });
+            comboBox3.DataSource = Races_Especes;
+            comboBox3.ValueMember = "RACE";
+            comboBox3.DisplayMember = "RACE";
+            //---------------------------
             tabControl1.TabPages.Remove(tabPage2);
             //----------------------
             comboBox2.SelectedIndex = comboBox3.SelectedIndex = comboBox4.SelectedIndex = 0;
@@ -88,7 +147,7 @@ namespace ALBAITAR_Softvet.Resources
                 textBox4.Text = (string)dataGridView1.SelectedRows[0].Cells["NUM_PASSPORT"].Value;
                 comboBox1.SelectedValue = (int)dataGridView1.SelectedRows[0].Cells["CLIENT_ID"].Value;
                 comboBox2.SelectedItem = (string)dataGridView1.SelectedRows[0].Cells["ESPECE"].Value;
-                comboBox3.SelectedItem = (string)dataGridView1.SelectedRows[0].Cells["RACE"].Value;
+                comboBox3.Text = (string)dataGridView1.SelectedRows[0].Cells["RACE"].Value;
                 comboBox4.SelectedItem = (string)dataGridView1.SelectedRows[0].Cells["SEXE"].Value;
                 checkBox2.Checked = dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value != DBNull.Value;
                 dateTimePicker1.Value = dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value != DBNull.Value ? (DateTime)dataGridView1.SelectedRows[0].Cells["NISS_DATE"].Value : (DateTime)dataGridView1.SelectedRows[0].Cells["DATE_ADDED"].Value;// DateTime.Now.Date;
@@ -311,7 +370,7 @@ namespace ALBAITAR_Softvet.Resources
             Is_New = true;
             comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
             comboBox4.SelectedIndexChanged -= comboBox4_SelectedIndexChanged;
-
+            comboBox3.Text = "--";
             foreach (Control ctrl in tabPage1.Controls)
             {
                 if (ctrl.GetType() == typeof(TextBox) || ctrl.GetType() == typeof(MaskedTextBox))
@@ -533,6 +592,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
             panel2.Visible = comboBox2.SelectedIndex == 0;
             if (!button7.Visible)
             {
@@ -547,6 +607,12 @@ namespace ALBAITAR_Softvet.Resources
 
             }
             verif_if_déja_exist_animal();
+            //------------------------
+            string prev_val = comboBox3.Text;
+            string[] tmmmp = { "Canine", "Feline", "Oiseaux" };
+            ((DataTable)comboBox3.DataSource).DefaultView.RowFilter = tmmmp.Contains(comboBox2.Text) ? "ESPECE LIKE '" + comboBox2.Text + "'" : "";
+            comboBox3.Text = prev_val;
+            //-----------------------
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -966,6 +1032,11 @@ namespace ALBAITAR_Softvet.Resources
                     load_visites();
                 }
             }
+        }
+
+        private void comboBox3_Validated(object sender, EventArgs e)
+        {
+            verif_if_déja_exist_animal();
         }
     }
 }
