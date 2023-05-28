@@ -10,12 +10,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Web.WebPages;
 using System.Windows.Forms;
 using DataTable = System.Data.DataTable;
 
@@ -34,6 +36,8 @@ namespace ALBAITAR_Softvet
         DataTable clients;
         DataTable animals;
         ImageList tabcontrol_img_lst;
+        System.Drawing.Font simple_font = new System.Drawing.Font("Century Gothic",9,FontStyle.Regular);
+        System.Drawing.Font bold_font = new System.Drawing.Font("Century Gothic", 10, FontStyle.Bold);
         //----------
         DataTable chosen_anim_from_search;
         DataTable chosen_client_from_search;
@@ -129,7 +133,7 @@ namespace ALBAITAR_Softvet
 
             if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
             {
-                new Animaux().Show();
+                new Animaux(-1,-1).Show();
             }
             else
             {
@@ -619,6 +623,8 @@ namespace ALBAITAR_Softvet
 
         private void Refresh_current_tab()
         {
+
+            
             switch (tabControl1.SelectedTab.Name)
             {
                 case "tabPage_visites_animal":
@@ -936,6 +942,117 @@ namespace ALBAITAR_Softvet
             
             Refresh_current_tab();
         }
+
+        private void textBox8_Enter(object sender, EventArgs e)
+        {
+            button3.Select();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if(selected_animal_id > -1)
+            {
+                if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+                {
+                    new Animaux(selected_animal_id,-1).Show();
+                }
+                else
+                {
+                    Animaux.ID_to_selectt = selected_animal_id;
+                    System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
+                    System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+                }
+                panel1.Visible = false;
+            }
+            
+        }
+
+        private void dataGridView2_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (selected_animal_id > -1)
+            {
+                if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+                {
+                    new Animaux(selected_animal_id, (int)dataGridView2.Rows[e.RowIndex].Cells["ID_VISITE"].Value).Show();
+                }
+                else
+                {
+                    Animaux.ID_to_selectt = selected_animal_id;
+                    Animaux.visite_idd = (int)dataGridView2.Rows[e.RowIndex].Cells["ID_VISITE"].Value;
+                    System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
+                    System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+                }
+                panel1.Visible = false;
+            }
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            if(dataGridView2.SelectedRows.Count > 0) {
+                DataGridViewCellMouseEventArgs rr = new DataGridViewCellMouseEventArgs(1, dataGridView2.SelectedRows[0].Index, 1, 1, new MouseEventArgs(MouseButtons.Left,2,1,1,0));
+                dataGridView2_CellMouseDoubleClick(dataGridView2, rr);
+            }
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            if (selected_animal_id > -1)
+            {
+                if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+                {
+                    new Animaux(selected_animal_id,-2).Show();
+                }
+                else
+                {
+                    Animaux.ID_to_selectt = selected_animal_id;
+                    Animaux.visite_idd = -2;
+                    System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
+                    System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+                }
+                panel1.Visible = false;
+            }
+        }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            var tabPage = tabControl1.TabPages[e.Index];
+
+            var headerBounds = tabControl1.GetTabRect(e.Index);
+
+
+
+            System.Drawing.Font fntt = tabControl1.Font;
+
+            if (e.Index == tabControl1.SelectedIndex) // Assuming TabPage2 is at index 1
+            {
+                fntt = bold_font;
+                using (var brush = new SolidBrush(Color.Yellow))
+                {
+                    e.Graphics.FillRectangle(brush, headerBounds);
+                }
+            }
+            else
+            {
+                fntt = simple_font;
+                using (var brush = new SolidBrush(Color.White))
+                {
+                    e.Graphics.FillRectangle(brush, headerBounds);
+                }
+            }
+            if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
+            {
+                var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];
+                var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Top + (e.Bounds.Height - icon.Height) - 5, icon.Width, icon.Height);
+                e.Graphics.DrawImage(icon, iconBounds);
+                headerBounds.X += iconBounds.Width + 4; // Adjust the X position for the text
+            }
+
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+            e.Graphics.TranslateTransform(headerBounds.Left + headerBounds.Width / 2, headerBounds.Top + headerBounds.Height / 2);
+            e.Graphics.RotateTransform(-90);
+            e.Graphics.DrawString(tabPage.Text, fntt, Brushes.Black, -(headerBounds.Height / 2) + 25, -(headerBounds.Width / 2) - 10 , StringFormat.GenericDefault);
+        }
+
     }
 }
 

@@ -38,6 +38,18 @@ namespace ALBAITAR_Softvet
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Frm));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.textBox5 = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label_cab_nme = new System.Windows.Forms.Label();
@@ -45,6 +57,7 @@ namespace ALBAITAR_Softvet
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_infos_animal = new System.Windows.Forms.TabPage();
+            this.button16 = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
@@ -60,6 +73,7 @@ namespace ALBAITAR_Softvet
             this.label12 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -85,6 +99,7 @@ namespace ALBAITAR_Softvet
             this.FACTURE_REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_labo_animal = new System.Windows.Forms.TabPage();
+            this.button15 = new System.Windows.Forms.Button();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
@@ -97,32 +112,20 @@ namespace ALBAITAR_Softvet
             this.IDD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OBSERV2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NUM_FACT_LAB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button15 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.button17 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_infos_animal.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabPage_visites_animal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabPage_labo_animal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox5
@@ -135,730 +138,9 @@ namespace ALBAITAR_Softvet
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
             this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox5.Size = new System.Drawing.Size(217, 167);
+            this.textBox5.Size = new System.Drawing.Size(217, 131);
             this.textBox5.TabIndex = 17;
             this.toolTip1.SetToolTip(this.textBox5, "ex: Euthanasie");
-            // 
-            // listView1
-            // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(662, 12);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(181, 532);
-            this.listView1.TabIndex = 17;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.Visible = false;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(239)))), ((int)(((byte)(247)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button6);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button9);
-            this.panel1.Controls.Add(this.button11);
-            this.panel1.Controls.Add(this.button12);
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Location = new System.Drawing.Point(787, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(295, 326);
-            this.panel1.TabIndex = 20;
-            this.panel1.Visible = false;
-            this.panel1.VisibleChanged += new System.EventHandler(this.panel1_VisibleChanged);
-            this.panel1.MouseLeave += new System.EventHandler(this.panel1_MouseLeave);
-            // 
-            // label_cab_nme
-            // 
-            this.label_cab_nme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_cab_nme.BackColor = System.Drawing.Color.Transparent;
-            this.label_cab_nme.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_cab_nme.ForeColor = System.Drawing.Color.Purple;
-            this.label_cab_nme.Location = new System.Drawing.Point(209, 13);
-            this.label_cab_nme.Name = "label_cab_nme";
-            this.label_cab_nme.Size = new System.Drawing.Size(490, 25);
-            this.label_cab_nme.TabIndex = 21;
-            this.label_cab_nme.Text = "Cabinet : --";
-            this.label_cab_nme.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Propriétaire",
-            "Animal"});
-            this.comboBox1.Location = new System.Drawing.Point(182, 41);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 27;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(79, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 16);
-            this.label1.TabIndex = 29;
-            this.label1.Text = "Rechercher par :";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage_infos_animal);
-            this.tabControl1.Controls.Add(this.tabPage_visites_animal);
-            this.tabControl1.Controls.Add(this.tabPage_labo_animal);
-            this.tabControl1.Location = new System.Drawing.Point(1, 69);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.Padding = new System.Drawing.Point(15, 10);
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(842, 499);
-            this.tabControl1.TabIndex = 30;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
-            // tabPage_infos_animal
-            // 
-            this.tabPage_infos_animal.AutoScroll = true;
-            this.tabPage_infos_animal.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage_infos_animal.Controls.Add(this.label26);
-            this.tabPage_infos_animal.Controls.Add(this.label25);
-            this.tabPage_infos_animal.Controls.Add(this.label24);
-            this.tabPage_infos_animal.Controls.Add(this.label16);
-            this.tabPage_infos_animal.Controls.Add(this.label17);
-            this.tabPage_infos_animal.Controls.Add(this.label18);
-            this.tabPage_infos_animal.Controls.Add(this.label19);
-            this.tabPage_infos_animal.Controls.Add(this.label20);
-            this.tabPage_infos_animal.Controls.Add(this.label21);
-            this.tabPage_infos_animal.Controls.Add(this.label22);
-            this.tabPage_infos_animal.Controls.Add(this.label23);
-            this.tabPage_infos_animal.Controls.Add(this.label13);
-            this.tabPage_infos_animal.Controls.Add(this.label12);
-            this.tabPage_infos_animal.Controls.Add(this.label15);
-            this.tabPage_infos_animal.Controls.Add(this.label2);
-            this.tabPage_infos_animal.Controls.Add(this.pictureBox2);
-            this.tabPage_infos_animal.Controls.Add(this.label3);
-            this.tabPage_infos_animal.Controls.Add(this.label4);
-            this.tabPage_infos_animal.Controls.Add(this.groupBox1);
-            this.tabPage_infos_animal.Controls.Add(this.label11);
-            this.tabPage_infos_animal.Controls.Add(this.textBox8);
-            this.tabPage_infos_animal.Controls.Add(this.label9);
-            this.tabPage_infos_animal.Controls.Add(this.label8);
-            this.tabPage_infos_animal.Controls.Add(this.label6);
-            this.tabPage_infos_animal.Controls.Add(this.label7);
-            this.tabPage_infos_animal.Controls.Add(this.label10);
-            this.tabPage_infos_animal.Location = new System.Drawing.Point(37, 4);
-            this.tabPage_infos_animal.Name = "tabPage_infos_animal";
-            this.tabPage_infos_animal.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_infos_animal.Size = new System.Drawing.Size(801, 491);
-            this.tabPage_infos_animal.TabIndex = 0;
-            this.tabPage_infos_animal.Text = "Informations :";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(122, 225);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(15, 16);
-            this.label26.TabIndex = 86;
-            this.label26.Text = "--";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(122, 34);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(15, 16);
-            this.label25.TabIndex = 85;
-            this.label25.Text = "--";
-            // 
-            // label24
-            // 
-            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(667, 208);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(15, 16);
-            this.label24.TabIndex = 84;
-            this.label24.Text = "--";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(122, 8);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(15, 16);
-            this.label16.TabIndex = 76;
-            this.label16.Text = "--";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(122, 59);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(15, 16);
-            this.label17.TabIndex = 77;
-            this.label17.Text = "--";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(122, 86);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(15, 16);
-            this.label18.TabIndex = 78;
-            this.label18.Text = "--";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(122, 253);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(15, 16);
-            this.label19.TabIndex = 83;
-            this.label19.Text = "--";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(122, 198);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(15, 16);
-            this.label20.TabIndex = 82;
-            this.label20.Text = "--";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(122, 114);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(15, 16);
-            this.label21.TabIndex = 79;
-            this.label21.Text = "--";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(122, 172);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(15, 16);
-            this.label22.TabIndex = 81;
-            this.label22.Text = "--";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(122, 144);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(15, 16);
-            this.label23.TabIndex = 80;
-            this.label23.Text = "--";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(12, 225);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(107, 16);
-            this.label13.TabIndex = 75;
-            this.label13.Text = "Date de nissance :";
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(606, 208);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(55, 16);
-            this.label12.TabIndex = 74;
-            this.label12.Text = "Radié ? :";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(60, 8);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(59, 16);
-            this.label15.TabIndex = 72;
-            this.label15.Text = "Ajouté le :";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(81, 34);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 16);
-            this.label2.TabIndex = 49;
-            this.label2.Text = "Nom :";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 16);
-            this.label3.TabIndex = 50;
-            this.label3.Text = "N° d\'identification :";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 86);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 16);
-            this.label4.TabIndex = 51;
-            this.label4.Text = "N° du passport :";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.label27);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Location = new System.Drawing.Point(572, 227);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(229, 249);
-            this.groupBox1.TabIndex = 69;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Radiation : ";
-            this.groupBox1.Visible = false;
-            // 
-            // label27
-            // 
-            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(127, 29);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(15, 16);
-            this.label27.TabIndex = 85;
-            this.label27.Text = "--";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(11, 29);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(110, 16);
-            this.label14.TabIndex = 40;
-            this.label14.Text = "Date de radiation :";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 53);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 16);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Causes :";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 272);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(85, 16);
-            this.label11.TabIndex = 63;
-            this.label11.Text = "Observations :";
-            // 
-            // textBox8
-            // 
-            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox8.Location = new System.Drawing.Point(15, 291);
-            this.textBox8.Multiline = true;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.ReadOnly = true;
-            this.textBox8.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox8.Size = new System.Drawing.Size(542, 193);
-            this.textBox8.TabIndex = 61;
-            this.textBox8.WordWrap = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(77, 253);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(42, 16);
-            this.label9.TabIndex = 68;
-            this.label9.Text = "Robe :";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(80, 198);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(39, 16);
-            this.label8.TabIndex = 67;
-            this.label8.Text = "Sexe :";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(46, 114);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(74, 16);
-            this.label6.TabIndex = 64;
-            this.label6.Text = "Propriétaire :";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(77, 172);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 16);
-            this.label7.TabIndex = 66;
-            this.label7.Text = "Race :";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(68, 144);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 16);
-            this.label10.TabIndex = 65;
-            this.label10.Text = "Espéce :";
-            // 
-            // tabPage_visites_animal
-            // 
-            this.tabPage_visites_animal.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage_visites_animal.Controls.Add(this.radioButton3);
-            this.tabPage_visites_animal.Controls.Add(this.radioButton2);
-            this.tabPage_visites_animal.Controls.Add(this.radioButton1);
-            this.tabPage_visites_animal.Controls.Add(this.dataGridView2);
-            this.tabPage_visites_animal.Location = new System.Drawing.Point(37, 4);
-            this.tabPage_visites_animal.Name = "tabPage_visites_animal";
-            this.tabPage_visites_animal.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_visites_animal.Size = new System.Drawing.Size(801, 491);
-            this.tabPage_visites_animal.TabIndex = 1;
-            this.tabPage_visites_animal.Text = "Visites";
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.ForeColor = System.Drawing.Color.Red;
-            this.radioButton3.Location = new System.Drawing.Point(226, 8);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(99, 20);
-            this.radioButton3.TabIndex = 61;
-            this.radioButton3.Text = "Non Facturé()";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.ForeColor = System.Drawing.Color.DarkGreen;
-            this.radioButton2.Location = new System.Drawing.Point(110, 8);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(74, 20);
-            this.radioButton2.TabIndex = 60;
-            this.radioButton2.Text = "Facturé()";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(17, 8);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(56, 20);
-            this.radioButton1.TabIndex = 59;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Tous()";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView2.ColumnHeadersHeight = 35;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID_VISITE,
-            this.DATETIME,
-            this.VISITOR_FULL_NME,
-            this.OBJECT,
-            this.FACTURE_REF,
-            this.ANIM_ID});
-            this.dataGridView2.EnableHeadersVisualStyles = false;
-            this.dataGridView2.Location = new System.Drawing.Point(7, 34);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(575, 230);
-            this.dataGridView2.TabIndex = 58;
-            // 
-            // ID_VISITE
-            // 
-            this.ID_VISITE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ID_VISITE.DataPropertyName = "ID";
-            this.ID_VISITE.HeaderText = "ID";
-            this.ID_VISITE.Name = "ID_VISITE";
-            this.ID_VISITE.ReadOnly = true;
-            this.ID_VISITE.Visible = false;
-            this.ID_VISITE.Width = 42;
-            // 
-            // DATETIME
-            // 
-            this.DATETIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DATETIME.DataPropertyName = "DATETIME";
-            dataGridViewCellStyle2.Format = "dd/MM/yyyy HH:mm";
-            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle2;
-            this.DATETIME.HeaderText = "Date";
-            this.DATETIME.Name = "DATETIME";
-            this.DATETIME.ReadOnly = true;
-            this.DATETIME.Width = 58;
-            // 
-            // VISITOR_FULL_NME
-            // 
-            this.VISITOR_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.VISITOR_FULL_NME.DataPropertyName = "VISITOR_FULL_NME";
-            this.VISITOR_FULL_NME.HeaderText = "Visiteur";
-            this.VISITOR_FULL_NME.Name = "VISITOR_FULL_NME";
-            this.VISITOR_FULL_NME.ReadOnly = true;
-            this.VISITOR_FULL_NME.Width = 67;
-            // 
-            // OBJECT
-            // 
-            this.OBJECT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OBJECT.DataPropertyName = "OBJECT";
-            this.OBJECT.HeaderText = "Objet";
-            this.OBJECT.Name = "OBJECT";
-            this.OBJECT.ReadOnly = true;
-            // 
-            // FACTURE_REF
-            // 
-            this.FACTURE_REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.FACTURE_REF.DataPropertyName = "FACTURE_REF";
-            this.FACTURE_REF.HeaderText = "N° Facture\n(s\'il est facturé)";
-            this.FACTURE_REF.Name = "FACTURE_REF";
-            this.FACTURE_REF.ReadOnly = true;
-            this.FACTURE_REF.Width = 109;
-            // 
-            // ANIM_ID
-            // 
-            this.ANIM_ID.DataPropertyName = "ANIM_ID";
-            this.ANIM_ID.HeaderText = "ANIM_ID";
-            this.ANIM_ID.Name = "ANIM_ID";
-            this.ANIM_ID.ReadOnly = true;
-            this.ANIM_ID.Visible = false;
-            // 
-            // tabPage_labo_animal
-            // 
-            this.tabPage_labo_animal.Controls.Add(this.button15);
-            this.tabPage_labo_animal.Controls.Add(this.radioButton4);
-            this.tabPage_labo_animal.Controls.Add(this.radioButton5);
-            this.tabPage_labo_animal.Controls.Add(this.radioButton6);
-            this.tabPage_labo_animal.Controls.Add(this.textBox3);
-            this.tabPage_labo_animal.Controls.Add(this.comboBox3);
-            this.tabPage_labo_animal.Controls.Add(this.dataGridView1);
-            this.tabPage_labo_animal.Controls.Add(this.button14);
-            this.tabPage_labo_animal.Controls.Add(this.button13);
-            this.tabPage_labo_animal.Controls.Add(this.button10);
-            this.tabPage_labo_animal.Location = new System.Drawing.Point(37, 4);
-            this.tabPage_labo_animal.Name = "tabPage_labo_animal";
-            this.tabPage_labo_animal.Size = new System.Drawing.Size(801, 491);
-            this.tabPage_labo_animal.TabIndex = 2;
-            this.tabPage_labo_animal.Text = "Laboratoire";
-            this.tabPage_labo_animal.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.ForeColor = System.Drawing.Color.Red;
-            this.radioButton4.Location = new System.Drawing.Point(220, 39);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(99, 20);
-            this.radioButton4.TabIndex = 64;
-            this.radioButton4.Text = "Non Facturé()";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.ForeColor = System.Drawing.Color.DarkGreen;
-            this.radioButton5.Location = new System.Drawing.Point(104, 39);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(74, 20);
-            this.radioButton5.TabIndex = 63;
-            this.radioButton5.Text = "Facturé()";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
-            // 
-            // radioButton6
-            // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Checked = true;
-            this.radioButton6.Location = new System.Drawing.Point(11, 39);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(56, 20);
-            this.radioButton6.TabIndex = 62;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Tous()";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Location = new System.Drawing.Point(276, 11);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(452, 21);
-            this.textBox3.TabIndex = 29;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "- Tous -",
-            "Hemogramme",
-            "Biochimie Sanguine",
-            "Immunologie",
-            "Protéinogramme",
-            "Urologie",
-            "- Autres -"});
-            this.comboBox3.Location = new System.Drawing.Point(11, 9);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(236, 24);
-            this.comboBox3.TabIndex = 28;
-            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.ColumnHeadersHeight = 30;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.LABO_NME,
-            this.DATE_TIME2,
-            this.REF2,
-            this.IDD2,
-            this.OBSERV2,
-            this.NUM_FACT_LAB});
-            this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(11, 65);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(782, 384);
-            this.dataGridView1.TabIndex = 27;
-            this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
-            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            // 
-            // LABO_NME
-            // 
-            this.LABO_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.LABO_NME.DataPropertyName = "LABO_NME";
-            this.LABO_NME.HeaderText = "Laboratoire";
-            this.LABO_NME.Name = "LABO_NME";
-            this.LABO_NME.ReadOnly = true;
-            this.LABO_NME.Width = 93;
-            // 
-            // DATE_TIME2
-            // 
-            this.DATE_TIME2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DATE_TIME2.DataPropertyName = "DATE_TIME";
-            dataGridViewCellStyle4.Format = "d";
-            dataGridViewCellStyle4.NullValue = null;
-            this.DATE_TIME2.DefaultCellStyle = dataGridViewCellStyle4;
-            this.DATE_TIME2.HeaderText = "Date";
-            this.DATE_TIME2.Name = "DATE_TIME2";
-            this.DATE_TIME2.ReadOnly = true;
-            this.DATE_TIME2.Width = 58;
-            // 
-            // REF2
-            // 
-            this.REF2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.REF2.DataPropertyName = "REF";
-            this.REF2.HeaderText = "Réf.";
-            this.REF2.Name = "REF2";
-            this.REF2.ReadOnly = true;
-            this.REF2.Width = 51;
-            // 
-            // IDD2
-            // 
-            this.IDD2.DataPropertyName = "ID";
-            this.IDD2.HeaderText = "ID";
-            this.IDD2.Name = "IDD2";
-            this.IDD2.ReadOnly = true;
-            this.IDD2.Visible = false;
-            // 
-            // OBSERV2
-            // 
-            this.OBSERV2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OBSERV2.DataPropertyName = "OBSERV";
-            this.OBSERV2.HeaderText = "Observ.";
-            this.OBSERV2.Name = "OBSERV2";
-            this.OBSERV2.ReadOnly = true;
-            // 
-            // NUM_FACT_LAB
-            // 
-            this.NUM_FACT_LAB.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.NUM_FACT_LAB.DataPropertyName = "FACTURE_REF";
-            this.NUM_FACT_LAB.HeaderText = "N° Facture";
-            this.NUM_FACT_LAB.Name = "NUM_FACT_LAB";
-            this.NUM_FACT_LAB.ReadOnly = true;
-            this.NUM_FACT_LAB.Width = 87;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(309, 41);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(242, 24);
-            this.comboBox2.TabIndex = 31;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // button7
             // 
@@ -1075,6 +357,307 @@ namespace ALBAITAR_Softvet
             this.button3.MouseEnter += new System.EventHandler(this.button3_MouseEnter);
             this.button3.MouseLeave += new System.EventHandler(this.button3_MouseLeave);
             // 
+            // button10
+            // 
+            this.button10.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_search_20px;
+            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button10.Enabled = false;
+            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Location = new System.Drawing.Point(253, 11);
+            this.button10.Margin = new System.Windows.Forms.Padding(4);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(24, 21);
+            this.button10.TabIndex = 33;
+            this.toolTip1.SetToolTip(this.button10, "Rechercher");
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(662, 12);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(181, 532);
+            this.listView1.TabIndex = 17;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(239)))), ((int)(((byte)(247)))));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button6);
+            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.button9);
+            this.panel1.Controls.Add(this.button11);
+            this.panel1.Controls.Add(this.button12);
+            this.panel1.Controls.Add(this.button5);
+            this.panel1.Location = new System.Drawing.Point(787, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(295, 326);
+            this.panel1.TabIndex = 20;
+            this.panel1.Visible = false;
+            this.panel1.VisibleChanged += new System.EventHandler(this.panel1_VisibleChanged);
+            this.panel1.MouseLeave += new System.EventHandler(this.panel1_MouseLeave);
+            // 
+            // label_cab_nme
+            // 
+            this.label_cab_nme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_cab_nme.BackColor = System.Drawing.Color.Transparent;
+            this.label_cab_nme.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_cab_nme.ForeColor = System.Drawing.Color.Purple;
+            this.label_cab_nme.Location = new System.Drawing.Point(209, 13);
+            this.label_cab_nme.Name = "label_cab_nme";
+            this.label_cab_nme.Size = new System.Drawing.Size(490, 25);
+            this.label_cab_nme.TabIndex = 21;
+            this.label_cab_nme.Text = "Cabinet : --";
+            this.label_cab_nme.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Propriétaire",
+            "Animal"});
+            this.comboBox1.Location = new System.Drawing.Point(182, 41);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 27;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(79, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 16);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "Rechercher par :";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage_infos_animal);
+            this.tabControl1.Controls.Add(this.tabPage_visites_animal);
+            this.tabControl1.Controls.Add(this.tabPage_labo_animal);
+            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControl1.Location = new System.Drawing.Point(1, 69);
+            this.tabControl1.Multiline = true;
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(15, 10);
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(842, 499);
+            this.tabControl1.TabIndex = 30;
+            this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // tabPage_infos_animal
+            // 
+            this.tabPage_infos_animal.AutoScroll = true;
+            this.tabPage_infos_animal.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage_infos_animal.Controls.Add(this.button16);
+            this.tabPage_infos_animal.Controls.Add(this.label26);
+            this.tabPage_infos_animal.Controls.Add(this.label25);
+            this.tabPage_infos_animal.Controls.Add(this.label24);
+            this.tabPage_infos_animal.Controls.Add(this.label16);
+            this.tabPage_infos_animal.Controls.Add(this.label17);
+            this.tabPage_infos_animal.Controls.Add(this.label18);
+            this.tabPage_infos_animal.Controls.Add(this.label19);
+            this.tabPage_infos_animal.Controls.Add(this.label20);
+            this.tabPage_infos_animal.Controls.Add(this.label21);
+            this.tabPage_infos_animal.Controls.Add(this.label22);
+            this.tabPage_infos_animal.Controls.Add(this.label23);
+            this.tabPage_infos_animal.Controls.Add(this.label13);
+            this.tabPage_infos_animal.Controls.Add(this.label12);
+            this.tabPage_infos_animal.Controls.Add(this.label15);
+            this.tabPage_infos_animal.Controls.Add(this.label2);
+            this.tabPage_infos_animal.Controls.Add(this.pictureBox2);
+            this.tabPage_infos_animal.Controls.Add(this.label3);
+            this.tabPage_infos_animal.Controls.Add(this.label4);
+            this.tabPage_infos_animal.Controls.Add(this.groupBox1);
+            this.tabPage_infos_animal.Controls.Add(this.label11);
+            this.tabPage_infos_animal.Controls.Add(this.textBox8);
+            this.tabPage_infos_animal.Controls.Add(this.label9);
+            this.tabPage_infos_animal.Controls.Add(this.label8);
+            this.tabPage_infos_animal.Controls.Add(this.label6);
+            this.tabPage_infos_animal.Controls.Add(this.label7);
+            this.tabPage_infos_animal.Controls.Add(this.label10);
+            this.tabPage_infos_animal.Location = new System.Drawing.Point(37, 4);
+            this.tabPage_infos_animal.Name = "tabPage_infos_animal";
+            this.tabPage_infos_animal.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_infos_animal.Size = new System.Drawing.Size(801, 491);
+            this.tabPage_infos_animal.TabIndex = 0;
+            this.tabPage_infos_animal.Text = "Informations :";
+            // 
+            // button16
+            // 
+            this.button16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button16.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button16.FlatAppearance.BorderSize = 2;
+            this.button16.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.button16.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button16.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.button16.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_pencil_drawing_25px_1;
+            this.button16.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button16.Location = new System.Drawing.Point(685, 446);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(106, 36);
+            this.button16.TabIndex = 87;
+            this.button16.Text = "Modifier";
+            this.button16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(122, 225);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(15, 16);
+            this.label26.TabIndex = 86;
+            this.label26.Text = "--";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(122, 34);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(15, 16);
+            this.label25.TabIndex = 85;
+            this.label25.Text = "--";
+            // 
+            // label24
+            // 
+            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(667, 208);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(15, 16);
+            this.label24.TabIndex = 84;
+            this.label24.Text = "--";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(122, 8);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(15, 16);
+            this.label16.TabIndex = 76;
+            this.label16.Text = "--";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(122, 59);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(15, 16);
+            this.label17.TabIndex = 77;
+            this.label17.Text = "--";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(122, 86);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(15, 16);
+            this.label18.TabIndex = 78;
+            this.label18.Text = "--";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(122, 253);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(15, 16);
+            this.label19.TabIndex = 83;
+            this.label19.Text = "--";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(122, 198);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(15, 16);
+            this.label20.TabIndex = 82;
+            this.label20.Text = "--";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(122, 114);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(15, 16);
+            this.label21.TabIndex = 79;
+            this.label21.Text = "--";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(122, 172);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(15, 16);
+            this.label22.TabIndex = 81;
+            this.label22.Text = "--";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(122, 144);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(15, 16);
+            this.label23.TabIndex = 80;
+            this.label23.Text = "--";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 225);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(107, 16);
+            this.label13.TabIndex = 75;
+            this.label13.Text = "Date de nissance :";
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(606, 208);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(55, 16);
+            this.label12.TabIndex = 74;
+            this.label12.Text = "Radié ? :";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(60, 8);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(59, 16);
+            this.label15.TabIndex = 72;
+            this.label15.Text = "Ajouté le :";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(81, 34);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 16);
+            this.label2.TabIndex = 49;
+            this.label2.Text = "Nom :";
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1086,6 +669,302 @@ namespace ALBAITAR_Softvet
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 70;
             this.pictureBox2.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(108, 16);
+            this.label3.TabIndex = 50;
+            this.label3.Text = "N° d\'identification :";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(28, 86);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 16);
+            this.label4.TabIndex = 51;
+            this.label4.Text = "N° du passport :";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.label27);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.textBox5);
+            this.groupBox1.Location = new System.Drawing.Point(572, 227);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(229, 213);
+            this.groupBox1.TabIndex = 69;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Radiation : ";
+            this.groupBox1.Visible = false;
+            // 
+            // label27
+            // 
+            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(127, 29);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(15, 16);
+            this.label27.TabIndex = 85;
+            this.label27.Text = "--";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(11, 29);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(110, 16);
+            this.label14.TabIndex = 40;
+            this.label14.Text = "Date de radiation :";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 53);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 16);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Causes :";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(12, 272);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(85, 16);
+            this.label11.TabIndex = 63;
+            this.label11.Text = "Observations :";
+            // 
+            // textBox8
+            // 
+            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox8.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox8.Location = new System.Drawing.Point(15, 291);
+            this.textBox8.Multiline = true;
+            this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
+            this.textBox8.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox8.Size = new System.Drawing.Size(542, 193);
+            this.textBox8.TabIndex = 61;
+            this.textBox8.WordWrap = false;
+            this.textBox8.Enter += new System.EventHandler(this.textBox8_Enter);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(77, 253);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(42, 16);
+            this.label9.TabIndex = 68;
+            this.label9.Text = "Robe :";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(80, 198);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(39, 16);
+            this.label8.TabIndex = 67;
+            this.label8.Text = "Sexe :";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(46, 114);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(74, 16);
+            this.label6.TabIndex = 64;
+            this.label6.Text = "Propriétaire :";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(77, 172);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(42, 16);
+            this.label7.TabIndex = 66;
+            this.label7.Text = "Race :";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(68, 144);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(52, 16);
+            this.label10.TabIndex = 65;
+            this.label10.Text = "Espéce :";
+            // 
+            // tabPage_visites_animal
+            // 
+            this.tabPage_visites_animal.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage_visites_animal.Controls.Add(this.button17);
+            this.tabPage_visites_animal.Controls.Add(this.button18);
+            this.tabPage_visites_animal.Controls.Add(this.radioButton3);
+            this.tabPage_visites_animal.Controls.Add(this.radioButton2);
+            this.tabPage_visites_animal.Controls.Add(this.radioButton1);
+            this.tabPage_visites_animal.Controls.Add(this.dataGridView2);
+            this.tabPage_visites_animal.Location = new System.Drawing.Point(37, 4);
+            this.tabPage_visites_animal.Name = "tabPage_visites_animal";
+            this.tabPage_visites_animal.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_visites_animal.Size = new System.Drawing.Size(801, 491);
+            this.tabPage_visites_animal.TabIndex = 1;
+            this.tabPage_visites_animal.Text = "Visites";
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.ForeColor = System.Drawing.Color.Red;
+            this.radioButton3.Location = new System.Drawing.Point(226, 8);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(99, 20);
+            this.radioButton3.TabIndex = 61;
+            this.radioButton3.Text = "Non Facturé()";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.ForeColor = System.Drawing.Color.DarkGreen;
+            this.radioButton2.Location = new System.Drawing.Point(110, 8);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(74, 20);
+            this.radioButton2.TabIndex = 60;
+            this.radioButton2.Text = "Facturé()";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(17, 8);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(56, 20);
+            this.radioButton1.TabIndex = 59;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Tous()";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView2.ColumnHeadersHeight = 35;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID_VISITE,
+            this.DATETIME,
+            this.VISITOR_FULL_NME,
+            this.OBJECT,
+            this.FACTURE_REF,
+            this.ANIM_ID});
+            this.dataGridView2.EnableHeadersVisualStyles = false;
+            this.dataGridView2.Location = new System.Drawing.Point(7, 34);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView2.Size = new System.Drawing.Size(791, 413);
+            this.dataGridView2.TabIndex = 58;
+            this.dataGridView2.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDoubleClick);
+            // 
+            // ID_VISITE
+            // 
+            this.ID_VISITE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ID_VISITE.DataPropertyName = "ID";
+            this.ID_VISITE.HeaderText = "ID";
+            this.ID_VISITE.Name = "ID_VISITE";
+            this.ID_VISITE.ReadOnly = true;
+            this.ID_VISITE.Visible = false;
+            this.ID_VISITE.Width = 43;
+            // 
+            // DATETIME
+            // 
+            this.DATETIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATETIME.DataPropertyName = "DATETIME";
+            dataGridViewCellStyle2.Format = "dd/MM/yyyy HH:mm";
+            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle2;
+            this.DATETIME.HeaderText = "Date";
+            this.DATETIME.Name = "DATETIME";
+            this.DATETIME.ReadOnly = true;
+            this.DATETIME.Width = 58;
+            // 
+            // VISITOR_FULL_NME
+            // 
+            this.VISITOR_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.VISITOR_FULL_NME.DataPropertyName = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME.HeaderText = "Visiteur";
+            this.VISITOR_FULL_NME.Name = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME.ReadOnly = true;
+            this.VISITOR_FULL_NME.Width = 67;
+            // 
+            // OBJECT
+            // 
+            this.OBJECT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OBJECT.DataPropertyName = "OBJECT";
+            this.OBJECT.HeaderText = "Objet";
+            this.OBJECT.Name = "OBJECT";
+            this.OBJECT.ReadOnly = true;
+            // 
+            // FACTURE_REF
+            // 
+            this.FACTURE_REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FACTURE_REF.DataPropertyName = "FACTURE_REF";
+            this.FACTURE_REF.HeaderText = "N° Facture\n(s\'il est facturé)";
+            this.FACTURE_REF.Name = "FACTURE_REF";
+            this.FACTURE_REF.ReadOnly = true;
+            this.FACTURE_REF.Width = 109;
+            // 
+            // ANIM_ID
+            // 
+            this.ANIM_ID.DataPropertyName = "ANIM_ID";
+            this.ANIM_ID.HeaderText = "ANIM_ID";
+            this.ANIM_ID.Name = "ANIM_ID";
+            this.ANIM_ID.ReadOnly = true;
+            this.ANIM_ID.Visible = false;
+            // 
+            // tabPage_labo_animal
+            // 
+            this.tabPage_labo_animal.Controls.Add(this.button15);
+            this.tabPage_labo_animal.Controls.Add(this.radioButton4);
+            this.tabPage_labo_animal.Controls.Add(this.radioButton5);
+            this.tabPage_labo_animal.Controls.Add(this.radioButton6);
+            this.tabPage_labo_animal.Controls.Add(this.textBox3);
+            this.tabPage_labo_animal.Controls.Add(this.comboBox3);
+            this.tabPage_labo_animal.Controls.Add(this.dataGridView1);
+            this.tabPage_labo_animal.Controls.Add(this.button14);
+            this.tabPage_labo_animal.Controls.Add(this.button13);
+            this.tabPage_labo_animal.Controls.Add(this.button10);
+            this.tabPage_labo_animal.Location = new System.Drawing.Point(37, 4);
+            this.tabPage_labo_animal.Name = "tabPage_labo_animal";
+            this.tabPage_labo_animal.Size = new System.Drawing.Size(801, 491);
+            this.tabPage_labo_animal.TabIndex = 2;
+            this.tabPage_labo_animal.Text = "Laboratoire";
+            this.tabPage_labo_animal.UseVisualStyleBackColor = true;
             // 
             // button15
             // 
@@ -1108,16 +987,174 @@ namespace ALBAITAR_Softvet
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.ForeColor = System.Drawing.Color.Red;
+            this.radioButton4.Location = new System.Drawing.Point(220, 39);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(99, 20);
+            this.radioButton4.TabIndex = 64;
+            this.radioButton4.Text = "Non Facturé()";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.ForeColor = System.Drawing.Color.DarkGreen;
+            this.radioButton5.Location = new System.Drawing.Point(104, 39);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(74, 20);
+            this.radioButton5.TabIndex = 63;
+            this.radioButton5.Text = "Facturé()";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Checked = true;
+            this.radioButton6.Location = new System.Drawing.Point(11, 39);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(56, 20);
+            this.radioButton6.TabIndex = 62;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "Tous()";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox3.Location = new System.Drawing.Point(276, 11);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(452, 21);
+            this.textBox3.TabIndex = 29;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "- Tous -",
+            "Hemogramme",
+            "Biochimie Sanguine",
+            "Immunologie",
+            "Protéinogramme",
+            "Urologie",
+            "- Autres -"});
+            this.comboBox3.Location = new System.Drawing.Point(11, 9);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(236, 24);
+            this.comboBox3.TabIndex = 28;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView1.ColumnHeadersHeight = 30;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.LABO_NME,
+            this.DATE_TIME2,
+            this.REF2,
+            this.IDD2,
+            this.OBSERV2,
+            this.NUM_FACT_LAB});
+            this.dataGridView1.EnableHeadersVisualStyles = false;
+            this.dataGridView1.Location = new System.Drawing.Point(11, 65);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(782, 384);
+            this.dataGridView1.TabIndex = 27;
+            this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            // 
+            // LABO_NME
+            // 
+            this.LABO_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.LABO_NME.DataPropertyName = "LABO_NME";
+            this.LABO_NME.HeaderText = "Laboratoire";
+            this.LABO_NME.Name = "LABO_NME";
+            this.LABO_NME.ReadOnly = true;
+            this.LABO_NME.Width = 93;
+            // 
+            // DATE_TIME2
+            // 
+            this.DATE_TIME2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATE_TIME2.DataPropertyName = "DATE_TIME";
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.DATE_TIME2.DefaultCellStyle = dataGridViewCellStyle4;
+            this.DATE_TIME2.HeaderText = "Date";
+            this.DATE_TIME2.Name = "DATE_TIME2";
+            this.DATE_TIME2.ReadOnly = true;
+            this.DATE_TIME2.Width = 58;
+            // 
+            // REF2
+            // 
+            this.REF2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.REF2.DataPropertyName = "REF";
+            this.REF2.HeaderText = "Réf.";
+            this.REF2.Name = "REF2";
+            this.REF2.ReadOnly = true;
+            this.REF2.Width = 51;
+            // 
+            // IDD2
+            // 
+            this.IDD2.DataPropertyName = "ID";
+            this.IDD2.HeaderText = "ID";
+            this.IDD2.Name = "IDD2";
+            this.IDD2.ReadOnly = true;
+            this.IDD2.Visible = false;
+            // 
+            // OBSERV2
+            // 
+            this.OBSERV2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OBSERV2.DataPropertyName = "OBSERV";
+            this.OBSERV2.HeaderText = "Observ.";
+            this.OBSERV2.Name = "OBSERV2";
+            this.OBSERV2.ReadOnly = true;
+            // 
+            // NUM_FACT_LAB
+            // 
+            this.NUM_FACT_LAB.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.NUM_FACT_LAB.DataPropertyName = "FACTURE_REF";
+            this.NUM_FACT_LAB.HeaderText = "N° Facture";
+            this.NUM_FACT_LAB.Name = "NUM_FACT_LAB";
+            this.NUM_FACT_LAB.ReadOnly = true;
+            this.NUM_FACT_LAB.Width = 87;
+            // 
             // button14
             // 
             this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.OliveDrab;
+            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
             this.button14.FlatAppearance.BorderSize = 2;
-            this.button14.FlatAppearance.MouseDownBackColor = System.Drawing.Color.GreenYellow;
+            this.button14.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
             this.button14.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button14.ForeColor = System.Drawing.Color.OliveDrab;
+            this.button14.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button14.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_pencil_drawing_25px_1;
             this.button14.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button14.Location = new System.Drawing.Point(11, 452);
@@ -1151,22 +1188,59 @@ namespace ALBAITAR_Softvet
             this.button13.Visible = false;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
-            // button10
+            // comboBox2
             // 
-            this.button10.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_search_20px;
-            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button10.Enabled = false;
-            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.button10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(253, 11);
-            this.button10.Margin = new System.Windows.Forms.Padding(4);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(24, 21);
-            this.button10.TabIndex = 33;
-            this.toolTip1.SetToolTip(this.button10, "Rechercher");
-            this.button10.UseVisualStyleBackColor = true;
+            this.comboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(309, 41);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(242, 24);
+            this.comboBox2.TabIndex = 31;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
+            // button17
+            // 
+            this.button17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.ForestGreen;
+            this.button17.FlatAppearance.BorderSize = 2;
+            this.button17.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LimeGreen;
+            this.button17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button17.ForeColor = System.Drawing.Color.ForestGreen;
+            this.button17.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
+            this.button17.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button17.Location = new System.Drawing.Point(688, 450);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(106, 36);
+            this.button17.TabIndex = 67;
+            this.button17.Text = "Nouveau";
+            this.button17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // button18
+            // 
+            this.button18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button18.FlatAppearance.BorderSize = 2;
+            this.button18.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.button18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button18.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.button18.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_pencil_drawing_25px_1;
+            this.button18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button18.Location = new System.Drawing.Point(7, 451);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(106, 36);
+            this.button18.TabIndex = 66;
+            this.button18.Text = "Modifier";
+            this.button18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // Main_Frm
             // 
@@ -1203,6 +1277,7 @@ namespace ALBAITAR_Softvet
             this.tabControl1.ResumeLayout(false);
             this.tabPage_infos_animal.ResumeLayout(false);
             this.tabPage_infos_animal.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage_visites_animal.ResumeLayout(false);
@@ -1211,7 +1286,6 @@ namespace ALBAITAR_Softvet
             this.tabPage_labo_animal.ResumeLayout(false);
             this.tabPage_labo_animal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1296,5 +1370,8 @@ namespace ALBAITAR_Softvet
         private System.Windows.Forms.DataGridViewTextBoxColumn OBSERV2;
         private System.Windows.Forms.DataGridViewTextBoxColumn NUM_FACT_LAB;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button button18;
     }
 }

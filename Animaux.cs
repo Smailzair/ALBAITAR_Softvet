@@ -20,15 +20,19 @@ namespace ALBAITAR_Softvet.Resources
 {
     public partial class Animaux : Form
     {
+        public static int ID_to_selectt = -1;
+        public static int visite_idd = -1;
         DataTable clients;
         DataTable animaux;
         List<string> full_nme_clients;
         bool Is_New = true;
         bool Is_New_Visite = true;
         DataTable Races_Especes = new DataTable();
-        public Animaux()
+        public Animaux(int ID_to_select,int visite_id)
         {
             InitializeComponent();
+            ID_to_selectt = ID_to_select;
+            visite_idd = visite_id;
             //----------------------
             Races_Especes.Columns.Add("ESPECE", typeof(string));
             Races_Especes.Columns.Add("RACE", typeof(string));
@@ -669,10 +673,34 @@ namespace ALBAITAR_Softvet.Resources
                     }
                 }
                 button1.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10001" && (Int32)QQ[3] == 1).Count() > 0; //Ajouter Client
-            }
-            //-------------------
+            }            
             //-----------
             button9.PerformClick();
+            //-----------
+            if(ID_to_selectt > 0)
+            {
+                tabControl1.SelectedTab = tabPage1;
+                dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                dataGridView1.ClearSelection();
+                dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                dataGridView1.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["ID"].Value == ID_to_selectt).ToList().ForEach(W => W.Selected = true);
+                ID_to_selectt = -1;
+            }            
+            if (visite_idd > 0)
+            {               
+                tabControl1.SelectedTab = tabPage2;
+                dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
+                dataGridView2.ClearSelection();
+                dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
+                dataGridView2.Rows.Cast<DataGridViewRow>().Where(xx => (int)xx.Cells["ID_VISITE"].Value == visite_idd).ToList().ForEach(dx => dx.Selected = true);
+                visite_idd = -1;
+            }else if (visite_idd == -2)
+            {
+                tabControl1.SelectedTab = tabPage2;
+                button12.PerformClick();
+                visite_idd = -1;
+                richTextBox1.Select();
+            }
         }
 
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
@@ -765,6 +793,7 @@ namespace ALBAITAR_Softvet.Resources
             dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
             dataGridView2.ClearSelection();
             dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
+            richTextBox1.Focus();
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1037,6 +1066,35 @@ namespace ALBAITAR_Softvet.Resources
         private void comboBox3_Validated(object sender, EventArgs e)
         {
             verif_if_déja_exist_animal();
+        }
+
+        private void Animaux_Activated(object sender, EventArgs e)
+        {
+            if (ID_to_selectt > 0)
+            {
+                tabControl1.SelectedTab = tabPage1;
+                dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                dataGridView1.ClearSelection();
+                dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                dataGridView1.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["ID"].Value == ID_to_selectt).ToList().ForEach(W => W.Selected = true);
+                ID_to_selectt = -1;
+            }
+            if (visite_idd > 0)
+            {
+                tabControl1.SelectedTab = tabPage2;
+                dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
+                dataGridView2.ClearSelection();
+                dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
+                dataGridView2.Rows.Cast<DataGridViewRow>().Where(xx => (int)xx.Cells["ID_VISITE"].Value == visite_idd).ToList().ForEach(dx => dx.Selected = true);
+                visite_idd = -1;
+            }
+            else if (visite_idd == -2)
+            {
+                tabControl1.SelectedTab = tabPage2;
+                button12.PerformClick();
+                visite_idd = -1;
+                richTextBox1.Select();
+            }
         }
     }
 }
