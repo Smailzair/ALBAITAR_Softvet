@@ -43,7 +43,7 @@ namespace ALBAITAR_Softvet.Labo
             }
             dataGridView1.DataSource = new_initial_tbl;
             //------------------------------
-            button3.PerformClick();
+            
         }
         
 
@@ -86,6 +86,14 @@ namespace ALBAITAR_Softvet.Labo
                                  .ToList()
                                  .ForEach(row => row.Selected = true);
                 }
+                else
+                {
+                    button3.PerformClick();
+                }
+            }
+            else
+            {
+                button3.PerformClick();
             }
             //------------------
 

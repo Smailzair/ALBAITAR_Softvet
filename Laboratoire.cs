@@ -18,18 +18,19 @@ namespace ALBAITAR_Softvet.Resources
         DataTable animaux;
         public static DataTable labo;
         public static string labo_load_cmd = "SELECT 'Hemogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme UNION ALL "
-                                           + "SELECT 'Biochimie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_biochimie  UNION ALL "
-                                           + "SELECT 'Immunologie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_immunologie  UNION ALL "
-                                           + "SELECT 'Protéinogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_proteinogramme  UNION ALL "
+                                           + "SELECT 'Biochimie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_biochimie UNION ALL "
+                                           + "SELECT 'Immunologie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_immunologie UNION ALL "
+                                           + "SELECT 'Protéinogramme' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_proteinogramme UNION ALL "
+                                           + "SELECT 'Urologie' AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_urologie UNION ALL "
                                            + "SELECT TYPE_ANAL AS LABO_NME ,`ID`,`REF`,`ANIM_ID`,`DATE_TIME`,`OBSERV` FROM tb_labo_autre;";
         static DataGridViewRow selected_anim = null;
         string Ref_To_Selectt = "";
         bool Just_to_printt = false;
-        int id_to_selectt = -1;
+        int anim_id_to_selectt = -1;
         string lab_nmee = "";
-        public Laboratoire(int id_to_select, string Ref_To_Select, bool? Just_to_print, string Lab_nme)
+        public Laboratoire(int anim_id_to_select, string Ref_To_Select, bool? Just_to_print, string Lab_nme)
         {
-            id_to_selectt = id_to_select;
+            anim_id_to_selectt = anim_id_to_select;
             Ref_To_Selectt = Ref_To_Select;
             Just_to_printt = (bool)(Just_to_print != null ? Just_to_print : false);
             lab_nmee = Lab_nme;
@@ -76,9 +77,9 @@ namespace ALBAITAR_Softvet.Resources
             //---------
             comboBox1.SelectedIndex = 0;
             //------------------
-            if (id_to_selectt > -1)
+            if (anim_id_to_selectt > -1)
             {                
-                dataGridView1.Rows.Cast<DataGridViewRow>().Where(zz => (int)zz.Cells["ID"].Value == id_to_selectt).ForEach(cc => cc.Selected = true);                
+                dataGridView1.Rows.Cast<DataGridViewRow>().Where(zz => (int)zz.Cells["ID"].Value == anim_id_to_selectt).ForEach(cc => cc.Selected = true);                
             }
 
             if (Ref_To_Selectt.Length > 0)
@@ -91,14 +92,14 @@ namespace ALBAITAR_Softvet.Resources
                     dataGridView2_CellDoubleClick(dataGridView2, arrg);
                 }
             }
-            else
+            else if (lab_nmee.Length > 0)
             {                
                 switch (lab_nmee)
                 {                    
                     case "Hemogramme":
                         button2.PerformClick();
                         break;
-                    case "Biochimie Sanguine":
+                    case "Biochimie":
                         button1.PerformClick();
                         break;
                     case "Immunologie":
@@ -107,7 +108,10 @@ namespace ALBAITAR_Softvet.Resources
                     case "Protéinogramme":
                         button6.PerformClick();
                         break;
-                    case "- Autres -":
+                    case "Urologie":
+                        button7.PerformClick();
+                        break;
+                    default:
                         button4.PerformClick();
                         break;
                 }
@@ -217,7 +221,11 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     histo_filter += " AND LABO_NME LIKE 'Protéinogramme'";
                 }
-                else if (comboBox1.SelectedIndex == 5) //Autres
+                else if (comboBox1.SelectedIndex == 5) //Urologie
+                {
+                    histo_filter += " AND LABO_NME LIKE 'Urologie'";
+                }
+                else if (comboBox1.SelectedIndex == 6) //Autres
                 {
                     histo_filter += " AND LABO_NME NOT LIKE 'Hemogramme' AND LABO_NME NOT LIKE 'Biochimie' AND LABO_NME NOT LIKE 'Immunologie' AND LABO_NME NOT LIKE 'Protéinogramme'";
                 }
@@ -322,12 +330,20 @@ namespace ALBAITAR_Softvet.Resources
                         this.Controls.Add(prot);
                         prot.BringToFront();
                         break;
+                    case "Urologie":
+                        this.ControlBox = false;
+                        Urologie urol = new Urologie(selected_anim, dataGridView2.Rows[e.RowIndex].Cells["IDD2"].Value.ToString());
+                        urol.Dock = DockStyle.Fill;
+                        this.Controls.Add(urol);
+                        urol.BringToFront();
+                        break;
                     default:
                         this.ControlBox = false;
                         Autre_Lab atr = new Autre_Lab(selected_anim, dataGridView2.Rows[e.RowIndex].Cells["IDD2"].Value.ToString());
                         atr.Dock = DockStyle.Fill;
                         this.Controls.Add(atr);
                         atr.BringToFront();
+                        this.ActiveControl = atr;
                         break;
                 }
                 //----------------------------------
@@ -1210,10 +1226,22 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            if (selected_anim != null)
+            {
+                this.ControlBox = false;
+                Urologie urol = new Urologie(selected_anim, null);
+                urol.Dock = DockStyle.Fill;
+                this.Controls.Add(urol);
+                urol.BringToFront();
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }

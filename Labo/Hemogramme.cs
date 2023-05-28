@@ -63,7 +63,6 @@ namespace ALBAITAR_Softvet.Labo
 
             dataGridView1.DataSource = new_initial_tbl;            
             //------------------------------
-            button3.PerformClick();
             //----------
             
         }

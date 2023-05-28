@@ -717,6 +717,7 @@ namespace ALBAITAR_Softvet
                                                           + "SELECT 'Biochimie' AS LABO_NME ,`ID`,`REF`,`DATE_TIME`,`OBSERV` FROM tb_labo_biochimie WHERE `ANIM_ID` = "+ selected_animal_id + "  UNION ALL "
                                                           + "SELECT 'Immunologie' AS LABO_NME ,`ID`,`REF`,`DATE_TIME`,`OBSERV` FROM tb_labo_immunologie WHERE `ANIM_ID` = "+ selected_animal_id + "  UNION ALL "
                                                           + "SELECT 'Protéinogramme' AS LABO_NME ,`ID`,`REF`,`DATE_TIME`,`OBSERV` FROM tb_labo_proteinogramme WHERE `ANIM_ID` = "+ selected_animal_id + "  UNION ALL "
+                                                          + "SELECT 'Urologie' AS LABO_NME ,`ID`,`REF`,`DATE_TIME`,`OBSERV` FROM tb_labo_urologie WHERE `ANIM_ID` = " + selected_animal_id + "  UNION ALL "
                                                           + "SELECT TYPE_ANAL AS LABO_NME ,`ID`,`REF`,`DATE_TIME`,`OBSERV` FROM tb_labo_autre WHERE `ANIM_ID` = "+ selected_animal_id + ") tb1 "
                                                           + "LEFT JOIN ("
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_01` AS 'LABO' FROM tb_factures_vente WHERE `ITEM_IS_PROD_01` IS FALSE AND `ITEM_PROD_CODE_01` IS NOT NULL AND `ITEM_NME_01` IS NOT NULL UNION "
@@ -890,6 +891,9 @@ namespace ALBAITAR_Softvet
                     break;
                 case "Protéinogramme":
                     fltr = "LABO_NME LIKE 'Protéinogramme'";
+                    break;
+                case "Urologie":
+                    fltr = "LABO_NME LIKE 'Urologie'";
                     break;
                 case "- Autres -":
                     fltr = "LABO_NME NOT IN ('Hemogramme','Biochimie','Immunologie','Protéinogramme')";

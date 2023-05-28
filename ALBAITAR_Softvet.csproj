@@ -292,6 +292,12 @@
     <Compile Include="Labo\Autre_Lab.Designer.cs">
       <DependentUpon>Autre_Lab.cs</DependentUpon>
     </Compile>
+    <Compile Include="Labo\Urologie.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Labo\Urologie.Designer.cs">
+      <DependentUpon>Urologie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Labo\Protéinogramme.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -443,6 +449,9 @@
     <EmbeddedResource Include="Labo\Autre_Lab.resx">
       <DependentUpon>Autre_Lab.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Labo\Urologie.resx">
+      <DependentUpon>Urologie.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Labo\Protéinogramme.resx">
       <DependentUpon>Protéinogramme.cs</DependentUpon>
     </EmbeddedResource>
@@ -452,6 +461,7 @@
     <EmbeddedResource Include="Labo\Biochimie.resx">
       <DependentUpon>Biochimie.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\urologie.rdlc" />
     <EmbeddedResource Include="Reports\facture_vente.rdlc" />
     <EmbeddedResource Include="Reports\certificat_enreg.rdlc" />
     <EmbeddedResource Include="Vente.resx">

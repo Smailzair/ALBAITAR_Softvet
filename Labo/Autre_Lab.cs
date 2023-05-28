@@ -32,7 +32,7 @@ namespace ALBAITAR_Softvet.Labo
             selected_animm = selected_anim;
             IDD_to_select = ID_to_select;
             //------------------------------
-            button3.PerformClick();
+            lab_histor = new DataTable();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -61,18 +61,20 @@ namespace ALBAITAR_Softvet.Labo
             //-------------------------
             Load_histor();
             //-----------------
-            ccc = true;
+            ccc = true;            
             //------------------
 
         }
+        int tmp_rw_idx  = 0;
         bool ccc = false;
         private void Load_histor()
         {
-            string[] sss = { "Hemogramme", "Biochimie", "Immunologie", "Protéinogramme"};
+            string[] sss = { "Hemogramme", "Biochimie", "Immunologie", "Protéinogramme", "Urologie"};
             if (Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && !sss.Contains((string)P["LABO_NME"])).Count() > 0)
             {
                 lab_histor = Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && !sss.Contains((string)P["LABO_NME"])).CopyToDataTable();
                 dataGridView22.DataSource = lab_histor;
+                dataGridView22.Refresh();
             }
             else
             {
@@ -81,14 +83,15 @@ namespace ALBAITAR_Softvet.Labo
                     DataTable dt = ((DataTable)dataGridView22.DataSource).Clone();
                     dataGridView22.DataSource = dt;
                 }
-
             }
+            //---------------
+
         }
                 
         
         private void button3_Click(object sender, EventArgs e)
         {
-            is_new = true;            
+            is_new = true;
             pictureBox1.Image = Properties.Resources.NOUVEAU_003;
             dateTimePicker1.Value = DateTime.Now;
             textBox1.Clear();
@@ -207,26 +210,14 @@ namespace ALBAITAR_Softvet.Labo
         }
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
-        {
+        {            
+
             if (dataGridView22.SelectedRows.Count > 0)
             {
-                string hh = IDD_to_select != null && ccc ? IDD_to_select : dataGridView22.SelectedRows[0].Cells["ID"].Value.ToString();
-                DataTable dt = PreConnection.Load_data("SELECT * FROM tb_labo_autre WHERE ID = " + hh + ";");
-                //--------------------
-                if (hh == IDD_to_select)
-                {
-                    dataGridView22.SelectionChanged -= dataGridView2_SelectionChanged;
-                    dataGridView22.ClearSelection();
-                    dataGridView22.Rows.Cast<DataGridViewRow>()
-                                 .Where(row => row.Cells["ID"].Value.ToString() == hh)
-                                 .ToList()
-                                 .ForEach(row =>
-                                 {
-                                     row.Selected = true;
-                                 });
-                    dataGridView22.SelectionChanged += dataGridView2_SelectionChanged;
-                    IDD_to_select = null;
-                }
+
+                DataTable dt = PreConnection.Load_data("SELECT * FROM tb_labo_autre WHERE ID = " + dataGridView22.SelectedRows[0].Cells["ID"].Value + ";");
+                
+
                 //--------------------
                 if (dt != null)
                 {
@@ -389,6 +380,32 @@ namespace ALBAITAR_Softvet.Labo
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             button5.Visible = false;
+        }
+
+        private void Autre_Lab_Enter(object sender, EventArgs e)
+        {
+            if (IDD_to_select != null)
+            {
+                if (IDD_to_select.Trim().Length > 0)
+                {
+                    dataGridView22.SelectionChanged -= dataGridView2_SelectionChanged;
+                    dataGridView22.ClearSelection();
+                    dataGridView22.SelectionChanged += dataGridView2_SelectionChanged;
+                    dataGridView22.Rows.Cast<DataGridViewRow>()
+                                 .Where(row => row.Cells["ID"].Value.ToString() == IDD_to_select)
+                                 .ToList()
+                                 .ForEach(row => row.Selected = true);
+                }
+                else
+                {
+                    button3.PerformClick();
+                }
+                IDD_to_select = null;
+            }
+            else
+            {
+                button3.PerformClick();
+            }
         }
     }
 }

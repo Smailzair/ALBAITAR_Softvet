@@ -72,138 +72,10 @@ namespace ALBAITAR_Softvet.Labo
             new_initial_tbl.Rows[25]["UNIT"] = "mmol/l";
             new_initial_tbl.Rows[26]["UNIT"] = "mmol/l";
             new_initial_tbl.Rows[27]["UNIT"] = "ug/dl";
-            /*
-                        switch ((string)selected_animm.Cells["ESPECE"].Value)
-                        {
-                            case "Canine":
-                                new_initial_tbl.Rows[0]["DEFAULT_MIN"] = 70;
-                                new_initial_tbl.Rows[1]["DEFAULT_MIN"] = 8;
-                                new_initial_tbl.Rows[2]["DEFAULT_MIN"] = 0.7;
-                                new_initial_tbl.Rows[3]["DEFAULT_MIN"] = 0;
-                                new_initial_tbl.Rows[4]["DEFAULT_MIN"] = 70;
-                                new_initial_tbl.Rows[5]["DEFAULT_MIN"] = 16;
-                                new_initial_tbl.Rows[6]["DEFAULT_MIN"] = 5;
-                                new_initial_tbl.Rows[7]["DEFAULT_MIN"] = 2;
-                                new_initial_tbl.Rows[8]["DEFAULT_MIN"] = 1.5;
-                                new_initial_tbl.Rows[9]["DEFAULT_MIN"] = 0.62;
-                                new_initial_tbl.Rows[10]["DEFAULT_MIN"] = 0;
-                                new_initial_tbl.Rows[11]["DEFAULT_MIN"] = 0;
-                                new_initial_tbl.Rows[12]["DEFAULT_MIN"] = 28;
-                                new_initial_tbl.Rows[13]["DEFAULT_MIN"] = 18;
-                                new_initial_tbl.Rows[14]["DEFAULT_MIN"] = 12;
-                                new_initial_tbl.Rows[15]["DEFAULT_MIN"] = 4;
-                                new_initial_tbl.Rows[16]["DEFAULT_MIN"] = 50;
-                                new_initial_tbl.Rows[17]["DEFAULT_MIN"] = DBNull.Value;
-                                new_initial_tbl.Rows[18]["DEFAULT_MIN"] = 5;
-                                new_initial_tbl.Rows[19]["DEFAULT_MIN"] = 580;
-                                new_initial_tbl.Rows[20]["DEFAULT_MIN"] = 1.9;
-                                new_initial_tbl.Rows[21]["DEFAULT_MIN"] = 6;
-                                new_initial_tbl.Rows[22]["DEFAULT_MIN"] = 2;
-                                new_initial_tbl.Rows[23]["DEFAULT_MIN"] = 107;
-                                new_initial_tbl.Rows[24]["DEFAULT_MIN"] = 3.5;
-                                new_initial_tbl.Rows[25]["DEFAULT_MIN"] = 138;
-                                new_initial_tbl.Rows[26]["DEFAULT_MIN"] = DBNull.Value;
-                                new_initial_tbl.Rows[27]["DEFAULT_MIN"] = 90;
-                                //--------------
-                                new_initial_tbl.Rows[0]["DEFAULT_MAX"] = 120;
-                                new_initial_tbl.Rows[1]["DEFAULT_MAX"] = 33;
-                                new_initial_tbl.Rows[2]["DEFAULT_MAX"] = 1.6;
-                                new_initial_tbl.Rows[3]["DEFAULT_MAX"] = 10;
-                                new_initial_tbl.Rows[4]["DEFAULT_MAX"] = 250;
-                                new_initial_tbl.Rows[5]["DEFAULT_MAX"] = 120;
-                                new_initial_tbl.Rows[6]["DEFAULT_MAX"] = 7;
-                                new_initial_tbl.Rows[7]["DEFAULT_MAX"] = 4;
-                                new_initial_tbl.Rows[8]["DEFAULT_MAX"] = 5;
-                                new_initial_tbl.Rows[9]["DEFAULT_MAX"] = 1.28;
-                                new_initial_tbl.Rows[10]["DEFAULT_MAX"] = 0.9;
-                                new_initial_tbl.Rows[11]["DEFAULT_MAX"] = 0.3;
-                                new_initial_tbl.Rows[12]["DEFAULT_MAX"] = 78;
-                                new_initial_tbl.Rows[13]["DEFAULT_MAX"] = 70;
-                                new_initial_tbl.Rows[14]["DEFAULT_MAX"] = 121;
-                                new_initial_tbl.Rows[15]["DEFAULT_MAX"] = 23;
-                                new_initial_tbl.Rows[16]["DEFAULT_MAX"] = 450;
-                                new_initial_tbl.Rows[17]["DEFAULT_MAX"] = DBNull.Value;
-                                new_initial_tbl.Rows[18]["DEFAULT_MAX"] = 500;
-                                new_initial_tbl.Rows[19]["DEFAULT_MAX"] = 2000;
-                                new_initial_tbl.Rows[20]["DEFAULT_MAX"] = 2.7;
-                                new_initial_tbl.Rows[21]["DEFAULT_MAX"] = 12;
-                                new_initial_tbl.Rows[22]["DEFAULT_MAX"] = 7;
-                                new_initial_tbl.Rows[23]["DEFAULT_MAX"] = 120;
-                                new_initial_tbl.Rows[24]["DEFAULT_MAX"] = 5;
-                                new_initial_tbl.Rows[25]["DEFAULT_MAX"] = 150;
-                                new_initial_tbl.Rows[26]["DEFAULT_MAX"] = 98;
-                                new_initial_tbl.Rows[27]["DEFAULT_MAX"] = 150;
-                                break;
-                            case "Feline":
-                                new_initial_tbl.Rows[0]["DEFAULT_MIN"] = 75;
-                                new_initial_tbl.Rows[1]["DEFAULT_MIN"] = 15;
-                                new_initial_tbl.Rows[2]["DEFAULT_MIN"] = 0.8;
-                                new_initial_tbl.Rows[3]["DEFAULT_MIN"] = 0;
-                                new_initial_tbl.Rows[4]["DEFAULT_MIN"] = 73;
-                                new_initial_tbl.Rows[5]["DEFAULT_MIN"] = 21;
-                                new_initial_tbl.Rows[6]["DEFAULT_MIN"] = 5.5;
-                                new_initial_tbl.Rows[7]["DEFAULT_MIN"] = 2.5;
-                                new_initial_tbl.Rows[8]["DEFAULT_MIN"] = 2.5;
-                                new_initial_tbl.Rows[9]["DEFAULT_MIN"] = 0.4;
-                                new_initial_tbl.Rows[10]["DEFAULT_MIN"] = 0;
-                                new_initial_tbl.Rows[11]["DEFAULT_MIN"] = 0;
-                                new_initial_tbl.Rows[12]["DEFAULT_MIN"] = 10;
-                                new_initial_tbl.Rows[13]["DEFAULT_MIN"] = 10;
-                                new_initial_tbl.Rows[14]["DEFAULT_MIN"] = 10;
-                                new_initial_tbl.Rows[15]["DEFAULT_MIN"] = 1;
-                                new_initial_tbl.Rows[16]["DEFAULT_MIN"] = 75;
-                                new_initial_tbl.Rows[17]["DEFAULT_MIN"] = DBNull.Value;
-                                new_initial_tbl.Rows[18]["DEFAULT_MIN"] = 25;
-                                new_initial_tbl.Rows[19]["DEFAULT_MIN"] = 500;
-                                new_initial_tbl.Rows[20]["DEFAULT_MIN"] = 2;
-                                new_initial_tbl.Rows[21]["DEFAULT_MIN"] = 9;
-                                new_initial_tbl.Rows[22]["DEFAULT_MIN"] = 2.5;
-                                new_initial_tbl.Rows[23]["DEFAULT_MIN"] = 115;
-                                new_initial_tbl.Rows[24]["DEFAULT_MIN"] = 3.5;
-                                new_initial_tbl.Rows[25]["DEFAULT_MIN"] = 145;
-                                new_initial_tbl.Rows[26]["DEFAULT_MIN"] = DBNull.Value;
-                                new_initial_tbl.Rows[27]["DEFAULT_MIN"] = 68;
-                                //--------------
-                                new_initial_tbl.Rows[0]["DEFAULT_MAX"] = 200;
-                                new_initial_tbl.Rows[1]["DEFAULT_MAX"] = 30;
-                                new_initial_tbl.Rows[2]["DEFAULT_MAX"] = 1.8;
-                                new_initial_tbl.Rows[3]["DEFAULT_MAX"] = 0.3;
-                                new_initial_tbl.Rows[4]["DEFAULT_MAX"] = 300;
-                                new_initial_tbl.Rows[5]["DEFAULT_MAX"] = 156;
-                                new_initial_tbl.Rows[6]["DEFAULT_MAX"] = 7.1;
-                                new_initial_tbl.Rows[7]["DEFAULT_MAX"] = 4;
-                                new_initial_tbl.Rows[8]["DEFAULT_MAX"] = 5;
-                                new_initial_tbl.Rows[9]["DEFAULT_MAX"] = 1.4;
-                                new_initial_tbl.Rows[10]["DEFAULT_MAX"] = 0.9;
-                                new_initial_tbl.Rows[11]["DEFAULT_MAX"] = 0.1;
-                                new_initial_tbl.Rows[12]["DEFAULT_MAX"] = 80;
-                                new_initial_tbl.Rows[13]["DEFAULT_MAX"] = 80;
-                                new_initial_tbl.Rows[14]["DEFAULT_MAX"] = 80;
-                                new_initial_tbl.Rows[15]["DEFAULT_MAX"] = 10;
-                                new_initial_tbl.Rows[16]["DEFAULT_MAX"] = 600;
-                                new_initial_tbl.Rows[17]["DEFAULT_MAX"] = DBNull.Value;
-                                new_initial_tbl.Rows[18]["DEFAULT_MAX"] = 200;
-                                new_initial_tbl.Rows[19]["DEFAULT_MAX"] = 1800;
-                                new_initial_tbl.Rows[20]["DEFAULT_MAX"] = 3;
-                                new_initial_tbl.Rows[21]["DEFAULT_MAX"] = 12;
-                                new_initial_tbl.Rows[22]["DEFAULT_MAX"] = 9;
-                                new_initial_tbl.Rows[23]["DEFAULT_MAX"] = 130;
-                                new_initial_tbl.Rows[24]["DEFAULT_MAX"] = 5.1;
-                                new_initial_tbl.Rows[25]["DEFAULT_MAX"] = 160;
-                                new_initial_tbl.Rows[26]["DEFAULT_MAX"] = 98;
-                                new_initial_tbl.Rows[27]["DEFAULT_MAX"] = 215;
-                                break;
-                        }
-
-                        for (int i = 0; i < paramss.Length; i++)
-                        {
-                            string val = (new_initial_tbl.Rows[i]["DEFAULT_MIN"] != DBNull.Value ? new_initial_tbl.Rows[i]["DEFAULT_MIN"].ToString() + "-" : "inf ") + (new_initial_tbl.Rows[i]["DEFAULT_MAX"] != null ? new_initial_tbl.Rows[i]["DEFAULT_MAX"].ToString() : "");
-                            new_initial_tbl.Rows[i]["DEFAULT_FULL"] = val.Equals("inf ") ? "" : val;
-                        }
-            */
             dataGridView1.DataSource = new_initial_tbl;
             //------------------------------
-            button3.PerformClick();
+            
+
         }
         private void initial_normatifs_defaults()
         {
@@ -461,6 +333,14 @@ namespace ALBAITAR_Softvet.Labo
                                  .ToList()
                                  .ForEach(row => row.Selected = true);
                 }
+                else
+                {
+                    button3.PerformClick();
+                }
+            }
+            else
+            {
+                button3.PerformClick();
             }
             //------------------
 
@@ -546,8 +426,10 @@ namespace ALBAITAR_Softvet.Labo
             {
                 dataGridView1.Rows[i].Cells["VALUE2"].Value = DBNull.Value;
             }
+            Debug.WriteLine(">>>>>>>>>>>>>>>> xx3 >>>>>>>>>> ENTRDDDD>>>>>>>>>>>>is_new >>> " + is_new);
             initial_normatifs_defaults();
             button5.Visible = false;
+            Debug.WriteLine(">>>>>>>>>>>>>>>> xx3 >>>>>>>>>> ENTRDDDD>>>>>>>>>>>>is_new >>> " + is_new);
         }
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -792,6 +674,10 @@ namespace ALBAITAR_Softvet.Labo
                         dataGridView2.Rows[current_row_to_select == -1 ? dataGridView2.Rows.Count - 1 : current_row_to_select].Selected = true;
                     }
 
+                }
+                else
+                {
+                    MessageBox.Show("Il y a des erreurs dans votre bilan,\n\nVeuillez les corriger.\n", "Attention :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
