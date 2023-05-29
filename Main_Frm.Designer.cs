@@ -88,6 +88,8 @@ namespace ALBAITAR_Softvet
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage_visites_animal = new System.Windows.Forms.TabPage();
+            this.button17 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -115,8 +117,6 @@ namespace ALBAITAR_Softvet
             this.button14 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_infos_animal.SuspendLayout();
@@ -497,7 +497,7 @@ namespace ALBAITAR_Softvet
             this.tabPage_infos_animal.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage_infos_animal.Size = new System.Drawing.Size(801, 491);
             this.tabPage_infos_animal.TabIndex = 0;
-            this.tabPage_infos_animal.Text = "Informations :";
+            this.tabPage_infos_animal.Text = "Informations";
             // 
             // button16
             // 
@@ -818,6 +818,48 @@ namespace ALBAITAR_Softvet
             this.tabPage_visites_animal.Size = new System.Drawing.Size(801, 491);
             this.tabPage_visites_animal.TabIndex = 1;
             this.tabPage_visites_animal.Text = "Visites";
+            // 
+            // button17
+            // 
+            this.button17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.ForestGreen;
+            this.button17.FlatAppearance.BorderSize = 2;
+            this.button17.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LimeGreen;
+            this.button17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button17.ForeColor = System.Drawing.Color.ForestGreen;
+            this.button17.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
+            this.button17.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button17.Location = new System.Drawing.Point(688, 450);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(106, 36);
+            this.button17.TabIndex = 67;
+            this.button17.Text = "Nouveau";
+            this.button17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // button18
+            // 
+            this.button18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button18.FlatAppearance.BorderSize = 2;
+            this.button18.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.button18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button18.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.button18.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_pencil_drawing_25px_1;
+            this.button18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button18.Location = new System.Drawing.Point(7, 451);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(106, 36);
+            this.button18.TabIndex = 66;
+            this.button18.Text = "Modifier";
+            this.button18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // radioButton3
             // 
@@ -1199,48 +1241,6 @@ namespace ALBAITAR_Softvet
             this.comboBox2.Size = new System.Drawing.Size(242, 24);
             this.comboBox2.TabIndex = 31;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            // 
-            // button17
-            // 
-            this.button17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.ForestGreen;
-            this.button17.FlatAppearance.BorderSize = 2;
-            this.button17.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LimeGreen;
-            this.button17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button17.ForeColor = System.Drawing.Color.ForestGreen;
-            this.button17.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
-            this.button17.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button17.Location = new System.Drawing.Point(688, 450);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(106, 36);
-            this.button17.TabIndex = 67;
-            this.button17.Text = "Nouveau";
-            this.button17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
-            // 
-            // button18
-            // 
-            this.button18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.button18.FlatAppearance.BorderSize = 2;
-            this.button18.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
-            this.button18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button18.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.button18.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_pencil_drawing_25px_1;
-            this.button18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button18.Location = new System.Drawing.Point(7, 451);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(106, 36);
-            this.button18.TabIndex = 66;
-            this.button18.Text = "Modifier";
-            this.button18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // Main_Frm
             // 

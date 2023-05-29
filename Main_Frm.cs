@@ -1,5 +1,6 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
+using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Word;
 using Npgsql.Logging;
 //using CrystalDecisions.CrystalReports.Engine;
@@ -10,6 +11,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Dynamic;
 using System.Globalization;
@@ -58,12 +60,14 @@ namespace ALBAITAR_Softvet
             
             //----------------------
             tabcontrol_img_lst = new ImageList();
+            tabcontrol_img_lst.ColorDepth = ColorDepth.Depth32Bit;
             tabcontrol_img_lst.Images.AddRange(new Image[]
             {
                 Properties.Resources.agenda_001,//Visite analyse
                 Properties.Resources.agenda_003,//Labo
                 Properties.Resources.icons8_info_30px,//Infos
                 Properties.Resources.icons8_tear_off_calendar_30px,//calendar
+                Properties.Resources.icons8_info_15px_1,//Red Notification
             });
             tabControl1.ImageList = tabcontrol_img_lst;
             tabPage_infos_animal.ImageIndex = 2;
@@ -1022,13 +1026,22 @@ namespace ALBAITAR_Softvet
 
 
             System.Drawing.Font fntt = tabControl1.Font;
+            Brush color_txt = Brushes.Black;
 
             if (e.Index == tabControl1.SelectedIndex) // Assuming TabPage2 is at index 1
             {
                 fntt = bold_font;
-                using (var brush = new SolidBrush(Color.Yellow))
+                using (var brush = new SolidBrush(Color.DarkGreen))
                 {
                     e.Graphics.FillRectangle(brush, headerBounds);
+                    headerBounds.X -= 3;
+                }
+                color_txt = Brushes.White;
+                // Draw the bottom rectangle with the specified color and height
+                System.Drawing.Rectangle bottomRect = new System.Drawing.Rectangle(e.Bounds.Left, e.Bounds.Bottom - 25 , e.Bounds.Width - 2, 25);
+                using (SolidBrush brush = new SolidBrush(Color.DarkSeaGreen))
+                {
+                    e.Graphics.FillRectangle(brush, bottomRect);
                 }
             }
             else
@@ -1039,18 +1052,34 @@ namespace ALBAITAR_Softvet
                     e.Graphics.FillRectangle(brush, headerBounds);
                 }
             }
+
+            
             if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
             {
                 var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];
-                var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Top + (e.Bounds.Height - icon.Height) - 5, icon.Width, icon.Height);
+                //var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Top + (e.Bounds.Height - icon.Height) - 5, icon.Width, icon.Height);
+                var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Bottom - 20, icon.Width, icon.Height);
+
                 e.Graphics.DrawImage(icon, iconBounds);
                 headerBounds.X += iconBounds.Width + 4; // Adjust the X position for the text
             }
-
+            //---------------Notifiaction (If needed) -----------------
+            //if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
+            //{
+            //    var icon = tabcontrol_img_lst.Images[4];
+            //    var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Top + 3, icon.Width, icon.Height);
+            //    e.Graphics.DrawImage(icon, iconBounds);
+            //}
+            //--------------------------------
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             e.Graphics.TranslateTransform(headerBounds.Left + headerBounds.Width / 2, headerBounds.Top + headerBounds.Height / 2);
             e.Graphics.RotateTransform(-90);
-            e.Graphics.DrawString(tabPage.Text, fntt, Brushes.Black, -(headerBounds.Height / 2) + 25, -(headerBounds.Width / 2) - 10 , StringFormat.GenericDefault);
+            e.Graphics.DrawString(tabPage.Text, fntt, color_txt, -(headerBounds.Height / 2) + 25, -(headerBounds.Width / 2) - 10 , StringFormat.GenericDefault);
+            
+            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+            e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+
         }
 
     }
