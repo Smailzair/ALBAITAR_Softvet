@@ -47,10 +47,9 @@ namespace ALBAITAR_Softvet
             this.button5 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.button19 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label_cab_nme = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -88,6 +87,7 @@ namespace ALBAITAR_Softvet
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage_visites_animal = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -117,6 +117,7 @@ namespace ALBAITAR_Softvet
             this.button14 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.tabPage_Calendar = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_infos_animal.SuspendLayout();
@@ -138,7 +139,7 @@ namespace ALBAITAR_Softvet
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
             this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox5.Size = new System.Drawing.Size(217, 131);
+            this.textBox5.Size = new System.Drawing.Size(281, 126);
             this.textBox5.TabIndex = 17;
             this.toolTip1.SetToolTip(this.textBox5, "ex: Euthanasie");
             // 
@@ -293,7 +294,7 @@ namespace ALBAITAR_Softvet
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(698, 12);
+            this.button1.Location = new System.Drawing.Point(741, 12);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(43, 46);
@@ -311,7 +312,7 @@ namespace ALBAITAR_Softvet
             this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(749, 12);
+            this.button2.Location = new System.Drawing.Point(792, 12);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(43, 46);
@@ -319,24 +320,6 @@ namespace ALBAITAR_Softvet
             this.toolTip1.SetToolTip(this.button2, "Parametres");
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button8
-            // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_alarm_30px;
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(800, 12);
-            this.button8.Margin = new System.Windows.Forms.Padding(4);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(43, 46);
-            this.button8.TabIndex = 23;
-            this.toolTip1.SetToolTip(this.button8, "Notificaions");
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button3
             // 
@@ -374,18 +357,22 @@ namespace ALBAITAR_Softvet
             this.toolTip1.SetToolTip(this.button10, "Rechercher");
             this.button10.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // button19
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(662, 12);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(181, 532);
-            this.listView1.TabIndex = 17;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.Visible = false;
+            this.button19.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_search_20px;
+            this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button19.Enabled = false;
+            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button19.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.button19.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button19.Location = new System.Drawing.Point(356, 8);
+            this.button19.Margin = new System.Windows.Forms.Padding(4);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(24, 21);
+            this.button19.TabIndex = 69;
+            this.toolTip1.SetToolTip(this.button19, "Rechercher");
+            this.button19.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -450,6 +437,7 @@ namespace ALBAITAR_Softvet
             this.tabControl1.Controls.Add(this.tabPage_infos_animal);
             this.tabControl1.Controls.Add(this.tabPage_visites_animal);
             this.tabControl1.Controls.Add(this.tabPage_labo_animal);
+            this.tabControl1.Controls.Add(this.tabPage_Calendar);
             this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl1.Location = new System.Drawing.Point(1, 69);
             this.tabControl1.Multiline = true;
@@ -511,7 +499,7 @@ namespace ALBAITAR_Softvet
             this.button16.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button16.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_pencil_drawing_25px_1;
             this.button16.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button16.Location = new System.Drawing.Point(685, 446);
+            this.button16.Location = new System.Drawing.Point(687, 448);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(106, 36);
             this.button16.TabIndex = 87;
@@ -543,7 +531,7 @@ namespace ALBAITAR_Softvet
             this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(667, 208);
+            this.label24.Location = new System.Drawing.Point(595, 208);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(15, 16);
             this.label24.TabIndex = 84;
@@ -634,7 +622,7 @@ namespace ALBAITAR_Softvet
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(606, 208);
+            this.label12.Location = new System.Drawing.Point(534, 208);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(55, 16);
             this.label12.TabIndex = 74;
@@ -663,7 +651,7 @@ namespace ALBAITAR_Softvet
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(597, 8);
+            this.pictureBox2.Location = new System.Drawing.Point(591, 8);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(192, 195);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -696,9 +684,9 @@ namespace ALBAITAR_Softvet
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Location = new System.Drawing.Point(572, 227);
+            this.groupBox1.Location = new System.Drawing.Point(500, 227);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(229, 213);
+            this.groupBox1.Size = new System.Drawing.Size(293, 204);
             this.groupBox1.TabIndex = 69;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Radiation : ";
@@ -709,7 +697,7 @@ namespace ALBAITAR_Softvet
             this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(127, 29);
+            this.label27.Location = new System.Drawing.Point(191, 29);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(15, 16);
             this.label27.TabIndex = 85;
@@ -753,7 +741,7 @@ namespace ALBAITAR_Softvet
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
             this.textBox8.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox8.Size = new System.Drawing.Size(542, 193);
+            this.textBox8.Size = new System.Drawing.Size(470, 193);
             this.textBox8.TabIndex = 61;
             this.textBox8.WordWrap = false;
             this.textBox8.Enter += new System.EventHandler(this.textBox8_Enter);
@@ -806,6 +794,8 @@ namespace ALBAITAR_Softvet
             // tabPage_visites_animal
             // 
             this.tabPage_visites_animal.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage_visites_animal.Controls.Add(this.textBox1);
+            this.tabPage_visites_animal.Controls.Add(this.button19);
             this.tabPage_visites_animal.Controls.Add(this.button17);
             this.tabPage_visites_animal.Controls.Add(this.button18);
             this.tabPage_visites_animal.Controls.Add(this.radioButton3);
@@ -818,6 +808,16 @@ namespace ALBAITAR_Softvet
             this.tabPage_visites_animal.Size = new System.Drawing.Size(801, 491);
             this.tabPage_visites_animal.TabIndex = 1;
             this.tabPage_visites_animal.Text = "Visites";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(379, 8);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(355, 21);
+            this.textBox1.TabIndex = 68;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button17
             // 
@@ -1242,6 +1242,16 @@ namespace ALBAITAR_Softvet
             this.comboBox2.TabIndex = 31;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
+            // tabPage_Calendar
+            // 
+            this.tabPage_Calendar.Location = new System.Drawing.Point(37, 4);
+            this.tabPage_Calendar.Name = "tabPage_Calendar";
+            this.tabPage_Calendar.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_Calendar.Size = new System.Drawing.Size(801, 491);
+            this.tabPage_Calendar.TabIndex = 3;
+            this.tabPage_Calendar.Text = "Calendrier";
+            this.tabPage_Calendar.UseVisualStyleBackColor = true;
+            // 
             // Main_Frm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -1254,9 +1264,7 @@ namespace ALBAITAR_Softvet
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.listView1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label_cab_nme);
@@ -1299,12 +1307,10 @@ namespace ALBAITAR_Softvet
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl1;
@@ -1373,5 +1379,8 @@ namespace ALBAITAR_Softvet
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.TabPage tabPage_Calendar;
     }
 }

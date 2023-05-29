@@ -3,6 +3,8 @@ using ALBAITAR_Softvet.Resources;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Word;
 using Npgsql.Logging;
+using ServiceStack;
+using ServiceStack.Script;
 //using CrystalDecisions.CrystalReports.Engine;
 //using CrystalDecisions.Windows.Forms;
 using System;
@@ -57,7 +59,7 @@ namespace ALBAITAR_Softvet
         {
             InitializeComponent();
             //------------------------
-            
+            radioButton1.Font = radioButton6.Font = bold_font;
             //----------------------
             tabcontrol_img_lst = new ImageList();
             tabcontrol_img_lst.ColorDepth = ColorDepth.Depth32Bit;
@@ -73,6 +75,7 @@ namespace ALBAITAR_Softvet
             tabPage_infos_animal.ImageIndex = 2;
             tabPage_visites_animal.ImageIndex = 0;
             tabPage_labo_animal.ImageIndex = 1;
+            tabPage_Calendar.ImageIndex = 3;
             //-------------------------
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
@@ -356,59 +359,20 @@ namespace ALBAITAR_Softvet
             panel1.Visible = false;
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-
-            if (!listView1.Visible)
-            {
-                listView1.Visible = true;
-                button8.Location = new System.Drawing.Point(button8.Location.X - listView1.Width, button8.Location.Y);
-                button1.Location = new System.Drawing.Point(button1.Location.X - listView1.Width, button1.Location.Y);
-                button2.Location = new System.Drawing.Point(button2.Location.X - listView1.Width, button2.Location.Y);
-            }
-            else
-            {
-                listView1.Visible = false;
-                button8.Location = new System.Drawing.Point(button8.Location.X + listView1.Width, button8.Location.Y);
-                button1.Location = new System.Drawing.Point(button1.Location.X + listView1.Width, button1.Location.Y);
-                button2.Location = new System.Drawing.Point(button2.Location.X + listView1.Width, button2.Location.Y);
-            }
-
-        }
-
 
         private void Main_Frm_MouseClick(object sender, MouseEventArgs e)
         {
-            if (listView1.Visible)
-            {
-                listView1.Visible = false;
-                button8.Location = new System.Drawing.Point(button8.Location.X + listView1.Width, button8.Location.Y);
-                button1.Location = new System.Drawing.Point(button1.Location.X + listView1.Width, button1.Location.Y);
-                button2.Location = new System.Drawing.Point(button2.Location.X + listView1.Width, button2.Location.Y);
-            }
+           
         }
 
         private void tmp_MouseClick(object sender, MouseEventArgs e)
         {
-            if (listView1.Visible && !listView1.Bounds.Contains(e.Location))
-            {
-                listView1.Visible = false;
-                button8.Location = new System.Drawing.Point(button8.Location.X + listView1.Width, button8.Location.Y);
-                button1.Location = new System.Drawing.Point(button1.Location.X + listView1.Width, button1.Location.Y);
-                button2.Location = new System.Drawing.Point(button2.Location.X + listView1.Width, button2.Location.Y);
-            }
+           
         }
         
         private void Main_Frm_Deactivate(object sender, EventArgs e)
         {
-            
-            if (listView1.Visible)
-            {
-                listView1.Visible = false;
-                button8.Location = new System.Drawing.Point(button8.Location.X + listView1.Width, button8.Location.Y);
-                button1.Location = new System.Drawing.Point(button1.Location.X + listView1.Width, button1.Location.Y);
-                button2.Location = new System.Drawing.Point(button2.Location.X + listView1.Width, button2.Location.Y);
-            }
+           
             
         }
 
@@ -648,7 +612,7 @@ namespace ALBAITAR_Softvet
                                 radioButton1.Text = "Tous (" + main_anim_visites_tab.Rows.Count + ")";
                                 radioButton2.Text = "Facturé (" + fct + ")";
                                 radioButton3.Text = "Non Facturé (" + (main_anim_visites_tab.Rows.Count - fct) + ")";
-                                radioButton1_CheckedChanged(null, null);
+                                DGV_Visit_Filter(true);
                             }
                         }
                     }
@@ -702,15 +666,10 @@ namespace ALBAITAR_Softvet
                                 loading_lab_tab = false;
                                 dataGridView1.DataSource = main_anim_lab_tab;
                                 dataGridView1.Refresh();
-                                int fct1 = main_anim_lab_tab.AsEnumerable().Count(t => t["FACTURE_REF"] != DBNull.Value && ((string)t["FACTURE_REF"]).Trim().Length > 0);
-                                radioButton6.Text = "Tous (" + main_anim_lab_tab.Rows.Count + ")";
-                                radioButton5.Text = "Facturé (" + fct1 + ")";
-                                radioButton4.Text = "Non Facturé (" + (main_anim_lab_tab.Rows.Count - fct1) + ")";
-
                             }
                         }
                         //---------
-                        DGV1_Filter();
+                        DGV_Lab_Filter(true);
                         if (dataGridView1.Rows.Count > prev_idx && prev_idx > -1) {                             
                             dataGridView1.Rows[prev_idx].Selected = true; 
                         }
@@ -804,29 +763,50 @@ namespace ALBAITAR_Softvet
                                                           + "ON tb1.`REF` = tb2.`LABO`;");            
             ended_loading_lab_tab = true;
         }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private void DGV_Visit_Filter(bool update_tot)
         {
-            System.Drawing.Font fnt = new System.Drawing.Font(radioButton1.Font.FontFamily, (float)8.25, FontStyle.Regular);
-            System.Drawing.Font fnt2 = new System.Drawing.Font(radioButton1.Font.FontFamily, (float)9.25, FontStyle.Bold);
-
-            radioButton1.Font = radioButton1.Checked ? fnt2 : fnt;
-            radioButton2.Font = radioButton2.Checked ? fnt2 : fnt;
-            radioButton3.Font = radioButton3.Checked ? fnt2 : fnt;
+            string fltr = textBox1.Text.Trim().Length > 0 ? ("("
+                + "VISITOR_FULL_NME LIKE '%" + textBox1.Text + "%'"
+                + " OR CONVERT(DATETIME, 'System.String') LIKE '%" + textBox1.Text + "%'"
+                + " OR OBJECT LIKE '%" + textBox1.Text + "%'"
+                + " OR FACTURE_REF LIKE '%" + textBox1.Text + "%'"
+                + ")") : "";
+            bool dd = fltr.Length > 0;
+            //===================================================
+            DataTable tmppp = main_anim_visites_tab.Copy();
+            tmppp.DefaultView.RowFilter = fltr;
+            int tss = tmppp.DefaultView.Cast<DataRowView>().Count();
+            //----
+            tmppp.DefaultView.RowFilter = fltr + (dd ? " AND " : "") + "LEN(FACTURE_REF) > 0";
+            int fct1 = tmppp.DefaultView.Cast<DataRowView>().Count();
+            //===================================================
             if (radioButton2.Checked) //Facturé
             {
-                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "LEN(FACTURE_REF) > 0";
+                fltr += (dd ? " AND " : "") + "LEN(FACTURE_REF) > 0";
             }
             else if (radioButton3.Checked) //Non Facturé
             {
 
-                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "FACTURE_REF IS NULL OR LEN(FACTURE_REF) = 0";
+                fltr += (dd ? " AND " : "") + "FACTURE_REF IS NULL OR LEN(FACTURE_REF) = 0";
             }
-            else //Tous
+            
+            ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = fltr;
+            if (update_tot)
             {
-                ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "";
-
+                radioButton1.Text = "Tous (" + tss + ")";
+                radioButton2.Text = "Facturé (" + fct1 + ")";
+                radioButton3.Text = "Non Facturé (" + (tss - fct1) + ")";
             }
+        }
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            System.Drawing.Font fnt = new System.Drawing.Font(radioButton1.Font.FontFamily, (float)8.25, FontStyle.Regular);
+            System.Drawing.Font fnt2 = new System.Drawing.Font(radioButton1.Font.FontFamily, (float)9.25, FontStyle.Bold);
+            radioButton1.Font = radioButton1.Checked ? fnt2 : fnt;
+            radioButton2.Font = radioButton2.Checked ? fnt2 : fnt;
+            radioButton3.Font = radioButton3.Checked ? fnt2 : fnt;
+            //--------------------
+            DGV_Visit_Filter(false);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -836,12 +816,12 @@ namespace ALBAITAR_Softvet
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DGV1_Filter();
+            DGV_Lab_Filter(true);
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            DGV1_Filter();
+            DGV_Lab_Filter(true);
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -880,9 +860,9 @@ namespace ALBAITAR_Softvet
             radioButton5.Font = radioButton5.Checked ? fnt2 : fnt;
             radioButton4.Font = radioButton4.Checked ? fnt2 : fnt;
 
-            DGV1_Filter();
+            DGV_Lab_Filter(false);
         }
-        private void DGV1_Filter()
+        private void DGV_Lab_Filter(bool update_tot)
         {
             string fltr = "";
             switch (comboBox3.Text)
@@ -906,7 +886,7 @@ namespace ALBAITAR_Softvet
                     fltr = "LABO_NME LIKE 'Urologie'";
                     break;
                 case "- Autres -":
-                    fltr = "LABO_NME NOT IN ('Hemogramme','Biochimie','Immunologie','Protéinogramme')";
+                    fltr = "LABO_NME NOT IN ('Hemogramme','Biochimie','Immunologie','Protéinogramme','Urologie')";
                     break;
             }
             fltr += textBox3.Text.Trim().Length > 0 ? ((fltr.Length > 0 ? " AND " : "") + "("
@@ -917,20 +897,36 @@ namespace ALBAITAR_Softvet
                 + ")") : "";
                         
             bool dd = fltr.Length > 0;
+            //===================================================
+            DataTable tmppp = main_anim_lab_tab.Copy();
+            tmppp.DefaultView.RowFilter = fltr;
+            int tss = tmppp.DefaultView.Cast<DataRowView>().Count();
+            //----
+            tmppp.DefaultView.RowFilter = fltr + (dd ? " AND " : "") + "LEN(FACTURE_REF) > 0";
+            int fct1 = tmppp.DefaultView.Cast<DataRowView>().Count();
+            //===================================================
             if (radioButton5.Checked) //Facturé
             {
-
                 fltr += (dd ? " AND " : "") + "LEN(FACTURE_REF) > 0";
+
             }
             else if (radioButton4.Checked) //Non Facturé
             {                
                 fltr +=  (dd ? " AND (" : "")+ "FACTURE_REF IS NULL OR LEN(FACTURE_REF) = 0" + (dd ? ")" : "");
             }
             if(dataGridView1.DataSource != null)
-            {                
+            {
                 ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
             }
+            //--------------------
+            if (update_tot)
+            {
+                radioButton6.Text = "Tous (" + tss + ")";
+                radioButton5.Text = "Facturé (" + fct1 + ")";
+                radioButton4.Text = "Non Facturé (" + (tss - fct1) + ")";
+            }
             
+
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -1056,8 +1052,7 @@ namespace ALBAITAR_Softvet
             
             if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
             {
-                var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];
-                //var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Top + (e.Bounds.Height - icon.Height) - 5, icon.Width, icon.Height);
+                var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];                
                 var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Bottom - 20, icon.Width, icon.Height);
 
                 e.Graphics.DrawImage(icon, iconBounds);
@@ -1082,6 +1077,10 @@ namespace ALBAITAR_Softvet
 
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            DGV_Visit_Filter(true);
+        }
     }
 }
 

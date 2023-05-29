@@ -751,7 +751,7 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             if (dataGridView4.SelectedRows.Count > 0)
             {
-                label2.Text = dataGridView4.SelectedRows.Count > 0 ? string.Concat("Analyse de (" + dataGridView4.SelectedRows[0].Cells["LABO_LABO_NME"].Value + ") le [", dataGridView4.SelectedRows[0].Cells["LABO_DATE_TIME"].Value, "] - d'animal : '", dataGridView4.SelectedRows[0].Cells["LABO_ANIM_NME"].Value, "'") : "--";
+                label2.Text = dataGridView4.SelectedRows.Count > 0 ? string.Concat("Analyse de (" + dataGridView4.SelectedRows[0].Cells["LABO_LABO_NME"].Value + ") le [", ((DateTime)dataGridView4.SelectedRows[0].Cells["LABO_DATE_TIME"].Value).ToString("dd/MM/yyyy"), "] - d'animal : '", dataGridView4.SelectedRows[0].Cells["LABO_ANIM_NME"].Value, "'") : "--";
             }
             else
             {
