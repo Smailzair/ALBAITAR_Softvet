@@ -30,7 +30,7 @@ namespace ALBAITAR_Softvet
             Application.SetCompatibleTextRenderingDefault(false);
             Properties.Settings.Default.Reload();
             //------------------------------------
-            CultureInfo c = new System.Globalization.CultureInfo("en-EN");
+            CultureInfo c = new System.Globalization.CultureInfo("fr-FR");
             NumberFormatInfo nfi = new NumberFormatInfo();
             nfi.NumberDecimalSeparator = ".";
             nfi.NumberGroupSeparator = " ";

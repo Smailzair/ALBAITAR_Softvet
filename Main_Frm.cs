@@ -37,8 +37,8 @@ namespace ALBAITAR_Softvet
         public static DataTable Params;
         int selected_client_id = -1;
         int selected_animal_id = -1;
-        DataTable clients;
-        DataTable animals;
+        public static DataTable Main_Frm_clients_tbl;
+        public static DataTable Main_Frm_animals_tbl;
         ImageList tabcontrol_img_lst;
         System.Drawing.Font simple_font = new System.Drawing.Font("Century Gothic",9,FontStyle.Regular);
         System.Drawing.Font bold_font = new System.Drawing.Font("Century Gothic", 10, FontStyle.Bold);
@@ -172,7 +172,7 @@ namespace ALBAITAR_Softvet
         {
             if (System.Windows.Forms.Application.OpenForms["Agenda"] == null)
             {
-                new Agenda().Show();
+                new Agenda(null,null).Show();
             }
             else
             {
@@ -226,29 +226,7 @@ namespace ALBAITAR_Softvet
             {
                 label_cab_nme.Text = cab_doct;
             }
-            ///--------------------
-            foreach (Control ctrr in this.Controls)
-            {
-                if (ctrr.Name != "button8" && ctrr.Name != "listView1")
-                {
-                    EventHandlerList events = (EventHandlerList)typeof(Control)
-                                     .GetProperty("Events", BindingFlags.NonPublic | BindingFlags.Instance)
-                                      .GetValue(ctrr);
-
-                    object mouseClickEventKey = typeof(Control)
-                        .GetField("EventMouseClick", BindingFlags.NonPublic | BindingFlags.Static)
-                        .GetValue(ctrr);
-
-                    Delegate mouseClickDelegate = events[mouseClickEventKey] as Delegate;
-                    if (mouseClickDelegate == null)
-                    {
-                        ctrr.MouseClick += tmp_MouseClick;
-                    }
-                }
-
-
-            }
-            ///---------------------
+            ///--------------------            
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
                 button9.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10000" && (Int32)QQ[3] == 1).Count() > 0;
@@ -262,8 +240,8 @@ namespace ALBAITAR_Softvet
             comboBox3.SelectedIndex = 0;
             comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
             //----------------
-            clients = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            animals = PreConnection.Load_data("SELECT * FROM tb_animaux;");
+            Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
+            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT * FROM tb_animaux;");
             comboBox1.SelectedIndex = 0;
         }
 
@@ -273,8 +251,8 @@ namespace ALBAITAR_Softvet
             //------------
             int cb1_idx = comboBox1.SelectedIndex > -1 ? comboBox1.SelectedIndex : 0;
             int cb2_idx = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : 0) : 0;
-            clients = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            animals = PreConnection.Load_data("SELECT * FROM tb_animaux;");
+            Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
+            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT * FROM tb_animaux;");
             comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
             comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
             comboBox1.SelectedIndex = cb1_idx;
@@ -359,27 +337,9 @@ namespace ALBAITAR_Softvet
             panel1.Visible = false;
         }
 
-
-        private void Main_Frm_MouseClick(object sender, MouseEventArgs e)
+        static void animal_visites_tab()
         {
-           
-        }
-
-        private void tmp_MouseClick(object sender, MouseEventArgs e)
-        {
-           
-        }
-        
-        private void Main_Frm_Deactivate(object sender, EventArgs e)
-        {
-           
-            
-        }
-
-
-        static void animal_visites_tab(object anim_id)
-        {
-            main_anim_visites_tab = PreConnection.Load_data("SELECT tb1.*,tb2.REF AS 'FACTURE_REF' FROM tb_visites tb1 LEFT JOIN ("
+            main_anim_visites_tab = PreConnection.Load_data("SELECT tb1.*,tb3.`NME` AS ANIM_NME,tb3.`CLIENT_ID`,tb3.CLIENT_FULL_NME,tb2.REF AS 'FACTURE_REF' FROM tb_visites tb1 LEFT JOIN ("
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_01` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_01` IS FALSE AND `ITEM_PROD_CODE_01` IS NOT NULL AND `ITEM_NME_01` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_02` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_02` IS FALSE AND `ITEM_PROD_CODE_02` IS NOT NULL AND `ITEM_NME_02` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_03` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_03` IS FALSE AND `ITEM_PROD_CODE_03` IS NOT NULL AND `ITEM_NME_03` IS NOT NULL UNION "
@@ -450,7 +410,7 @@ namespace ALBAITAR_Softvet
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_68` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_68` IS FALSE AND `ITEM_PROD_CODE_68` IS NOT NULL AND `ITEM_NME_68` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_69` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_69` IS FALSE AND `ITEM_PROD_CODE_69` IS NOT NULL AND `ITEM_NME_69` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_70` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_70` IS FALSE AND `ITEM_PROD_CODE_70` IS NOT NULL AND `ITEM_NME_70` IS NOT NULL "
-                                    + ") tb2 ON tb1.`ID` = tb2.`VISIT` WHERE tb1.`ANIM_ID` = " + anim_id + " ORDER BY DATETIME;");
+                                    + ") tb2 ON tb1.`ID` = tb2.`VISIT` LEFT JOIN (SELECT tbb1.`ID`,tbb1.`NME`,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) tb3 ON tb1.`ANIM_ID` = tb3.`ID` ORDER BY DATETIME;");
             ended_loading_visites_tab = true;
         }
 
@@ -466,7 +426,7 @@ namespace ALBAITAR_Softvet
                 refresh_main_tables();
             }
             else
-            {
+            {                
                 Refresh_current_tab();
             }
             
@@ -476,14 +436,14 @@ namespace ALBAITAR_Softvet
         {
             if (comboBox1.SelectedIndex == 0) //CLIENT
             {
-                comboBox2.DataSource = clients;
+                comboBox2.DataSource = Main_Frm_clients_tbl;
                 comboBox2.ValueMember = "ID";
                 comboBox2.DisplayMember = "FULL_NME";
 
             }
             else //ANIMAL
             {
-                comboBox2.DataSource = animals;
+                comboBox2.DataSource = Main_Frm_animals_tbl;
                 comboBox2.ValueMember = "ID";
                 comboBox2.DisplayMember = "NME";
 
@@ -495,6 +455,14 @@ namespace ALBAITAR_Softvet
             selected_animal_id = selected_client_id = -1;
             if (comboBox2.SelectedValue != null)
             {
+                radioButton8.CheckedChanged -= radioButton8_CheckedChanged;
+                radioButton8.Checked = true;
+                radioButton8.CheckedChanged += radioButton8_CheckedChanged;
+                if (tabControl1.TabPages["tabPage_infos_animal"] == null)
+                {
+                    tabControl1.TabPages.Insert(0, tabPage_infos_animal);
+                }
+                //-----------
                 if (int.TryParse(comboBox2.SelectedValue.ToString(), out int yy))
                 {
                     if (comboBox1.SelectedIndex == 0) //CLIENT
@@ -507,6 +475,10 @@ namespace ALBAITAR_Softvet
                     }
 
                 }
+            }
+            if(tabControl1.SelectedTab.Name == "tabPage_Calendar")
+            {
+                Agenda_Just_Display.make_filter_refresh = true;
             }
             Refresh_current_tab();
         }
@@ -562,6 +534,9 @@ namespace ALBAITAR_Softvet
                 select.ShowDialog();
                 if (chosen_client_from_search != null)
                 {
+                    radioButton8.CheckedChanged -= radioButton8_CheckedChanged;
+                    radioButton8.Checked = true;
+                    radioButton8.CheckedChanged += radioButton8_CheckedChanged;
                     comboBox2.SelectedValue = chosen_client_from_search.Rows[0][0];
                 }
             }
@@ -573,6 +548,9 @@ namespace ALBAITAR_Softvet
                 select.ShowDialog();
                 if (chosen_anim_from_search != null)
                 {
+                    radioButton8.CheckedChanged -= radioButton8_CheckedChanged;
+                    radioButton8.Checked = true;
+                    radioButton8.CheckedChanged += radioButton8_CheckedChanged;                    
                     comboBox2.SelectedValue = chosen_anim_from_search.Rows[0][1];
                 }
             }
@@ -590,15 +568,13 @@ namespace ALBAITAR_Softvet
         }
 
         private void Refresh_current_tab()
-        {
-
-            
+        {   
             switch (tabControl1.SelectedTab.Name)
             {
                 case "tabPage_visites_animal":
                     if (!loading_visites_tab)
                     {
-                        animal_visites_tab(selected_animal_id);
+                        animal_visites_tab();
                         loading_visites_tab = true;
                         //----------------------
                         while (loading_visites_tab)
@@ -618,45 +594,55 @@ namespace ALBAITAR_Softvet
                     }
                 break;
                 case "tabPage_infos_animal":
-                    DataRow inf = animals.AsEnumerable().Where(zz => (int)zz["ID"] == selected_animal_id).FirstOrDefault();                    
-                    if (inf != null)
+
+                    if(comboBox1.SelectedIndex == 0) //Clients
                     {                        
-                        label16.Text = inf["DATE_ADDED"] != DBNull.Value ? ((DateTime)inf["DATE_ADDED"]).ToString("dddd dd/MM/yyyy", new CultureInfo("fr-FR")) : "--";
-                        label25.Text = inf["NME"] != DBNull.Value ? (string)inf["NME"] : "--";
-                        label17.Text = inf["NUM_IDENTIF"] != DBNull.Value ? (string)inf["NUM_IDENTIF"] : "--";
-                        label18.Text = inf["NUM_PASSPORT"] != DBNull.Value ? (string)inf["NUM_PASSPORT"] : "--";
-                        DataRow clnt_nme = clients.AsEnumerable().Where(zz => (int)zz["ID"] == (inf["CLIENT_ID"] != DBNull.Value ? (int)inf["CLIENT_ID"] : -1)).FirstOrDefault();
-                        label21.Text = clnt_nme != null ? (string)clnt_nme["FULL_NME"] : "--";                        
-                        label23.Text = inf["ESPECE"] != DBNull.Value ? (string)inf["ESPECE"] : "--";
-                        label22.Text = inf["RACE"] != DBNull.Value ? (string)inf["RACE"] : "--";
-                        label20.Text = inf["SEXE"] != DBNull.Value ? (string)inf["SEXE"] : "--";
-                        label26.Text = inf["NISS_DATE"] != DBNull.Value ? ((DateTime)inf["NISS_DATE"]).ToString("dd/MM/yyyy"): "--";
-                        label19.Text = inf["ROBE"] != DBNull.Value ? (string)inf["ROBE"] : "--";
-                        textBox8.Text = inf["OBSERVATIONS"] != DBNull.Value ? (string)inf["OBSERVATIONS"] : "";
-                        bool ttt = inf["IS_RADIATED"] != DBNull.Value;
-                        ttt = ttt ? (sbyte)inf["IS_RADIATED"] == 1 : false;
-                        if (ttt)
+                        if (tabPage_infos_animal.Controls["Client_Infos"] == null)
                         {
-                            label24.Text = "Oui";
-                            groupBox1.Visible = true;
-                            label27.Text = inf["RADIATION_DATE"] != DBNull.Value ? ((DateTime)inf["RADIATION_DATE"]).ToString("dd/MM/yyyy") : "--";
-                            textBox5.Text = inf["RADIATION_CAUSES"] != DBNull.Value ? (string)inf["RADIATION_CAUSES"] : "";
+                            int zz = -1;
+                            bool ff = int.TryParse((comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? comboBox2.SelectedValue : -1) : -1).ToString(), out zz);
+                            if (ff)
+                            {
+                                tabPage_infos_animal.Controls.Add(new Client_Infos(zz));
+                                tabPage_infos_animal.Controls["Client_Infos"].Dock = DockStyle.Fill;
+                                tabPage_infos_animal.Controls["Client_Infos"].BringToFront();
+                            }
                         }
                         else
                         {
-                            label24.Text = "Non";
-                            groupBox1.Visible = false;
-                            label27.Text = "--";
-                            textBox5.Text = "";
+                            Client_Infos.selected_client_id = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : -1) : -1;
+                            Client_Infos.make_refresh = true;
+                            tabPage_infos_animal.Controls["Client_Infos"].Focus();
+                            tabPage_infos_animal.Controls["Client_Infos"].BringToFront();
                         }
-                        pictureBox2.Image = inf["PICTURE"] != DBNull.Value ? PreConnection.ByteArrayToImage((byte[])inf["PICTURE"]) : (Properties.Settings.Default.Use_animals_logo ? (Image)Properties.Resources.ResourceManager.GetObject(label23.Text) : null);
-                    }                    
+                    }
+                    else //Animaux
+                    {
+                        if (tabPage_infos_animal.Controls["Anim_Infos"] == null)
+                        {
+                            int zz = -1;
+                            bool ff = int.TryParse((comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? comboBox2.SelectedValue : -1) : -1).ToString(), out zz);
+                            if (ff)
+                            {
+                                tabPage_infos_animal.Controls.Add(new Anim_Infos(zz));
+                                tabPage_infos_animal.Controls["Anim_Infos"].Dock = DockStyle.Fill;
+                                tabPage_infos_animal.Controls["Anim_Infos"].BringToFront();
+                            }
+                        }
+                        else
+                        {
+                            Anim_Infos.selected_anim_id = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : -1) : -1;
+                            Anim_Infos.make_refresh = true;
+                            tabPage_infos_animal.Controls["Anim_Infos"].Focus();
+                            tabPage_infos_animal.Controls["Anim_Infos"].BringToFront();
+                        }
+                    }
                     break;
                 case "tabPage_labo_animal":
                     if (!loading_lab_tab)
                     {
                         int prev_idx = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : -1;
-                        animal_lab_tab(selected_animal_id);
+                        animal_lab_tab();
                         loading_lab_tab = true;
                         //----------------------
                         while (loading_lab_tab)
@@ -675,19 +661,33 @@ namespace ALBAITAR_Softvet
                         }
                     }
                     break;
+                case "tabPage_Calendar":
+                    if(tabPage_Calendar.Controls.Count == 0) {                        
+                        int zz = (int)(comboBox2.SelectedValue != null && radioButton8.Checked ? comboBox2.SelectedValue : -1);                        
+                        tabPage_Calendar.Controls.Add(new Agenda_Just_Display(comboBox1.SelectedIndex + 1, zz));
+                        tabPage_Calendar.Controls[0].Dock = DockStyle.Fill;
+                    }
+                    else
+                    {
+                        Agenda_Just_Display.Selected_idss = (int)(radioButton8.Checked ? comboBox2.SelectedValue : -1);
+                        Agenda_Just_Display.for_animal = comboBox1.SelectedIndex == 1;                        
+                        Agenda_Just_Display.make_update = true;
+                        tabPage_Calendar.Controls[0].Focus();
+                    }
+                    break;
                     //==================================================================
             }
         }
 
-        private void animal_lab_tab(int selected_animal_id)
+        private void animal_lab_tab()
         {
             main_anim_lab_tab = PreConnection.Load_data("SELECT tb1.*,tb2.REF AS 'FACTURE_REF' FROM "
-                                                          + "(SELECT 'Hemogramme' AS LABO_NME ,`ID`,`REF`,`DATE_TIME`,`OBSERV` FROM tb_labo_hemogramme WHERE `ANIM_ID` = "+ selected_animal_id + " UNION ALL "
-                                                          + "SELECT 'Biochimie' AS LABO_NME ,`ID`,`REF`,`DATE_TIME`,`OBSERV` FROM tb_labo_biochimie WHERE `ANIM_ID` = "+ selected_animal_id + "  UNION ALL "
-                                                          + "SELECT 'Immunologie' AS LABO_NME ,`ID`,`REF`,`DATE_TIME`,`OBSERV` FROM tb_labo_immunologie WHERE `ANIM_ID` = "+ selected_animal_id + "  UNION ALL "
-                                                          + "SELECT 'Protéinogramme' AS LABO_NME ,`ID`,`REF`,`DATE_TIME`,`OBSERV` FROM tb_labo_proteinogramme WHERE `ANIM_ID` = "+ selected_animal_id + "  UNION ALL "
-                                                          + "SELECT 'Urologie' AS LABO_NME ,`ID`,`REF`,`DATE_TIME`,`OBSERV` FROM tb_labo_urologie WHERE `ANIM_ID` = " + selected_animal_id + "  UNION ALL "
-                                                          + "SELECT TYPE_ANAL AS LABO_NME ,`ID`,`REF`,`DATE_TIME`,`OBSERV` FROM tb_labo_autre WHERE `ANIM_ID` = "+ selected_animal_id + ") tb1 "
+                                                          + "(SELECT 'Hemogramme' AS LABO_NME ,Hem_1.`ID`,Hem_1.`REF`,Hem_1.`DATE_TIME`,Hem_1.`OBSERV`,Hem_2.* FROM tb_labo_hemogramme Hem_1 LEFT JOIN (SELECT tbb1.`ID` AS ANIM_ID,tbb1.`NME` AS ANIM_NME,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) Hem_2 ON Hem_1.`ANIM_ID` = Hem_2.`ANIM_ID` UNION ALL "
+                                                          + "SELECT 'Biochimie' AS LABO_NME ,Bio_1.`ID`,Bio_1.`REF`,Bio_1.`DATE_TIME`,Bio_1.`OBSERV`,Bio_2.* FROM tb_labo_biochimie Bio_1 LEFT JOIN (SELECT tbb1.`ID` AS ANIM_ID,tbb1.`NME` AS ANIM_NME,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) Bio_2 ON Bio_1.`ANIM_ID` = Bio_2.`ANIM_ID` UNION ALL "
+                                                          + "SELECT 'Immunologie' AS LABO_NME ,Imm_1.`ID`,Imm_1.`REF`,Imm_1.`DATE_TIME`,Imm_1.`OBSERV`,Imm_2.* FROM tb_labo_immunologie Imm_1 LEFT JOIN (SELECT tbb1.`ID` AS ANIM_ID,tbb1.`NME` AS ANIM_NME,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) Imm_2 ON Imm_1.`ANIM_ID` = Imm_2.`ANIM_ID` UNION ALL "
+                                                          + "SELECT 'Protéinogramme' AS LABO_NME ,Pro_1.`ID`,Pro_1.`REF`,Pro_1.`DATE_TIME`,Pro_1.`OBSERV`,Pro_2.* FROM tb_labo_proteinogramme Pro_1 LEFT JOIN (SELECT tbb1.`ID` AS ANIM_ID,tbb1.`NME` AS ANIM_NME,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) Pro_2 ON Pro_1.`ANIM_ID` = Pro_2.`ANIM_ID` UNION ALL "
+                                                          + "SELECT 'Urologie' AS LABO_NME ,Uro_1.`ID`,Uro_1.`REF`,Uro_1.`DATE_TIME`,Uro_1.`OBSERV`,Uro_2.* FROM tb_labo_urologie Uro_1 LEFT JOIN (SELECT tbb1.`ID` AS ANIM_ID,tbb1.`NME` AS ANIM_NME,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) Uro_2 ON Uro_1.`ANIM_ID` = Uro_2.`ANIM_ID` UNION ALL "
+                                                          + "SELECT TYPE_ANAL AS LABO_NME ,Atr_1.`ID`,Atr_1.`REF`,Atr_1.`DATE_TIME`,Atr_1.`OBSERV`,Atr_2.* FROM tb_labo_autre Atr_1 LEFT JOIN (SELECT tbb1.`ID` AS ANIM_ID,tbb1.`NME` AS ANIM_NME,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) Atr_2 ON Atr_1.`ANIM_ID` = Atr_2.`ANIM_ID`) tb1 "
                                                           + "LEFT JOIN ("
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_01` AS 'LABO' FROM tb_factures_vente WHERE `ITEM_IS_PROD_01` IS FALSE AND `ITEM_PROD_CODE_01` IS NOT NULL AND `ITEM_NME_01` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_02` AS 'LABO' FROM tb_factures_vente WHERE `ITEM_IS_PROD_02` IS FALSE AND `ITEM_PROD_CODE_02` IS NOT NULL AND `ITEM_NME_02` IS NOT NULL UNION "
@@ -765,20 +765,31 @@ namespace ALBAITAR_Softvet
         }
         private void DGV_Visit_Filter(bool update_tot)
         {
-            string fltr = textBox1.Text.Trim().Length > 0 ? ("("
+            string fltr = radioButton8.Checked && comboBox2.Items.Count > 0 ? (comboBox1.SelectedIndex == 0  ? "CLIENT_ID" : "ANIM_ID") + " = " + comboBox2.SelectedValue : "";            
+            //-----------------------------------
+            fltr += textBox1.Text.Trim().Length > 0 ? ((fltr.Length > 0 ? " AND " : "") + "("
                 + "VISITOR_FULL_NME LIKE '%" + textBox1.Text + "%'"
                 + " OR CONVERT(DATETIME, 'System.String') LIKE '%" + textBox1.Text + "%'"
                 + " OR OBJECT LIKE '%" + textBox1.Text + "%'"
                 + " OR FACTURE_REF LIKE '%" + textBox1.Text + "%'"
+                + " OR ANIM_NME LIKE '%" + textBox1.Text + "%'"
+                + " OR CLIENT_FULL_NME LIKE '%" + textBox1.Text + "%'"
                 + ")") : "";
             bool dd = fltr.Length > 0;
+            //------------------------------------
+
             //===================================================
-            DataTable tmppp = main_anim_visites_tab.Copy();
-            tmppp.DefaultView.RowFilter = fltr;
-            int tss = tmppp.DefaultView.Cast<DataRowView>().Count();
-            //----
-            tmppp.DefaultView.RowFilter = fltr + (dd ? " AND " : "") + "LEN(FACTURE_REF) > 0";
-            int fct1 = tmppp.DefaultView.Cast<DataRowView>().Count();
+            int tss = 0;
+            int fct1 = 0;
+            if (update_tot)
+            {
+                DataTable tmppp = main_anim_visites_tab.Copy();
+                tmppp.DefaultView.RowFilter = fltr;
+                tss = tmppp.DefaultView.Cast<DataRowView>().Count();
+                //----
+                tmppp.DefaultView.RowFilter = fltr + (dd ? " AND " : "") + "LEN(FACTURE_REF) > 0";
+                fct1 = tmppp.DefaultView.Cast<DataRowView>().Count();
+            }
             //===================================================
             if (radioButton2.Checked) //Facturé
             {
@@ -865,6 +876,7 @@ namespace ALBAITAR_Softvet
         private void DGV_Lab_Filter(bool update_tot)
         {
             string fltr = "";
+            //------------------------------------
             switch (comboBox3.Text)
             {
                 case "- Tous -":
@@ -888,22 +900,29 @@ namespace ALBAITAR_Softvet
                 case "- Autres -":
                     fltr = "LABO_NME NOT IN ('Hemogramme','Biochimie','Immunologie','Protéinogramme','Urologie')";
                     break;
-            }
+            }            
+            fltr += radioButton8.Checked && comboBox2.Items.Count > 0 ? (fltr.Length > 0 ? " AND " : "") + (comboBox1.SelectedIndex == 0 ? "CLIENT_ID" : "ANIM_ID") + " = " + comboBox2.SelectedValue : "";
             fltr += textBox3.Text.Trim().Length > 0 ? ((fltr.Length > 0 ? " AND " : "") + "("
                 + "LABO_NME LIKE '%" + textBox3.Text + "%'"
                 + " OR CONVERT(DATE_TIME, 'System.String') LIKE '%" + textBox3.Text + "%'"
                 + " OR REF LIKE '%" + textBox3.Text + "%'"
                 + " OR OBSERV LIKE '%" + textBox3.Text + "%'"
-                + ")") : "";
-                        
+                + " OR ANIM_NME LIKE '%" + textBox3.Text + "%'"
+                + " OR CLIENT_FULL_NME LIKE '%" + textBox3.Text + "%'"
+                + ")") : "";                        
             bool dd = fltr.Length > 0;
             //===================================================
-            DataTable tmppp = main_anim_lab_tab.Copy();
-            tmppp.DefaultView.RowFilter = fltr;
-            int tss = tmppp.DefaultView.Cast<DataRowView>().Count();
-            //----
-            tmppp.DefaultView.RowFilter = fltr + (dd ? " AND " : "") + "LEN(FACTURE_REF) > 0";
-            int fct1 = tmppp.DefaultView.Cast<DataRowView>().Count();
+            int tss = 0;
+            int fct1 = 0;
+            if (update_tot)
+            {
+                DataTable tmppp = main_anim_lab_tab.Copy();
+                tmppp.DefaultView.RowFilter = fltr;
+                tss = tmppp.DefaultView.Cast<DataRowView>().Count();
+                //----
+                tmppp.DefaultView.RowFilter = fltr + (dd ? " AND " : "") + "LEN(FACTURE_REF) > 0";
+                fct1 = tmppp.DefaultView.Cast<DataRowView>().Count();
+            }
             //===================================================
             if (radioButton5.Checked) //Facturé
             {
@@ -1079,8 +1098,36 @@ namespace ALBAITAR_Softvet
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            DGV_Visit_Filter(true);
+            DGV_Lab_Filter(true);
+                    
         }
+
+        private void radioButton8_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton8.Checked && tabControl1.TabPages["tabPage_infos_animal"] == null) {
+                tabControl1.TabPages.Insert(0,tabPage_infos_animal);
+                
+            }
+            else if(tabControl1.TabPages["tabPage_infos_animal"] != null)
+            {
+                tabControl1.TabPages.Remove(tabPage_infos_animal);
+            }
+            
+            switch (tabControl1.SelectedTab.Name)
+            {
+                case "tabPage_visites_animal":
+                    DGV_Visit_Filter(true);
+                    break;
+                case "tabPage_labo_animal":
+                    DGV_Lab_Filter(true);
+                    break;
+                case "tabPage_Calendar":
+                    Agenda_Just_Display.make_filter_refresh = true;
+                    Refresh_current_tab();
+                    break;
+            }
+        }
+
     }
 }
 

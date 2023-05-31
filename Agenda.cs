@@ -24,7 +24,8 @@ namespace ALBAITAR_Softvet.Resources
 {
     public partial class Agenda : Form
     {
-
+        int event_id_to_selectt = -1;
+        DateTime Date_to_selectt = DateTime.Now;
         public static List<int> selected_clients { get; set; }
         bool Is_New_To_Insert = true;
         string Current_items_id = string.Empty;
@@ -38,6 +39,8 @@ namespace ALBAITAR_Softvet.Resources
         string selected_ids_to_delete = "";
         bool tmp_pause = false;
         ListView prev = null;
+
+        DateTime tmmp;
         //---------
         bool Ajouter_pour_tout_monde_40001,
             Ajouter_pour_juste_lui_40002,
@@ -53,10 +56,12 @@ namespace ALBAITAR_Softvet.Resources
         public static ListViewItem[] Animm2;
         public static string Userss;
         int selected_img_idx = -1;
-        public Agenda()
+        public Agenda(int? event_id_to_select, DateTime? Date_to_select)
         {
 
             InitializeComponent();
+            event_id_to_selectt = (int)(event_id_to_select != null ? event_id_to_select : -1);
+            Date_to_selectt = (DateTime)(Date_to_select != null ? Date_to_select : DateTime.Now);
             //----------------------
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
@@ -137,39 +142,49 @@ namespace ALBAITAR_Softvet.Resources
             //----------------
             radioButton1.Text = Properties.Settings.Default.Last_login_user_full_nme;
             //-------------------------
-            dateTimePicker1_ValueChanged(null, null);
-            intial_Modify_fields();
-        }
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            startDate = DateTime.Parse("01/" + e.Start.Month + "/" + e.Start.Year);
-            endDate = DateTime.Parse(DateTime.DaysInMonth(e.Start.Year, e.Start.Month) + "/" + e.Start.Month + "/" + e.Start.Year);
-            //--------------------------------
-            int ddds = (int)startDate.DayOfWeek;
-            foreach (Control ctr in flowLayoutPanel1.Controls)
+            if(event_id_to_selectt > -1)
             {
-                foreach (Control ctr1 in ctr.Controls)
-                {
-                    if (ctr1.Name.Contains("Dayy_"))
-                    {
-                        ((ListView)ctr1).Items.Clear();
-                        ((ListView)ctr1).Columns[0].Text = "";
-                        if ((int.Parse(ctr1.Name.Substring(5)) - ddds) <= (endDate.Date).Day && (int.Parse(ctr1.Name.Substring(5)) - ddds) >= (startDate.Date).Day)
-                        {
-                            ((ListView)ctr1).Columns[0].Text = (int.Parse(ctr1.Name.Substring(5)) - ddds).ToString();
-                            ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.Nonclickable;
-                            ((ListView)ctr1).BorderStyle = BorderStyle.Fixed3D;
-                        }
-                        else
-                        {
-                            ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.None;
-                            ((ListView)ctr1).BorderStyle = BorderStyle.None;
-                        }
-                    }
-                }
+                dateTimePicker1.Value = Date_to_selectt;
+                Fill_Event_Fields(event_id_to_selectt.ToString());
+                event_id_to_selectt = -1;
             }
-            //------------------------
+            else
+            {
+                dateTimePicker1_ValueChanged(null, null);
+                intial_Modify_fields();
+            }
+            
         }
+        //private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        //{
+        //    startDate = DateTime.Parse("01/" + e.Start.Month + "/" + e.Start.Year);
+        //    endDate = DateTime.Parse(DateTime.DaysInMonth(e.Start.Year, e.Start.Month) + "/" + e.Start.Month + "/" + e.Start.Year);
+        //    //--------------------------------
+        //    int ddds = (int)startDate.DayOfWeek;
+        //    foreach (Control ctr in flowLayoutPanel1.Controls)
+        //    {
+        //        foreach (Control ctr1 in ctr.Controls)
+        //        {
+        //            if (ctr1.Name.Contains("Dayy_"))
+        //            {
+        //                ((ListView)ctr1).Items.Clear();
+        //                ((ListView)ctr1).Columns[0].Text = "";
+        //                if ((int.Parse(ctr1.Name.Substring(5)) - ddds) <= (endDate.Date).Day && (int.Parse(ctr1.Name.Substring(5)) - ddds) >= (startDate.Date).Day)
+        //                {
+        //                    ((ListView)ctr1).Columns[0].Text = (int.Parse(ctr1.Name.Substring(5)) - ddds).ToString();
+        //                    ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.Nonclickable;
+        //                    ((ListView)ctr1).BorderStyle = BorderStyle.Fixed3D;
+        //                }
+        //                else
+        //                {
+        //                    ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.None;
+        //                    ((ListView)ctr1).BorderStyle = BorderStyle.None;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    //------------------------
+        //}
         private void listView1_SizeChanged(object sender, EventArgs e)
         {
             if (((ListView)sender).Columns.Count > 0)
@@ -305,7 +320,7 @@ namespace ALBAITAR_Softvet.Resources
                     checkBox11.Checked = true;
                     numericUpDown3.Value = int.Parse(row["REPPEL_BEFORE_DAYS"].ToString());
                 }
-                comboBox2.SelectedItem = row["REPPEL_BEFORE_DAYS"].ToString();
+                comboBox2.SelectedItem = row["TYPE"].ToString();
                 textBox2.Text = row["DESCRIPTION"].ToString();
                 //-------------------
                 if (row["RELATED_ANIMALS_IDs"].ToString().Trim().Length > 0)
@@ -372,11 +387,11 @@ namespace ALBAITAR_Softvet.Resources
                     else
                     {
                         radioButton3.Checked = true;
-                        usrs.ForEach(AA =>
-                        {
-                            Userss += ',' + AA;
-                        });
-                        Userss = Userss.Substring(1, Userss.Length - 1);
+                        //usrs.ForEach(AA =>
+                        //{
+                        //    Userss += ',' + AA;
+                        //});
+                        //Userss = Userss.Substring(1, Userss.Length - 1);
                     }
                 }
                 else
@@ -385,7 +400,6 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 //--------------
                 Userss = row["FOR_THIS_USERS"].ToString();
-
                 //============= Autorisations --> ===================                
                 if (Modifier_pour_tous_40003)
                 {
@@ -627,7 +641,9 @@ namespace ALBAITAR_Softvet.Resources
                             ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.None;
                             ((ListView)ctr1).BorderStyle = BorderStyle.None;
                         }
-
+                        tmmp = new DateTime(1900, 12, 12);
+                        DateTime.TryParse(string.Concat((int.Parse(ctr1.Name.Substring(5)) - ddds), "/", dateTimePicker1.Value.Month, "/", dateTimePicker1.Value.Year), out tmmp);
+                        ((ListView)ctr1).BackColor = DateTime.Today == tmmp ? Color.HotPink : SystemColors.Window;
 
                     }
                 }
@@ -1051,6 +1067,7 @@ namespace ALBAITAR_Softvet.Resources
                     mySqlCommand.Parameters.AddWithValue("@Icon", selected_img_idx);
                 }
                 int row_affected = mySqlCommand.ExecuteNonQuery();
+                Agenda_Just_Display.make_update = true;
                 Load_all_data();
             }
             else
@@ -1325,6 +1342,16 @@ namespace ALBAITAR_Softvet.Resources
             //new Agenda_Filter().ShowDialog();
         }
 
+        private void radioButton3_MouseClick(object sender, MouseEventArgs e)
+        {            
+            (new Users_List()).ShowDialog();            
+            if (Userss.Length == 0 || Userss == Properties.Settings.Default.Last_login_user_idx.ToString())
+            {
+                radioButton1.Checked = true;
+                Userss = Properties.Settings.Default.Last_login_user_idx.ToString();
+            }
+        }
+
         private void flowLayoutPanel1_Enter(object sender, EventArgs e)
         {
             if(prev != null)
@@ -1340,17 +1367,6 @@ namespace ALBAITAR_Softvet.Resources
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             button8.Enabled = checkBox1.Checked;
-        }
-
-        private void radioButton3_MouseClick(object sender, MouseEventArgs e)
-        {
-            new Users_List().ShowDialog();
-            if (Userss.Length == 0)
-            { radioButton2.Checked = true; }
-            else if (Userss.Length == 1 && Userss == Properties.Settings.Default.Last_login_user_idx.ToString())
-            { radioButton1.Checked = true; }
-            else
-            { radioButton3.Checked = true; }
         }
 
         private void radioButton1_MouseClick(object sender, MouseEventArgs e)

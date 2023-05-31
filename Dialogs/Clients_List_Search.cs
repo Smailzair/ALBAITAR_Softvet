@@ -147,24 +147,14 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             if (e.Item.Selected)
             {
-                e.Graphics.FillRectangle(Brushes.Yellow, e.Bounds);
+                e.Graphics.FillRectangle(Brushes.LightSeaGreen, e.Bounds);
             }
             else
             {
                 e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.Bounds);
             }
-            
-            if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
-            {
-                StringFormat stringFormat = new StringFormat();
-                stringFormat.Alignment = StringAlignment.Near;
-                stringFormat.LineAlignment = StringAlignment.Center;
-                e.Graphics.DrawString(e.SubItem.Text, ((ListView)sender).Font, Brushes.Black, e.Bounds, stringFormat);
-            }
-            else
-            {
-                e.DrawDefault = true;
-            }
+            TextRenderer.DrawText(e.Graphics, e.SubItem.Text, e.SubItem.Font, e.Bounds, e.SubItem.ForeColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+
         }
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)

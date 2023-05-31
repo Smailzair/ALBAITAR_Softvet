@@ -247,7 +247,7 @@
             this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button8.Location = new System.Drawing.Point(579, 16);
+            this.button8.Location = new System.Drawing.Point(579, 12);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(39, 27);
             this.button8.TabIndex = 31;
@@ -1160,6 +1160,7 @@
             this.Dayy_4.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.Dayy_4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.Dayy_4.BackColor = System.Drawing.SystemColors.Window;
             this.Dayy_4.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.label_nb_day_4});
             this.Dayy_4.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1963,13 +1964,12 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.checkBox1.Location = new System.Drawing.Point(530, 19);
+            this.checkBox1.Location = new System.Drawing.Point(530, 16);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(46, 20);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.Text = "Filtre";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Visible = false;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // dateTimePicker1

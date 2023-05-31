@@ -265,6 +265,24 @@
     <Compile Include="Agenda.Designer.cs">
       <DependentUpon>Agenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Agenda_Just_Display.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Agenda_Just_Display.Designer.cs">
+      <DependentUpon>Agenda_Just_Display.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Anim_Infos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Anim_Infos.Designer.cs">
+      <DependentUpon>Anim_Infos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client_Infos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client_Infos.Designer.cs">
+      <DependentUpon>Client_Infos.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB_TMPDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -438,6 +456,15 @@
     </Compile>
     <EmbeddedResource Include="Agenda.resx">
       <DependentUpon>Agenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Agenda_Just_Display.resx">
+      <DependentUpon>Agenda_Just_Display.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Anim_Infos.resx">
+      <DependentUpon>Anim_Infos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client_Infos.resx">
+      <DependentUpon>Client_Infos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Add_Vente_Fact_Item.resx">
       <DependentUpon>Add_Vente_Fact_Item.cs</DependentUpon>

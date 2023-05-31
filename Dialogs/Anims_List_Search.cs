@@ -1,5 +1,6 @@
 ﻿using ALBAITAR_Softvet.Resources;
 using MySqlX.XDevAPI;
+using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -136,40 +137,21 @@ namespace ALBAITAR_Softvet.Dialogs
         private void listView1_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
             e.Graphics.FillRectangle((e.ColumnIndex == 0 ? Brushes.Peru : (e.ColumnIndex == 2 ? Brushes.SaddleBrown : Brushes.SandyBrown)), e.Bounds);
-            if (e.ColumnIndex == 0 || e.ColumnIndex == 2 || e.ColumnIndex == 4)
-            {
-                StringFormat stringFormat = new StringFormat();
-                stringFormat.Alignment = StringAlignment.Center;
-                stringFormat.LineAlignment = StringAlignment.Center;
-                e.Graphics.DrawString(e.Header.Text, ((ListView)sender).Font, Brushes.White, e.Bounds, stringFormat);
-            }else
-            {
-                e.DrawDefault = true;
-            }
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, e.Font, e.Bounds, Color.White, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
         }
 
         private void listView1_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
             if (e.Item.Selected)
             {                
-                e.Graphics.FillRectangle(Brushes.Yellow, e.Bounds);
+                e.Graphics.FillRectangle(Brushes.LightSeaGreen, e.Bounds);
             }
             else
             {
                 e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.Bounds);
             }
-            
-            if (e.ColumnIndex == 0 || e.ColumnIndex == 2 || e.ColumnIndex == 4)
-            {
-                StringFormat stringFormat = new StringFormat();
-                stringFormat.Alignment = StringAlignment.Near;
-                stringFormat.LineAlignment = StringAlignment.Center;
-                e.Graphics.DrawString(e.SubItem.Text, ((ListView)sender).Font, Brushes.Black, e.Bounds, stringFormat);
-            }
-            else
-            {
-                e.DrawDefault = true;
-            }
+            TextRenderer.DrawText(e.Graphics, e.SubItem.Text, e.SubItem.Font, e.Bounds, e.SubItem.ForeColor, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+
         }
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
