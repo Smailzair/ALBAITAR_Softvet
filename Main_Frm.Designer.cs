@@ -95,7 +95,7 @@ namespace ALBAITAR_Softvet
             this.button14 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.tabPage_infos_animal = new System.Windows.Forms.TabPage();
+            this.tabPage_infos = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_visites_animal.SuspendLayout();
@@ -164,7 +164,7 @@ namespace ALBAITAR_Softvet
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage_infos_animal);
+            this.tabControl1.Controls.Add(this.tabPage_infos);
             this.tabControl1.Controls.Add(this.tabPage_visites_animal);
             this.tabControl1.Controls.Add(this.tabPage_labo_animal);
             this.tabControl1.Controls.Add(this.tabPage_Calendar);
@@ -960,16 +960,16 @@ namespace ALBAITAR_Softvet
             this.toolTip1.SetToolTip(this.button10, "Rechercher");
             this.button10.UseVisualStyleBackColor = true;
             // 
-            // tabPage_infos_animal
+            // tabPage_infos
             // 
-            this.tabPage_infos_animal.AutoScroll = true;
-            this.tabPage_infos_animal.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage_infos_animal.Location = new System.Drawing.Point(37, 4);
-            this.tabPage_infos_animal.Name = "tabPage_infos_animal";
-            this.tabPage_infos_animal.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_infos_animal.Size = new System.Drawing.Size(801, 491);
-            this.tabPage_infos_animal.TabIndex = 0;
-            this.tabPage_infos_animal.Text = "Informations";
+            this.tabPage_infos.AutoScroll = true;
+            this.tabPage_infos.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage_infos.Location = new System.Drawing.Point(37, 4);
+            this.tabPage_infos.Name = "tabPage_infos";
+            this.tabPage_infos.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_infos.Size = new System.Drawing.Size(801, 491);
+            this.tabPage_infos.TabIndex = 0;
+            this.tabPage_infos.Text = "Informations";
             // 
             // Main_Frm
             // 
@@ -1073,6 +1073,6 @@ namespace ALBAITAR_Softvet
         private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_IDD;
         private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_FULL_NMEE;
         private System.Windows.Forms.DataGridViewTextBoxColumn NUM_FACT_LAB;
-        private System.Windows.Forms.TabPage tabPage_infos_animal;
+        private System.Windows.Forms.TabPage tabPage_infos;
     }
 }

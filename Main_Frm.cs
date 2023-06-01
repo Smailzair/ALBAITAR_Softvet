@@ -72,7 +72,7 @@ namespace ALBAITAR_Softvet
                 Properties.Resources.icons8_info_15px_1,//Red Notification
             });
             tabControl1.ImageList = tabcontrol_img_lst;
-            tabPage_infos_animal.ImageIndex = 2;
+            tabPage_infos.ImageIndex = 2;
             tabPage_visites_animal.ImageIndex = 0;
             tabPage_labo_animal.ImageIndex = 1;
             tabPage_Calendar.ImageIndex = 3;
@@ -107,7 +107,7 @@ namespace ALBAITAR_Softvet
             }
             if (System.Windows.Forms.Application.OpenForms["Clients"] == null)
             {
-                new Clients().Show();
+                new Clients(-1, 1).Show();
             }
             else
             {
@@ -124,7 +124,7 @@ namespace ALBAITAR_Softvet
         private void button2_Click(object sender, EventArgs e)
         {
             (new Settings()).ShowDialog();
-            if(tabControl1.SelectedTab.Name == "tabPage_infos_animal")
+            if(tabControl1.SelectedTab.Name == "tabPage_infos")
             {
                 Refresh_current_tab();
             }
@@ -458,9 +458,9 @@ namespace ALBAITAR_Softvet
                 radioButton8.CheckedChanged -= radioButton8_CheckedChanged;
                 radioButton8.Checked = true;
                 radioButton8.CheckedChanged += radioButton8_CheckedChanged;
-                if (tabControl1.TabPages["tabPage_infos_animal"] == null)
+                if (tabControl1.TabPages["tabPage_infos"] == null)
                 {
-                    tabControl1.TabPages.Insert(0, tabPage_infos_animal);
+                    tabControl1.TabPages.Insert(0, tabPage_infos);
                 }
                 //-----------
                 if (int.TryParse(comboBox2.SelectedValue.ToString(), out int yy))
@@ -593,48 +593,48 @@ namespace ALBAITAR_Softvet
                         }
                     }
                 break;
-                case "tabPage_infos_animal":
-
+                case "tabPage_infos":
+                    button3.Focus();
                     if(comboBox1.SelectedIndex == 0) //Clients
                     {                        
-                        if (tabPage_infos_animal.Controls["Client_Infos"] == null)
+                        if (tabPage_infos.Controls["Client_Infos"] == null)
                         {
                             int zz = -1;
                             bool ff = int.TryParse((comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? comboBox2.SelectedValue : -1) : -1).ToString(), out zz);
                             if (ff)
                             {
-                                tabPage_infos_animal.Controls.Add(new Client_Infos(zz));
-                                tabPage_infos_animal.Controls["Client_Infos"].Dock = DockStyle.Fill;
-                                tabPage_infos_animal.Controls["Client_Infos"].BringToFront();
+                                tabPage_infos.Controls.Add(new Client_Infos(zz));
+                                tabPage_infos.Controls["Client_Infos"].Dock = DockStyle.Fill;
+                                tabPage_infos.Controls["Client_Infos"].BringToFront();
                             }
                         }
                         else
                         {
                             Client_Infos.selected_client_id = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : -1) : -1;
                             Client_Infos.make_refresh = true;
-                            tabPage_infos_animal.Controls["Client_Infos"].Focus();
-                            tabPage_infos_animal.Controls["Client_Infos"].BringToFront();
+                            tabPage_infos.Controls["Client_Infos"].Focus();
+                            tabPage_infos.Controls["Client_Infos"].BringToFront();
                         }
                     }
                     else //Animaux
                     {
-                        if (tabPage_infos_animal.Controls["Anim_Infos"] == null)
+                        if (tabPage_infos.Controls["Anim_Infos"] == null)
                         {
                             int zz = -1;
                             bool ff = int.TryParse((comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? comboBox2.SelectedValue : -1) : -1).ToString(), out zz);
                             if (ff)
                             {
-                                tabPage_infos_animal.Controls.Add(new Anim_Infos(zz));
-                                tabPage_infos_animal.Controls["Anim_Infos"].Dock = DockStyle.Fill;
-                                tabPage_infos_animal.Controls["Anim_Infos"].BringToFront();
+                                tabPage_infos.Controls.Add(new Anim_Infos(zz));
+                                tabPage_infos.Controls["Anim_Infos"].Dock = DockStyle.Fill;
+                                tabPage_infos.Controls["Anim_Infos"].BringToFront();
                             }
                         }
                         else
                         {
                             Anim_Infos.selected_anim_id = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : -1) : -1;
                             Anim_Infos.make_refresh = true;
-                            tabPage_infos_animal.Controls["Anim_Infos"].Focus();
-                            tabPage_infos_animal.Controls["Anim_Infos"].BringToFront();
+                            tabPage_infos.Controls["Anim_Infos"].Focus();
+                            tabPage_infos.Controls["Anim_Infos"].BringToFront();
                         }
                     }
                     break;
@@ -1104,13 +1104,13 @@ namespace ALBAITAR_Softvet
 
         private void radioButton8_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioButton8.Checked && tabControl1.TabPages["tabPage_infos_animal"] == null) {
-                tabControl1.TabPages.Insert(0,tabPage_infos_animal);
-                
+            if(radioButton8.Checked && tabControl1.TabPages["tabPage_infos"] == null) {
+                tabControl1.TabPages.Insert(0,tabPage_infos);
+                if(tabControl1.SelectedIndex == 1) { tabControl1.SelectedIndex = 0; }
             }
-            else if(tabControl1.TabPages["tabPage_infos_animal"] != null)
+            else if(tabControl1.TabPages["tabPage_infos"] != null)
             {
-                tabControl1.TabPages.Remove(tabPage_infos_animal);
+                tabControl1.TabPages.Remove(tabPage_infos);
             }
             
             switch (tabControl1.SelectedTab.Name)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ALBAITAR_Softvet.Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -67,6 +68,39 @@ namespace ALBAITAR_Softvet
                 make_refresh = false;
                 Load_Data();
             }
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["Animaux"] == null)
+            {
+                new Animaux(-2, -1).Show();
+            }
+            else
+            {
+                Animaux.ID_to_selectt = -2;
+                Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
+                Application.OpenForms["Animaux"].BringToFront();
+            }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["Animaux"] == null)
+            {
+                new Animaux(selected_anim_id, -1).Show();
+            }
+            else
+            {
+                Animaux.ID_to_selectt = selected_anim_id;
+                Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
+                Application.OpenForms["Animaux"].BringToFront();
+            }            
+        }
+
+        private void textBox8_Enter(object sender, EventArgs e)
+        {
+            button16.Focus();
         }
     }
 }

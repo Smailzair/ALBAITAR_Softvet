@@ -28,6 +28,7 @@ namespace ALBAITAR_Softvet.Resources
         bool Is_New = true;
         bool Is_New_Visite = true;
         DataTable Races_Especes = new DataTable();
+        DataTable chosen_anim_from_search;
         public Animaux(int ID_to_select,int visite_id)
         {
             InitializeComponent();
@@ -685,7 +686,13 @@ namespace ALBAITAR_Softvet.Resources
                 dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
                 dataGridView1.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["ID"].Value == ID_to_selectt).ToList().ForEach(W => W.Selected = true);
                 ID_to_selectt = -1;
-            }            
+            }
+            else if (ID_to_selectt == -2)
+            {
+                ID_to_selectt = -1;
+                button3.PerformClick();
+                
+            }
             if (visite_idd > 0)
             {               
                 tabControl1.SelectedTab = tabPage2;
@@ -1070,6 +1077,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void Animaux_Activated(object sender, EventArgs e)
         {
+            textBox1.Clear();
             if (ID_to_selectt > 0)
             {
                 tabControl1.SelectedTab = tabPage1;
@@ -1078,7 +1086,13 @@ namespace ALBAITAR_Softvet.Resources
                 dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
                 dataGridView1.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["ID"].Value == ID_to_selectt).ToList().ForEach(W => W.Selected = true);
                 ID_to_selectt = -1;
+            }else if (ID_to_selectt == -2)
+            {
+                ID_to_selectt = -1;
+                button3.PerformClick();
+                
             }
+            //------------
             if (visite_idd > 0)
             {
                 tabControl1.SelectedTab = tabPage2;
@@ -1095,6 +1109,25 @@ namespace ALBAITAR_Softvet.Resources
                 visite_idd = -1;
                 richTextBox1.Select();
             }
+        }
+        
+        private void button14_Click(object sender, EventArgs e)
+        {
+            chosen_anim_from_search = new DataTable();
+            Anims_List_Search select = new Anims_List_Search();
+            select.DataTableReturned += ChildForm_DataTableReturned;
+            select.ShowDialog();
+            if (chosen_anim_from_search != null)
+            {
+                textBox1.Clear();
+                comboBox2.SelectedValue = chosen_anim_from_search.Rows[0][1];
+                dataGridView1.ClearSelection();
+                dataGridView1.Rows.Cast<DataGridViewRow>().Where(c => c.Cells["ID"].Value.ToString() == chosen_anim_from_search.Rows[0]["ID"].ToString()).ForEach(dx => dx.Selected = true);
+            }
+        }
+        private void ChildForm_DataTableReturned(object sender, DataTableEventArgs e)
+        {
+            chosen_anim_from_search = e.DataTable;
         }
     }
 }

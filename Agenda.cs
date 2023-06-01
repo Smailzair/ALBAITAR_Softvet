@@ -663,7 +663,7 @@ namespace ALBAITAR_Softvet.Resources
             //-----------------
             foreach (Control vw in ((FlowLayoutPanel)sender).Controls.OfType<ListView>())
             {
-                vw.Width = (((FlowLayoutPanel)sender).Width - 9);
+              //  vw.Width = (((FlowLayoutPanel)sender).Width - 9);
                 vw.Height = (((FlowLayoutPanel)sender).Height - 60) / 5;
                 vw.Width = (((FlowLayoutPanel)sender).Width - 6);
             }
@@ -1337,9 +1337,9 @@ namespace ALBAITAR_Softvet.Resources
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //new Agenda_Filter().ShowDialog();
+            dateTimePicker1.Value = DateTime.Now;
         }
 
         private void radioButton3_MouseClick(object sender, MouseEventArgs e)
@@ -1364,10 +1364,6 @@ namespace ALBAITAR_Softvet.Resources
             
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            button8.Enabled = checkBox1.Checked;
-        }
 
         private void radioButton1_MouseClick(object sender, MouseEventArgs e)
         {

@@ -188,6 +188,7 @@
             this.label25 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button15 = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.Ven_Flow.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -464,6 +465,7 @@
             this.Ven_Flow.Name = "Ven_Flow";
             this.Ven_Flow.Size = new System.Drawing.Size(162, 533);
             this.Ven_Flow.TabIndex = 6;
+            this.Ven_Flow.SizeChanged += new System.EventHandler(this.Sam_Flow_SizeChanged);
             // 
             // label8
             // 
@@ -796,7 +798,7 @@
             this.dateTimePicker1.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePicker1.Location = new System.Drawing.Point(329, 16);
+            this.dateTimePicker1.Location = new System.Drawing.Point(329, 7);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(151, 21);
             this.dateTimePicker1.TabIndex = 43;
@@ -894,6 +896,7 @@
             this.Dim_Flow.Name = "Dim_Flow";
             this.Dim_Flow.Size = new System.Drawing.Size(162, 533);
             this.Dim_Flow.TabIndex = 1;
+            this.Dim_Flow.SizeChanged += new System.EventHandler(this.Sam_Flow_SizeChanged);
             // 
             // label3
             // 
@@ -1153,7 +1156,7 @@
             this.button10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(566, 16);
+            this.button10.Location = new System.Drawing.Point(633, 15);
             this.button10.Margin = new System.Windows.Forms.Padding(4);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(24, 21);
@@ -1169,7 +1172,7 @@
             this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(486, 11);
+            this.button2.Location = new System.Drawing.Point(486, 7);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(34, 30);
             this.button2.TabIndex = 45;
@@ -1185,7 +1188,7 @@
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(289, 11);
+            this.button1.Location = new System.Drawing.Point(289, 7);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(34, 30);
             this.button1.TabIndex = 44;
@@ -1253,6 +1256,7 @@
             this.Sam_Flow.Name = "Sam_Flow";
             this.Sam_Flow.Size = new System.Drawing.Size(162, 533);
             this.Sam_Flow.TabIndex = 0;
+            this.Sam_Flow.SizeChanged += new System.EventHandler(this.Sam_Flow_SizeChanged);
             // 
             // Dayy_22
             // 
@@ -1314,6 +1318,7 @@
             this.Lun_Flow.Name = "Lun_Flow";
             this.Lun_Flow.Size = new System.Drawing.Size(162, 533);
             this.Lun_Flow.TabIndex = 2;
+            this.Lun_Flow.SizeChanged += new System.EventHandler(this.Sam_Flow_SizeChanged);
             // 
             // label4
             // 
@@ -1509,6 +1514,7 @@
             this.Mar_Flow.Name = "Mar_Flow";
             this.Mar_Flow.Size = new System.Drawing.Size(162, 533);
             this.Mar_Flow.TabIndex = 3;
+            this.Mar_Flow.SizeChanged += new System.EventHandler(this.Sam_Flow_SizeChanged);
             // 
             // label5
             // 
@@ -1704,6 +1710,7 @@
             this.Mer_Flow.Name = "Mer_Flow";
             this.Mer_Flow.Size = new System.Drawing.Size(162, 533);
             this.Mer_Flow.TabIndex = 4;
+            this.Mer_Flow.SizeChanged += new System.EventHandler(this.Sam_Flow_SizeChanged);
             // 
             // label6
             // 
@@ -1899,6 +1906,7 @@
             this.Jeu_Flow.Name = "Jeu_Flow";
             this.Jeu_Flow.Size = new System.Drawing.Size(162, 533);
             this.Jeu_Flow.TabIndex = 5;
+            this.Jeu_Flow.SizeChanged += new System.EventHandler(this.Sam_Flow_SizeChanged);
             // 
             // label7
             // 
@@ -2182,7 +2190,7 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(589, 16);
+            this.textBox3.Location = new System.Drawing.Point(656, 15);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(216, 21);
             this.textBox3.TabIndex = 57;
@@ -2230,10 +2238,23 @@
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel1.Location = new System.Drawing.Point(367, 30);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(66, 16);
+            this.linkLabel1.TabIndex = 67;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Aujourd\'hui";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // Agenda_Just_Display
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label25);
@@ -2248,6 +2269,7 @@
             this.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Agenda_Just_Display";
             this.Size = new System.Drawing.Size(1314, 591);
+            this.SizeChanged += new System.EventHandler(this.Agenda_Just_Display_SizeChanged);
             this.Enter += new System.EventHandler(this.Agenda_Just_Display_Enter);
             this.Ven_Flow.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -2430,5 +2452,6 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

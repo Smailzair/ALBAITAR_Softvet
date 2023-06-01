@@ -22,16 +22,21 @@ namespace ALBAITAR_Softvet.Resources
 {
     public partial class Clients : Form
     {
+        public static int ID_to_selectt = -1;
+        public static int Infoss_1_Caiss_2 = 1;
         DataTable clients;
         DataTable sites;
         List<string> wilayaa;
         List<string> cities;
         bool Is_New = true;
         bool can_start_historic_saving = false;
-        public Clients()
+        DataTable chosen_client_from_search;
+        public Clients(int ID_to_select, int Infos_1_Caiss_2)
         {
-            InitializeComponent();
+            InitializeComponent();            
             tabControl1.TabPages.Remove(tabPage1);
+            ID_to_selectt = ID_to_select;
+            Infoss_1_Caiss_2 = Infos_1_Caiss_2;
             //----------------------
             Load_clients_from_DB();
             //---------------------
@@ -522,7 +527,19 @@ namespace ALBAITAR_Softvet.Resources
                 splitContainer1.Panel2.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
             }
             //--------------
-
+            if (ID_to_selectt > 0)
+            {
+                tabControl1.SelectedTab = Infoss_1_Caiss_2 == 2 ? tabPage1 : tabPage2;
+                dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                dataGridView1.ClearSelection();
+                dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                dataGridView1.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["ID"].Value == ID_to_selectt).ToList().ForEach(W => W.Selected = true);
+                ID_to_selectt = -1;
+            }else if(ID_to_selectt == -2) //NEW
+            {
+                ID_to_selectt = -1;
+                button3.PerformClick();
+            }
 
         }
 
@@ -661,9 +678,41 @@ namespace ALBAITAR_Softvet.Resources
             calc_sold();
         }
 
-        private void dataGridView2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void Clients_Activated(object sender, EventArgs e)
         {
-            //if()
+            if (ID_to_selectt > 0)
+            {
+                tabControl1.SelectedTab = Infoss_1_Caiss_2 == 2 ? tabPage1 : tabPage2;
+                dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                dataGridView1.ClearSelection();
+                dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                dataGridView1.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["ID"].Value == ID_to_selectt).ToList().ForEach(W => W.Selected = true);
+                ID_to_selectt = -1;
+            }
+            else if (ID_to_selectt == -2) //NEW
+            {
+                ID_to_selectt = -1;
+                button3.PerformClick();
+            }
+        }
+        
+        private void button14_Click(object sender, EventArgs e)
+        {        
+            chosen_client_from_search = new DataTable();
+            Clients_List_Search select = new Clients_List_Search();
+            select.DataTableReturned += ChildForm_DataTableReturned2;
+            select.ShowDialog();
+            if (chosen_client_from_search != null)
+            {
+                textBox1.Clear();
+                comboBox2.SelectedValue = chosen_client_from_search.Rows[0][1];
+                dataGridView1.ClearSelection();
+                dataGridView1.Rows.Cast<DataGridViewRow>().Where(c => c.Cells["ID"].Value.ToString() == chosen_client_from_search.Rows[0]["ID"].ToString()).ForEach(dx => dx.Selected = true);
+            }
+        }
+        private void ChildForm_DataTableReturned2(object sender, DataTableEventArgs_Clients e)
+        {
+            chosen_client_from_search = e.DataTable;
         }
     }
 }
