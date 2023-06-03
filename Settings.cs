@@ -82,6 +82,10 @@ namespace ALBAITAR_Softvet
             textBox4.Text = Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
             //-----------TVA de vente ---------
             numericUpDown1.Value = decimal.Parse(Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 5).Select(QQ => QQ["VAL"]).First().ToString());
+            //-----------Tabs Orient ---------------
+            radioButton2.CheckedChanged -= radioButton2_CheckedChanged;
+            radioButton1.Checked = !Properties.Settings.Default.Main_Frm_Tabs_Horientation_Is_Verticatl;
+            radioButton2.CheckedChanged += radioButton2_CheckedChanged;
         }
 
 
@@ -127,6 +131,15 @@ namespace ALBAITAR_Softvet
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             save_tva_perc = true;
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Main_Frm_Tabs_Horientation_Is_Verticatl = radioButton2.Checked;
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+            //---------------
+            Application.Restart();
         }
     }
 }

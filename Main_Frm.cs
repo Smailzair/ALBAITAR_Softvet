@@ -1,7 +1,7 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
 using Google.Protobuf.WellKnownTypes;
-using Microsoft.Office.Interop.Excel;
+//using Microsoft.Office.Interop.Excel;
 //using Microsoft.Office.Interop.Excel;
 //using Microsoft.Office.Interop.Word;
 using Npgsql.Logging;
@@ -73,6 +73,11 @@ namespace ALBAITAR_Softvet
         public Main_Frm()
         {
             InitializeComponent();
+            //-----------
+            tabControl1.Alignment = Properties.Settings.Default.Main_Frm_Tabs_Horientation_Is_Verticatl ? TabAlignment.Left : TabAlignment.Top;
+            //-----------------
+            dataGridView4.Columns["FINN_DEBIT"].HeaderCell.Style.ForeColor = dataGridView6.Columns[1].DefaultCellStyle.SelectionForeColor = Color.LightCoral;
+            dataGridView4.Columns["FINN_CREDIT"].HeaderCell.Style.ForeColor = dataGridView6.Columns[2].DefaultCellStyle.SelectionForeColor = Color.LimeGreen;
             //------------------------
             radioButton1.Font = radioButton6.Font = bold_font;
             //----------------------
@@ -344,7 +349,7 @@ namespace ALBAITAR_Softvet
         {
             if (System.Windows.Forms.Application.OpenForms["Vente"] == null)
             {
-                new Vente().Show();
+                new Vente(-1).Show();
             }
             else
             {
@@ -792,7 +797,7 @@ namespace ALBAITAR_Softvet
         }
         private void finance_lab_tab()
         {
-            main_financ_tab = PreConnection.Load_data("SELECT * FROM tb_clients_finance;");
+            main_financ_tab = PreConnection.Load_data("SELECT tb1.*,tb2.CLIENT_FULL_NME FROM tb_clients_finance tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
             ended_loading_finn_tab = true;
 
 
@@ -1272,71 +1277,165 @@ namespace ALBAITAR_Softvet
         }
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
-        {
+        {            
             if (e.Index < tabControl1.TabPages.Count)
             {
-                var tabPage = tabControl1.TabPages[e.Index];
-
-                var headerBounds = tabControl1.GetTabRect(e.Index);
-
-
-
-                System.Drawing.Font fntt = tabControl1.Font;
-                Brush color_txt = Brushes.Black;
-
-                if (e.Index == tabControl1.SelectedIndex) // Assuming TabPage2 is at index 1
+                if (Properties.Settings.Default.Main_Frm_Tabs_Horientation_Is_Verticatl)
                 {
-                    fntt = bold_font;
-                    using (var brush = new SolidBrush(Color.DarkGreen))
+                    //---------
+                    var tabPage = tabControl1.TabPages[e.Index];
+
+                    var headerBounds = tabControl1.GetTabRect(e.Index);
+
+
+
+                    System.Drawing.Font fntt = tabControl1.Font;
+                    Brush color_txt = Brushes.Black;
+
+                    if (e.Index == tabControl1.SelectedIndex)
                     {
-                        e.Graphics.FillRectangle(brush, headerBounds);
-                        headerBounds.X -= 3;
+                        fntt = bold_font;
+                        using (var brush = new SolidBrush(Color.DarkGreen))
+                        {
+                            e.Graphics.FillRectangle(brush, headerBounds);
+                            headerBounds.X -= 3;
+                        }
+                        color_txt = Brushes.White;
+                        // Draw the bottom rectangle with the specified color and height
+                        System.Drawing.Rectangle bottomRect = new System.Drawing.Rectangle(e.Bounds.Left, e.Bounds.Bottom - 25, e.Bounds.Width - 2, 25);
+                        using (SolidBrush brush = new SolidBrush(Color.DarkSeaGreen))
+                        {
+                            e.Graphics.FillRectangle(brush, bottomRect);
+                        }
                     }
-                    color_txt = Brushes.White;
-                    // Draw the bottom rectangle with the specified color and height
-                    System.Drawing.Rectangle bottomRect = new System.Drawing.Rectangle(e.Bounds.Left, e.Bounds.Bottom - 25, e.Bounds.Width - 2, 25);
-                    using (SolidBrush brush = new SolidBrush(Color.DarkSeaGreen))
+                    else
                     {
-                        e.Graphics.FillRectangle(brush, bottomRect);
+                        fntt = simple_font;
+                        using (var brush = new SolidBrush(Color.White))
+                        {
+                            e.Graphics.FillRectangle(brush, headerBounds);
+                        }
                     }
+
+
+                    if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
+                    {
+                        var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];
+                        var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Bottom - 20, icon.Width, icon.Height);
+
+                        e.Graphics.DrawImage(icon, iconBounds);
+                        headerBounds.X += iconBounds.Width + 4; // Adjust the X position for the text
+                    }
+                    //---------------Notifiaction (If needed) -----------------
+                    //if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
+                    //{
+                    //    var icon = tabcontrol_img_lst.Images[4];
+                    //    var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Top + 3, icon.Width, icon.Height);
+                    //    e.Graphics.DrawImage(icon, iconBounds);
+                    //}
+                    //--------------------------------
+                    e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+                    e.Graphics.TranslateTransform(headerBounds.Left + headerBounds.Width / 2, headerBounds.Top + headerBounds.Height / 2);
+                    e.Graphics.RotateTransform(-90);
+                    e.Graphics.DrawString(tabPage.Text, fntt, color_txt, -(headerBounds.Height / 2) + 25, -(headerBounds.Width / 2) - 10, StringFormat.GenericDefault);
+
+                    e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                    e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                 }
                 else
                 {
-                    fntt = simple_font;
-                    using (var brush = new SolidBrush(Color.White))
+                    //--------------
+                    var tabPage = tabControl1.TabPages[e.Index];
+                    var headerBounds = tabControl1.GetTabRect(e.Index);
+                    System.Drawing.Font fntt = tabControl1.Font;
+                    Brush color_txt = Brushes.Black;
+
+                    if (e.Index == tabControl1.SelectedIndex)
                     {
-                        e.Graphics.FillRectangle(brush, headerBounds);
+                        fntt = bold_font;
+                        using (var brush = new SolidBrush(Color.DarkGreen))
+                        {
+                            e.Graphics.FillRectangle(brush, headerBounds);
+                            //headerBounds.X -= 3;
+                        }
+                        color_txt = Brushes.White;
+                        // Draw the bottom rectangle with the specified color and height
+                        System.Drawing.Rectangle bottomRect = new System.Drawing.Rectangle(e.Bounds.Left, e.Bounds.Top, 30, e.Bounds.Height);
+                        using (SolidBrush brush = new SolidBrush(Color.DarkSeaGreen))
+                        {
+                            e.Graphics.FillRectangle(brush, bottomRect);
+                        }
                     }
+                    else
+                    {
+                        fntt = simple_font;
+                        using (var brush = new SolidBrush(Color.White))
+                        {
+                            e.Graphics.FillRectangle(brush, headerBounds);
+                        }
+                    }
+                    if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
+                    {
+                        var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];
+                        var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Height / 2 - 3, icon.Width, icon.Height);
+
+                        e.Graphics.DrawImage(icon, iconBounds);
+                        headerBounds.X += iconBounds.Width + 4; // Adjust the X position for the text
+                    }
+                    //--------------------------------
+                    e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+                    e.Graphics.DrawString(tabPage.Text, fntt, color_txt, headerBounds.Left + 15, (headerBounds.Height / 2 - 3), StringFormat.GenericDefault);
+                    e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                    e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                 }
-
-
-                if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
-                {
-                    var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];
-                    var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Bottom - 20, icon.Width, icon.Height);
-
-                    e.Graphics.DrawImage(icon, iconBounds);
-                    headerBounds.X += iconBounds.Width + 4; // Adjust the X position for the text
-                }
-                //---------------Notifiaction (If needed) -----------------
-                //if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
-                //{
-                //    var icon = tabcontrol_img_lst.Images[4];
-                //    var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Top + 3, icon.Width, icon.Height);
-                //    e.Graphics.DrawImage(icon, iconBounds);
-                //}
-                //--------------------------------
-                e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-                e.Graphics.TranslateTransform(headerBounds.Left + headerBounds.Width / 2, headerBounds.Top + headerBounds.Height / 2);
-                e.Graphics.RotateTransform(-90);
-                e.Graphics.DrawString(tabPage.Text, fntt, color_txt, -(headerBounds.Height / 2) + 25, -(headerBounds.Width / 2) - 10, StringFormat.GenericDefault);
-
-                e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-                e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                
             }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+            //if (e.Index < tabControl1.TabPages.Count)
+            //{
+            //    var tabPage = tabControl1.TabPages[e.Index];
+            //    var headerBounds = tabControl1.GetTabRect(e.Index);
+
+            //    e.Graphics.FillRectangle(Brushes.White, headerBounds);
+
+            //    if (e.Index == tabControl1.SelectedIndex)
+            //    {
+            //        using (var brush = new SolidBrush(Color.DarkGreen))
+            //        {
+            //            e.Graphics.FillRectangle(brush, headerBounds);
+            //        }
+            //    }
+
+            //    if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
+            //    {
+            //        var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];
+            //        var iconBounds = new Rectangle(headerBounds.Left + 10, headerBounds.Top + 10, icon.Width, icon.Height);
+            //        e.Graphics.DrawImage(icon, iconBounds);
+            //        headerBounds.X += iconBounds.Width + 4;
+            //    }
+
+            //    using (var sf = new StringFormat())
+            //    {
+            //        sf.Alignment = StringAlignment.Center;
+            //        sf.LineAlignment = StringAlignment.Center;
+            //        e.Graphics.DrawString(tabPage.Text, tabControl1.Font, Brushes.Black, headerBounds, sf);
+            //    }
+            //}
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -1460,10 +1559,11 @@ namespace ALBAITAR_Softvet
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            string fltr = radioButton8.Checked && comboBox2.SelectedValue != DBNull.Value ? "CLIENT_ID = " + comboBox2.SelectedValue.ToString() : "";
+            string fltr = radioButton8.Checked && comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? "CLIENT_ID = " + comboBox2.SelectedValue.ToString() : "") : "";
             fltr += textBox4.Text.Trim().Length > 0 ? (fltr.Length > 0 ? " AND " : "") + "("
                 + "OBJECT LIKE '%" + textBox4.Text + "%'"
                 + " OR CONVERT(OP_DATE, 'System.String') LIKE '%" + textBox4.Text + "%'"
+                + " OR CLIENT_FULL_NME LIKE '%" + textBox4.Text + "%'"
                 + " OR FACT_NUM LIKE '%" + textBox4.Text + "%'"
                 + " OR CONVERT([DEBIT], 'System.String') LIKE '%" + textBox4.Text + "%'"
                 + " OR CONVERT([CREDIT], 'System.String') LIKE '%" + textBox4.Text + "%'"
@@ -1478,6 +1578,22 @@ namespace ALBAITAR_Softvet
             dataGridView4.Columns["FINN_DEBIT"].Width = dataGridView6.Columns[1].Width;
             dataGridView4.Columns["FINN_CREDIT"].Width = dataGridView6.Columns[2].Width;
             dataGridView6.Width = dataGridView4.Width - (dataGridView4.Controls.OfType<VScrollBar>().FirstOrDefault().Visible ? 17 : 0);
+            //--------------------
+            decimal sld = 0;
+            sld = ((DataTable)dataGridView4.DataSource).DefaultView.Cast<DataRowView>().Sum(row => row["DEBIT"] != DBNull.Value ? Convert.ToDecimal(row["DEBIT"]) : 0) - ((DataTable)dataGridView4.DataSource).DefaultView.Cast<DataRowView>().Sum(row => row["CREDIT"] != DBNull.Value ? Convert.ToDecimal(row["CREDIT"]) : 0);
+            if (sld == 0)
+            {
+                label9.Text = (textBox4.Text.Length == 0 && radioButton8.Checked ?  "Rien " : "") + "(0.00 DA).";
+            }
+            else if (sld >= 0)
+            {
+                label9.Text = (textBox4.Text.Length == 0 && radioButton8.Checked ? "Il est endetté par " : "Ils sont endettés par ") + "(" + sld.ToString("N2") + " DA).";
+            }
+            else
+            {
+                label9.Text = (textBox4.Text.Length == 0 && radioButton8.Checked ? "On lui doit " : "On leur doit ") + "(" + (sld * -1).ToString("N2") + " DA).";
+            }
+
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -1512,6 +1628,9 @@ namespace ALBAITAR_Softvet
             dataGridView5.Columns[9].Width = dataGridView7.Columns[5].Width;
             //---------------
             dataGridView7.Width = dataGridView5.Width - dataGridView5.Columns[10].Width - (dataGridView5.Controls.OfType<VScrollBar>().FirstOrDefault().Visible ? 17 : 0);
+            //-------            
+            label8.Text = "Réglé (" + ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["CLIENT_ID"] != DBNull.Value && (XX["FACT_PAID_MNT"] != DBNull.Value ? (decimal)XX["FACT_PAID_MNT"] : 0) <= 0).Count() + ")";
+            label7.Text = "Non réglé (" + ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["CLIENT_ID"] != DBNull.Value && (XX["FACT_PAID_MNT"] != DBNull.Value ? (decimal)XX["FACT_PAID_MNT"] : 0) > 0).Count() + ")";
         }
 
         private void dataGridView4_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -1531,6 +1650,91 @@ namespace ALBAITAR_Softvet
                     System.Windows.Forms.Application.OpenForms["Clients"].BringToFront();
                 }
                 
+            }
+        }
+
+        private void dataGridView5_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value != DBNull.Value)
+            {
+                if (System.Windows.Forms.Application.OpenForms["Vente"] == null)
+                {
+                    new Vente((int)dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value).Show();                    
+                }
+                else
+                {                    
+                    Vente.to_select_idx = (int)dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value;                    
+                    System.Windows.Forms.Application.OpenForms["Vente"].WindowState = System.Windows.Forms.Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Vente"].WindowState;
+                    System.Windows.Forms.Application.OpenForms["Vente"].BringToFront();
+                }
+
+            }
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            if (dataGridView4.SelectedRows.Count > 0)
+            {
+                DataGridViewCellMouseEventArgs rr = new DataGridViewCellMouseEventArgs(1, dataGridView4.SelectedRows[0].Index, 1, 1, new MouseEventArgs(MouseButtons.Left, 2, 1, 1, 0));
+                dataGridView4_CellMouseDoubleClick(null, rr);
+            }
+        }
+
+        private void button16_Click_1(object sender, EventArgs e)
+        {
+            if (System.Windows.Forms.Application.OpenForms["Clients"] == null)
+            {
+                new Clients(selected_client_id, 2, -2).Show();
+            }
+            else
+            {
+                Clients.ID_to_selectt = selected_client_id;
+                Clients.Infoss_1_Caiss_2 = 2;
+                Clients.Caisse_Idx = -2;
+                System.Windows.Forms.Application.OpenForms["Clients"].WindowState = System.Windows.Forms.Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Clients"].WindowState;
+                System.Windows.Forms.Application.OpenForms["Clients"].BringToFront();
+            }
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            if (System.Windows.Forms.Application.OpenForms["Vente"] == null)
+            {
+                new Vente(-2).Show();                
+            }
+            else
+            {
+                Vente.to_select_idx = -2;
+                System.Windows.Forms.Application.OpenForms["Vente"].WindowState = System.Windows.Forms.Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Vente"].WindowState;
+                System.Windows.Forms.Application.OpenForms["Vente"].BringToFront();
+            }
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            if(dataGridView5.SelectedRows.Count > 0)
+            {
+                DataGridViewCellMouseEventArgs rr1 = new DataGridViewCellMouseEventArgs(1, dataGridView5.SelectedRows[0].Index, 1, 1, new MouseEventArgs(MouseButtons.Left, 2, 1, 1, 0));
+                dataGridView5_CellMouseDoubleClick(null, rr1);
+            }
+            
+        }
+
+        private void dataGridView5_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                decimal cellValue = dataGridView5.Rows[e.RowIndex].Cells["FACT_PAID_MNT"].Value != DBNull.Value ? (decimal)dataGridView5.Rows[e.RowIndex].Cells["FACT_PAID_MNT"].Value : 0;
+               // decimal cellValue2 = (decimal)dataGridView5.Rows[e.RowIndex].Cells["TOTAL_TTC"].Value;
+
+                if(dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn2"].Value != DBNull.Value) //CLIENT_ID
+                {
+                    dataGridView5.Rows[e.RowIndex].DefaultCellStyle.BackColor =  cellValue > 0 ?  Color.FromArgb(255, 192, 192) : Color.FromArgb(128, 255, 128);
+                }
+                else
+                {
+                    dataGridView5.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView5.DefaultCellStyle.BackColor;
+                }
             }
         }
     }

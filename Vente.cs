@@ -17,6 +17,7 @@ namespace ALBAITAR_Softvet.Resources
 {
     public partial class Vente : Form
     {
+        static public int to_select_idx = -1;
         static public DataGridViewRow selected_item = null;
         static public DataTable stock_to_modify = new DataTable();
         static public List<int> visite_to_update_fact_num = new List<int>();
@@ -34,9 +35,10 @@ namespace ALBAITAR_Softvet.Resources
         static public int tmp_current_client_id = -1;
         bool has_asked_for_Transf_also_caisse = false;
 
-        public Vente()
+        public Vente(int to_select_id)
         {
             InitializeComponent();
+            to_select_idx = to_select_id;
             //-----------------------
             clients = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
             comboBox1.DataSource = clients;
@@ -235,7 +237,23 @@ namespace ALBAITAR_Softvet.Resources
             int prev_idx = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : -1;
             factures = PreConnection.Load_data("SELECT `ID`,`DATE`,`CLIENT_ID`,`CLIENT_FULL_NME`,`REF`,`TVA_PERC`,`DROIT_TIMBRE`,`TOTAL_HT`,`TOTAL_TTC` FROM tb_factures_vente;");
             dataGridView1.DataSource = factures;
-            if (prev_idx > -1 && dataGridView1.Rows.Count > prev_idx)
+            if(to_select_idx > -1)
+            {
+                dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                dataGridView1.ClearSelection();
+                dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                dataGridView1.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["ID"].Value == to_select_idx).ToList().ForEach(W => {
+                    W.Selected = true;
+                    dataGridView1.FirstDisplayedScrollingRowIndex = W.Index;
+                });
+                to_select_idx = -1;
+            }
+            else if (to_select_idx == 2)
+            {
+                button3.PerformClick();
+                to_select_idx = -1;
+            }
+            else if (prev_idx > -1 && dataGridView1.Rows.Count > prev_idx)
             {
 
                 dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
@@ -245,6 +263,7 @@ namespace ALBAITAR_Softvet.Resources
 
 
             }
+            
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -462,13 +481,24 @@ namespace ALBAITAR_Softvet.Resources
                     }
                     else
                     {
+                        PreConnection.Excut_Cmd("DELETE FROM tb_clients_finance WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "';");
+
                         if (cb1_selected_value > -1)
                         {
-                            PreConnection.Excut_Cmd("UPDATE tb_clients_finance SET " +
-                            "`OP_DATE`='" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," +
-                            "`DEBIT`=" + dataGridView3.Rows[3].Cells[1].Value + "," +
-                            "`CREDIT`=" + numericUpDown2.Value +
-                            " WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "';");
+                            PreConnection.Excut_Cmd("INSERT INTO `tb_clients_finance`"
+                                     + "(`CLIENT_ID`,"
+                                     + "`OP_DATE`,"
+                                     + "`OBJECT`,"
+                                     + "`DEBIT`,"
+                                     + "`CREDIT`,"
+                                     + "`FACT_NUM`)"
+                                     + "VALUES"
+                                     + "(" + cb1_selected_value + ","
+                                     + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
+                                     + "'Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "]',"
+                                     + dataGridView3.Rows[3].Cells[1].Value + ","
+                                     + numericUpDown2.Value + ","
+                                     + "'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "');");
                         }
                     }
                     //---------------------------
@@ -800,12 +830,34 @@ namespace ALBAITAR_Softvet.Resources
         private void groupBox3_EnabledChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(groupBox3, groupBox3.Enabled ? "" : "Juste pour les propriétaires enregistrés !");
+            label6.Visible = !groupBox3.Enabled;
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             PreConnection.Excport_to_excel(dataGridView1, "ALBAITAR SoftVet Factures", "Vente", null, false);
         }
+
+        private void Vente_Activated(object sender, EventArgs e)
+        {            
+            if (to_select_idx > -1)
+            {
+                dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                dataGridView1.ClearSelection();
+                dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                dataGridView1.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["ID"].Value == to_select_idx).ToList().ForEach(W => {
+                    W.Selected = true;
+                    dataGridView1.FirstDisplayedScrollingRowIndex = W.Index;
+                });
+                to_select_idx = -1;
+            }else if (to_select_idx == -2)
+            {
+                button3.PerformClick();
+                to_select_idx = -1;
+                
+            }
+        }
+
     }
 }
 

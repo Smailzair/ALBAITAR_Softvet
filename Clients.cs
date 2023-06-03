@@ -548,8 +548,15 @@ namespace ALBAITAR_Softvet.Resources
                     });
                     Caisse_Idx = -1;
                 }
-                
-            }else if(ID_to_selectt == -2) //NEW
+                else if (Caisse_Idx == -2)
+                {
+                    
+                    button7.PerformClick();
+                    Caisse_Idx = -1;
+                }
+
+            }
+            else if(ID_to_selectt == -2) //NEW
             {
                 ID_to_selectt = -1;
                 button3.PerformClick();
@@ -711,6 +718,11 @@ namespace ALBAITAR_Softvet.Resources
                         dataGridView2.CurrentCell = dataGridView2.SelectedCells[0];
                         dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.SelectedCells[0].RowIndex;
                     });
+                    Caisse_Idx = -1;
+                }else if (Caisse_Idx == -2)
+                {
+                    dataGridView2.Focus();
+                    button7.PerformClick();
                     Caisse_Idx = -1;
                 }
             }
