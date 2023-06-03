@@ -142,7 +142,8 @@ namespace ALBAITAR_Softvet
                 tmp_stop = true;
                 if (((ListView)sender).SelectedItems.Count > 0)
                 {
-
+                    button3.Visible = label16.Visible = panel1.Visible = true;
+                    //-----------
                     Current_items_id = ((ListView)sender).SelectedItems[0].SubItems[1].Text; //Get the ID
                     Fill_Event_Fields(Current_items_id);
 
@@ -162,6 +163,8 @@ namespace ALBAITAR_Softvet
                 }
                 else
                 {
+                    button3.Visible = label16.Visible = panel1.Visible = false;
+                    //-------------
                     Current_items_id = string.Empty;
                     intial_Modify_fields();
                 }
@@ -415,7 +418,7 @@ namespace ALBAITAR_Softvet
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-
+            button3.Visible = panel1.Visible = label16.Visible = false;
             DateTime startDate = DateTime.Parse("01/" + dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Year);
             DateTime endDate = DateTime.Parse(DateTime.DaysInMonth(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month) + "/" + dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Year);
             //--------------------------------
@@ -507,9 +510,10 @@ namespace ALBAITAR_Softvet
 
         private void Agenda_Just_Display_Enter(object sender, EventArgs e)
         {
+            
             if (make_filter_refresh)
             {
-                make_filter_refresh = false;
+                make_filter_refresh = false;                
                 dateTimePicker1_ValueChanged(null, null);
 
             }else if (make_update)
@@ -576,6 +580,19 @@ namespace ALBAITAR_Softvet
         {
             Sam_Flow.Height = Dim_Flow.Height = Lun_Flow.Height = Mar_Flow.Height = Mer_Flow.Height = Jeu_Flow.Height = Ven_Flow.Height = (flowLayoutPanel1.ClientSize.Height < flowLayoutPanel1.DisplayRectangle.Height) ? 533 : this.Size.Height - 58;           
             Sam_Flow.Width = Dim_Flow.Width = Lun_Flow.Width = Mar_Flow.Width = Mer_Flow.Width = Jeu_Flow.Width = Ven_Flow.Width = (flowLayoutPanel1.ClientSize.Width > flowLayoutPanel1.DisplayRectangle.Width) ? 162 : (this.Width - 325) / 7;           
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (Current_items_id.Length > 0)
+            {
+                if (Application.OpenForms["Agenda"] != null)
+                {
+                    Application.OpenForms["Agenda"].Close();
+                }
+                this.Parent.Focus();
+                new Agenda(int.Parse(Current_items_id), dateTimePicker1.Value).Show();
+            }
         }
     }
 }

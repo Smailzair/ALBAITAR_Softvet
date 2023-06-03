@@ -189,6 +189,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button15 = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.button3 = new System.Windows.Forms.Button();
             this.Ven_Flow.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -1999,6 +2000,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(270, 549);
             this.panel1.TabIndex = 55;
+            this.panel1.Visible = false;
             // 
             // listView1
             // 
@@ -2186,6 +2188,7 @@
             this.label16.Size = new System.Drawing.Size(49, 15);
             this.label16.TabIndex = 56;
             this.label16.Text = "Déteils :";
+            this.label16.Visible = false;
             // 
             // textBox3
             // 
@@ -2229,9 +2232,9 @@
             this.button15.ForeColor = System.Drawing.Color.ForestGreen;
             this.button15.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
             this.button15.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button15.Location = new System.Drawing.Point(167, 1);
+            this.button15.Location = new System.Drawing.Point(176, 1);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(106, 36);
+            this.button15.Size = new System.Drawing.Size(97, 36);
             this.button15.TabIndex = 66;
             this.button15.Text = "Nouveau";
             this.button15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -2251,10 +2254,33 @@
             this.linkLabel1.Visible = false;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // button3
+            // 
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button3.FlatAppearance.BorderSize = 2;
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.button3.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_pencil_drawing_25px_1;
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.Location = new System.Drawing.Point(86, 1);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(88, 36);
+            this.button3.TabIndex = 73;
+            this.button3.Text = "Modifier";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Agenda_Just_Display
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.comboBox1);
@@ -2454,5 +2480,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button button3;
     }
 }
