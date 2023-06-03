@@ -649,7 +649,7 @@ namespace ALBAITAR_Softvet.Resources
                 }
             }
             //------------------------
-
+            linkLabel1.Visible = dateTimePicker1.Value.Month != DateTime.Now.Month;
         }
 
         private void Agenda_TEST_SizeChanged(object sender, EventArgs e)

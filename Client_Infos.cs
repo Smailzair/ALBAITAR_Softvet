@@ -56,7 +56,7 @@ namespace ALBAITAR_Softvet
         {
             if (Application.OpenForms["Clients"] == null)
             {
-                new Clients(selected_client_id, 1).Show();
+                new Clients(selected_client_id, 1, -1).Show();
             }
             else
             {
@@ -70,7 +70,7 @@ namespace ALBAITAR_Softvet
         {
             if (Application.OpenForms["Clients"] == null)
             {
-                new Clients(-2 ,1).Show();
+                new Clients(-2, 1,-1).Show();
             }
             else
             {

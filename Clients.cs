@@ -24,6 +24,7 @@ namespace ALBAITAR_Softvet.Resources
     {
         public static int ID_to_selectt = -1;
         public static int Infoss_1_Caiss_2 = 1;
+        public static int Caisse_Idx = -1;
         DataTable clients;
         DataTable sites;
         List<string> wilayaa;
@@ -31,12 +32,13 @@ namespace ALBAITAR_Softvet.Resources
         bool Is_New = true;
         bool can_start_historic_saving = false;
         DataTable chosen_client_from_search;
-        public Clients(int ID_to_select, int Infos_1_Caiss_2)
+        public Clients(int ID_to_select, int Infos_1_Caiss_2, int Caisse_Id)
         {
             InitializeComponent();            
             tabControl1.TabPages.Remove(tabPage1);
             ID_to_selectt = ID_to_select;
             Infoss_1_Caiss_2 = Infos_1_Caiss_2;
+            Caisse_Idx = Caisse_Id;
             //----------------------
             Load_clients_from_DB();
             //---------------------
@@ -535,6 +537,18 @@ namespace ALBAITAR_Softvet.Resources
                 dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
                 dataGridView1.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["ID"].Value == ID_to_selectt).ToList().ForEach(W => W.Selected = true);
                 ID_to_selectt = -1;
+                //-------
+                if (Caisse_Idx > -1)
+                {
+                    dataGridView2.ClearSelection();
+                    dataGridView2.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["IDD_FINANC"].Value == Caisse_Idx).ToList().ForEach(W => {
+                        W.Cells[4].Selected = true;
+                        dataGridView2.CurrentCell = dataGridView2.SelectedCells[0];
+                        dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.SelectedCells[0].RowIndex;
+                    });
+                    Caisse_Idx = -1;
+                }
+                
             }else if(ID_to_selectt == -2) //NEW
             {
                 ID_to_selectt = -1;
@@ -688,6 +702,17 @@ namespace ALBAITAR_Softvet.Resources
                 dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
                 dataGridView1.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["ID"].Value == ID_to_selectt).ToList().ForEach(W => W.Selected = true);
                 ID_to_selectt = -1;
+                //-------
+                if (Caisse_Idx > -1)
+                {
+                    dataGridView2.ClearSelection();
+                    dataGridView2.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["IDD_FINANC"].Value == Caisse_Idx).ToList().ForEach(W => {
+                        W.Cells[4].Selected = true;
+                        dataGridView2.CurrentCell = dataGridView2.SelectedCells[0];
+                        dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.SelectedCells[0].RowIndex;
+                    });
+                    Caisse_Idx = -1;
+                }
             }
             else if (ID_to_selectt == -2) //NEW
             {

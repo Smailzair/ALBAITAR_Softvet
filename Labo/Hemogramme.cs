@@ -285,7 +285,7 @@ namespace ALBAITAR_Softvet.Labo
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            this.ParentForm.ControlBox = true;
+            //this.ParentForm.ControlBox = true;
             Dispose();
         }
 

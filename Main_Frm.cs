@@ -1,7 +1,9 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Word;
+//using Microsoft.Office.Interop.Excel;
+//using Microsoft.Office.Interop.Word;
 using Npgsql.Logging;
 using ServiceStack;
 using ServiceStack.Script;
@@ -23,6 +25,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Web.WebPages;
 using System.Windows.Forms;
+using Xamarin.Forms.Internals;
 using DataTable = System.Data.DataTable;
 
 namespace ALBAITAR_Softvet
@@ -40,19 +43,31 @@ namespace ALBAITAR_Softvet
         public static DataTable Main_Frm_clients_tbl;
         public static DataTable Main_Frm_animals_tbl;
         ImageList tabcontrol_img_lst;
-        System.Drawing.Font simple_font = new System.Drawing.Font("Century Gothic",9,FontStyle.Regular);
+        System.Drawing.Font simple_font = new System.Drawing.Font("Century Gothic", 9, FontStyle.Regular);
         System.Drawing.Font bold_font = new System.Drawing.Font("Century Gothic", 10, FontStyle.Bold);
+        int prev_sel_rw = -1;
+        int frst_scrll = -1;
+        int prev_sel_rw_facture = -1;
+        int frst_scrll_facture = -1;
         //----------
         DataTable chosen_anim_from_search;
         DataTable chosen_client_from_search;
         //-------------
-        static DataTable main_anim_visites_tab;
+        static DataTable main_visites_tab;
         bool loading_visites_tab = false;
         static bool ended_loading_visites_tab = false;
         //-------------------
-        static DataTable main_anim_lab_tab;
+        static DataTable main_lab_tab;
         bool loading_lab_tab = false;
         static bool ended_loading_lab_tab = false;
+        //-------------------
+        DataTable main_financ_tab;
+        bool loading_finn_tab = false;
+        static bool ended_loading_finn_tab = false;
+        //-------------------        
+        DataTable main_factures_tbl;
+        bool loading_fact_tab = false;
+        static bool ended_loading_fact_tab = false;
         //-------------------
 
         public Main_Frm()
@@ -70,13 +85,18 @@ namespace ALBAITAR_Softvet
                 Properties.Resources.icons8_info_30px,//Infos
                 Properties.Resources.icons8_tear_off_calendar_30px,//calendar
                 Properties.Resources.icons8_info_15px_1,//Red Notification
+                Properties.Resources.icons8_dog_30px, //Animaux
+                Properties.Resources.icons8_profit_30px //Monetique
             });
             tabControl1.ImageList = tabcontrol_img_lst;
+
+            tabPage_visites.ImageIndex = 0;
+            tabPage_labo.ImageIndex = 1;
             tabPage_infos.ImageIndex = 2;
-            tabPage_visites_animal.ImageIndex = 0;
-            tabPage_labo_animal.ImageIndex = 1;
             tabPage_Calendar.ImageIndex = 3;
-            //-------------------------
+            tabPage_animaux.ImageIndex = 5;
+            tabPage_monetique.ImageIndex = 6;
+            //---------------------------
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
                 Autorisations = PreConnection.Load_data("SELECT `ID`,`CODE`,`AUTOR_TEXT`,Usr_" + Properties.Settings.Default.Last_login_user_idx + " FROM tb_autoriz;");
@@ -107,7 +127,7 @@ namespace ALBAITAR_Softvet
             }
             if (System.Windows.Forms.Application.OpenForms["Clients"] == null)
             {
-                new Clients(-1, 1).Show();
+                new Clients(-1, 1,-1).Show();
             }
             else
             {
@@ -124,7 +144,7 @@ namespace ALBAITAR_Softvet
         private void button2_Click(object sender, EventArgs e)
         {
             (new Settings()).ShowDialog();
-            if(tabControl1.SelectedTab.Name == "tabPage_infos")
+            if (tabControl1.SelectedTab.Name == "tabPage_infos")
             {
                 Refresh_current_tab();
             }
@@ -140,7 +160,7 @@ namespace ALBAITAR_Softvet
 
             if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
             {
-                new Animaux(-1,-1).Show();
+                new Animaux(-1, -1).Show();
             }
             else
             {
@@ -172,7 +192,7 @@ namespace ALBAITAR_Softvet
         {
             if (System.Windows.Forms.Application.OpenForms["Agenda"] == null)
             {
-                new Agenda(null,null).Show();
+                new Agenda(null, null).Show();
             }
             else
             {
@@ -250,16 +270,13 @@ namespace ALBAITAR_Softvet
             last_update_time = DateTime.Now;
             //------------
             int cb1_idx = comboBox1.SelectedIndex > -1 ? comboBox1.SelectedIndex : 0;
-            int cb2_idx = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : 0) : 0;
             Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
             Main_Frm_animals_tbl = PreConnection.Load_data("SELECT * FROM tb_animaux;");
+
             comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
-            comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
             comboBox1.SelectedIndex = cb1_idx;
-            try { comboBox2.SelectedValue = cb2_idx; }catch { comboBox2.SelectedIndex = 0; }
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
-            comboBox1_SelectedIndexChanged(null,null);
+            comboBox1_SelectedIndexChanged(null, null);
             Refresh_current_tab();
         }
 
@@ -295,7 +312,7 @@ namespace ALBAITAR_Softvet
         {
             if (System.Windows.Forms.Application.OpenForms["Laboratoire"] == null)
             {
-                new Laboratoire(-1,"",false,"").Show();
+                new Laboratoire(-1, "", false, "").Show();
             }
             else
             {
@@ -337,9 +354,9 @@ namespace ALBAITAR_Softvet
             panel1.Visible = false;
         }
 
-        static void animal_visites_tab()
+        static void visites_tab()
         {
-            main_anim_visites_tab = PreConnection.Load_data("SELECT tb1.*,tb3.`NME` AS ANIM_NME,tb3.`CLIENT_ID`,tb3.CLIENT_FULL_NME,tb2.REF AS 'FACTURE_REF' FROM tb_visites tb1 LEFT JOIN ("
+            main_visites_tab = PreConnection.Load_data("SELECT tb1.*,tb3.`NME` AS ANIM_NME,tb3.`CLIENT_ID`,tb3.CLIENT_FULL_NME,tb2.REF AS 'FACTURE_REF' FROM tb_visites tb1 LEFT JOIN ("
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_01` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_01` IS FALSE AND `ITEM_PROD_CODE_01` IS NOT NULL AND `ITEM_NME_01` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_02` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_02` IS FALSE AND `ITEM_PROD_CODE_02` IS NOT NULL AND `ITEM_NME_02` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_03` AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_03` IS FALSE AND `ITEM_PROD_CODE_03` IS NOT NULL AND `ITEM_NME_03` IS NOT NULL UNION "
@@ -415,7 +432,7 @@ namespace ALBAITAR_Softvet
         }
 
         private void Main_Frm_Activated(object sender, EventArgs e)
-        {            
+        {
             Params = PreConnection.Load_data("SELECT * FROM tb_params;");
             //-----------
             label_cab_nme.Text = Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 1).First()["VAL"].ToString();
@@ -426,19 +443,69 @@ namespace ALBAITAR_Softvet
                 refresh_main_tables();
             }
             else
-            {                
+            {
                 Refresh_current_tab();
             }
-            
+            //-----------
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0) //CLIENT
             {
+                bool rb8 = radioButton8.Checked;
+                int cb2_idx = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : 0) : 0;
+                comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
+                //---------------
                 comboBox2.DataSource = Main_Frm_clients_tbl;
                 comboBox2.ValueMember = "ID";
                 comboBox2.DisplayMember = "FULL_NME";
+                //--------------------
+                if (cb2_idx > 0)
+                {
+                    try { comboBox2.SelectedValue = cb2_idx; } catch { if (comboBox2.Items.Count > 0) { comboBox2.SelectedIndex = 0; } }
+                }
+                else
+                {
+                    if (comboBox2.Items.Count > 0) { comboBox2.SelectedIndex = 0; }
+                }
+                //--------------
+                comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+                //--------
+                if (rb8)
+                {
+                    if (!radioButton8.Checked) { radioButton8.CheckedChanged -= radioButton8_CheckedChanged; radioButton8.Checked = true; radioButton8.CheckedChanged += radioButton8_CheckedChanged; }
+                    comboBox2_SelectedIndexChanged(null, null);
+                }
+                else
+                {
+                    if (!radioButton7.Checked) { radioButton7.CheckedChanged -= radioButton8_CheckedChanged; radioButton7.Checked = true; radioButton7.CheckedChanged += radioButton8_CheckedChanged; }
+                    //----------
+                    selected_client_id = selected_animal_id = -1;
+                    if (int.TryParse(comboBox2.SelectedValue.ToString(), out int yy))
+                    {
+                        if (comboBox1.SelectedIndex == 0) //CLIENT
+                        {
+                            selected_client_id = (int)comboBox2.SelectedValue;
+                        }
+                        else //ANIMAL
+                        {
+                            selected_animal_id = (int)comboBox2.SelectedValue;
+                        }
+
+                    }
+                }
+                //-----------
+                if (radioButton8.Checked && tabControl1.TabPages["tabPage_animaux"] == null)
+                {
+                    tabControl1.TabPages.Insert(tabControl1.TabPages.IndexOf(tabPage_visites), tabPage_animaux);
+                }
+                //-------
+                if (tabControl1.TabPages["tabPage_monetique"] == null)
+                {
+                    tabControl1.TabPages.Insert(tabControl1.TabPages.IndexOf(tabPage_Calendar), tabPage_monetique);
+                }
 
             }
             else //ANIMAL
@@ -446,6 +513,14 @@ namespace ALBAITAR_Softvet
                 comboBox2.DataSource = Main_Frm_animals_tbl;
                 comboBox2.ValueMember = "ID";
                 comboBox2.DisplayMember = "NME";
+                if (tabControl1.TabPages["tabPage_animaux"] != null)
+                {
+                    tabControl1.TabPages.Remove(tabPage_animaux);
+                }
+                if (tabControl1.TabPages["tabPage_monetique"] != null)
+                {
+                    tabControl1.TabPages.Remove(tabPage_monetique);
+                }
 
             }
         }
@@ -476,7 +551,7 @@ namespace ALBAITAR_Softvet
 
                 }
             }
-            if(tabControl1.SelectedTab.Name == "tabPage_Calendar")
+            if (tabControl1.SelectedTab.Name == "tabPage_Calendar")
             {
                 Agenda_Just_Display.make_filter_refresh = true;
             }
@@ -523,7 +598,7 @@ namespace ALBAITAR_Softvet
             }
         }
 
-        
+
         private void button7_Click_1(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0)
@@ -550,7 +625,7 @@ namespace ALBAITAR_Softvet
                 {
                     radioButton8.CheckedChanged -= radioButton8_CheckedChanged;
                     radioButton8.Checked = true;
-                    radioButton8.CheckedChanged += radioButton8_CheckedChanged;                    
+                    radioButton8.CheckedChanged += radioButton8_CheckedChanged;
                     comboBox2.SelectedValue = chosen_anim_from_search.Rows[0][1];
                 }
             }
@@ -568,13 +643,13 @@ namespace ALBAITAR_Softvet
         }
 
         private void Refresh_current_tab()
-        {   
+        {
             switch (tabControl1.SelectedTab.Name)
             {
-                case "tabPage_visites_animal":
+                case "tabPage_visites":
                     if (!loading_visites_tab)
                     {
-                        animal_visites_tab();
+                        visites_tab();
                         loading_visites_tab = true;
                         //----------------------
                         while (loading_visites_tab)
@@ -582,21 +657,21 @@ namespace ALBAITAR_Softvet
                             if (ended_loading_visites_tab)
                             {
                                 loading_visites_tab = false;
-                                dataGridView2.DataSource = main_anim_visites_tab;
+                                dataGridView2.DataSource = main_visites_tab;
                                 dataGridView2.Refresh();
-                                int fct = main_anim_visites_tab.AsEnumerable().Count(t => t["FACTURE_REF"] != DBNull.Value && ((string)t["FACTURE_REF"]).Trim().Length > 0);
-                                radioButton1.Text = "Tous (" + main_anim_visites_tab.Rows.Count + ")";
+                                int fct = main_visites_tab.AsEnumerable().Count(t => t["FACTURE_REF"] != DBNull.Value && ((string)t["FACTURE_REF"]).Trim().Length > 0);
+                                radioButton1.Text = "Tous (" + main_visites_tab.Rows.Count + ")";
                                 radioButton2.Text = "Facturé (" + fct + ")";
-                                radioButton3.Text = "Non Facturé (" + (main_anim_visites_tab.Rows.Count - fct) + ")";
+                                radioButton3.Text = "Non Facturé (" + (main_visites_tab.Rows.Count - fct) + ")";
                                 DGV_Visit_Filter(true);
                             }
                         }
                     }
-                break;
+                    break;
                 case "tabPage_infos":
                     button3.Focus();
-                    if(comboBox1.SelectedIndex == 0) //Clients
-                    {                        
+                    if (comboBox1.SelectedIndex == 0) //Clients
+                    {
                         if (tabPage_infos.Controls["Client_Infos"] == null)
                         {
                             int zz = -1;
@@ -638,10 +713,9 @@ namespace ALBAITAR_Softvet
                         }
                     }
                     break;
-                case "tabPage_labo_animal":
+                case "tabPage_labo":
                     if (!loading_lab_tab)
                     {
-                        int prev_idx = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : -1;
                         animal_lab_tab();
                         loading_lab_tab = true;
                         //----------------------
@@ -650,38 +724,87 @@ namespace ALBAITAR_Softvet
                             if (ended_loading_lab_tab)
                             {
                                 loading_lab_tab = false;
-                                dataGridView1.DataSource = main_anim_lab_tab;
+                                dataGridView1.DataSource = main_lab_tab;
                                 dataGridView1.Refresh();
                             }
                         }
                         //---------
                         DGV_Lab_Filter(true);
-                        if (dataGridView1.Rows.Count > prev_idx && prev_idx > -1) {                             
-                            dataGridView1.Rows[prev_idx].Selected = true; 
-                        }
                     }
                     break;
                 case "tabPage_Calendar":
-                    if(tabPage_Calendar.Controls.Count == 0) {                        
-                        int zz = (int)(comboBox2.SelectedValue != null && radioButton8.Checked ? comboBox2.SelectedValue : -1);                        
+                    if (tabPage_Calendar.Controls.Count == 0)
+                    {
+                        int zz = (int)(comboBox2.SelectedValue != null && radioButton8.Checked ? comboBox2.SelectedValue : -1);
                         tabPage_Calendar.Controls.Add(new Agenda_Just_Display(comboBox1.SelectedIndex + 1, zz));
                         tabPage_Calendar.Controls[0].Dock = DockStyle.Fill;
                     }
                     else
                     {
                         Agenda_Just_Display.Selected_idss = (int)(radioButton8.Checked ? comboBox2.SelectedValue : -1);
-                        Agenda_Just_Display.for_animal = comboBox1.SelectedIndex == 1;                        
+                        Agenda_Just_Display.for_animal = comboBox1.SelectedIndex == 1;
                         Agenda_Just_Display.make_update = true;
                         tabPage_Calendar.Controls[0].Focus();
                     }
                     break;
+                case "tabPage_animaux":
+                    DGV_Anim_Filter();
+                    break;
+                case "tabPage_monetique":
+                    if (!loading_finn_tab)
+                    {
+                        finance_lab_tab();
+                        loading_finn_tab = true;
+                        //----------------------
+                        while (loading_finn_tab)
+                        {
+                            if (ended_loading_finn_tab)
+                            {
+                                loading_finn_tab = false;
+                                dataGridView4.DataSource = main_financ_tab;
+                                dataGridView4.Refresh();
+                            }
+                        }
+                        //---------
+                        textBox4_TextChanged(null, null);
+                    }
+                    if (!loading_fact_tab)
+                    {
+                        facture_lab_tab();
+                        loading_fact_tab = true;
+                        //----------------------
+                        while (loading_fact_tab)
+                        {
+                            if (ended_loading_fact_tab)
+                            {
+                                loading_fact_tab = false;
+                                dataGridView5.DataSource = main_factures_tbl;
+                                dataGridView5.Refresh();
+                            }
+                        }
+                        //---------
+                        textBox5_TextChanged(null, null);
+                    }
+                    break;
                     //==================================================================
             }
+            save_and_restore_select_sit(2);
         }
+        private void finance_lab_tab()
+        {
+            main_financ_tab = PreConnection.Load_data("SELECT * FROM tb_clients_finance;");
+            ended_loading_finn_tab = true;
 
+
+        }
+        private void facture_lab_tab()
+        {
+            main_factures_tbl = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`DATE`,tb1.`CLIENT_ID`,tb1.`CLIENT_FULL_NME`,tb1.`REF`,tb1.`TOTAL_HT`,tb1.`TVA_PERC`,tb1.`DROIT_TIMBRE`,tb1.`TOTAL_TTC`,tb2.`SLD` AS FACT_PAID_MNT,tb3.SLD AS SLD_OF_CLIENT FROM tb_factures_vente tb1 LEFT JOIN (SELECT SUM(`DEBIT` - `CREDIT`) AS SLD, `FACT_NUM` FROM tb_clients_finance WHERE `FACT_NUM` IS NOT NULL GROUP BY `FACT_NUM`) tb2 ON tb1.`REF` = tb2.`FACT_NUM` LEFT JOIN (SELECT `CLIENT_ID`,SUM(`DEBIT` - `CREDIT`) AS SLD FROM tb_clients_finance WHERE `CLIENT_ID` IS NOT NULL GROUP BY `CLIENT_ID`) tb3 ON tb1.`CLIENT_ID` = tb3.`CLIENT_ID`;");
+            ended_loading_fact_tab = true;
+        }
         private void animal_lab_tab()
         {
-            main_anim_lab_tab = PreConnection.Load_data("SELECT tb1.*,tb2.REF AS 'FACTURE_REF' FROM "
+            main_lab_tab = PreConnection.Load_data("SELECT tb1.*,tb2.REF AS 'FACTURE_REF' FROM "
                                                           + "(SELECT 'Hemogramme' AS LABO_NME ,Hem_1.`ID`,Hem_1.`REF`,Hem_1.`DATE_TIME`,Hem_1.`OBSERV`,Hem_2.* FROM tb_labo_hemogramme Hem_1 LEFT JOIN (SELECT tbb1.`ID` AS ANIM_ID,tbb1.`NME` AS ANIM_NME,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) Hem_2 ON Hem_1.`ANIM_ID` = Hem_2.`ANIM_ID` UNION ALL "
                                                           + "SELECT 'Biochimie' AS LABO_NME ,Bio_1.`ID`,Bio_1.`REF`,Bio_1.`DATE_TIME`,Bio_1.`OBSERV`,Bio_2.* FROM tb_labo_biochimie Bio_1 LEFT JOIN (SELECT tbb1.`ID` AS ANIM_ID,tbb1.`NME` AS ANIM_NME,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) Bio_2 ON Bio_1.`ANIM_ID` = Bio_2.`ANIM_ID` UNION ALL "
                                                           + "SELECT 'Immunologie' AS LABO_NME ,Imm_1.`ID`,Imm_1.`REF`,Imm_1.`DATE_TIME`,Imm_1.`OBSERV`,Imm_2.* FROM tb_labo_immunologie Imm_1 LEFT JOIN (SELECT tbb1.`ID` AS ANIM_ID,tbb1.`NME` AS ANIM_NME,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) Imm_2 ON Imm_1.`ANIM_ID` = Imm_2.`ANIM_ID` UNION ALL "
@@ -760,12 +883,33 @@ namespace ALBAITAR_Softvet
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_69` AS 'LABO' FROM tb_factures_vente WHERE `ITEM_IS_PROD_69` IS FALSE AND `ITEM_PROD_CODE_69` IS NOT NULL AND `ITEM_NME_69` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_70` AS 'LABO' FROM tb_factures_vente WHERE `ITEM_IS_PROD_70` IS FALSE AND `ITEM_PROD_CODE_70` IS NOT NULL AND `ITEM_NME_70` IS NOT NULL "
                                                           + ") tb2 "
-                                                          + "ON tb1.`REF` = tb2.`LABO`;");            
+                                                          + "ON tb1.`REF` = tb2.`LABO`;");
             ended_loading_lab_tab = true;
+        }
+        private void DGV_Anim_Filter()
+        {
+            if (comboBox1.SelectedIndex == 0)
+            {
+                //-----------------
+                DataTable tmp_animm;
+                if (radioButton8.Checked)
+                {
+                    tmp_animm = (Main_Frm_animals_tbl.AsEnumerable().Where(DD => (int)DD["CLIENT_ID"] == selected_client_id).CopyToDataTable()).DefaultView.ToTable(false, "ID", "NUM_IDENTIF", "NME", "ESPECE", "RACE", "SEXE", "NISS_DATE", "DATE_ADDED", "IS_RADIATED", "OBSERVATIONS");
+                }
+                else
+                {
+                    tmp_animm = Main_Frm_animals_tbl.DefaultView.ToTable(false, "ID", "NUM_IDENTIF", "NME", "ESPECE", "RACE", "SEXE", "NISS_DATE", "DATE_ADDED", "IS_RADIATED", "OBSERVATIONS");
+                }
+
+                dataGridView3.DataSource = tmp_animm;
+                textBox2_TextChanged(null, null);
+                //-------------------
+            }
+
         }
         private void DGV_Visit_Filter(bool update_tot)
         {
-            string fltr = radioButton8.Checked && comboBox2.Items.Count > 0 ? (comboBox1.SelectedIndex == 0  ? "CLIENT_ID" : "ANIM_ID") + " = " + comboBox2.SelectedValue : "";            
+            string fltr = radioButton8.Checked && comboBox2.Items.Count > 0 ? (comboBox1.SelectedIndex == 0 ? "CLIENT_ID" : "ANIM_ID") + " = " + comboBox2.SelectedValue : "";
             //-----------------------------------
             fltr += textBox1.Text.Trim().Length > 0 ? ((fltr.Length > 0 ? " AND " : "") + "("
                 + "VISITOR_FULL_NME LIKE '%" + textBox1.Text + "%'"
@@ -781,9 +925,9 @@ namespace ALBAITAR_Softvet
             //===================================================
             int tss = 0;
             int fct1 = 0;
-            if (update_tot)
+            if (update_tot && main_visites_tab != null)
             {
-                DataTable tmppp = main_anim_visites_tab.Copy();
+                DataTable tmppp = main_visites_tab.Copy();
                 tmppp.DefaultView.RowFilter = fltr;
                 tss = tmppp.DefaultView.Cast<DataRowView>().Count();
                 //----
@@ -800,14 +944,16 @@ namespace ALBAITAR_Softvet
 
                 fltr += (dd ? " AND " : "") + "FACTURE_REF IS NULL OR LEN(FACTURE_REF) = 0";
             }
-            
+
             ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = fltr;
+            //--------------------------------
             if (update_tot)
             {
                 radioButton1.Text = "Tous (" + tss + ")";
                 radioButton2.Text = "Facturé (" + fct1 + ")";
                 radioButton3.Text = "Non Facturé (" + (tss - fct1) + ")";
             }
+
         }
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
@@ -842,9 +988,10 @@ namespace ALBAITAR_Softvet
 
         private void button13_Click(object sender, EventArgs e)
         {
-            if(dataGridView1.SelectedRows[0].Cells["REF2"].Value != DBNull.Value) {                
-                
-                (new Laboratoire(selected_animal_id, dataGridView1.SelectedRows[0].Cells["REF2"].Value.ToString(), true,"")).ShowDialog();
+            if (dataGridView1.SelectedRows[0].Cells["REF2"].Value != DBNull.Value)
+            {
+
+                (new Laboratoire(selected_animal_id, dataGridView1.SelectedRows[0].Cells["REF2"].Value.ToString(), true, "")).ShowDialog();
             }
         }
 
@@ -852,14 +999,15 @@ namespace ALBAITAR_Softvet
         {
             if (dataGridView1.SelectedRows[0].Cells["REF2"].Value != DBNull.Value)
             {
-                (new Laboratoire(selected_animal_id,dataGridView1.SelectedRows[0].Cells["REF2"].Value.ToString(), false, "")).ShowDialog();
+
+                (new Laboratoire(selected_animal_id, dataGridView1.SelectedRows[0].Cells["REF2"].Value.ToString(), false, "")).ShowDialog();
             }
             Refresh_current_tab();
         }
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            button14_Click(null,null);
+            button14_Click(null, null);
         }
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
@@ -873,6 +1021,7 @@ namespace ALBAITAR_Softvet
 
             DGV_Lab_Filter(false);
         }
+
         private void DGV_Lab_Filter(bool update_tot)
         {
             string fltr = "";
@@ -900,7 +1049,7 @@ namespace ALBAITAR_Softvet
                 case "- Autres -":
                     fltr = "LABO_NME NOT IN ('Hemogramme','Biochimie','Immunologie','Protéinogramme','Urologie')";
                     break;
-            }            
+            }
             fltr += radioButton8.Checked && comboBox2.Items.Count > 0 ? (fltr.Length > 0 ? " AND " : "") + (comboBox1.SelectedIndex == 0 ? "CLIENT_ID" : "ANIM_ID") + " = " + comboBox2.SelectedValue : "";
             fltr += textBox3.Text.Trim().Length > 0 ? ((fltr.Length > 0 ? " AND " : "") + "("
                 + "LABO_NME LIKE '%" + textBox3.Text + "%'"
@@ -909,14 +1058,14 @@ namespace ALBAITAR_Softvet
                 + " OR OBSERV LIKE '%" + textBox3.Text + "%'"
                 + " OR ANIM_NME LIKE '%" + textBox3.Text + "%'"
                 + " OR CLIENT_FULL_NME LIKE '%" + textBox3.Text + "%'"
-                + ")") : "";                        
+                + ")") : "";
             bool dd = fltr.Length > 0;
             //===================================================
             int tss = 0;
             int fct1 = 0;
             if (update_tot)
             {
-                DataTable tmppp = main_anim_lab_tab.Copy();
+                DataTable tmppp = main_lab_tab.Copy();
                 tmppp.DefaultView.RowFilter = fltr;
                 tss = tmppp.DefaultView.Cast<DataRowView>().Count();
                 //----
@@ -930,10 +1079,10 @@ namespace ALBAITAR_Softvet
 
             }
             else if (radioButton4.Checked) //Non Facturé
-            {                
-                fltr +=  (dd ? " AND (" : "")+ "FACTURE_REF IS NULL OR LEN(FACTURE_REF) = 0" + (dd ? ")" : "");
+            {
+                fltr += (dd ? " AND (" : "") + "FACTURE_REF IS NULL OR LEN(FACTURE_REF) = 0" + (dd ? ")" : "");
             }
-            if(dataGridView1.DataSource != null)
+            if (dataGridView1.DataSource != null)
             {
                 ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
             }
@@ -944,21 +1093,108 @@ namespace ALBAITAR_Softvet
                 radioButton5.Text = "Facturé (" + fct1 + ")";
                 radioButton4.Text = "Non Facturé (" + (tss - fct1) + ")";
             }
-            
+        }
+
+        private void save_and_restore_select_sit(int save_1_restore_2)
+        {
+            switch (tabControl1.SelectedTab.Name)
+            {
+                case "tabPage_visites":
+                    if (save_1_restore_2 == 1)
+                    {
+                        prev_sel_rw = dataGridView2.SelectedRows.Count > 0 ? dataGridView2.SelectedRows[0].Index : -1;
+                        frst_scrll = dataGridView2.Rows.Count > 0 ? dataGridView2.FirstDisplayedScrollingRowIndex : -1;
+                    }
+                    else
+                    {
+                        //-------------------
+                        if (dataGridView2.Rows.Count > prev_sel_rw && prev_sel_rw >= 0)
+                        {
+                            dataGridView2.ClearSelection();
+                            dataGridView2.Rows[prev_sel_rw].Selected = true;
+                        }
+                        if (dataGridView2.Rows.Count > frst_scrll && frst_scrll >= 0) { dataGridView2.FirstDisplayedScrollingRowIndex = frst_scrll; }
+                    }
+                    break;
+                case "tabPage_labo":
+                    if (save_1_restore_2 == 1)
+                    {
+                        prev_sel_rw = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : -1;
+                        frst_scrll = dataGridView1.Rows.Count > 0 ? dataGridView1.FirstDisplayedScrollingRowIndex : -1;
+                    }
+                    else
+                    {
+                        //-------------------
+                        if (dataGridView1.Rows.Count > prev_sel_rw && prev_sel_rw >= 0)
+                        {
+                            dataGridView1.ClearSelection();
+                            dataGridView1.Rows[prev_sel_rw].Selected = true;
+
+                        }
+                        //-------------------
+                        if (dataGridView1.Rows.Count > frst_scrll && frst_scrll >= 0)
+                        {
+                            dataGridView1.FirstDisplayedScrollingRowIndex = frst_scrll;
+                        }
+                    }
+                    break;
+                case "tabPage_animaux":
+                    if (save_1_restore_2 == 1)
+                    {
+                        prev_sel_rw = dataGridView3.SelectedRows.Count > 0 ? dataGridView3.SelectedRows[0].Index : -1;
+                        frst_scrll = dataGridView3.Rows.Count > 0 ? dataGridView3.FirstDisplayedScrollingRowIndex : -1;
+                    }
+                    else
+                    {
+                        //-------------------
+                        if (dataGridView3.Rows.Count > prev_sel_rw && prev_sel_rw >= 0)
+                        {
+                            dataGridView3.ClearSelection();
+                            dataGridView3.Rows[prev_sel_rw].Selected = true;
+                        }
+                        if (dataGridView3.Rows.Count > frst_scrll && frst_scrll >= 0) { dataGridView3.FirstDisplayedScrollingRowIndex = frst_scrll; }
+                    }
+                    break;
+                case "tabPage_monetique":
+                    if (save_1_restore_2 == 1)
+                    {
+                        prev_sel_rw = dataGridView4.SelectedRows.Count > 0 ? dataGridView4.SelectedRows[0].Index : -1;
+                        frst_scrll = dataGridView4.Rows.Count > 0 ? dataGridView4.FirstDisplayedScrollingRowIndex : -1;
+                        prev_sel_rw_facture = dataGridView5.SelectedRows.Count > 0 ? dataGridView5.SelectedRows[0].Index : -1;
+                        frst_scrll_facture = dataGridView5.Rows.Count > 0 ? dataGridView5.FirstDisplayedScrollingRowIndex : -1;
+                    }
+                    else
+                    {
+                        if (dataGridView4.Rows.Count > prev_sel_rw && prev_sel_rw >= 0)
+                        {
+                            dataGridView4.ClearSelection();
+                            dataGridView4.Rows[prev_sel_rw].Selected = true;
+                        }
+                        if (dataGridView4.Rows.Count > frst_scrll && frst_scrll >= 0) { dataGridView4.FirstDisplayedScrollingRowIndex = frst_scrll; }
+                        //-------------------
+                        if (dataGridView5.Rows.Count > prev_sel_rw_facture && prev_sel_rw_facture >= 0)
+                        {
+                            dataGridView5.ClearSelection();
+                            dataGridView5.Rows[prev_sel_rw_facture].Selected = true;
+                        }
+                        if (dataGridView5.Rows.Count > frst_scrll_facture && frst_scrll_facture >= 0) { dataGridView5.FirstDisplayedScrollingRowIndex = frst_scrll_facture; }
+                    }
+                    break;
+            }
 
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            if(dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
                 (new Laboratoire(selected_animal_id, "", false, (string)dataGridView1.SelectedRows[0].Cells["LABO_NME"].Value)).ShowDialog();
             }
             else
             {
                 (new Laboratoire(selected_animal_id, "", false, comboBox3.Text)).ShowDialog();
-            }               
-            
+            }
+
             Refresh_current_tab();
         }
 
@@ -969,11 +1205,11 @@ namespace ALBAITAR_Softvet
 
         private void button16_Click(object sender, EventArgs e)
         {
-            if(selected_animal_id > -1)
+            if (selected_animal_id > -1)
             {
                 if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
                 {
-                    new Animaux(selected_animal_id,-1).Show();
+                    new Animaux(selected_animal_id, -1).Show();
                 }
                 else
                 {
@@ -983,20 +1219,22 @@ namespace ALBAITAR_Softvet
                 }
                 panel1.Visible = false;
             }
-            
+
         }
 
         private void dataGridView2_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (selected_animal_id > -1)
+
+            if (e.RowIndex > -1)
             {
+
                 if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
                 {
-                    new Animaux(selected_animal_id, (int)dataGridView2.Rows[e.RowIndex].Cells["ID_VISITE"].Value).Show();
+                    new Animaux((int)dataGridView2.Rows[e.RowIndex].Cells["ANIM_ID"].Value, (int)dataGridView2.Rows[e.RowIndex].Cells["ID_VISITE"].Value).Show();
                 }
                 else
                 {
-                    Animaux.ID_to_selectt = selected_animal_id;
+                    Animaux.ID_to_selectt = (int)dataGridView2.Rows[e.RowIndex].Cells["ANIM_ID"].Value;
                     Animaux.visite_idd = (int)dataGridView2.Rows[e.RowIndex].Cells["ID_VISITE"].Value;
                     System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
                     System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
@@ -1007,8 +1245,9 @@ namespace ALBAITAR_Softvet
 
         private void button18_Click(object sender, EventArgs e)
         {
-            if(dataGridView2.SelectedRows.Count > 0) {
-                DataGridViewCellMouseEventArgs rr = new DataGridViewCellMouseEventArgs(1, dataGridView2.SelectedRows[0].Index, 1, 1, new MouseEventArgs(MouseButtons.Left,2,1,1,0));
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                DataGridViewCellMouseEventArgs rr = new DataGridViewCellMouseEventArgs(1, dataGridView2.SelectedRows[0].Index, 1, 1, new MouseEventArgs(MouseButtons.Left, 2, 1, 1, 0));
                 dataGridView2_CellMouseDoubleClick(dataGridView2, rr);
             }
         }
@@ -1019,7 +1258,7 @@ namespace ALBAITAR_Softvet
             {
                 if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
                 {
-                    new Animaux(selected_animal_id,-2).Show();
+                    new Animaux(selected_animal_id, -2).Show();
                 }
                 else
                 {
@@ -1034,100 +1273,266 @@ namespace ALBAITAR_Softvet
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            var tabPage = tabControl1.TabPages[e.Index];
-
-            var headerBounds = tabControl1.GetTabRect(e.Index);
-
-
-
-            System.Drawing.Font fntt = tabControl1.Font;
-            Brush color_txt = Brushes.Black;
-
-            if (e.Index == tabControl1.SelectedIndex) // Assuming TabPage2 is at index 1
+            if (e.Index < tabControl1.TabPages.Count)
             {
-                fntt = bold_font;
-                using (var brush = new SolidBrush(Color.DarkGreen))
+                var tabPage = tabControl1.TabPages[e.Index];
+
+                var headerBounds = tabControl1.GetTabRect(e.Index);
+
+
+
+                System.Drawing.Font fntt = tabControl1.Font;
+                Brush color_txt = Brushes.Black;
+
+                if (e.Index == tabControl1.SelectedIndex) // Assuming TabPage2 is at index 1
                 {
-                    e.Graphics.FillRectangle(brush, headerBounds);
-                    headerBounds.X -= 3;
+                    fntt = bold_font;
+                    using (var brush = new SolidBrush(Color.DarkGreen))
+                    {
+                        e.Graphics.FillRectangle(brush, headerBounds);
+                        headerBounds.X -= 3;
+                    }
+                    color_txt = Brushes.White;
+                    // Draw the bottom rectangle with the specified color and height
+                    System.Drawing.Rectangle bottomRect = new System.Drawing.Rectangle(e.Bounds.Left, e.Bounds.Bottom - 25, e.Bounds.Width - 2, 25);
+                    using (SolidBrush brush = new SolidBrush(Color.DarkSeaGreen))
+                    {
+                        e.Graphics.FillRectangle(brush, bottomRect);
+                    }
                 }
-                color_txt = Brushes.White;
-                // Draw the bottom rectangle with the specified color and height
-                System.Drawing.Rectangle bottomRect = new System.Drawing.Rectangle(e.Bounds.Left, e.Bounds.Bottom - 25 , e.Bounds.Width - 2, 25);
-                using (SolidBrush brush = new SolidBrush(Color.DarkSeaGreen))
+                else
                 {
-                    e.Graphics.FillRectangle(brush, bottomRect);
+                    fntt = simple_font;
+                    using (var brush = new SolidBrush(Color.White))
+                    {
+                        e.Graphics.FillRectangle(brush, headerBounds);
+                    }
                 }
-            }
-            else
-            {
-                fntt = simple_font;
-                using (var brush = new SolidBrush(Color.White))
+
+
+                if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
                 {
-                    e.Graphics.FillRectangle(brush, headerBounds);
+                    var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];
+                    var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Bottom - 20, icon.Width, icon.Height);
+
+                    e.Graphics.DrawImage(icon, iconBounds);
+                    headerBounds.X += iconBounds.Width + 4; // Adjust the X position for the text
                 }
+                //---------------Notifiaction (If needed) -----------------
+                //if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
+                //{
+                //    var icon = tabcontrol_img_lst.Images[4];
+                //    var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Top + 3, icon.Width, icon.Height);
+                //    e.Graphics.DrawImage(icon, iconBounds);
+                //}
+                //--------------------------------
+                e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+                e.Graphics.TranslateTransform(headerBounds.Left + headerBounds.Width / 2, headerBounds.Top + headerBounds.Height / 2);
+                e.Graphics.RotateTransform(-90);
+                e.Graphics.DrawString(tabPage.Text, fntt, color_txt, -(headerBounds.Height / 2) + 25, -(headerBounds.Width / 2) - 10, StringFormat.GenericDefault);
+
+                e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             }
 
-            
-            if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
-            {
-                var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];                
-                var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Bottom - 20, icon.Width, icon.Height);
-
-                e.Graphics.DrawImage(icon, iconBounds);
-                headerBounds.X += iconBounds.Width + 4; // Adjust the X position for the text
-            }
-            //---------------Notifiaction (If needed) -----------------
-            //if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
-            //{
-            //    var icon = tabcontrol_img_lst.Images[4];
-            //    var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Top + 3, icon.Width, icon.Height);
-            //    e.Graphics.DrawImage(icon, iconBounds);
-            //}
-            //--------------------------------
-            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-            e.Graphics.TranslateTransform(headerBounds.Left + headerBounds.Width / 2, headerBounds.Top + headerBounds.Height / 2);
-            e.Graphics.RotateTransform(-90);
-            e.Graphics.DrawString(tabPage.Text, fntt, color_txt, -(headerBounds.Height / 2) + 25, -(headerBounds.Width / 2) - 10 , StringFormat.GenericDefault);
-            
-            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-            e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            DGV_Lab_Filter(true);
-                    
+            DGV_Visit_Filter(true);
+
         }
 
         private void radioButton8_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioButton8.Checked && tabControl1.TabPages["tabPage_infos"] == null) {
-                tabControl1.TabPages.Insert(0,tabPage_infos);
-                if(tabControl1.SelectedIndex == 1) { tabControl1.SelectedIndex = 0; }
+            if (radioButton8.Checked && tabControl1.TabPages["tabPage_infos"] == null)
+            {
+                tabControl1.TabPages.Insert(0, tabPage_infos);
             }
-            else if(tabControl1.TabPages["tabPage_infos"] != null)
+            else if (tabControl1.TabPages["tabPage_infos"] != null)
             {
                 tabControl1.TabPages.Remove(tabPage_infos);
             }
-            
+
             switch (tabControl1.SelectedTab.Name)
             {
-                case "tabPage_visites_animal":
+                case "tabPage_visites":
                     DGV_Visit_Filter(true);
                     break;
-                case "tabPage_labo_animal":
+                case "tabPage_labo":
                     DGV_Lab_Filter(true);
                     break;
                 case "tabPage_Calendar":
                     Agenda_Just_Display.make_filter_refresh = true;
                     Refresh_current_tab();
                     break;
+                case "tabPage_animaux":
+                    DGV_Anim_Filter();
+                    break;
+                case "tabPage_monetique":
+                    textBox4_TextChanged(null, null);
+                    textBox5_TextChanged(null, null);
+                    break;
             }
         }
 
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            string ddd = "NUM_IDENTIF LIKE '%{0}%' OR NME LIKE '%{0}%' OR ESPECE LIKE '%{0}%' OR RACE LIKE '%{0}%' OR SEXE LIKE '%{0}%' OR Convert([NISS_DATE], System.String) LIKE '%{0}%' OR Convert([DATE_ADDED], System.String) LIKE '%{0}%'";
+            ((DataTable)dataGridView3.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox2.Text);
+            label3.Text = "Total: " + dataGridView3.Rows.Count;
+        }
+
+        private void dataGridView3_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var cellValue = dataGridView3.Rows[e.RowIndex].Cells["ANIMM_IS_RADIATED"].Value;
+
+                if (cellValue != null && (sbyte)cellValue == 1)
+                {
+                    dataGridView3.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightCoral;
+                }
+                else
+                {
+                    dataGridView3.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView3.DefaultCellStyle.BackColor;
+                }
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+            if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+            {
+                new Animaux(-2, -1).Show();
+            }
+            else
+            {
+                Animaux.ID_to_selectt = -2;
+                Animaux.visite_idd = -1;
+                System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
+                System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+            }
+
+        }
+
+        private void textBox8_Enter_1(object sender, EventArgs e)
+        {
+            button10.Focus();
+        }
+
+        private void dataGridView3_SelectionChanged(object sender, EventArgs e)
+        {
+            textBox8.Text = dataGridView3.SelectedRows.Count > 0 ? (dataGridView3.SelectedRows[0].Cells["ANIMM_OBSERVATIONS"].Value != DBNull.Value ? (string)dataGridView3.SelectedRows[0].Cells["ANIMM_OBSERVATIONS"].Value : "") : "";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+            if (dataGridView3.SelectedRows.Count > 0)
+            {
+                if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+                {
+                    new Animaux((int)dataGridView3.SelectedRows[0].Cells["ANIMM_ID"].Value, -1).Show();
+                }
+                else
+                {
+                    Animaux.ID_to_selectt = (int)dataGridView3.SelectedRows[0].Cells["ANIMM_ID"].Value;
+                    Animaux.visite_idd = -1;
+                    System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
+                    System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+                }
+            }
+        }
+
+        private void dataGridView3_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            button10_Click(null, null);
+        }
+
+        private void Main_Frm_Deactivate(object sender, EventArgs e)
+        {
+            save_and_restore_select_sit(1);
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            string fltr = radioButton8.Checked && comboBox2.SelectedValue != DBNull.Value ? "CLIENT_ID = " + comboBox2.SelectedValue.ToString() : "";
+            fltr += textBox4.Text.Trim().Length > 0 ? (fltr.Length > 0 ? " AND " : "") + "("
+                + "OBJECT LIKE '%" + textBox4.Text + "%'"
+                + " OR CONVERT(OP_DATE, 'System.String') LIKE '%" + textBox4.Text + "%'"
+                + " OR FACT_NUM LIKE '%" + textBox4.Text + "%'"
+                + " OR CONVERT([DEBIT], 'System.String') LIKE '%" + textBox4.Text + "%'"
+                + " OR CONVERT([CREDIT], 'System.String') LIKE '%" + textBox4.Text + "%'"
+                + ")" : "";
+            ((DataTable)dataGridView4.DataSource).DefaultView.RowFilter = fltr;
+            //-------------
+            if (dataGridView6.Rows.Count == 0) { dataGridView6.Rows.Add(); }
+            dataGridView6.Rows[0].Cells[0].Value = "Total (" + ((DataTable)dataGridView4.DataSource).DefaultView.Count + ") :";
+            dataGridView6.Rows[0].Cells[1].Value = ((DataTable)dataGridView4.DataSource).DefaultView.Cast<DataRowView>().Sum(rowView => (decimal)rowView["DEBIT"]);
+            dataGridView6.Rows[0].Cells[2].Value = ((DataTable)dataGridView4.DataSource).DefaultView.Cast<DataRowView>().Sum(rowView => (decimal)rowView["CREDIT"]);
+            //-----------------
+            dataGridView4.Columns["FINN_DEBIT"].Width = dataGridView6.Columns[1].Width;
+            dataGridView4.Columns["FINN_CREDIT"].Width = dataGridView6.Columns[2].Width;
+            dataGridView6.Width = dataGridView4.Width - (dataGridView4.Controls.OfType<VScrollBar>().FirstOrDefault().Visible ? 17 : 0);
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            string fltr = radioButton8.Checked && comboBox2.SelectedValue != DBNull.Value ? "CLIENT_ID = " + comboBox2.SelectedValue.ToString() : "";
+            fltr += textBox5.Text.Trim().Length > 0 ? (fltr.Length > 0 ? " AND " : "") + "("
+                + "CLIENT_FULL_NME LIKE '%" + textBox5.Text + "%'"
+                + " OR CONVERT(DATE, 'System.String') LIKE '%" + textBox5.Text + "%'"
+                + " OR REF LIKE '%" + textBox5.Text + "%'"
+                + " OR CONVERT([TOTAL_HT], 'System.String') LIKE '%" + textBox5.Text + "%'"
+                + " OR CONVERT([TVA_PERC], 'System.String') LIKE '%" + textBox5.Text + "%'"
+                + " OR CONVERT([DROIT_TIMBRE], 'System.String') LIKE '%" + textBox5.Text + "%'"
+                + " OR CONVERT([TOTAL_TTC], 'System.String') LIKE '%" + textBox5.Text + "%'"
+                + " OR CONVERT([FACT_PAID_MNT], 'System.String') LIKE '%" + textBox5.Text + "%'"
+                + " OR CONVERT([SLD_OF_CLIENT], 'System.String') LIKE '%" + textBox5.Text + "%'"
+                + ")" : "";
+            ((DataTable)dataGridView5.DataSource).DefaultView.RowFilter = fltr;
+            //-------------
+            if (dataGridView7.Rows.Count == 0) { dataGridView7.Rows.Add(); }
+            dataGridView7.Rows[0].Cells[0].Value = "Total (" + ((DataTable)dataGridView5.DataSource).DefaultView.Count + ") :";           
+
+            dataGridView7.Rows[0].Cells[1].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["TOTAL_HT"] != DBNull.Value).Sum(rowView => (decimal)rowView["TOTAL_HT"]);
+            dataGridView7.Rows[0].Cells[2].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["TVA_PERC"] != DBNull.Value).Sum(rowView => (decimal)rowView["TVA_PERC"]);
+            dataGridView7.Rows[0].Cells[3].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["DROIT_TIMBRE"] != DBNull.Value).Sum(rowView => (decimal)rowView["DROIT_TIMBRE"]);
+            dataGridView7.Rows[0].Cells[4].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["TOTAL_TTC"] != DBNull.Value).Sum(rowView => (decimal)rowView["TOTAL_TTC"]);
+            dataGridView7.Rows[0].Cells[5].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["FACT_PAID_MNT"] != DBNull.Value).Sum(rowView => (decimal)rowView["FACT_PAID_MNT"]);           
+            //-----------------
+            dataGridView5.Columns[5].Width = dataGridView7.Columns[1].Width;
+            dataGridView5.Columns[6].Width = dataGridView7.Columns[2].Width;
+            dataGridView5.Columns[7].Width = dataGridView7.Columns[3].Width;
+            dataGridView5.Columns[8].Width = dataGridView7.Columns[4].Width;
+            dataGridView5.Columns[9].Width = dataGridView7.Columns[5].Width;
+            //---------------
+            dataGridView7.Width = dataGridView5.Width - dataGridView5.Columns[10].Width - (dataGridView5.Controls.OfType<VScrollBar>().FirstOrDefault().Visible ? 17 : 0);
+        }
+
+        private void dataGridView4_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dataGridView4.Rows[e.RowIndex].Cells["FINN_CLIENT_ID"].Value != DBNull.Value)
+            {
+                if (System.Windows.Forms.Application.OpenForms["Clients"] == null)
+                {
+                    new Clients((int)dataGridView4.Rows[e.RowIndex].Cells["FINN_CLIENT_ID"].Value, 2, (int)dataGridView4.Rows[e.RowIndex].Cells["FINN_ID"].Value).Show();
+                }
+                else
+                {
+                    Clients.ID_to_selectt = (int)dataGridView4.Rows[e.RowIndex].Cells["FINN_CLIENT_ID"].Value;
+                    Clients.Infoss_1_Caiss_2 = 2;
+                    Clients.Caisse_Idx = (int)dataGridView4.Rows[e.RowIndex].Cells["FINN_ID"].Value;
+                    System.Windows.Forms.Application.OpenForms["Clients"].WindowState = System.Windows.Forms.Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Clients"].WindowState;
+                    System.Windows.Forms.Application.OpenForms["Clients"].BringToFront();
+                }
+                
+            }
+        }
     }
 }
 

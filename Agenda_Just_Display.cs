@@ -449,7 +449,7 @@ namespace ALBAITAR_Softvet
                 }
             }
             //------------------------
-
+            linkLabel1.Visible = dateTimePicker1.Value.Month != DateTime.Now.Month;
 
 
         }
