@@ -141,5 +141,10 @@ namespace ALBAITAR_Softvet
             //---------------
             Application.Restart();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            new Connection_Str().ShowDialog();
+        }
     }
 }

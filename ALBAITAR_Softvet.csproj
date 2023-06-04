@@ -75,7 +75,7 @@
     </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -187,6 +187,7 @@
     <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.Pipelines.5.0.2\lib\net461\System.IO.Pipelines.dll</HintPath>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -305,6 +306,15 @@
     </Compile>
     <Compile Include="Dialogs\Anims_List_Search.Designer.cs">
       <DependentUpon>Anims_List_Search.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Connection_Str.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Connection_Str.Designer.cs">
+      <DependentUpon>Connection_Str.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CustomMessageBox.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Labo\Autre_Lab.cs">
       <SubType>UserControl</SubType>
@@ -474,6 +484,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Anims_List_Search.resx">
       <DependentUpon>Anims_List_Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Connection_Str.resx">
+      <DependentUpon>Connection_Str.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Labo\Autre_Lab.resx">
       <DependentUpon>Autre_Lab.cs</DependentUpon>
@@ -744,6 +757,8 @@
     <None Include="Resources\pngtree-vet-doctors-with-animals-png-image_8768727 copy1 copy.png" />
     <None Include="Resources\rrrrrr.png" />
     <None Include="Resources\aaaaaaaaaaa.png" />
+    <None Include="Resources\icons8_repeat_30px.png" />
+    <None Include="Resources\icons8_pass_fail_25px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

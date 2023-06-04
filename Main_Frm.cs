@@ -266,7 +266,7 @@ namespace ALBAITAR_Softvet
             comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
             //----------------
             Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT * FROM tb_animaux;");
+            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
             comboBox1.SelectedIndex = 0;
         }
 
@@ -276,7 +276,7 @@ namespace ALBAITAR_Softvet
             //------------
             int cb1_idx = comboBox1.SelectedIndex > -1 ? comboBox1.SelectedIndex : 0;
             Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT * FROM tb_animaux;");
+            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
 
             comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
             comboBox1.SelectedIndex = cb1_idx;
@@ -899,11 +899,11 @@ namespace ALBAITAR_Softvet
                 DataTable tmp_animm;
                 if (radioButton8.Checked)
                 {
-                    tmp_animm = (Main_Frm_animals_tbl.AsEnumerable().Where(DD => (int)DD["CLIENT_ID"] == selected_client_id).CopyToDataTable()).DefaultView.ToTable(false, "ID", "NUM_IDENTIF", "NME", "ESPECE", "RACE", "SEXE", "NISS_DATE", "DATE_ADDED", "IS_RADIATED", "OBSERVATIONS");
+                    tmp_animm = (Main_Frm_animals_tbl.AsEnumerable().Where(DD => (int)DD["CLIENT_ID"] == selected_client_id).CopyToDataTable()).DefaultView.ToTable(false, "ID", "NUM_IDENTIF", "CLIENT_FULL_NME", "NME", "ESPECE", "RACE", "SEXE", "NISS_DATE", "DATE_ADDED", "IS_RADIATED", "OBSERVATIONS");
                 }
                 else
                 {
-                    tmp_animm = Main_Frm_animals_tbl.DefaultView.ToTable(false, "ID", "NUM_IDENTIF", "NME", "ESPECE", "RACE", "SEXE", "NISS_DATE", "DATE_ADDED", "IS_RADIATED", "OBSERVATIONS");
+                    tmp_animm = Main_Frm_animals_tbl.DefaultView.ToTable(false, "ID", "NUM_IDENTIF", "CLIENT_FULL_NME", "NME", "ESPECE", "RACE", "SEXE", "NISS_DATE", "DATE_ADDED", "IS_RADIATED", "OBSERVATIONS");
                 }
 
                 dataGridView3.DataSource = tmp_animm;
@@ -1479,7 +1479,7 @@ namespace ALBAITAR_Softvet
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            string ddd = "NUM_IDENTIF LIKE '%{0}%' OR NME LIKE '%{0}%' OR ESPECE LIKE '%{0}%' OR RACE LIKE '%{0}%' OR SEXE LIKE '%{0}%' OR Convert([NISS_DATE], System.String) LIKE '%{0}%' OR Convert([DATE_ADDED], System.String) LIKE '%{0}%'";
+            string ddd = "NUM_IDENTIF LIKE '%{0}%' OR CLIENT_FULL_NME LIKE '%{0}%' OR NME LIKE '%{0}%' OR ESPECE LIKE '%{0}%' OR RACE LIKE '%{0}%' OR SEXE LIKE '%{0}%' OR Convert([NISS_DATE], System.String) LIKE '%{0}%' OR Convert([DATE_ADDED], System.String) LIKE '%{0}%'";
             ((DataTable)dataGridView3.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox2.Text);
             label3.Text = "Total: " + dataGridView3.Rows.Count;
         }
