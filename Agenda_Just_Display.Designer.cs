@@ -2187,7 +2187,7 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(49, 15);
             this.label16.TabIndex = 56;
-            this.label16.Text = "Déteils :";
+            this.label16.Text = "Détails :";
             this.label16.Visible = false;
             // 
             // textBox3

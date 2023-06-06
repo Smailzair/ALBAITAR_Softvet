@@ -184,6 +184,8 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.117.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\System.Data.SQLite.Linq.1.0.117.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.Pipelines.5.0.2\lib\net461\System.IO.Pipelines.dll</HintPath>
     </Reference>
@@ -307,14 +309,17 @@
     <Compile Include="Dialogs\Anims_List_Search.Designer.cs">
       <DependentUpon>Anims_List_Search.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\App_Activation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\App_Activation.Designer.cs">
+      <DependentUpon>App_Activation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Connection_Str.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\Connection_Str.Designer.cs">
       <DependentUpon>Connection_Str.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\CustomMessageBox.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Labo\Autre_Lab.cs">
       <SubType>UserControl</SubType>
@@ -484,6 +489,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Anims_List_Search.resx">
       <DependentUpon>Anims_List_Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\App_Activation.resx">
+      <DependentUpon>App_Activation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Connection_Str.resx">
       <DependentUpon>Connection_Str.cs</DependentUpon>
@@ -759,6 +767,17 @@
     <None Include="Resources\aaaaaaaaaaa.png" />
     <None Include="Resources\icons8_repeat_30px.png" />
     <None Include="Resources\icons8_pass_fail_25px.png" />
+    <None Include="Resources\icons8_safe_out_120px.png" />
+    <None Include="Resources\icons8_automatic_gearbox_warning_120px.png" />
+    <None Include="Resources\icons8_safe_ok_120px.png" />
+    <None Include="Resources\icons8_guarantee_120px.png" />
+    <None Include="Resources\icons8_paper_plane_120px.png" />
+    <None Include="Resources\icons8_paper_plane_25px.png" />
+    <None Include="Resources\icons8_paper_plane_50px.png" />
+    <None Include="Resources\icons8_help_50px.png" />
+    <None Include="Resources\icons8_good_pincode_120px.png" />
+    <None Include="Resources\icons8_checked_radio_button_50px.png" />
+    <None Include="Resources\icons8_database_administrator_20px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

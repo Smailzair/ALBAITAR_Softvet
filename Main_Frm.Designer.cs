@@ -31,36 +31,36 @@ namespace ALBAITAR_Softvet
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Frm));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button7 = new System.Windows.Forms.Button();
@@ -73,6 +73,7 @@ namespace ALBAITAR_Softvet
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button22 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label_cab_nme = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -89,12 +90,32 @@ namespace ALBAITAR_Softvet
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.ANIMM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIMM_NUM_IDENTIF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_CLIENT_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIMM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIMM_ESPECE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIMM_RACE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIMM_SEXE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIMM_NISS_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATE_ADDED = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIMM_IS_RADIATED = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIMM_OBSERVATIONS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_visites = new System.Windows.Forms.TabPage();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.ID_VISITE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATETIME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VISITOR_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OBJECT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FACTURE_REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.tabPage_labo = new System.Windows.Forms.TabPage();
@@ -168,26 +189,7 @@ namespace ALBAITAR_Softvet
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton8 = new System.Windows.Forms.RadioButton();
-            this.ID_VISITE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DATETIME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VISITOR_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OBJECT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CLIENT_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CLIENT_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FACTURE_REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIMM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIMM_NUM_IDENTIF = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIM_CLIENT_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIMM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIMM_ESPECE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIMM_RACE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIMM_SEXE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIMM_NISS_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DATE_ADDED = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIMM_IS_RADIATED = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIMM_OBSERVATIONS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_animaux.SuspendLayout();
@@ -399,6 +401,24 @@ namespace ALBAITAR_Softvet
             this.button3.Click += new System.EventHandler(this.button3_Click);
             this.button3.MouseEnter += new System.EventHandler(this.button3_MouseEnter);
             this.button3.MouseLeave += new System.EventHandler(this.button3_MouseLeave);
+            // 
+            // button22
+            // 
+            this.button22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button22.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_lock_30px;
+            this.button22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button22.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button22.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.button22.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button22.Location = new System.Drawing.Point(701, 12);
+            this.button22.Margin = new System.Windows.Forms.Padding(4);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(43, 46);
+            this.button22.TabIndex = 35;
+            this.toolTip1.SetToolTip(this.button22, "Verrouiller/Changer l\'utilisateur");
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
             // panel1
             // 
@@ -629,14 +649,14 @@ namespace ALBAITAR_Softvet
             this.dataGridView3.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView3.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DarkCyan;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle31.BackColor = System.Drawing.Color.DarkCyan;
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
             this.dataGridView3.ColumnHeadersHeight = 35;
             this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ANIMM_ID,
@@ -661,6 +681,111 @@ namespace ALBAITAR_Softvet
             this.dataGridView3.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView3_CellMouseDoubleClick);
             this.dataGridView3.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView3_RowPrePaint);
             this.dataGridView3.SelectionChanged += new System.EventHandler(this.dataGridView3_SelectionChanged);
+            // 
+            // ANIMM_ID
+            // 
+            this.ANIMM_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIMM_ID.DataPropertyName = "ID";
+            this.ANIMM_ID.HeaderText = "ID";
+            this.ANIMM_ID.Name = "ANIMM_ID";
+            this.ANIMM_ID.ReadOnly = true;
+            this.ANIMM_ID.Visible = false;
+            this.ANIMM_ID.Width = 43;
+            // 
+            // ANIMM_NUM_IDENTIF
+            // 
+            this.ANIMM_NUM_IDENTIF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIMM_NUM_IDENTIF.DataPropertyName = "NUM_IDENTIF";
+            this.ANIMM_NUM_IDENTIF.HeaderText = "N° Ident.";
+            this.ANIMM_NUM_IDENTIF.Name = "ANIMM_NUM_IDENTIF";
+            this.ANIMM_NUM_IDENTIF.ReadOnly = true;
+            this.ANIMM_NUM_IDENTIF.Width = 78;
+            // 
+            // ANIM_CLIENT_FULL_NME
+            // 
+            this.ANIM_CLIENT_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIM_CLIENT_FULL_NME.DataPropertyName = "CLIENT_FULL_NME";
+            this.ANIM_CLIENT_FULL_NME.HeaderText = "Propriétaire";
+            this.ANIM_CLIENT_FULL_NME.Name = "ANIM_CLIENT_FULL_NME";
+            this.ANIM_CLIENT_FULL_NME.ReadOnly = true;
+            this.ANIM_CLIENT_FULL_NME.Width = 92;
+            // 
+            // ANIMM_NME
+            // 
+            this.ANIMM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ANIMM_NME.DataPropertyName = "NME";
+            this.ANIMM_NME.HeaderText = "Nom";
+            this.ANIMM_NME.Name = "ANIMM_NME";
+            this.ANIMM_NME.ReadOnly = true;
+            // 
+            // ANIMM_ESPECE
+            // 
+            this.ANIMM_ESPECE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIMM_ESPECE.DataPropertyName = "ESPECE";
+            this.ANIMM_ESPECE.HeaderText = "Espéce";
+            this.ANIMM_ESPECE.Name = "ANIMM_ESPECE";
+            this.ANIMM_ESPECE.ReadOnly = true;
+            this.ANIMM_ESPECE.Width = 70;
+            // 
+            // ANIMM_RACE
+            // 
+            this.ANIMM_RACE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIMM_RACE.DataPropertyName = "RACE";
+            this.ANIMM_RACE.HeaderText = "Race";
+            this.ANIMM_RACE.Name = "ANIMM_RACE";
+            this.ANIMM_RACE.ReadOnly = true;
+            this.ANIMM_RACE.Width = 60;
+            // 
+            // ANIMM_SEXE
+            // 
+            this.ANIMM_SEXE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIMM_SEXE.DataPropertyName = "SEXE";
+            this.ANIMM_SEXE.HeaderText = "Sexe";
+            this.ANIMM_SEXE.Name = "ANIMM_SEXE";
+            this.ANIMM_SEXE.ReadOnly = true;
+            this.ANIMM_SEXE.Width = 57;
+            // 
+            // ANIMM_NISS_DATE
+            // 
+            this.ANIMM_NISS_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIMM_NISS_DATE.DataPropertyName = "NISS_DATE";
+            dataGridViewCellStyle32.Format = "dd/MM/yyyy";
+            this.ANIMM_NISS_DATE.DefaultCellStyle = dataGridViewCellStyle32;
+            this.ANIMM_NISS_DATE.HeaderText = "Date Nissance";
+            this.ANIMM_NISS_DATE.Name = "ANIMM_NISS_DATE";
+            this.ANIMM_NISS_DATE.ReadOnly = true;
+            this.ANIMM_NISS_DATE.Width = 108;
+            // 
+            // DATE_ADDED
+            // 
+            this.DATE_ADDED.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATE_ADDED.DataPropertyName = "DATE_ADDED";
+            dataGridViewCellStyle33.Format = "dd/MM/yyyy";
+            this.DATE_ADDED.DefaultCellStyle = dataGridViewCellStyle33;
+            this.DATE_ADDED.HeaderText = "Ajouté le";
+            this.DATE_ADDED.Name = "DATE_ADDED";
+            this.DATE_ADDED.ReadOnly = true;
+            this.DATE_ADDED.Width = 77;
+            // 
+            // ANIMM_IS_RADIATED
+            // 
+            this.ANIMM_IS_RADIATED.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIMM_IS_RADIATED.DataPropertyName = "IS_RADIATED";
+            this.ANIMM_IS_RADIATED.HeaderText = "Radié";
+            this.ANIMM_IS_RADIATED.Name = "ANIMM_IS_RADIATED";
+            this.ANIMM_IS_RADIATED.ReadOnly = true;
+            this.ANIMM_IS_RADIATED.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ANIMM_IS_RADIATED.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ANIMM_IS_RADIATED.Visible = false;
+            this.ANIMM_IS_RADIATED.Width = 45;
+            // 
+            // ANIMM_OBSERVATIONS
+            // 
+            this.ANIMM_OBSERVATIONS.DataPropertyName = "OBSERVATIONS";
+            this.ANIMM_OBSERVATIONS.HeaderText = "OBSERVATIONS";
+            this.ANIMM_OBSERVATIONS.Name = "ANIMM_OBSERVATIONS";
+            this.ANIMM_OBSERVATIONS.ReadOnly = true;
+            this.ANIMM_OBSERVATIONS.Visible = false;
             // 
             // tabPage_visites
             // 
@@ -736,14 +861,14 @@ namespace ALBAITAR_Softvet
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle34.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle34;
             this.dataGridView2.ColumnHeadersHeight = 35;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_VISITE,
@@ -764,6 +889,87 @@ namespace ALBAITAR_Softvet
             this.dataGridView2.Size = new System.Drawing.Size(766, 413);
             this.dataGridView2.TabIndex = 58;
             this.dataGridView2.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDoubleClick);
+            // 
+            // ID_VISITE
+            // 
+            this.ID_VISITE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ID_VISITE.DataPropertyName = "ID";
+            this.ID_VISITE.HeaderText = "ID";
+            this.ID_VISITE.Name = "ID_VISITE";
+            this.ID_VISITE.ReadOnly = true;
+            this.ID_VISITE.Visible = false;
+            this.ID_VISITE.Width = 43;
+            // 
+            // DATETIME
+            // 
+            this.DATETIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATETIME.DataPropertyName = "DATETIME";
+            dataGridViewCellStyle35.Format = "dd/MM/yyyy HH:mm";
+            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle35;
+            this.DATETIME.HeaderText = "Date";
+            this.DATETIME.Name = "DATETIME";
+            this.DATETIME.ReadOnly = true;
+            this.DATETIME.Width = 58;
+            // 
+            // VISITOR_FULL_NME
+            // 
+            this.VISITOR_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.VISITOR_FULL_NME.DataPropertyName = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME.HeaderText = "Visiteur";
+            this.VISITOR_FULL_NME.Name = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME.ReadOnly = true;
+            this.VISITOR_FULL_NME.Width = 67;
+            // 
+            // OBJECT
+            // 
+            this.OBJECT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OBJECT.DataPropertyName = "OBJECT";
+            this.OBJECT.HeaderText = "Objet";
+            this.OBJECT.Name = "OBJECT";
+            this.OBJECT.ReadOnly = true;
+            // 
+            // ANIM_ID
+            // 
+            this.ANIM_ID.DataPropertyName = "ANIM_ID";
+            this.ANIM_ID.HeaderText = "ANIM_ID";
+            this.ANIM_ID.Name = "ANIM_ID";
+            this.ANIM_ID.ReadOnly = true;
+            this.ANIM_ID.Visible = false;
+            // 
+            // CLIENT_ID
+            // 
+            this.CLIENT_ID.DataPropertyName = "CLIENT_ID";
+            this.CLIENT_ID.HeaderText = "CLIENT_ID";
+            this.CLIENT_ID.Name = "CLIENT_ID";
+            this.CLIENT_ID.ReadOnly = true;
+            this.CLIENT_ID.Visible = false;
+            // 
+            // ANIM_NME
+            // 
+            this.ANIM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIM_NME.DataPropertyName = "ANIM_NME";
+            this.ANIM_NME.HeaderText = "Animal";
+            this.ANIM_NME.Name = "ANIM_NME";
+            this.ANIM_NME.ReadOnly = true;
+            this.ANIM_NME.Width = 67;
+            // 
+            // CLIENT_FULL_NME
+            // 
+            this.CLIENT_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CLIENT_FULL_NME.DataPropertyName = "CLIENT_FULL_NME";
+            this.CLIENT_FULL_NME.HeaderText = "Propriétaire";
+            this.CLIENT_FULL_NME.Name = "CLIENT_FULL_NME";
+            this.CLIENT_FULL_NME.ReadOnly = true;
+            this.CLIENT_FULL_NME.Width = 92;
+            // 
+            // FACTURE_REF
+            // 
+            this.FACTURE_REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FACTURE_REF.DataPropertyName = "FACTURE_REF";
+            this.FACTURE_REF.HeaderText = "N° Facture";
+            this.FACTURE_REF.Name = "FACTURE_REF";
+            this.FACTURE_REF.ReadOnly = true;
+            this.FACTURE_REF.Width = 87;
             // 
             // button17
             // 
@@ -921,14 +1127,14 @@ namespace ALBAITAR_Softvet
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle36.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle36.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle36;
             this.dataGridView1.ColumnHeadersHeight = 30;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LABO_NME,
@@ -966,9 +1172,9 @@ namespace ALBAITAR_Softvet
             // 
             this.DATE_TIME2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.DATE_TIME2.DataPropertyName = "DATE_TIME";
-            dataGridViewCellStyle7.Format = "d";
-            dataGridViewCellStyle7.NullValue = null;
-            this.DATE_TIME2.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle37.Format = "d";
+            dataGridViewCellStyle37.NullValue = null;
+            this.DATE_TIME2.DefaultCellStyle = dataGridViewCellStyle37;
             this.DATE_TIME2.HeaderText = "Date";
             this.DATE_TIME2.Name = "DATE_TIME2";
             this.DATE_TIME2.ReadOnly = true;
@@ -1118,7 +1324,7 @@ namespace ALBAITAR_Softvet
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label9.Location = new System.Drawing.Point(383, 327);
+            this.label9.Location = new System.Drawing.Point(332, 327);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(359, 22);
             this.label9.TabIndex = 83;
@@ -1130,7 +1336,7 @@ namespace ALBAITAR_Softvet
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.Green;
-            this.label8.Location = new System.Drawing.Point(557, 681);
+            this.label8.Location = new System.Drawing.Point(506, 681);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(37, 16);
             this.label8.TabIndex = 82;
@@ -1141,7 +1347,7 @@ namespace ALBAITAR_Softvet
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Location = new System.Drawing.Point(536, 680);
+            this.panel4.Location = new System.Drawing.Point(485, 680);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(18, 18);
             this.panel4.TabIndex = 81;
@@ -1151,7 +1357,7 @@ namespace ALBAITAR_Softvet
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.Brown;
-            this.label7.Location = new System.Drawing.Point(557, 700);
+            this.label7.Location = new System.Drawing.Point(506, 700);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 16);
             this.label7.TabIndex = 80;
@@ -1162,7 +1368,7 @@ namespace ALBAITAR_Softvet
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(536, 699);
+            this.panel3.Location = new System.Drawing.Point(485, 699);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(18, 18);
             this.panel3.TabIndex = 79;
@@ -1172,7 +1378,7 @@ namespace ALBAITAR_Softvet
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label6.ForeColor = System.Drawing.Color.Orange;
-            this.label6.Location = new System.Drawing.Point(255, 681);
+            this.label6.Location = new System.Drawing.Point(204, 681);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(273, 36);
             this.label6.TabIndex = 78;
@@ -1269,14 +1475,14 @@ namespace ALBAITAR_Softvet
             this.dataGridView7.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView7.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.DarkGreen;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView7.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle38.BackColor = System.Drawing.Color.DarkGreen;
+            dataGridViewCellStyle38.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView7.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle38;
             this.dataGridView7.ColumnHeadersHeight = 35;
             this.dataGridView7.ColumnHeadersVisible = false;
             this.dataGridView7.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1286,21 +1492,21 @@ namespace ALBAITAR_Softvet
             this.dataGridViewTextBoxColumn18,
             this.dataGridViewTextBoxColumn19,
             this.dataGridViewTextBoxColumn20});
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.DarkGreen;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView7.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle44.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle44.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle44.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle44.SelectionBackColor = System.Drawing.Color.DarkGreen;
+            dataGridViewCellStyle44.SelectionForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle44.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView7.DefaultCellStyle = dataGridViewCellStyle44;
             this.dataGridView7.EnableHeadersVisualStyles = false;
             this.dataGridView7.Location = new System.Drawing.Point(7, 653);
             this.dataGridView7.Name = "dataGridView7";
             this.dataGridView7.ReadOnly = true;
             this.dataGridView7.RowHeadersVisible = false;
             this.dataGridView7.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView7.Size = new System.Drawing.Size(735, 25);
+            this.dataGridView7.Size = new System.Drawing.Size(684, 25);
             this.dataGridView7.TabIndex = 67;
             // 
             // dataGridViewTextBoxColumn15
@@ -1315,11 +1521,11 @@ namespace ALBAITAR_Softvet
             // 
             this.dataGridViewTextBoxColumn16.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn16.DataPropertyName = "TOTAL_HT";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle39.Format = "N2";
+            dataGridViewCellStyle39.NullValue = null;
+            dataGridViewCellStyle39.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle39;
             this.dataGridViewTextBoxColumn16.HeaderText = "Total HT";
             this.dataGridViewTextBoxColumn16.MinimumWidth = 60;
             this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
@@ -1330,10 +1536,10 @@ namespace ALBAITAR_Softvet
             // 
             this.dataGridViewTextBoxColumn17.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn17.DataPropertyName = "TVA_PERC";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle40.Format = "N2";
+            dataGridViewCellStyle40.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle40;
             this.dataGridViewTextBoxColumn17.HeaderText = "TVA";
             this.dataGridViewTextBoxColumn17.MinimumWidth = 60;
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
@@ -1344,10 +1550,10 @@ namespace ALBAITAR_Softvet
             // 
             this.dataGridViewTextBoxColumn18.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn18.DataPropertyName = "DROIT_TIMBRE";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N2";
-            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle41.Format = "N2";
+            dataGridViewCellStyle41.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle41;
             this.dataGridViewTextBoxColumn18.HeaderText = "D.Timbre";
             this.dataGridViewTextBoxColumn18.MinimumWidth = 60;
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
@@ -1358,10 +1564,10 @@ namespace ALBAITAR_Softvet
             // 
             this.dataGridViewTextBoxColumn19.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn19.DataPropertyName = "TOTAL_TTC";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle42.Format = "N2";
+            dataGridViewCellStyle42.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle42;
             this.dataGridViewTextBoxColumn19.HeaderText = "Total TTC";
             this.dataGridViewTextBoxColumn19.MinimumWidth = 60;
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
@@ -1372,10 +1578,10 @@ namespace ALBAITAR_Softvet
             // 
             this.dataGridViewTextBoxColumn20.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn20.DataPropertyName = "FACT_PAID_MNT";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle13.Format = "N2";
-            dataGridViewCellStyle13.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle43.Format = "N2";
+            dataGridViewCellStyle43.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle43;
             this.dataGridViewTextBoxColumn20.HeaderText = "Solde de Facture";
             this.dataGridViewTextBoxColumn20.MinimumWidth = 60;
             this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
@@ -1400,28 +1606,28 @@ namespace ALBAITAR_Softvet
             this.dataGridView6.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView6.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.DarkSlateGray;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView6.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle45.BackColor = System.Drawing.Color.DarkSlateGray;
+            dataGridViewCellStyle45.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle45.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle45.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle45.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView6.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle45;
             this.dataGridView6.ColumnHeadersHeight = 35;
             this.dataGridView6.ColumnHeadersVisible = false;
             this.dataGridView6.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn11,
             this.dataGridViewTextBoxColumn12,
             this.dataGridViewTextBoxColumn13});
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.DarkSlateGray;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView6.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle48.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle48.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle48.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle48.SelectionBackColor = System.Drawing.Color.DarkSlateGray;
+            dataGridViewCellStyle48.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView6.DefaultCellStyle = dataGridViewCellStyle48;
             this.dataGridView6.EnableHeadersVisualStyles = false;
             this.dataGridView6.Location = new System.Drawing.Point(7, 293);
             this.dataGridView6.Name = "dataGridView6";
@@ -1429,7 +1635,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView6.RowHeadersVisible = false;
             this.dataGridView6.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView6.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView6.Size = new System.Drawing.Size(735, 28);
+            this.dataGridView6.Size = new System.Drawing.Size(684, 28);
             this.dataGridView6.TabIndex = 65;
             // 
             // dataGridViewTextBoxColumn11
@@ -1444,11 +1650,11 @@ namespace ALBAITAR_Softvet
             // 
             this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn12.DataPropertyName = "DEBIT";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Format = "N2";
-            dataGridViewCellStyle16.NullValue = null;
-            dataGridViewCellStyle16.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle46.Format = "N2";
+            dataGridViewCellStyle46.NullValue = null;
+            dataGridViewCellStyle46.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle46;
             this.dataGridViewTextBoxColumn12.HeaderText = "Débit";
             this.dataGridViewTextBoxColumn12.MinimumWidth = 50;
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
@@ -1459,10 +1665,10 @@ namespace ALBAITAR_Softvet
             // 
             this.dataGridViewTextBoxColumn13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn13.DataPropertyName = "CREDIT";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle17.Format = "N2";
-            dataGridViewCellStyle17.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle47.Format = "N2";
+            dataGridViewCellStyle47.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle47;
             this.dataGridViewTextBoxColumn13.HeaderText = "Crédit";
             this.dataGridViewTextBoxColumn13.MinimumWidth = 50;
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
@@ -1498,14 +1704,14 @@ namespace ALBAITAR_Softvet
             this.dataGridView5.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView5.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.DarkGreen;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView5.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle49.BackColor = System.Drawing.Color.DarkGreen;
+            dataGridViewCellStyle49.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle49.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle49.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle49.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView5.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle49;
             this.dataGridView5.ColumnHeadersHeight = 55;
             this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -1526,7 +1732,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView5.ReadOnly = true;
             this.dataGridView5.RowHeadersVisible = false;
             this.dataGridView5.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView5.Size = new System.Drawing.Size(751, 249);
+            this.dataGridView5.Size = new System.Drawing.Size(700, 249);
             this.dataGridView5.TabIndex = 62;
             this.dataGridView5.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView5_CellMouseDoubleClick);
             this.dataGridView5.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView5_RowPrePaint);
@@ -1555,8 +1761,8 @@ namespace ALBAITAR_Softvet
             // 
             this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.dataGridViewTextBoxColumn3.DataPropertyName = "DATE";
-            dataGridViewCellStyle20.Format = "dd/MM/yyyy";
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle50.Format = "dd/MM/yyyy";
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle50;
             this.dataGridViewTextBoxColumn3.HeaderText = "Date";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
@@ -1583,10 +1789,10 @@ namespace ALBAITAR_Softvet
             // 
             this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dataGridViewTextBoxColumn5.DataPropertyName = "TOTAL_HT";
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle21.Format = "N2";
-            dataGridViewCellStyle21.NullValue = null;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle51.Format = "N2";
+            dataGridViewCellStyle51.NullValue = null;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle51;
             this.dataGridViewTextBoxColumn5.HeaderText = "Total HT";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
@@ -1596,9 +1802,9 @@ namespace ALBAITAR_Softvet
             // 
             this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dataGridViewTextBoxColumn6.DataPropertyName = "TVA_PERC";
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle22.Format = "N2";
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle52.Format = "N2";
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle52;
             this.dataGridViewTextBoxColumn6.HeaderText = "TVA";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -1608,9 +1814,9 @@ namespace ALBAITAR_Softvet
             // 
             this.DROIT_TIMBRE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.DROIT_TIMBRE.DataPropertyName = "DROIT_TIMBRE";
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle23.Format = "N2";
-            this.DROIT_TIMBRE.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle53.Format = "N2";
+            this.DROIT_TIMBRE.DefaultCellStyle = dataGridViewCellStyle53;
             this.DROIT_TIMBRE.HeaderText = "D.Timbre";
             this.DROIT_TIMBRE.Name = "DROIT_TIMBRE";
             this.DROIT_TIMBRE.ReadOnly = true;
@@ -1620,9 +1826,9 @@ namespace ALBAITAR_Softvet
             // 
             this.TOTAL_TTC.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.TOTAL_TTC.DataPropertyName = "TOTAL_TTC";
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle24.Format = "N2";
-            this.TOTAL_TTC.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle54.Format = "N2";
+            this.TOTAL_TTC.DefaultCellStyle = dataGridViewCellStyle54;
             this.TOTAL_TTC.HeaderText = "Total TTC";
             this.TOTAL_TTC.Name = "TOTAL_TTC";
             this.TOTAL_TTC.ReadOnly = true;
@@ -1632,9 +1838,9 @@ namespace ALBAITAR_Softvet
             // 
             this.FACT_PAID_MNT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FACT_PAID_MNT.DataPropertyName = "FACT_PAID_MNT";
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle25.Format = "N2";
-            this.FACT_PAID_MNT.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle55.Format = "N2";
+            this.FACT_PAID_MNT.DefaultCellStyle = dataGridViewCellStyle55;
             this.FACT_PAID_MNT.HeaderText = "Montant non réglé";
             this.FACT_PAID_MNT.Name = "FACT_PAID_MNT";
             this.FACT_PAID_MNT.ReadOnly = true;
@@ -1644,9 +1850,9 @@ namespace ALBAITAR_Softvet
             // 
             this.SLD_OF_CLIENT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
             this.SLD_OF_CLIENT.DataPropertyName = "SLD_OF_CLIENT";
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle26.Format = "N2";
-            this.SLD_OF_CLIENT.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle56.Format = "N2";
+            this.SLD_OF_CLIENT.DefaultCellStyle = dataGridViewCellStyle56;
             this.SLD_OF_CLIENT.HeaderText = "Compte de Propriétaire";
             this.SLD_OF_CLIENT.MinimumWidth = 80;
             this.SLD_OF_CLIENT.Name = "SLD_OF_CLIENT";
@@ -1674,14 +1880,14 @@ namespace ALBAITAR_Softvet
             this.dataGridView4.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView4.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.DarkSlateGray;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView4.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle57.BackColor = System.Drawing.Color.DarkSlateGray;
+            dataGridViewCellStyle57.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle57.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle57.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle57.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle57.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView4.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle57;
             this.dataGridView4.ColumnHeadersHeight = 35;
             this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FINN_ID,
@@ -1699,7 +1905,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView4.ReadOnly = true;
             this.dataGridView4.RowHeadersVisible = false;
             this.dataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView4.Size = new System.Drawing.Size(751, 263);
+            this.dataGridView4.Size = new System.Drawing.Size(700, 263);
             this.dataGridView4.TabIndex = 60;
             this.dataGridView4.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView4_CellMouseDoubleClick);
             // 
@@ -1727,8 +1933,8 @@ namespace ALBAITAR_Softvet
             // 
             this.FINN_OP_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.FINN_OP_DATE.DataPropertyName = "OP_DATE";
-            dataGridViewCellStyle28.Format = "dd/MM/yyyy";
-            this.FINN_OP_DATE.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle58.Format = "dd/MM/yyyy";
+            this.FINN_OP_DATE.DefaultCellStyle = dataGridViewCellStyle58;
             this.FINN_OP_DATE.HeaderText = "Date";
             this.FINN_OP_DATE.Name = "FINN_OP_DATE";
             this.FINN_OP_DATE.ReadOnly = true;
@@ -1755,10 +1961,10 @@ namespace ALBAITAR_Softvet
             // 
             this.FINN_DEBIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FINN_DEBIT.DataPropertyName = "DEBIT";
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle29.Format = "N2";
-            dataGridViewCellStyle29.NullValue = null;
-            this.FINN_DEBIT.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle59.Format = "N2";
+            dataGridViewCellStyle59.NullValue = null;
+            this.FINN_DEBIT.DefaultCellStyle = dataGridViewCellStyle59;
             this.FINN_DEBIT.HeaderText = "Débit";
             this.FINN_DEBIT.Name = "FINN_DEBIT";
             this.FINN_DEBIT.ReadOnly = true;
@@ -1768,9 +1974,9 @@ namespace ALBAITAR_Softvet
             // 
             this.FINN_CREDIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.FINN_CREDIT.DataPropertyName = "CREDIT";
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle30.Format = "N2";
-            this.FINN_CREDIT.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle60.Format = "N2";
+            this.FINN_CREDIT.DefaultCellStyle = dataGridViewCellStyle60;
             this.FINN_CREDIT.HeaderText = "Crédit";
             this.FINN_CREDIT.Name = "FINN_CREDIT";
             this.FINN_CREDIT.ReadOnly = true;
@@ -1830,191 +2036,11 @@ namespace ALBAITAR_Softvet
             this.radioButton8.UseVisualStyleBackColor = true;
             this.radioButton8.CheckedChanged += new System.EventHandler(this.radioButton8_CheckedChanged);
             // 
-            // ID_VISITE
+            // timer1
             // 
-            this.ID_VISITE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ID_VISITE.DataPropertyName = "ID";
-            this.ID_VISITE.HeaderText = "ID";
-            this.ID_VISITE.Name = "ID_VISITE";
-            this.ID_VISITE.ReadOnly = true;
-            this.ID_VISITE.Visible = false;
-            this.ID_VISITE.Width = 42;
-            // 
-            // DATETIME
-            // 
-            this.DATETIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DATETIME.DataPropertyName = "DATETIME";
-            dataGridViewCellStyle5.Format = "dd/MM/yyyy HH:mm";
-            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle5;
-            this.DATETIME.HeaderText = "Date";
-            this.DATETIME.Name = "DATETIME";
-            this.DATETIME.ReadOnly = true;
-            this.DATETIME.Width = 58;
-            // 
-            // VISITOR_FULL_NME
-            // 
-            this.VISITOR_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.VISITOR_FULL_NME.DataPropertyName = "VISITOR_FULL_NME";
-            this.VISITOR_FULL_NME.HeaderText = "Visiteur";
-            this.VISITOR_FULL_NME.Name = "VISITOR_FULL_NME";
-            this.VISITOR_FULL_NME.ReadOnly = true;
-            this.VISITOR_FULL_NME.Width = 67;
-            // 
-            // OBJECT
-            // 
-            this.OBJECT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OBJECT.DataPropertyName = "OBJECT";
-            this.OBJECT.HeaderText = "Objet";
-            this.OBJECT.Name = "OBJECT";
-            this.OBJECT.ReadOnly = true;
-            // 
-            // ANIM_ID
-            // 
-            this.ANIM_ID.DataPropertyName = "ANIM_ID";
-            this.ANIM_ID.HeaderText = "ANIM_ID";
-            this.ANIM_ID.Name = "ANIM_ID";
-            this.ANIM_ID.ReadOnly = true;
-            this.ANIM_ID.Visible = false;
-            // 
-            // CLIENT_ID
-            // 
-            this.CLIENT_ID.DataPropertyName = "CLIENT_ID";
-            this.CLIENT_ID.HeaderText = "CLIENT_ID";
-            this.CLIENT_ID.Name = "CLIENT_ID";
-            this.CLIENT_ID.ReadOnly = true;
-            this.CLIENT_ID.Visible = false;
-            // 
-            // ANIM_NME
-            // 
-            this.ANIM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIM_NME.DataPropertyName = "ANIM_NME";
-            this.ANIM_NME.HeaderText = "Animal";
-            this.ANIM_NME.Name = "ANIM_NME";
-            this.ANIM_NME.ReadOnly = true;
-            this.ANIM_NME.Width = 67;
-            // 
-            // CLIENT_FULL_NME
-            // 
-            this.CLIENT_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CLIENT_FULL_NME.DataPropertyName = "CLIENT_FULL_NME";
-            this.CLIENT_FULL_NME.HeaderText = "Propriétaire";
-            this.CLIENT_FULL_NME.Name = "CLIENT_FULL_NME";
-            this.CLIENT_FULL_NME.ReadOnly = true;
-            this.CLIENT_FULL_NME.Width = 92;
-            // 
-            // FACTURE_REF
-            // 
-            this.FACTURE_REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.FACTURE_REF.DataPropertyName = "FACTURE_REF";
-            this.FACTURE_REF.HeaderText = "N° Facture";
-            this.FACTURE_REF.Name = "FACTURE_REF";
-            this.FACTURE_REF.ReadOnly = true;
-            this.FACTURE_REF.Width = 87;
-            // 
-            // ANIMM_ID
-            // 
-            this.ANIMM_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIMM_ID.DataPropertyName = "ID";
-            this.ANIMM_ID.HeaderText = "ID";
-            this.ANIMM_ID.Name = "ANIMM_ID";
-            this.ANIMM_ID.ReadOnly = true;
-            this.ANIMM_ID.Visible = false;
-            this.ANIMM_ID.Width = 42;
-            // 
-            // ANIMM_NUM_IDENTIF
-            // 
-            this.ANIMM_NUM_IDENTIF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIMM_NUM_IDENTIF.DataPropertyName = "NUM_IDENTIF";
-            this.ANIMM_NUM_IDENTIF.HeaderText = "N° Ident.";
-            this.ANIMM_NUM_IDENTIF.Name = "ANIMM_NUM_IDENTIF";
-            this.ANIMM_NUM_IDENTIF.ReadOnly = true;
-            this.ANIMM_NUM_IDENTIF.Width = 78;
-            // 
-            // ANIM_CLIENT_FULL_NME
-            // 
-            this.ANIM_CLIENT_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIM_CLIENT_FULL_NME.DataPropertyName = "CLIENT_FULL_NME";
-            this.ANIM_CLIENT_FULL_NME.HeaderText = "Propriétaire";
-            this.ANIM_CLIENT_FULL_NME.Name = "ANIM_CLIENT_FULL_NME";
-            this.ANIM_CLIENT_FULL_NME.ReadOnly = true;
-            this.ANIM_CLIENT_FULL_NME.Width = 92;
-            // 
-            // ANIMM_NME
-            // 
-            this.ANIMM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ANIMM_NME.DataPropertyName = "NME";
-            this.ANIMM_NME.HeaderText = "Nom";
-            this.ANIMM_NME.Name = "ANIMM_NME";
-            this.ANIMM_NME.ReadOnly = true;
-            // 
-            // ANIMM_ESPECE
-            // 
-            this.ANIMM_ESPECE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIMM_ESPECE.DataPropertyName = "ESPECE";
-            this.ANIMM_ESPECE.HeaderText = "Espéce";
-            this.ANIMM_ESPECE.Name = "ANIMM_ESPECE";
-            this.ANIMM_ESPECE.ReadOnly = true;
-            this.ANIMM_ESPECE.Width = 70;
-            // 
-            // ANIMM_RACE
-            // 
-            this.ANIMM_RACE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIMM_RACE.DataPropertyName = "RACE";
-            this.ANIMM_RACE.HeaderText = "Race";
-            this.ANIMM_RACE.Name = "ANIMM_RACE";
-            this.ANIMM_RACE.ReadOnly = true;
-            this.ANIMM_RACE.Width = 60;
-            // 
-            // ANIMM_SEXE
-            // 
-            this.ANIMM_SEXE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIMM_SEXE.DataPropertyName = "SEXE";
-            this.ANIMM_SEXE.HeaderText = "Sexe";
-            this.ANIMM_SEXE.Name = "ANIMM_SEXE";
-            this.ANIMM_SEXE.ReadOnly = true;
-            this.ANIMM_SEXE.Width = 57;
-            // 
-            // ANIMM_NISS_DATE
-            // 
-            this.ANIMM_NISS_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIMM_NISS_DATE.DataPropertyName = "NISS_DATE";
-            dataGridViewCellStyle2.Format = "dd/MM/yyyy";
-            this.ANIMM_NISS_DATE.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ANIMM_NISS_DATE.HeaderText = "Date Nissance";
-            this.ANIMM_NISS_DATE.Name = "ANIMM_NISS_DATE";
-            this.ANIMM_NISS_DATE.ReadOnly = true;
-            this.ANIMM_NISS_DATE.Width = 108;
-            // 
-            // DATE_ADDED
-            // 
-            this.DATE_ADDED.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DATE_ADDED.DataPropertyName = "DATE_ADDED";
-            dataGridViewCellStyle3.Format = "dd/MM/yyyy";
-            this.DATE_ADDED.DefaultCellStyle = dataGridViewCellStyle3;
-            this.DATE_ADDED.HeaderText = "Ajouté le";
-            this.DATE_ADDED.Name = "DATE_ADDED";
-            this.DATE_ADDED.ReadOnly = true;
-            this.DATE_ADDED.Width = 77;
-            // 
-            // ANIMM_IS_RADIATED
-            // 
-            this.ANIMM_IS_RADIATED.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIMM_IS_RADIATED.DataPropertyName = "IS_RADIATED";
-            this.ANIMM_IS_RADIATED.HeaderText = "Radié";
-            this.ANIMM_IS_RADIATED.Name = "ANIMM_IS_RADIATED";
-            this.ANIMM_IS_RADIATED.ReadOnly = true;
-            this.ANIMM_IS_RADIATED.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ANIMM_IS_RADIATED.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ANIMM_IS_RADIATED.Visible = false;
-            this.ANIMM_IS_RADIATED.Width = 44;
-            // 
-            // ANIMM_OBSERVATIONS
-            // 
-            this.ANIMM_OBSERVATIONS.DataPropertyName = "OBSERVATIONS";
-            this.ANIMM_OBSERVATIONS.HeaderText = "OBSERVATIONS";
-            this.ANIMM_OBSERVATIONS.Name = "ANIMM_OBSERVATIONS";
-            this.ANIMM_OBSERVATIONS.ReadOnly = true;
-            this.ANIMM_OBSERVATIONS.Visible = false;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Main_Frm
             // 
@@ -2023,6 +2049,7 @@ namespace ALBAITAR_Softvet
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(854, 569);
+            this.Controls.Add(this.button22);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radioButton8);
             this.Controls.Add(this.radioButton7);
@@ -2195,5 +2222,7 @@ namespace ALBAITAR_Softvet
         private System.Windows.Forms.DataGridViewTextBoxColumn DATE_ADDED;
         private System.Windows.Forms.DataGridViewTextBoxColumn ANIMM_IS_RADIATED;
         private System.Windows.Forms.DataGridViewTextBoxColumn ANIMM_OBSERVATIONS;
+        private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.Timer timer1;
     }
 }

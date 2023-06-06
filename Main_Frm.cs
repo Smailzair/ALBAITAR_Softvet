@@ -19,9 +19,11 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Dynamic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Web.WebPages;
 using System.Windows.Forms;
@@ -32,8 +34,10 @@ namespace ALBAITAR_Softvet
 {
     public partial class Main_Frm : Form
     {
+        int time_delay = 0;
         DateTime last_update_time = new DateTime(1900, 12, 31);
-        Thread th;
+        Thread th; 
+            Thread Activ_Ver;
         public static DataTable ADRESSES_SITES;
         bool sites_table_ready = false;
         public static DataTable Autorisations;
@@ -73,6 +77,7 @@ namespace ALBAITAR_Softvet
         public Main_Frm()
         {
             InitializeComponent();
+            timer1.Enabled = true;
             //-----------
             tabControl1.Alignment = Properties.Settings.Default.Main_Frm_Tabs_Horientation_Is_Verticatl ? TabAlignment.Left : TabAlignment.Top;
             //-----------------
@@ -113,10 +118,64 @@ namespace ALBAITAR_Softvet
             th.Start();
             th.Join();
             //--------------
-
+            Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
+            Activ_Ver.Start();
+            //--------------
 
         }
 
+        public void Activ_Verif()
+        {
+            if(Properties.Settings.Default.Connection_String_IP_Or_LocalHost == "localhost")
+            {
+                string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\Sys32.txt";
+                
+                if (File.Exists(filePath))
+                {
+                    string fileContents = File.ReadAllText(filePath);
+                    double old_val = 0;
+                    double.TryParse(fileContents, out old_val);
+                    if (old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
+                    {
+                        PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
+                    }
+                }else
+                {
+                    DateTime dtt = DateTime.UtcNow;
+                    DateTime.TryParse(PreConnection.ReadFromRegistry("SoftVet_Start_Date"), out dtt);
+                    if((DateTime.UtcNow.Date - dtt.Date).Days == 0){
+                        File.Create(filePath).Dispose();                        
+                        File.WriteAllText(filePath, "28000");
+                        PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
+                    }
+                    string tt = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
+                }         
+                //----------------
+                string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
+                if (!PreConnection.Verif_Activation_SOftVet(codd))
+                {                  
+
+                    string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
+                    DateTime dt = DateTime.UtcNow;
+                    if (strt_date == "")
+                    {
+                        PreConnection.WriteIntoRegistry("SoftVet_Start_Date", dt.ToString("dd/MM/yyyy"));
+                    }
+                    else
+                    {
+                        DateTime.TryParse(strt_date, out dt);
+                    }
+
+                    int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
+
+                    this.Text += " (Produit non activé - réste [" + delay +"] jours)";
+                    if (delay <= 0) {
+                           new Dialogs.App_Activation().ShowDialog();
+                    }
+                }
+            }
+            
+        }
 
         public void Load_sites_table()
         {
@@ -217,6 +276,10 @@ namespace ALBAITAR_Softvet
 
         private void Main_Frm_Load(object sender, EventArgs e)
         {
+
+            //Properties.Settings.Default.Codified_Activate_Code = "--";
+            //Properties.Settings.Default.Save();
+            //Properties.Settings.Default.Reload();
             WindowState = Properties.Settings.Default.Maximize_Main_Frm ? FormWindowState.Maximized : FormWindowState.Normal;
             Text = "ALBAITAR Softvet - " + Properties.Settings.Default.Last_login_user_full_nme;
             string cab_doct = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
@@ -341,6 +404,25 @@ namespace ALBAITAR_Softvet
 
         private void Main_Frm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            
+            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\Sys32.txt";
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath).Dispose();
+
+            }
+
+            string fileContents = File.ReadAllText(filePath);
+            decimal old_val = 0;
+            decimal.TryParse(fileContents, out old_val);
+
+            if(old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
+            {
+                PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
+            }
+
+            File.WriteAllText(filePath, ((double)old_val + (double)time_delay / 60).ToString("N2"));
+            //----------------------------------
             Properties.Settings.Default.Maximize_Main_Frm = WindowState == FormWindowState.Maximized;
             Properties.Settings.Default.Save();
         }
@@ -1736,6 +1818,16 @@ namespace ALBAITAR_Softvet
                     dataGridView5.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView5.DefaultCellStyle.BackColor;
                 }
             }
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            new App_Activation().Show();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            time_delay++;
         }
     }
 }

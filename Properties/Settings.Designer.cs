@@ -248,5 +248,41 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Main_Frm_Tabs_Horientation_Is_Verticatl"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        public string Connection_String_IP_Or_LocalHost {
+            get {
+                return ((string)(this["Connection_String_IP_Or_LocalHost"]));
+            }
+            set {
+                this["Connection_String_IP_Or_LocalHost"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Connection_String_PC_name {
+            get {
+                return ((string)(this["Connection_String_PC_name"]));
+            }
+            set {
+                this["Connection_String_PC_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("--")]
+        public string Codified_Activate_Code {
+            get {
+                return ((string)(this["Codified_Activate_Code"]));
+            }
+            set {
+                this["Codified_Activate_Code"] = value;
+            }
+        }
     }
 }
