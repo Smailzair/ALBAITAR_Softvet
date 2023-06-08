@@ -63,16 +63,6 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap aaaaaaaaaaa {
-            get {
-                object obj = ResourceManager.GetObject("aaaaaaaaaaa", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap agenda_001 {
             get {
                 object obj = ResourceManager.GetObject("agenda_001", resourceCulture);
@@ -1133,6 +1123,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap output_onlinegiftools {
+            get {
+                object obj = ResourceManager.GetObject("output-onlinegiftools", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap output_onlinegiftools_copy {
             get {
                 object obj = ResourceManager.GetObject("output-onlinegiftools copy", resourceCulture);
@@ -1153,39 +1153,9 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pngfind_com_doctor_png_3001218 {
-            get {
-                object obj = ResourceManager.GetObject("pngfind.com-doctor-png-3001218", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy {
             get {
                 object obj = ResourceManager.GetObject("pngtree-star-horizontal-line-decoration-elements-2986140-png-image_1731077 copy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pngtree_vet_doctors_with_animals_png_image_8768727_copy1_copy {
-            get {
-                object obj = ResourceManager.GetObject("pngtree-vet-doctors-with-animals-png-image_8768727 copy1 copy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pngtree_vet_doctors_with_animals_png_image_876872799 {
-            get {
-                object obj = ResourceManager.GetObject("pngtree-vet-doctors-with-animals-png-image_876872799", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1226,16 +1196,6 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap Rongeur {
             get {
                 object obj = ResourceManager.GetObject("Rongeur", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap rrrrrr {
-            get {
-                object obj = ResourceManager.GetObject("rrrrrr", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,4 +1,5 @@
 ﻿
+using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using ServiceStack;
@@ -33,6 +34,7 @@ namespace ALBAITAR_Softvet
         ListView prev_selected = null;
         string Userss;
         bool tmp_stop = false;
+        bool Modif_autorized = false;
 
         DateTime tmmp;
         public Agenda_Just_Display(int client_1_animal_2, int? Selected_ids)
@@ -526,7 +528,7 @@ namespace ALBAITAR_Softvet
 
         private void Dayy_1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (((ListView)sender).SelectedItems.Count > 0)
+            if (button3.Visible && ((ListView)sender).SelectedItems.Count > 0)
             {
                 if (Application.OpenForms["Agenda"] != null)
                 {
@@ -593,6 +595,40 @@ namespace ALBAITAR_Softvet
                 this.Parent.Focus();
                 new Agenda(int.Parse(Current_items_id), dateTimePicker1.Value).Show();
             }
+        }
+
+        private void Agenda_Just_Display_Load(object sender, EventArgs e)
+        {            
+            if (Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
+            {
+                this.Controls.Add(new Nn_Autorized());
+                this.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
+                this.Controls["Nn_Autorized"].BringToFront();
+            }
+            else
+            {
+                button15.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40001" && (Int32)QQ[3] == 1).Count() > 0 && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40002" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                Modif_autorized = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40003" && (Int32)QQ[3] == 1).Count() > 0 && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40004" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
+                if (!Modif_autorized)
+                {
+                    foreach(Control ctrl in panel1.Controls)
+                    {
+                        if (ctrl is TextBox)
+                        {
+                            ((TextBox)ctrl).ReadOnly = true;
+                        }
+                        else
+                        {
+                            ctrl.Enabled = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void button3_VisibleChanged(object sender, EventArgs e)
+        {
+            if (!Modif_autorized) { button3.Visible = false; }
         }
     }
 }

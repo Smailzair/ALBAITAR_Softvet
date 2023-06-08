@@ -48,7 +48,7 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             else
             {
-                if(PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
+                if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
                 {
                     string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
                     DateTime dt = DateTime.UtcNow;
@@ -75,8 +75,8 @@ namespace ALBAITAR_Softvet.Dialogs
                     label13.Text = "0 Jours";
                     label18.ForeColor = label13.ForeColor = Color.Red;
                 }
-                
-                
+
+
             }
         }
 

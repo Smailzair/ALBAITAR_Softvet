@@ -38,8 +38,8 @@ namespace ALBAITAR_Softvet
     {
         int time_delay = 0;
         DateTime last_update_time = new DateTime(1900, 12, 31);
-        Thread th; 
-            Thread Activ_Ver;
+        Thread th;
+        Thread Activ_Ver;
         public static DataTable ADRESSES_SITES;
         bool sites_table_ready = false;
         public static DataTable Autorisations;
@@ -128,11 +128,11 @@ namespace ALBAITAR_Softvet
 
         public void Activ_Verif()
         {
-            
-            if(Properties.Settings.Default.Connection_String_IP_Or_LocalHost == "localhost")
+
+            if (Properties.Settings.Default.Connection_String_IP_Or_LocalHost == "localhost")
             {
                 bool Verifyed_001 = false;
-                if(Properties.Settings.Default.Codifed_Activation_Email.Length > 2 && Properties.Settings.Default.Codified_Activate_Code.Length > 2)
+                if (Properties.Settings.Default.Codifed_Activation_Email.Length > 2 && Properties.Settings.Default.Codified_Activate_Code.Length > 2)
                 {
                     MySqlConnection albaitar_online = new MySqlConnection(@"Server=instances.spawn.cc;Port=31681;Database=ALBAITAR_SOFTVET;Uid=root;Pwd=kOluo0PgmDVowykt;");
                     //---------------------
@@ -140,17 +140,26 @@ namespace ALBAITAR_Softvet
                         "'" + PreConnection.generate_ID_of_client() + "'," +
                         "'" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "'," +
                         "'" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "');", albaitar_online);
-                    if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
-                    try { command.ExecuteNonQuery(); } catch { }
+
+                    try
+                    {
+                        if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+                        command.ExecuteNonQuery();
+                    }
+                    catch { }
                     albaitar_online.Close();
                     //-------------------------------
                     DataTable dttb = new DataTable();
-                    MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '"+ PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND  `ACTIVAT_CODE` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
-                    if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
-                    using (MySqlDataReader reader = command2.ExecuteReader())
+                    MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND  `ACTIVAT_CODE` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
+                    try
                     {
-                        dttb.Load(reader);
+                        if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+                        using (MySqlDataReader reader = command2.ExecuteReader())
+                        {
+                            dttb.Load(reader);
+                        }
                     }
+                    catch { }
                     albaitar_online.Close();
                     if (dttb.Rows.Count > 0) //Good
                     {
@@ -165,7 +174,7 @@ namespace ALBAITAR_Softvet
 
                 if (!Verifyed_001)
                 {
-                    if(PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
+                    if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
                     {
                         string filePath = "C:\\ProgramData\\Sys32.txt";
 
@@ -230,8 +239,8 @@ namespace ALBAITAR_Softvet
                     }
 
                 }
-                
-                
+
+
             }
             else
             {
@@ -244,8 +253,8 @@ namespace ALBAITAR_Softvet
                 }
                 if (!activated)
                 {
-                    MessageBox.Show("malheureusement le produit de PC serveur n'est pas activé\navec une tentative expirée!","",MessageBoxButtons.OK,MessageBoxIcon.Hand);
-                    if(MessageBox.Show("Voulez vous de changer la connection à un autre serveur ?","",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+                    MessageBox.Show("malheureusement le produit de PC serveur n'est pas activé\navec une tentative expirée!", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    if (MessageBox.Show("Voulez vous de changer la connection à un autre serveur ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         new Connection_Str().ShowDialog();
                         Activ_Verif();
@@ -254,10 +263,10 @@ namespace ALBAITAR_Softvet
                     {
                         Application.Exit();
                     }
-                    
+
                 }
             }
-            
+
         }
 
         public void Load_sites_table()
@@ -274,7 +283,7 @@ namespace ALBAITAR_Softvet
             }
             if (System.Windows.Forms.Application.OpenForms["Clients"] == null)
             {
-                new Clients(-1, 1,-1).Show();
+                new Clients(-1, 1, -1).Show();
             }
             else
             {
@@ -360,9 +369,6 @@ namespace ALBAITAR_Softvet
         private void Main_Frm_Load(object sender, EventArgs e)
         {
 
-            //Properties.Settings.Default.Codified_Activate_Code = "--";
-            //Properties.Settings.Default.Save();
-            //Properties.Settings.Default.Reload();
             WindowState = Properties.Settings.Default.Maximize_Main_Frm ? FormWindowState.Maximized : FormWindowState.Normal;
             Text = "ALBAITAR Softvet - " + Properties.Settings.Default.Last_login_user_full_nme;
             string cab_doct = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
@@ -405,7 +411,66 @@ namespace ALBAITAR_Softvet
                 button12.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30000" && (Int32)QQ[3] == 1).Count() > 0;
                 button4.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31000" && (Int32)QQ[3] == 1).Count() > 0;
                 button5.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40000" && (Int32)QQ[3] == 1).Count() > 0;
+                button6.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70000" && (Int32)QQ[3] == 1).Count() > 0;
+                //---------------tabPage_animaux
+                if (Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
+                {
+                    tabPage_animaux.Controls.Add(new Nn_Autorized());
+                    tabPage_animaux.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
+                    tabPage_animaux.Controls["Nn_Autorized"].BringToFront();
+                }
+                else
+                {
+                    button8.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                    button10.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
+                }
+                //---------------tabPage_visites
+                if (Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
+                {
+                    tabPage_visites.Controls.Add(new Nn_Autorized());
+                    tabPage_visites.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
+                    tabPage_visites.Controls["Nn_Autorized"].BringToFront();
+                }
+                else
+                {
+                    button17.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                    button18.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
+                }
+                //---------------tabPage_labo
+                if (Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
+                {
+                    tabPage_labo.Controls.Add(new Nn_Autorized());
+                    tabPage_labo.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
+                    tabPage_labo.Controls["Nn_Autorized"].BringToFront();
+                }
+                else
+                {
+                    button15.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                    button14.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
+                    button13.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30004" && (Int32)QQ[3] == 1).Count() > 0; //Imprimer
+                }
+                //---------------tabPage_monetique
+                bool alll = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60000" && (Int32)QQ[3] == 1).Count() == 0 && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70000" && (Int32)QQ[3] == 1).Count() == 0;
+                if (alll) //Monetic + Factures
+                {
+                    tabPage_monetique.Controls.Add(new Nn_Autorized());
+                    tabPage_monetique.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
+                    tabPage_monetique.Controls["Nn_Autorized"].BringToFront();
+                }
+                else
+                {
+                    //---->> Monetic
+                    label4.Visible = textBox4.Visible = dataGridView4.Visible = dataGridView6.Visible =label9.Visible = button27.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60000" && (Int32)QQ[3] == 1).Count() > 0;
+                    button16.Visible = dataGridView4.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                    button19.Visible = dataGridView4.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier                    
+                    //---->> Factures
+                    label5.Visible = textBox5.Visible = dataGridView5.Visible = dataGridView7.Visible = panel3.Visible = panel4.Visible = label7.Visible = label8.Visible = label6.Visible = button26.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70000" && (Int32)QQ[3] == 1).Count() > 0;
+                    button20.Visible = dataGridView5.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                    button21.Visible = dataGridView5.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier                    
+                }
+                
             }
+
             //--------------------
             comboBox3.SelectedIndexChanged -= comboBox3_SelectedIndexChanged;
             comboBox3.SelectedIndex = 0;
@@ -499,7 +564,7 @@ namespace ALBAITAR_Softvet
             decimal old_val = 0;
             decimal.TryParse(fileContents, out old_val);
 
-            if(old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
+            if (old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
             {
                 PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
                 PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = 0 WHERE `ID` = 7;");
@@ -1178,7 +1243,8 @@ namespace ALBAITAR_Softvet
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            button14_Click(null, null);
+            if (button14.Visible) { button14_Click(null, null); }
+            
         }
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
@@ -1395,23 +1461,26 @@ namespace ALBAITAR_Softvet
 
         private void dataGridView2_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (button18.Visible) {
 
-            if (e.RowIndex > -1)
-            {
+                if (e.RowIndex > -1)
+                {
 
-                if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
-                {
-                    new Animaux((int)dataGridView2.Rows[e.RowIndex].Cells["ANIM_ID"].Value, (int)dataGridView2.Rows[e.RowIndex].Cells["ID_VISITE"].Value).Show();
+                    if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+                    {
+                        new Animaux((int)dataGridView2.Rows[e.RowIndex].Cells["ANIM_ID"].Value, (int)dataGridView2.Rows[e.RowIndex].Cells["ID_VISITE"].Value).Show();
+                    }
+                    else
+                    {
+                        Animaux.ID_to_selectt = (int)dataGridView2.Rows[e.RowIndex].Cells["ANIM_ID"].Value;
+                        Animaux.visite_idd = (int)dataGridView2.Rows[e.RowIndex].Cells["ID_VISITE"].Value;
+                        System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
+                        System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+                    }
+                    panel1.Visible = false;
                 }
-                else
-                {
-                    Animaux.ID_to_selectt = (int)dataGridView2.Rows[e.RowIndex].Cells["ANIM_ID"].Value;
-                    Animaux.visite_idd = (int)dataGridView2.Rows[e.RowIndex].Cells["ID_VISITE"].Value;
-                    System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
-                    System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
-                }
-                panel1.Visible = false;
             }
+            
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1443,7 +1512,7 @@ namespace ALBAITAR_Softvet
         }
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
-        {            
+        {
             if (e.Index < tabControl1.TabPages.Count)
             {
                 if (Properties.Settings.Default.Main_Frm_Tabs_Horientation_Is_Verticatl)
@@ -1556,7 +1625,7 @@ namespace ALBAITAR_Softvet
                     e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
                     e.Graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
                 }
-                
+
             }
 
 
@@ -1715,7 +1784,8 @@ namespace ALBAITAR_Softvet
 
         private void dataGridView3_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            button10_Click(null, null);
+            if (button10.Visible) { button10_Click(null, null); }
+            
         }
 
         private void Main_Frm_Deactivate(object sender, EventArgs e)
@@ -1749,7 +1819,7 @@ namespace ALBAITAR_Softvet
             sld = ((DataTable)dataGridView4.DataSource).DefaultView.Cast<DataRowView>().Sum(row => row["DEBIT"] != DBNull.Value ? Convert.ToDecimal(row["DEBIT"]) : 0) - ((DataTable)dataGridView4.DataSource).DefaultView.Cast<DataRowView>().Sum(row => row["CREDIT"] != DBNull.Value ? Convert.ToDecimal(row["CREDIT"]) : 0);
             if (sld == 0)
             {
-                label9.Text = (textBox4.Text.Length == 0 && radioButton8.Checked ?  "Rien " : "") + "(0.00 DA).";
+                label9.Text = (textBox4.Text.Length == 0 && radioButton8.Checked ? "Rien " : "") + "(0.00 DA).";
             }
             else if (sld >= 0)
             {
@@ -1779,13 +1849,13 @@ namespace ALBAITAR_Softvet
             ((DataTable)dataGridView5.DataSource).DefaultView.RowFilter = fltr;
             //-------------
             if (dataGridView7.Rows.Count == 0) { dataGridView7.Rows.Add(); }
-            dataGridView7.Rows[0].Cells[0].Value = "Total (" + ((DataTable)dataGridView5.DataSource).DefaultView.Count + ") :";           
+            dataGridView7.Rows[0].Cells[0].Value = "Total (" + ((DataTable)dataGridView5.DataSource).DefaultView.Count + ") :";
 
             dataGridView7.Rows[0].Cells[1].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["TOTAL_HT"] != DBNull.Value).Sum(rowView => (decimal)rowView["TOTAL_HT"]);
             dataGridView7.Rows[0].Cells[2].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["TVA_PERC"] != DBNull.Value).Sum(rowView => (decimal)rowView["TVA_PERC"]);
             dataGridView7.Rows[0].Cells[3].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["DROIT_TIMBRE"] != DBNull.Value).Sum(rowView => (decimal)rowView["DROIT_TIMBRE"]);
             dataGridView7.Rows[0].Cells[4].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["TOTAL_TTC"] != DBNull.Value).Sum(rowView => (decimal)rowView["TOTAL_TTC"]);
-            dataGridView7.Rows[0].Cells[5].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["FACT_PAID_MNT"] != DBNull.Value).Sum(rowView => (decimal)rowView["FACT_PAID_MNT"]);           
+            dataGridView7.Rows[0].Cells[5].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["FACT_PAID_MNT"] != DBNull.Value).Sum(rowView => (decimal)rowView["FACT_PAID_MNT"]);
             //-----------------
             dataGridView5.Columns[5].Width = dataGridView7.Columns[1].Width;
             dataGridView5.Columns[6].Width = dataGridView7.Columns[2].Width;
@@ -1801,7 +1871,7 @@ namespace ALBAITAR_Softvet
 
         private void dataGridView4_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (dataGridView4.Rows[e.RowIndex].Cells["FINN_CLIENT_ID"].Value != DBNull.Value)
+            if (button19.Visible && dataGridView4.Rows[e.RowIndex].Cells["FINN_CLIENT_ID"].Value != DBNull.Value)
             {
                 if (System.Windows.Forms.Application.OpenForms["Clients"] == null)
                 {
@@ -1815,21 +1885,21 @@ namespace ALBAITAR_Softvet
                     System.Windows.Forms.Application.OpenForms["Clients"].WindowState = System.Windows.Forms.Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Clients"].WindowState;
                     System.Windows.Forms.Application.OpenForms["Clients"].BringToFront();
                 }
-                
+
             }
         }
 
         private void dataGridView5_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value != DBNull.Value)
+            if (button21.Visible && dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value != DBNull.Value)
             {
                 if (System.Windows.Forms.Application.OpenForms["Vente"] == null)
                 {
-                    new Vente((int)dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value).Show();                    
+                    new Vente((int)dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value).Show();
                 }
                 else
-                {                    
-                    Vente.to_select_idx = (int)dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value;                    
+                {
+                    Vente.to_select_idx = (int)dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value;
                     System.Windows.Forms.Application.OpenForms["Vente"].WindowState = System.Windows.Forms.Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Vente"].WindowState;
                     System.Windows.Forms.Application.OpenForms["Vente"].BringToFront();
                 }
@@ -1866,7 +1936,7 @@ namespace ALBAITAR_Softvet
         {
             if (System.Windows.Forms.Application.OpenForms["Vente"] == null)
             {
-                new Vente(-2).Show();                
+                new Vente(-2).Show();
             }
             else
             {
@@ -1878,12 +1948,12 @@ namespace ALBAITAR_Softvet
 
         private void button21_Click(object sender, EventArgs e)
         {
-            if(dataGridView5.SelectedRows.Count > 0)
+            if (dataGridView5.SelectedRows.Count > 0)
             {
                 DataGridViewCellMouseEventArgs rr1 = new DataGridViewCellMouseEventArgs(1, dataGridView5.SelectedRows[0].Index, 1, 1, new MouseEventArgs(MouseButtons.Left, 2, 1, 1, 0));
                 dataGridView5_CellMouseDoubleClick(null, rr1);
             }
-            
+
         }
 
         private void dataGridView5_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -1891,11 +1961,11 @@ namespace ALBAITAR_Softvet
             if (e.RowIndex >= 0)
             {
                 decimal cellValue = dataGridView5.Rows[e.RowIndex].Cells["FACT_PAID_MNT"].Value != DBNull.Value ? (decimal)dataGridView5.Rows[e.RowIndex].Cells["FACT_PAID_MNT"].Value : 0;
-               // decimal cellValue2 = (decimal)dataGridView5.Rows[e.RowIndex].Cells["TOTAL_TTC"].Value;
+                // decimal cellValue2 = (decimal)dataGridView5.Rows[e.RowIndex].Cells["TOTAL_TTC"].Value;
 
-                if(dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn2"].Value != DBNull.Value) //CLIENT_ID
+                if (dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn2"].Value != DBNull.Value) //CLIENT_ID
                 {
-                    dataGridView5.Rows[e.RowIndex].DefaultCellStyle.BackColor =  cellValue > 0 ?  Color.FromArgb(255, 192, 192) : Color.FromArgb(128, 255, 128);
+                    dataGridView5.Rows[e.RowIndex].DefaultCellStyle.BackColor = cellValue > 0 ? Color.FromArgb(255, 192, 192) : Color.FromArgb(128, 255, 128);
                 }
                 else
                 {
@@ -1913,6 +1983,32 @@ namespace ALBAITAR_Softvet
         {
             time_delay++;
         }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            PreConnection.Excport_to_excel(dataGridView3, "Animaux", radioButton7.Checked ? "Tous" : comboBox2.Text, null, false);
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            PreConnection.Excport_to_excel(dataGridView2, "Visites" + (comboBox1.SelectedIndex == 0 ? " Propriétaires" : " Animaux"), (radioButton7.Checked ? "Tous" : comboBox2.Text), null, false);
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            PreConnection.Excport_to_excel(dataGridView1, "Laboratoires", (radioButton7.Checked ? "Tous" : comboBox2.Text), null, false);
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            PreConnection.Excport_to_excel(dataGridView5, "Factures", (radioButton7.Checked ? "Tous" : comboBox2.Text), null, false);
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            PreConnection.Excport_to_excel(dataGridView4, "Fonds", (radioButton7.Checked ? "Tous" : comboBox2.Text), null, false);
+        }
+
     }
 }
 

@@ -2274,6 +2274,7 @@
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Visible = false;
+            this.button3.VisibleChanged += new System.EventHandler(this.button3_VisibleChanged);
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Agenda_Just_Display
@@ -2296,6 +2297,7 @@
             this.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Agenda_Just_Display";
             this.Size = new System.Drawing.Size(1314, 591);
+            this.Load += new System.EventHandler(this.Agenda_Just_Display_Load);
             this.SizeChanged += new System.EventHandler(this.Agenda_Just_Display_SizeChanged);
             this.Enter += new System.EventHandler(this.Agenda_Just_Display_Enter);
             this.Ven_Flow.ResumeLayout(false);

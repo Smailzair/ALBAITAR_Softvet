@@ -1,4 +1,5 @@
-﻿using ALBAITAR_Softvet.Resources;
+﻿using ALBAITAR_Softvet.Dialogs;
+using ALBAITAR_Softvet.Resources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,8 +23,24 @@ namespace ALBAITAR_Softvet
             //--------------------
             selected_anim_id = anim_id;
             Load_Data();
-        }
+            //--------------------
+            if (!Properties.Settings.Default.Last_login_is_admin)
+            {
+                if(Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
+                {
+                    this.Controls.Add(new Nn_Autorized());
+                    this.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
+                    this.Controls["Nn_Autorized"].BringToFront();
 
+                }
+                else
+                {
+                    button17.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                    button16.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
+                }
+            }
+        }
+        
         private void Load_Data()
         {
             DataRow inf = Main_Frm.Main_Frm_animals_tbl.AsEnumerable().Where(zz => (int)zz["ID"] == selected_anim_id).FirstOrDefault();

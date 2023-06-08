@@ -321,6 +321,12 @@
     <Compile Include="Dialogs\Connection_Str.Designer.cs">
       <DependentUpon>Connection_Str.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Nn_Autorized.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Nn_Autorized.Designer.cs">
+      <DependentUpon>Nn_Autorized.cs</DependentUpon>
+    </Compile>
     <Compile Include="Labo\Autre_Lab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -495,6 +501,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Connection_Str.resx">
       <DependentUpon>Connection_Str.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Nn_Autorized.resx">
+      <DependentUpon>Nn_Autorized.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Labo\Autre_Lab.resx">
       <DependentUpon>Autre_Lab.cs</DependentUpon>
@@ -778,6 +787,8 @@
     <None Include="Resources\icons8_good_pincode_120px.png" />
     <None Include="Resources\icons8_checked_radio_button_50px.png" />
     <None Include="Resources\icons8_database_administrator_20px.png" />
+    <None Include="Resources\image_processing20210904-22504-j2w21r.gif" />
+    <None Include="Resources\output-onlinegiftools.gif" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

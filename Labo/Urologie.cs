@@ -31,6 +31,11 @@ namespace ALBAITAR_Softvet.Labo
             selected_animm = selected_anim;
             IDD_to_select = ID_to_select;
             //------------------------------------
+            if (!Properties.Settings.Default.Last_login_is_admin)
+            {
+                button5.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30004" && (Int32)QQ[3] == 1).Count() > 0; //Imprimer
+            }
+            //--------------------------------------
             new_initial_tbl = new DataTable();
             new_initial_tbl.Columns.Add("PARAM_NME", typeof(string));
             string[] paramss = { "Densité","Leucocites", "Nitrites","pH","Proteines","Couleur"};

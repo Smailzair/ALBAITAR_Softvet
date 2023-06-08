@@ -97,7 +97,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox8.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox8.Location = new System.Drawing.Point(9, 273);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox8.Margin = new System.Windows.Forms.Padding(4);
             this.textBox8.Multiline = true;
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
@@ -394,7 +394,7 @@
             this.Controls.Add(this.label9);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Client_Infos";
             this.Size = new System.Drawing.Size(686, 426);
             this.Enter += new System.EventHandler(this.Client_Infos_Enter);
