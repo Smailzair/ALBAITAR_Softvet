@@ -353,6 +353,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_Checkmark_20px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Checkmark_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_Checkmark_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Checkmark_30px", resourceCulture);
@@ -376,6 +386,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap icons8_clear_search_25px {
             get {
                 object obj = ResourceManager.GetObject("icons8_clear_search_25px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_copy_20px_1 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_copy_20px_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1043,6 +1063,26 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap imageedit_62_2608573935_f1cb27a519bdb5b6ed34049a5b86e317_copy {
+            get {
+                object obj = ResourceManager.GetObject("imageedit_62_2608573935.f1cb27a519bdb5b6ed34049a5b86e317 copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_copy {
+            get {
+                object obj = ResourceManager.GetObject("logo copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap MODIF {
             get {
                 object obj = ResourceManager.GetObject("MODIF", resourceCulture);
@@ -1156,6 +1196,26 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy {
             get {
                 object obj = ResourceManager.GetObject("pngtree-star-horizontal-line-decoration-elements-2986140-png-image_1731077 copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngtree_vet_doctors_with_animals_png_image_8768727_copy1_copy {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-vet-doctors-with-animals-png-image_8768727 copy1 copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngtree_vet_doctors_with_animals_png_image_876872799 {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-vet-doctors-with-animals-png-image_876872799", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

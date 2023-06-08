@@ -45,8 +45,8 @@ namespace ALBAITAR_Softvet
             }
             else
             {
-                Thread RancoVerif = new Thread(PreConnection.check_app_actiavtion);
-                RancoVerif.Start();
+                //Thread RancoVerif = new Thread(PreConnection.check_app_actiavtion);
+                //RancoVerif.Start();
                 //---------------------------------------
                 string procName = Process.GetCurrentProcess().ProcessName;
                 // get the list of all processes by that name

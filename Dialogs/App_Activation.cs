@@ -35,6 +35,9 @@ namespace ALBAITAR_Softvet.Dialogs
             label8.Text = PreConnection.generate_ID_of_client();
             label9.Text = Environment.MachineName;
             label7.Text = Environment.UserName;
+            textBox1.Validating -= textBox1_Validating;            
+            textBox1.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email);
+            textBox1.Validating += textBox1_Validating;
             //-----------------------
             string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
             if (PreConnection.Verif_Activation_SOftVet(codd))
@@ -110,19 +113,19 @@ namespace ALBAITAR_Softvet.Dialogs
 
             // The email address is not valid
             return false;
-
-
         }
         private void button3_Click(object sender, EventArgs e)
         {
             textBox1_Validating(null, null);
             if (label8.Text.Length == 29 && textBox1.BackColor != Color.LightCoral)
-            {
+            {                
+                Properties.Settings.Default.Codifed_Activation_Email = PreConnection.Codify_txt(textBox1.Text);
+                //-------------------
                 if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
                 {
                     MimeMessage Mssg = new MimeMessage();
-                    Mssg.From.Add(new MailboxAddress("AlBaitar SoftVet", "rancosoft@gmail.com"));
-                    Mssg.To.Add(MailboxAddress.Parse(textBox1.Text));
+                    Mssg.From.Add(new MailboxAddress("AlBaitar SoftVet", textBox1.Text));
+                    Mssg.To.Add(MailboxAddress.Parse("albaitar.technologie@gmail.com"));
                     Mssg.Subject = "ALBAITAR Softvet - Demande code d'activation";
                     Mssg.Body = new TextPart("plain")
                     {
@@ -237,11 +240,8 @@ namespace ALBAITAR_Softvet.Dialogs
                         Verifyed_001 = true;
                         PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
                     }
-                    else //Not activated
-                    {
-
-                    }
-                    if (Verifyed_001 && PreConnection.Verif_Activation_SOftVet(textBox3.Text))
+                    //--------------
+                    if (Verifyed_001 || (PreConnection.Verif_Activation_SOftVet(textBox3.Text) && PreConnection.ReadFromRegistry("Déja_try_version") != "OUI"))
                     {
                         MessageBox.Show("Produit bien Activé !\n\n  ** Bienvenue avec AL BAITAR SoftVet **\n\n","",MessageBoxButtons.OK,MessageBoxIcon.Information);                        
                         label6.Text = textBox3.Text.Substring(0, 3) + "***************" + textBox3.Text.Substring(22, 2);
@@ -300,6 +300,12 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             new Connection_Str().ShowDialog();
             Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(label8.Text);
+            button2.Image = Properties.Resources.icons8_Checkmark_20px;
         }
     }
 

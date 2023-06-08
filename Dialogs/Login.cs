@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet
@@ -46,6 +42,7 @@ namespace ALBAITAR_Softvet
             InitializeComponent();
             just_return_answer1  = just_return_answer ?? false;
             specified_usr_id = specified_user_id ?? -1;
+            maskedTextBox1.Focus();
         }
         DataTable datat;
         private void Login_Load(object sender, EventArgs e)
@@ -104,6 +101,7 @@ namespace ALBAITAR_Softvet
             else
             {
                 maskedTextBox1.BackColor = Color.LightCoral;
+                maskedTextBox1.Focus();
                 maskedTextBox1.SelectAll();
                 linkLabel1.Visible = true;
                 //-----------
@@ -125,5 +123,9 @@ namespace ALBAITAR_Softvet
             (new Login_Pass_Forgot(comboBox1.SelectedValue.ToString())).ShowDialog();
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            maskedTextBox1.Focus();
+        }
     }
 }

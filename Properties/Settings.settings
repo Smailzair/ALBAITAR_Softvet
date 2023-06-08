@@ -11,24 +11,6 @@
     <Setting Name="App_Closed_By_User" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="RANCOSOFT_LAST_USED_DATE" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RANCOSOFT_LAST_DEVICE_NAME" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RANCOSOFT_LAST_ACT_VERIF_DAYS_NB" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="RANCOSOFT_LAST_ACT_VERIF_DATE" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RANCOSOFT_CLIENT_KEY" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RANCOSOFT_ACTIVE_CODE_ID" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="RANCOSOFT_GMAIL_AUTHENT" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

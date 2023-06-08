@@ -25,8 +25,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web.WebPages;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
@@ -40,6 +42,7 @@ namespace ALBAITAR_Softvet
         DateTime last_update_time = new DateTime(1900, 12, 31);
         Thread th;
         Thread Activ_Ver;
+        Thread RancoSoft_Verif;
         public static DataTable ADRESSES_SITES;
         bool sites_table_ready = false;
         public static DataTable Autorisations;
@@ -55,6 +58,7 @@ namespace ALBAITAR_Softvet
         int frst_scrll = -1;
         int prev_sel_rw_facture = -1;
         int frst_scrll_facture = -1;
+        string text_to_add_to_title = "";
         //----------
         DataTable chosen_anim_from_search;
         DataTable chosen_client_from_search;
@@ -75,10 +79,12 @@ namespace ALBAITAR_Softvet
         bool loading_fact_tab = false;
         static bool ended_loading_fact_tab = false;
         //-------------------
-
         public Main_Frm()
         {
-            InitializeComponent();
+            new Splash().Show();
+            //------------------
+            InitializeComponent();            
+            //-------------            
             timer1.Enabled = true;
             //-----------
             tabControl1.Alignment = Properties.Settings.Default.Main_Frm_Tabs_Horientation_Is_Verticatl ? TabAlignment.Left : TabAlignment.Top;
@@ -118,14 +124,18 @@ namespace ALBAITAR_Softvet
             //------------------------------
             th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting perfermance of "Clients" from
             th.Start();
-            th.Join();
+            th.Join();            
             //--------------
             Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
             Activ_Ver.Start();
+            Activ_Ver.Join();                    
             //--------------
-
+            RancoSoft_Verif = new Thread(new ThreadStart(PreConnection.check_app_actiavtion)); //To check if is manual stopped by RancoSoft
+            RancoSoft_Verif.Start();
+            //--------
+            
         }
-
+        
         public void Activ_Verif()
         {
 
@@ -164,11 +174,6 @@ namespace ALBAITAR_Softvet
                     if (dttb.Rows.Count > 0) //Good
                     {
                         Verifyed_001 = true;
-                        PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
-                    }
-                    else //Not activated
-                    {
-
                     }
                 }
 
@@ -204,7 +209,6 @@ namespace ALBAITAR_Softvet
                         string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
                         if (!PreConnection.Verif_Activation_SOftVet(codd))
                         {
-
                             string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
                             DateTime dt = DateTime.UtcNow;
                             if (strt_date == "")
@@ -218,12 +222,12 @@ namespace ALBAITAR_Softvet
 
                             int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
 
-                            this.Text += " (Produit non activé - réste [" + delay + "] jours)";
+                            text_to_add_to_title = " (Produit non activé - réste [" + delay + "] jours)";
                             if (delay <= 0)
                             {
+                                PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
                                 Properties.Settings.Default.Codified_Activate_Code = "";
                                 Properties.Settings.Default.Save();
-                                //new Dialogs.App_Activation().ShowDialog();
                                 Close();
                                 Application.Run(new Dialogs.App_Activation());
                             }
@@ -233,7 +237,6 @@ namespace ALBAITAR_Softvet
                     {
                         Properties.Settings.Default.Codified_Activate_Code = "";
                         Properties.Settings.Default.Save();
-                        //new Dialogs.App_Activation().ShowDialog();
                         Close();
                         Application.Run(new Dialogs.App_Activation());
                     }
@@ -266,7 +269,7 @@ namespace ALBAITAR_Softvet
 
                 }
             }
-
+            
         }
 
         public void Load_sites_table()
@@ -281,14 +284,14 @@ namespace ALBAITAR_Softvet
             {
                 th.Join();
             }
-            if (System.Windows.Forms.Application.OpenForms["Clients"] == null)
+            if (Application.OpenForms["Clients"] == null)
             {
                 new Clients(-1, 1, -1).Show();
             }
             else
             {
-                System.Windows.Forms.Application.OpenForms["Clients"].WindowState = System.Windows.Forms.Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Clients"].WindowState;
-                System.Windows.Forms.Application.OpenForms["Clients"].BringToFront();
+                Application.OpenForms["Clients"].WindowState = Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Clients"].WindowState;
+                Application.OpenForms["Clients"].BringToFront();
             }
             Cursor = Cursors.Default;
             panel1.Visible = false;
@@ -314,14 +317,14 @@ namespace ALBAITAR_Softvet
         private void button11_Click(object sender, EventArgs e)
         {
 
-            if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+            if (Application.OpenForms["Animaux"] == null)
             {
                 new Animaux(-1, -1).Show();
             }
             else
             {
-                System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
-                System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+                Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
+                Application.OpenForms["Animaux"].BringToFront();
             }
             panel1.Visible = false;
 
@@ -331,14 +334,14 @@ namespace ALBAITAR_Softvet
         private void button12_Click(object sender, EventArgs e)
         {
 
-            if (System.Windows.Forms.Application.OpenForms["Produits"] == null)
+            if (Application.OpenForms["Produits"] == null)
             {
                 new Produits().Show();
             }
             else
             {
-                System.Windows.Forms.Application.OpenForms["Produits"].WindowState = System.Windows.Forms.Application.OpenForms["Produits"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Produits"].WindowState;
-                System.Windows.Forms.Application.OpenForms["Produits"].BringToFront();
+                Application.OpenForms["Produits"].WindowState = Application.OpenForms["Produits"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Produits"].WindowState;
+                Application.OpenForms["Produits"].BringToFront();
             }
             panel1.Visible = false;
 
@@ -346,14 +349,14 @@ namespace ALBAITAR_Softvet
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (System.Windows.Forms.Application.OpenForms["Agenda"] == null)
+            if (Application.OpenForms["Agenda"] == null)
             {
                 new Agenda(null, null).Show();
             }
             else
             {
-                System.Windows.Forms.Application.OpenForms["Agenda"].WindowState = System.Windows.Forms.Application.OpenForms["Agenda"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Agenda"].WindowState;
-                System.Windows.Forms.Application.OpenForms["Agenda"].BringToFront();
+                Application.OpenForms["Agenda"].WindowState = Application.OpenForms["Agenda"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Agenda"].WindowState;
+                Application.OpenForms["Agenda"].BringToFront();
             }
             panel1.Visible = false;
 
@@ -363,12 +366,11 @@ namespace ALBAITAR_Softvet
         {
             Properties.Settings.Default.Login_Auto_Enter = false;
             Properties.Settings.Default.Save();
-            System.Windows.Forms.Application.Restart();
+            Application.Restart();
         }
 
         private void Main_Frm_Load(object sender, EventArgs e)
         {
-
             WindowState = Properties.Settings.Default.Maximize_Main_Frm ? FormWindowState.Maximized : FormWindowState.Normal;
             Text = "ALBAITAR Softvet - " + Properties.Settings.Default.Last_login_user_full_nme;
             string cab_doct = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
@@ -391,12 +393,12 @@ namespace ALBAITAR_Softvet
                     }
                     else
                     {
-                        System.Windows.Forms.Application.Exit();
+                        Application.Exit();
                     }
                 }
                 else
                 {
-                    System.Windows.Forms.Application.Exit();
+                    Application.Exit();
                 }
             }
             else
@@ -479,6 +481,8 @@ namespace ALBAITAR_Softvet
             Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
             Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
             comboBox1.SelectedIndex = 0;
+            //-----
+            Application.OpenForms["Splash"]?.Close();
         }
 
         private void refresh_main_tables()
@@ -526,14 +530,14 @@ namespace ALBAITAR_Softvet
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (System.Windows.Forms.Application.OpenForms["Laboratoire"] == null)
+            if (Application.OpenForms["Laboratoire"] == null)
             {
                 new Laboratoire(-1, "", false, "").Show();
             }
             else
             {
-                System.Windows.Forms.Application.OpenForms["Laboratoire"].WindowState = System.Windows.Forms.Application.OpenForms["Laboratoire"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Laboratoire"].WindowState;
-                System.Windows.Forms.Application.OpenForms["Laboratoire"].BringToFront();
+                Application.OpenForms["Laboratoire"].WindowState = Application.OpenForms["Laboratoire"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Laboratoire"].WindowState;
+                Application.OpenForms["Laboratoire"].BringToFront();
             }
             panel1.Visible = false;
         }
@@ -552,7 +556,8 @@ namespace ALBAITAR_Softvet
 
         private void Main_Frm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            Application.OpenForms["Splash"]?.Close();
+            //-----------
             string filePath = "C:\\ProgramData\\Sys32.txt";
             if (!File.Exists(filePath))
             {
@@ -578,14 +583,14 @@ namespace ALBAITAR_Softvet
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (System.Windows.Forms.Application.OpenForms["Vente"] == null)
+            if (Application.OpenForms["Vente"] == null)
             {
                 new Vente(-1).Show();
             }
             else
             {
-                System.Windows.Forms.Application.OpenForms["Vente"].WindowState = System.Windows.Forms.Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Vente"].WindowState;
-                System.Windows.Forms.Application.OpenForms["Vente"].BringToFront();
+                Application.OpenForms["Vente"].WindowState = Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Vente"].WindowState;
+                Application.OpenForms["Vente"].BringToFront();
             }
             panel1.Visible = false;
         }
@@ -1444,15 +1449,15 @@ namespace ALBAITAR_Softvet
         {
             if (selected_animal_id > -1)
             {
-                if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+                if (Application.OpenForms["Animaux"] == null)
                 {
                     new Animaux(selected_animal_id, -1).Show();
                 }
                 else
                 {
                     Animaux.ID_to_selectt = selected_animal_id;
-                    System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
-                    System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+                    Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
+                    Application.OpenForms["Animaux"].BringToFront();
                 }
                 panel1.Visible = false;
             }
@@ -1466,7 +1471,7 @@ namespace ALBAITAR_Softvet
                 if (e.RowIndex > -1)
                 {
 
-                    if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+                    if (Application.OpenForms["Animaux"] == null)
                     {
                         new Animaux((int)dataGridView2.Rows[e.RowIndex].Cells["ANIM_ID"].Value, (int)dataGridView2.Rows[e.RowIndex].Cells["ID_VISITE"].Value).Show();
                     }
@@ -1474,8 +1479,8 @@ namespace ALBAITAR_Softvet
                     {
                         Animaux.ID_to_selectt = (int)dataGridView2.Rows[e.RowIndex].Cells["ANIM_ID"].Value;
                         Animaux.visite_idd = (int)dataGridView2.Rows[e.RowIndex].Cells["ID_VISITE"].Value;
-                        System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
-                        System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+                        Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
+                        Application.OpenForms["Animaux"].BringToFront();
                     }
                     panel1.Visible = false;
                 }
@@ -1496,7 +1501,7 @@ namespace ALBAITAR_Softvet
         {
             if (selected_animal_id > -1)
             {
-                if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+                if (Application.OpenForms["Animaux"] == null)
                 {
                     new Animaux(selected_animal_id, -2).Show();
                 }
@@ -1504,8 +1509,8 @@ namespace ALBAITAR_Softvet
                 {
                     Animaux.ID_to_selectt = selected_animal_id;
                     Animaux.visite_idd = -2;
-                    System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
-                    System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+                    Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
+                    Application.OpenForms["Animaux"].BringToFront();
                 }
                 panel1.Visible = false;
             }
@@ -1739,7 +1744,7 @@ namespace ALBAITAR_Softvet
         private void button8_Click(object sender, EventArgs e)
         {
 
-            if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+            if (Application.OpenForms["Animaux"] == null)
             {
                 new Animaux(-2, -1).Show();
             }
@@ -1747,8 +1752,8 @@ namespace ALBAITAR_Softvet
             {
                 Animaux.ID_to_selectt = -2;
                 Animaux.visite_idd = -1;
-                System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
-                System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+                Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
+                Application.OpenForms["Animaux"].BringToFront();
             }
 
         }
@@ -1768,7 +1773,7 @@ namespace ALBAITAR_Softvet
 
             if (dataGridView3.SelectedRows.Count > 0)
             {
-                if (System.Windows.Forms.Application.OpenForms["Animaux"] == null)
+                if (Application.OpenForms["Animaux"] == null)
                 {
                     new Animaux((int)dataGridView3.SelectedRows[0].Cells["ANIMM_ID"].Value, -1).Show();
                 }
@@ -1776,8 +1781,8 @@ namespace ALBAITAR_Softvet
                 {
                     Animaux.ID_to_selectt = (int)dataGridView3.SelectedRows[0].Cells["ANIMM_ID"].Value;
                     Animaux.visite_idd = -1;
-                    System.Windows.Forms.Application.OpenForms["Animaux"].WindowState = System.Windows.Forms.Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Animaux"].WindowState;
-                    System.Windows.Forms.Application.OpenForms["Animaux"].BringToFront();
+                    Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
+                    Application.OpenForms["Animaux"].BringToFront();
                 }
             }
         }
@@ -1873,7 +1878,7 @@ namespace ALBAITAR_Softvet
         {
             if (button19.Visible && dataGridView4.Rows[e.RowIndex].Cells["FINN_CLIENT_ID"].Value != DBNull.Value)
             {
-                if (System.Windows.Forms.Application.OpenForms["Clients"] == null)
+                if (Application.OpenForms["Clients"] == null)
                 {
                     new Clients((int)dataGridView4.Rows[e.RowIndex].Cells["FINN_CLIENT_ID"].Value, 2, (int)dataGridView4.Rows[e.RowIndex].Cells["FINN_ID"].Value).Show();
                 }
@@ -1882,8 +1887,8 @@ namespace ALBAITAR_Softvet
                     Clients.ID_to_selectt = (int)dataGridView4.Rows[e.RowIndex].Cells["FINN_CLIENT_ID"].Value;
                     Clients.Infoss_1_Caiss_2 = 2;
                     Clients.Caisse_Idx = (int)dataGridView4.Rows[e.RowIndex].Cells["FINN_ID"].Value;
-                    System.Windows.Forms.Application.OpenForms["Clients"].WindowState = System.Windows.Forms.Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Clients"].WindowState;
-                    System.Windows.Forms.Application.OpenForms["Clients"].BringToFront();
+                    Application.OpenForms["Clients"].WindowState = Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Clients"].WindowState;
+                    Application.OpenForms["Clients"].BringToFront();
                 }
 
             }
@@ -1893,15 +1898,15 @@ namespace ALBAITAR_Softvet
         {
             if (button21.Visible && dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value != DBNull.Value)
             {
-                if (System.Windows.Forms.Application.OpenForms["Vente"] == null)
+                if (Application.OpenForms["Vente"] == null)
                 {
                     new Vente((int)dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value).Show();
                 }
                 else
                 {
                     Vente.to_select_idx = (int)dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn1"].Value;
-                    System.Windows.Forms.Application.OpenForms["Vente"].WindowState = System.Windows.Forms.Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Vente"].WindowState;
-                    System.Windows.Forms.Application.OpenForms["Vente"].BringToFront();
+                    Application.OpenForms["Vente"].WindowState = Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Vente"].WindowState;
+                    Application.OpenForms["Vente"].BringToFront();
                 }
 
             }
@@ -1918,7 +1923,7 @@ namespace ALBAITAR_Softvet
 
         private void button16_Click_1(object sender, EventArgs e)
         {
-            if (System.Windows.Forms.Application.OpenForms["Clients"] == null)
+            if (Application.OpenForms["Clients"] == null)
             {
                 new Clients(selected_client_id, 2, -2).Show();
             }
@@ -1927,22 +1932,22 @@ namespace ALBAITAR_Softvet
                 Clients.ID_to_selectt = selected_client_id;
                 Clients.Infoss_1_Caiss_2 = 2;
                 Clients.Caisse_Idx = -2;
-                System.Windows.Forms.Application.OpenForms["Clients"].WindowState = System.Windows.Forms.Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Clients"].WindowState;
-                System.Windows.Forms.Application.OpenForms["Clients"].BringToFront();
+                Application.OpenForms["Clients"].WindowState = Application.OpenForms["Clients"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Clients"].WindowState;
+                Application.OpenForms["Clients"].BringToFront();
             }
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
-            if (System.Windows.Forms.Application.OpenForms["Vente"] == null)
+            if (Application.OpenForms["Vente"] == null)
             {
                 new Vente(-2).Show();
             }
             else
             {
                 Vente.to_select_idx = -2;
-                System.Windows.Forms.Application.OpenForms["Vente"].WindowState = System.Windows.Forms.Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : System.Windows.Forms.Application.OpenForms["Vente"].WindowState;
-                System.Windows.Forms.Application.OpenForms["Vente"].BringToFront();
+                Application.OpenForms["Vente"].WindowState = Application.OpenForms["Vente"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Vente"].WindowState;
+                Application.OpenForms["Vente"].BringToFront();
             }
         }
 
@@ -1982,6 +1987,12 @@ namespace ALBAITAR_Softvet
         private void timer1_Tick(object sender, EventArgs e)
         {
             time_delay++;
+            if(text_to_add_to_title.Length > 0)
+            {
+                this.Text += text_to_add_to_title;
+                text_to_add_to_title = "";
+            }
+            
         }
 
         private void button23_Click(object sender, EventArgs e)

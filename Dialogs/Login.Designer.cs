@@ -82,6 +82,7 @@ namespace ALBAITAR_Softvet
             this.comboBox1.Size = new System.Drawing.Size(196, 24);
             this.comboBox1.TabIndex = 3;
             this.comboBox1.ValueMember = "ID";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label2
             // 

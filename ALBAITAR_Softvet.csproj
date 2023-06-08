@@ -327,6 +327,12 @@
     <Compile Include="Dialogs\Nn_Autorized.Designer.cs">
       <DependentUpon>Nn_Autorized.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Splash.Designer.cs">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </Compile>
     <Compile Include="Labo\Autre_Lab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -504,6 +510,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Nn_Autorized.resx">
       <DependentUpon>Nn_Autorized.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Splash.resx">
+      <DependentUpon>Splash.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Labo\Autre_Lab.resx">
       <DependentUpon>Autre_Lab.cs</DependentUpon>
@@ -789,6 +798,11 @@
     <None Include="Resources\icons8_database_administrator_20px.png" />
     <None Include="Resources\image_processing20210904-22504-j2w21r.gif" />
     <None Include="Resources\output-onlinegiftools.gif" />
+    <None Include="Resources\icons8_copy_20px_1.png" />
+    <None Include="Resources\icons8_Checkmark_20px.png" />
+    <None Include="Resources\pngtree-vet-doctors-with-animals-png-image_8768727991.png" />
+    <None Include="Resources\logo copy.png" />
+    <None Include="Resources\imageedit_62_2608573935.f1cb27a519bdb5b6ed34049a5b86e317 copy.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -142,112 +142,65 @@ namespace ALBAITAR_Softvet
         ////////////////////////////////////////////
         public static void check_app_actiavtion()
         {
-
             //--------------------------
-            bool good = false;
-            bool not_autorized = false;
+            int ch = -1;
             try
             {
-                int previous_id = Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID;
-                int ch = send_infos_to_server(previous_id);
-                Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE = DateTime.Now.ToString();
-                Properties.Settings.Default.Save();
-                Properties.Settings.Default.Reload();
-                //===================================================================
-                if (ch > 0)
-                {
-                    Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = ch;
-                    Properties.Settings.Default.Save();
-                    Properties.Settings.Default.Reload();
-                    good = true;
-                    WriteIntoRegistry(Application.ProductName + "_Activ", Codify_txt(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE + Environment.MachineName + System.Security.Principal.WindowsIdentity.GetCurrent().Name + SERIAL.Substring(SERIAL.Length - 4)));
-                }
-                else
-                {
-                    int ch2 = -2;
-                    if (previous_id > 0)
-                    {
-                        try { ch2 = send_infos_to_server(0); } catch { }
-                        if (ch2 > 0)
-                        {
-                            Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = ch2;
-                            Properties.Settings.Default.Save();
-                            Properties.Settings.Default.Reload();
-                            good = true;
-                            WriteIntoRegistry(Application.ProductName + "_Activ", Codify_txt(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE + Environment.MachineName + System.Security.Principal.WindowsIdentity.GetCurrent().Name + SERIAL.Substring(SERIAL.Length - 4)));
-                        }
-                        else if (ch2 == -11) //Manual Stop (Forcé)
-                        {
-                            not_autorized = true;
-                            Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = 0;
-                            Properties.Settings.Default.Save();
-                            Properties.Settings.Default.Reload();
-                            WriteIntoRegistry(Application.ProductName + "_Activ", "No");
-                        }
-                    }
-                    else
-                    {
-                        not_autorized = true;
-                        Properties.Settings.Default.RANCOSOFT_ACTIVE_CODE_ID = 0;
-                        Properties.Settings.Default.Save();
-                        Properties.Settings.Default.Reload();
-                        WriteIntoRegistry(Application.ProductName + "_Activ", "No");
-                    }
-
-                }
+                ch = Verif_manual_stop_of_RancoSoft();
             }
-            catch
-            { }
-            if (!good)
+            catch { }
+            //----------
+            if (ch <= 0) // NOT STOPED (Or not yet)
             {
-                if (not_autorized)
+                if (ch == 0) //Verifed (Good)
                 {
-                    foreach (Form frm in Application.OpenForms)
-                    {
-
-                        frm.Dispose();
-                    }
-                    MessageBox.Show("Contactez votre fournisseur de logiciel.", "Attention :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    Application.Exit();
+                    WriteIntoRegistry(Application.ProductName + "_Activ", "Yes");
+                    WriteIntoRegistry("RANCOSOFT_LAST_ACT_VERIF_DATE", DateTime.Now.ToString());
                 }
-                else
+                else //-1 Not veried
                 {
-                    DateTime dte = new DateTime(1990, 01, 01);
-                    if (Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE.Length > 0)
+                    WriteIntoRegistry(Application.ProductName + "_Activ", "No");
+                    DateTime dte;
+                    if (ReadFromRegistry("RANCOSOFT_LAST_ACT_VERIF_DATE").Length > 0)
                     {
-                        DateTime.TryParse(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE, out dte);
+                        DateTime.TryParse(ReadFromRegistry("RANCOSOFT_LAST_ACT_VERIF_DATE"), out dte);
                     }
                     else
                     {
                         dte = DateTime.Now;
                     }
-                    if ((DateTime.Now - dte).TotalDays > 30 || ReadFromRegistry(Application.ProductName + "_Activ") != Codify_txt(Properties.Settings.Default.RANCOSOFT_LAST_ACT_VERIF_DATE + Environment.MachineName + System.Security.Principal.WindowsIdentity.GetCurrent().Name + SERIAL.Substring(SERIAL.Length - 4)))
+                    if ((DateTime.Now - dte).TotalDays > 60)
                     {
                         foreach (Form frm in Application.OpenForms)
                         {
                             frm.Dispose();
                         }
-                        MessageBox.Show("Vous avez obligatoirement besoin d'internet ... !\nVeuillez vérifier la connection puis lancer logiciel.", "Besoin d'une connection Internet", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        MessageBox.Show("Vous avez obligatoirement besoin d'internet ... !\nVeuillez vérifier la connection puis lancer logiciel.", "Besoin d'une connection Internet ", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                         Application.Exit();
                     }
                 }
+                //-----------
 
-
+            }
+            else //STOPED
+            {
+                WriteIntoRegistry(Application.ProductName + "_Activ", "No");
+                WriteIntoRegistry("RANCOSOFT_LAST_ACT_VERIF_DATE", DateTime.Now.ToString());
+                //--------------------
+                MessageBox.Show("Vous avez un problème ... !\nN'hisiter de nous contacter pour faire le diagnostique.\n\n[ albaitar.technologie@gmail.com ]", "--", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
 
-
-        public static int send_infos_to_server(int ID_IN)
+        public static int Verif_manual_stop_of_RancoSoft()
         {
-            int ID_OUT = ID_IN;
+            int ID_OUT = -1;
             if (SERIAL.Length > 0)
             {
-                MySqlCommand cmmd = new MySqlCommand("Insert_Into_CODES_ACTIVES", client_manag);
+                MySqlCommand cmmd = new MySqlCommand("MANUAL_STOP_2nd_VERIF", client_manag);
                 cmmd.CommandType = CommandType.StoredProcedure;
-                cmmd.Parameters.AddWithValue("@ACTIV_KEY", SERIAL).Direction = ParameterDirection.Input;
-                cmmd.Parameters.AddWithValue("@Device_nme", Environment.MachineName).Direction = ParameterDirection.Input;
-                cmmd.Parameters.AddWithValue("@OP_ID_IN", ID_IN).Direction = ParameterDirection.Input;
-                cmmd.Parameters.AddWithValue("@OP_ID_OUT", ID_OUT).Direction = ParameterDirection.Output;
+                cmmd.Parameters.AddWithValue("ACT_KEY", SERIAL).Direction = ParameterDirection.Input;
+                cmmd.Parameters.AddWithValue("MAN_STOP", ID_OUT).Direction = ParameterDirection.Output; //1-> Stopped   0-> Not stopped  (-1)->Nothing
                 if (client_manag.State != ConnectionState.Open)
                 {
                     client_manag.Open();
@@ -258,7 +211,7 @@ namespace ALBAITAR_Softvet
                     try
                     {
                         cmmd.ExecuteNonQuery();
-                        ID_OUT = (int)cmmd.Parameters["@OP_ID_OUT"].Value;
+                        ID_OUT = (int)cmmd.Parameters["MAN_STOP"].Value;
                         //==========================================================
                         //Load Gmail Authent Pass (to use it to send forgot login pass of login of clients)
                         MySqlDataAdapter adp = new MySqlDataAdapter("SELECT VALUE_TXT FROM PARAMS_AND_VALUES WHERE NME = 'RancoSoft Gmail Auth';", client_manag);
@@ -659,7 +612,7 @@ namespace ALBAITAR_Softvet
             }
             else
             {
-               return false;
+                return false;
             }
 
 

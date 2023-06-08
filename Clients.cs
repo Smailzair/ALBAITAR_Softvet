@@ -1,6 +1,4 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
-//using Microsoft.Office.Interop.Word;
-using ServiceStack.Script;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,14 +7,10 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
 using Excc = Microsoft.Office.Interop.Excel;
-//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ALBAITAR_Softvet.Resources
 {
@@ -32,17 +26,18 @@ namespace ALBAITAR_Softvet.Resources
         bool Is_New = true;
         bool can_start_historic_saving = false;
         DataTable chosen_client_from_search;
+        bool monetic_not_autorsed = false;
         public Clients(int ID_to_select, int Infos_1_Caiss_2, int Caisse_Id)
         {
-            InitializeComponent();            
+            InitializeComponent();
             tabControl1.TabPages.Remove(tabPage1);
             ID_to_selectt = ID_to_select;
             Infoss_1_Caiss_2 = Infos_1_Caiss_2;
             Caisse_Idx = Caisse_Id;
+            
             //----------------------
             Load_clients_from_DB();
             //---------------------
-            //sites = PreConnection.Load_data_keeping_duplicates("SELECT * FROM tb_adresses;");
             sites = Main_Frm.ADRESSES_SITES;
             wilayaa = new List<string>();
             cities = new List<string>();
@@ -270,73 +265,90 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bool autorisat = Properties.Settings.Default.Last_login_is_admin || (Is_New && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10001" && (Int32)QQ[3] == 1).Count() > 0) || (!Is_New && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10003" && (Int32)QQ[3] == 1).Count() > 0);
-            if (autorisat)
+            bool insert_autori = true;
+            bool updadate_autori = true;
+            if (!Properties.Settings.Default.Last_login_is_admin)
             {
-                bool all_ready = true;
-                textBox2.BackColor = textBox2.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
-                textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
-                textBox4.BackColor = textBox4.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
-                all_ready &= textBox2.Text.TrimStart().TrimEnd() != string.Empty;
-                all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
-                all_ready &= textBox4.Text.TrimStart().TrimEnd() != string.Empty;
-                all_ready &= !label13.Visible;
-                //-------------
-                label12.Visible = !all_ready;
-                //-------------
-                if (all_ready)
+                insert_autori = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10001" && (Int32)QQ[3] == 1).Count() > 0;
+                updadate_autori = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10003" && (Int32)QQ[3] == 1).Count() > 0;
+            }
+
+            bool all_ready = true;
+            textBox2.BackColor = textBox2.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
+            textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
+            textBox4.BackColor = textBox4.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
+            all_ready &= textBox2.Text.TrimStart().TrimEnd() != string.Empty;
+            all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+            all_ready &= textBox4.Text.TrimStart().TrimEnd() != string.Empty;
+            all_ready &= !label13.Visible;
+            //-------------
+            label12.Visible = !all_ready;
+            //-------------
+            if (all_ready)
+            {
+                if (Is_New) //INSERT
                 {
-                    if (Is_New) //INSERT
+                    if (insert_autori)
                     {
                         PreConnection.Excut_Cmd("INSERT INTO `tb_clients` "
-                                + "(`SEX`,"
-                                + "`FAMNME`,"
-                                + "`NME`,"
-                                + "`NUM_CNI`,"
-                                + "`ADRESS`,"
-                                + "`POSTAL_CODE`,"
-                                + "`CITY`,"
-                                + "`WILAYA`,"
-                                + "`NUM_PHONE`,"
-                                + "`EMAIL`,"
-                                + "`OBSERVATIONS`)"
-                                + "VALUES"
-                                + "('" + comboBox1.Text.Replace("'", "''") + "',"
-                                + "'" + textBox3.Text.Replace("'", "''") + "',"
-                                + "'" + textBox2.Text.Replace("'", "''") + "',"
-                                + "'" + textBox4.Text.Replace("'", "''") + "',"
-                                + "'" + textBox5.Text.Replace("'", "''") + "',"
-                                + "'" + textBox6.Text.Replace("'", "''") + "',"
-                                + "'" + comboBox2.Text.Replace("'", "''") + "',"
-                                + "'" + comboBox3.Text.Replace("'", "''") + "',"
-                                + "'" + maskedTextBox1.Text.Replace("'", "''") + "',"
-                                + "'" + textBox7.Text.Replace("'", "''") + "',"
-                                + "'" + textBox8.Text.Replace("'", "''") + "');");
+                            + "(`SEX`,"
+                            + "`FAMNME`,"
+                            + "`NME`,"
+                            + "`NUM_CNI`,"
+                            + "`ADRESS`,"
+                            + "`POSTAL_CODE`,"
+                            + "`CITY`,"
+                            + "`WILAYA`,"
+                            + "`NUM_PHONE`,"
+                            + "`EMAIL`,"
+                            + "`OBSERVATIONS`)"
+                            + "VALUES"
+                            + "('" + comboBox1.Text.Replace("'", "''") + "',"
+                            + "'" + textBox3.Text.Replace("'", "''") + "',"
+                            + "'" + textBox2.Text.Replace("'", "''") + "',"
+                            + "'" + textBox4.Text.Replace("'", "''") + "',"
+                            + "'" + textBox5.Text.Replace("'", "''") + "',"
+                            + "'" + textBox6.Text.Replace("'", "''") + "',"
+                            + "'" + comboBox2.Text.Replace("'", "''") + "',"
+                            + "'" + comboBox3.Text.Replace("'", "''") + "',"
+                            + "'" + maskedTextBox1.Text.Replace("'", "''") + "',"
+                            + "'" + textBox7.Text.Replace("'", "''") + "',"
+                            + "'" + textBox8.Text.Replace("'", "''") + "');");
                     }
-                    else //UPDATE
+                    else
+                    {
+                        new Non_Autorized_Msg("").ShowDialog();
+                    }
+
+                }
+                else //UPDATE
+                {
+                    if (updadate_autori)
                     {
                         PreConnection.Excut_Cmd("UPDATE `tb_clients` SET "
-                                + "`SEX` = '" + comboBox1.Text.Replace("'", "''") + "',"
-                                + "`FAMNME` = '" + textBox3.Text.Replace("'", "''") + "',"
-                                + "`NME` = '" + textBox2.Text.Replace("'", "''") + "',"
-                                + "`NUM_CNI` = '" + textBox4.Text.Replace("'", "''") + "',"
-                                + "`ADRESS` = '" + textBox5.Text.Replace("'", "''") + "',"
-                                + "`POSTAL_CODE` = '" + textBox6.Text.Replace("'", "''") + "',"
-                                + "`CITY` = '" + comboBox2.Text.Replace("'", "''") + "',"
-                                + "`WILAYA` = '" + comboBox3.Text.Replace("'", "''") + "',"
-                                + "`NUM_PHONE` = '" + maskedTextBox1.Text.Replace("'", "''") + "',"
-                                + "`EMAIL` = '" + textBox7.Text.Replace("'", "''") + "',"
-                                + "`OBSERVATIONS` = '" + textBox8.Text.Replace("'", "''") + "' "
-                                + "WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
+                            + "`SEX` = '" + comboBox1.Text.Replace("'", "''") + "',"
+                            + "`FAMNME` = '" + textBox3.Text.Replace("'", "''") + "',"
+                            + "`NME` = '" + textBox2.Text.Replace("'", "''") + "',"
+                            + "`NUM_CNI` = '" + textBox4.Text.Replace("'", "''") + "',"
+                            + "`ADRESS` = '" + textBox5.Text.Replace("'", "''") + "',"
+                            + "`POSTAL_CODE` = '" + textBox6.Text.Replace("'", "''") + "',"
+                            + "`CITY` = '" + comboBox2.Text.Replace("'", "''") + "',"
+                            + "`WILAYA` = '" + comboBox3.Text.Replace("'", "''") + "',"
+                            + "`NUM_PHONE` = '" + maskedTextBox1.Text.Replace("'", "''") + "',"
+                            + "`EMAIL` = '" + textBox7.Text.Replace("'", "''") + "',"
+                            + "`OBSERVATIONS` = '" + textBox8.Text.Replace("'", "''") + "' "
+                            + "WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
                     }
-                    //----------------
-                    Load_clients_from_DB();
+                    else
+                    {
+                        new Non_Autorized_Msg("").ShowDialog();
+                    }
+
                 }
+                //----------------
+                Load_clients_from_DB();
             }
-            else
-            {
-                new Non_Autorized_Msg("").ShowDialog();
-            }
+
 
 
         }
@@ -380,6 +392,10 @@ namespace ALBAITAR_Softvet.Resources
             Is_New = false;
             Load_selected_client_fields();
             Load_finace_historic();
+            if (monetic_not_autorsed && tabPage1 != null)
+            {
+                tabControl1.TabPages.Remove(tabPage1);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -409,17 +425,17 @@ namespace ALBAITAR_Softvet.Resources
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {            
+        {
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 string fff = "";
                 dataGridView1.SelectedRows.Cast<DataGridViewRow>().ToList().ForEach(row => fff += "," + row.Cells["ID"].Value);
-                fff = fff.Substring(1);                
-                DataTable dt = PreConnection.Load_data("SELECT SUM(`DEBIT`-`CREDIT`) AS SLLD FROM tb_clients_finance WHERE CLIENT_ID IN (" + fff + ");");                
+                fff = fff.Substring(1);
+                DataTable dt = PreConnection.Load_data("SELECT SUM(`DEBIT`-`CREDIT`) AS SLLD FROM tb_clients_finance WHERE CLIENT_ID IN (" + fff + ");");
                 decimal dd = dt.Rows[0][0] != DBNull.Value ? (decimal)dt.Rows[0][0] : 0;
                 string slld = dd != 0 ? "- Il y a des soldes monétiques non réglés !" : "";
-                if (MessageBox.Show("Vous étes sures de supprimer " + (dataGridView1.SelectedRows.Count > 1 ? ("ces [" + dataGridView1.SelectedRows.Count + "] clients ?") : "ce client ?") + "\n\n\nAttention :\n\n"+slld+"\n\n-Tous " + (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " animaux seront supprimés!\n(Avec tous informations associés (Laboratires, Agenda ...))\n", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {                                 
+                if (MessageBox.Show("Vous étes sures de supprimer " + (dataGridView1.SelectedRows.Count > 1 ? ("ces [" + dataGridView1.SelectedRows.Count + "] clients ?") : "ce client ?") + "\n\n\nAttention :\n\n" + slld + "\n\n-Tous " + (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " animaux seront supprimés!\n(Avec tous informations associés (Laboratires, Agenda ...))\n", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
                     PreConnection.Excut_Cmd("DELETE FROM tb_clients WHERE ID IN (" + fff + ");");
                     Load_clients_from_DB();
                 }
@@ -526,7 +542,18 @@ namespace ALBAITAR_Softvet.Resources
             {
                 button4.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10002" && (Int32)QQ[3] == 1).Count() > 0; //Supprimer
                 button3.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10001" && (Int32)QQ[3] == 1).Count() > 0; //Ajouter
-                splitContainer1.Panel2.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
+                //--------------------
+                if (Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50000" && (Int32)QQ[3] == 1).Count() == 0)
+                {
+                    monetic_not_autorsed = true;
+                    tabControl1.TabPages.Remove(tabPage1);
+                }
+                else
+                {
+                    button7.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60001" && (Int32)QQ[3] == 1).Count() > 0;//Ajouter
+                    dataGridView2.ReadOnly = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60002" && (Int32)QQ[3] == 1).Count() > 0;//Modifier
+                    button5.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60003" && (Int32)QQ[3] == 1).Count() > 0;//Supprimer
+                }
             }
             //--------------
             if (ID_to_selectt > 0)
@@ -541,7 +568,8 @@ namespace ALBAITAR_Softvet.Resources
                 if (Caisse_Idx > -1)
                 {
                     dataGridView2.ClearSelection();
-                    dataGridView2.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["IDD_FINANC"].Value == Caisse_Idx).ToList().ForEach(W => {
+                    dataGridView2.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["IDD_FINANC"].Value == Caisse_Idx).ToList().ForEach(W =>
+                    {
                         W.Cells[4].Selected = true;
                         dataGridView2.CurrentCell = dataGridView2.SelectedCells[0];
                         dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.SelectedCells[0].RowIndex;
@@ -550,13 +578,13 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 else if (Caisse_Idx == -2)
                 {
-                    
+
                     button7.PerformClick();
                     Caisse_Idx = -1;
                 }
 
             }
-            else if(ID_to_selectt == -2) //NEW
+            else if (ID_to_selectt == -2) //NEW
             {
                 ID_to_selectt = -1;
                 button3.PerformClick();
@@ -566,10 +594,14 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dataGridView2_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && !dataGridView2.CurrentCell.ReadOnly)
+            if (!monetic_not_autorsed)
             {
-                dataGridView2.CurrentCell.Value = DBNull.Value;
+                if (e.KeyCode == Keys.Delete && !dataGridView2.CurrentCell.ReadOnly)
+                {
+                    dataGridView2.CurrentCell.Value = DBNull.Value;
+                }
             }
+            
         }
 
         private void calc_sold()
@@ -713,13 +745,15 @@ namespace ALBAITAR_Softvet.Resources
                 if (Caisse_Idx > -1)
                 {
                     dataGridView2.ClearSelection();
-                    dataGridView2.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["IDD_FINANC"].Value == Caisse_Idx).ToList().ForEach(W => {
+                    dataGridView2.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["IDD_FINANC"].Value == Caisse_Idx).ToList().ForEach(W =>
+                    {
                         W.Cells[4].Selected = true;
                         dataGridView2.CurrentCell = dataGridView2.SelectedCells[0];
                         dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.SelectedCells[0].RowIndex;
                     });
                     Caisse_Idx = -1;
-                }else if (Caisse_Idx == -2)
+                }
+                else if (Caisse_Idx == -2)
                 {
                     dataGridView2.Focus();
                     button7.PerformClick();
@@ -732,9 +766,9 @@ namespace ALBAITAR_Softvet.Resources
                 button3.PerformClick();
             }
         }
-        
+
         private void button14_Click(object sender, EventArgs e)
-        {        
+        {
             chosen_client_from_search = new DataTable();
             Clients_List_Search select = new Clients_List_Search();
             select.DataTableReturned += ChildForm_DataTableReturned2;
