@@ -284,5 +284,17 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Codified_Activate_Code"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Codifed_Activation_Email {
+            get {
+                return ((string)(this["Codifed_Activation_Email"]));
+            }
+            set {
+                this["Codifed_Activation_Email"] = value;
+            }
+        }
     }
 }

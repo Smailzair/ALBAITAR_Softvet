@@ -73,5 +73,8 @@
     <Setting Name="Codified_Activate_Code" Type="System.String" Scope="User">
       <Value Profile="(Default)">--</Value>
     </Setting>
+    <Setting Name="Codifed_Activation_Email" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

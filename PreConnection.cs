@@ -647,11 +647,11 @@ namespace ALBAITAR_Softvet
                 for (int t = 0; t < 5; t++)
                 {
 
-                    w1 += zzz.Substring(dds[(zzz.IndexOf(v1.Substring(t, 1)) + t + 4) < 63 ? (zzz.IndexOf(v1.Substring(t, 1)) + t + 4) : (zzz.IndexOf(v1.Substring(t, 1)) - t - 4)], 1);
-                    w2 += zzz.Substring(dds[(zzz.IndexOf(v2.Substring(t, 1)) + t + 2) < 63 ? (zzz.IndexOf(v2.Substring(t, 1)) + t + 2) : (zzz.IndexOf(v2.Substring(t, 1)) - t - 2)], 1);
-                    w3 += zzz.Substring(dds[(zzz.IndexOf(v3.Substring(t, 1)) + t + 1) < 63 ? (zzz.IndexOf(v3.Substring(t, 1)) + t + 1) : (zzz.IndexOf(v3.Substring(t, 1)) - t - 1)], 1);
-                    w4 += zzz.Substring(dds[(zzz.IndexOf(v4.Substring(t, 1)) + t + 5) < 63 ? (zzz.IndexOf(v4.Substring(t, 1)) + t + 5) : (zzz.IndexOf(v4.Substring(t, 1)) - t - 5)], 1);
-                    w5 += zzz.Substring(dds[(zzz.IndexOf(v5.Substring(t, 1)) + t + 3) < 63 ? (zzz.IndexOf(v5.Substring(t, 1)) + t + 3) : (zzz.IndexOf(v5.Substring(t, 1)) - t - 3)], 1);
+                    w1 += zzz.Substring(dds[(zzz.IndexOf(v1.Substring(t, 1)) + t + 4) < 62 ? (zzz.IndexOf(v1.Substring(t, 1)) + t + 4) : (zzz.IndexOf(v1.Substring(t, 1)) - t - 4)], 1);
+                    w2 += zzz.Substring(dds[(zzz.IndexOf(v2.Substring(t, 1)) + t + 2) < 62 ? (zzz.IndexOf(v2.Substring(t, 1)) + t + 2) : (zzz.IndexOf(v2.Substring(t, 1)) - t - 2)], 1);
+                    w3 += zzz.Substring(dds[(zzz.IndexOf(v3.Substring(t, 1)) + t + 1) < 62 ? (zzz.IndexOf(v3.Substring(t, 1)) + t + 1) : (zzz.IndexOf(v3.Substring(t, 1)) - t - 1)], 1);
+                    w4 += zzz.Substring(dds[(zzz.IndexOf(v4.Substring(t, 1)) + t + 5) < 62 ? (zzz.IndexOf(v4.Substring(t, 1)) + t + 5) : (zzz.IndexOf(v4.Substring(t, 1)) - t - 5)], 1);
+                    w5 += zzz.Substring(dds[(zzz.IndexOf(v5.Substring(t, 1)) + t + 3) < 62 ? (zzz.IndexOf(v5.Substring(t, 1)) + t + 3) : (zzz.IndexOf(v5.Substring(t, 1)) - t - 3)], 1);
 
                 }
                 string Act_code = string.Concat(w1, w2, w3, w4, w5);

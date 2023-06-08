@@ -1,6 +1,8 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
 using Google.Protobuf.WellKnownTypes;
+using Microsoft.ReportingServices.Diagnostics.Internal;
+using MySql.Data.MySqlClient;
 //using Microsoft.Office.Interop.Excel;
 //using Microsoft.Office.Interop.Excel;
 //using Microsoft.Office.Interop.Word;
@@ -126,52 +128,133 @@ namespace ALBAITAR_Softvet
 
         public void Activ_Verif()
         {
+            
             if(Properties.Settings.Default.Connection_String_IP_Or_LocalHost == "localhost")
             {
-                string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\Sys32.txt";
-                
-                if (File.Exists(filePath))
+                bool Verifyed_001 = false;
+                if(Properties.Settings.Default.Codifed_Activation_Email.Length > 2 && Properties.Settings.Default.Codified_Activate_Code.Length > 2)
                 {
-                    string fileContents = File.ReadAllText(filePath);
-                    double old_val = 0;
-                    double.TryParse(fileContents, out old_val);
-                    if (old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
+                    MySqlConnection albaitar_online = new MySqlConnection(@"Server=instances.spawn.cc;Port=31681;Database=ALBAITAR_SOFTVET;Uid=root;Pwd=kOluo0PgmDVowykt;");
+                    //---------------------
+                    MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`ACTIVAT_CODE`) VALUES (" +
+                        "'" + PreConnection.generate_ID_of_client() + "'," +
+                        "'" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "'," +
+                        "'" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "');", albaitar_online);
+                    if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+                    try { command.ExecuteNonQuery(); } catch { }
+                    albaitar_online.Close();
+                    //-------------------------------
+                    DataTable dttb = new DataTable();
+                    MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '"+ PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND  `ACTIVAT_CODE` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
+                    if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+                    using (MySqlDataReader reader = command2.ExecuteReader())
                     {
-                        PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
+                        dttb.Load(reader);
                     }
-                }else
-                {
-                    DateTime dtt = DateTime.UtcNow;
-                    DateTime.TryParse(PreConnection.ReadFromRegistry("SoftVet_Start_Date"), out dtt);
-                    if((DateTime.UtcNow.Date - dtt.Date).Days == 0){
-                        File.Create(filePath).Dispose();                        
-                        File.WriteAllText(filePath, "28000");
-                        PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
+                    albaitar_online.Close();
+                    if (dttb.Rows.Count > 0) //Good
+                    {
+                        Verifyed_001 = true;
+                        PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
                     }
-                    string tt = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
-                }         
-                //----------------
-                string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
-                if (!PreConnection.Verif_Activation_SOftVet(codd))
-                {                  
+                    else //Not activated
+                    {
 
-                    string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
-                    DateTime dt = DateTime.UtcNow;
-                    if (strt_date == "")
+                    }
+                }
+
+                if (!Verifyed_001)
+                {
+                    if(PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
                     {
-                        PreConnection.WriteIntoRegistry("SoftVet_Start_Date", dt.ToString("dd/MM/yyyy"));
+                        string filePath = "C:\\ProgramData\\Sys32.txt";
+
+                        if (File.Exists(filePath))
+                        {
+                            string fileContents = File.ReadAllText(filePath);
+                            double old_val = 0;
+                            double.TryParse(fileContents, out old_val);
+                            if (old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
+                            {
+                                PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
+                            }
+                        }
+                        else
+                        {
+                            DateTime dtt = DateTime.UtcNow;
+                            DateTime.TryParse(PreConnection.ReadFromRegistry("SoftVet_Start_Date"), out dtt);
+                            if ((DateTime.UtcNow.Date - dtt.Date).Days == 0)
+                            {
+                                File.Create(filePath).Dispose();
+                                File.WriteAllText(filePath, "28000");
+                                PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
+                            }
+                            string tt = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
+                        }
+                        //----------------
+                        string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
+                        if (!PreConnection.Verif_Activation_SOftVet(codd))
+                        {
+
+                            string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
+                            DateTime dt = DateTime.UtcNow;
+                            if (strt_date == "")
+                            {
+                                PreConnection.WriteIntoRegistry("SoftVet_Start_Date", dt.ToString("dd/MM/yyyy"));
+                            }
+                            else
+                            {
+                                DateTime.TryParse(strt_date, out dt);
+                            }
+
+                            int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
+
+                            this.Text += " (Produit non activé - réste [" + delay + "] jours)";
+                            if (delay <= 0)
+                            {
+                                Properties.Settings.Default.Codified_Activate_Code = "";
+                                Properties.Settings.Default.Save();
+                                //new Dialogs.App_Activation().ShowDialog();
+                                Close();
+                                Application.Run(new Dialogs.App_Activation());
+                            }
+                        }
                     }
                     else
                     {
-                        DateTime.TryParse(strt_date, out dt);
+                        Properties.Settings.Default.Codified_Activate_Code = "";
+                        Properties.Settings.Default.Save();
+                        //new Dialogs.App_Activation().ShowDialog();
+                        Close();
+                        Application.Run(new Dialogs.App_Activation());
                     }
 
-                    int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
-
-                    this.Text += " (Produit non activé - réste [" + delay +"] jours)";
-                    if (delay <= 0) {
-                           new Dialogs.App_Activation().ShowDialog();
+                }
+                
+                
+            }
+            else
+            {
+                bool activated = false;
+                DataTable acct = PreConnection.Load_data("SELECT * FROM tb_params WHERE `ID` = 7;");
+                if (acct != null)
+                {
+                    int dd = int.Parse(acct.Rows[0][2].ToString());
+                    activated = dd == 1;
+                }
+                if (!activated)
+                {
+                    MessageBox.Show("malheureusement le produit de PC serveur n'est pas activé\navec une tentative expirée!","",MessageBoxButtons.OK,MessageBoxIcon.Hand);
+                    if(MessageBox.Show("Voulez vous de changer la connection à un autre serveur ?","",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        new Connection_Str().ShowDialog();
+                        Activ_Verif();
                     }
+                    else
+                    {
+                        Application.Exit();
+                    }
+                    
                 }
             }
             
@@ -404,8 +487,8 @@ namespace ALBAITAR_Softvet
 
         private void Main_Frm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
-            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\Sys32.txt";
+
+            string filePath = "C:\\ProgramData\\Sys32.txt";
             if (!File.Exists(filePath))
             {
                 File.Create(filePath).Dispose();
@@ -419,6 +502,7 @@ namespace ALBAITAR_Softvet
             if(old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
             {
                 PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
+                PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = 0 WHERE `ID` = 7;");
             }
 
             File.WriteAllText(filePath, ((double)old_val + (double)time_delay / 60).ToString("N2"));
