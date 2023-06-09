@@ -803,6 +803,7 @@
     <None Include="Resources\pngtree-vet-doctors-with-animals-png-image_8768727991.png" />
     <None Include="Resources\logo copy.png" />
     <None Include="Resources\imageedit_62_2608573935.f1cb27a519bdb5b6ed34049a5b86e317 copy.png" />
+    <None Include="Resources\Untitled-2.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

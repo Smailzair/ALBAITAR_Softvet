@@ -21,8 +21,9 @@ namespace ALBAITAR_Softvet.Dialogs
 
     public partial class App_Activation : Form
     {
-        
 
+        MySqlConnection albaitar_online = new MySqlConnection(@"Server=instances.spawn.cc;Port=31681;Database=ALBAITAR_SOFTVET;Uid=root;Pwd=kOluo0PgmDVowykt;");
+        int rest_jrs_delay = 30;
         public App_Activation()
         {
             InitializeComponent();
@@ -65,6 +66,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     }
 
                     int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
+                    rest_jrs_delay = (delay >= 0 ? delay : 0);
                     label13.Text = (delay >= 0 ? delay : 0) + " Jours";
                     if (delay <= 0)
                     {
@@ -116,6 +118,8 @@ namespace ALBAITAR_Softvet.Dialogs
         }
         private void button3_Click(object sender, EventArgs e)
         {
+            label14.Visible = true;
+            label14.Refresh();
             textBox1_Validating(null, null);
             if (label8.Text.Length == 29 && textBox1.BackColor != Color.LightCoral)
             {                
@@ -125,7 +129,7 @@ namespace ALBAITAR_Softvet.Dialogs
                 {
                     MimeMessage Mssg = new MimeMessage();
                     Mssg.From.Add(new MailboxAddress("AlBaitar SoftVet", textBox1.Text));
-                    Mssg.To.Add(MailboxAddress.Parse("albaitar.technologie@gmail.com"));
+                    Mssg.To.Add(MailboxAddress.Parse("bsmail93@gmail.com"));//albaitar.technologie@gmail.com
                     Mssg.Subject = "ALBAITAR Softvet - Demande code d'activation";
                     Mssg.Body = new TextPart("plain")
                     {
@@ -145,7 +149,7 @@ namespace ALBAITAR_Softvet.Dialogs
                         "Tentative reste : " +label13.Text+"\n\n" +
                         "====================================="
                     };
-
+                    bool good_sent = true;
 
                     MailKit.Net.Smtp.SmtpClient clnt = new MailKit.Net.Smtp.SmtpClient();
                     try
@@ -157,12 +161,25 @@ namespace ALBAITAR_Softvet.Dialogs
                     }
                     catch (Exception ex)
                     {
+                        good_sent = false;
                         MessageBox.Show("Il y a eu un problème, veuillez réessayer.", "Non éffectué :", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     finally
                     {
                         clnt.Disconnect(true);
                         clnt.Dispose();
+                        //---------------------
+                        if (good_sent)
+                        {
+                            MySqlCommand command = new MySqlCommand("INSERT INTO `ACT_COMMANDS`(`CLIENT_ID`,`CLIENT_MAIL`,`TENTATIVE`) VALUES (" +
+                            "'" + PreConnection.generate_ID_of_client() + "'," +
+                            "'" + textBox1.Text + "'," +
+                            "" + rest_jrs_delay + ");", albaitar_online);                            
+                            if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+                            try { command.ExecuteNonQuery(); } catch { }
+                            albaitar_online.Close();
+                        }                        
+                        //-------------------------------
                     }
                     //-----------
                 }
@@ -176,7 +193,7 @@ namespace ALBAITAR_Softvet.Dialogs
                 textBox1.Focus();
                 textBox1.SelectAll();
             }
-
+            label14.Visible = false;
 
         }
 
@@ -217,7 +234,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     label11.Refresh();
                     //--------------------------
                     bool Verifyed_001 = false;
-                    MySqlConnection albaitar_online = new MySqlConnection(@"Server=instances.spawn.cc;Port=31681;Database=ALBAITAR_SOFTVET;Uid=root;Pwd=kOluo0PgmDVowykt;");
+                    
                     //---------------------
                     MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`ACTIVAT_CODE`) VALUES (" +
                         "'" + PreConnection.generate_ID_of_client() + "'," +

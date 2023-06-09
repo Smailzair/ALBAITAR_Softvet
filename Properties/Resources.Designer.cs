@@ -1063,26 +1063,6 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap imageedit_62_2608573935_f1cb27a519bdb5b6ed34049a5b86e317_copy {
-            get {
-                object obj = ResourceManager.GetObject("imageedit_62_2608573935.f1cb27a519bdb5b6ed34049a5b86e317 copy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap logo_copy {
-            get {
-                object obj = ResourceManager.GetObject("logo copy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap MODIF {
             get {
                 object obj = ResourceManager.GetObject("MODIF", resourceCulture);
@@ -1203,26 +1183,6 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pngtree_vet_doctors_with_animals_png_image_8768727_copy1_copy {
-            get {
-                object obj = ResourceManager.GetObject("pngtree-vet-doctors-with-animals-png-image_8768727 copy1 copy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pngtree_vet_doctors_with_animals_png_image_876872799 {
-            get {
-                object obj = ResourceManager.GetObject("pngtree-vet-doctors-with-animals-png-image_876872799", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap rainbow_spinner_loading {
             get {
                 object obj = ResourceManager.GetObject("rainbow-spinner-loading", resourceCulture);
@@ -1276,6 +1236,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap Transp_Backg {
             get {
                 object obj = ResourceManager.GetObject("Transp_Backg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Untitled_2 {
+            get {
+                object obj = ResourceManager.GetObject("Untitled-2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
