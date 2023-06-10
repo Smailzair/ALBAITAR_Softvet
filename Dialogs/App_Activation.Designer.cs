@@ -49,6 +49,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -64,7 +65,11 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -107,7 +112,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_checked_radio_button_50px;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.Location = new System.Drawing.Point(74, 149);
+            this.button1.Location = new System.Drawing.Point(76, 190);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(205, 59);
@@ -130,7 +135,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_paper_plane_50px;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button3.Location = new System.Drawing.Point(94, 34);
+            this.button3.Location = new System.Drawing.Point(105, 81);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(205, 59);
@@ -312,6 +317,10 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.textBox6);
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.textBox5);
+            this.panel3.Controls.Add(this.label15);
             this.panel3.Controls.Add(this.label14);
             this.panel3.Controls.Add(this.label11);
             this.panel3.Controls.Add(this.textBox3);
@@ -321,17 +330,29 @@
             this.panel3.Controls.Add(this.label20);
             this.panel3.Controls.Add(this.label27);
             this.panel3.Controls.Add(this.button3);
+            this.panel3.Controls.Add(this.label17);
             this.panel3.Location = new System.Drawing.Point(4, 265);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(316, 214);
+            this.panel3.Size = new System.Drawing.Size(316, 254);
             this.panel3.TabIndex = 41;
+            // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.OrangeRed;
+            this.label14.Location = new System.Drawing.Point(10, 81);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(69, 34);
+            this.label14.TabIndex = 44;
+            this.label14.Text = "Veuillez Patienter ...";
+            this.label14.Visible = false;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label11.Location = new System.Drawing.Point(145, 103);
+            this.label11.Location = new System.Drawing.Point(147, 144);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(110, 16);
             this.label11.TabIndex = 43;
@@ -340,7 +361,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(11, 121);
+            this.textBox3.Location = new System.Drawing.Point(13, 162);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(298, 21);
             this.textBox3.TabIndex = 42;
@@ -351,7 +372,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label21.Location = new System.Drawing.Point(8, 103);
+            this.label21.Location = new System.Drawing.Point(10, 144);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(108, 15);
             this.label21.TabIndex = 41;
@@ -396,7 +417,7 @@
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(315, 214);
+            this.textBox2.Size = new System.Drawing.Size(315, 254);
             this.textBox2.TabIndex = 40;
             this.textBox2.TabStop = false;
             this.textBox2.Text = resources.GetString("textBox2.Text");
@@ -485,23 +506,61 @@
             this.pictureBox1.TabIndex = 26;
             this.pictureBox1.TabStop = false;
             // 
-            // label14
+            // textBox5
             // 
-            this.label14.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label14.Location = new System.Drawing.Point(18, 34);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(69, 38);
-            this.label14.TabIndex = 44;
-            this.label14.Text = "Veuillez Patienter ...";
-            this.label14.Visible = false;
+            this.textBox5.Location = new System.Drawing.Point(87, 31);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(224, 21);
+            this.textBox5.TabIndex = 46;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label15.Location = new System.Drawing.Point(5, 34);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(76, 15);
+            this.label15.TabIndex = 45;
+            this.label15.Text = "Votre N° Tél :";
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(100, 55);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(211, 21);
+            this.textBox6.TabIndex = 48;
+            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label16.Location = new System.Drawing.Point(5, 58);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(89, 15);
+            this.label16.TabIndex = 47;
+            this.label16.Text = "Nom && Prénom:";
+            // 
+            // label17
+            // 
+            this.label17.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.label17.Location = new System.Drawing.Point(7, 81);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(95, 59);
+            this.label17.TabIndex = 49;
+            this.label17.Text = "Demande envoyée le : ";
+            this.label17.Visible = false;
             // 
             // App_Activation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(643, 483);
+            this.ClientSize = new System.Drawing.Size(643, 525);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
@@ -522,7 +581,7 @@
             this.Text = "Activation de logiciel :";
             this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.App_Activation_FormClosed);
-            this.Load += new System.EventHandler(this.Connection_Str_Load);
+            this.Load += new System.EventHandler(this.App_Activation_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -576,5 +635,10 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label17;
     }
 }

@@ -224,5 +224,41 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Codifed_Activation_Email"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Codified_Act_Command_dmnd_date {
+            get {
+                return ((string)(this["Codified_Act_Command_dmnd_date"]));
+            }
+            set {
+                this["Codified_Act_Command_dmnd_date"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Codified_Act_Clt_Tel {
+            get {
+                return ((string)(this["Codified_Act_Clt_Tel"]));
+            }
+            set {
+                this["Codified_Act_Clt_Tel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Codified_Act_Clt_Nme {
+            get {
+                return ((string)(this["Codified_Act_Clt_Nme"]));
+            }
+            set {
+                this["Codified_Act_Clt_Nme"] = value;
+            }
+        }
     }
 }

@@ -598,28 +598,33 @@ namespace ALBAITAR_Softvet
         }
 
         private void Agenda_Just_Display_Load(object sender, EventArgs e)
-        {            
-            if (Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
+        {
+
+            if (!Properties.Settings.Default.Last_login_is_admin)
             {
-                this.Controls.Add(new Nn_Autorized());
-                this.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
-                this.Controls["Nn_Autorized"].BringToFront();
-            }
-            else
-            {
-                button15.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40001" && (Int32)QQ[3] == 1).Count() > 0 && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40002" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
-                Modif_autorized = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40003" && (Int32)QQ[3] == 1).Count() > 0 && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40004" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
-                if (!Modif_autorized)
+                if (Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
                 {
-                    foreach(Control ctrl in panel1.Controls)
+                    this.Controls.Add(new Nn_Autorized());
+                    this.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
+                    this.Controls["Nn_Autorized"].BringToFront();
+                }
+                else
+                {
+                    
+                    button15.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40001" && (Int32)QQ[3] == 1).Count() > 0 && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40002" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                    Modif_autorized = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40003" && (Int32)QQ[3] == 1).Count() > 0 && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40004" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
+                    if (!Modif_autorized)
                     {
-                        if (ctrl is TextBox)
+                        foreach (Control ctrl in panel1.Controls)
                         {
-                            ((TextBox)ctrl).ReadOnly = true;
-                        }
-                        else
-                        {
-                            ctrl.Enabled = false;
+                            if (ctrl is TextBox)
+                            {
+                                ((TextBox)ctrl).ReadOnly = true;
+                            }
+                            else
+                            {
+                                ctrl.Enabled = false;
+                            }
                         }
                     }
                 }

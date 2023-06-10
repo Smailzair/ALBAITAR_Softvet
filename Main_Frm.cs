@@ -678,7 +678,8 @@ namespace ALBAITAR_Softvet
             //-----------
             label_cab_nme.Text = Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 1).First()["VAL"].ToString();
             //----------
-            DateTime tt = DateTime.Parse(Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 6).First()["VAL"].ToString());
+            DateTime tt = DateTime.Now;
+            DateTime.TryParse(Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 6).First()["VAL"].ToString(), out tt);
             if ((tt - last_update_time).Seconds > 0)
             {
                 refresh_main_tables();
@@ -724,18 +725,22 @@ namespace ALBAITAR_Softvet
                     if (!radioButton7.Checked) { radioButton7.CheckedChanged -= radioButton8_CheckedChanged; radioButton7.Checked = true; radioButton7.CheckedChanged += radioButton8_CheckedChanged; }
                     //----------
                     selected_client_id = selected_animal_id = -1;
-                    if (int.TryParse(comboBox2.SelectedValue.ToString(), out int yy))
+                    if(comboBox2.SelectedValue != null)
                     {
-                        if (comboBox1.SelectedIndex == 0) //CLIENT
+                        if (int.TryParse(comboBox2.SelectedValue.ToString(), out int yy))
                         {
-                            selected_client_id = (int)comboBox2.SelectedValue;
-                        }
-                        else //ANIMAL
-                        {
-                            selected_animal_id = (int)comboBox2.SelectedValue;
-                        }
+                            if (comboBox1.SelectedIndex == 0) //CLIENT
+                            {
+                                selected_client_id = (int)comboBox2.SelectedValue;
+                            }
+                            else //ANIMAL
+                            {
+                                selected_animal_id = (int)comboBox2.SelectedValue;
+                            }
 
+                        }
                     }
+                    
                 }
                 //-----------
                 if (radioButton8.Checked && tabControl1.TabPages["tabPage_animaux"] == null)
@@ -779,18 +784,22 @@ namespace ALBAITAR_Softvet
                     tabControl1.TabPages.Insert(0, tabPage_infos);
                 }
                 //-----------
-                if (int.TryParse(comboBox2.SelectedValue.ToString(), out int yy))
+                if (comboBox2.SelectedValue != null)
                 {
-                    if (comboBox1.SelectedIndex == 0) //CLIENT
+                    if (int.TryParse(comboBox2.SelectedValue.ToString(), out int yy))
                     {
-                        selected_client_id = (int)comboBox2.SelectedValue;
-                    }
-                    else //ANIMAL
-                    {
-                        selected_animal_id = (int)comboBox2.SelectedValue;
-                    }
+                        if (comboBox1.SelectedIndex == 0) //CLIENT
+                        {
+                            selected_client_id = (int)comboBox2.SelectedValue;
+                        }
+                        else //ANIMAL
+                        {
+                            selected_animal_id = (int)comboBox2.SelectedValue;
+                        }
 
+                    }
                 }
+                
             }
             if (tabControl1.SelectedTab.Name == "tabPage_Calendar")
             {

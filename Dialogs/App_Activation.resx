@@ -124,13 +124,13 @@
     <value>                   
                        Les étapes d'activation :
                      -----------------------------------------
-1)- Taper votre adresse émail, puis appuyer sur 'Envoyer'.
+1)- Taper vos informations, puis appuyer sur 'Envoyer'.
 2)- Vous recevrez -plus tard- votre code d'activation dans un message émail.
 3)- Taper le serial recevé, puis appuyer sur 'Activer'.
     - Et Voila -
---------------------------
-Remarque : 
-Le sérial reçu est pour l'ordinateur actuel uniquement, en cas de changement d'ordinateur, veuillez suivre les étapes précédentes.</value>
+-------------------------------------------------------------
+                               Remarque : 
+L'activation suit la quantité autorisée, si la quantité est dépassée, les anciennes versions seront automatiquement désactivées.</value>
   </data>
   <data name="textBox4.Text" xml:space="preserve">
     <value>   Important :
