@@ -676,19 +676,28 @@ namespace ALBAITAR_Softvet
         {
             Params = PreConnection.Load_data("SELECT * FROM tb_params;");
             //-----------
-            label_cab_nme.Text = Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 1).First()["VAL"].ToString();
-            //----------
-            DateTime tt = DateTime.Now;
-            DateTime.TryParse(Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 6).First()["VAL"].ToString(), out tt);
-            if ((tt - last_update_time).Seconds > 0)
+            try
             {
-                refresh_main_tables();
+                label_cab_nme.Text = Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 1).FirstOrDefault()["VAL"].ToString();
+                //----------
+                DateTime tt = DateTime.Now;
+                if (Params != null) { DateTime.TryParse(Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 6).FirstOrDefault()["VAL"].ToString(), out tt); }
+
+                if ((tt - last_update_time).Seconds > 0)
+                {
+                    refresh_main_tables();
+                }
+                else
+                {
+                    Refresh_current_tab();
+                }
+                //-----------
             }
-            else
+            catch (Exception excc)
             {
-                Refresh_current_tab();
+               // MessageBox.Show(excc.Message);
             }
-            //-----------
+            
 
         }
 
