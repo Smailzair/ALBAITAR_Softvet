@@ -277,20 +277,38 @@ namespace ALBAITAR_Softvet.Resources
             textBox2.BackColor = textBox2.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
             textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
             textBox4.BackColor = textBox4.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
+
             all_ready &= textBox2.Text.TrimStart().TrimEnd() != string.Empty;
+            bool all_ready_01 = all_ready;
             all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+            bool all_ready_02 = all_ready;
             all_ready &= textBox4.Text.TrimStart().TrimEnd() != string.Empty;
+            bool all_ready_03 = all_ready;
             all_ready &= !label13.Visible;
+            bool all_ready_04 = all_ready;
             //-------------
             label12.Visible = !all_ready;
+            bool all_ready_05 = all_ready;
             //-------------
+            MessageBox.Show(">> Properties.Settings.Default.Last_login_is_admin : " + Properties.Settings.Default.Last_login_is_admin + "\n" +
+                ">> all_ready : " + all_ready + "\n" +
+                ">> all_ready_01 : " + all_ready_01 + "\n" +
+                ">> all_ready_02 : " + all_ready_02 + "\n" +
+                ">> all_ready_03 : " + all_ready_03 + "\n" +
+                ">> all_ready_04 : " + all_ready_04 + "\n" +
+                ">> all_ready_05 : " + all_ready_05 + "\n" +
+                ">> insert_autori : " + insert_autori + "\n" +
+                ">> updadate_autori : " + updadate_autori + "\n" +
+                "");
             if (all_ready)
             {
                 if (Is_New) //INSERT
                 {
                     if (insert_autori)
                     {
-                        PreConnection.Excut_Cmd("INSERT INTO `tb_clients` "
+                        try
+                        {
+                            PreConnection.Excut_Cmd("INSERT INTO `tb_clients` "
                             + "(`SEX`,"
                             + "`FAMNME`,"
                             + "`NME`,"
@@ -314,6 +332,12 @@ namespace ALBAITAR_Softvet.Resources
                             + "'" + maskedTextBox1.Text.Replace("'", "''") + "',"
                             + "'" + textBox7.Text.Replace("'", "''") + "',"
                             + "'" + textBox8.Text.Replace("'", "''") + "');");
+                        }
+                        catch(Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Insert Exception");
+                        }
+                        
                     }
                     else
                     {
@@ -784,6 +808,11 @@ namespace ALBAITAR_Softvet.Resources
         private void ChildForm_DataTableReturned2(object sender, DataTableEventArgs_Clients e)
         {
             chosen_client_from_search = e.DataTable;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PreConnection.Excport_to_excel(dataGridView2, "Historique monétique", dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value != DBNull.Value ? "Monét." : dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value.ToString(), null,false);
         }
     }
 }

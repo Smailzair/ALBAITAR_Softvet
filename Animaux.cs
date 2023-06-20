@@ -1165,6 +1165,73 @@ namespace ALBAITAR_Softvet.Resources
             chosen_anim_from_search = e.DataTable;
         }
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //PreConnection.Excport_to_excel(dataGridView2, "Visites", dataGridView1.SelectedRows[0].Cells["NME"].Value != DBNull.Value ? "Visites" : dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value.ToString(), null, true);
+            if (dataGridView2.Rows.Count > 0)
+            {
+                Excc.Application xcelApp = new Excc.Application();
+                xcelApp.Application.Workbooks.Add(Type.Missing);
+                xcelApp.Application.Workbooks[1].Title = Application.ProductName + "Visites";
+                xcelApp.Application.Workbooks[1].Worksheets[1].Name = dataGridView1.SelectedRows[0].Cells["NME"].Value != DBNull.Value ? "Visites" : dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value.ToString();
+                dataGridView2.Columns.Cast<DataGridViewColumn>().Where(ss => ss.Name != "ID_VISITE" && ss.Name != "ANIM_ID").ToList().ForEach(g =>
+                {
+                    xcelApp.Cells[1, g.Index + 1].Value = g.HeaderText;
+                    
+                    ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
+                    ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Font.Bold = true;
+                    ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
+                    try
+                    {
+                        if (dataGridView2.Columns[g.Index].DefaultCellStyle.Format == "N2")
+                        {
+                            ((Excc.Range)xcelApp.Columns[g.Index + 1]).NumberFormat = "#,##0.00 [$Da-fr-dz]";
+                        }
+                        else if (dataGridView2.Columns[g.Index].DefaultCellStyle.Format.Contains("MM/yyyy"))
+                        {
+                            ((Excc.Range)xcelApp.Columns[g.Index + 1]).NumberFormat = "dd/MM/yyyy";
+                        }
+                    }
+                    catch { }
+                });
+
+                dataGridView2.Rows.Cast<DataGridViewRow>().ToList().ForEach(t =>
+                {
+                    t.Cells.Cast<DataGridViewCell>().ToList().ForEach(b =>
+                    {
+                        //if (xcelApp.Cells[1, b.ColumnIndex + 1].Value == "Propriétaire")
+                        //{
+                        //    xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? (((DataRow)clients.AsEnumerable().FirstOrDefault(row => row.Field<int>("ID") == (int)dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value))["FULL_NME"]) : "";
+                        //}
+                        //else
+                        //{
+                        xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView2.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView2.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").Replace("00:00:00", "").TrimStart().TrimEnd() : "";
+                        //}
+                    });
+                });
+                xcelApp.Columns[3].Delete();
+                xcelApp.Columns[1].Delete();
+                xcelApp.Columns.AutoFit();
+                //------------------
+                SaveFileDialog svd = new SaveFileDialog();
+                svd.Filter = "Excel | *.xlsx";
+                svd.DefaultExt = "*.xlsx";
+                svd.FileName = xcelApp.Application.Workbooks[1].Title + "_" + DateTime.Now.ToString("ddMMyyyy_HHmmss") + ".xlsx";
+                if (svd.ShowDialog() == DialogResult.OK)
+                {
+                    xcelApp.Workbooks[1].SaveAs(Path.GetFullPath(svd.FileName));
+                    Process.Start(Path.GetFullPath(svd.FileName));
+                }
+                xcelApp.Application.Workbooks[1].Close(false);
+                xcelApp.Quit();
+                //-------------------
+            }
+            else
+            {
+                MessageBox.Show("Aucun donnés !", ".", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+
+        }
     }
 }
 

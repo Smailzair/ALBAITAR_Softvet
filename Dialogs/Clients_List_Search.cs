@@ -106,13 +106,13 @@ namespace ALBAITAR_Softvet.Dialogs
                     }
                     else
                     {
-                        MessageBox.Show("Aucun person trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Aucune personne trouvée !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Close();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Aucun person trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Aucune personne trouvée !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }           
             
