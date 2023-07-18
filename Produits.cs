@@ -45,11 +45,11 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if((numericUpDown2.Value - 1) >= numericUpDown2.Minimum)
+            if ((numericUpDown2.Value - 1) >= numericUpDown2.Minimum)
             {
                 numericUpDown2.Value -= 1;
             }
-            
+
         }
 
         private void Produits_Load(object sender, EventArgs e)
@@ -98,16 +98,16 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     DateTime minDate = Stock.AsEnumerable()
                             .Where(row => row["PROD_ID"].ToString() == dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() && row["OBSERV"].ToString() != "Achat (Premier Stock)")
-                            .Min(row => row.Field<DateTime>("OP_DATE"));
+                            .Min(row => row.Field<DateTime?>("OP_DATE")) ?? new DateTime(2999, 01, 01);
                     if (minDate != null)
                     {
-                        label13.BackColor = dateTimePicker2.Value > minDate ? Color.LightCoral : SystemColors.Control;
-                    }
-                    if (label13.BackColor == Color.LightCoral)
-                    {
-                        MessageBox.Show("Dans les opérations de stock de cet produit, il y a une date avec une valeur supérieure à la date sélectionnée.\n\nVous avez deux choix :\n1- Changer la date à une valeur inférieure ou égale à '" + minDate.ToString("dd/MM/yyyy") + "'.\nOu\n2- Changer les dates d'opérations de stock de date '" + minDate.ToString("dd/MM/yyyy") + "' à '" + dateTimePicker2.Value.ToString("dd/MM/yyyy") + "' ou plus superieur.\n", "Probleme de date :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
 
+                        label13.BackColor = dateTimePicker2.Value > minDate ? Color.LightCoral : SystemColors.Control;
+                        if (label13.BackColor == Color.LightCoral)
+                        {
+                            MessageBox.Show("Dans les opérations de stock de cet produit, il y a une date avec une valeur supérieure à la date sélectionnée.\n\nVous avez deux choix :\n1- Changer la date à une valeur inférieure ou égale à '" + minDate.ToString("dd/MM/yyyy") + "'.\nOu\n2- Changer les dates d'opérations de stock de date '" + minDate.ToString("dd/MM/yyyy") + "' à '" + dateTimePicker2.Value.ToString("dd/MM/yyyy") + "' ou plus superieur.\n", "Probleme de date :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
                 }
                 numericUpDown1.BackColor = numericUpDown1.Value > 0 ? SystemColors.Window : Color.LightCoral;
                 numericUpDown4.BackColor = numericUpDown4.Value > 0 ? numericUpDown4.BackColor : Color.LightCoral;
@@ -139,11 +139,11 @@ namespace ALBAITAR_Softvet.Resources
                                               + "('" + textBox2.Text.Replace("'", "''") + "'," //CODE
                                               + "'" + textBox3.Text.Replace("'", "''") + "'," //NME
                                               + "'" + ((string)comboBox2.SelectedItem).Replace("'", "''") + "'," //CATEGOR
-                                              + numericUpDown4.Value + "," //QNT
+                                              + Convert.ToDouble(numericUpDown4.Value) + "," //QNT
                                               + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
-                                              + numericUpDown5.Value + "," //QNT_MIN
-                                              + numericUpDown1.Value + "," //REVIENT_PRTICE
-                                              + numericUpDown3.Value + "," //VENTE_PRICE
+                                              + Convert.ToDouble(numericUpDown5.Value) + "," //QNT_MIN
+                                              + Convert.ToDouble(numericUpDown1.Value) + "," //REVIENT_PRTICE
+                                              + Convert.ToDouble(numericUpDown3.Value) + "," //VENTE_PRICE
                                               + "'" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "');" //TMP_FIRST_INSERT_DATE
                                               );
 
@@ -154,11 +154,11 @@ namespace ALBAITAR_Softvet.Resources
                                               + "`CODE` = '" + textBox2.Text.Replace("'", "''") + "'," //CODE
                                               + "`NME` = '" + textBox3.Text.Replace("'", "''") + "'," //NME
                                               + "`CATEGOR` = '" + ((string)comboBox2.SelectedItem).Replace("'", "''") + "'," //CATEGOR
-                                              + "`QNT` = " + numericUpDown4.Value + "," //QNT
+                                              + "`QNT` = " + Convert.ToDouble(numericUpDown4.Value) + "," //QNT
                                               + "`ALERT_MIN_ON` = " + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
-                                              + "`QNT_MIN` = " + numericUpDown5.Value + "," //QNT_MIN
-                                              + "`REVIENT_PRTICE` = " + numericUpDown1.Value + "," //REVIENT_PRTICE
-                                              + "`VENTE_PRICE` = " + numericUpDown3.Value + ","//VENTE_PRICE
+                                              + "`QNT_MIN` = " + Convert.ToDouble(numericUpDown5.Value) + "," //QNT_MIN
+                                              + "`REVIENT_PRTICE` = " + Convert.ToDouble(numericUpDown1.Value) + "," //REVIENT_PRTICE
+                                              + "`VENTE_PRICE` = " + Convert.ToDouble(numericUpDown3.Value) + ","//VENTE_PRICE
                                               + "`TMP_FIRST_INSERT_DATE` = '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "'"//TMP_FIRST_INSERT_DATE
                                               + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
                     }
@@ -421,7 +421,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioButton2.Checked && radioButton2.Text == "--" && dataGridView1.SelectedRows.Count > 0)
+            if (radioButton2.Checked && radioButton2.Text == "--" && dataGridView1.SelectedRows.Count > 0)
             {
                 radioButton2.Text = dataGridView1.SelectedRows[0].Cells["NME"].Value.ToString();
             }
@@ -472,7 +472,7 @@ namespace ALBAITAR_Softvet.Resources
 
 
 
-                        numericUpDown2.Value = numericUpDown2_old_val = (decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value;                                                
+                        numericUpDown2.Value = numericUpDown2_old_val = (decimal)dataGridView2.SelectedRows[0].Cells["QNT2"].Value;
                         //-------------------------
                         textBox5.Enabled = comboBox1.Enabled = comboBox3.Enabled = dateTimePicker1.Enabled = !textBox5.Text.Equals("Achat (Premier Stock)");
                         //----------
@@ -482,7 +482,7 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         initial_stock_fields();
                     }
-                    
+
 
                 }
                 else
@@ -521,13 +521,13 @@ namespace ALBAITAR_Softvet.Resources
             dateTimePicker1.Value = DateTime.Now >= minDate ? DateTime.Now : minDate;
             //------------------------
             textBox5.Clear();
-            comboBox1.SelectedIndex = dataGridView1.SelectedRows.Count == 0 ? 0 : comboBox1.SelectedIndex;            
-            
+            comboBox1.SelectedIndex = dataGridView1.SelectedRows.Count == 0 ? 0 : comboBox1.SelectedIndex;
+
             //--------------------
             label25.Visible = false;
             label10.ForeColor = SystemColors.ControlText;
             //---------------------
-            if(dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
                 comboBox3.SelectedValue = dataGridView1.SelectedRows[0].Cells["ID"].Value;
             }
@@ -631,7 +631,7 @@ namespace ALBAITAR_Softvet.Resources
                     label10.Visible = label9.Visible = true;
                     //if (Is_New_Stock)
                     //{
-                        prev_sld = (decimal)edd["SLD"];
+                    prev_sld = (decimal)edd["SLD"];
                     //}
                     //else
                     //{
@@ -703,8 +703,8 @@ namespace ALBAITAR_Softvet.Resources
                                             + "WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID2"].Value + ";");
                         if (textBox5.Text == "Achat (Premier Stock)")
                         {
-                            Debug.WriteLine("UPDATE tb_produits SET `QNT` = " + numericUpDown2.Value + " WHERE `ID` = " + comboBox3.SelectedValue + ";");
-                            PreConnection.Excut_Cmd("UPDATE tb_produits SET `QNT` = "+ numericUpDown2.Value + " WHERE `ID` = " + comboBox3.SelectedValue + ";");
+                            Debug.WriteLine("UPDATE tb_produits SET `QNT` = " + Convert.ToDouble(numericUpDown2.Value) + " WHERE `ID` = " + comboBox3.SelectedValue + ";");
+                            PreConnection.Excut_Cmd("UPDATE tb_produits SET `QNT` = " + Convert.ToDouble(numericUpDown2.Value) + " WHERE `ID` = " + comboBox3.SelectedValue + ";");
                             load_prods(false);
                         }
                     }
@@ -825,7 +825,7 @@ namespace ALBAITAR_Softvet.Resources
                 ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = "";
             }
         }
-        
+
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
             decimal diff = numericUpDown2.Value - numericUpDown2_old_val;

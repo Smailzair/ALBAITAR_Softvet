@@ -126,12 +126,12 @@ namespace ALBAITAR_Softvet
             th.Start();
             th.Join();            
             //--------------
-            Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
-            Activ_Ver.Start();
-            Activ_Ver.Join();                    
+            //Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
+            //Activ_Ver.Start();
+            //Activ_Ver.Join();                    
             //--------------
-            RancoSoft_Verif = new Thread(new ThreadStart(PreConnection.check_app_actiavtion)); //To check if is manual stopped by RancoSoft
-            RancoSoft_Verif.Start();
+            //RancoSoft_Verif = new Thread(new ThreadStart(PreConnection.check_app_actiavtion)); //To check if is manual stopped by RancoSoft
+            //RancoSoft_Verif.Start();
             //--------
             
         }

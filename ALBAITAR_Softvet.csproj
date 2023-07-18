@@ -297,6 +297,12 @@
     <Compile Include="Dialogs\Add_Vente_Fact_Item.Designer.cs">
       <DependentUpon>Add_Vente_Fact_Item.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Autorizations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Autorizations.Designer.cs">
+      <DependentUpon>Autorizations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Clients_List_Search.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -386,12 +392,6 @@
     </Compile>
     <Compile Include="Dialogs\Anims_List.Designer.cs">
       <DependentUpon>Anims_List.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\Autorizations.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\Autorizations.Designer.cs">
-      <DependentUpon>Autorizations.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Non_Autorized_Msg.cs">
       <SubType>Form</SubType>
@@ -496,6 +496,9 @@
     <EmbeddedResource Include="Dialogs\Add_Vente_Fact_Item.resx">
       <DependentUpon>Add_Vente_Fact_Item.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Autorizations.resx">
+      <DependentUpon>Autorizations.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Clients_List_Search.resx">
       <DependentUpon>Clients_List_Search.cs</DependentUpon>
     </EmbeddedResource>
@@ -547,9 +550,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Anims_List.resx">
       <DependentUpon>Anims_List.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Autorizations.resx">
-      <DependentUpon>Autorizations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Non_Autorized_Msg.resx">
       <DependentUpon>Non_Autorized_Msg.cs</DependentUpon>

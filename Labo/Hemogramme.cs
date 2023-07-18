@@ -441,9 +441,9 @@ namespace ALBAITAR_Softvet.Labo
 
         private void Hemogramme_TextChanged(object sender, EventArgs e)
         {
-            if (((TextBox)sender).Text.EndsWith(","))
+            if (((TextBox)sender).Text.EndsWith("."))
             {
-                ((TextBox)sender).Text = ((TextBox)sender).Text.Substring(0, ((TextBox)sender).Text.Length - 1) + ".";
+                ((TextBox)sender).Text = ((TextBox)sender).Text.Substring(0, ((TextBox)sender).Text.Length - 1) + ",";
                 ((TextBox)sender).SelectionStart = ((TextBox)sender).Text.Length;
             }
         }
@@ -515,21 +515,21 @@ namespace ALBAITAR_Softvet.Labo
                                               + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," //DATE_TIME
                                               + selected_animm.Cells["ID"].Value + "," //ANIM_ID
                                               + "'" + textBox1.Text.ToString().Replace("'", "''") + "'," //OBSERV
-                                              + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value : "NULL") + "," //Hematies
-                                              + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value : "NULL") + "," //Hemoglobine
-                                              + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value : "NULL") + "," //Hematocrite
-                                              + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value : "NULL") + "," //VGM
-                                              + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value : "NULL") + "," //CCMH
-                                              + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value : "NULL") + "," //TCMH
-                                              + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value : "NULL") + "," //Reticulocytes
-                                              + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value : "NULL") + "," //Plaquettes
-                                              + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value : "NULL") + "," //Leucocytes
-                                              + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value : "NULL") + "," // Granulocytes
-                                              + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value : "NULL") + "," //Neutrophiles
-                                              + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value : "NULL") + "," //Eosinophiles
-                                              + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value : "NULL") + "," //Basophiles
-                                              + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value : "NULL") + "," //Lymphocytes
-                                              + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value : "NULL") + "," //Monocytes
+                                              + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //Hematies
+                                              + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //Hemoglobine
+                                              + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //Hematocrite
+                                              + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //VGM
+                                              + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //CCMH
+                                              + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //TCMH
+                                              + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //Reticulocytes
+                                              + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //Plaquettes
+                                              + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //Leucocytes
+                                              + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," // Granulocytes
+                                              + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //Neutrophiles
+                                              + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //Eosinophiles
+                                              + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //Basophiles
+                                              + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //Lymphocytes
+                                              + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + "," //Monocytes
                                               + (dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + "," //Hematies_NORMATIF
                                               + (dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'"  : "NULL") + "," //Hemoglobine_NORMATIF
                                               + (dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'"  : "NULL") + "," //Hematocrite_NORMATIF
@@ -552,21 +552,21 @@ namespace ALBAITAR_Softvet.Labo
                                               + "`REF` = '" + textBox3.Text.Replace("'", "''") + "',"
                                               + "`DATE_TIME` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
                                               + "`OBSERV` = '" + textBox1.Text.ToString().Replace("'", "''") + "',"
-                                              + "`Hematies` = " + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Hemoglobine` = " + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Hematocrite` = " + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`VGM` = " + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`CCMH` = " + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`TCMH` = " + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Reticulocytes` = " + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Plaquettes` = " + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Leucocytes` = " + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Granulocytes` = " + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Neutrophiles` = " + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Eosinophiles` = " + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Basophiles` = " + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Lymphocytes` = " + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Monocytes` = " + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Hematies` = " + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Hemoglobine` = " + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Hematocrite` = " + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`VGM` = " + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`CCMH` = " + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`TCMH` = " + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Reticulocytes` = " + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Plaquettes` = " + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Leucocytes` = " + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Granulocytes` = " + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Neutrophiles` = " + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Eosinophiles` = " + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Basophiles` = " + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Lymphocytes` = " + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Monocytes` = " + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
                                               + "`Hematies_NORMATIF` = " + (dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
                                               + "`Hemoglobine_NORMATIF` = " + (dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
                                               + "`Hematocrite_NORMATIF` = " + (dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","

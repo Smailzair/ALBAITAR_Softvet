@@ -45,13 +45,13 @@ namespace ALBAITAR_Softvet.Labo
             new_initial_tbl.Columns.Add("DEFAULT_MIN", typeof(decimal));
             new_initial_tbl.Columns.Add("DEFAULT_MAX", typeof(decimal));
             new_initial_tbl.Columns.Add("DEFAULT_FULL", typeof(string));
-            string[] paramss = { "Protéines Totales", "Albumine", "Alpha-1-Globulines", "Alpha-2-Globulines", "Beta-Globulines", "Gamma-Globulines", "Globulines Totales", "Coefficient A/G"};
+            string[] paramss = { "Protéines Totales", "Albumine", "Alpha-1-Globulines", "Alpha-2-Globulines", "Beta-Globulines", "Gamma-Globulines", "Globulines Totales", "Coefficient A/G" };
             foreach (string param in paramss)
             {
                 DataRow rw = new_initial_tbl.NewRow();
                 rw["PARAM_NME"] = param;
-                new_initial_tbl.Rows.Add(rw);                
-                
+                new_initial_tbl.Rows.Add(rw);
+
             }
             dataGridView1.DataSource = new_initial_tbl;
             //------------------------------
@@ -87,7 +87,7 @@ namespace ALBAITAR_Softvet.Labo
             if (comboBox1.Visible)
             {
                 comboBox1.SelectedIndex = 0;
-            }            
+            }
             //---------------------------
             Load_histor();
             //-----------------
@@ -160,7 +160,7 @@ namespace ALBAITAR_Softvet.Labo
 
         //    }
         //}
-        
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedCells.Count > 0)
@@ -169,17 +169,17 @@ namespace ALBAITAR_Softvet.Labo
                 {
                     //if(dataGridView1.Columns[dataGridView1.SelectedCells[0].ColumnIndex].Name == "DEFAULT_FULL" && default_modif_autorized)
                     //{
-                        
+
                     //}
                     //else
                     //{
-                        dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
-                        int rww = dataGridView1.SelectedCells[0].RowIndex;
-                        dataGridView1.ClearSelection();
-                        dataGridView1.Rows[rww].Cells["VALUE2"].Selected = true;
-                        dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                    dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                    int rww = dataGridView1.SelectedCells[0].RowIndex;
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[rww].Cells["VALUE2"].Selected = true;
+                    dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
                     //}
-                    
+
                 }
             }
 
@@ -187,7 +187,7 @@ namespace ALBAITAR_Softvet.Labo
 
         private void button3_Click(object sender, EventArgs e)
         {
-            is_new = true;            
+            is_new = true;
             pictureBox1.Image = Properties.Resources.NOUVEAU_003;
             dateTimePicker1.Value = DateTime.Now;
             textBox1.Clear();
@@ -204,7 +204,7 @@ namespace ALBAITAR_Softvet.Labo
             //initial_normatifs_defaults();
 
             dataGridView1.Rows[0].Cells["UNIT2"].Value = "g/dl";
-           // dataGridView1_CellValueChanged(null, new DataGridViewCellEventArgs(dataGridView1.Columns["UNIT2"].Index, 0));
+            // dataGridView1_CellValueChanged(null, new DataGridViewCellEventArgs(dataGridView1.Columns["UNIT2"].Index, 0));
             dataGridView1.Rows[1].Cells["UNIT2"].Value = "%";
             dataGridView1.Rows[2].Cells["UNIT2"].Value = "%";
             dataGridView1.Rows[3].Cells["UNIT2"].Value = "%";
@@ -213,7 +213,7 @@ namespace ALBAITAR_Softvet.Labo
             dataGridView1.Rows[6].Cells["UNIT2"].Value = "%";
             dataGridView1.Rows[7].Cells["UNIT2"].Value = "%";
 
-            
+
             //----------------
             dataGridView1.Refresh();
             //---------------------
@@ -227,10 +227,10 @@ namespace ALBAITAR_Softvet.Labo
 
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if(e.Control is ComboBox)
+            if (e.Control is ComboBox)
             {
                 ComboBox comboBox = e.Control as ComboBox;
-                cel_tmp = dataGridView1.CurrentCell;                
+                cel_tmp = dataGridView1.CurrentCell;
                 comboBox.SelectedIndexChanged += Protéinogramme_SelectedIndexChanged; // Add the event handler
             }
             else
@@ -238,7 +238,7 @@ namespace ALBAITAR_Softvet.Labo
                 cel_tmp = null;
                 ((TextBox)e.Control).TextChanged += Hemogramme_TextChanged;
             }
-            
+
         }
         DataGridViewCell cel_tmp;
         private void Protéinogramme_SelectedIndexChanged(object sender, EventArgs e)
@@ -253,9 +253,9 @@ namespace ALBAITAR_Softvet.Labo
 
         private void Hemogramme_TextChanged(object sender, EventArgs e)
         {
-            if (((TextBox)sender).Text.EndsWith(","))
+            if (((TextBox)sender).Text.EndsWith("."))
             {
-                ((TextBox)sender).Text = ((TextBox)sender).Text.Substring(0, ((TextBox)sender).Text.Length - 1) + ".";
+                ((TextBox)sender).Text = ((TextBox)sender).Text.Substring(0, ((TextBox)sender).Text.Length - 1) + ",";
                 ((TextBox)sender).SelectionStart = ((TextBox)sender).Text.Length;
             }
         }
@@ -290,7 +290,7 @@ namespace ALBAITAR_Softvet.Labo
                 if (ready)
                 {
                     if (is_new)
-                    {                        
+                    {
                         PreConnection.Excut_Cmd("INSERT INTO `tb_labo_proteinogramme` "
                                               + "(`REF`,"
                                               + "`DATE_TIME`,"
@@ -328,14 +328,14 @@ namespace ALBAITAR_Softvet.Labo
                                               + "'" + textBox1.Text.Replace("'", "''") + "'," //OBSERV
                                               + comboBox1.SelectedIndex + "," //Index_Normatif_De
 
-                                              + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value : "NULL") + "," 
-                                              + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value : "NULL") + "," 
-                                              + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value : "NULL") + "," 
-                                              + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value : "NULL") + "," 
-                                              + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value : "NULL") + "," 
-                                              + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value : "NULL") + "," 
-                                              + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value : "NULL") + "," 
-                                              + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value : "NULL") + ","
+                                              + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
 
                                               + (dataGridView1.Rows[0].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
                                               + (dataGridView1.Rows[1].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
@@ -353,23 +353,23 @@ namespace ALBAITAR_Softvet.Labo
                                               + (dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
                                               + (dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ", "
                                               + (dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ");"); 
+                                              + (dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ");");
                     }
                     else
-                    {                        
+                    {
                         PreConnection.Excut_Cmd("UPDATE `tb_labo_proteinogramme` SET "
                                               + "`REF` = '" + textBox3.Text.Replace("'", "''") + "',"
                                               + "`DATE_TIME` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
                                               + "`OBSERV` = '" + textBox1.Text.Replace("'", "''") + "',"
                                               + "`Index_Normatif_De` = " + comboBox1.SelectedIndex + ","
-                                              + "`Protéines Totales` = " + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Albumine` = " + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Alpha-1-Globulines` = " + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Alpha-2-Globulines` = " + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Beta-Globulines` = " + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Gamma-Globulines` = " + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Globulines Totales` = " + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value : "NULL") + ","
-                                              + "`Coefficient A/G` = " + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value : "NULL") + ","
+                                              + "`Protéines Totales` = " + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Albumine` = " + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Alpha-1-Globulines` = " + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Alpha-2-Globulines` = " + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Beta-Globulines` = " + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Gamma-Globulines` = " + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Globulines Totales` = " + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                                              + "`Coefficient A/G` = " + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
                                               + "`Protéines Totales_UNIT` = " + (dataGridView1.Rows[0].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
                                               + "`Albumine_UNIT` = " + (dataGridView1.Rows[1].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
                                               + "`Alpha-1-Globulines_UNIT` = " + (dataGridView1.Rows[2].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
@@ -472,7 +472,7 @@ namespace ALBAITAR_Softvet.Labo
                         dateTimePicker1.Value = (DateTime)dt.Rows[0]["DATE_TIME"];
                         textBox3.Text = (string)dt.Rows[0]["REF"];
                         textBox1.Text = (string)dt.Rows[0]["OBSERV"];
-                        
+
                         dataGridView1.CellValueChanged -= dataGridView1_CellValueChanged;
                         for (int f = 14; f < 22; f++)
                         {
@@ -506,7 +506,7 @@ namespace ALBAITAR_Softvet.Labo
             {
                 button3.PerformClick();
             }
-            
+
         }
 
         private void dataGridView2_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -580,16 +580,16 @@ namespace ALBAITAR_Softvet.Labo
 
         }
 
-        
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {            
+        {
             if (cbx_tmp)
             {
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     dataGridView1_CellValueChanged(null, new DataGridViewCellEventArgs(dataGridView1.Columns["UNIT2"].Index, i));
                 }
-            }          
+            }
             //----------------
             dataGridView1.Refresh();
         }
@@ -597,13 +597,13 @@ namespace ALBAITAR_Softvet.Labo
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView1.Rows.Count > 0)
-            {                
+            {
                 if ((!comboBox1.Visible || (comboBox1.Visible && comboBox1.SelectedIndex == 1)) && e.ColumnIndex == dataGridView1.Columns["UNIT2"].Index)
-                {                   
+                {
                     dataGridView1.CellValueChanged -= dataGridView1_CellValueChanged;
                     switch (e.RowIndex)
                     {
-                        
+
                         case 0:
                             dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MIN2"].Value = dataGridView1.Rows[e.RowIndex].Cells["UNIT2"].Value.ToString().Equals("g/dl") ? 5.2 : 5.2;
                             dataGridView1.Rows[e.RowIndex].Cells["DEFAULT_MAX2"].Value = dataGridView1.Rows[e.RowIndex].Cells["UNIT2"].Value.ToString().Equals("g/dl") ? 7.6 : 7.6;
@@ -643,7 +643,7 @@ namespace ALBAITAR_Softvet.Labo
 
                     dataGridView1.Refresh();
                     dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
-                    
+
                 }
             }
             button5.Visible = false;

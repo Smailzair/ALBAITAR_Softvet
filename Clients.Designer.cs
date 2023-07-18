@@ -397,11 +397,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 7);
+            this.label4.Location = new System.Drawing.Point(17, 7);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 16);
+            this.label4.Size = new System.Drawing.Size(49, 16);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Sexe :";
+            this.label4.Text = "Civilité :";
             // 
             // button2
             // 
@@ -678,7 +678,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(528, 373);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Hist. Monitique :";
+            this.tabPage1.Text = "Hist. Monétique :";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // label15
@@ -686,7 +686,7 @@
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(18, 314);
+            this.label15.Location = new System.Drawing.Point(18, 308);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(83, 15);
             this.label15.TabIndex = 58;
@@ -698,7 +698,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label14.Location = new System.Drawing.Point(107, 314);
+            this.label14.Location = new System.Drawing.Point(107, 308);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(17, 15);
             this.label14.TabIndex = 57;
@@ -711,7 +711,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(462, 265);
+            this.button1.Location = new System.Drawing.Point(462, 259);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 31);
             this.button1.TabIndex = 56;
@@ -726,7 +726,7 @@
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(494, 266);
+            this.button5.Location = new System.Drawing.Point(494, 260);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(26, 29);
             this.button5.TabIndex = 55;
@@ -741,7 +741,7 @@
             this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button7.FlatAppearance.BorderSize = 0;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(6, 265);
+            this.button7.Location = new System.Drawing.Point(6, 259);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(26, 29);
             this.button7.TabIndex = 54;
@@ -782,7 +782,7 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(522, 257);
+            this.dataGridView2.Size = new System.Drawing.Size(522, 251);
             this.dataGridView2.TabIndex = 53;
             this.dataGridView2.DataSourceChanged += new System.EventHandler(this.dataGridView2_DataSourceChanged);
             this.dataGridView2.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellValueChanged);

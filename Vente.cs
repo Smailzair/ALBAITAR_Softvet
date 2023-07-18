@@ -354,7 +354,7 @@ namespace ALBAITAR_Softvet.Resources
                                           + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
                                           + "'Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "]',"
                                           + dataGridView3.Rows[3].Cells[1].Value + ","
-                                          + numericUpDown2.Value + ","
+                                          + Convert.ToDouble(numericUpDown2.Value) + ","
                                           + "'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "');");
                     }
                     //---------------------------
@@ -418,7 +418,7 @@ namespace ALBAITAR_Softvet.Resources
                                                     "`OP_DATE`='" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," +
                                                     "`CLIENT_ID`=" + cb1_selected_value + "," +
                                                     "`DEBIT`=" + dataGridView3.Rows[3].Cells[1].Value + "," +
-                                                    "`CREDIT`=" + numericUpDown2.Value +
+                                                    "`CREDIT`=" + Convert.ToDouble(numericUpDown2.Value) +
                                                     " WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "';");
                                     
                                 }
@@ -443,7 +443,7 @@ namespace ALBAITAR_Softvet.Resources
                                      + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
                                      + "'Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "]',"
                                      + dataGridView3.Rows[3].Cells[1].Value + ","
-                                     + numericUpDown2.Value + ","
+                                     + Convert.ToDouble(numericUpDown2.Value) + ","
                                      + "'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "');");
                                 }
                             }
@@ -474,7 +474,7 @@ namespace ALBAITAR_Softvet.Resources
                                  + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
                                  + "'Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "]',"
                                  + dataGridView3.Rows[3].Cells[1].Value + ","
-                                 + numericUpDown2.Value + ","
+                                 + Convert.ToDouble(numericUpDown2.Value) + ","
                                  + "'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "');");
                             }
                         }
@@ -497,7 +497,7 @@ namespace ALBAITAR_Softvet.Resources
                                      + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
                                      + "'Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "]',"
                                      + dataGridView3.Rows[3].Cells[1].Value + ","
-                                     + numericUpDown2.Value + ","
+                                     + Convert.ToDouble(numericUpDown2.Value) + ","
                                      + "'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text + "');");
                         }
                     }

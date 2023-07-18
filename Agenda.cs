@@ -1252,7 +1252,7 @@ namespace ALBAITAR_Softvet.Resources
             }
 
 
-            if (MessageBox.Show("Sures de faire la suppression ?\n\nRMQ : L'évenement origine sera supprimer (tous les répétition liés seront supprimés)", "Confirmation :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Sures de faire la suppression ?\n\nRMQ : L'évenement origine sera supprimer (tous les évènements lies seront supprimés)", "Confirmation :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (Supprimer_pour_tous_40005)
                 {
