@@ -364,7 +364,7 @@
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(120, 20);
             this.checkBox1.TabIndex = 41;
-            this.checkBox1.Text = "Rég. en espéce ?";
+            this.checkBox1.Text = "Rég. en espèce ?";
             this.toolTip1.SetToolTip(this.checkBox1, "Méthode de calcule D.Timbre :\r\n----------------------\r\nD.Timbre = (HT + TVA) x 1%" +
         "\r\n---------\r\nRMQ :\r\n** (5 DA < D.Timbre < 2500.00 DA)\r\n** (HT + TVA) > 20.00 DA\r" +
         "\n");

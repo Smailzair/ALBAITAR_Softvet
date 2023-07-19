@@ -53,10 +53,10 @@
             // 
             // button3
             // 
-            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_pdf_20px;
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_pdf_20px;
             this.button3.Location = new System.Drawing.Point(733, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(27, 24);
@@ -67,10 +67,10 @@
             // 
             // button2
             // 
-            this.button2.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_microsoft_word_20px;
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_microsoft_word_20px;
             this.button2.Location = new System.Drawing.Point(700, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(27, 24);
@@ -81,10 +81,10 @@
             // 
             // button1
             // 
-            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_microsoft_excel_20px;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_microsoft_excel_20px;
             this.button1.Location = new System.Drawing.Point(667, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(27, 24);

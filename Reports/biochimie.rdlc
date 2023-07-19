@@ -6476,7 +6476,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Prioritaire :</Value>
+                      <Value>Propriétaire :</Value>
                       <Style>
                         <FontFamily>Century Gothic</FontFamily>
                         <FontWeight>Normal</FontWeight>
@@ -6491,7 +6491,7 @@
               <Top>2.12361cm</Top>
               <Left>4.30953cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.02375cm</Width>
+              <Width>2.46381cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -6510,7 +6510,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Espéce :</Value>
+                      <Value>Espèce :</Value>
                       <Style>
                         <FontFamily>Century Gothic</FontFamily>
                         <FontWeight>Normal</FontWeight>
@@ -6612,7 +6612,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Date de nissance :</Value>
+                      <Value>Date de naissance :</Value>
                       <Style>
                         <FontFamily>Century Gothic</FontFamily>
                         <FontWeight>Normal</FontWeight>
@@ -6743,9 +6743,9 @@
               </Paragraphs>
               <rd:DefaultName>PRIOR</rd:DefaultName>
               <Top>2.12361cm</Top>
-              <Left>6.33328cm</Left>
+              <Left>6.7733cm</Left>
               <Height>0.6cm</Height>
-              <Width>6.48689cm</Width>
+              <Width>6.08215cm</Width>
               <ZIndex>9</ZIndex>
               <Style>
                 <Border>

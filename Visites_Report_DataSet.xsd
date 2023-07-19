@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Visites_Report_DataSet" targetNamespace="http://tempuri.org/Visites_Report_DataSet.xsd" xmlns:mstns="http://tempuri.org/Visites_Report_DataSet.xsd" xmlns="http://tempuri.org/Visites_Report_DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Visites_Report_DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="Visites_Report_DataSet" msprop:Generator_DataSetName="Visites_Report_DataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="tbl1" msprop:Generator_RowEvHandlerName="tbl1RowChangeEventHandler" msprop:Generator_RowDeletedName="tbl1RowDeleted" msprop:Generator_RowDeletingName="tbl1RowDeleting" msprop:Generator_RowEvArgName="tbl1RowChangeEvent" msprop:Generator_TablePropName="tbl1" msprop:Generator_RowChangedName="tbl1RowChanged" msprop:Generator_RowChangingName="tbl1RowChanging" msprop:Generator_TableClassName="tbl1DataTable" msprop:Generator_RowClassName="tbl1Row" msprop:Generator_TableVarName="tabletbl1" msprop:Generator_UserTableName="tbl1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DATETIME" msprop:Generator_ColumnPropNameInRow="DATETIME" msprop:Generator_ColumnPropNameInTable="DATETIMEColumn" msprop:Generator_ColumnVarNameInTable="columnDATETIME" msprop:Generator_UserColumnName="DATETIME" type="xs:string" minOccurs="0" />
+              <xs:element name="ANIM_NME" msprop:Generator_ColumnPropNameInRow="ANIM_NME" msprop:Generator_ColumnPropNameInTable="ANIM_NMEColumn" msprop:Generator_ColumnVarNameInTable="columnANIM_NME" msprop:Generator_UserColumnName="ANIM_NME" type="xs:string" minOccurs="0" />
+              <xs:element name="POIDS" msprop:Generator_ColumnPropNameInRow="POIDS" msprop:Generator_ColumnPropNameInTable="POIDSColumn" msprop:Generator_ColumnVarNameInTable="columnPOIDS" msprop:Generator_UserColumnName="POIDS" type="xs:string" minOccurs="0" />
+              <xs:element name="TXT" msprop:Generator_ColumnPropNameInRow="TXT" msprop:Generator_ColumnPropNameInTable="TXTColumn" msprop:Generator_ColumnVarNameInTable="columnTXT" msprop:Generator_UserColumnName="TXT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

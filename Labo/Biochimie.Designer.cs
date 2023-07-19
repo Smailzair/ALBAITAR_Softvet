@@ -173,17 +173,17 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 15);
             this.label9.TabIndex = 43;
-            this.label9.Text = "Espéce :";
+            this.label9.Text = "Espèce :";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(379, 45);
+            this.label10.Location = new System.Drawing.Point(370, 45);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(111, 15);
+            this.label10.Size = new System.Drawing.Size(119, 15);
             this.label10.TabIndex = 42;
-            this.label10.Text = "Date de nissance :";
+            this.label10.Text = "Date de naissance :";
             // 
             // label11
             // 
@@ -238,9 +238,9 @@
             this.label5.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(18, 44);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 15);
+            this.label5.Size = new System.Drawing.Size(80, 15);
             this.label5.TabIndex = 3;
-            this.label5.Text = "Prioritaire :";
+            this.label5.Text = "Propriétaire :";
             // 
             // label3
             // 

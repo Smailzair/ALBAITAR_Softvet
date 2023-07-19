@@ -575,7 +575,7 @@ namespace ALBAITAR_Softvet
                 PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = 0 WHERE `ID` = 7;");
             }
 
-            File.WriteAllText(filePath, ((double)old_val + (double)time_delay / 60).ToString("N2"));
+       //     File.WriteAllText(filePath, ((double)old_val + (double)time_delay / 60).ToString("N2"));
             //----------------------------------
             Properties.Settings.Default.Maximize_Main_Frm = WindowState == FormWindowState.Maximized;
             Properties.Settings.Default.Save();
@@ -778,6 +778,7 @@ namespace ALBAITAR_Softvet
                 }
 
             }
+            comboBox2_SelectedIndexChanged(null,null);
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -795,15 +796,16 @@ namespace ALBAITAR_Softvet
                 //-----------
                 if (comboBox2.SelectedValue != null)
                 {
-                    if (int.TryParse(comboBox2.SelectedValue.ToString(), out int yy))
+                    int yy = -1;
+                    if (int.TryParse(comboBox2.SelectedValue.ToString(), out yy))
                     {
                         if (comboBox1.SelectedIndex == 0) //CLIENT
                         {
-                            selected_client_id = (int)comboBox2.SelectedValue;
+                            selected_client_id = yy;
                         }
                         else //ANIMAL
                         {
-                            selected_animal_id = (int)comboBox2.SelectedValue;
+                            selected_animal_id = yy;
                         }
 
                     }
@@ -1153,7 +1155,16 @@ namespace ALBAITAR_Softvet
                 DataTable tmp_animm;
                 if (radioButton8.Checked)
                 {
-                    tmp_animm = (Main_Frm_animals_tbl.AsEnumerable().Where(DD => (int)DD["CLIENT_ID"] == selected_client_id).CopyToDataTable()).DefaultView.ToTable(false, "ID", "NUM_IDENTIF", "CLIENT_FULL_NME", "NME", "ESPECE", "RACE", "SEXE", "NISS_DATE", "DATE_ADDED", "IS_RADIATED", "OBSERVATIONS");
+                    var rrr = Main_Frm_animals_tbl.AsEnumerable().Where(DD => (int)DD["CLIENT_ID"] == selected_client_id);
+
+                    if (rrr.Any())
+                    {
+                        tmp_animm = (Main_Frm_animals_tbl.AsEnumerable().Where(DD => (int)DD["CLIENT_ID"] == selected_client_id).CopyToDataTable()).DefaultView.ToTable(false, "ID", "NUM_IDENTIF", "CLIENT_FULL_NME", "NME", "ESPECE", "RACE", "SEXE", "NISS_DATE", "DATE_ADDED", "IS_RADIATED", "OBSERVATIONS");
+                    }
+                    else
+                    {
+                        tmp_animm = Main_Frm_animals_tbl != null ? Main_Frm_animals_tbl.Clone() : null;
+                    }
                 }
                 else
                 {
@@ -1168,7 +1179,7 @@ namespace ALBAITAR_Softvet
         }
         private void DGV_Visit_Filter(bool update_tot)
         {
-            string fltr = radioButton8.Checked && comboBox2.Items.Count > 0 ? (comboBox1.SelectedIndex == 0 ? "CLIENT_ID" : "ANIM_ID") + " = " + comboBox2.SelectedValue : "";
+            string fltr = radioButton8.Checked && comboBox2.Items.Count > 0 ? (comboBox1.SelectedIndex == 0 ? "CLIENT_ID" : "ANIM_ID") + " = " + (comboBox2.SelectedValue != null ? comboBox2.SelectedValue : -1) : "";
             //-----------------------------------
             fltr += textBox1.Text.Trim().Length > 0 ? ((fltr.Length > 0 ? " AND " : "") + "("
                 + "VISITOR_FULL_NME LIKE '%" + textBox1.Text + "%'"
@@ -1531,6 +1542,10 @@ namespace ALBAITAR_Softvet
                     Application.OpenForms["Animaux"].BringToFront();
                 }
                 panel1.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show("Veuillez séléctionner -d'abord- un animal.","",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
         }
 
@@ -2038,6 +2053,10 @@ namespace ALBAITAR_Softvet
             PreConnection.Excport_to_excel(dataGridView4, "Fonds", (radioButton7.Checked ? "Tous" : comboBox2.Text), null, false);
         }
 
+        private void button22_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

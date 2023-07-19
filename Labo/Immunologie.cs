@@ -578,5 +578,6 @@ namespace ALBAITAR_Softvet.Labo
         {
             button5.Visible = false;
         }
+
     }
 }

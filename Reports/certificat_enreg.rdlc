@@ -80,7 +80,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Espéce :</Value>
+                    <Value>Espèce :</Value>
                     <Style>
                       <FontFamily>Century Gothic</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -185,7 +185,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Date de nissance :</Value>
+                    <Value>Date de naissance :</Value>
                     <Style>
                       <FontFamily>Century Gothic</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -201,7 +201,7 @@
             <Top>6.04333cm</Top>
             <Left>2.44829cm</Left>
             <Height>0.6cm</Height>
-            <Width>3.53188cm</Width>
+            <Width>3.70827cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -359,9 +359,9 @@
             </Paragraphs>
             <rd:DefaultName>DATE_NISS</rd:DefaultName>
             <Top>6.04333cm</Top>
-            <Left>5.98017cm</Left>
+            <Left>6.15656cm</Left>
             <Height>0.6cm</Height>
-            <Width>12.15403cm</Width>
+            <Width>11.97764cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>

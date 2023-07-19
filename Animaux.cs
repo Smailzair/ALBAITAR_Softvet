@@ -20,133 +20,138 @@ namespace ALBAITAR_Softvet.Resources
         public static int visite_idd = -1;
         DataTable clients;
         DataTable animaux;
+        DataTable poids_tbl = new DataTable();
         List<string> full_nme_clients;
         bool Is_New = true;
         bool Is_New_Visite = true;
-        DataTable Races_Especes = new DataTable();
+        DataTable Races_Espèces = new DataTable();
         DataTable chosen_anim_from_search;
+        int prev_rw_idx = -1;
+        int prev_col_idx = -1;
+
         public Animaux(int ID_to_select, int visite_id)
         {
             InitializeComponent();
             ID_to_selectt = ID_to_select;
             visite_idd = visite_id;
             //----------------------
-            Races_Especes.Columns.Add("ESPECE", typeof(string));
-            Races_Especes.Columns.Add("RACE", typeof(string));
-            Races_Especes.Rows.Add(new object[] { "Canine", "Husky Siberien" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Jack Russel" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Jagdterrier" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Komodor" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Korthals" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Labrador" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Levrier Afghan" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Levrier Espagnol" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Lhassa Apso" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Malamute de l'Alaska" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Pekinois" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Pinscher" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Pit Bull" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Podenco" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Pointer" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Rhodesian Ridgeback" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Rottweiler" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Saint-Bernard" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Saluki" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Samoyede" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Schnauzer" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Schnauzer Geant" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Schnauzer Moyen" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Schnauzer Nain" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Scottish Terrier" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Setter Anglais" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Setter Gordon" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Setter Irlandais" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Shar-pei" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Shiba Inu" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Shih Tzu" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Sloughi" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Spitz Japonais" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Spitz Nain" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Staffordshire Bull Terrier" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Teckel" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Teckel à poil dur" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Teckel à poil long" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Teckel Nain" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Terre Neuve" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Terrier Tibétain" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Westhiland West terrier" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Whippet" });
-            Races_Especes.Rows.Add(new object[] { "Canine", "Yorkshire Terrier" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "American Bobtail poil court et poil long" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "American Curl poil court et poil long" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "American Shorthair" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "American Wirehair (variété de l'American SH)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Angora turc" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Asian (variété de Burmese Européen)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Balinais (Siamois PL)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Bengal" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Bobtail Japonais poil court et poil long" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Bombay" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "British Shorthair et Longhair" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Burmese Américain" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Burmese Anglais ou Européen" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Californian Rex (Cornish Rex PL)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Californian Spangled" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Ceylan" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Chartreux" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Chausie" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Cornish Rex" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Cymric (Manx PL)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Devon Rex" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Européen" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Exotic Shorthair (Persan PC)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "German Rex" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Havana Brown" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Highland Fold (Scottish PL)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Korat" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Kurilian Bobtail poil court et poil long" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Laperm poil court et poil long" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Maine Coon" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Mandarin (Oriental PL)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Manx" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Mau Égyptien" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Munchkin poil court et poil long" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Nebelung (Russe PL)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Norvégien" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Ocicat" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Ojos Azules poil court et poil long" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Oriental (Siamois coloré)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Persan" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Peterbald" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Pixie-Bob poil court et poil long" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Ragdoll" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Russe" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Sacré de Birmanie (Birman)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Savannah" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Scottish Fold" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Selkirk Rex poil court et poil long" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Serengeti" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Siamois" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Sibérien" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Singapura" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Snowshoe" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Sokoké" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Somali (Abyssin PL)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Sphynx" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Sphynx du Don" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Thaï" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Tiffany (Burmese Européen ou Asian PL)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Tonkinois poil court et poil long (Tibétain)" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "Turc de Van" });
-            Races_Especes.Rows.Add(new object[] { "Feline", "York Chocolate" });            
-            Races_Especes.Rows.Add(new object[] { "Oiseaux", "Perroquet" });
-            Races_Especes.Rows.Add(new object[] { "Oiseaux", "Perruche" });
+            Races_Espèces.Columns.Add("ESPECE", typeof(string));
+            Races_Espèces.Columns.Add("RACE", typeof(string));
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Husky Siberien" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Jack Russel" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Jagdterrier" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Komodor" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Korthals" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Labrador" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Levrier Afghan" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Levrier Espagnol" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Lhassa Apso" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Malamute de l'Alaska" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Pekinois" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Pinscher" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Pit Bull" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Podenco" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Pointer" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Rhodesian Ridgeback" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Rottweiler" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Saint-Bernard" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Saluki" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Samoyede" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Schnauzer" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Schnauzer Geant" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Schnauzer Moyen" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Schnauzer Nain" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Scottish Terrier" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Setter Anglais" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Setter Gordon" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Setter Irlandais" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Shar-pei" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Shiba Inu" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Shih Tzu" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Sloughi" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Spitz Japonais" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Spitz Nain" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Staffordshire Bull Terrier" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Teckel" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Teckel à poil dur" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Teckel à poil long" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Teckel Nain" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Terre Neuve" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Terrier Tibétain" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Westhiland West terrier" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Whippet" });
+            Races_Espèces.Rows.Add(new object[] { "Canine", "Yorkshire Terrier" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "American Bobtail poil court et poil long" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "American Curl poil court et poil long" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "American Shorthair" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "American Wirehair (variété de l'American SH)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Angora turc" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Asian (variété de Burmese Européen)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Balinais (Siamois PL)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Bengal" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Bobtail Japonais poil court et poil long" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Bombay" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "British Shorthair et Longhair" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Burmese Américain" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Burmese Anglais ou Européen" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Californian Rex (Cornish Rex PL)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Californian Spangled" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Ceylan" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Chartreux" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Chausie" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Cornish Rex" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Cymric (Manx PL)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Devon Rex" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Européen" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Exotic Shorthair (Persan PC)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "German Rex" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Havana Brown" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Highland Fold (Scottish PL)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Korat" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Kurilian Bobtail poil court et poil long" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Laperm poil court et poil long" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Maine Coon" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Mandarin (Oriental PL)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Manx" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Mau Égyptien" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Munchkin poil court et poil long" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Nebelung (Russe PL)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Norvégien" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Ocicat" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Ojos Azules poil court et poil long" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Oriental (Siamois coloré)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Persan" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Peterbald" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Pixie-Bob poil court et poil long" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Ragdoll" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Russe" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Sacré de Birmanie (Birman)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Savannah" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Scottish Fold" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Selkirk Rex poil court et poil long" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Serengeti" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Siamois" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Sibérien" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Singapura" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Snowshoe" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Sokoké" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Somali (Abyssin PL)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Sphynx" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Sphynx du Don" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Thaï" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Tiffany (Burmese Européen ou Asian PL)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Tonkinois poil court et poil long (Tibétain)" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "Turc de Van" });
+            Races_Espèces.Rows.Add(new object[] { "Feline", "York Chocolate" });
+            Races_Espèces.Rows.Add(new object[] { "Oiseaux", "Perroquet" });
+            Races_Espèces.Rows.Add(new object[] { "Oiseaux", "Perruche" });
             //---
-            
-            comboBox3.DataSource = Races_Especes;
+
+            comboBox3.DataSource = Races_Espèces;
             comboBox3.ValueMember = "RACE";
             comboBox3.DisplayMember = "RACE";
             //---------------------------
+            tabControl1.TabPages.Remove(tabPage3);
             tabControl1.TabPages.Remove(tabPage2);
             //----------------------
             comboBox2.SelectedIndex = comboBox3.SelectedIndex = comboBox4.SelectedIndex = 0;
@@ -179,8 +184,6 @@ namespace ALBAITAR_Softvet.Resources
             { dataGridView1.ClearSelection(); dataGridView1.Rows[fd].Selected = true; }
             else if (dataGridView1.Rows.Count > 0)
             { dataGridView1.ClearSelection(); dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true; }
-
-
         }
         private void Load_selected_anim_fields()
         {
@@ -199,7 +202,11 @@ namespace ALBAITAR_Softvet.Resources
                 button8.Visible = true;
                 panel1.Visible = false;
                 panel2.Visible = false;
-                if (tabControl1.TabPages.Count < 2) { tabControl1.TabPages.Add(tabPage2); }
+                if (tabControl1.TabPages.Count < 2)
+                {
+                    tabControl1.TabPages.Add(tabPage3);
+                    tabControl1.TabPages.Add(tabPage2);
+                }
                 //----------------------------------------------                
                 dateTimePicker3.Value = (DateTime)dataGridView1.SelectedRows[0].Cells["DATE_ADDED"].Value;
                 textBox3.Text = (string)dataGridView1.SelectedRows[0].Cells["NME"].Value;
@@ -273,7 +280,7 @@ namespace ALBAITAR_Softvet.Resources
                 bool all_ready = true;
                 textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
                 comboBox1.BackColor = comboBox1.Text.TrimStart().TrimEnd() != string.Empty && comboBox1.SelectedValue != null ? SystemColors.Window : Color.LightCoral;
-                panel2.Visible = comboBox2.Text.Length == 0 || comboBox2.Text == "--";//Espece (Obligé !)
+                panel2.Visible = comboBox2.Text.Length == 0 || comboBox2.Text == "--";//Espèce (Obligé !)
                 panel1.Visible = comboBox4.Text.Length == 0 || comboBox4.Text == "--"; //Sexe (Obligé !)
                 int mm = 0;
                 if (Is_New) { mm = animaux.Rows.Cast<DataRow>().Where(XX => XX["NUM_IDENTIF"].ToString().Length > 0 && (string)XX["NUM_IDENTIF"] == textBox2.Text.Trim().Replace(" ", "")).ToList().Count; }
@@ -417,14 +424,59 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            label18.Visible = false;
+
             Is_New = false;
-            Load_selected_anim_fields(); 
-            load_visites();
-            
-            
+            if (tabControl1.SelectedTab == tabPage1)
+            {
+                Load_selected_anim_fields();
+            }
+            else if (tabControl1.SelectedTab == tabPage3)
+            {
+                load_poids();
+            }
+            else if (tabControl1.SelectedTab == tabPage2)
+            {
+                label18.Visible = false;
+                load_visites();
+            }
+
+
+
+
+
         }
 
+        private void load_poids()
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+
+                int prev_select = dataGridView3.SelectedRows.Count > 0 ? (int)dataGridView3.SelectedRows[0].Cells["IDD"].Value : -1;
+
+                dataGridView3.CellValueChanged -= dataGridView3_CellValueChanged;
+                poids_tbl.Rows.Clear();
+                poids_tbl = PreConnection.Load_data("SELECT * FROM tb_poids WHERE ANIM_ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + " ORDER BY DATETIME ASC;");
+                dataGridView3.DataSource = poids_tbl;
+                dataGridView3.CellValueChanged += dataGridView3_CellValueChanged;
+
+                dataGridView3.ClearSelection();
+                if (prev_select > -1)
+                {
+                    dataGridView3.Rows.Cast<DataGridViewRow>().Where(ZZ => (int)ZZ.Cells["IDD"].Value == prev_select).ToList().ForEach(FF =>
+                    {
+                        FF.Selected = true;
+                        if (FF.Index > dataGridView3.DisplayedRowCount(false)) { dataGridView3.FirstDisplayedScrollingRowIndex = FF.Index; }
+                    });
+
+                }
+                else
+                {
+                    if (dataGridView3.DisplayedRowCount(false) < dataGridView3.RowCount) { dataGridView3.FirstDisplayedScrollingRowIndex = dataGridView3.NewRowIndex; }
+                }
+
+                dataGridView3_Scroll(null, null);
+            }
+        }
         private void button3_Click(object sender, EventArgs e)
         {
             dataGridView1.ClearSelection();
@@ -464,7 +516,13 @@ namespace ALBAITAR_Softvet.Resources
             checkBox1.Checked = checkBox2.Checked = false;
             label13.Visible = false;
             pictureBox1.Image = Properties.Resources.NOUVEAU;
-            if (tabControl1.TabPages.Count > 1) { tabControl1.TabPages.Remove(tabPage2); }
+            poids_tbl.Rows.Clear();
+            if (tabControl1.TabPages.Count > 1)
+            {
+                tabControl1.TabPages.Remove(tabPage3);
+                tabControl1.TabPages.Remove(tabPage2);
+            }
+            tabControl1.SelectedTab = tabPage1;
             if (!textBox1.Focused) { textBox3.Select(); }
         }
 
@@ -473,6 +531,7 @@ namespace ALBAITAR_Softvet.Resources
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
+
                 if (MessageBox.Show("Vous étes sures de supprimer [" + dataGridView1.SelectedRows.Count + "] animaux ?\n\nAttention: Tous " + (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " infos associées seront supprimés (Laboratires, Visies, Agenda ...).", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     string fff = "";
@@ -480,8 +539,9 @@ namespace ALBAITAR_Softvet.Resources
                     fff = fff.Substring(1);
                     PreConnection.Excut_Cmd("DELETE FROM tb_animaux WHERE ID IN (" + fff + ");");
                     Load_anims_from_DB();
+                    tabControl1.SelectedTab = tabPage1;
                 }
-
+                
             }
 
         }
@@ -514,7 +574,7 @@ namespace ALBAITAR_Softvet.Resources
                             xcelApp.Cells[1, g.Index + 1].Value = "Propriétaire";
                             break;
                         case "ESPECE":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Espéce";
+                            xcelApp.Cells[1, g.Index + 1].Value = "Espèce";
                             break;
                         case "RACE":
                             xcelApp.Cells[1, g.Index + 1].Value = "Race";
@@ -523,7 +583,7 @@ namespace ALBAITAR_Softvet.Resources
                             xcelApp.Cells[1, g.Index + 1].Value = "Sexe";
                             break;
                         case "NISS_DATE":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Date Nissance";
+                            xcelApp.Cells[1, g.Index + 1].Value = "Date Naissance";
                             break;
                         case "ROBE":
                             xcelApp.Cells[1, g.Index + 1].Value = "Robe";
@@ -736,10 +796,10 @@ namespace ALBAITAR_Softvet.Resources
                 if (Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50000" && (Int32)QQ[3] == 1).Count() == 0)
                 {
                     visites_not_autorsed = true;
-                    tabControl1.TabPages.Remove(tabPage2);                         
+                    tabControl1.TabPages.Remove(tabPage2);
                 }
                 else
-                {                    
+                {
                     button12.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50001" && (Int32)QQ[3] == 1).Count() > 0;
                     button11.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50003" && (Int32)QQ[3] == 1).Count() > 0;
                 }
@@ -998,15 +1058,12 @@ namespace ALBAITAR_Softvet.Resources
                 dataGridView2.ClearSelection();
                 if (prev_select > -1)
                 {
-                    DataGridViewRow rww = dataGridView2.Rows.Cast<DataGridViewRow>().Where(ZZ => (int)ZZ.Cells["ID_VISITE"].Value == prev_select).FirstOrDefault();
-                    if (rww != null) { rww.Selected = true; }
-
+                    dataGridView2.Rows.Cast<DataGridViewRow>().Where(ZZ => (int)ZZ.Cells["ID_VISITE"].Value == prev_select).ToList().ForEach(FF => FF.Selected = true);
                 }
                 else if (dataGridView2.Rows.Count > 0)
                 {
                     int idd_max = dataGridView2.Rows.Cast<DataGridViewRow>().Max(row => Convert.ToInt32(row.Cells["ID_VISITE"].Value));
-                    DataGridViewRow rww = dataGridView2.Rows.Cast<DataGridViewRow>().Where(ZZ => (int)ZZ.Cells["ID_VISITE"].Value == idd_max).FirstOrDefault();
-                    if (rww != null) { rww.Selected = true; }
+                    dataGridView2.Rows.Cast<DataGridViewRow>().Where(ZZ => (int)ZZ.Cells["ID_VISITE"].Value == idd_max).ToList().ForEach(M => M.Selected = true);
                 }
                 dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
                 dataGridView2_SelectionChanged(null, null);
@@ -1236,7 +1293,7 @@ namespace ALBAITAR_Softvet.Resources
                 dataGridView2.Columns.Cast<DataGridViewColumn>().Where(ss => ss.Name != "ID_VISITE" && ss.Name != "ANIM_ID").ToList().ForEach(g =>
                 {
                     xcelApp.Cells[1, g.Index + 1].Value = g.HeaderText;
-                    
+
                     ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
                     ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Font.Bold = true;
                     ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
@@ -1291,6 +1348,164 @@ namespace ALBAITAR_Softvet.Resources
             }
 
         }
+
+        private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            prev_rw_idx = dataGridView3.CurrentCell.RowIndex;
+            prev_col_idx = dataGridView3.CurrentCell.ColumnIndex;
+            if (dataGridView3.CurrentCell.ColumnIndex == dataGridView3.Columns["DATETIMEE"].Index)
+            {
+
+                DateTimePicker dateTimePicker = new DateTimePicker();
+                dateTimePicker.Format = DateTimePickerFormat.Custom;
+                dateTimePicker.CustomFormat = "dd/MM/yyyy HH:mm";
+                dateTimePicker.Value = dataGridView3.Rows[prev_rw_idx].Cells["DATETIMEE"].Value != DBNull.Value ? DateTime.Now : DateTime.Parse(dataGridView3.Rows[prev_rw_idx].Cells["DATETIMEE"].Value.ToString());
+                dateTimePicker.ValueChanged += (s, args) =>
+                {
+                    dataGridView3.CellValueChanged -= dataGridView3_CellValueChanged;
+                    dataGridView3.Rows[prev_rw_idx].Cells[prev_col_idx].Value = dateTimePicker.Value.ToString("dd/MM/yyyy HH:mm");
+                    dataGridView3.CellValueChanged += dataGridView3_CellValueChanged;
+                };
+                dateTimePicker.Leave += (s, args) =>
+                {
+                    dataGridView3_CellValueChanged(null, new DataGridViewCellEventArgs(prev_col_idx, prev_rw_idx));
+                    dataGridView3_Scroll(null, null);
+                };
+                dataGridView3.Controls.Add(dateTimePicker);
+                dataGridView3.CurrentCell.Style.Padding = new Padding(0);
+                dateTimePicker.Visible = true;
+                dateTimePicker.Location = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location;
+                dateTimePicker.Size = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
+                dateTimePicker.Focus();
+
+
+            }
+            else if (prev_col_idx == dataGridView3.Columns["POIDS"].Index)
+            {
+
+                NumericUpDown numericUpDown = new NumericUpDown();
+
+                numericUpDown.Minimum = 0;
+                numericUpDown.Maximum = 100000000000;
+                numericUpDown.DecimalPlaces = 2;
+                numericUpDown.ThousandsSeparator = true;
+                decimal fff = 0;
+                decimal.TryParse(dataGridView3.Rows[prev_rw_idx].Cells[prev_col_idx].Value.ToString(), out fff);
+                numericUpDown.Value = fff;
+                numericUpDown.ValueChanged += (s, args) =>
+                {
+                    dataGridView3.CellValueChanged -= dataGridView3_CellValueChanged;
+                    dataGridView3.Rows[prev_rw_idx].Cells[prev_col_idx].Value = numericUpDown.Value;
+                    dataGridView3.CellValueChanged += dataGridView3_CellValueChanged;
+                };
+                numericUpDown.Leave += (s, args) =>
+                {
+                    dataGridView3_CellValueChanged(null, new DataGridViewCellEventArgs(prev_col_idx, prev_rw_idx));
+                    dataGridView3_Scroll(null, null);
+                };
+                dataGridView3.Controls.Add(numericUpDown);
+                dataGridView3.CurrentCell.Style.Padding = new Padding(0);
+                numericUpDown.Visible = true;
+                numericUpDown.Location = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location;
+                numericUpDown.Size = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
+                numericUpDown.Focus();
+            }
+            else if(prev_col_idx == dataGridView3.Columns["DELETE"].Index && prev_rw_idx != dataGridView3.NewRowIndex)
+            {
+                if (MessageBox.Show("Êtes-vous sûrs de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    PreConnection.Excut_Cmd("DELETE FROM tb_poids WHERE ID = "+ dataGridView3.Rows[prev_rw_idx].Cells["IDD"].Value + ";");
+                    load_poids();
+                }
+            }
+        }
+
+
+        private void dataGridView3_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1 && (dataGridView3.Rows[e.RowIndex].Cells["DATETIMEE"].Value != null || dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value != null))
+            {
+                string cmd = "";
+
+                //if (dataGridView3.Rows[e.RowIndex].Cells["IDD"].Value != null)//UPDATE
+                if (dataGridView3.Rows[e.RowIndex].Cells["ANIM_IDD"].Value != DBNull.Value )
+                {
+                    cmd = "UPDATE `tb_poids` SET "
+                                          + "`DATETIME` = '" + ((DateTime)dataGridView3.Rows[e.RowIndex].Cells["DATETIMEE"].Value).ToString("yyyy-MM-dd HH:mm") + "',"
+                                          + "`POIDS` = " + dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value
+                                          + " WHERE `ID` = " + dataGridView3.Rows[e.RowIndex].Cells["IDD"].Value + ";";
+                }
+                else //INSERT
+                {
+                    if (dataGridView3.Columns[e.ColumnIndex].Name == "DATETIMEE")
+                    {
+                        cmd = "INSERT INTO `tb_poids`"
+                                          + "(`ANIM_ID`,"
+                                          + "`DATETIME`)"
+                                          + " VALUES ("
+                                          + dataGridView1.SelectedRows[0].Cells["ID"].Value + ","
+                                          + "'" + ((DateTime)dataGridView3.Rows[e.RowIndex].Cells["DATETIMEE"].Value).ToString("yyyy-MM-dd HH:mm") + "')";
+                    }
+                    else if (dataGridView3.Columns[e.ColumnIndex].Name == "POIDS")
+                    {
+                        cmd = "INSERT INTO `tb_poids`"
+                                           + "(`ANIM_ID`,"
+                                          + "`POIDS`)"
+                                          + " VALUES ("
+                                          + dataGridView1.SelectedRows[0].Cells["ID"].Value + ","
+                                          + dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value + ")";
+                    }
+                }
+
+                if (cmd.Length > 0)
+                {
+                    PreConnection.Excut_Cmd(cmd);
+                    load_poids();
+
+                }
+            }
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dataGridView1_SelectionChanged(null, null);
+        }
+
+        private void dataGridView3_Scroll(object sender, ScrollEventArgs e)
+        {
+            foreach (Control ctrr in dataGridView3.Controls)
+            {
+                dataGridView3.Controls.Remove(ctrr);
+            }
+            dataGridView3.Refresh();
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            string iddw = "";
+            dataGridView3.SelectedCells.Cast<DataGridViewCell>().Where(F => F.RowIndex != dataGridView3.NewRowIndex).Select(C => C.RowIndex).Distinct().ToList().ForEach(V => iddw += "," + V);
+            if (iddw.Length > 0)
+            {
+                if (MessageBox.Show("Êtes-vous sûrs de faire la suppression ?", "Confirmer :",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    PreConnection.Excut_Cmd("DELETE FROM tb_poids WHERE ID IN ("+iddw.Substring(1)+");");
+                }
+
+                load_poids();
+            }
+        }
+
+        private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView3.Columns[e.ColumnIndex].Name == "DELETE" && e.RowIndex == dataGridView3.NewRowIndex)
+            {
+               e.Value = Properties.Resources.icons8_trash_25px_1;
+
+            }
+        }
+
     }
 }
 

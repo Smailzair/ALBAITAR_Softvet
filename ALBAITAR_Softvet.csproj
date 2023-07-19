@@ -369,6 +369,12 @@
     <Compile Include="Labo\Biochimie.Designer.cs">
       <DependentUpon>Biochimie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Print_visites.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Print_visites.Designer.cs">
+      <DependentUpon>Print_visites.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -481,6 +487,11 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Visites_Report_DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Visites_Report_DataSet.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Agenda.resx">
       <DependentUpon>Agenda.cs</DependentUpon>
     </EmbeddedResource>
@@ -532,6 +543,10 @@
     <EmbeddedResource Include="Labo\Biochimie.resx">
       <DependentUpon>Biochimie.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Print_visites.resx">
+      <DependentUpon>Print_visites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\visite_report.rdlc" />
     <EmbeddedResource Include="Reports\urologie.rdlc" />
     <EmbeddedResource Include="Reports\facture_vente.rdlc" />
     <EmbeddedResource Include="Reports\certificat_enreg.rdlc" />
@@ -627,6 +642,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Visites_Report_DataSet.xsc">
+      <DependentUpon>Visites_Report_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Visites_Report_DataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Visites_Report_DataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Visites_Report_DataSet.xss">
+      <DependentUpon>Visites_Report_DataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

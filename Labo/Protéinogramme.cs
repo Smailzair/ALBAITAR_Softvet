@@ -255,7 +255,7 @@ namespace ALBAITAR_Softvet.Labo
         {
             if (((TextBox)sender).Text.EndsWith("."))
             {
-                ((TextBox)sender).Text = ((TextBox)sender).Text.Substring(0, ((TextBox)sender).Text.Length - 1) + ",";
+                ((TextBox)sender).Text = ((TextBox)sender).Text.Substring(0, ((TextBox)sender).Text.Length - 1) + ",    ";
                 ((TextBox)sender).SelectionStart = ((TextBox)sender).Text.Length;
             }
         }

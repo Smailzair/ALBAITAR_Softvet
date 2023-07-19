@@ -30,16 +30,16 @@ namespace ALBAITAR_Softvet
             Application.SetCompatibleTextRenderingDefault(false);
             Properties.Settings.Default.Reload();
             //------------------------------------
-            //CultureInfo c = new System.Globalization.CultureInfo("fr-FR");
-            //NumberFormatInfo nfi = new NumberFormatInfo();
-            //nfi.NumberDecimalSeparator = ".";
-            //nfi.NumberGroupSeparator = " ";
-            //c.NumberFormat = nfi;
-            //c.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
-            //c.DateTimeFormat.LongTimePattern = "HH:mm:ss";
-            //Application.CurrentCulture = c;
+            CultureInfo c = new System.Globalization.CultureInfo("fr-FR");
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalSeparator = ".";
+            nfi.NumberGroupSeparator = " ";
+            c.NumberFormat = nfi;
+            c.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+            c.DateTimeFormat.LongTimePattern = "HH:mm:ss";
+            Application.CurrentCulture = c;
             //---------------------------------------
-            if(args.Length > 0 && args[0] == "Open_Connection_Str")
+            if (args.Length > 0 && args[0] == "Open_Connection_Str")
             {
                 Application.Run(new Dialogs.Connection_Str());
             }

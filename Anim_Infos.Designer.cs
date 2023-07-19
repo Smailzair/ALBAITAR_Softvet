@@ -191,11 +191,11 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Century Gothic", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label13.Location = new System.Drawing.Point(10, 226);
+            this.label13.Location = new System.Drawing.Point(3, 226);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(106, 15);
+            this.label13.Size = new System.Drawing.Size(113, 15);
             this.label13.TabIndex = 102;
-            this.label13.Text = "Date de nissance :";
+            this.label13.Text = "Date de naissance :";
             // 
             // label12
             // 
@@ -408,7 +408,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(52, 15);
             this.label10.TabIndex = 94;
-            this.label10.Text = "Espéce :";
+            this.label10.Text = "Espèce :";
             // 
             // button17
             // 
