@@ -460,8 +460,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>6.64332cm</Top>
-            <Left>2.46079cm</Left>
+            <Top>7.24333cm</Top>
+            <Left>2.44827cm</Left>
             <Height>0.6cm</Height>
             <Width>2.43827cm</Width>
             <ZIndex>13</ZIndex>
@@ -482,7 +482,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!NUM_PASSPORT.Value</Value>
+                    <Value>=Parameters!POIDS.Value &amp; " Kg"</Value>
                     <Style>
                       <FontFamily>Century Gothic</FontFamily>
                     </Style>
@@ -492,10 +492,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ANIM_NME</rd:DefaultName>
-            <Top>6.64332cm</Top>
-            <Left>4.93434cm</Left>
+            <Top>6.64333cm</Top>
+            <Left>3.8175cm</Left>
             <Height>0.6cm</Height>
-            <Width>13.21237cm</Width>
+            <Width>14.31669cm</Width>
             <ZIndex>14</ZIndex>
             <Style>
               <Border>
@@ -1184,6 +1184,73 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Poids :</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                      <Color>DarkGreen</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>6.64333cm</Top>
+            <Left>2.4608cm</Left>
+            <Height>0.6cm</Height>
+            <Width>1.3567cm</Width>
+            <ZIndex>35</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ANIM_NME5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!NUM_PASSPORT.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ANIM_NME</rd:DefaultName>
+            <Top>7.24333cm</Top>
+            <Left>4.92182cm</Left>
+            <Height>0.6cm</Height>
+            <Width>13.21237cm</Width>
+            <ZIndex>36</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>245.64858mm</Height>
         <Style>
@@ -1808,6 +1875,12 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="POIDS">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1928,6 +2001,11 @@
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>10</RowIndex>
           <ParameterName>POSTAL_CODE</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>11</RowIndex>
+          <ParameterName>POIDS</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

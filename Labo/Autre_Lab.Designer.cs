@@ -83,6 +83,8 @@
             this.label21 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label22 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView22)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -107,6 +109,8 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label23);
             this.groupBox2.Controls.Add(this.textBox2);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.label13);
@@ -160,7 +164,7 @@
             this.label13.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(424, 21);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(324, 16);
+            this.label13.Size = new System.Drawing.Size(157, 16);
             this.label13.TabIndex = 45;
             this.label13.Text = "--";
             // 
@@ -744,6 +748,27 @@
             this.label22.TabIndex = 69;
             this.label22.Text = "Historique :";
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(632, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(157, 16);
+            this.label2.TabIndex = 49;
+            this.label2.Text = "--";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(587, 22);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(43, 15);
+            this.label23.TabIndex = 48;
+            this.label23.Text = "Poids :";
+            // 
             // Autre_Lab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -849,5 +874,7 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label23;
     }
 }

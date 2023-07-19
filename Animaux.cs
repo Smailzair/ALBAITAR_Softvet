@@ -867,6 +867,7 @@ namespace ALBAITAR_Softvet.Resources
                 dt.Rows.Add(new object[] { "CABINET_TEL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
                 dt.Rows.Add(new object[] { "CABINET_EMAIL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
                 dt.Rows.Add(new object[] { "CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+                dt.Rows.Add(new object[] { "POIDS", poids_tbl.Rows.Count > 0 ? poids_tbl.AsEnumerable().Last().Field<double>("POIDS").ToString("N2") : "--"});
 
                 DataRow rww = clients.Rows.Cast<DataRow>().Where(FF => (int)FF["ID"] == (int)comboBox1.SelectedValue).FirstOrDefault();
                 dt.Rows.Add(new object[] { "CLIENT_SEX", rww["SEX"] != DBNull.Value ? rww["SEX"].ToString() : null });
@@ -1359,7 +1360,7 @@ namespace ALBAITAR_Softvet.Resources
                 DateTimePicker dateTimePicker = new DateTimePicker();
                 dateTimePicker.Format = DateTimePickerFormat.Custom;
                 dateTimePicker.CustomFormat = "dd/MM/yyyy HH:mm";
-                dateTimePicker.Value = dataGridView3.Rows[prev_rw_idx].Cells["DATETIMEE"].Value != DBNull.Value ? DateTime.Now : DateTime.Parse(dataGridView3.Rows[prev_rw_idx].Cells["DATETIMEE"].Value.ToString());
+                dateTimePicker.Value = dataGridView3.Rows[prev_rw_idx].Cells["DATETIMEE"].Value != null ? DateTime.Now : DateTime.Parse(dataGridView3.Rows[prev_rw_idx].Cells["DATETIMEE"].Value.ToString());
                 dateTimePicker.ValueChanged += (s, args) =>
                 {
                     dataGridView3.CellValueChanged -= dataGridView3_CellValueChanged;

@@ -27,6 +27,7 @@ namespace ALBAITAR_Softvet.Labo
         //bool default_modif_autorized = false;
         bool cbx_tmp = true;
         string IDD_to_select = "";
+        double Anim_poids = 0;
         public Protéinogramme(DataGridViewRow selected_anim, string ID_to_select)
         {
             InitializeComponent();
@@ -82,6 +83,9 @@ namespace ALBAITAR_Softvet.Labo
             label13.Text = (string)selected_animm.Cells["SEXE"].Value;
             label14.Text = selected_animm.Cells["NISS_DATE"].Value != DBNull.Value ? ((DateTime)selected_animm.Cells["NISS_DATE"].Value).ToString("d") : "--";
             textBox2.Text = (string)selected_animm.Cells["OBSERVATIONS"].Value;
+            var CCC = Main_Frm.main_poids_tab.AsEnumerable().Where(F => F.Field<int>("ANIM_ID") == (int)selected_animm.Cells["ID"].Value);
+            Anim_poids = CCC.Any() ? CCC.Last().Field<double>("POIDS") : 0;
+            label22.Text = Anim_poids.ToString("N2") + " Kg";
             //-------------------------
             label21.Visible = comboBox1.Visible = selected_animm.Cells["ESPECE"].Value.ToString() != "Canine";
             if (comboBox1.Visible)
@@ -236,7 +240,7 @@ namespace ALBAITAR_Softvet.Labo
             else
             {
                 cel_tmp = null;
-                ((TextBox)e.Control).TextChanged += Hemogramme_TextChanged;
+                
             }
 
         }
@@ -251,15 +255,7 @@ namespace ALBAITAR_Softvet.Labo
             }
         }
 
-        private void Hemogramme_TextChanged(object sender, EventArgs e)
-        {
-            if (((TextBox)sender).Text.EndsWith("."))
-            {
-                ((TextBox)sender).Text = ((TextBox)sender).Text.Substring(0, ((TextBox)sender).Text.Length - 1) + ",    ";
-                ((TextBox)sender).SelectionStart = ((TextBox)sender).Text.Length;
-            }
-        }
-
+       
         private void button2_Click(object sender, EventArgs e)
         {
             bool autorisat = Properties.Settings.Default.Last_login_is_admin || (is_new && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31001" && (Int32)QQ[3] == 1).Count() > 0) || (!is_new && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31003" && (Int32)QQ[3] == 1).Count() > 0);
@@ -557,7 +553,7 @@ namespace ALBAITAR_Softvet.Labo
                 dt.Rows.Add(new object[] { "CABINET_TEL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
                 dt.Rows.Add(new object[] { "CABINET_EMAIL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
                 dt.Rows.Add(new object[] { "CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
-
+                dt.Rows.Add(new object[] { "POIDS", Anim_poids > 0 ? Anim_poids.ToString("N2") : "" });
 
                 dt.Rows.Add(new object[] { "CLIENT_NUM_CNI", (string)selected_animm.Cells["CLIENT_NUM_CNI"].Value });
                 dt.Rows.Add(new object[] { "CLIENT_ADRESS", (string)selected_animm.Cells["CLIENT_ADRESS"].Value });

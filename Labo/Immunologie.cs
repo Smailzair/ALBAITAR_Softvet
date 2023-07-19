@@ -25,6 +25,7 @@ namespace ALBAITAR_Softvet.Labo
         bool is_new = true;
         string ref_tmp = string.Empty;
         string IDD_to_select = "";
+        double Anim_poids = 0;
         public Immunologie(DataGridViewRow selected_anim, string ID_to_select)
         {
             InitializeComponent();
@@ -76,6 +77,9 @@ namespace ALBAITAR_Softvet.Labo
             label13.Text = (string)selected_animm.Cells["SEXE"].Value;
             label14.Text = selected_animm.Cells["NISS_DATE"].Value != DBNull.Value ? ((DateTime)selected_animm.Cells["NISS_DATE"].Value).ToString("d") : "--";
             textBox2.Text = (string)selected_animm.Cells["OBSERVATIONS"].Value;
+            var CCC = Main_Frm.main_poids_tab.AsEnumerable().Where(F => F.Field<int>("ANIM_ID") == (int)selected_animm.Cells["ID"].Value);
+            Anim_poids = CCC.Any() ? CCC.Last().Field<double>("POIDS") : 0;
+            label22.Text = Anim_poids.ToString("N2") + " Kg";
             //-------------------------            
             Load_histor();
             //-----------------
@@ -546,7 +550,7 @@ namespace ALBAITAR_Softvet.Labo
                 dt.Rows.Add(new object[] { "CABINET_TEL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
                 dt.Rows.Add(new object[] { "CABINET_EMAIL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
                 dt.Rows.Add(new object[] { "CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
-
+                dt.Rows.Add(new object[] { "POIDS", Anim_poids > 0 ? Anim_poids.ToString("N2") : "" });
 
                 dt.Rows.Add(new object[] { "CLIENT_NUM_CNI", (string)selected_animm.Cells["CLIENT_NUM_CNI"].Value });
                 dt.Rows.Add(new object[] { "CLIENT_ADRESS", (string)selected_animm.Cells["CLIENT_ADRESS"].Value });

@@ -67,6 +67,8 @@ namespace ALBAITAR_Softvet
         bool loading_visites_tab = false;
         static bool ended_loading_visites_tab = false;
         //-------------------
+        public static DataTable main_poids_tab;
+        //-------------------
         static DataTable main_lab_tab;
         bool loading_lab_tab = false;
         static bool ended_loading_lab_tab = false;
@@ -480,6 +482,7 @@ namespace ALBAITAR_Softvet
             //----------------
             Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
             Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
+            main_poids_tab = PreConnection.Load_data("SELECT * FROM tb_poids;");
             comboBox1.SelectedIndex = 0;
             //-----
             Application.OpenForms["Splash"]?.Close();
@@ -491,8 +494,7 @@ namespace ALBAITAR_Softvet
             //------------
             int cb1_idx = comboBox1.SelectedIndex > -1 ? comboBox1.SelectedIndex : 0;
             Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
-
+            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");            
             comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
             comboBox1.SelectedIndex = cb1_idx;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
@@ -931,6 +933,7 @@ namespace ALBAITAR_Softvet
                     break;
                 case "tabPage_infos":
                     button3.Focus();
+                    main_poids_tab = PreConnection.Load_data("SELECT * FROM tb_poids;");
                     if (comboBox1.SelectedIndex == 0) //Clients
                     {
                         if (tabPage_infos.Controls["Client_Infos"] == null)

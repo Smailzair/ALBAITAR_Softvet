@@ -60,6 +60,8 @@ namespace ALBAITAR_Softvet
                     label26.Text = inf["NISS_DATE"] != DBNull.Value ? ((DateTime)inf["NISS_DATE"]).ToString("dd/MM/yyyy") : "--";
                     label19.Text = inf["ROBE"] != DBNull.Value ? (string)inf["ROBE"] : "--";
                     textBox8.Text = inf["OBSERVATIONS"] != DBNull.Value ? (string)inf["OBSERVATIONS"] : "";
+                    var ppoids = Main_Frm.main_poids_tab.AsEnumerable().Where(EE => EE.Field<int>("ANIM_ID") == selected_anim_id);
+                    label1.Text  = ppoids.Any() ? ppoids.Last().Field<double>("POIDS").ToString("N2") + " Kg" : "--";
                     bool ttt = inf["IS_RADIATED"] != DBNull.Value;
                     ttt = ttt ? (sbyte)inf["IS_RADIATED"] == 1 : false;
                     if (ttt)
