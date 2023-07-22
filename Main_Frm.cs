@@ -2058,7 +2058,7 @@ namespace ALBAITAR_Softvet
 
         private void button22_Click_1(object sender, EventArgs e)
         {
-
+            new Print_visites().ShowDialog();
         }
     }
 }

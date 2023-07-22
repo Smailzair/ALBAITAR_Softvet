@@ -61,7 +61,7 @@
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.ShowRefreshButton = false;
             this.reportViewer1.ShowStopButton = false;
-            this.reportViewer1.Size = new System.Drawing.Size(804, 291);
+            this.reportViewer1.Size = new System.Drawing.Size(848, 291);
             this.reportViewer1.TabIndex = 0;
             // 
             // button3
@@ -71,7 +71,7 @@
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(765, 70);
+            this.button3.Location = new System.Drawing.Point(809, 70);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(27, 24);
             this.button3.TabIndex = 3;
@@ -86,7 +86,7 @@
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(732, 70);
+            this.button2.Location = new System.Drawing.Point(776, 70);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(27, 24);
             this.button2.TabIndex = 2;
@@ -101,7 +101,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(699, 70);
+            this.button1.Location = new System.Drawing.Point(743, 70);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(27, 24);
             this.button1.TabIndex = 1;
@@ -120,6 +120,7 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Par animal :";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // radioButton2
             // 
@@ -130,6 +131,7 @@
             this.radioButton2.TabIndex = 5;
             this.radioButton2.Text = "Par propriétaire :";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // comboBox1
             // 
@@ -139,6 +141,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(288, 24);
             this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // comboBox2
             // 
@@ -148,6 +151,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(288, 24);
             this.comboBox2.TabIndex = 7;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // dateTimePicker2
             // 
@@ -192,9 +196,9 @@
             this.panel1.BackColor = System.Drawing.Color.Teal;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(274, 157);
+            this.panel1.Location = new System.Drawing.Point(187, 99);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(239, 89);
+            this.panel1.Size = new System.Drawing.Size(473, 89);
             this.panel1.TabIndex = 12;
             this.panel1.Visible = false;
             // 
@@ -203,18 +207,17 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 11F);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(45, 33);
+            this.label1.Location = new System.Drawing.Point(163, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(152, 20);
+            this.label1.Size = new System.Drawing.Size(129, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Veuillez patientez ...";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.Text = "Aucune donnée";
             // 
             // Print_visites
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 360);
+            this.ClientSize = new System.Drawing.Size(848, 360);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);

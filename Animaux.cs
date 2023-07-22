@@ -1507,6 +1507,10 @@ namespace ALBAITAR_Softvet.Resources
             }
         }
 
+        private void dataGridView3_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.ThrowException = true;
+        }
     }
 }
 

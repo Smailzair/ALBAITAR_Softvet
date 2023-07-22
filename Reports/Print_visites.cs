@@ -4,34 +4,32 @@ using System.Data;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
-using word = Microsoft.Office.Interop.Word.Application;
-using Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Word;
+using word = Microsoft.Office.Interop.Word;
 using Excel = Microsoft.Office.Interop.Excel.Application;
-using Microsoft.ReportingServices.Interfaces;
 using System.Diagnostics;
-using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
-using DataSet = System.Data.DataSet;
-using Microsoft.ReportingServices.Diagnostics.Internal;
-using System.Collections.Generic;
 
 namespace ALBAITAR_Softvet
 {
     public partial class Print_visites : Form
     {
-        public static MyDataset dataset = new MyDataset();
-        //string repprot_nmme = "";
-        System.Data.DataTable parr;
-        System.Data.DataTable datasrc;
+        System.Data.DataTable vistes_infos;
         int IDDx = -1;
         bool is_anim = true;
-        public Print_visites(int Anim_1_Or_Prop_2, int ID)
+        public Print_visites()//int Anim_1_Or_Prop_2, int ID)
         {
             InitializeComponent();
-            IDDx = ID;
-            is_anim = Anim_1_Or_Prop_2 == 1;
+            //-------------------
+            //IDDx = ID;
+            //is_anim = Anim_1_Or_Prop_2 == 1;
+            //---------------------
+            dateTimePicker1.ValueChanged -= dateTimePicker1_ValueChanged;
+            dateTimePicker2.ValueChanged -= dateTimePicker2_ValueChanged;
+            radioButton1.CheckedChanged -= radioButton1_CheckedChanged;
+            radioButton2.CheckedChanged -= radioButton2_CheckedChanged;
+            comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
+            comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
+            //-----------------------
             dateTimePicker2.MinDate = dateTimePicker1.Value;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
             //-------
@@ -46,55 +44,134 @@ namespace ALBAITAR_Softvet
             this.reportViewer1.ZoomPercent = 100;
             this.reportViewer1.ZoomMode = ZoomMode.Percent;
             //------------
-            //repprot_nmme = report_nme;
-            //parr = paramss;
-            ////------
-            //if(src != null)
-            //{
-            //    datasrc = src;
-            //}
-
-
-
         }
 
         private void Print_report_Load(object sender, EventArgs e)
         {
-            ReportParameterCollection reportParameters = new ReportParameterCollection();
-            foreach (DataRow rw in parr.Rows)
-            {
-                
-                reportParameters.Add(new ReportParameter(rw["PARAM_NME"].ToString(), rw["PARAM_VAL"].ToString()));
-            }
 
-                //reportViewer1.LocalReport.LoadReportDefinition(Assembly.GetExecutingAssembly().GetManifestResourceStream(filee));
+            //----------------
+            comboBox1.DataSource = Main_Frm.Main_Frm_animals_tbl;
+            comboBox1.DisplayMember = "NME";
+            comboBox1.ValueMember = "ID";
+            //---------------
+            comboBox2.DataSource = Main_Frm.Main_Frm_clients_tbl;
+            comboBox2.DisplayMember = "FULL_NME";
+            comboBox2.ValueMember = "ID";
+            //-----------
+            // Set the processing mode to local
+            reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
 
-                // Set the processing mode to local
-                reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
+            // Set the embedded resource name of the RDLC file
+           // reportViewer1.LocalReport.ReportEmbeddedResource = "ALBAITAR_Softvet.Reports.visite_report.rdlc";
 
-                // Set the embedded resource name of the RDLC file
-                reportViewer1.LocalReport.ReportEmbeddedResource = "ALBAITAR_Softvet.Reports.Print_visites.rdlc";       
-
-                if (parr.Rows.Count > 0) { reportViewer1.LocalReport.SetParameters(reportParameters); }
-
-                if (datasrc != null)
-                {
-                    // Define a dataset with the same name as the data source
-                    DataSet ds = new DataSet("MyDataSource");
-
-                    // Add a table to the dataset with the same schema as the DataTable
-                    System.Data.DataTable table = datasrc.Copy();
-                    table.TableName = "MyTable";
-                    ds.Tables.Add(table);
-
-                    // Set the LocalReport object's data source to the dataset
-                    reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("MyDataSource", ds.Tables[0]));
-                }
-
-                reportViewer1.RefreshReport();
-
+            load_report();
+            //----------------
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
+            dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
+            radioButton1.CheckedChanged += radioButton1_CheckedChanged;
+            radioButton2.CheckedChanged += radioButton2_CheckedChanged;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
         }
 
+        private void load_report()
+        {
+            vistes_infos = PreConnection.Load_data("SELECT tb1.*,tb2.NME AS ANIM_NME,tb2.CLIENT_ID,tb2.SEXE,tb2.ESPECE,tb2.RACE,(SELECT AI.POIDS FROM tb_poids AI WHERE AI.ANIM_ID = tb1.ANIM_ID AND AI.DATETIME < tb1.DATETIME ORDER BY AI.DATETIME DESC LIMIT 1) AS POIDS FROM tb_visites tb1 LEFT JOIN tb_animaux tb2 ON tb1.ANIM_ID = tb2.ID WHERE DATETIME >= '"+ dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND DATETIME <= '"+ dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59' ORDER BY DATETIME ASC;");
+            ReportParameterCollection reportParameters = new ReportParameterCollection();
+            DataTable filtred_data = new DataTable();
+            bool good = false;
+            
+            if (vistes_infos != null)
+            {
+                
+                if (vistes_infos.Rows.Count > 0)
+                {
+                    reportParameters.Add(new ReportParameter("CABINET", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
+                    reportParameters.Add(new ReportParameter("CABINET_TEL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
+                    reportParameters.Add(new ReportParameter("CABINET_EMAIL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
+                    reportParameters.Add(new ReportParameter("CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
+                    reportParameters.Add(new ReportParameter("DATE_OF", dateTimePicker1.Value.ToString("dd/MM/yyyy")));
+                    reportParameters.Add(new ReportParameter("DATE_TO", dateTimePicker2.Value.ToString("dd/MM/yyyy")));
+
+                    
+
+                    if (radioButton1.Checked) //par animal
+                    {
+                        var ggg = vistes_infos.AsEnumerable().Where(W => W.Field<int?>("ANIM_ID") == (comboBox1.SelectedValue != null && comboBox1.SelectedValue != DBNull.Value ? (int)comboBox1.SelectedValue : -1));
+                        if (ggg.Any())
+                        {
+                            good = true;
+                            filtred_data = ggg.CopyToDataTable();
+                            var ff = Main_Frm.Main_Frm_clients_tbl.AsEnumerable().Where(G => G.Field<int>("ID") == (int)filtred_data.Rows[0]["CLIENT_ID"]);
+                            if (ff.Any())
+                            {
+                                reportParameters.Add(new ReportParameter("CLIENT_NME", ff.First().Field<string>("FULL_NME")));
+                                reportParameters.Add(new ReportParameter("CLIENT_NUM_CNI", ff.First().Field<string>("NUM_CNI")));
+                                reportParameters.Add(new ReportParameter("CLIENT_ADRESS", ff.First().Field<string>("ADRESS")));
+                                reportParameters.Add(new ReportParameter("CLIENT_CITY", ff.First().Field<string>("CITY")));
+                                reportParameters.Add(new ReportParameter("CLIENT_WILAYA", ff.First().Field<string>("WILAYA")));
+                                reportParameters.Add(new ReportParameter("CLIENT_NUM_PHONE", ff.First().Field<string>("NUM_PHONE")));
+                                reportParameters.Add(new ReportParameter("CLIENT_EMAIL", ff.First().Field<string>("EMAIL")));
+                            }
+                            else
+                            {
+                                reportParameters.Add(new ReportParameter("CLIENT_NME", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_NUM_CNI", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_ADRESS", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_CITY", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_WILAYA", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_NUM_PHONE", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_EMAIL", ""));
+                            }
+                            //----------
+                        }
+                    }
+                    else //par propr.
+                    {
+                        var ggg = vistes_infos.AsEnumerable().Where(W => W.Field<int?>("CLIENT_ID") == (comboBox2.SelectedValue != null && comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : -1));
+                        if (ggg.Any())
+                        {
+                            good = true;
+                            filtred_data = ggg.CopyToDataTable();
+                            var ff = Main_Frm.Main_Frm_clients_tbl.AsEnumerable().Where(G => G.Field<int>("ID") == (int)filtred_data.Rows[0]["CLIENT_ID"]);
+                            if (ff.Any())
+                            {
+                                reportParameters.Add(new ReportParameter("CLIENT_NME", ff.First().Field<string>("FULL_NME")));
+                                reportParameters.Add(new ReportParameter("CLIENT_NUM_CNI", ff.First().Field<string>("NUM_CNI")));
+                                reportParameters.Add(new ReportParameter("CLIENT_ADRESS", ff.First().Field<string>("ADRESS")));
+                                reportParameters.Add(new ReportParameter("CLIENT_CITY", ff.First().Field<string>("CITY")));
+                                reportParameters.Add(new ReportParameter("CLIENT_WILAYA", ff.First().Field<string>("WILAYA")));
+                                reportParameters.Add(new ReportParameter("CLIENT_NUM_PHONE", ff.First().Field<string>("NUM_PHONE")));
+                                reportParameters.Add(new ReportParameter("CLIENT_EMAIL", ff.First().Field<string>("EMAIL")));
+                            }
+                            else
+                            {
+                                reportParameters.Add(new ReportParameter("CLIENT_NME", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_NUM_CNI", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_ADRESS", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_CITY", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_WILAYA", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_NUM_PHONE", ""));
+                                reportParameters.Add(new ReportParameter("CLIENT_EMAIL", ""));
+                            }
+                            //----------
+                        }
+                    }
+                }
+            }
+
+            reportViewer1.LocalReport.DataSources.Clear();
+            reportViewer1.LocalReport.ReportEmbeddedResource = null;
+            panel1.Visible = !good;
+            if (good)
+            {
+                reportViewer1.LocalReport.ReportEmbeddedResource = "ALBAITAR_Softvet.Reports.visite_report.rdlc";
+                reportViewer1.LocalReport.SetParameters(reportParameters);
+                reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", filtred_data));
+            }
+            reportViewer1.RefreshReport();
+            //---------------------------------------
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             button1.Enabled = button2.Enabled = button3.Enabled = false;
@@ -111,8 +188,8 @@ namespace ALBAITAR_Softvet
                 File.SetAttributes(inputFilePath2, FileAttributes.Hidden);
 
                 Excel excelApp = new Excel(); // create an instance of the Excel application
-                Workbook workbook = excelApp.Workbooks.Open(inputFilePath2); // open the Excel file as a workbook
-                Worksheet worksheet = workbook.Worksheets[1]; // get the first worksheet in the workbook
+                Microsoft.Office.Interop.Excel.Workbook workbook = excelApp.Workbooks.Open(inputFilePath2); // open the Excel file as a workbook
+                Microsoft.Office.Interop.Excel.Worksheet worksheet = workbook.Worksheets[1]; // get the first worksheet in the workbook
 
                 // ...
                 // Disable alerts and screen updates to improve performance
@@ -135,10 +212,6 @@ namespace ALBAITAR_Softvet
                 {
 
                 }
-
-
-
-                // ...
                 // Enable alerts and screen updates
                 excelApp.DisplayAlerts = true;
                 excelApp.ScreenUpdating = true;
@@ -180,17 +253,17 @@ namespace ALBAITAR_Softvet
                 }
                 File.SetAttributes(inputFilePath, FileAttributes.Hidden);
                 //===========================
-                word wordApplication = new word();
-                Document wordDocument = wordApplication.Documents.Open(inputFilePath);
+                word.Application wordApplication = new word.Application();
+                word.Document wordDocument = wordApplication.Documents.Open(inputFilePath);
 
                 // Get the first section of the document
-                Section firstSection = wordDocument.Sections[1];
+                word.Section firstSection = wordDocument.Sections[1];
 
                 // Get the header of the first section
-                Microsoft.Office.Interop.Word.HeaderFooter header = firstSection.Headers[WdHeaderFooterIndex.wdHeaderFooterPrimary];
+                Microsoft.Office.Interop.Word.HeaderFooter header = firstSection.Headers[word.WdHeaderFooterIndex.wdHeaderFooterPrimary];
 
                 // Get the first paragraph in the header
-                Paragraph firstParagraph = header.Range.Paragraphs[1];
+                word.Paragraph firstParagraph = header.Range.Paragraphs[1];
 
                 // Set the top spacing of the first line of the paragraph to 0.5 inches
                 float topSpacingInInches = 0.5f;
@@ -198,16 +271,16 @@ namespace ALBAITAR_Softvet
                 firstParagraph.SpaceBefore = topSpacingInPoints;
 
 
-                Microsoft.Office.Interop.Word.Range footerRange = wordDocument.Sections[wordDocument.Sections.Count].Footers[WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                Microsoft.Office.Interop.Word.Range footerRange = wordDocument.Sections[wordDocument.Sections.Count].Footers[word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
                 footerRange.Text = "01/01";
                 footerRange.InsertAfter("\r");
                 footerRange.InsertAfter("\r");
                 footerRange.Font.Name = "Century Gothic";
                 footerRange.Font.Size = 10;
-                footerRange.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+                footerRange.ParagraphFormat.Alignment = word.WdParagraphAlignment.wdAlignParagraphCenter;
 
 
-                
+
 
                 wordDocument.Save();
 
@@ -215,7 +288,7 @@ namespace ALBAITAR_Softvet
                 wordApplication.Quit();
                 File.SetAttributes(inputFilePath, FileAttributes.Normal);
                 //-----------------------
-                
+
             }
             //----------------
             button1.Enabled = button2.Enabled = button3.Enabled = true;
@@ -232,55 +305,61 @@ namespace ALBAITAR_Softvet
             {
                 string without_ext_for_pdf = dlg.FileName.Contains(".") ? dlg.FileName.Substring(0, dlg.FileName.LastIndexOf(".")) : dlg.FileName;
 
-              
-                    byte[] reportBytes = reportViewer1.LocalReport.Render("PDF");
-                        File.WriteAllBytes(without_ext_for_pdf + ".pdf", reportBytes);
-                }
 
-                //----------------
+                byte[] reportBytes = reportViewer1.LocalReport.Render("PDF");
+                File.WriteAllBytes(without_ext_for_pdf + ".pdf", reportBytes);
+            }
+
+            //----------------
             button1.Enabled = button2.Enabled = button3.Enabled = true;
-            
+
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
+            dateTimePicker2.ValueChanged -= dateTimePicker2_ValueChanged;
             dateTimePicker2.MinDate = dateTimePicker1.Value;
+            dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
+            load_report();
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
+            dateTimePicker1.ValueChanged -= dateTimePicker1_ValueChanged;
             dateTimePicker1.MaxDate = dateTimePicker2.Value;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
+            load_report();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            radioButton1.CheckedChanged -= radioButton1_CheckedChanged;
+            radioButton1.Checked = true;
+            radioButton1.CheckedChanged += radioButton1_CheckedChanged;
+            load_report();
         }
 
-        private void load_vistes()
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-
+            if(radioButton1.Checked) {
+                load_report();
+            }
         }
-    }
-    public class MyDataset
-    {
-        public List<MyTable> Tables { get; set; }
 
-        public MyDataset()
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Tables = new List<MyTable>();
+            radioButton2.CheckedChanged -= radioButton2_CheckedChanged;
+            radioButton2.Checked = true;
+            radioButton2.CheckedChanged += radioButton2_CheckedChanged;
+            load_report();
         }
-    }
 
-    public class MyTable
-    {
-        public string TableName { get; set; }
-        public List<Dictionary<string, object>> Rows { get; set; }
-
-        public MyTable(string tableName)
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            TableName = tableName;
-            Rows = new List<Dictionary<string, object>>();
+            if (radioButton2.Checked)
+            {
+                load_report();
+            }
         }
-    }
+    }   
 }
