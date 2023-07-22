@@ -1511,6 +1511,11 @@ namespace ALBAITAR_Softvet.Resources
         {
             e.ThrowException = true;
         }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            new Print_visites(1, (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ShowDialog();
+        }
     }
 }
 

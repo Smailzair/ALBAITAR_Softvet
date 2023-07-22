@@ -301,6 +301,8 @@ namespace ALBAITAR_Softvet {
             
             private global::System.Data.DataColumn columnPOIDS;
             
+            private global::System.Data.DataColumn columnNUM_IDENTIF;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public tbl1DataTable() {
@@ -424,6 +426,14 @@ namespace ALBAITAR_Softvet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn NUM_IDENTIFColumn {
+                get {
+                    return this.columnNUM_IDENTIF;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -459,7 +469,7 @@ namespace ALBAITAR_Softvet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public tbl1Row Addtbl1Row(int ID, System.DateTime DATETIME, int ANIM_ID, string VISITOR_FULL_NME, string OBJECT, string ANIM_NME, int CLIENT_ID, string SEXE, string ESPECE, string RACE, double POIDS) {
+            public tbl1Row Addtbl1Row(int ID, System.DateTime DATETIME, int ANIM_ID, string VISITOR_FULL_NME, string OBJECT, string ANIM_NME, int CLIENT_ID, string SEXE, string ESPECE, string RACE, double POIDS, string NUM_IDENTIF) {
                 tbl1Row rowtbl1Row = ((tbl1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
@@ -472,7 +482,8 @@ namespace ALBAITAR_Softvet {
                         SEXE,
                         ESPECE,
                         RACE,
-                        POIDS};
+                        POIDS,
+                        NUM_IDENTIF};
                 rowtbl1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtbl1Row);
                 return rowtbl1Row;
@@ -506,6 +517,7 @@ namespace ALBAITAR_Softvet {
                 this.columnESPECE = base.Columns["ESPECE"];
                 this.columnRACE = base.Columns["RACE"];
                 this.columnPOIDS = base.Columns["POIDS"];
+                this.columnNUM_IDENTIF = base.Columns["NUM_IDENTIF"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -533,6 +545,8 @@ namespace ALBAITAR_Softvet {
                 base.Columns.Add(this.columnRACE);
                 this.columnPOIDS = new global::System.Data.DataColumn("POIDS", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPOIDS);
+                this.columnNUM_IDENTIF = new global::System.Data.DataColumn("NUM_IDENTIF", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNUM_IDENTIF);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -851,6 +865,22 @@ namespace ALBAITAR_Softvet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string NUM_IDENTIF {
+                get {
+                    try {
+                        return ((string)(this[this.tabletbl1.NUM_IDENTIFColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NUM_IDENTIF\' in table \'tbl1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletbl1.NUM_IDENTIFColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsIDNull() {
                 return this.IsNull(this.tabletbl1.IDColumn);
             }
@@ -979,6 +1009,18 @@ namespace ALBAITAR_Softvet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetPOIDSNull() {
                 this[this.tabletbl1.POIDSColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsNUM_IDENTIFNull() {
+                return this.IsNull(this.tabletbl1.NUM_IDENTIFColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetNUM_IDENTIFNull() {
+                this[this.tabletbl1.NUM_IDENTIFColumn] = global::System.Convert.DBNull;
             }
         }
         

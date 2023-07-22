@@ -43,9 +43,11 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // reportViewer1
@@ -53,15 +55,14 @@
             this.reportViewer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.reportViewer1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "ALBAITAR_Softvet.Reports.hemogramme.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(0, 69);
+            this.reportViewer1.Location = new System.Drawing.Point(0, 84);
             this.reportViewer1.Margin = new System.Windows.Forms.Padding(0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.ShowRefreshButton = false;
             this.reportViewer1.ShowStopButton = false;
-            this.reportViewer1.Size = new System.Drawing.Size(848, 291);
+            this.reportViewer1.Size = new System.Drawing.Size(898, 275);
             this.reportViewer1.TabIndex = 0;
             // 
             // button3
@@ -71,7 +72,7 @@
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(809, 70);
+            this.button3.Location = new System.Drawing.Point(859, 85);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(27, 24);
             this.button3.TabIndex = 3;
@@ -86,7 +87,7 @@
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(776, 70);
+            this.button2.Location = new System.Drawing.Point(826, 85);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(27, 24);
             this.button2.TabIndex = 2;
@@ -101,7 +102,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(743, 70);
+            this.button1.Location = new System.Drawing.Point(793, 85);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(27, 24);
             this.button1.TabIndex = 1;
@@ -157,7 +158,7 @@
             // 
             this.dateTimePicker2.CustomFormat = "dddd dd/MM/yyyy";
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(541, 39);
+            this.dateTimePicker2.Location = new System.Drawing.Point(61, 45);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(161, 21);
             this.dateTimePicker2.TabIndex = 11;
@@ -167,7 +168,7 @@
             // 
             this.dateTimePicker1.CustomFormat = "dddd dd/MM/yyyy";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(541, 14);
+            this.dateTimePicker1.Location = new System.Drawing.Point(61, 20);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(161, 21);
             this.dateTimePicker1.TabIndex = 10;
@@ -176,53 +177,80 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(481, 41);
+            this.label4.Location = new System.Drawing.Point(32, 46);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 16);
+            this.label4.Size = new System.Drawing.Size(23, 16);
             this.label4.TabIndex = 9;
-            this.label4.Text = "Jusqu\'à :";
+            this.label4.Text = "Et :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(507, 16);
+            this.label3.Location = new System.Drawing.Point(15, 21);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(28, 16);
+            this.label3.Size = new System.Drawing.Size(40, 16);
             this.label3.TabIndex = 8;
-            this.label3.Text = "De :";
+            this.label3.Text = "Entre :";
             // 
-            // panel1
+            // dateTimePicker3
             // 
-            this.panel1.BackColor = System.Drawing.Color.Teal;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(187, 99);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(473, 89);
-            this.panel1.TabIndex = 12;
-            this.panel1.Visible = false;
+            this.dateTimePicker3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker3.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker3.Location = new System.Drawing.Point(793, 36);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(95, 21);
+            this.dateTimePicker3.TabIndex = 14;
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
             // 
-            // label1
+            // checkBox1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 11F);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(163, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Aucune donnée";
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(675, 36);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(112, 20);
+            this.checkBox1.TabIndex = 15;
+            this.checkBox1.Text = "Date de report :";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.dateTimePicker2);
+            this.groupBox1.Enabled = false;
+            this.groupBox1.Location = new System.Drawing.Point(425, 5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(240, 76);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = " ";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(432, 4);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(73, 20);
+            this.checkBox2.TabIndex = 17;
+            this.checkBox2.Text = "Période :";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // Print_visites
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 360);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(898, 360);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.dateTimePicker3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.radioButton2);
@@ -238,10 +266,10 @@
             this.Name = "Print_visites";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "--";
+            this.Text = "Report des visites :";
             this.Load += new System.EventHandler(this.Print_report_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,7 +290,9 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

@@ -2058,7 +2058,7 @@ namespace ALBAITAR_Softvet
 
         private void button22_Click_1(object sender, EventArgs e)
         {
-            new Print_visites().ShowDialog();
+            new Print_visites(comboBox1.SelectedIndex == 0 ? 2 : 1,comboBox2.SelectedValue != null ? (int)comboBox2.SelectedValue : -1).ShowDialog();
         }
     }
 }

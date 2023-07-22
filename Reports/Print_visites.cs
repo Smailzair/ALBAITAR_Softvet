@@ -16,21 +16,24 @@ namespace ALBAITAR_Softvet
         System.Data.DataTable vistes_infos;
         int IDDx = -1;
         bool is_anim = true;
-        public Print_visites()//int Anim_1_Or_Prop_2, int ID)
+        public Print_visites(int Anim_1_Or_Prop_2, int ID)
         {
             InitializeComponent();
             //-------------------
-            //IDDx = ID;
-            //is_anim = Anim_1_Or_Prop_2 == 1;
+            IDDx = ID;
+            is_anim = Anim_1_Or_Prop_2 == 1;
             //---------------------
             dateTimePicker1.ValueChanged -= dateTimePicker1_ValueChanged;
             dateTimePicker2.ValueChanged -= dateTimePicker2_ValueChanged;
+            dateTimePicker3.ValueChanged -= dateTimePicker3_ValueChanged;
             radioButton1.CheckedChanged -= radioButton1_CheckedChanged;
             radioButton2.CheckedChanged -= radioButton2_CheckedChanged;
             comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
             comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
             //-----------------------
+            dateTimePicker1.Value = DateTime.Now.AddMonths(-1);
             dateTimePicker2.MinDate = dateTimePicker1.Value;
+            dateTimePicker3.MinDate = dateTimePicker2.Value;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
             //-------
             PageSettings pg_set = new PageSettings();
@@ -58,72 +61,62 @@ namespace ALBAITAR_Softvet
             comboBox2.DisplayMember = "FULL_NME";
             comboBox2.ValueMember = "ID";
             //-----------
-            // Set the processing mode to local
             reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
-
-            // Set the embedded resource name of the RDLC file
-           // reportViewer1.LocalReport.ReportEmbeddedResource = "ALBAITAR_Softvet.Reports.visite_report.rdlc";
+            //----------
+            if (IDDx > 0)
+            {
+                if (is_anim)
+                {
+                    comboBox1.SelectedValue = IDDx;
+                }
+                else
+                {
+                    radioButton2.Checked = true;
+                    comboBox2.SelectedValue = IDDx;
+                }
+            }
 
             load_report();
             //----------------
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
+            dateTimePicker3.ValueChanged += dateTimePicker3_ValueChanged;
             radioButton1.CheckedChanged += radioButton1_CheckedChanged;
             radioButton2.CheckedChanged += radioButton2_CheckedChanged;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
-        }
 
+        }
         private void load_report()
         {
-            vistes_infos = PreConnection.Load_data("SELECT tb1.*,tb2.NME AS ANIM_NME,tb2.CLIENT_ID,tb2.SEXE,tb2.ESPECE,tb2.RACE,(SELECT AI.POIDS FROM tb_poids AI WHERE AI.ANIM_ID = tb1.ANIM_ID AND AI.DATETIME < tb1.DATETIME ORDER BY AI.DATETIME DESC LIMIT 1) AS POIDS FROM tb_visites tb1 LEFT JOIN tb_animaux tb2 ON tb1.ANIM_ID = tb2.ID WHERE DATETIME >= '"+ dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND DATETIME <= '"+ dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59' ORDER BY DATETIME ASC;");
+            vistes_infos = PreConnection.Load_data("SELECT tb1.*,tb2.NME AS ANIM_NME,tb2.CLIENT_ID,tb2.NUM_IDENTIF,tb2.SEXE,tb2.ESPECE,tb2.RACE,(SELECT AI.POIDS FROM tb_poids AI WHERE AI.ANIM_ID = tb1.ANIM_ID AND AI.DATETIME < tb1.DATETIME ORDER BY AI.DATETIME DESC LIMIT 1) AS POIDS FROM tb_visites tb1 LEFT JOIN tb_animaux tb2 ON tb1.ANIM_ID = tb2.ID" + (groupBox1.Enabled ? (" WHERE DATETIME >= '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND DATETIME <= '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59'") : "") + " ORDER BY DATETIME ASC;");
             ReportParameterCollection reportParameters = new ReportParameterCollection();
             DataTable filtred_data = new DataTable();
-            bool good = false;
-            
+            //-----------
+            reportParameters.Add(new ReportParameter("CABINET", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
+            reportParameters.Add(new ReportParameter("CABINET_TEL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
+            reportParameters.Add(new ReportParameter("CABINET_EMAIL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
+            reportParameters.Add(new ReportParameter("CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
+            reportParameters.Add(new ReportParameter("DATE_OF", groupBox1.Enabled ? dateTimePicker1.Value.ToString("dd/MM/yyyy") : "1900-01-01"));
+            reportParameters.Add(new ReportParameter("DATE_TO", groupBox1.Enabled ? dateTimePicker2.Value.ToString("dd/MM/yyyy") : "1900-01-01"));
+
+            reportParameters.Add(new ReportParameter("Report_Date", checkBox1.Checked ? dateTimePicker3.Value.ToString("dd/MM/yyyy") : "1900-01-01"));
+
+            //----------
+
             if (vistes_infos != null)
             {
-                
                 if (vistes_infos.Rows.Count > 0)
                 {
-                    reportParameters.Add(new ReportParameter("CABINET", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
-                    reportParameters.Add(new ReportParameter("CABINET_TEL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
-                    reportParameters.Add(new ReportParameter("CABINET_EMAIL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
-                    reportParameters.Add(new ReportParameter("CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()));
-                    reportParameters.Add(new ReportParameter("DATE_OF", dateTimePicker1.Value.ToString("dd/MM/yyyy")));
-                    reportParameters.Add(new ReportParameter("DATE_TO", dateTimePicker2.Value.ToString("dd/MM/yyyy")));
 
-                    
+
 
                     if (radioButton1.Checked) //par animal
                     {
                         var ggg = vistes_infos.AsEnumerable().Where(W => W.Field<int?>("ANIM_ID") == (comboBox1.SelectedValue != null && comboBox1.SelectedValue != DBNull.Value ? (int)comboBox1.SelectedValue : -1));
                         if (ggg.Any())
                         {
-                            good = true;
                             filtred_data = ggg.CopyToDataTable();
-                            var ff = Main_Frm.Main_Frm_clients_tbl.AsEnumerable().Where(G => G.Field<int>("ID") == (int)filtred_data.Rows[0]["CLIENT_ID"]);
-                            if (ff.Any())
-                            {
-                                reportParameters.Add(new ReportParameter("CLIENT_NME", ff.First().Field<string>("FULL_NME")));
-                                reportParameters.Add(new ReportParameter("CLIENT_NUM_CNI", ff.First().Field<string>("NUM_CNI")));
-                                reportParameters.Add(new ReportParameter("CLIENT_ADRESS", ff.First().Field<string>("ADRESS")));
-                                reportParameters.Add(new ReportParameter("CLIENT_CITY", ff.First().Field<string>("CITY")));
-                                reportParameters.Add(new ReportParameter("CLIENT_WILAYA", ff.First().Field<string>("WILAYA")));
-                                reportParameters.Add(new ReportParameter("CLIENT_NUM_PHONE", ff.First().Field<string>("NUM_PHONE")));
-                                reportParameters.Add(new ReportParameter("CLIENT_EMAIL", ff.First().Field<string>("EMAIL")));
-                            }
-                            else
-                            {
-                                reportParameters.Add(new ReportParameter("CLIENT_NME", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_NUM_CNI", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_ADRESS", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_CITY", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_WILAYA", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_NUM_PHONE", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_EMAIL", ""));
-                            }
-                            //----------
                         }
                     }
                     else //par propr.
@@ -131,47 +124,61 @@ namespace ALBAITAR_Softvet
                         var ggg = vistes_infos.AsEnumerable().Where(W => W.Field<int?>("CLIENT_ID") == (comboBox2.SelectedValue != null && comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : -1));
                         if (ggg.Any())
                         {
-                            good = true;
                             filtred_data = ggg.CopyToDataTable();
-                            var ff = Main_Frm.Main_Frm_clients_tbl.AsEnumerable().Where(G => G.Field<int>("ID") == (int)filtred_data.Rows[0]["CLIENT_ID"]);
-                            if (ff.Any())
-                            {
-                                reportParameters.Add(new ReportParameter("CLIENT_NME", ff.First().Field<string>("FULL_NME")));
-                                reportParameters.Add(new ReportParameter("CLIENT_NUM_CNI", ff.First().Field<string>("NUM_CNI")));
-                                reportParameters.Add(new ReportParameter("CLIENT_ADRESS", ff.First().Field<string>("ADRESS")));
-                                reportParameters.Add(new ReportParameter("CLIENT_CITY", ff.First().Field<string>("CITY")));
-                                reportParameters.Add(new ReportParameter("CLIENT_WILAYA", ff.First().Field<string>("WILAYA")));
-                                reportParameters.Add(new ReportParameter("CLIENT_NUM_PHONE", ff.First().Field<string>("NUM_PHONE")));
-                                reportParameters.Add(new ReportParameter("CLIENT_EMAIL", ff.First().Field<string>("EMAIL")));
-                            }
-                            else
-                            {
-                                reportParameters.Add(new ReportParameter("CLIENT_NME", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_NUM_CNI", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_ADRESS", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_CITY", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_WILAYA", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_NUM_PHONE", ""));
-                                reportParameters.Add(new ReportParameter("CLIENT_EMAIL", ""));
-                            }
-                            //----------
                         }
                     }
                 }
             }
-
+            //------
+            //--------------
+            int clt_int = -1;
+            clt_int = filtred_data.Rows.Count > 0 ? (int)filtred_data.Rows[0]["CLIENT_ID"] : -1;
+            if (clt_int == -1)
+            {
+                if (radioButton1.Checked) //par animal
+                {
+                    var ggg = Main_Frm.Main_Frm_animals_tbl.AsEnumerable().Where(W => W.Field<int?>("ID") == (comboBox1.SelectedValue != null && comboBox1.SelectedValue != DBNull.Value ? (int)comboBox1.SelectedValue : -1));
+                    if (ggg.Any())
+                    {
+                        clt_int = ggg.First().Field<int?>("CLIENT_ID") ?? -1;
+                    }
+                }
+                else //par propr.
+                {
+                    clt_int = comboBox2.SelectedValue != null && comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : -1;
+                }
+            }
+            var ff = Main_Frm.Main_Frm_clients_tbl.AsEnumerable().Where(G => G.Field<int>("ID") == clt_int);
+            if (ff.Any())
+            {
+                reportParameters.Add(new ReportParameter("CLIENT_NME", ff.First().Field<string>("FULL_NME")));
+                reportParameters.Add(new ReportParameter("CLIENT_NUM_CNI", ff.First().Field<string>("NUM_CNI")));
+                reportParameters.Add(new ReportParameter("CLIENT_ADRESS", ff.First().Field<string>("ADRESS")));
+                reportParameters.Add(new ReportParameter("CLIENT_CITY", ff.First().Field<string>("CITY")));
+                reportParameters.Add(new ReportParameter("CLIENT_WILAYA", ff.First().Field<string>("WILAYA")));
+                reportParameters.Add(new ReportParameter("CLIENT_NUM_PHONE", ff.First().Field<string>("NUM_PHONE")));
+                reportParameters.Add(new ReportParameter("CLIENT_EMAIL", ff.First().Field<string>("EMAIL")));
+            }
+            else
+            {
+                reportParameters.Add(new ReportParameter("CLIENT_NME", ""));
+                reportParameters.Add(new ReportParameter("CLIENT_NUM_CNI", ""));
+                reportParameters.Add(new ReportParameter("CLIENT_ADRESS", ""));
+                reportParameters.Add(new ReportParameter("CLIENT_CITY", ""));
+                reportParameters.Add(new ReportParameter("CLIENT_WILAYA", ""));
+                reportParameters.Add(new ReportParameter("CLIENT_NUM_PHONE", ""));
+                reportParameters.Add(new ReportParameter("CLIENT_EMAIL", ""));
+            }
+            //------------
             reportViewer1.LocalReport.DataSources.Clear();
             reportViewer1.LocalReport.ReportEmbeddedResource = null;
-            panel1.Visible = !good;
-            if (good)
-            {
-                reportViewer1.LocalReport.ReportEmbeddedResource = "ALBAITAR_Softvet.Reports.visite_report.rdlc";
-                reportViewer1.LocalReport.SetParameters(reportParameters);
-                reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", filtred_data));
-            }
+            reportViewer1.LocalReport.ReportEmbeddedResource = "ALBAITAR_Softvet.Reports.visite_report.rdlc";
+            reportViewer1.LocalReport.SetParameters(reportParameters);
+            reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", filtred_data));
             reportViewer1.RefreshReport();
             //---------------------------------------
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             button1.Enabled = button2.Enabled = button3.Enabled = false;
@@ -296,6 +303,7 @@ namespace ALBAITAR_Softvet
 
         private void button3_Click(object sender, EventArgs e)
         {
+
             button1.Enabled = button2.Enabled = button3.Enabled = false;
             //----------------
             SaveFileDialog dlg = new SaveFileDialog();
@@ -318,16 +326,22 @@ namespace ALBAITAR_Softvet
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             dateTimePicker2.ValueChanged -= dateTimePicker2_ValueChanged;
+            dateTimePicker3.ValueChanged -= dateTimePicker3_ValueChanged;
             dateTimePicker2.MinDate = dateTimePicker1.Value;
+            dateTimePicker3.MinDate = dateTimePicker2.Value;
             dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
+            dateTimePicker3.ValueChanged += dateTimePicker3_ValueChanged;
             load_report();
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
             dateTimePicker1.ValueChanged -= dateTimePicker1_ValueChanged;
+            dateTimePicker3.ValueChanged -= dateTimePicker3_ValueChanged;
             dateTimePicker1.MaxDate = dateTimePicker2.Value;
+            dateTimePicker3.MinDate = dateTimePicker2.Value;
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
+            dateTimePicker3.ValueChanged += dateTimePicker3_ValueChanged;
             load_report();
         }
 
@@ -341,7 +355,8 @@ namespace ALBAITAR_Softvet
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioButton1.Checked) {
+            if (radioButton1.Checked)
+            {
                 load_report();
             }
         }
@@ -361,5 +376,22 @@ namespace ALBAITAR_Softvet
                 load_report();
             }
         }
-    }   
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePicker3.Enabled = checkBox1.Checked;
+            load_report();
+        }
+
+        private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+        {
+            load_report();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox1.Enabled = checkBox2.Checked;
+            load_report();
+        }
+    }
 }
