@@ -1,9 +1,11 @@
 ﻿using ALBAITAR_Softvet.Resources;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ALBAITAR_Softvet.Dialogs
 {
@@ -134,7 +136,9 @@ namespace ALBAITAR_Softvet.Dialogs
             comboBox2.DataSource = Main_Frm.Main_Frm_animals_tbl;
             comboBox2.ValueMember = "ID";
             comboBox2.DisplayMember = "NME";
-            comboBox2.AutoCompleteCustomSource.AddRange(Main_Frm.Main_Frm_animals_tbl.AsEnumerable().Select(row => row.Field<string>("NME")).ToArray());
+            comboBox2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox2_SelectedIndexChanged(null, null);
             //----------------------
             comboBox1.DataSource = Main_Frm.Main_Frm_clients_tbl;
             comboBox1.DisplayMember = "FULL_NME";
@@ -216,11 +220,24 @@ namespace ALBAITAR_Softvet.Dialogs
                         (tt.First().Field<string>("POSTAL_CODE").Length > 0 ? " (" + tt.First().Field<string>("POSTAL_CODE") + ")" : "")
                         );
                 }
+                //--------
+                var SSS = Main_Frm.Main_Frm_animals_tbl.AsEnumerable().Where(G => G.Field<int?>("CLIENT_ID") == yy);
+                comboBox2.DataSource = SSS.Any() ? SSS.CopyToDataTable() : null;
+                comboBox2.ValueMember = "ID";
+                comboBox2.DisplayMember = "NME";
+                comboBox2_SelectedIndexChanged(null, null);
             }
+            
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            textBox3.Text = "";
+            comboBox4.Text = "";
+            comboBox5.Text = "";
+            comboBox3.Text = "";
+            checkBox3.Checked = false;
+            //--------------------------------
             int yy2 = -1;
             if (comboBox2.SelectedValue != null) { int.TryParse(comboBox2.SelectedValue.ToString(), out yy2); }
             if (yy2 > 0)
@@ -236,6 +253,42 @@ namespace ALBAITAR_Softvet.Dialogs
                     checkBox3.Checked = tt2.First().Field<DateTime?>("NISS_DATE") != null;
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ReportParameterCollection reportParameters = new ReportParameterCollection
+            {
+                new ReportParameter("CABINET", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()),
+                new ReportParameter("CABINET_TEL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()),
+                new ReportParameter("CABINET_EMAIL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()),
+                new ReportParameter("CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString()),
+
+                new ReportParameter("Report_Date", dateTimePicker1.Value.ToString("yyyy-MM-dd")),
+                new ReportParameter("REF", checkBox1.Checked ? textBox1.Text : ""),
+
+                new ReportParameter("CLIENT_NME", comboBox1.Text),
+                new ReportParameter("CLIENT_NUM_PHONE", textBox4.Text),
+                new ReportParameter("CLIENT_ADRESS", textBox2.Text)
+
+
+            };
+
+            if (checkBox2.Checked)
+            {
+                reportParameters.Add(new ReportParameter("SHOW_ANIM_INFOS", "YES"));
+                reportParameters.Add(new ReportParameter("ANIM_NME", comboBox2.Text));
+                reportParameters.Add(new ReportParameter("ANIM_IDENT", textBox3.Text));
+                reportParameters.Add(new ReportParameter("ANIM_SEXE", comboBox4.Text));
+                reportParameters.Add(new ReportParameter("ANIM_ESPECE", comboBox5.Text));
+                reportParameters.Add(new ReportParameter("ANIM_RACE", comboBox3.Text));
+                if (checkBox3.Checked) { reportParameters.Add(new ReportParameter("ANIM_NISS", dateTimePicker2.Value.ToString("dd/MM/yyyy"))); }
+            }
+
+            dataGridView1.Rows.Cast<DataGridViewRow>().ToList().ForEach(R => reportParameters.Add(new ReportParameter("MEDIC_0" + (R.Index + 1).ToString("D2"), R.Cells["MEDICA"].Value.ToString())));
+
+            new Print_ordonn(reportParameters).ShowDialog();
+
         }
     }
 }

@@ -570,13 +570,16 @@
     <EmbeddedResource Include="Labo\Biochimie.resx">
       <DependentUpon>Biochimie.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Ordonnance_1_in_A4.rdlc" />
+    <EmbeddedResource Include="Reports\Ordonnance_2_in_A4.rdlc" />
     <EmbeddedResource Include="Reports\Print_ordonn.resx">
       <DependentUpon>Print_ordonn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Print_visites.resx">
       <DependentUpon>Print_visites.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Ordonnance.rdlc" />
+    <EmbeddedResource Include="Reports\Ordonnance_1_in_A5.rdlc" />
+    <EmbeddedResource Include="Reports\Report1.rdlc" />
     <EmbeddedResource Include="Reports\visite_report.rdlc" />
     <EmbeddedResource Include="Reports\urologie.rdlc" />
     <EmbeddedResource Include="Reports\facture_vente.rdlc" />

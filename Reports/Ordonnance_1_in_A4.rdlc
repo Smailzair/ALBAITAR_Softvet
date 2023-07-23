@@ -1,81 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
-  <DataSources>
-    <DataSource Name="Visites_Report_DataSet">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>4b02b8fb-4265-44cf-84d5-28821a6471f4</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Query>
-        <DataSourceName>Visites_Report_DataSet</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="ID">
-          <DataField>ID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="DATETIME">
-          <DataField>DATETIME</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="ANIM_ID">
-          <DataField>ANIM_ID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="VISITOR_FULL_NME">
-          <DataField>VISITOR_FULL_NME</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="OBJECT">
-          <DataField>OBJECT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ANIM_NME">
-          <DataField>ANIM_NME</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CLIENT_ID">
-          <DataField>CLIENT_ID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="SEXE">
-          <DataField>SEXE</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ESPECE">
-          <DataField>ESPECE</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RACE">
-          <DataField>RACE</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="POIDS">
-          <DataField>POIDS</DataField>
-          <rd:TypeName>System.Double</rd:TypeName>
-        </Field>
-        <Field Name="NUM_IDENTIF">
-          <DataField>NUM_IDENTIF</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <rd:DataSetInfo>
-        <rd:DataSetName>Visites_Report_DataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\Programming\C_Sharp_Projects\ALBAITAR_Softvet\ALBAITAR_Softvet\Visites_Report_DataSet.xsd</rd:SchemaPath>
-        <rd:TableName>tbl1</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod />
-        <rd:TableAdapterName />
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -89,11 +14,11 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Nom :</Value>
+                        <Value>Propriétaire :</Value>
                         <Style>
                           <FontStyle>Italic</FontStyle>
                           <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>7pt</FontSize>
+                          <FontSize>8pt</FontSize>
                           <FontWeight>Normal</FontWeight>
                           <TextDecoration>Underline</TextDecoration>
                         </Style>
@@ -103,10 +28,10 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>0.16496cm</Top>
+                <Top>0.07938cm</Top>
                 <Left>0.17981cm</Left>
-                <Height>0.45cm</Height>
-                <Width>0.99185cm</Width>
+                <Height>0.5cm</Height>
+                <Width>2.15919cm</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -118,7 +43,6 @@
                 </Style>
               </Textbox>
               <Textbox Name="PRIOR1">
-                <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
@@ -127,7 +51,7 @@
                         <Value>=Parameters!CLIENT_NME.Value</Value>
                         <Style>
                           <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>6pt</FontSize>
+                          <FontSize>8pt</FontSize>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -135,80 +59,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>PRIOR1</rd:DefaultName>
-                <Top>0.16496cm</Top>
-                <Left>1.17166cm</Left>
-                <Height>0.45cm</Height>
-                <Width>5.76729cm</Width>
+                <Top>0.07938cm</Top>
+                <Left>2.339cm</Left>
+                <Height>0.5cm</Height>
+                <Width>4.59995cm</Width>
                 <ZIndex>1</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox137">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>N° CNI :</Value>
-                        <Style>
-                          <FontStyle>Italic</FontStyle>
-                          <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>7pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>Underline</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>0.61496cm</Top>
-                <Left>0.17981cm</Left>
-                <Height>0.45cm</Height>
-                <Width>1.49456cm</Width>
-                <ZIndex>2</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="PRIOR2">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!CLIENT_NUM_CNI.Value</Value>
-                        <Style>
-                          <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>6pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>PRIOR1</rd:DefaultName>
-                <Top>0.61496cm</Top>
-                <Left>1.67437cm</Left>
-                <Height>0.45cm</Height>
-                <Width>5.26458cm</Width>
-                <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -230,7 +85,7 @@
                         <Style>
                           <FontStyle>Italic</FontStyle>
                           <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>7pt</FontSize>
+                          <FontSize>8pt</FontSize>
                           <FontWeight>Normal</FontWeight>
                           <TextDecoration>Underline</TextDecoration>
                         </Style>
@@ -240,11 +95,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>1.06496cm</Top>
+                <Top>0.57938cm</Top>
                 <Left>0.17981cm</Left>
-                <Height>0.45cm</Height>
+                <Height>0.5cm</Height>
                 <Width>1.94435cm</Width>
-                <ZIndex>4</ZIndex>
+                <ZIndex>2</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -256,7 +111,6 @@
                 </Style>
               </Textbox>
               <Textbox Name="PRIOR5">
-                <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
@@ -265,7 +119,7 @@
                         <Value>=Parameters!CLIENT_NUM_PHONE.Value</Value>
                         <Style>
                           <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>6pt</FontSize>
+                          <FontSize>8pt</FontSize>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -273,11 +127,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>PRIOR1</rd:DefaultName>
-                <Top>1.06496cm</Top>
+                <Top>0.57938cm</Top>
                 <Left>2.12416cm</Left>
-                <Height>0.45cm</Height>
+                <Height>0.5cm</Height>
                 <Width>4.81479cm</Width>
-                <ZIndex>5</ZIndex>
+                <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -289,7 +143,6 @@
                 </Style>
               </Textbox>
               <Textbox Name="PRIOR3">
-                <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
@@ -298,7 +151,7 @@
                         <Value>=Parameters!CLIENT_ADRESS.Value</Value>
                         <Style>
                           <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>6pt</FontSize>
+                          <FontSize>8pt</FontSize>
                         </Style>
                       </TextRun>
                     </TextRuns>
@@ -306,77 +159,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>PRIOR1</rd:DefaultName>
-                <Top>1.51496cm</Top>
+                <Top>1.07938cm</Top>
                 <Left>1.80666cm</Left>
-                <Height>0.45cm</Height>
+                <Height>0.98525cm</Height>
                 <Width>5.13229cm</Width>
-                <ZIndex>6</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="PRIOR4">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!CLIENT_CITY.Value &amp; " - " &amp; Parameters!CLIENT_WILAYA.Value</Value>
-                        <Style>
-                          <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>6pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>PRIOR1</rd:DefaultName>
-                <Top>1.96496cm</Top>
-                <Left>1.80666cm</Left>
-                <Height>0.45cm</Height>
-                <Width>5.13229cm</Width>
-                <ZIndex>7</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="PRIOR6">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!CLIENT_EMAIL.Value</Value>
-                        <Style>
-                          <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>6pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>PRIOR1</rd:DefaultName>
-                <Top>2.41496cm</Top>
-                <Left>2.12416cm</Left>
-                <Height>0.45cm</Height>
-                <Width>4.81479cm</Width>
-                <ZIndex>8</ZIndex>
+                <ZIndex>4</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -398,7 +185,7 @@
                         <Style>
                           <FontStyle>Italic</FontStyle>
                           <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>7pt</FontSize>
+                          <FontSize>8pt</FontSize>
                           <FontWeight>Normal</FontWeight>
                           <TextDecoration>Underline</TextDecoration>
                         </Style>
@@ -408,11 +195,1523 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>1.51496cm</Top>
+                <Top>1.07938cm</Top>
                 <Left>0.17981cm</Left>
-                <Height>0.45cm</Height>
+                <Height>0.5cm</Height>
                 <Width>1.62685cm</Width>
-                <ZIndex>9</ZIndex>
+                <ZIndex>5</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <KeepTogether>true</KeepTogether>
+            <Top>14.90831cm</Top>
+            <Left>7.32989cm</Left>
+            <Height>2.24676cm</Height>
+            <Width>7.08612cm</Width>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Textbox Name="CABINET_ADRESS2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Constant">ORDONNANCE</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>17pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>#515151</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>CABINET_ADRESS</rd:DefaultName>
+            <Top>0.13917cm</Top>
+            <Left>4.1226cm</Left>
+            <Height>0.81167cm</Height>
+            <Width>6.50263cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox26">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_001.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>1.34383cm</Top>
+            <Left>1.21101cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox27">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_002.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>2.68466cm</Top>
+            <Left>1.21101cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_002.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="DATE">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Le :" &amp; Parameters!Report_Date.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>DATE</rd:DefaultName>
+            <Top>0.17639cm</Top>
+            <Left>0.33854cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.84396cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="DATE2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Ref. " &amp; Parameters!REF.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>DATE</rd:DefaultName>
+            <Top>0.17639cm</Top>
+            <Left>10.91383cm</Left>
+            <Height>0.6cm</Height>
+            <Width>3.59967cm</Width>
+            <ZIndex>5</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!REF.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox28">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_003.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>4.02549cm</Top>
+            <Left>1.21101cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_003.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox29">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_004.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>5.36632cm</Top>
+            <Left>1.21101cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_004.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox30">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_005.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>6.70715cm</Top>
+            <Left>1.21101cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_005.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox31">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_006.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>8.11117cm</Top>
+            <Left>1.21101cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_006.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox32">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_007.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>9.452cm</Top>
+            <Left>1.21101cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_007.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox33">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_008.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>10.79283cm</Top>
+            <Left>1.21101cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_008.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox34">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_009.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>12.13366cm</Top>
+            <Left>1.21101cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_009.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox35">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_010.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>1.34383cm</Top>
+            <Left>8.21817cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox36">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_011.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>2.68467cm</Top>
+            <Left>8.21817cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_011.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox37">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_012.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>4.02551cm</Top>
+            <Left>8.21817cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_012.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox38">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_013.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>5.36633cm</Top>
+            <Left>8.21817cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_013.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox39">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_014.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>6.70716cm</Top>
+            <Left>8.21817cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>17</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_014.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox40">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_015.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>8.11117cm</Top>
+            <Left>8.21817cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_015.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox41">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_016.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>9.452cm</Top>
+            <Left>8.21817cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>19</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_016.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox42">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_017.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>10.79285cm</Top>
+            <Left>8.21817cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>20</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_017.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox43">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!MEDIC_018.Value</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>12.13368cm</Top>
+            <Left>8.21817cm</Left>
+            <Height>1.34083cm</Height>
+            <Width>5.88667cm</Width>
+            <ZIndex>21</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>None</Style>
+              </Border>
+              <TopBorder>
+                <Style>=IIF(Parameters!MEDIC_018.Value &lt;&gt; "","Solid","")</Style>
+              </TopBorder>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox44">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>01)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>1.33647cm</Top>
+            <Left>0.33854cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>22</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_001.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox45">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>02)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>2.6773cm</Top>
+            <Left>0.33854cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>23</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_002.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox46">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>03)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>4.01813cm</Top>
+            <Left>0.33854cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>24</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_003.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox47">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>04)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>5.35896cm</Top>
+            <Left>0.33854cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>25</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_004.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox48">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>05)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>6.69979cm</Top>
+            <Left>0.33854cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>26</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_005.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox49">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>06)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>8.10381cm</Top>
+            <Left>0.33854cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>27</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_006.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox50">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>07)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>9.44464cm</Top>
+            <Left>0.33854cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>28</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_007.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox51">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>08)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>10.78547cm</Top>
+            <Left>0.33854cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>29</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_008.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox52">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>09)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>12.1263cm</Top>
+            <Left>0.33854cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>30</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_009.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox53">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>10)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>1.33646cm</Top>
+            <Left>7.3457cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>31</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_010.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox54">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>11)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>2.67729cm</Top>
+            <Left>7.3457cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>32</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_011.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox55">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>12)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>4.01812cm</Top>
+            <Left>7.3457cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>33</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_012.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox56">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>13)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>5.35895cm</Top>
+            <Left>7.3457cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>34</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_013.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox57">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>14)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>6.69978cm</Top>
+            <Left>7.3457cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>35</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_014.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox58">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>15)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>8.1038cm</Top>
+            <Left>7.3457cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>36</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_015.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox59">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>16)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>9.44463cm</Top>
+            <Left>7.3457cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>37</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_016.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox60">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>17)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>10.78546cm</Top>
+            <Left>7.3457cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>38</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_017.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox61">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>18)</Value>
+                    <Style>
+                      <FontFamily>Century Gothic</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>12.12629cm</Top>
+            <Left>7.3457cm</Left>
+            <Height>0.6cm</Height>
+            <Width>0.87247cm</Width>
+            <ZIndex>39</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!MEDIC_018.Value &lt;&gt; "",False,True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Rectangle Name="Rectangle2">
+            <ReportItems>
+              <Textbox Name="Textbox17">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Animal :</Value>
+                        <Style>
+                          <FontStyle>Italic</FontStyle>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>Underline</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>0.0826cm</Top>
+                <Left>0.13995cm</Left>
+                <Height>0.5cm</Height>
+                <Width>2.15919cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR2">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!ANIM_NME.Value</Value>
+                        <Style>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>0.0826cm</Top>
+                <Left>2.29914cm</Left>
+                <Height>0.5cm</Height>
+                <Width>4.59995cm</Width>
+                <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -430,11 +1729,11 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Email :</Value>
+                        <Value>N° Ident. :</Value>
                         <Style>
                           <FontStyle>Italic</FontStyle>
                           <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>7pt</FontSize>
+                          <FontSize>8pt</FontSize>
                           <FontWeight>Normal</FontWeight>
                           <TextDecoration>Underline</TextDecoration>
                         </Style>
@@ -444,11 +1743,321 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>2.41496cm</Top>
-                <Left>0.17981cm</Left>
-                <Height>0.45cm</Height>
+                <Top>0.5826cm</Top>
+                <Left>0.13995cm</Left>
+                <Height>0.5cm</Height>
                 <Width>1.94435cm</Width>
+                <ZIndex>2</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF(Parameters!ANIM_IDENT.Value &lt;&gt; "",False,True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR6">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!ANIM_IDENT.Value</Value>
+                        <Style>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>0.5826cm</Top>
+                <Left>2.0843cm</Left>
+                <Height>0.5cm</Height>
+                <Width>4.81479cm</Width>
+                <ZIndex>3</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox141">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Sexe :</Value>
+                        <Style>
+                          <FontStyle>Italic</FontStyle>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>Underline</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>1.0826cm</Top>
+                <Left>0.13995cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.62685cm</Width>
+                <ZIndex>4</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox142">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Espéce :</Value>
+                        <Style>
+                          <FontStyle>Italic</FontStyle>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>Underline</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>1.5826cm</Top>
+                <Left>0.13995cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.62685cm</Width>
+                <ZIndex>5</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox143">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Race :</Value>
+                        <Style>
+                          <FontStyle>Italic</FontStyle>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>Underline</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>2.0826cm</Top>
+                <Left>0.13995cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.62685cm</Width>
+                <ZIndex>6</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR7">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!ANIM_SEXE.Value</Value>
+                        <Style>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>1.0826cm</Top>
+                <Left>1.72335cm</Left>
+                <Height>0.5cm</Height>
+                <Width>5.17574cm</Width>
+                <ZIndex>7</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR8">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!ANIM_ESPECE.Value</Value>
+                        <Style>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>1.5826cm</Top>
+                <Left>1.7668cm</Left>
+                <Height>0.5cm</Height>
+                <Width>5.13229cm</Width>
+                <ZIndex>8</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR9">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!ANIM_RACE.Value</Value>
+                        <Style>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>2.11787cm</Top>
+                <Left>1.7668cm</Left>
+                <Height>0.5cm</Height>
+                <Width>5.13229cm</Width>
+                <ZIndex>9</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox144">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Date nissance :</Value>
+                        <Style>
+                          <FontStyle>Italic</FontStyle>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>Underline</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>2.61787cm</Top>
+                <Left>0.13995cm</Left>
+                <Height>0.5cm</Height>
+                <Width>2.47352cm</Width>
                 <ZIndex>10</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF(Parameters!ANIM_NISS.Value &lt;&gt; "",False,True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR10">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!ANIM_NISS.Value</Value>
+                        <Style>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>2.61787cm</Top>
+                <Left>2.68402cm</Left>
+                <Height>0.5cm</Height>
+                <Width>4.21507cm</Width>
+                <ZIndex>11</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -461,75 +2070,66 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>8.80743cm</Top>
-            <Left>0.15873cm</Left>
-            <Height>3.02916cm</Height>
+            <Top>13.76991cm</Top>
+            <Left>0.10266cm</Left>
+            <Height>3.38516cm</Height>
             <Width>7.08612cm</Width>
+            <ZIndex>40</ZIndex>
+            <Visibility>
+              <Hidden>=IIF(Parameters!SHOW_ANIM_INFOS.Value = "YES",False,True)</Hidden>
+            </Visibility>
             <Style>
               <Border>
-                <Color>SlateBlue</Color>
+                <Color>Silver</Color>
                 <Style>Solid</Style>
               </Border>
             </Style>
           </Rectangle>
-          <Textbox Name="CABINET_ADRESS2">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value EvaluationMode="Constant">ORDONNANCE</Value>
-                    <Style>
-                      <FontFamily>Century Gothic</FontFamily>
-                      <FontSize>16pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Color>#515151</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>CABINET_ADRESS</rd:DefaultName>
-            <Top>0.13917cm</Top>
-            <Left>3.64635cm</Left>
-            <Height>0.81167cm</Height>
-            <Width>7.3493cm</Width>
-            <ZIndex>1</ZIndex>
+          <Line Name="Line2">
+            <Top>0.16912cm</Top>
+            <Left>14.8cm</Left>
+            <Height>17.08883cm</Height>
+            <Width>0cm</Width>
+            <ZIndex>41</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-          </Textbox>
+          </Line>
         </ReportItems>
-        <Height>119.77707mm</Height>
+        <Height>175mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
           <BackgroundImage>
             <Source>Embedded</Source>
-            <Value>logocopy12</Value>
+            <Value>logocopy13</Value>
             <MIMEType>image/jpeg</MIMEType>
             <BackgroundRepeat>Clip</BackgroundRepeat>
           </BackgroundImage>
         </Style>
       </Body>
-      <Width>148mm</Width>
+      <Width>297mm</Width>
       <Page>
         <PageHeader>
-          <Height>2.44166cm</Height>
+          <Height>2.5cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
+            <Rectangle Name="Rectangle4">
+              <KeepTogether>true</KeepTogether>
+              <Height>2.5cm</Height>
+              <Width>14.8cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <BackgroundColor>#d1ebed</BackgroundColor>
+              </Style>
+            </Rectangle>
             <Image Name="Image1">
               <Source>Embedded</Source>
               <Value>Layer11copy</Value>
@@ -538,6 +2138,7 @@
               <Left>0.33854cm</Left>
               <Height>2.0747cm</Height>
               <Width>2.22975cm</Width>
+              <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -571,7 +2172,7 @@
               <Left>2.74468cm</Left>
               <Height>0.74662cm</Height>
               <Width>11.76882cm</Width>
-              <ZIndex>1</ZIndex>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -590,7 +2191,7 @@
               <Left>2.74468cm</Left>
               <Height>0.62225cm</Height>
               <Width>0.52986cm</Width>
-              <ZIndex>2</ZIndex>
+              <ZIndex>3</ZIndex>
               <Visibility>
                 <Hidden>=IIF(IsNothing(Parameters!CABINET_TEL.Value) OR Parameters!CABINET_TEL.Value = "",True,False)</Hidden>
               </Visibility>
@@ -624,7 +2225,7 @@
               <Left>3.38102cm</Left>
               <Height>0.62225cm</Height>
               <Width>4.80188cm</Width>
-              <ZIndex>3</ZIndex>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -643,7 +2244,7 @@
               <Left>2.74468cm</Left>
               <Height>0.6cm</Height>
               <Width>0.52986cm</Width>
-              <ZIndex>4</ZIndex>
+              <ZIndex>5</ZIndex>
               <Visibility>
                 <Hidden>=IIF(IsNothing(Parameters!CABINET_ADRESS.Value) OR Parameters!CABINET_ADRESS.Value = "",True,False)</Hidden>
               </Visibility>
@@ -677,7 +2278,7 @@
               <Left>3.38102cm</Left>
               <Height>0.6cm</Height>
               <Width>11.13248cm</Width>
-              <ZIndex>5</ZIndex>
+              <ZIndex>6</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -696,7 +2297,7 @@
               <Left>8.21817cm</Left>
               <Height>0.62225cm</Height>
               <Width>0.57939cm</Width>
-              <ZIndex>6</ZIndex>
+              <ZIndex>7</ZIndex>
               <Visibility>
                 <Hidden>=IIF(IsNothing(Parameters!CABINET_EMAIL.Value) OR Parameters!CABINET_EMAIL.Value = "",True,False)</Hidden>
               </Visibility>
@@ -730,7 +2331,7 @@
               <Left>8.93867cm</Left>
               <Height>0.62225cm</Height>
               <Width>5.57483cm</Width>
-              <ZIndex>7</ZIndex>
+              <ZIndex>8</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -750,14 +2351,25 @@
             <BottomBorder>
               <Color>#1a1a1a</Color>
             </BottomBorder>
-            <BackgroundColor>#d1ebed</BackgroundColor>
+            <BackgroundColor>White</BackgroundColor>
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>0.99323cm</Height>
+          <Height>1cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
+            <Rectangle Name="Rectangle5">
+              <KeepTogether>true</KeepTogether>
+              <Height>1cm</Height>
+              <Width>14.8cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <BackgroundColor>#d1ebed</BackgroundColor>
+              </Style>
+            </Rectangle>
             <Textbox Name="PRIOR11">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -779,9 +2391,10 @@
               </Paragraphs>
               <rd:DefaultName>PRIOR1</rd:DefaultName>
               <Top>0.17639cm</Top>
-              <Left>5.6783cm</Left>
+              <Left>5.17624cm</Left>
               <Height>0.6cm</Height>
               <Width>3.62132cm</Width>
+              <ZIndex>1</ZIndex>
               <Visibility>
                 <Hidden>=IIF(Globals!TotalPages&gt;1,False,True)</Hidden>
               </Visibility>
@@ -800,11 +2413,13 @@
             <Border>
               <Style>None</Style>
             </Border>
-            <BackgroundColor>#d1ebed</BackgroundColor>
+            <BackgroundColor>White</BackgroundColor>
           </Style>
         </PageFooter>
         <PageHeight>21cm</PageHeight>
-        <PageWidth>14.8cm</PageWidth>
+        <PageWidth>29.7cm</PageWidth>
+        <InteractiveHeight>21cm</InteractiveHeight>
+        <InteractiveWidth>29.7cm</InteractiveWidth>
         <LeftMargin>0cm</LeftMargin>
         <RightMargin>0cm</RightMargin>
         <TopMargin>0cm</TopMargin>
@@ -815,28 +2430,6 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="DATE_OF">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <DefaultValue>
-        <Values>
-          <Value>=FormatDateTime(Now(), DateFormat.ShortDate)</Value>
-        </Values>
-      </DefaultValue>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CLIENT_NUM_CNI">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <DefaultValue>
-        <Values>
-          <Value>="--"</Value>
-        </Values>
-      </DefaultValue>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="CLIENT_ADRESS">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
@@ -848,40 +2441,7 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="CLIENT_CITY">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <DefaultValue>
-        <Values>
-          <Value>="--"</Value>
-        </Values>
-      </DefaultValue>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CLIENT_WILAYA">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <DefaultValue>
-        <Values>
-          <Value>="--"</Value>
-        </Values>
-      </DefaultValue>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="CLIENT_NUM_PHONE">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <DefaultValue>
-        <Values>
-          <Value>="--"</Value>
-        </Values>
-      </DefaultValue>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CLIENT_EMAIL">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <DefaultValue>
@@ -936,12 +2496,6 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="DATE_TO">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="CLIENT_NME">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
@@ -958,46 +2512,177 @@
       </DefaultValue>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="MEDIC_001">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_002">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="REF">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_003">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_004">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_005">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_006">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_007">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_008">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_009">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_010">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_011">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_012">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_013">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_014">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_015">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_016">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_017">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="MEDIC_018">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ANIM_NME">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ANIM_IDENT">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ANIM_SEXE">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ANIM_ESPECE">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ANIM_RACE">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ANIM_NISS">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SHOW_ANIM_INFOS">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>20</NumberOfRows>
+      <NumberOfRows>27</NumberOfRows>
       <CellDefinitions>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>DATE_OF</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>6</RowIndex>
-          <ParameterName>CLIENT_NUM_CNI</ParameterName>
-        </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>6</RowIndex>
           <ParameterName>CLIENT_ADRESS</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>6</RowIndex>
-          <ParameterName>CLIENT_CITY</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>3</ColumnIndex>
-          <RowIndex>6</RowIndex>
-          <ParameterName>CLIENT_WILAYA</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>7</RowIndex>
           <ParameterName>CLIENT_NUM_PHONE</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>7</RowIndex>
-          <ParameterName>CLIENT_EMAIL</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -1020,11 +2705,6 @@
           <ParameterName>CABINET_ADRESS</ParameterName>
         </CellDefinition>
         <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>19</RowIndex>
-          <ParameterName>DATE_TO</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>19</RowIndex>
           <ParameterName>CLIENT_NME</ParameterName>
@@ -1033,6 +2713,136 @@
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>19</RowIndex>
           <ParameterName>Report_Date</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>20</RowIndex>
+          <ParameterName>MEDIC_001</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>20</RowIndex>
+          <ParameterName>MEDIC_002</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>20</RowIndex>
+          <ParameterName>REF</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>20</RowIndex>
+          <ParameterName>MEDIC_003</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>21</RowIndex>
+          <ParameterName>MEDIC_004</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>21</RowIndex>
+          <ParameterName>MEDIC_005</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>21</RowIndex>
+          <ParameterName>MEDIC_006</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>21</RowIndex>
+          <ParameterName>MEDIC_007</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>22</RowIndex>
+          <ParameterName>MEDIC_008</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>22</RowIndex>
+          <ParameterName>MEDIC_009</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>22</RowIndex>
+          <ParameterName>MEDIC_010</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>22</RowIndex>
+          <ParameterName>MEDIC_011</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>23</RowIndex>
+          <ParameterName>MEDIC_012</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>23</RowIndex>
+          <ParameterName>MEDIC_013</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>23</RowIndex>
+          <ParameterName>MEDIC_014</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>23</RowIndex>
+          <ParameterName>MEDIC_015</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>24</RowIndex>
+          <ParameterName>MEDIC_016</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>24</RowIndex>
+          <ParameterName>MEDIC_017</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>24</RowIndex>
+          <ParameterName>MEDIC_018</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>24</RowIndex>
+          <ParameterName>ANIM_NME</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>25</RowIndex>
+          <ParameterName>ANIM_IDENT</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>25</RowIndex>
+          <ParameterName>ANIM_SEXE</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>25</RowIndex>
+          <ParameterName>ANIM_ESPECE</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>25</RowIndex>
+          <ParameterName>ANIM_RACE</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>26</RowIndex>
+          <ParameterName>ANIM_NISS</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>26</RowIndex>
+          <ParameterName>SHOW_ANIM_INFOS</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
@@ -1534,6 +3344,75 @@ ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
 ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
 ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+/+4ADkFkb2JlAGRAAAAAAf/bAIQAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQICAgICAgICAgICAwMDAwMDAwMDAwEBAQEBAQEBAQEBAgIBAgIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMD/8AAEQgAFAAUAwERAAIRAQMRAf/dAAQAA//EAaIAAAAGAgMBAAAAAAAAAAAAAAcIBgUECQMKAgEACwEAAAYDAQEBAAAAAAAAAAAABgUEAwcCCAEJAAoLEAACAQMEAQMDAgMDAwIGCXUBAgMEEQUSBiEHEyIACDEUQTIjFQlRQhZhJDMXUnGBGGKRJUOhsfAmNHIKGcHRNSfhUzaC8ZKiRFRzRUY3R2MoVVZXGrLC0uLyZIN0k4Rlo7PD0+MpOGbzdSo5OkhJSlhZWmdoaWp2d3h5eoWGh4iJipSVlpeYmZqkpaanqKmqtLW2t7i5usTFxsfIycrU1dbX2Nna5OXm5+jp6vT19vf4+foRAAIBAwIEBAMFBAQEBgYFbQECAxEEIRIFMQYAIhNBUQcyYRRxCEKBI5EVUqFiFjMJsSTB0UNy8BfhgjQlklMYY0TxorImNRlUNkVk
 Jwpzg5NGdMLS4vJVZXVWN4SFo7PD0+PzKRqUpLTE1OT0laW1xdXl9ShHV2Y4doaWprbG1ub2Z3eHl6e3x9fn90hYaHiImKi4yNjo+DlJWWl5iZmpucnZ6fkqOkpaanqKmqq6ytrq+v/aAAwDAQACEQMRAD8AsB72+eXyZ6v/AJgz7SqIMnP19tHeON2Vj+nsNTfs742pudMelHmVDIJ8rvDOU+Rhq8dKX8dNUeOBB4zOJTSW6mS70/gBpT1B/wAvQNs9m2+42TxQR47KWLn8JFcfJRSh9ePGlNhv2b9Ajr3v3Xuv/9C+T+YX8J8p39jcJ3H07M2E+QfWUUFTgp6Kr/hdRu/GYmrOVoMTHlBLB/DdzYSvL1GJqy6KJXaGVlV45YD67tjKBJHiZf5/7Pp1G2x7stkz2t0K2MnHz0k4Jp5gjDD8/kShbG/nK5DY2zcPtHvDprdOX7h21mhtvfFTRVVBtOlnx+PZKaszdVisjSS1tDvON1dajF/b09HJOhdaimVxDEnXcSqhZYyZAaHy/wBR+XRnNyqs0rS2d0otWFVrU5PlUfh9DUn5HibOf9nk+On+y+f7Mv8A3trf9HH3v8D8X8Grf7zf3v8AD5f7l/wTTf8AvD/09+z8f733H2/73tb9VD4Pjauz+dfToP8A7nv/AK36Dwh49K8caf4q+n8/Klcdf//R3HPYr6hbqo/+YT/w3R/E4v8AZjPJ/pb+3pdP+ia/+lX+HeFftf7w/Z/7hPtPtdH238d9fit9t6dXtBd/R1/W/tPlx/1fb0Jtk/fuk/Qf7jf0/gr8vP7dP59Df/zg7/si3/MO/wCynf3W/wCmr+Jff/ef+hB/pM/vL/1X/wAS/wAPbn+K/S+XgU/1fn0j/wB2/wC+PxfvLV+X+bTT8qdf/9k=</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="logocopy13">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>/9j/4Rb6RXhpZgAATU0AKgAAAAgADgALAAIAAAAmAAAAtgEAAAMAAAABAsUAAAEBAAMAAAABAuQAAAECAAMAAAADAAAA3AEGAAMAAAABAAIAAAESAAMAAAABAAEAAAEVAAMAAAABAAMAAAEaAAUAAAABAAAA4gEbAAUAAAABAAAA6gEoAAMAAAABAAIAAAExAAIAAAAfAAAA8gEyAAIAAAAUAAABEeocAAcAAAgMAAABJYdpAAQAAAABAAAJNAAAEYRXaW5kb3dzIFBob3RvIEVkaXRvciAxMC4wLjEwMDExLjE2Mzg0AAAIAAgACAAtxsAAACcQAC3GwAAAJxBBZG9iZSBQaG90b3Nob3AgMjQuMSAoV2luZG93cykAMjAyMzowNzoyMyAxOToxMDoxOAAc6gAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFkAAABwAAAAQwMjMxoAEAAwAAAAEAAQAAoAIABAAAAAEAAAH0oAMABAAAAAEAAAHJ6hwABwAACAwAAAl2AAAAABzqAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgED
+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
+vTaWvhzvaeZ7KyHscSAQSOQqj6iw7SdYk/BR3HdvGhmQglvoTRD4U2PD2Bw7qLh+kHmkpIkkkkp//9P1VJJJJSkF3JRkFw1ISUlTpgZAKhvfxsJd8RH+ckpmSGiToAqtlhe6eAOAlZY55g6AdudU7KpcA8hs9idSnAVutJvQLMsLJIgT3KI3JbBLiCewaD/FTf6dbfojU8fFQd6Ah+0EETx2/qoHVI06ot4e8vsMNIIEfkUCIEHmZhSe+XSBt8J5A/k/uqJaQASI3ahBKXHs2u2Hh3HxR3fTb81UYCXtDeZEK6R7h8CkpdJJJJT/AP/U9VSSSSUpDsb+d96IkkpHW780/JEQ3MI1bwna8HQ8pKa9bC54A1AOp8gp5LWiHAe4mD5qVDSyWkR3n8FK1pO0gTtMwnXqtrRDa/cQ393k+JRaGBrQ7u4fgg+lYSfadZVpploMR5FI7KG9tfKbDmu8dD8kFziYn80Afcj2+s8bfTgAzMgoYotMaR8SmrmddldTf3nnmPySi1WiwExEaKAxmhpLpefAaBSx2OY07hEmQOUlJUkkklP/1fVUkkklKSSSSUpRLGlSSSUwAeODI80+49wfyqSSSlpTpJJKUkkkkpSSSSSlJJJJKf/ZOEJJTQQhAAAAAABXAAAAAQEAAAAPAEEAZABvAGIAZQAgAFAAaABvAHQAbwBzAGgAbwBwAAAAFABBAGQAbwBiAGUAIABQAGgAbwB0AG8AcwBoAG8AcAAgADIAMAAyADMAAAABADhCSU0EBgAAAAAABwAIAAAAAQEA/+ESfmh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8APD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4wLWMwMDAg
+NzkuMTcxYzI3ZiwgMjAyMi8wOC8xNi0xODowMjo0MyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IldpbmRvd3MgUGhvdG8gRWRpdG9yIDEwLjAuMTAwMTEuMTYzODQiIHhtcDpDcmVhdGVEYXRlPSIyMDIzLTA0LTIzVDA4OjUyOjAzKzAxOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMy0wNy0yM1QxOToxMDoxOCswMTowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wNy0yM1QxOToxMDoxOCswMTowMCIgZGM6Zm9ybWF0PSJpbWFnZS9qcGVnIiBwaG90b3Nob3A6TGVnYWN5SVBUQ0RpZ2VzdD0iQ0RDRkZBN0RBOEM3QkUwOTA1NzA3NkFFQUYwNUMzNEUiIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHBob3Rvc2hv
+cDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyMDYyYWIyZC00NzU4LTNjNGQtOTNhNi1hYjI4MzBmMDNmMzciIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDoyMzQwNGQyYi0yMWM0LTgyNDYtOTA5YS0wZjcyOWE3NDQ1ZGMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpmYzk2ZTFhZC04MTU1LWQwNDUtYjYyNS1hYzY1ZDJiZWVkYzgiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmZjOTZlMWFkLTgxNTUtZDA0NS1iNjI1LWFjNjVkMmJlZWRjOCIgc3RFdnQ6d2hlbj0iMjAyMy0wNC0yM1QwODo1MjowMyswMTowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDI0LjEgKFdpbmRvd3MpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTYyOGUyNi1jYmVmLTRiNDktYmE2My00N2Q1ZWFkYjg1OGMiIHN0RXZ0OndoZW49IjIwMjMtMDQtMjNUMDk6NDA6NDcrMDE6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyNC4xIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6NDBhMGFlNjAtM2U1OC0zYjRkLWJiOTUtZWU1
+NDgwNzI5N2MwIiBzdEV2dDp3aGVuPSIyMDIzLTA0LTI0VDEwOjI4OjE2KzAxOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjQuMSAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNvbnZlcnRlZCIgc3RFdnQ6cGFyYW1ldGVycz0iZnJvbSBpbWFnZS9wbmcgdG8gaW1hZ2UvanBlZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iZGVyaXZlZCIgc3RFdnQ6cGFyYW1ldGVycz0iY29udmVydGVkIGZyb20gaW1hZ2UvcG5nIHRvIGltYWdlL2pwZWciLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjU3OGE2NDRlLTRmY2ItMjU0Ni04MzcwLThlNTIwZTUyMTU5NCIgc3RFdnQ6d2hlbj0iMjAyMy0wNC0yNFQxMDoyODoxNiswMTowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDI0LjEgKFdpbmRvd3MpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDoyMDYyYWIyZC00NzU4LTNjNGQtOTNhNi1hYjI4MzBmMDNmMzciIHN0RXZ0OndoZW49IjIwMjMtMDctMjNUMTk6MTA6MTgrMDE6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyNC4xIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPHhtcE1NOkRlcml2ZWRG
+cm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NDBhMGFlNjAtM2U1OC0zYjRkLWJiOTUtZWU1NDgwNzI5N2MwIiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6YjJjNmJkNmItMjEyNC1mZDRmLWEwMGItNjA1MjM2NDJhNjE4IiBzdFJlZjpvcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6ZmM5NmUxYWQtODE1NS1kMDQ1LWI2MjUtYWM2NWQyYmVlZGM4Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDw/eHBhY2tldCBlbmQ9InciPz7/4gxYSUNDX1BST0ZJTEUAAQEAAAxITGlubwIQAABtbnRyUkdCIFhZWiAHzgACAAkABgAxAABhY3NwTVNGVAAAAABJRUMgc1JHQgAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLUhQICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABFjcHJ0AAABUAAAADNkZXNjAAABhAAAAGx3dHB0AAAB8AAAABRia3B0AAACBAAAABRyWFlaAAACGAAAABRnWFlaAAACLAAAABRiWFlaAAACQAAAABRkbW5kAAACVAAAAHBkbWRkAAACxAAAAIh2dWVkAAADTAAAAIZ2aWV3AAAD1AAAACRsdW1pAAAD+AAAABRtZWFzAAAEDAAAACR0ZWNoAAAEMAAAAAxyVFJDAAAEPAAACAxnVFJDAAAEPAAACAxiVFJDAAAEPAAACAx0ZXh0AAAAAENvcHlyaWdodCAoYykgMTk5OCBIZXdsZXR0LVBhY2thcmQgQ29tcGFueQAAZGVzYwAAAAAAAAASc1JHQiBJRUM2MTk2Ni0yLjEAAAAAAAAAAAAAABJzUkdCIElFQzYxOTY2LTIuMQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWFlaIAAAAAAAAPNRAAEAAAABFsxYWVogAAAAAAAAAAAAAAAAAAAAAFhZWiAAAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z2Rlc2MAAAAAAAAAFklFQyBodHRwOi8vd3d3LmllYy5jaAAAAAAAAAAAAAAAFklFQyBodHRwOi8v
+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
+hIWjs8PT4/MpGpSktMTU5PSVpbXF1eX1KEdXZjh2hpamtsbW5vZnd4eXp7fH1+f3SFhoeIiYqLjI2Oj4OUlZaXmJmam5ydnp+So6SlpqeoqaqrrK2ur6/9oADAMBAAIRAxEAPwDf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvdf/Q3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3X/0d/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3
+Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691/9Lf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvdf/T3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3X/1N/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3X
+vfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691/9Xf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvdf/W3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdYldGJVWUtHZXVW/R/r/AEPv3Xusvv3XusEU8UoZopI5QraW8bh7SC3F/wDD37r3Wf37r3WNmVVLM2lVszM39P8AfD37r3URMjQSHTHXUhb/AFK1EX++v7917qf7917r3v3XusasjjUrK4twyt5P9b+vv3XuunkjjVndlRFGpmYjQg/1+Le/de6jSVtJCqPJVU8YkTVG0ksSa+ObXt7917rj/FMdwPv6S7H/
+AJWIv+K29+6904e/de6xBkLaAy69OrTq9fP+829+691l9+691Bkr6KFmSWrpopF/Usk0Ubj88gn8+/de6yxVMFRfwzxTD/m1LFIP94/1vfuvdSffuvdYJpooI2lnkWKNB65JH8aD/Ynj37r3WCkyFFXKWpKqGoVf1+J/IP8Aivv3Xup3v3Xuve/de697917poTNYt63+HpWxNWBtPgX63/pa1v8AeffuvdTfuYPP9t5o/uNHl8P+7PHe3lt7917rtZoGleFZI2mj9bx6xrS/9ffuvdSffuvdYPPD5ft/Inm0eTx6hr8f08lre/de6z+/de697917rBPPDTRPNPIsUUY1NLJ+hP8AXPHA9+691kV1dVdCGDKWVh/vv8ffuvdc/fuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3X/9ff49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdQ6upioqaeqmOmOGKSV/wDkXHPv3XukFgqito8nDVV/EO5/JUKn/HGpH+ZhJ/6h/fuvdCT7917pIbQAFHkbf87it/63C3v3Xulf7917pry//Fqyf/UDVf8AWuX37r3SXosLgpdv0s1ZS00RehE0tTwkn+auZfN9R7917p22tLUTYWlepaR2JkWKST/OSU/lIglP1+o9+691LzmQGLxs1Qo1TNanpo7/AK6mc+GH/effuvdJ/a7VGMqanBVz6pfFFkKZuPX5z/lkY4/FR7917pQbjXVg8oD/AMqkv+9f8U9+691GocZj6/FYdqujgqDDj6bxeVPJo/Zh4/PN/fuvdMe28PjKqLIPUUNPI0eWqUhZk/RFDMPDH/sPfuvdLtnEaF2OlI11N/vP19+690G1LkKlcqu5ZbDF5Kq/hOj/AFFND/wDq+R+Z/fuvdCd
+7917pCY/GUNfnNxtW0kNR46mm0eVb6P2f+J9+691jzFDR4asxFZil+0q5q6KnemhY+Oqppv895Yb8kf19+690v8A37r3SH3T4lrcI2RDHDrUSfdL/un7kgeA1F/90A39+6907jB441tLk6P/ACV4kPNF444amI2NpgB6h7917qdksnSYqD7irk0qWCxRouueeQ/7qhi4JPv3XumV9zSQqJqzD5Oloj9aplifRH/x0li5Kg/7H37r3T7JWx/YtXUyPWp4fLCtN+484/5tcn37r3SQ2pUAxNA2MqCzVVbUff8AhhMaSeX/ADJmvczj37r3WJcnKdyPV/wrIa/4eKY0uiH7j/PzHzW8/wDwH9+691OzNsZlsZnkTRDUWx2S9I/zc3MEs1v9SffuvdLF5UijeR2ska6mb/ADnj37r3ST21E1bPkNwTL68jN4qTV/Yx0H+ZH9Ob+/de6cK/PQ0lT9jT01Tka7SXemol1+GP6Xnl/3Rz9PfuvdY6TcMElUlFW0tVi6ua/28dap0T/g+GUWBN/fuvdRt2VTR4yrpfs6iVKmkl1VCrH4IPp/n7+/de6csNWNU0saNRVNItPFTorVCRok/wCyP3YbH6XHv3Xunz37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691//Q3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3SF3RJPWzUmDoo/uHltW1UOoRh6eGUftSz/WAEn8+/de6j5ZM9kaNac4KGn+2eKop5oq4SPDJCOPF/k/19+690q8PkUyeOp6tT6nQJMn/HOoit5Yv9gR7917pn2h/wDyH/AGt6z/rd7917pX+/de6a8xxi8j/1BVR/6wzH37r3SSx21sbkMPQSzPWB5qaNyVqJRH5P+WP09+69074G
+qq/PkMTWyJNLi3iWKoRPGZKeYXh8sN+CLe/de6aMrPV5LNxR0FGK+HBP5Zo2m8cb1s36fr/yre/de6w5ebOa6TLTYmKkOKfzPNFViokemP8AnofCKcf19+690pszMlRt2vqIiDHPjpJUYf0lhNrf7f37r3UzDf8AFox//UBTf9avfuvdNG1f8xlf+11W/wDW0e/de647rqpjSw4mj5rcq/hRQ4H+T2PmNz/hx7917psnhzM2LbE/3fgjpvt/DHpyI/b8NvDL/wAB/wA29+690+7ar3rccsVQCtbQOaKrVuX8sHv3XukrPjauvyO5XoKqpp6unqKV4Y4pfHHVHw8xTce/de6eNt0WJqlTKL9zUZCO9PN/EJvPUUVR/u6LxX/Y59+690tvfuvdRpooKmN6eZI5EdNLxvZwYz9b/W3v3XukYsdRtfI00KSyT4PJVAp4opX1vj6mbkeEn/lH9+691LeOOp3gqz2IosZ5aKIg/wCdnmtNLb/D37r3SsZVZWUjUrel1b/bf4+/de6Sm1/2hmKWJiaSjylRHS8D0X/dlhi+hsCffuvdZNnf8Wyb/tZZD/rcvv3XuuS/8fhL/wBqeH/rdN7917p3ylCmSoKmif6TwlFP+ok58Ul/8CPfuvdIh8pUV+CosOG05Orq/wCD1P08iRw/5+a1v+OH+9+/de6X0EMdLSRU8S2SmiESL/hHFb/effuvdITbv8aelqKuhhxztVVtU9RJVvN9w8nl/wA1Lb+gPv3Xup2Totw5KlNPUxYZFV0mhqFkn1wyw8xTQj8G4/2Hv3XunTcIlG2q9ZWVpfsSH0/mSw+n+F/fuvdPFB/wBov+WEX/AFr9+691N9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvdf//R3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde
+9+691737r3Xvfuvde9+691737r3ScxGLqKeqyWSrmjetr5hp8frSGmh/zMQP+H+39+690o/fuvdJ3G42px2SyTI0X8LrGFRFF/u2GpP+et9B4D/T37r3TTRY7cmM+6ipP4U8M9XUVK+Z5vJ+8f6gf19+690pMb/FPHJ/FBRiXX+19j5vH4/x/n+QffuvdZa+nNVQ1lMpGqpp6iBdR4/eiN/959+690mKSk3XSUkFFEcOiQReJZD53fj/AAP+v7917p0xuKmxlJWOs33mUrfJLNVTemOSp8REXA+kAPv3XusmBxj4uh8UzI9XUyyVNbKv+7KmY8n37r3TzJEkkbxut0kXSy/6/H/E+/de6SdPhshBg8jh2kgdG+5ixjF5eKaYftRT3/p7917pQ4+neloKSml066elp4HKg6LwxAcX5tx7917qBhMdUY+OuWoMbNU5CprF8f8AxznN/wA/n37r3WKnxlU2aq8vWtGwWH7THRJd/DTXvLMf6T1Pv3XulJ7917pOR4yop89LkKZo/s66nCV0LN+59xD/AJmWL6/j6+/de6yY7HVFHksxVytE0dfNE8GljrtDFb936C9/fuvdRp8VU02XjymMaNVqfRlqaRikc0f1+7itf/KAPfuvdKj37r3SZyeKrWrYstiZ0jrIo/FLT1LS/b1VPe4hP08Bvzx7917qGmNy+VraWqzX21LS0L+WGipn8muoH+7ZZf8AD+nv3XunLL4iStemraKoFHlKO/29Tp1o8ZP7tLMLf5hv979+691BkXdtRE1Of4ZRahpatiaaokH/ADdihIt+fz7917p6xuOhxdElHTglVGt5JDeSaSQ/uyy/7Ub+/de6i4HHT42ienqGiZ2q6qoBi4QJNMZY7f6359+6912uOqBn3ymqP7dsd9oE48nkE3mv/gPfuvdPvv3Xuk3BgYos9UZkFbS04VI/9RUFv3Zf6cgW9+690pPfuvdJKTFZLHVtRWYR6d4KxjLV46rMqRtU
+H6zQTD/M/wCI9+691wbGZjLyxDMyU1PQwypMKKheUvUyRfQzykg6QR9B7917p5zVHLX4usoqfQsk8PiTyfo5+g9+691NpYzFTQRNbXHFGjaRblY7f0HPv3XupXv3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r//S3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691heaOIeuSNP+DP/AMV59+691Cky2PisrVUer/aTr/3r37r3WA57H8/uSn/gsR/4m/v3Xuvfx3HD/dki/wDTrj/ivv3XusyZjGyfSoT/AJC4/p/r+/de6mx1EEn+akjcfjS3/GvfuvdZ/fuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvdf/09/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdY3kjjUu7qi/wCqb6e/de6YancFPFdKdGqG59VtEf8ArXt9ffuvdMc+Vrqgcz+MflYTo/3u9+PfuvdNz+rmQs7fX1v5Pfuvdesf6H/bH37r3XXv3Xuve/de697917r1
+gDqHDf6pX8f+xNhz7917qfBkq6n5SoaQX/TP6/8AkXv3Xun2m3DEw01aeFv+OkZ8kf8Ar/19+690/RyRTDXE6uv+qVjx/wAi9+691m9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691//9Tf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+690w12bhpyYqf9+f+n9hLX/Nvr7917pKVFRPVtrqJWkI/s/7rT/Ew+/de6we/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de6zwTz0ja6eVoj/qf91uefx/T37r3SroMzHU2iqNMNT/AEv6H9+690/e/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuv/1d/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdYnkSNWd2VEW+tm/w9+690jsjl5avVFTs0VP9GfjXMOP+I9+690y+/de697917r3v3Xuve/de67BFz/a/wBj/vPF/fuvddav9ob/AJIk/wCKe/de67JFx/Z/2P8AvPNvfuvdde/de697917r3v3Xuve/de697917r3v3XuvHng/7G/v3
+Xun7G5h6YrT1jO8Lfon/ALcP/Le309+690r1ZWVSp1Bvo3/I/fuvdc/fuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvdf/1t/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3WCSSOJDJI3jjT1szf8a9+690iMhkJK+TSPRSr/movr5P+bsv1Nh7917pt9+691737r3WeCnnqW008TS/7Xx4/fuvdP0G33bS1VOV4/wA1D/1+tf37r3TtFh8fF/yjK7G/qkHk+v8Ar+/de6mrDAn0hjH/ACBELf7b37r3WTRH/wAc1/6l/wDSPv3Xusb08LD1Qxvz9NA/437917qDNhsfOeYPG3Hqi/bt7917pom286ampptfH+bn/wCv3Pv3XumOaCpp2tURNE31Dtbx/QfT37r3WD37r3Xvfuvde9+691737r3XvfuvdPWKyZomEE7aqVm9Df8AHAfX/qR/T37r3S0FmCkG4H+8/wDG/fuvdcvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3X//X3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XEsB9ffuvdInLZH72XwxMPtY3seB+/KAf969+690z+/de65+okKouzcIqn9x/fuvdKKgwWrTJX2FjrWnX6Af83fw
+T7917pTRRpEoSJFjT/Ur/wAR7917rL7917r3v3Xuve/de697917r3v3Xuve/de697917rFLGkqlJUWRP9S3/ABPv3Xuk1XYK2qWhb/qna9rD/jiebH37r3SbZSrMkitG6/qRv85/xQce/de64+/de697917r3v3Xuve/de6UeDyOkrRTtqVv+A8v9Rf/ADX+NvfuvdK337r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691//0N/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+690m87XmNVooGs8v+dbn0RfQ8fn37r3ST9+691kjjeaRIo49ckvKL9P8AXv8A0tf37r3Szx2Liol1vaSpb9cv+o/5tRf0A9+6908+/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917psrsdBXKdQ8cy/omX/OAf4fTg+/de6RVRBLSzNBOul/7LHiN/wDljf8A1vfuvdR/fuvde9+691737r3Xv+Ctpb+y3v3Xul1iq372mGv/AD8fpl5HJ/46j/X9+6907e/de697917r3v3Xuve/de697917r3v3Xuve/de697917r//0d/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdRqqojpIJJn/TEvP/ABHv3Xug8kleaR5ZTqeR9T2/339P
+fuvddKpZgiLqdvSir/rf8T7917pa4zHJQx3Y66mS/mlP5/Pi+vA9+6908e/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de6hVdHFWxGKVfqPRIOHQ8fQ2+vv3XukLUU8lHM0Eq8/rRrjRJH9PL7917qN7917r3v3Xuve/de6m0NW1HVxz/SNvTL9OIuef9h7917oQQVYKQLj8f4ce/de65e/de697917r3v3Xuve/de697917r3v3Xuve/de6/9Lf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3SRz9T5ZUo0b0x/uzC44kH+Z4v8A19+690nffuvdKrB0OlfvJh65P8wrc+OP6iTn8n37r3Sm9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdN2QoUroRG3plX1wyf6iQ3P8Are/de6QkkbxSSRyDTJG2ll4/p9Rb37r3WP37r3Xvfuvde9+690scJVtNTNDIwMlP6L/nx/7p+n+Hv3Xun/37r3Xvfuvde9+691737r3Xvfuvde9+691737r3X//T3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdYZJRFG8jfSNNT8f63v3Xug4kkkmllmk+srl/fuvdS8dR/e1
+SxMv7UY8tR+Rc/7p/wBt7917oQFsPSBb8/77k+/de65e/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de6T2bofNG1XEg80K+r/a4vqf6e/de6SF78j/Xv7917r3v3Xuve/de6ccbU/bVkTmwSS0Uv+vLYi3+x9+690v/AH7r3Xvfuvde9+691737r3Xvfuvde9+691737r3X/9Tf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+690xZ6Yx0XiX61LCH/kD8/7x7917pGe/de6W2GpftqRXK/u1H7z/Qf8s4rkfge/de6evfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3SEylF9pVl0ULDP64f6JJ/u6IfX629+6901e/de697917rv+lr3/AOJ/Frc+/de6X+PqBU0cMv1bTofjjyRG3+9j37r3Th7917r3v3Xuve/de697917r3v3Xuve/de6//9Xf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+690jNwTa6uKAHiKIu/+tMbf8R7917ptoaf7qthht6NWuXgf5uD/AB/FyffuvdCL7917r3v3Xuve/de697917r3v3Xuve/de
+697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917pvyNItZSSRDhv1RNf/AHZzY8XPv3XukDz9D+pfQ5/x49+691x9+691737r3So29MLVFO1vS/lU/wCF+f8Abe/de6VHv3Xuve/de697917r3v3Xuve/de697917r//W3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdB5kX81fVP8A0lC2/wAYP9v7917p527B/wACKk/6sxJ/rce/de6VXv3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de6RObpPDVeZR+1U+v/p9x7917pl9+691737r3TliZfBkYfVxKPE3+3Nv979+690vvfuvde9+691737r3Xvfuvde9+691737r3X//X3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XHWv9f94P8AxT37r3XL37r3Xvfuvde9+691737r3XvfuvdcXOlWb/af+K/8V9+690GZfUzv+XeR/wDrMffuvdLzGQ+GhpkP6igdv9eX8/n37r3Tl7917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3X
+umrLU/3NFIFHrj/dT/X5J/2Pv3XukJ/j7917r3v3XuuaM0ckUq/7qlif/Dn/AG1vfuvdCUr6lDD6FNQ/3jj/AA9+691z9+691737r3Xvfuvde9+691737r3X/9Df49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691hkmihXXNIsa/1Z+P6+/de6Y59wU6XEEctSw/tC8cf+39+6901S5vIS6tHigX/af3Db/Y2+vv3XuoL1tbIbSVUx/5D8fv3Xuo5klY+qWRv+Quf96Pv3Xuvaz/AKuQf6zX/wB7Hv3XuvLPLH+mpkX/AKfD6/7x/T37r3UuPJ5CMemrdh/zdHk/3nj37r3TjHuCrQ3lijlXn9I0f63PPv3XunODPUUnEvlgP/N1PR/vuPfuvdPEc8Uy6opI3X+qv/xQX9+691xqW0wTN/SKX/eOPfuvdBxAnlaCL/jq8S+/de6E1V0hVX9I4/1/98ffuvdcvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdN1bkKPGU71dfUR08Ef1eQ2+oH7cfA8pP+Hv3XugsyfZ0+oph8eoT+xUVr/wCcP/LGAn/e/fuvdMadjblVlMn8PlX/AI5/bmP6f43v7917pebf3/Q5WSOkr4v4bWS+iJmfXSTyf8coZv6j37r3Qie/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de6DuvgNLWVMSrddeuP8Ap45+P9iffuvdQ/fuvdef+1/yF/xPv3XuhBxriWhpnve8QU/j/D/iPfuvdT/fuvde9+691737r3Xvfuvde9+691//0d/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdY
+ndI1Z3ZURb62f/D37r3Sarc9clKBQf8Am9JxHb/m1/X37r3SckeWY65pWnccfut/xr37r3XD37r3XvfuvdOlNia2o9Xj8CfXVN/15/437917p5h27Tp/nppZTb9K3jj+g/A/Pv3XunCLE46MHTTRn/g3r/3se/de6kfYUVrfbQ2/4IPfuvdY3xlA/wBaWH/H0D37r3UKTA499WlJIjxcxPYn/Yc+/de6b5tuyr6qeoV7/wBmdP8AiR/X37r3TRLSVlA2spJCF/3ZF/m/6f7yffuvdSo81UmCSGZVqBImhJBeN+f8Dx/j7917qNiUD5ClTn0Pq/6kH37r3Qhe/de697917r3v3Xuve/de697917r3v3Xuve/de6gV9bT46kqK+pbRBTReaQ/63/E+/de6LZnM5W7grTV1bWiX/gJSD/N0sf5P5/f59+6900+/de697917riQCLH/ff73/AF9+690PGwc9Llsc9FVyeSsx3jh8jfrmpzfwzH8/4f8AIPv3XuhC9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdJXcMFvDUhb/WJv6cn9q3+x9+690mffuvde9+690tcC+ugVfp4ppE/23/I/fuvdPfv3Xuve/de697917r3v3Xuve/de6//S3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdQ6qrho4mlnOlbelb2dyB9PryffuvdImtrqivb939uBf0QL+f+W1/fuvdQffuvde9+691MpaOorJNEI9K/rlfmNP95v8AT37r3SuosVS0XIXyzW9UsnP9P6j37r3Tt7917r3v3Xuve/de697917r3v3Xuve/de697917riBceqx/1v+Ne/de6aqvDUlTdgvglI/zkfB/3n37r3UDHYyeiyBeTS8XhcLIt/wDD6/6/v3XulN7917r3v3Xu
+ve/de697917r3v3Xuve/de697917oPuyGdduMFbSJK2nRj/UEzG3v3XugI9+691737r3Xvfuvde9+690rdjZD7DcdIrG0den2Lj8G/8AmPz+Le/de6MX7917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de6bcnB9xQ1MYNm0Fk/6dc+/de6QPv3Xuve/de6Ve3m/YqU/1M39f+bQP+29+690pffuvde9+691737r3Xvfuvde9+691/9Pf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdQ6uqipIGml+i8Kt+XkN7Rj/ABPv3XukLVVU1bOZpjwLBI/7Ef8AW/v3Xuovv3Xuve/de6cMdj5K+VrHRTxm0slvofp4oSPpx7917pcQQx08axQpojT/AA/H+9n37r3Uj37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+690j980TV22sgiLrlhEVSiD6sYJQbWP149+690Xh4njYxSo0Uq/qik/ziDw+f/D37r3XXv3Xuve/de697917rpWaNlkRtDxNqhkX+xJe/PP8Ah7917oZcP2PBUGipMhRTx1c8qU71EPjNJ+P3gSfp/h7917rFubfGWw+XqMbT0VEY4UidJ5Xl1zRyxeb6Djg/09+69030XaFWrhchi43i/tSUk37g/wCnM/NvfuvdCdh87jc3B5sfOsmn/Owt+3PAT/x1ivce/de6e/fuvde9+691737r3Xvfuvde9+691xI1Bgw9P++/r7917oOJo2hnnib6RyyID/Xj37r3WD37r3Sl2612rB/yzf8A4r/vXv3XulX7917r3v3Xuve/de697917r3v3Xuv/1N/j37r3Xvfuvde9+691737r3Xvfuvde
+9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdY2KxqXc6QvrZvx+ffuvdIHIV75CZntpgjOmnjP1v8AXzX9+691B9+691737r3UmlpnrZ0povT9Xml/1Ef09+690v4KeKmiSGIaUi+g/wB9x7917qR7917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917riBceqx/wBb/jXv3XugR39thqOafP0xMlPVSj76BvrDUfiaLgfs8G/v3Xug39+691737r3Xvfuvde9+6911qaJldf1RPG6fn8+/de6Wu/nE2Wx1UfrV4enlf/ff7H37r3SL9+691Koq6sx1VFW0UzU9RF+iRbHXzzDN/wAd6ew9+690YPa25YdxUPlAWGtp/RWU2r/NyWH7kVzzAfx7917pV+/de697917r3v3Xuve/de697917pDZuLx5B2HHmijb/AFrXB/2x9+6900e/de6UG3m/yioX/mzGR/1NPv3Xulh7917r3v3Xuve/de697917r3v3Xuv/1d/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdJXPVrcUETcv66j/llfmIe/de6TPv3Xuve/de697917pcYii+1p9bj9+b1S/kpz/mv8be/de6ePfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdYHkjjQyOyoiLqZmNkT6XuePoPelHiUx1RiIgSeHQeZDsCnhq/FQ0n3tOv66gShA//LC4N7ezSHbmZak0/wBX29Fc25KpKj/V/LpPZPfOVrfRQquOh+mo/uVD/wBPp/mPayHbUSurJ/1fPpFPupcUGP8AV9nWGiGfhxx3PFkZ5Xjm
+9VNUS+SGalBAlllP4I/H+t79KsIYQkeVf9jplJZCC9aCvTk3YuQaOyY6nWT/AFbSSeIf7YXPttdqUcWP+r8+lh3Zjin+r9nSQr81lq+R5qjIVCvo9C0z+CNP6+GE8n2YRWaRigH+r9vRbPeM7V8/9Xy6HLA1D1eGx9RKdUktLEzs35NrewzdLSR6dCe0k1Rqfl09f63++/r7arQdKAcnpF79p6mo23VRUlPJVTeWn/bjQPIY/Lz9fx791voBq2iqsdUtSVsLU9Rpjm8DGHyeOax/2/v3Xuo3v3XuuN+NN/V/vj/vXv3XuuXv3Xuu0ieeWKGNdUs0sUKL9D5Z/fuvdKjecofNLRoda4vHUWPZ7/7sgi/e9+690lvfuvde9+6906YTMT4LIwZCE+mM6KuHgeamv+7FzexB+nv3XujN01RFV08NTA4eCeNJYmH0KGxvf37r3Un37r3Xvfuvde9+691737r3SW3EnppZv9rkia35B44v/re/de6THv3Xun/Af8DJf+oaL/raffuvdLH37r3Xvfuvde9+691737r3Xvfuvdf/1t/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3UeeYQQyzP+mNNf8AvH+P9D7917oO3keaV5pPU8ja2/3jj37r3WP37r3XvfuvdOWKpvu65FYaooP3nt+P+OPJ9+690vvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+690DW8twvWVL4mkl00tO3jq2Xk1NQSSYvpbwU/1P8Aj7O7G0GGIz/g6D9/dmhAOP8AV8ukP9PZq8ghFOiJVaZiSc9df6/uxDHq6qozTrlrl0eLyy+LXq8er0f9SfbbW7Pw/wBX8+lKyoo64fn25qPSZiF69+q6orO8noSNU/ceS3+Z/wBb37u9enE0niMdGDwNLLRY
+egpp1CyxU8ccq/0Nuf8AePYSuXq7UyOhbaR6UH2dPX+t/vv6+2qVHSgDJ65e/db6Yczt/GZyDw18Or1Rv5om8c/7X/N4C9vfuvdBJlevctT1ujEIK2hk8ZiknmijeA/QxS3tcc/X6e/de6n5PD7f27Q0WFyvkkqMw3lqsrD/AJyglht4ZoYbXFOKjge/de6RGUwlZilWod6atx0j6KfI0U0MlPP/AM2QOfBUe/de6dqeOm2qkWQrGjrNwS08c2OxwJeDGeeH/gXkv6VH/Nv8e/de6STySyvJJK7yyyP5ppGN9ck3+7v8b+/de697917r3v3Xuve/de6GPrbM+akmwsz/ALtF+7SXN/8AJpufFf8AP2549+690Kvv3Xuve/de697917r3v3XumTPKGx8h/wCOTxva39D7917pFe/de6fdvf8AAyf/AJYR/wDW0+/de6Wfv3Xuve/de697917r3v3Xuve/de6//9ff49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+690mtwT6YIqYEfvvrY/8ANqEi/wDtz7917pKe/de697917r3v3XulhgKfx0hmK+qoa/8A07/H0/1/fuvdKD37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691xPNv6c+/E0B9etg46xsLqwB03X/AIjj/Wt72pJ0nrTGnHouWSo6nHV9RTVa2kMsjpJ/Ymjnl/zsP9D7FsMsbKGBx0DZFckinUSKN55ooYlu87+KFb/7s/PuzutK1x15FcU65zqEmlRG1Rq+jV/vfvQFc+fTZIHHrhb/AB930gcOmTJ5eXUiioqvI1ApKKFpqhvwP82n/N2a/wDwH9tSzrbAmvT8MDXLAD/V/g6GLb20qbD6aiotV5HR/n2T0Qi3+bg/oPYfurwzsQOH+r5dCO1s/BUVH+r9vS09oujL
+r3v3Xuve/de697917r3v3XugB7GqGm3F4rjTTUNMin+vm883+x9+691x29QfxDCRUzK328e6aWrq/wDjmlNBSQzTeX/be/de6SmTrTkslX5Br/5XUSzR3+scX+6YRx/xw0e/de6he/de6lQQCekrWX/O0iR1H/VMZPBNz9ffuvdRffuvde9+691PxOTlw+SpclDfVTzfur9ddP8A7uiv/wBQ/v3XujQU1RFVQQ1ELao5oo5Y2X+kwv7917qT7917r3v3Xuve/de6g5FPJRVSf1iP++/23v3Xug9H6F/334X37r3T7t7/AIGT/wDLCP8A62n37r3Sz9+691737r3Xvfuvde9+691737r3X//Q3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdIHLTNPXT6T6Y/2V/1/wDEf6/v3Xum337r3Xvfuvdcvr6f7THR/wAR7917oRqeNYYYol/3Wka/77/b+/de6ke/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3XuuvdTk9e4DoK947ndXkxGOk0sPTX1Ubcx/X/ACaL6Xc/n2d7fZ+LRm/L/VXoj3C98M6R/q/l0i6XM1EMAoqqCmydAv6aetTyeD/ljN/uj6+10loQajB/1fPorW5Q4P8Aq/l1lfL08UciYvE0uMlnTxS1ayyz1Hj/AOOUPH7B9+jtXJrrJ/Z157lBUAZ/PpjT6f77/H2rXAp0jlOenbDYepzdYKWBtEaeqpqRykMf0sB+agn2jubnwh8ultrbeJ9vQ44rD0WGp/t6OO39qWRv89PJ/wAdZpf7RNvYfkuTcGrH/V+zoSw2qW9CB/q/b07W+tvz/vHtOFpxPSsEHrn7t1rr3v3Xuve/de697917r3v3Xui4b4mSbdGSZGJWIU0Xp/EsEUF/r/T37r3WfZ+QEc9dhZpTTRZ6
+n+3hqB/uit8Vof8Azp9+690k56WainloqgaJ6SXwSr9f3Ifz/T8+/de6x+/de6d8CPJkxS2utbSVtG/9f34ffuvdMy6rer6/8a9+691y9+691737r3Qx9bZry0kuEmf92i/epNT/AKqaa58P/VN7917oVffuvde9+691737r3WKRdcbr/VJF/wBv9P8AevfuvdBrptdR/ZbR/vHv3XulHt1f3asn/URp7917pWe/de697917r3v3Xuve/de697917r//0d/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691wZwqs39F1f7D37r3QbMxkeWQ/qkmlfj/eP9vb37r3WP37r3XvfuvdS6OPy1tKh/Msf+9e/de6EX37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdcOQf99z72SKdWwR1z901fLqvSO3bmzhqAJA3+XVhMVOP9Rz+5L9P7I9rbC3MjioxXpBuFyIkPr0CP+DPc/rdm/wB2f73x7Ef9io9f+K6DNfHJ669udN9e9+691y90ErU6qzeI66vXoY9lUkNDhEqnKrLkGFQzs9roeIeTxwvsPXxeSQqPLoU7akQSpOfz6UsmaxMP+dyNEhP9aiK/+8H2mFtIeCHpT9XF/F/h/wA3WD+8mDvb+K0N/wDlqP8Aivvf0sv8H+D/AD9a+ri9f8P+bqTHlcZNxFX0ch/OmpiN/wDbN7qY39M9OC6jJ49OBN7EG4/p7bIYdOLokz1k9+6t1737r3SO3buSLAUFoir5KqUrSQ8ei9yauX+lPTfn37r3ReGd5GeSWTXLI2uWRv7ck/8AnpffuvdTMXFJUZPGwwIzytXU2lY/84LTD90/8V/w9+6909bygnj3Lk3kgnijmqB9vJLFLHHP+yL+GYfXn37r3SZ9+69097XVm3FhlW3/AALjsffuvdM0w0z1CqfS
+tTKn/WX6e/de64+/de697917qZjMjUYnIUuRp/108od47X80Q/z0X5/5R/fuvdGfoK2HIUkFbTvrgqIhIjf1H+w9+691N9+691737r3XvfuvdBrOumaojH9mol/2/mv9f9b37r3Si26p01Z/GuJD/sRz+ffuvdKj37r3Xvfuvde9+691737r3Xvfuvdf/9Lf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdQ66Tx0dVJf8ARFL/AL7/AG3v3Xug7H6F/wB9+F9+691737r3XvfuvdOeJXXkYD+VjlY+/de6Xvv3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697q3l17pgzmcpcHSmeY65W9MFOtvJPJ+AOPam3gMhA8ukdxcCMdAZX19Vkqt6ytfXPIP0L/m4I/xFD/j7EkVuLfAHQZmuDc1q3+r9nUP6+3SPF4dJgxhNa9cfdurde9+691yA/wCNe6vKuadaYh6gceu2Z20q0sjRr+iPXeNPdQiPk9WCzr8J/wAHWMiJf9p/PF/blY/Tqn6v+qnXrxen1en/AGPv1Y/Trf6v+qnTrp22FX93MI/9r0Up/wCu359piCanStPtP+bp9/EVhn/B0JuyqaIUj1lJk8jWUUo8KU1dFojhkhPMkPF7H2SXjqHppp+fQh2wOUqT0v8A2h6MukDuPfOOxCyU9CY6/JD0LFG48EMn0/fmHAt7917oDq2tqcjUy1ldO1RVTcPI30A+ghgH0+39+691G9+690LnWFJTeHJ1xRWq/PHTl2PKU4iWYC3+M9/fuvdKrcho68nCTiOXzY+sq6hT/nKIQxf5HV/82P8AKD7917ouym6hv9p+n++/1vfuvdLHZkCrW1ubmUCkwdFUTPIw/wCUmaK0MXv3XukdqLEuf1SuG/25B/23v3Xuufv3Xuve/de697917oRdhbmX
+HVAwta3+RVcw+0kb/lGqZjfw/keGoP0/x9+690Ofv3Xuve/de697917oO8gClfWL/WX/AJF7917pRbdFqSZv9XUk/wC8j/ivv3XulF7917r3v3Xuve/de697917r3v3Xuv/T3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Tflf+LdWf8ALFv97Hv3Xug/H6F/334X37r3Xvfuvde9+69074L/AIuK/wDLJv8Ae/fuvdLn37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+69119P+IHv3zPW+PXuPddXWqDpN53PUuDptcn7lTILUtKn+cnbkcf82gfam0tXmbH+r+fSO7uxEpPy/1eXQH19fV5KqerrZfJNJ/T/NwxXP7MHsSQxi3QAf6v8PQZmmFwxPUT2/0x1737r3XfvZPXuuUqGKR4pP1RPo/x+v8AxHts/Lpzrr6nn3eRfFcN1QSeEmnp4xuOp5qepyuTmlp8TROUZorfcVlR/wAqtID7QX12Ik0A93+r5dLtttDK2o/D/q+fXMbpwsN0pdpUpT+w1VMJJH/5a3B9kn1b/wAX+D/N0IvpV/1f8X1x/vhTD6bTw3+2/wCNe9fVP/Ef5f5uvfSp/q/4vr398Yx9Nr4L/kiT/inurXLnzP8AL/N15bZBT/Z/z9TP9JGWSNYaXHY2lRfQhj8pjjH/ACx/p7YaRieHSgRoOk7kd1Z/KqyVOQkWJv1w03+Tx/8AEn3br3TAoUekf7H/AH309+691y9+691xsSC2ltK+hm0eg/7b/X9+6908YfN1uFkmNOsc8FSmirpKn/MTc/4f8B5x7917qZV7nqZqaoo6KipMTFWemtkpxK9ZUpY3ilnn/NvfuvdYMHgajNNI7OtFiqW71uTk/wA3DEOTDD/x3n59+691KzWap5KZMLg4mpcFTPrYt/wIydR/ytTf9M/H+8e/de6T
+Xv3Xuve/de697917r3v3XuuI+vB0t/qvro/239PfuvdGP2fmGzWDpaiU/wCVQj7Wq/5aw2vJ/sR7917pV+/de697917pBZY6cjVf8Hjb/rGP969+690pMIunHRH/AI6PI/1/rMf+K+/de6effuvde9+691737r3Xvfuvde9+691//9Tf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdN+V/4t1Z/wAsW/3se/de6D8foX/ffhffuvde9+691737r3TnhW0ZOH/a0kX/AHgEe/de6Xvv3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917rr3VvLrw4dJzcGdhwVGZ3Hknf0U1OPrJLb6cciIfn2pt4DIQB0hubjw8efQG1tbU5Cokq62XzVEgGpgB405/zMP/AEz+xJFCtuKU6Dc0zXAyeo/19vMwkFB0k/sz8+uPvfTnXvfuvdeIuPdCfLr1c9Ok8f3lEuQiGqakSOkycX+7PH/yh5D/AKh/+O3tktRtPr/q/wBX+x075dQqamnq6iGkpxrqKh/DF/S35m9vSP4UTNXgK9UVPGnVelzubaualp8XjcRTxzY7HQFnDTRRST1sx/dll1WNv+K+wpLJ9TK+o/6v5dDK2iW3iXHl/q9ekPJtDcsR5w1Q39PH4pB7b1J6dO0Pr1EkwGei/Xh8kv8A1Ry+/al9OvUPTdNBUUzaKinqaY/2DPFLGX+nu3Znr1G6xe9eIo8sdb8Fz13711rrnDFLVSrFSwSVUrPp8dLDLJJ/vXv3Xul5h+vMrWlZco38Mpf7acSVjoB/1g9+691M3JlttUWFqNs4WLztq9dREnkjSphlH7s1X9J6i/8Ar+/de6DK+keo+/de6V+M21EtL/GtxytjsQvqipm/br6/6nxRQ3v/ALbn37r3ULObhlyypRUsC47C0wH2+Ojsdf8AzdrP9a/v3Xuk/wC/
+de697917r3v3Xuve/de697917r3v3XuhG61yP2+TqsbIf26+HzRf9REP/FaeX37r3Q5e/de697917pB5gf7kqn/FIv8AeyPfuvdK3HJ46GmA/wCOUX++/wB59+691P8Afuvde9+691737r3Xvfuvde9+691//9Xf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdRqpfJTTx/wCqilH+2v7917oOB+hf99+F9+691737r3XvfuvdTKBzFX0bte3l0fX+v/ED37r3Qie/de697917r3v3XuuuPdQ1MHrVK09OuJ4/HH+v73UjJ6sVDefXduPdq9UfPXrce/V68mOvfjk+9VBOOtqCPt69a3vfHrzE46bsjkKXGU0lXVyCOKMH/gzccRxj8kn3uGJpmFBmvTE1wsCknoCM1l6jNVz1swKRD00kPH7NN9b8f8pB9ieyi+nUevQZvJ/qGJr00+1PSTr3v3Xuve/de697917rl6h/Z1MfR/vv9h787BFOevLqncdDFtLba4ykkqq5Fetr4tE0bC6QU/FqUf1A9hu9uA7kLwHQosLXSlW4/wCr59PeP25iMXUS1dJSJHPKLagS2gf0iuT4gf8AC3tia4Zx3cenLezSM1HT99fx9f8AH2nXzz0tKL161/p9P6+9hqivn14AIOvW+vtqP4ietjB6bMrh6DN0r0dfCssTC6Nb9yN/qJYpb3BA9u9a6Ry9Z4IfqlyDf9VPA9+6906U2xNr0xDDH/cMv0+5lln/AOhvr73j069QjpT09HS0i6KWmhp0/wBRFEkf+3svvRC+Z6qXbhTpB9i5qbH42Chp5PDLkXkSWVX/AHI6aEAzEfn8+/dW6C3F7XzGUTyw0n2tIv8Aym137ECRfk2/3f8AX37r3TxGNt7aIm88e581H/moo/8Ai2Ucg/3b/wA3vr/j7917pMZPLV+Yqvu8hP5pf0wxL6KeGP8A44ww
+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
+nb6xvp/1wALc+/de6xe/de697917rJFK8Ukcsf64m1p/r+/de6EWnnSohjmT9Miax/vF/fuvdZ/fuvde9+691737r3Xvfuvde9+691BrrijqyPqKef8A61H/AIp7tBiVa+vTcorC9PToti8rf/lqf97HsWIaxgdAzIuH+0/4Ou/bnVeve/de6dMJT/d5nGU5GrVVxu55/wA1T/8AIvbM8ojtpB8un7eMvcIa4r0YORWaORQ3jZk0h1/sHixF/wCnsIx4mY0r0MHH6IX5dIWu2FQVIllhrK1KqQ63nml+48j2+somvcezW33FkoCtV/1fLovbbESNtJ7vz/z9BfkMdU4uqeirE0Sx+tHX/Nzx/mWEf19nFrMJSWBx0G3WW1lbH+D/AGeof/E/8R7fbieqN2rnj0InXtc6z12MY3iKirh/2iS4hmH+3A9ku5oDpYcadHO0z5p0K9hYE/i/+9+ycdikdH7prcHpCb/a2GhW/wCuvpx/sAbf8R7MdnXVMxPp0WbwQIVA416B72Ieg11737r3XHQv6tPH+392WkKmp62SaU8+hA2Tg5J6oZeoRlpqfil1LYzTn6zC3+6bfT/H2TX91qJUeY6NtqtDIdZ4D/V69DF7JOhF1737r3XA2IYH6C1/9j/xQ+/de6LJuPGti87kqTT6PuPuIf8AllP+9yfr9PfuvdMvv3Xuve/de6E7q+r0VuUoCf8APRRVaLc8+E+D/be/de6Y9/V/3u4poQ2qLGwxUqfX/Of5+Ye/de6Rvv3Xuve/de697917pUbR24dwZErMGXG0Z1Vp+hk/440n+8X9+690Yamp4aSBKelijhhiXSkcSeONLf09+691K9+691737r3XvfuvdYYoyhlb8yPq/wB49+691m9+691737r3Xvfuvde9+691737r3Xvfuvdf/9Lf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+6
+91737r3SXz1GNIrUHqSyzfQ/tX5l/wBh7917pL+/de697917r3v3XulDgK3S0lFM3En7tP8A4f8AHaH/AG49+690r/fuvde9+691737r3Xvfuvde9+691hYBgVP0YWb/AHn/AIr78DR6jj1WmqI16LlkqRqDI11ET/wHq5FTi14p/wB/2Kbc6okPl0DpRpnf1r1C9qemeve/de6XmwaBpsnUVxFoqKLwp/y1m/8Axf2Vbo+gBa8ejbaU8Q6j0MdvZAo8+hGRinXEE3/w9+CBRjj1SragD0HXYVKjUNHXhbS01QIv+nc1wR/tx7NNrkOsg9Fe66IlDUz0FA/H+x9iE5Y9B2Q1WvSw2MrNuHUP0xUMgf8A2JFvZXuQAToy2lKsM9C3kslS4qkerq5NEUd/+Du5+kcY/JNvZHEnjMFHQhnmEKlugQzm4K3Oz6pf2KSN7U9Gv1S3+7Zz9fPz7EltbLaKCOJH+r16DFzeG6cqfL/V6Dpi9q+kfXvfuvdLLam2Fy7isrR/uOgcqkf1+8kFrk/9M/Psr3C7IGkcSOjLbbb6hanhXoZljSNFRBpUWVVUWUW/Fvx7IgxkJPQjhRYBSmOpHvXTnXvfuvde9+690DfZ+O0zY7KoP1eShqD/ANZob/09+690Ffv3Xuve/de6UW0q5cduGgqHbRE/kp5WP/HOeK9/fuvdMVXO1VWVVU/+cqampmf/AKfS/wCv7917rF7917r3v3Xuu0SSSRIok8ssjiGKP8ySz38NvfuvdGV21hY8DiYKEeqZv3qqT/jpUzWMx/w59+690ovfuvdYnaONSzlUX/VMf959+6903/xnE6tH8SotX+o+4it7917qbFNDOuuGSOUEcNG4k/3r37r3Uj37r3Xvfuvde9+691737r3Xvfuvde9+691737r3X//T3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+69
+1idFkVo3XUrLpf8A2I+nv3Xug/rKN6KpMLepGGuFr8vGPr+f6+/de6ie/de697917rIrPGyyobPG4dW/qf8Abe/de6XlBWpW04lX0v8AolT/AI5yfn8+/de6cPfuvde9+691737r3XvfuvdYz9R/rH/ifdT8Q+3rwNEJ6Afd0qSbiyHj/wB1/bRN/wAtDD/j+B7FO31EC9BTcDqlYeXSe+v59qkXxei2piJPWWkpaivqYqSki8tRM5VV+mj/AJvTf9M4v7rJKLWteH+r7elUURuaU4/6vs6HzCYiHDUMVJGdTD1zSn6zVB06pSP6m3sKzTeIa9Cq3g8MDHT37YXz6UnHXfvZ4de6DrsOW2Noov8AjpXD/rDz7NNqHex/1efRRu3wJ/q9Ogm/4j2eAV7ugzIM06EXr+nWFcrlZiUjjH24kb6eKH9+Y2+thf2T7g4dlQca9CDaF8IFiMU6Sefzc2crGmbUlJA+mipv+bdyfLKOf36n8f4e11rbeFT7OkV1ciSorjpmI+ntaxoK9FqmpNeHXX+HujA+XTymn29cGbTqP+0f8i/3v3dDTj1Rxq4dD/tmk+1weOhb9X26s3+vKC3/ABPsK3bapH6F1mumMetOlF7THh0r8+u/e+vde9+691737r3SV3ljjlNv5CBRqljj+4px/wA3YLn37r3Rb1bUoJ/tf7b/AH1vfuvdcvfuvde9+691737r3Xvfuvde9+690InXWFFZkZMrOl4cZ6KfUOHrJuT/AI/5Na3+v7917oUcrujCYjWtZWx+Zf8AlGhPnqP9hCPfuvdBxk+za2W6YihWmS3pqaz9yT/qRbj/AHn37r3SAyGXyuTa+QyFTUfX9tn8dP8A7GD37r3Tb40/1I9+691Nx9bV46phnoKiSlmWWIHxteN7Tf5maHgfj37r3Rp4mLRRuf1MsbN/sf8Ajfv3Xus/v3Xuve/de697917r3v3Xuve/de697917r//U3+Pfuvde9+691737
+r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3TfkKKOugaI+l19cUl/0SX9+690gmV4pHjlGiWN9LqPpb+vH+t7917rh7917r3v3Xup9BWPQT+UcxP6JY+P6/578XPv3Xul5HKkqJIhBSRdSN/h/X/be/de6y+/de697917r3v3XuuDtpDk/RRf35VJYdVc0QnotlbM1TX1tQw1eerqXt/0+59i22UCJacOghctqlY9RhqZ1CDXIz6EVLfuS/1/3n3bX4K9MiPx2H+r06G7a+30wtJ5Zl15CpUNUScft/0p4v6KvsPXt0ZmOewdCfb7RYlFRn/V8+lh7L9Pz6MK0699fduHWuPXfvR4db6DLsg/5Nil/rV1H/Wn2abV8bf6vXoo3b4U/wBXp0Fo1W/Fv9j/AF9iED9ByOg6wBuFB9R/k6FOvgfBbI+2X01FRHGkv/LWulHmt/sCfYdiHjXR9B0IpqQ2ykcadBaD/h7EBYDj0GipOa467/xP19tk6sDrWFHXC9v+Ne3BTz6uTTy6kUlMa2rpqNF1GoqI4v8AbS/vf63+T+25GCAseAHTkYLcOjIxxrFGkanhE0r/ALa3/EewhIxZqnj0NY1CqABjrKPr723DqqnuI65e/dX697917r3v3XuuDIHUo1iGXS3++/2Pv3XuitZigbF5bIUB+lNWSeH/AAjm/fh/oP8AgPN7917pv9+691737r3Xvfuvde9+691737r3ThFlspDRfw+nrZ6ei1yu8FM4j1yT/wDHeb/Ye/de6bLfX+p/U39Pz+ffuvdc/fuvde9+691737r3UvGU7VeUxtKouJq6mT/rN5vfuvdGrFhZef8AfX9+691y9+691737r3Xvfuvde9+691737r3Xvfuvdf/V3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde
+9+691737r3XvfuvdMuVxi1sflj4qY/0c/r/5tE/QA+/de6RlmQlHVkkX0Orf2ObW9+691w9+691737r3Tvisn9k/ima1LI1vz+xL/h9P8n9+690tlYMAym6t9P8AD6/8U9+691z9+691737r3UKsbTSVTf6mnnP+2iJ97h/tV+0f5OqSf2L/AGdFrX1epv8AVSX/ANjN7Fi/AvQN/wCJDdK3ZdEtZnY5JFBSiikqwv8AzcuIIv8ADge0e5PRaefS3bF7h8j0OY+nsO6hU9CcDAHXfvfW+ve/de66HA9+J8+t8eg07GUfa4x/wtW6/wDWIj/iPZttLUd/9Xr0R7utVHp/xXSF27Q/xDOUNOyhkSb7iW/5jhPmA/2/swu5Alux8+iuxjrMvoel72JMqY/Hw/8AHWrL3/5Yxk/8T7LtrNZ2+zo33VaQj7f83QUez3oPde9+691zP1/1uf8Aff7b3SQ/qL9v+brSLWFs+f8Am6WWxKZZ84855+0pZGX/AJaTHwn/AHj2g3VgIx0ZbKv6px0NfsP9Cjr3v3Xuve/de697917r3v3Xuve/de6Avsug8GYpK9R6K2n8LH6/5RB+LfX/ADGj37r3Qd+/de697917r3v3Xuve/de697917r3v3Xuve/de6461/r/vB/4p7917rJTQy1c0VPSxS1E0z6Ioo0/Xc+/de6m5TF1eFrnoa0J5lijl1Rf5uSOY2Ph5/Hv3XupO3H8W4sK//Vwj4/6dTf8AEe/de6NB7917r3v3Xuve/de697917r3v3Xuve/de697917r/1t/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdMeSxSVo8sREVSv0cfSQfXxTf1HPv3Xuke8bxO0cqMjr+tW/P5Pv3Xusfv3Xuve/de6ecZlWoysNR6qX+w3+7IOf8Abfb+/de6Wiur
+qHRtSt+ll54/r/rce/de65+/de6i1Mflpp4/zJHIn+3jI/4n3uE0kUnqkn9i32dFxp6Zp6uOi1eMyVf2+r/UWmn9isNSME+nQO/0dvXpVbLqFpNwtTsSVqUqaVG/1ckE3/FIfaPck7CfTpbtjdw+3obR9PYe0ip6EwOAeu/e+t9e9+69173o8OvdIbflMZsI8yrdqOeOo/6dr/nf9uD7X7Y9JKV49Fe6LWPpC7Jmjh3BEshsZqR4ov6eQG5H4+o9ml+p8BuijbmrMMY6eOxJr1eLp7/piqZv+uA/3v2n2VAZW+zpdvjaYU+3/L0HXs46I+ve/de6dqWNMlDNT6dOQpKeWopJF/5TaaH/ADtJN/00eD/My/7R7TTMRKmO2vSlV/TI8ulT10wOTyFjy1HGf+skQ4/2/tDux7E9K9GOzKA7fIdDD7JOj/r3v3Xuve/de697917punyeOptXnr6SDTfV5aiKP/Ym59+690mclv3b1ApCVQr5gPTDRHyf6/7vAHv3Xugk3Lumr3I8Ky08dNS07l6eFSZJPwPNLN9AP949+690mffuvde9+6911ZhbVb1fot/vP+9+/de679+691737r3XKCCepkWClglqJ2HoigTySf8AE+/de6ETDdbZCrEc2Xm/h8XH+TQeur/r/n+PB/sPfuvdCPQ7O27QIAmNgnf/AI6VX+USOf8Ap/f37r3T8lNR0al4qenpgqepo4oo9H+uQALe/de6BnsarxtdU4yahqqaplWKpiqGhmEmiPyweHyi54vr9+690isNq/jOI0ct/EKbR/xTn/H37r3RqPfuvde9+691737r3Xvfuvde9+691737r3Xvfuvdf//X3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3TdX46CvQLJ6JV/wA1Mv8AnE/Jt/tvfuvdIyqo6iic
+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
+0H/nJD/159+691z/AIXjh9MfRf7Clh/4oPfuvdSooYoF8cMccSf6mNBGn4/p/h7917rN7917r3v3Xuve/de697917r3v3XusbKH+qq3/AAZD/vZ9+691x8Ef/HOP/kj/AI37917rmqhRZVUL/tJ/40Pfuvdc/fuvde9+691737r3Xvfuvde9+691737r3Xvfuvdf/9Hf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdQaugpqxbTJ6v7Mi8SD/eOPfuvdJeqwlVBqMLfdRf+rH+3+nv3Xumg6lZlZWVl4dX+v9OffuvdceT/AFJ/2/v3XunOky9XSWQ/5RCBbxyOPIOP+O30/Pv3XulTSZSjrOEfRL/xzl/bk/pyP9h7917pz9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvdf//S3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691EqKKmqhpnhV/9qP6/wDb2uPfuvdJ+p2836qSY/18c/N/+nvJ/Pv3XumSairKf/P00ir/AKpf3Ixf+vv3XuovpOlh+r+vP+39+6906UmYraf06/uIh/Zk/wAf+b/Hv3Xun+mz1DNxKft3+n7hsn+wl+nv3XunlWjcEoVYW/s/X37r3WT37r3Xvfuvde9+6917
+37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691//T3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+6903T42iqf87TxlvqGUaH/AOK/j37r3TTLt2O3+T1Msf8AtMi+QH/bj37r3TbLg8hH+mOOcH/Uva3+3+vv3XuoIjr6JrhKin/rp/zfN/fuvdOcWfq4/TOscw/1/HIf8Lf09+6906Q7gonOmVZISP8AVDWn9RyP6e/de6dYa2km/wA1URv/AKz3/wB7Pv3Xupfv3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r3v3Xuve/de697917r/9Tf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3XvfuvdRpaank5lhik/4Mn/I/fuvdQXw2Ofj7bx/8s3lj/wB64Hv3Xuorbcom9StOjf8AB/8AjXv3XuvLhaiD/gPk6mP/AIMBJ7917qQtNmIx6a6CX/lpBb/eVPv3XusyNlF/UlG//BPMn+9gj6e/de6z
+rJWf24I1/wBaUe/de6krqP6lI/5DJ9+691z9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691/9Xf49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvdf/W3+Pfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3X/19/j37r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde
+9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691/9Df49+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvde9+691737r3Xvfuvdf/Z</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>

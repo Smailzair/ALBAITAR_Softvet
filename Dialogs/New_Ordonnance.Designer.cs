@@ -54,13 +54,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.MEDICA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
@@ -75,7 +75,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(207, 9);
+            this.label1.Location = new System.Drawing.Point(6, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 16);
             this.label1.TabIndex = 25;
@@ -84,7 +84,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(251, 7);
+            this.dateTimePicker1.Location = new System.Drawing.Point(50, 11);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(109, 21);
             this.dateTimePicker1.TabIndex = 26;
@@ -92,7 +92,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(148, 37);
+            this.checkBox1.Location = new System.Drawing.Point(175, 12);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(52, 20);
             this.checkBox1.TabIndex = 27;
@@ -103,9 +103,9 @@
             // textBox1
             // 
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(206, 36);
+            this.textBox1.Location = new System.Drawing.Point(233, 11);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(154, 21);
+            this.textBox1.Size = new System.Drawing.Size(131, 21);
             this.textBox1.TabIndex = 28;
             // 
             // comboBox1
@@ -134,7 +134,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(8, 61);
+            this.groupBox1.Location = new System.Drawing.Point(8, 38);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(358, 126);
             this.groupBox1.TabIndex = 32;
@@ -188,7 +188,7 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.comboBox2);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Location = new System.Drawing.Point(8, 193);
+            this.groupBox2.Location = new System.Drawing.Point(8, 170);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(358, 199);
             this.groupBox2.TabIndex = 33;
@@ -316,19 +316,6 @@
             this.label9.TabIndex = 54;
             this.label9.Text = "Espèce :";
             // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(18, 189);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(71, 20);
-            this.checkBox2.TabIndex = 33;
-            this.checkBox2.Text = "Animal : ";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
@@ -346,6 +333,19 @@
             this.label5.Size = new System.Drawing.Size(38, 16);
             this.label5.TabIndex = 0;
             this.label5.Text = "Nom :";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Location = new System.Drawing.Point(18, 166);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(71, 20);
+            this.checkBox2.TabIndex = 33;
+            this.checkBox2.Text = "Animal : ";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // splitContainer1
             // 
@@ -372,9 +372,37 @@
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel2.Controls.Add(this.checkBox1);
             this.splitContainer1.Panel2.Controls.Add(this.textBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(691, 445);
+            this.splitContainer1.Size = new System.Drawing.Size(691, 422);
             this.splitContainer1.SplitterDistance = 313;
             this.splitContainer1.TabIndex = 34;
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(281, 389);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(26, 29);
+            this.button4.TabIndex = 5;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(8, 389);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(26, 29);
+            this.button3.TabIndex = 4;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // dataGridView1
             // 
@@ -410,36 +438,8 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(307, 407);
+            this.dataGridView1.Size = new System.Drawing.Size(307, 384);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(281, 412);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(26, 29);
-            this.button4.TabIndex = 5;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button3.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(8, 412);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(26, 29);
-            this.button3.TabIndex = 4;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button1
             // 
@@ -455,20 +455,21 @@
             this.button1.ForeColor = System.Drawing.Color.MediumVioletRed;
             this.button1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_treatment_25px;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(204, 398);
+            this.button1.Location = new System.Drawing.Point(204, 375);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 40);
             this.button1.TabIndex = 24;
             this.button1.Text = "Imprimer";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MEDICA
             // 
             this.MEDICA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.MEDICA.DefaultCellStyle = dataGridViewCellStyle2;
-            this.MEDICA.HeaderText = "Médicament";
+            this.MEDICA.HeaderText = "Médicaments :";
             this.MEDICA.Name = "MEDICA";
             this.MEDICA.ReadOnly = true;
             // 
@@ -477,7 +478,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(691, 445);
+            this.ClientSize = new System.Drawing.Size(691, 422);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

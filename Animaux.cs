@@ -1516,6 +1516,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             new Print_visites(1, (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ShowDialog();
         }
+
     }
 }
 

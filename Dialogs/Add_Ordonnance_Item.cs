@@ -114,15 +114,21 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(textBox1.Text.Trim().Length > 0) {
+            if(textBox1.Text.Trim().Length > 0 && comboBox1.Text.Trim().Length > 0) {
                 New_Ordonnance.Item_to_add = label4.Text;
                 Close();
             }
             else
             {
-                textBox1.BackColor = Color.LightCoral;
+                textBox1.BackColor = textBox1.Text.Trim().Length == 0 ? Color.LightCoral : Color.White;
+                comboBox1.BackColor = comboBox1.Text.Trim().Length == 0 ? Color.LightCoral : Color.White;
                 textBox1.Focus();
             }
+        }
+
+        private void comboBox1_TextUpdate(object sender, EventArgs e)
+        {
+            comboBox1.BackColor = Color.White;
         }
     }
 }
