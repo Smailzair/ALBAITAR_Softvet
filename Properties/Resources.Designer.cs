@@ -1023,6 +1023,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_treatment_25px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_treatment_25px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_user_shield_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_user_shield_30px", resourceCulture);

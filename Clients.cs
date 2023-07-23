@@ -290,16 +290,6 @@ namespace ALBAITAR_Softvet.Resources
             label12.Visible = !all_ready;
             bool all_ready_05 = all_ready;
             //-------------
-            MessageBox.Show(">> Properties.Settings.Default.Last_login_is_admin : " + Properties.Settings.Default.Last_login_is_admin + "\n" +
-                ">> all_ready : " + all_ready + "\n" +
-                ">> all_ready_01 : " + all_ready_01 + "\n" +
-                ">> all_ready_02 : " + all_ready_02 + "\n" +
-                ">> all_ready_03 : " + all_ready_03 + "\n" +
-                ">> all_ready_04 : " + all_ready_04 + "\n" +
-                ">> all_ready_05 : " + all_ready_05 + "\n" +
-                ">> insert_autori : " + insert_autori + "\n" +
-                ">> updadate_autori : " + updadate_autori + "\n" +
-                "");
             if (all_ready)
             {
                 if (Is_New) //INSERT

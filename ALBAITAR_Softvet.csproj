@@ -291,6 +291,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB_TMPDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Add_Ordonnance_Item.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Add_Ordonnance_Item.Designer.cs">
+      <DependentUpon>Add_Ordonnance_Item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\New_Ordonnance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\New_Ordonnance.Designer.cs">
+      <DependentUpon>New_Ordonnance.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Add_Vente_Fact_Item.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,6 +380,12 @@
     </Compile>
     <Compile Include="Labo\Biochimie.Designer.cs">
       <DependentUpon>Biochimie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Print_ordonn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Print_ordonn.Designer.cs">
+      <DependentUpon>Print_ordonn.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Print_visites.cs">
       <SubType>Form</SubType>
@@ -507,6 +525,12 @@
     <EmbeddedResource Include="Client_Infos.resx">
       <DependentUpon>Client_Infos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Add_Ordonnance_Item.resx">
+      <DependentUpon>Add_Ordonnance_Item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\New_Ordonnance.resx">
+      <DependentUpon>New_Ordonnance.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Add_Vente_Fact_Item.resx">
       <DependentUpon>Add_Vente_Fact_Item.cs</DependentUpon>
     </EmbeddedResource>
@@ -546,9 +570,13 @@
     <EmbeddedResource Include="Labo\Biochimie.resx">
       <DependentUpon>Biochimie.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Print_ordonn.resx">
+      <DependentUpon>Print_ordonn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Print_visites.resx">
       <DependentUpon>Print_visites.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Ordonnance.rdlc" />
     <EmbeddedResource Include="Reports\visite_report.rdlc" />
     <EmbeddedResource Include="Reports\urologie.rdlc" />
     <EmbeddedResource Include="Reports\facture_vente.rdlc" />
@@ -833,6 +861,7 @@
     <None Include="Resources\logo copy.png" />
     <None Include="Resources\imageedit_62_2608573935.f1cb27a519bdb5b6ed34049a5b86e317 copy.png" />
     <None Include="Resources\Untitled-2.png" />
+    <None Include="Resources\icons8_treatment_25px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
