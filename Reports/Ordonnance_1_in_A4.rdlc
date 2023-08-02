@@ -2085,19 +2085,6 @@
               </Border>
             </Style>
           </Rectangle>
-          <Line Name="Line2">
-            <Top>0.16912cm</Top>
-            <Left>14.8cm</Left>
-            <Height>17.08883cm</Height>
-            <Width>0cm</Width>
-            <ZIndex>41</ZIndex>
-            <Style>
-              <Border>
-                <Color>Silver</Color>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
         </ReportItems>
         <Height>175mm</Height>
         <Style>
@@ -2370,44 +2357,6 @@
                 <BackgroundColor>#d1ebed</BackgroundColor>
               </Style>
             </Rectangle>
-            <Textbox Name="PRIOR11">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>="Page : " &amp; Globals!PageNumber &amp; "\" &amp; Globals!TotalPages</Value>
-                      <Style>
-                        <FontFamily>Century Gothic</FontFamily>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <Color>#515151</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>PRIOR1</rd:DefaultName>
-              <Top>0.17639cm</Top>
-              <Left>5.17624cm</Left>
-              <Height>0.6cm</Height>
-              <Width>3.62132cm</Width>
-              <ZIndex>1</ZIndex>
-              <Visibility>
-                <Hidden>=IIF(Globals!TotalPages&gt;1,False,True)</Hidden>
-              </Visibility>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
           </ReportItems>
           <Style>
             <Border>

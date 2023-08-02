@@ -174,12 +174,20 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Item_to_add = "";
-            new Add_Ordonnance_Item().ShowDialog();
-            if(Item_to_add.Trim().Length > 0 && Item_to_add != "--")
+            if(dataGridView1.Rows.Count < 18)
             {
-                dataGridView1.Rows.Add(Item_to_add);
+                Item_to_add = "";
+                new Add_Ordonnance_Item().ShowDialog();
+                if (Item_to_add.Trim().Length > 0 && Item_to_add != "--")
+                {
+                    dataGridView1.Rows.Add(Item_to_add);
+                }
             }
+            else
+            {
+                MessageBox.Show("Le nombre maximum de sélections est de 18 !", "Maximum : ",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+            
             
         }
 
@@ -289,6 +297,16 @@ namespace ALBAITAR_Softvet.Dialogs
 
             new Print_ordonn(reportParameters).ShowDialog();
 
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            label11.Text = dataGridView1.Rows.Count.ToString();
+        }
+
+        private void dataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            label11.Text = dataGridView1.Rows.Count.ToString();
         }
     }
 }

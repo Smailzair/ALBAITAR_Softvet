@@ -1,37 +1,15 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
-using Google.Protobuf.WellKnownTypes;
-using Microsoft.ReportingServices.Diagnostics.Internal;
 using MySql.Data.MySqlClient;
-//using Microsoft.Office.Interop.Excel;
-//using Microsoft.Office.Interop.Excel;
-//using Microsoft.Office.Interop.Word;
-using Npgsql.Logging;
-using ServiceStack;
-using ServiceStack.Script;
-//using CrystalDecisions.CrystalReports.Engine;
-//using CrystalDecisions.Windows.Forms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.Dynamic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Web.WebPages;
 using System.Windows.Forms;
-using Xamarin.Forms.Internals;
 using DataTable = System.Data.DataTable;
 
 namespace ALBAITAR_Softvet
@@ -52,8 +30,8 @@ namespace ALBAITAR_Softvet
         public static DataTable Main_Frm_clients_tbl;
         public static DataTable Main_Frm_animals_tbl;
         ImageList tabcontrol_img_lst;
-        System.Drawing.Font simple_font = new System.Drawing.Font("Century Gothic", 9, FontStyle.Regular);
-        System.Drawing.Font bold_font = new System.Drawing.Font("Century Gothic", 10, FontStyle.Bold);
+        Font simple_font = new Font("Century Gothic", 9, FontStyle.Regular);
+        Font bold_font = new Font("Century Gothic", 10, FontStyle.Bold);
         int prev_sel_rw = -1;
         int frst_scrll = -1;
         int prev_sel_rw_facture = -1;
@@ -126,16 +104,16 @@ namespace ALBAITAR_Softvet
             //------------------------------
             th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting perfermance of "Clients" from
             th.Start();
-            th.Join();            
+            th.Join();
             //--------------
-            //Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
-            //Activ_Ver.Start();
-            //Activ_Ver.Join();                    
+            Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
+            Activ_Ver.Start();
+            Activ_Ver.Join();
             //--------------
-            //RancoSoft_Verif = new Thread(new ThreadStart(PreConnection.check_app_actiavtion)); //To check if is manual stopped by RancoSoft
-            //RancoSoft_Verif.Start();
+            RancoSoft_Verif = new Thread(new ThreadStart(PreConnection.check_app_actiavtion)); //To check if is manual stopped by RancoSoft
+            RancoSoft_Verif.Start();
             //--------
-            
+
         }
         
         public void Activ_Verif()
@@ -577,7 +555,7 @@ namespace ALBAITAR_Softvet
                 PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = 0 WHERE `ID` = 7;");
             }
 
-       //     File.WriteAllText(filePath, ((double)old_val + (double)time_delay / 60).ToString("N2"));
+            File.WriteAllText(filePath, ((double)old_val + (double)time_delay / 60).ToString("N2"));
             //----------------------------------
             Properties.Settings.Default.Maximize_Main_Frm = WindowState == FormWindowState.Maximized;
             Properties.Settings.Default.Save();
@@ -2061,6 +2039,11 @@ namespace ALBAITAR_Softvet
         }
 
         private void button28_Click(object sender, EventArgs e)
+        {
+            new New_Ordonnance().Show();
+        }
+
+        private void button29_Click(object sender, EventArgs e)
         {
             new New_Ordonnance().Show();
         }

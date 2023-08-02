@@ -26,7 +26,7 @@ namespace ALBAITAR_Softvet
 
         public static MySqlConnection mySqlConnection = new MySqlConnection("Server=" + Properties.Settings.Default.Connection_String_IP_Or_LocalHost + ";Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine                
 
-        static bool Connection_opened = false;
+       // static bool Connection_opened = false;
         public static void open_conn()
         {
             try
@@ -37,11 +37,11 @@ namespace ALBAITAR_Softvet
                     mySqlConnection.Open();
 
                 }
-                Connection_opened = true;
+              //  Connection_opened = true;
             }
             catch
             {
-                Connection_opened = false;
+               // Connection_opened = false;
                 MessageBox.Show("Probleme de connection avec la base donnée, veuillez vérifier ...", "--", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Process myProcess = Process.Start("ALBAITAR_Softvet.exe", "Open_Connection_Str");

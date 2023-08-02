@@ -1183,6 +1183,36 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Paper_001 {
+            get {
+                object obj = ResourceManager.GetObject("Paper_001", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Paper_002 {
+            get {
+                object obj = ResourceManager.GetObject("Paper_002", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Paper_003 {
+            get {
+                object obj = ResourceManager.GetObject("Paper_003", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy {
             get {
                 object obj = ResourceManager.GetObject("pngtree-star-horizontal-line-decoration-elements-2986140-png-image_1731077 copy", resourceCulture);

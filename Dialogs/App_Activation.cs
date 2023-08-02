@@ -174,7 +174,7 @@ namespace ALBAITAR_Softvet.Dialogs
                         clnt.Send(Mssg);
                         MessageBox.Show("Votre demande a bien été envoyée, \nVous recevrez -prochainement- votre numéro d'activation par mail.\n\nMerci.", "Bien envoyé :", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
-                    catch (Exception ex)
+                    catch 
                     {
                         good_sent = false;
                         MessageBox.Show("Il y a eu un problème, veuillez réessayer.", "Non éffectué :", MessageBoxButtons.OK, MessageBoxIcon.Error);

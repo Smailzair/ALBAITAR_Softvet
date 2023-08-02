@@ -26,18 +26,14 @@ namespace ALBAITAR_Softvet
 
             this.reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
             this.reportViewer1.ZoomPercent = 100;
-            this.reportViewer1.ZoomMode = ZoomMode.Percent;
+            this.reportViewer1.ZoomMode = ZoomMode.FullPage;
             //------------
+            reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
         }
 
         private void Print_report_Load(object sender, EventArgs e)
         {
-            //-----------
-            reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
-            //----------
-
-            load_report();
-            //----------------           
+      
 
         }
         private void load_report()
@@ -226,6 +222,26 @@ namespace ALBAITAR_Softvet
             {
                 load_report();
             }
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            radioButton3.Checked = true;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            radioButton2.Checked = true;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            radioButton1.Checked = true;
+        }
+
+        private void Print_ordonn_Shown(object sender, EventArgs e)
+        {
+            load_report();
         }
     }
 }

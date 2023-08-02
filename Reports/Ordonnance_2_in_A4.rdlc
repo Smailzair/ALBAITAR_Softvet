@@ -4167,14 +4167,12 @@
             </Style>
           </Rectangle>
           <Line Name="Line2">
-            <Top>0.16912cm</Top>
             <Left>14.8cm</Left>
-            <Height>17.08883cm</Height>
+            <Height>17.5cm</Height>
             <Width>0cm</Width>
             <ZIndex>82</ZIndex>
             <Style>
               <Border>
-                <Color>Silver</Color>
                 <Style>Solid</Style>
               </Border>
             </Style>
@@ -4193,13 +4191,24 @@
           </BackgroundImage>
         </Style>
       </Body>
-      <Width>297.29452mm</Width>
+      <Width>297mm</Width>
       <Page>
         <PageHeader>
           <Height>2.5cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
+            <Line Name="Line6">
+              <Top>1.25cm</Top>
+              <Height>0cm</Height>
+              <Width>14.71cm</Width>
+              <Style>
+                <Border>
+                  <Color>#d1ebed</Color>
+                  <Style>Solid</Style>
+                </Border>
+              </Style>
+            </Line>
             <Image Name="Image1">
               <Source>Embedded</Source>
               <Value>Layer11copy</Value>
@@ -4208,6 +4217,7 @@
               <Left>0.33854cm</Left>
               <Height>2.0747cm</Height>
               <Width>2.22975cm</Width>
+              <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4241,7 +4251,7 @@
               <Left>2.74468cm</Left>
               <Height>0.74662cm</Height>
               <Width>11.76882cm</Width>
-              <ZIndex>1</ZIndex>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4260,7 +4270,7 @@
               <Left>2.74468cm</Left>
               <Height>0.62225cm</Height>
               <Width>0.52986cm</Width>
-              <ZIndex>2</ZIndex>
+              <ZIndex>3</ZIndex>
               <Visibility>
                 <Hidden>=IIF(IsNothing(Parameters!CABINET_TEL.Value) OR Parameters!CABINET_TEL.Value = "",True,False)</Hidden>
               </Visibility>
@@ -4294,7 +4304,7 @@
               <Left>3.38102cm</Left>
               <Height>0.62225cm</Height>
               <Width>4.80188cm</Width>
-              <ZIndex>3</ZIndex>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4313,7 +4323,7 @@
               <Left>2.74468cm</Left>
               <Height>0.6cm</Height>
               <Width>0.52986cm</Width>
-              <ZIndex>4</ZIndex>
+              <ZIndex>5</ZIndex>
               <Visibility>
                 <Hidden>=IIF(IsNothing(Parameters!CABINET_ADRESS.Value) OR Parameters!CABINET_ADRESS.Value = "",True,False)</Hidden>
               </Visibility>
@@ -4347,7 +4357,7 @@
               <Left>3.38102cm</Left>
               <Height>0.6cm</Height>
               <Width>11.13248cm</Width>
-              <ZIndex>5</ZIndex>
+              <ZIndex>6</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4366,7 +4376,7 @@
               <Left>8.21817cm</Left>
               <Height>0.62225cm</Height>
               <Width>0.57939cm</Width>
-              <ZIndex>6</ZIndex>
+              <ZIndex>7</ZIndex>
               <Visibility>
                 <Hidden>=IIF(IsNothing(Parameters!CABINET_EMAIL.Value) OR Parameters!CABINET_EMAIL.Value = "",True,False)</Hidden>
               </Visibility>
@@ -4400,7 +4410,7 @@
               <Left>8.93867cm</Left>
               <Height>0.62225cm</Height>
               <Width>5.57483cm</Width>
-              <ZIndex>7</ZIndex>
+              <ZIndex>8</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4419,7 +4429,7 @@
               <Left>15.19731cm</Left>
               <Height>2.0747cm</Height>
               <Width>2.22975cm</Width>
-              <ZIndex>8</ZIndex>
+              <ZIndex>9</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4453,7 +4463,7 @@
               <Left>17.60345cm</Left>
               <Height>0.74662cm</Height>
               <Width>11.76882cm</Width>
-              <ZIndex>9</ZIndex>
+              <ZIndex>10</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4472,7 +4482,7 @@
               <Left>17.60345cm</Left>
               <Height>0.62225cm</Height>
               <Width>0.52986cm</Width>
-              <ZIndex>10</ZIndex>
+              <ZIndex>11</ZIndex>
               <Visibility>
                 <Hidden>=IIF(IsNothing(Parameters!CABINET_TEL.Value) Or Parameters!CABINET_TEL.Value = "", True, False)</Hidden>
               </Visibility>
@@ -4506,7 +4516,7 @@
               <Left>18.23979cm</Left>
               <Height>0.62225cm</Height>
               <Width>4.80188cm</Width>
-              <ZIndex>11</ZIndex>
+              <ZIndex>12</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4525,7 +4535,7 @@
               <Left>17.60345cm</Left>
               <Height>0.6cm</Height>
               <Width>0.52986cm</Width>
-              <ZIndex>12</ZIndex>
+              <ZIndex>13</ZIndex>
               <Visibility>
                 <Hidden>=IIF(IsNothing(Parameters!CABINET_ADRESS.Value) Or Parameters!CABINET_ADRESS.Value = "", True, False)</Hidden>
               </Visibility>
@@ -4559,7 +4569,7 @@
               <Left>18.23979cm</Left>
               <Height>0.6cm</Height>
               <Width>11.13248cm</Width>
-              <ZIndex>13</ZIndex>
+              <ZIndex>14</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4578,7 +4588,7 @@
               <Left>23.07694cm</Left>
               <Height>0.62225cm</Height>
               <Width>0.57939cm</Width>
-              <ZIndex>14</ZIndex>
+              <ZIndex>15</ZIndex>
               <Visibility>
                 <Hidden>=IIF(IsNothing(Parameters!CABINET_EMAIL.Value) Or Parameters!CABINET_EMAIL.Value = "", True, False)</Hidden>
               </Visibility>
@@ -4612,7 +4622,7 @@
               <Left>23.79744cm</Left>
               <Height>0.62225cm</Height>
               <Width>5.57483cm</Width>
-              <ZIndex>15</ZIndex>
+              <ZIndex>16</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4623,6 +4633,17 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Line Name="Line3">
+              <Left>14.71cm</Left>
+              <Height>2.5cm</Height>
+              <Width>0cm</Width>
+              <ZIndex>17</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Solid</Style>
+                </Border>
+              </Style>
+            </Line>
           </ReportItems>
           <Style>
             <Border>
@@ -4640,81 +4661,16 @@
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Textbox Name="PRIOR11">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>="Page : " &amp; Globals!PageNumber &amp; "\" &amp; Globals!TotalPages</Value>
-                      <Style>
-                        <FontFamily>Century Gothic</FontFamily>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <Color>#515151</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>PRIOR1</rd:DefaultName>
-              <Top>0.17639cm</Top>
-              <Left>5.17624cm</Left>
-              <Height>0.6cm</Height>
-              <Width>3.62132cm</Width>
-              <Visibility>
-                <Hidden>=IIF(Globals!TotalPages&gt;1,False,True)</Hidden>
-              </Visibility>
+            <Line Name="Line4">
+              <Left>14.71cm</Left>
+              <Height>1cm</Height>
+              <Width>0cm</Width>
               <Style>
                 <Border>
-                  <Style>None</Style>
+                  <Style>Solid</Style>
                 </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
               </Style>
-            </Textbox>
-            <Textbox Name="PRIOR20">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>="Page : " &amp; Globals!PageNumber &amp; "\" &amp; Globals!TotalPages</Value>
-                      <Style>
-                        <FontFamily>Century Gothic</FontFamily>
-                        <FontSize>8pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <Color>#515151</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>PRIOR1</rd:DefaultName>
-              <Top>0.17639cm</Top>
-              <Left>20.03501cm</Left>
-              <Height>0.6cm</Height>
-              <Width>3.62132cm</Width>
-              <ZIndex>1</ZIndex>
-              <Visibility>
-                <Hidden>=IIF(Globals!TotalPages&gt;1,False,True)</Hidden>
-              </Visibility>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
+            </Line>
           </ReportItems>
           <Style>
             <Border>
