@@ -1356,7 +1356,6 @@ namespace ALBAITAR_Softvet.Resources
             prev_col_idx = dataGridView3.CurrentCell.ColumnIndex;
             if (dataGridView3.CurrentCell.ColumnIndex == dataGridView3.Columns["DATETIMEE"].Index)
             {
-
                 DateTimePicker dateTimePicker = new DateTimePicker();
                 dateTimePicker.Format = DateTimePickerFormat.Custom;
                 dateTimePicker.CustomFormat = "dd/MM/yyyy HH:mm";
@@ -1377,9 +1376,8 @@ namespace ALBAITAR_Softvet.Resources
                 dateTimePicker.Visible = true;
                 dateTimePicker.Location = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location;
                 dateTimePicker.Size = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
+                if(prev_rw_idx == 0) { dataGridView3.BeginEdit(true); }
                 dateTimePicker.Focus();
-
-
             }
             else if (prev_col_idx == dataGridView3.Columns["POIDS"].Index)
             {
@@ -1410,6 +1408,7 @@ namespace ALBAITAR_Softvet.Resources
                 numericUpDown.Location = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location;
                 numericUpDown.Size = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
                 numericUpDown.Focus();
+                numericUpDown.Select(0, fff.ToString("N2").Length);
             }
             else if(prev_col_idx == dataGridView3.Columns["DELETE"].Index && prev_rw_idx != dataGridView3.NewRowIndex)
             {
@@ -1428,8 +1427,7 @@ namespace ALBAITAR_Softvet.Resources
             {
                 string cmd = "";
 
-                //if (dataGridView3.Rows[e.RowIndex].Cells["IDD"].Value != null)//UPDATE
-                if (dataGridView3.Rows[e.RowIndex].Cells["ANIM_IDD"].Value != DBNull.Value )
+                if (dataGridView3.Rows[e.RowIndex].Cells["ANIM_IDD"].Value != DBNull.Value && dataGridView3.Rows[e.RowIndex].Cells["IDD"].Value != null)
                 {
                     cmd = "UPDATE `tb_poids` SET "
                                           + "`DATETIME` = '" + ((DateTime)dataGridView3.Rows[e.RowIndex].Cells["DATETIMEE"].Value).ToString("yyyy-MM-dd HH:mm") + "',"
@@ -1438,7 +1436,7 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 else //INSERT
                 {
-                    if (dataGridView3.Columns[e.ColumnIndex].Name == "DATETIMEE")
+                    if (dataGridView3.Columns[e.ColumnIndex].Name == "DATETIMEE" && dataGridView3.Rows[e.RowIndex].Cells["DATETIMEE"].Value != DBNull.Value)
                     {
                         cmd = "INSERT INTO `tb_poids`"
                                           + "(`ANIM_ID`,"
@@ -1447,7 +1445,7 @@ namespace ALBAITAR_Softvet.Resources
                                           + dataGridView1.SelectedRows[0].Cells["ID"].Value + ","
                                           + "'" + ((DateTime)dataGridView3.Rows[e.RowIndex].Cells["DATETIMEE"].Value).ToString("yyyy-MM-dd HH:mm") + "')";
                     }
-                    else if (dataGridView3.Columns[e.ColumnIndex].Name == "POIDS")
+                    else if (dataGridView3.Columns[e.ColumnIndex].Name == "POIDS" && dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value != DBNull.Value)
                     {
                         cmd = "INSERT INTO `tb_poids`"
                                            + "(`ANIM_ID`,"
@@ -1479,24 +1477,10 @@ namespace ALBAITAR_Softvet.Resources
             {
                 dataGridView3.Controls.Remove(ctrr);
             }
-            dataGridView3.Refresh();
+            //dataGridView3.Refresh();
 
         }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            string iddw = "";
-            dataGridView3.SelectedCells.Cast<DataGridViewCell>().Where(F => F.RowIndex != dataGridView3.NewRowIndex).Select(C => C.RowIndex).Distinct().ToList().ForEach(V => iddw += "," + V);
-            if (iddw.Length > 0)
-            {
-                if (MessageBox.Show("Êtes-vous sûrs de faire la suppression ?", "Confirmer :",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    PreConnection.Excut_Cmd("DELETE FROM tb_poids WHERE ID IN ("+iddw.Substring(1)+");");
-                }
-
-                load_poids();
-            }
-        }
+             
 
         private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
