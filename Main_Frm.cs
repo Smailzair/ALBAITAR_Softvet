@@ -1,8 +1,11 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
 using MySql.Data.MySqlClient;
+using ServiceStack;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -63,7 +66,7 @@ namespace ALBAITAR_Softvet
         {
             new Splash().Show();
             //------------------
-            InitializeComponent();            
+            InitializeComponent();
             //-------------            
             timer1.Enabled = true;
             //-----------
@@ -106,16 +109,16 @@ namespace ALBAITAR_Softvet
             th.Start();
             th.Join();
             //--------------
-            //Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
-            //Activ_Ver.Start();
-            //Activ_Ver.Join();
+            Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
+            Activ_Ver.Start();
+            Activ_Ver.Join();
             ////--------------
-            //RancoSoft_Verif = new Thread(new ThreadStart(PreConnection.check_app_actiavtion)); //To check if is manual stopped by RancoSoft
-            //RancoSoft_Verif.Start();
+            RancoSoft_Verif = new Thread(new ThreadStart(PreConnection.check_app_actiavtion)); //To check if is manual stopped by RancoSoft
+            RancoSoft_Verif.Start();
             //--------
 
         }
-        
+
         public void Activ_Verif()
         {
 
@@ -249,7 +252,7 @@ namespace ALBAITAR_Softvet
 
                 }
             }
-            
+
         }
 
         public void Load_sites_table()
@@ -442,7 +445,7 @@ namespace ALBAITAR_Softvet
                 else
                 {
                     //---->> Monetic
-                    label4.Visible = textBox4.Visible = dataGridView4.Visible = dataGridView6.Visible =label9.Visible = button27.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60000" && (Int32)QQ[3] == 1).Count() > 0;
+                    label4.Visible = textBox4.Visible = dataGridView4.Visible = dataGridView6.Visible = label9.Visible = button27.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60000" && (Int32)QQ[3] == 1).Count() > 0;
                     button16.Visible = dataGridView4.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
                     button19.Visible = dataGridView4.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier                    
                     //---->> Factures
@@ -450,7 +453,7 @@ namespace ALBAITAR_Softvet
                     button20.Visible = dataGridView5.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
                     button21.Visible = dataGridView5.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier                    
                 }
-                
+
             }
 
             //--------------------
@@ -472,7 +475,7 @@ namespace ALBAITAR_Softvet
             //------------
             int cb1_idx = comboBox1.SelectedIndex > -1 ? comboBox1.SelectedIndex : 0;
             Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");            
+            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
             comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
             comboBox1.SelectedIndex = cb1_idx;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
@@ -673,10 +676,10 @@ namespace ALBAITAR_Softvet
                 }
                 //-----------
             }
-            catch 
+            catch
             {
             }
-            
+
 
         }
 
@@ -713,7 +716,7 @@ namespace ALBAITAR_Softvet
                     if (!radioButton7.Checked) { radioButton7.CheckedChanged -= radioButton8_CheckedChanged; radioButton7.Checked = true; radioButton7.CheckedChanged += radioButton8_CheckedChanged; }
                     //----------
                     selected_client_id = selected_animal_id = -1;
-                    if(comboBox2.SelectedValue != null)
+                    if (comboBox2.SelectedValue != null)
                     {
                         if (int.TryParse(comboBox2.SelectedValue.ToString(), out int yy))
                         {
@@ -728,7 +731,7 @@ namespace ALBAITAR_Softvet
 
                         }
                     }
-                    
+
                 }
                 //-----------
                 if (radioButton8.Checked && tabControl1.TabPages["tabPage_animaux"] == null)
@@ -757,7 +760,7 @@ namespace ALBAITAR_Softvet
                 }
 
             }
-            comboBox2_SelectedIndexChanged(null,null);
+            comboBox2_SelectedIndexChanged(null, null);
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -789,7 +792,7 @@ namespace ALBAITAR_Softvet
 
                     }
                 }
-                
+
             }
             if (tabControl1.SelectedTab.Name == "tabPage_Calendar")
             {
@@ -1141,9 +1144,16 @@ namespace ALBAITAR_Softvet
                     {
                         tmp_animm = (Main_Frm_animals_tbl.AsEnumerable().Where(DD => (int)DD["CLIENT_ID"] == selected_client_id).CopyToDataTable()).DefaultView.ToTable(false, "ID", "NUM_IDENTIF", "CLIENT_FULL_NME", "NME", "ESPECE", "RACE", "SEXE", "NISS_DATE", "DATE_ADDED", "IS_RADIATED", "OBSERVATIONS");
                     }
+                    else if (Main_Frm_animals_tbl != null)
+                    {
+                        string[] list = { "ID", "NUM_IDENTIF", "CLIENT_FULL_NME", "NME", "ESPECE", "RACE", "SEXE", "NISS_DATE", "DATE_ADDED", "IS_RADIATED", "OBSERVATIONS" };
+                        
+                        tmp_animm = Main_Frm_animals_tbl.Clone();
+                        tmp_animm.Columns.Cast<DataColumn>().Where(Z => !list.Contains(Z.ColumnName)).ToList().ForEach(T => tmp_animm.Columns.Remove(T));
+                    }
                     else
                     {
-                        tmp_animm = Main_Frm_animals_tbl != null ? Main_Frm_animals_tbl.Clone() : null;
+                        tmp_animm= new DataTable();
                     }
                 }
                 else
@@ -1153,6 +1163,9 @@ namespace ALBAITAR_Softvet
 
                 dataGridView3.DataSource = tmp_animm;
                 textBox2_TextChanged(null, null);
+
+
+
                 //-------------------
             }
 
@@ -1258,7 +1271,7 @@ namespace ALBAITAR_Softvet
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (button14.Visible) { button14_Click(null, null); }
-            
+
         }
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
@@ -1475,7 +1488,8 @@ namespace ALBAITAR_Softvet
 
         private void dataGridView2_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (button18.Visible) {
+            if (button18.Visible)
+            {
 
                 if (e.RowIndex > -1)
                 {
@@ -1494,7 +1508,7 @@ namespace ALBAITAR_Softvet
                     panel1.Visible = false;
                 }
             }
-            
+
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1525,7 +1539,7 @@ namespace ALBAITAR_Softvet
             }
             else
             {
-                MessageBox.Show("Veuillez séléctionner -d'abord- un animal.","",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Veuillez séléctionner -d'abord- un animal.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -1803,7 +1817,7 @@ namespace ALBAITAR_Softvet
         private void dataGridView3_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (button10.Visible) { button10_Click(null, null); }
-            
+
         }
 
         private void Main_Frm_Deactivate(object sender, EventArgs e)
@@ -2000,12 +2014,12 @@ namespace ALBAITAR_Softvet
         private void timer1_Tick(object sender, EventArgs e)
         {
             time_delay++;
-            if(text_to_add_to_title.Length > 0)
+            if (text_to_add_to_title.Length > 0)
             {
                 this.Text += text_to_add_to_title;
                 text_to_add_to_title = "";
             }
-            
+
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -2035,7 +2049,7 @@ namespace ALBAITAR_Softvet
 
         private void button22_Click_1(object sender, EventArgs e)
         {
-            new Print_visites(comboBox1.SelectedIndex == 0 ? 2 : 1,comboBox2.SelectedValue != null ? (int)comboBox2.SelectedValue : -1).ShowDialog();
+            new Print_visites(comboBox1.SelectedIndex == 0 ? 2 : 1, comboBox2.SelectedValue != null ? (int)comboBox2.SelectedValue : -1).ShowDialog();
         }
 
         private void button28_Click(object sender, EventArgs e)
