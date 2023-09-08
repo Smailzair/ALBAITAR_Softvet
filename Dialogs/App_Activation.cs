@@ -22,7 +22,7 @@ namespace ALBAITAR_Softvet.Dialogs
     public partial class App_Activation : Form
     {
 
-        MySqlConnection albaitar_online = new MySqlConnection(@"Server=instances.spawn.cc;Port=31681;Database=ALBAITAR_SOFTVET;Uid=root;Pwd=kOluo0PgmDVowykt;");
+        MySqlConnection albaitar_online = new MySqlConnection(@"Server=instances.spawn.cc;Port=32092;Database=ALBAITAR_SOFTVET;Uid=root;Pwd=3kcb6PDDPKcQkUIP;");
         int rest_jrs_delay = 30;
         public App_Activation()
         {
