@@ -58,13 +58,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.MEDICA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -138,7 +138,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(8, 38);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(358, 126);
+            this.groupBox1.Size = new System.Drawing.Size(358, 149);
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Propriétaire : ";
@@ -164,7 +164,7 @@
             this.textBox2.Location = new System.Drawing.Point(98, 77);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(249, 39);
+            this.textBox2.Size = new System.Drawing.Size(249, 66);
             this.textBox2.TabIndex = 32;
             // 
             // label2
@@ -190,7 +190,7 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.comboBox2);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Location = new System.Drawing.Point(8, 170);
+            this.groupBox2.Location = new System.Drawing.Point(8, 197);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(358, 199);
             this.groupBox2.TabIndex = 33;
@@ -341,7 +341,7 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(18, 166);
+            this.checkBox2.Location = new System.Drawing.Point(18, 193);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(71, 20);
             this.checkBox2.TabIndex = 33;
@@ -376,9 +376,29 @@
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel2.Controls.Add(this.checkBox1);
             this.splitContainer1.Panel2.Controls.Add(this.textBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(691, 422);
+            this.splitContainer1.Size = new System.Drawing.Size(691, 451);
             this.splitContainer1.SplitterDistance = 313;
             this.splitContainer1.TabIndex = 34;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(152, 419);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(15, 16);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "--";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(87, 419);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 16);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Nombre : ";
             // 
             // button4
             // 
@@ -387,7 +407,7 @@
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(281, 389);
+            this.button4.Location = new System.Drawing.Point(281, 418);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(26, 29);
             this.button4.TabIndex = 5;
@@ -401,7 +421,7 @@
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(8, 389);
+            this.button3.Location = new System.Drawing.Point(8, 418);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(26, 29);
             this.button3.TabIndex = 4;
@@ -442,7 +462,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(307, 384);
+            this.dataGridView1.Size = new System.Drawing.Size(307, 413);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             this.dataGridView1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView1_RowsRemoved);
@@ -470,7 +490,7 @@
             this.button1.ForeColor = System.Drawing.Color.MediumVioletRed;
             this.button1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_treatment_25px;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(204, 375);
+            this.button1.Location = new System.Drawing.Point(204, 404);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 40);
             this.button1.TabIndex = 24;
@@ -479,30 +499,12 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(87, 390);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 16);
-            this.label6.TabIndex = 26;
-            this.label6.Text = "Nombre : ";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(152, 390);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(15, 16);
-            this.label11.TabIndex = 27;
-            this.label11.Text = "--";
-            // 
             // New_Ordonnance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(691, 422);
+            this.ClientSize = new System.Drawing.Size(691, 451);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

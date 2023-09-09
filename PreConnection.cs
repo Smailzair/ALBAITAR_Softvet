@@ -136,7 +136,7 @@ namespace ALBAITAR_Softvet
         ///////////////////////  RancoSoft Cammands   /////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////
-        public static MySqlConnection client_manag = new MySqlConnection(@"Server=instances.spawn.cc;Port=32687;Database=CLIENTS_MANAG;Uid=root;Pwd=OE7OccXd935vrjZQ;");
+        public static MySqlConnection client_manag = new MySqlConnection(@"Server=srv1103.hstgr.io;Port=3306;Database=u844866977_CLIENTS_MANAG;Uid=u844866977_RANCO_USER;Pwd=v[y:hyiN3W4;");
         ////////////////////////////////////////////        
         static string SERIAL = "zXdsf14s6q35EDdc7xc82vvc6d";
         ////////////////////////////////////////////

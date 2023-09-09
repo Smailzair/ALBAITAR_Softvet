@@ -109,13 +109,12 @@ namespace ALBAITAR_Softvet
             th.Start();
             th.Join();
             //--------------
-            Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
-            Activ_Ver.Start();
-            Activ_Ver.Join();
+            //Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
+            //Activ_Ver.Start();
+            //Activ_Ver.Join();
             ////--------------
-            RancoSoft_Verif = new Thread(new ThreadStart(PreConnection.check_app_actiavtion)); //To check if is manual stopped by RancoSoft
-            RancoSoft_Verif.Start();
-            //--------
+
+
 
         }
 
@@ -1147,13 +1146,13 @@ namespace ALBAITAR_Softvet
                     else if (Main_Frm_animals_tbl != null)
                     {
                         string[] list = { "ID", "NUM_IDENTIF", "CLIENT_FULL_NME", "NME", "ESPECE", "RACE", "SEXE", "NISS_DATE", "DATE_ADDED", "IS_RADIATED", "OBSERVATIONS" };
-                        
+
                         tmp_animm = Main_Frm_animals_tbl.Clone();
                         tmp_animm.Columns.Cast<DataColumn>().Where(Z => !list.Contains(Z.ColumnName)).ToList().ForEach(T => tmp_animm.Columns.Remove(T));
                     }
                     else
                     {
-                        tmp_animm= new DataTable();
+                        tmp_animm = new DataTable();
                     }
                 }
                 else
@@ -1174,13 +1173,14 @@ namespace ALBAITAR_Softvet
         {
             string fltr = radioButton8.Checked && comboBox2.Items.Count > 0 ? (comboBox1.SelectedIndex == 0 ? "CLIENT_ID" : "ANIM_ID") + " = " + (comboBox2.SelectedValue != null ? comboBox2.SelectedValue : -1) : "";
             //-----------------------------------
+            string kk = textBox1.Text.Replace("'", "''");
             fltr += textBox1.Text.Trim().Length > 0 ? ((fltr.Length > 0 ? " AND " : "") + "("
-                + "VISITOR_FULL_NME LIKE '%" + textBox1.Text + "%'"
-                + " OR CONVERT(DATETIME, 'System.String') LIKE '%" + textBox1.Text + "%'"
-                + " OR OBJECT LIKE '%" + textBox1.Text + "%'"
-                + " OR FACTURE_REF LIKE '%" + textBox1.Text + "%'"
-                + " OR ANIM_NME LIKE '%" + textBox1.Text + "%'"
-                + " OR CLIENT_FULL_NME LIKE '%" + textBox1.Text + "%'"
+                + "VISITOR_FULL_NME LIKE '%" + kk + "%'"
+                + " OR CONVERT(DATETIME, 'System.String') LIKE '%" + kk + "%'"
+                + " OR OBJECT LIKE '%" + kk + "%'"
+                + " OR FACTURE_REF LIKE '%" + kk + "%'"
+                + " OR ANIM_NME LIKE '%" + kk + "%'"
+                + " OR CLIENT_FULL_NME LIKE '%" + kk + "%'"
                 + ")") : "";
             bool dd = fltr.Length > 0;
             //------------------------------------
@@ -1191,6 +1191,7 @@ namespace ALBAITAR_Softvet
             if (update_tot && main_visites_tab != null)
             {
                 DataTable tmppp = main_visites_tab.Copy();
+                Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>> " + fltr);
                 tmppp.DefaultView.RowFilter = fltr;
                 tss = tmppp.DefaultView.Cast<DataRowView>().Count();
                 //----
@@ -2060,6 +2061,55 @@ namespace ALBAITAR_Softvet
         private void button29_Click(object sender, EventArgs e)
         {
             new New_Ordonnance().Show();
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            richTextBox1.BackColor = richTextBox1.Text.Length > 0 ? SystemColors.Window : Color.LightCoral;
+
+            if (richTextBox1.BackColor == SystemColors.Window)
+            {
+                if (!Properties.Settings.Default.Last_login_is_admin)
+                {
+                    label18.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50002" && (Int32)QQ[3] == 1).Count() == 0;
+                }
+                if (!label18.Visible)
+                {
+                    PreConnection.Excut_Cmd("UPDATE `tb_visites` SET "
+                                          + "`DATETIME` = '" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
+                                          + "`VISITOR_FULL_NME` = '" + comboBox5.Text + "',"
+                                          + "`OBJECT` = '" + richTextBox1.Text + "'"
+                                          + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value + ";");
+                }
+                bool label18_visible = label18.Visible;
+                int curr_idx = dataGridView2.SelectedRows[0].Index;
+                int curr_scroll = dataGridView2.FirstDisplayedScrollingRowIndex;
+                Refresh_current_tab();
+                label18.Visible = label18_visible;                           
+                dataGridView2.Rows[curr_idx].Selected = true;
+                if(dataGridView2.Rows.Count > 1) { dataGridView2.Rows[0].Selected = false; }
+                dataGridView2.FirstDisplayedScrollingRowIndex = curr_scroll;
+            }
+        }
+        
+        private void dataGridView2_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                groupBox1.Visible = true;
+                //-----
+                label18.Visible = false;
+                DataGridViewRow row = dataGridView2.SelectedRows[0];
+                dateTimePicker4.Value = (DateTime)row.Cells["DATETIME"].Value;
+                comboBox5.Text = (string)row.Cells["VISITOR_FULL_NME"].Value;
+                richTextBox1.Text = (string)row.Cells["OBJECT"].Value;
+                richTextBox1.BackColor = SystemColors.Window;
+            }
+            else
+            {
+                groupBox1.Visible = false;
+                //-----
+            }
         }
     }
 }

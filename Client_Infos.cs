@@ -47,6 +47,7 @@ namespace ALBAITAR_Softvet
             Main_Frm.Main_Frm_clients_tbl.AsEnumerable().Where(ZZ => (int)ZZ["ID"] == selected_client_id).ForEach(rww => {
                 label14.Text = rww["SEX"].ToString();
                 label12.Text = rww["FAMNME"].ToString();
+                label21.Text = rww["NME"].ToString();
                 label13.Text = rww["NUM_CNI"].ToString();
                 label15.Text = rww["ADRESS"].ToString();
                 label20.Text = rww["WILAYA"].ToString();

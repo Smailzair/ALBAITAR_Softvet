@@ -5,224 +5,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Rectangle Name="Rectangle1">
-            <ReportItems>
-              <Textbox Name="Textbox16">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Propriétaire :</Value>
-                        <Style>
-                          <FontStyle>Italic</FontStyle>
-                          <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>Underline</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>0.07938cm</Top>
-                <Left>0.17981cm</Left>
-                <Height>0.5cm</Height>
-                <Width>2.15919cm</Width>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="PRIOR1">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!CLIENT_NME.Value</Value>
-                        <Style>
-                          <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>PRIOR1</rd:DefaultName>
-                <Top>0.07938cm</Top>
-                <Left>2.339cm</Left>
-                <Height>0.5cm</Height>
-                <Width>4.59995cm</Width>
-                <ZIndex>1</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox139">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>N° Tél :</Value>
-                        <Style>
-                          <FontStyle>Italic</FontStyle>
-                          <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>Underline</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>0.57938cm</Top>
-                <Left>0.17981cm</Left>
-                <Height>0.5cm</Height>
-                <Width>1.94435cm</Width>
-                <ZIndex>2</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="PRIOR5">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!CLIENT_NUM_PHONE.Value</Value>
-                        <Style>
-                          <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>PRIOR1</rd:DefaultName>
-                <Top>0.57938cm</Top>
-                <Left>2.12416cm</Left>
-                <Height>0.5cm</Height>
-                <Width>4.81479cm</Width>
-                <ZIndex>3</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="PRIOR3">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!CLIENT_ADRESS.Value</Value>
-                        <Style>
-                          <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>8pt</FontSize>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>PRIOR1</rd:DefaultName>
-                <Top>1.07938cm</Top>
-                <Left>1.80666cm</Left>
-                <Height>0.98525cm</Height>
-                <Width>5.13229cm</Width>
-                <ZIndex>4</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox138">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Adresse :</Value>
-                        <Style>
-                          <FontStyle>Italic</FontStyle>
-                          <FontFamily>Century Gothic</FontFamily>
-                          <FontSize>8pt</FontSize>
-                          <FontWeight>Normal</FontWeight>
-                          <TextDecoration>Underline</TextDecoration>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style />
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox2</rd:DefaultName>
-                <Top>1.07938cm</Top>
-                <Left>0.17981cm</Left>
-                <Height>0.5cm</Height>
-                <Width>1.62685cm</Width>
-                <ZIndex>5</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-            </ReportItems>
-            <KeepTogether>true</KeepTogether>
-            <Top>14.90831cm</Top>
-            <Left>7.32989cm</Left>
-            <Height>2.24676cm</Height>
-            <Width>7.08612cm</Width>
-            <Style>
-              <Border>
-                <Color>Silver</Color>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Rectangle>
           <Textbox Name="CABINET_ADRESS2">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -249,7 +31,6 @@
             <Left>4.1226cm</Left>
             <Height>0.81167cm</Height>
             <Width>6.50263cm</Width>
-            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -282,7 +63,7 @@
             <Left>1.21101cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -315,7 +96,7 @@
             <Left>1.21101cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -352,7 +133,7 @@
             <Left>0.33854cm</Left>
             <Height>0.6cm</Height>
             <Width>2.84396cm</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -385,7 +166,7 @@
             <Left>10.91383cm</Left>
             <Height>0.6cm</Height>
             <Width>3.59967cm</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!REF.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -421,7 +202,7 @@
             <Left>1.21101cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -458,7 +239,7 @@
             <Left>1.21101cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -495,7 +276,7 @@
             <Left>1.21101cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -532,7 +313,7 @@
             <Left>1.21101cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -569,7 +350,7 @@
             <Left>1.21101cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -606,7 +387,7 @@
             <Left>1.21101cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -643,7 +424,7 @@
             <Left>1.21101cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -680,7 +461,7 @@
             <Left>8.21817cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -713,7 +494,7 @@
             <Left>8.21817cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -750,7 +531,7 @@
             <Left>8.21817cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -787,7 +568,7 @@
             <Left>8.21817cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -824,7 +605,7 @@
             <Left>8.21817cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>17</ZIndex>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -861,7 +642,7 @@
             <Left>8.21817cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>18</ZIndex>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -898,7 +679,7 @@
             <Left>8.21817cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>19</ZIndex>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -935,7 +716,7 @@
             <Left>8.21817cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>20</ZIndex>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -972,7 +753,7 @@
             <Left>8.21817cm</Left>
             <Height>1.34083cm</Height>
             <Width>5.88667cm</Width>
-            <ZIndex>21</ZIndex>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -1010,7 +791,7 @@
             <Left>0.33854cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>22</ZIndex>
+            <ZIndex>21</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_001.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1047,7 +828,7 @@
             <Left>0.33854cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>23</ZIndex>
+            <ZIndex>22</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_002.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1084,7 +865,7 @@
             <Left>0.33854cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>24</ZIndex>
+            <ZIndex>23</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_003.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1121,7 +902,7 @@
             <Left>0.33854cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>25</ZIndex>
+            <ZIndex>24</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_004.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1158,7 +939,7 @@
             <Left>0.33854cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>26</ZIndex>
+            <ZIndex>25</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_005.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1195,7 +976,7 @@
             <Left>0.33854cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>27</ZIndex>
+            <ZIndex>26</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_006.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1232,7 +1013,7 @@
             <Left>0.33854cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>28</ZIndex>
+            <ZIndex>27</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_007.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1269,7 +1050,7 @@
             <Left>0.33854cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>29</ZIndex>
+            <ZIndex>28</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_008.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1306,7 +1087,7 @@
             <Left>0.33854cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>30</ZIndex>
+            <ZIndex>29</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_009.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1343,7 +1124,7 @@
             <Left>7.3457cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>31</ZIndex>
+            <ZIndex>30</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_010.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1380,7 +1161,7 @@
             <Left>7.3457cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>32</ZIndex>
+            <ZIndex>31</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_011.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1417,7 +1198,7 @@
             <Left>7.3457cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>33</ZIndex>
+            <ZIndex>32</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_012.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1454,7 +1235,7 @@
             <Left>7.3457cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>34</ZIndex>
+            <ZIndex>33</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_013.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1491,7 +1272,7 @@
             <Left>7.3457cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>35</ZIndex>
+            <ZIndex>34</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_014.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1528,7 +1309,7 @@
             <Left>7.3457cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>36</ZIndex>
+            <ZIndex>35</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_015.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1565,7 +1346,7 @@
             <Left>7.3457cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>37</ZIndex>
+            <ZIndex>36</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_016.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1602,7 +1383,7 @@
             <Left>7.3457cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>38</ZIndex>
+            <ZIndex>37</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_017.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -1639,7 +1420,7 @@
             <Left>7.3457cm</Left>
             <Height>0.6cm</Height>
             <Width>0.87247cm</Width>
-            <ZIndex>39</ZIndex>
+            <ZIndex>38</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!MEDIC_018.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -2074,10 +1855,229 @@
             <Left>0.10266cm</Left>
             <Height>3.38516cm</Height>
             <Width>7.08612cm</Width>
-            <ZIndex>40</ZIndex>
+            <ZIndex>39</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!SHOW_ANIM_INFOS.Value = "YES",False,True)</Hidden>
             </Visibility>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="Rectangle3">
+            <ReportItems>
+              <Textbox Name="Textbox18">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Propriétaire :</Value>
+                        <Style>
+                          <FontStyle>Italic</FontStyle>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>Underline</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>0.07938cm</Top>
+                <Left>0.11631cm</Left>
+                <Height>0.5cm</Height>
+                <Width>2.15919cm</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR4">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!CLIENT_NME.Value</Value>
+                        <Style>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>0.07938cm</Top>
+                <Left>2.2755cm</Left>
+                <Height>0.5cm</Height>
+                <Width>4.99683cm</Width>
+                <ZIndex>1</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox145">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>N° Tél :</Value>
+                        <Style>
+                          <FontStyle>Italic</FontStyle>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>Underline</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>0.57938cm</Top>
+                <Left>0.11631cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.94435cm</Width>
+                <ZIndex>2</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR11">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!CLIENT_NUM_PHONE.Value</Value>
+                        <Style>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>0.57938cm</Top>
+                <Left>2.06066cm</Left>
+                <Height>0.5cm</Height>
+                <Width>4.81479cm</Width>
+                <ZIndex>3</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="PRIOR12">
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!CLIENT_ADRESS.Value</Value>
+                        <Style>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>PRIOR1</rd:DefaultName>
+                <Top>1.07938cm</Top>
+                <Left>1.74316cm</Left>
+                <Height>2.14432cm</Height>
+                <Width>5.50271cm</Width>
+                <ZIndex>4</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox146">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Adresse :</Value>
+                        <Style>
+                          <FontStyle>Italic</FontStyle>
+                          <FontFamily>Century Gothic</FontFamily>
+                          <FontSize>8pt</FontSize>
+                          <FontWeight>Normal</FontWeight>
+                          <TextDecoration>Underline</TextDecoration>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox2</rd:DefaultName>
+                <Top>1.07938cm</Top>
+                <Left>0.11631cm</Left>
+                <Height>0.5cm</Height>
+                <Width>1.62685cm</Width>
+                <ZIndex>5</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <KeepTogether>true</KeepTogether>
+            <Top>13.76991cm</Top>
+            <Left>7.29484cm</Left>
+            <Height>3.38516cm</Height>
+            <Width>7.35071cm</Width>
+            <ZIndex>40</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -2348,6 +2348,7 @@
           <ReportItems>
             <Rectangle Name="Rectangle5">
               <KeepTogether>true</KeepTogether>
+              <Top>0cm</Top>
               <Height>1cm</Height>
               <Width>14.8cm</Width>
               <Style>

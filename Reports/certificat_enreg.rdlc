@@ -447,7 +447,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>N° Passport :</Value>
+                    <Value>N° Passeport :</Value>
                     <Style>
                       <FontFamily>Century Gothic</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -463,7 +463,7 @@
             <Top>7.24333cm</Top>
             <Left>2.44827cm</Left>
             <Height>0.6cm</Height>
-            <Width>2.43827cm</Width>
+            <Width>2.65066cm</Width>
             <ZIndex>13</ZIndex>
             <Style>
               <Border>
@@ -1237,9 +1237,9 @@
             </Paragraphs>
             <rd:DefaultName>ANIM_NME</rd:DefaultName>
             <Top>7.24333cm</Top>
-            <Left>4.92182cm</Left>
+            <Left>5.09893cm</Left>
             <Height>0.6cm</Height>
-            <Width>13.21237cm</Width>
+            <Width>13.03526cm</Width>
             <ZIndex>36</ZIndex>
             <Style>
               <Border>
@@ -1397,7 +1397,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>- CERTIFICAT D'IDENTIFICATION ANIMAL -</Value>
+                      <Value>- CERTIFICAT D'IDENTIFICATION ANIMALE -</Value>
                       <Style>
                         <FontStyle>Normal</FontStyle>
                         <FontFamily>Century Gothic</FontFamily>

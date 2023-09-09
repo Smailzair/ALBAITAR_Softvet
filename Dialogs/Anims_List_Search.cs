@@ -57,7 +57,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     }
                 }
             }
-
+            listView1.Visible = listView1.Items.Count > 0;
         }
       
 
@@ -69,7 +69,7 @@ namespace ALBAITAR_Softvet.Dialogs
             RESULT.Columns.Add("CLIENT_FULL_NME");
             RESULT.Columns.Add("CLIENT_ID");
             RESULT.Columns.Add("NUM_IDENTIF_ANIM");
-            if(listView1.SelectedItems.Count > 0)
+            if(listView1.SelectedItems.Count > 0 && listView1.Visible)
             {
                 RESULT.Rows.Add(listView1.SelectedItems[0].SubItems[0].Text,
                     listView1.SelectedItems[0].SubItems[1].Text,
@@ -158,9 +158,11 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             e.Handled = true;
         }
-        
 
-
+        private void listView1_ControlAdded(object sender, ControlEventArgs e)
+        {
+           
+        }
     }
     public class DataTableEventArgs : EventArgs
     {

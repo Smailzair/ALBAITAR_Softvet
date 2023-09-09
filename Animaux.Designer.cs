@@ -1016,10 +1016,10 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.dataGridView3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(614, 479);
+            this.tabPage3.Size = new System.Drawing.Size(614, 482);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "His. Poids";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1128,7 +1128,7 @@
             this.button22.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button22.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
             this.button22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button22.Location = new System.Drawing.Point(508, 233);
+            this.button22.Location = new System.Drawing.Point(508, 234);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(36, 30);
             this.button22.TabIndex = 99;
@@ -1165,7 +1165,7 @@
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(8, 274);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(598, 149);
+            this.groupBox2.Size = new System.Drawing.Size(598, 197);
             this.groupBox2.TabIndex = 66;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Détails :";
@@ -1233,7 +1233,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(9, 93);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(583, 50);
+            this.richTextBox1.Size = new System.Drawing.Size(583, 98);
             this.richTextBox1.TabIndex = 63;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
