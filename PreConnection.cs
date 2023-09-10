@@ -431,7 +431,7 @@ namespace ALBAITAR_Softvet
                 ddd += " OR Convert([" + dd.Name + "], System.String) LIKE '%{0}%'";
             }
             ddd = ddd.Substring(4);
-            ((DataTable)dgv.DataSource).DefaultView.RowFilter = String.Format(ddd, searchTxt);
+            ((DataTable)dgv.DataSource).DefaultView.RowFilter = String.Format(ddd, searchTxt.Replace("'", "''"));
         }
 
         ///////////////////////////////////////////////////////////////////////

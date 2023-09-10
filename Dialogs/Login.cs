@@ -70,6 +70,8 @@ namespace ALBAITAR_Softvet
             checkBox1.Visible = !just_return_answer1 && comboBox1.Enabled;
             //-----------------------            
             maskedTextBox1.Select();
+            //-----
+            BringToFront();
         }
 
         private void maskedTextBox1_Validating(object sender, CancelEventArgs e)

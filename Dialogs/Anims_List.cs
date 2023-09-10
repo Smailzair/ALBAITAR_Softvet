@@ -30,7 +30,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string filter = textBox1.Text.ToLower();
+            string filter = textBox1.Text.ToLower().Replace("'","''");
 
             foreach (ListViewItem item in items2)
             {

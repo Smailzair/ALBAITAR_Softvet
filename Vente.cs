@@ -237,6 +237,7 @@ namespace ALBAITAR_Softvet.Resources
             int prev_idx = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : -1;
             factures = PreConnection.Load_data("SELECT `ID`,`DATE`,`CLIENT_ID`,`CLIENT_FULL_NME`,`REF`,`TVA_PERC`,`DROIT_TIMBRE`,`TOTAL_HT`,`TOTAL_TTC` FROM tb_factures_vente;");
             dataGridView1.DataSource = factures;
+            textBox1_TextChanged(null,null);
             if(to_select_idx > -1)
             {
                 dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
@@ -311,9 +312,9 @@ namespace ALBAITAR_Softvet.Resources
                                 + "`TOTAL_TTC`";
                     string cmmd2 = " VALUES (" +
                         "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," + //DATE
-                        (comboBox1.SelectedValue != null ? (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text).ToList().Count > 0 ? comboBox1.SelectedValue : "NULL") : "NULL") + "," + //CLIENT_ID
-                        "'" + comboBox1.Text + "'," + //CLIENT_FULL_NME
-                        "'" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text) + "'," + //REF
+                        (comboBox1.SelectedValue != null ? (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text.Replace("'", "''")).ToList().Count > 0 ? comboBox1.SelectedValue : "NULL") : "NULL") + "," + //CLIENT_ID
+                        "'" + comboBox1.Text.Replace("'", "''") + "'," + //CLIENT_FULL_NME
+                        "'" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''")) + "'," + //REF
                         dataGridView3.Rows[1].Cells[1].Value + "," + //TVA_PERC
                         dataGridView3.Rows[2].Cells[1].Value + "," + //DROIT_TIMBRE
                         dataGridView3.Rows[0].Cells[1].Value + "," + //TOTAL_HT
@@ -858,6 +859,10 @@ namespace ALBAITAR_Softvet.Resources
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            PreConnection.search_filter_datagridview(dataGridView1, textBox1.Text.Replace("'", "''"));
+        }
     }
 }
 

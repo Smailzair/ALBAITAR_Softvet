@@ -115,7 +115,7 @@ namespace ALBAITAR_Softvet
                         + "WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() + ";");
                     if (was_admin && !radioButton1.Checked && MessageBox.Show("Voulez-vous mettre les autorisations 'par defaut' [Oui] \n ou de conserver les autorisations précédentes (avant d'étre 'Admin') ? [Non]", "Autorisations :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        PreConnection.Excut_Cmd("UPDATE tb_autoriz t1 JOIN tb_autoriz t2 ON t1.id = t2.id SET t2.Usr_" + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() + " = t1.`DEFAULT_VALUES`;");
+                        PreConnection.Excut_Cmd("UPDATE tb_autoriz t1 JOIN tb_autoriz t2 ON t1.id = t2.id SET t2.Usr_" + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString().Replace("'", "''") + " = t1.`DEFAULT_VALUES`;");
                     }
 
 

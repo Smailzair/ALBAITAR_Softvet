@@ -187,10 +187,10 @@ namespace ALBAITAR_Softvet.Dialogs
                         if (good_sent)
                         {
                             MySqlCommand command = new MySqlCommand("INSERT INTO `ACT_COMMANDS`(`CLIENT_ID`,`CLIENT_MAIL`,`CLIENT_TEL`,`CLIENT_NME`,`FIRST_TENTATIVE`) VALUES (" +
-                            "'" + PreConnection.generate_ID_of_client() + "'," + //ID
-                            "'" + textBox1.Text + "'," + //MAIL
-                            "'" + textBox5.Text + "'," + //TEL
-                            "'" + textBox6.Text + "'," + //NME
+                            "'" + PreConnection.generate_ID_of_client().Replace("'", "''") + "'," + //ID
+                            "'" + textBox1.Text.Replace("'", "''") + "'," + //MAIL
+                            "'" + textBox5.Text.Replace("'", "''") + "'," + //TEL
+                            "'" + textBox6.Text.Replace("'", "''") + "'," + //NME
                             rest_jrs_delay + ");", albaitar_online); //TENTATIVE
                             if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
                             try { command.ExecuteNonQuery(); } catch { }
@@ -261,16 +261,16 @@ namespace ALBAITAR_Softvet.Dialogs
                     //---------------------
                     MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) VALUES (" +
                         "'" + PreConnection.generate_ID_of_client() + "'," + //CLIENT_ID
-                        "'" + textBox1.Text + "'," + //CLIENT_EMAL
-                        "'" + textBox5.Text + "'," + //CLIENT_TEL
-                        "'" + textBox6.Text + "'," + //CLIENT_NME
-                        "'" + textBox3.Text + "');", albaitar_online); //ACTIAVATE_CODe
+                        "'" + textBox1.Text.Replace("'", "''") + "'," + //CLIENT_EMAL
+                        "'" + textBox5.Text.Replace("'", "''") + "'," + //CLIENT_TEL
+                        "'" + textBox6.Text.Replace("'", "''") + "'," + //CLIENT_NME
+                        "'" + textBox3.Text.Replace("'", "''") + "');", albaitar_online); //ACTIAVATE_CODe
                     if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
                     try { command.ExecuteNonQuery(); } catch { }
                     albaitar_online.Close();
                     //-------------------------------
                     DataTable dttb = new DataTable();
-                    MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '"+ textBox1.Text + "' AND `ACTIVAT_CODE` = '" + textBox3.Text + "';", albaitar_online);
+                    MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '"+ textBox1.Text.Replace("'", "''") + "' AND `ACTIVAT_CODE` = '" + textBox3.Text.Replace("'", "''") + "';", albaitar_online);
                     if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
                     using (MySqlDataReader reader = command2.ExecuteReader())
                     {

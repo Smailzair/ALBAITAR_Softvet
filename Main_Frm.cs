@@ -1173,15 +1173,14 @@ namespace ALBAITAR_Softvet
         {
             string fltr = radioButton8.Checked && comboBox2.Items.Count > 0 ? (comboBox1.SelectedIndex == 0 ? "CLIENT_ID" : "ANIM_ID") + " = " + (comboBox2.SelectedValue != null ? comboBox2.SelectedValue : -1) : "";
             //-----------------------------------
-            string kk = textBox1.Text.Replace("'", "''");
-            fltr += textBox1.Text.Trim().Length > 0 ? ((fltr.Length > 0 ? " AND " : "") + "("
-                + "VISITOR_FULL_NME LIKE '%" + kk + "%'"
-                + " OR CONVERT(DATETIME, 'System.String') LIKE '%" + kk + "%'"
-                + " OR OBJECT LIKE '%" + kk + "%'"
-                + " OR FACTURE_REF LIKE '%" + kk + "%'"
-                + " OR ANIM_NME LIKE '%" + kk + "%'"
-                + " OR CLIENT_FULL_NME LIKE '%" + kk + "%'"
-                + ")") : "";
+            fltr += string.Format(textBox1.Text.Trim().Length > 0 ? ((fltr.Length > 0 ? " AND " : "") + "("
+                + "VISITOR_FULL_NME LIKE '%{0}%'"
+                + " OR CONVERT(DATETIME, 'System.String') LIKE '%{0}%'"
+                + " OR OBJECT LIKE '%{0}%'"
+                + " OR FACTURE_REF LIKE '%{0}%'"
+                + " OR ANIM_NME LIKE '%{0}%'"
+                + " OR CLIENT_FULL_NME LIKE '%{0}%'"
+                + ")") : "", textBox1.Text.Replace("'", "''"));
             bool dd = fltr.Length > 0;
             //------------------------------------
 
@@ -1316,14 +1315,14 @@ namespace ALBAITAR_Softvet
                     break;
             }
             fltr += radioButton8.Checked && comboBox2.Items.Count > 0 ? (fltr.Length > 0 ? " AND " : "") + (comboBox1.SelectedIndex == 0 ? "CLIENT_ID" : "ANIM_ID") + " = " + comboBox2.SelectedValue : "";
-            fltr += textBox3.Text.Trim().Length > 0 ? ((fltr.Length > 0 ? " AND " : "") + "("
-                + "LABO_NME LIKE '%" + textBox3.Text + "%'"
-                + " OR CONVERT(DATE_TIME, 'System.String') LIKE '%" + textBox3.Text + "%'"
-                + " OR REF LIKE '%" + textBox3.Text + "%'"
-                + " OR OBSERV LIKE '%" + textBox3.Text + "%'"
-                + " OR ANIM_NME LIKE '%" + textBox3.Text + "%'"
-                + " OR CLIENT_FULL_NME LIKE '%" + textBox3.Text + "%'"
-                + ")") : "";
+            fltr += string.Format(textBox3.Text.Trim().Length > 0 ? ((fltr.Length > 0 ? " AND " : "") + "("
+                + "LABO_NME LIKE '%{0}%'"
+                + " OR CONVERT(DATE_TIME, 'System.String') LIKE '%{0}%'"
+                + " OR REF LIKE '%{0}%'"
+                + " OR OBSERV LIKE '%{0}%'"
+                + " OR ANIM_NME LIKE '%{0}%'"
+                + " OR CLIENT_FULL_NME LIKE '%{0}%'"
+                + ")") : "",textBox3.Text.Replace("'","''"));
             bool dd = fltr.Length > 0;
             //===================================================
             int tss = 0;
@@ -1748,7 +1747,7 @@ namespace ALBAITAR_Softvet
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             string ddd = "NUM_IDENTIF LIKE '%{0}%' OR CLIENT_FULL_NME LIKE '%{0}%' OR NME LIKE '%{0}%' OR ESPECE LIKE '%{0}%' OR RACE LIKE '%{0}%' OR SEXE LIKE '%{0}%' OR Convert([NISS_DATE], System.String) LIKE '%{0}%' OR Convert([DATE_ADDED], System.String) LIKE '%{0}%'";
-            ((DataTable)dataGridView3.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox2.Text);
+            ((DataTable)dataGridView3.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox2.Text.Replace("'","''"));
             label3.Text = "Total: " + dataGridView3.Rows.Count;
         }
 
@@ -1829,14 +1828,14 @@ namespace ALBAITAR_Softvet
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
             string fltr = radioButton8.Checked && comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? "CLIENT_ID = " + comboBox2.SelectedValue.ToString() : "") : "";
-            fltr += textBox4.Text.Trim().Length > 0 ? (fltr.Length > 0 ? " AND " : "") + "("
-                + "OBJECT LIKE '%" + textBox4.Text + "%'"
-                + " OR CONVERT(OP_DATE, 'System.String') LIKE '%" + textBox4.Text + "%'"
-                + " OR CLIENT_FULL_NME LIKE '%" + textBox4.Text + "%'"
-                + " OR FACT_NUM LIKE '%" + textBox4.Text + "%'"
-                + " OR CONVERT([DEBIT], 'System.String') LIKE '%" + textBox4.Text + "%'"
-                + " OR CONVERT([CREDIT], 'System.String') LIKE '%" + textBox4.Text + "%'"
-                + ")" : "";
+            fltr += string.Format(textBox4.Text.Trim().Length > 0 ? (fltr.Length > 0 ? " AND " : "") + "("
+                + "OBJECT LIKE '%{0}%'"
+                + " OR CONVERT(OP_DATE, 'System.String') LIKE '%{0}%'"
+                + " OR CLIENT_FULL_NME LIKE '%{0}%'"
+                + " OR FACT_NUM LIKE '%{0}%'"
+                + " OR CONVERT([DEBIT], 'System.String') LIKE '%{0}%'"
+                + " OR CONVERT([CREDIT], 'System.String') LIKE '%{0}%'"
+                + ")" : "",textBox4.Text.Replace("'","''"));
             ((DataTable)dataGridView4.DataSource).DefaultView.RowFilter = fltr;
             //-------------
             if (dataGridView6.Rows.Count == 0) { dataGridView6.Rows.Add(); }
@@ -1868,17 +1867,17 @@ namespace ALBAITAR_Softvet
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
             string fltr = radioButton8.Checked && comboBox2.SelectedValue != DBNull.Value ? "CLIENT_ID = " + comboBox2.SelectedValue.ToString() : "";
-            fltr += textBox5.Text.Trim().Length > 0 ? (fltr.Length > 0 ? " AND " : "") + "("
-                + "CLIENT_FULL_NME LIKE '%" + textBox5.Text + "%'"
-                + " OR CONVERT(DATE, 'System.String') LIKE '%" + textBox5.Text + "%'"
-                + " OR REF LIKE '%" + textBox5.Text + "%'"
-                + " OR CONVERT([TOTAL_HT], 'System.String') LIKE '%" + textBox5.Text + "%'"
-                + " OR CONVERT([TVA_PERC], 'System.String') LIKE '%" + textBox5.Text + "%'"
-                + " OR CONVERT([DROIT_TIMBRE], 'System.String') LIKE '%" + textBox5.Text + "%'"
-                + " OR CONVERT([TOTAL_TTC], 'System.String') LIKE '%" + textBox5.Text + "%'"
-                + " OR CONVERT([FACT_PAID_MNT], 'System.String') LIKE '%" + textBox5.Text + "%'"
-                + " OR CONVERT([SLD_OF_CLIENT], 'System.String') LIKE '%" + textBox5.Text + "%'"
-                + ")" : "";
+            fltr += string.Format(textBox5.Text.Trim().Length > 0 ? (fltr.Length > 0 ? " AND " : "") + "("
+                + "CLIENT_FULL_NME LIKE '%{0}%'"
+                + " OR CONVERT(DATE, 'System.String') LIKE '%{0}%'"
+                + " OR REF LIKE '%{0}%'"
+                + " OR CONVERT([TOTAL_HT], 'System.String') LIKE '%{0}%'"
+                + " OR CONVERT([TVA_PERC], 'System.String') LIKE '%{0}%'"
+                + " OR CONVERT([DROIT_TIMBRE], 'System.String') LIKE '%{0}%'"
+                + " OR CONVERT([TOTAL_TTC], 'System.String') LIKE '%{0}%'"
+                + " OR CONVERT([FACT_PAID_MNT], 'System.String') LIKE '%{0}%'"
+                + " OR CONVERT([SLD_OF_CLIENT], 'System.String') LIKE '%{0}%'"
+                + ")" : "",textBox5.Text.Replace("'","''"));
             ((DataTable)dataGridView5.DataSource).DefaultView.RowFilter = fltr;
             //-------------
             if (dataGridView7.Rows.Count == 0) { dataGridView7.Rows.Add(); }
@@ -2071,14 +2070,14 @@ namespace ALBAITAR_Softvet
             {
                 if (!Properties.Settings.Default.Last_login_is_admin)
                 {
-                    label18.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50002" && (Int32)QQ[3] == 1).Count() == 0;
+                    label18.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50002" && (Int32)QQ[3] == 1).Count() == 0;
                 }
                 if (!label18.Visible)
                 {
                     PreConnection.Excut_Cmd("UPDATE `tb_visites` SET "
                                           + "`DATETIME` = '" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
-                                          + "`VISITOR_FULL_NME` = '" + comboBox5.Text + "',"
-                                          + "`OBJECT` = '" + richTextBox1.Text + "'"
+                                          + "`VISITOR_FULL_NME` = '" + comboBox5.Text.Replace("'","''") + "',"
+                                          + "`OBJECT` = '" + richTextBox1.Text.Replace("'", "''") + "'"
                                           + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value + ";");
                 }
                 bool label18_visible = label18.Visible;
@@ -2111,6 +2110,7 @@ namespace ALBAITAR_Softvet
                 //-----
             }
         }
+
     }
 }
 

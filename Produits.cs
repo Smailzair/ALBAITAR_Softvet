@@ -764,7 +764,7 @@ namespace ALBAITAR_Softvet.Resources
                         ddd += " OR Convert([CODE], System.String) LIKE '%{0}%'";
                         ddd += " OR Convert([NME], System.String) LIKE '%{0}%'";
                         ddd += " OR Convert([OBSERV], System.String) LIKE '%{0}%')";
-                        ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox6.Text);
+                        ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox6.Text.Replace("'", "''"));
                     }
                     else
                     {
@@ -772,7 +772,7 @@ namespace ALBAITAR_Softvet.Resources
                         ddd += " OR Convert([CODE], System.String) LIKE '%{0}%'";
                         ddd += " OR Convert([NME], System.String) LIKE '%{0}%'";
                         ddd += " OR Convert([OBSERV], System.String) LIKE '%{0}%'";
-                        ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox6.Text);
+                        ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox6.Text.Replace("'", "''"));
                     }
                 }
                 else
@@ -818,7 +818,7 @@ namespace ALBAITAR_Softvet.Resources
                 string ddd = "Convert([CODE], System.String) LIKE '%{0}%'";
                 ddd += " OR Convert([NME], System.String) LIKE '%{0}%'";
                 ddd += " OR Convert([CATEGOR], System.String) LIKE '%{0}%'";
-                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox1.Text);
+                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox1.Text.Replace("'", "''"));
             }
             else
             {

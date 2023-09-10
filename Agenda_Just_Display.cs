@@ -353,8 +353,8 @@ namespace ALBAITAR_Softvet
             { }
             fltr += (textBox3.Text.Length > 0 || comboBox1.SelectedIndex > 0 ? (fltr.Length > 0 ? " AND " : "") + "(" + (comboBox1.SelectedIndex > 0 ? "`TYPE` LIKE '" + comboBox1.Text + "'" : "")
                 + (textBox3.Text.Length > 0 ? (comboBox1.SelectedIndex > 0 ? " AND " : "") +
-                "(`OBJECT` LIKE '%" + textBox3.Text + "%'" +
-                " OR `DESCRIPTION` LIKE '%" + textBox3.Text + "%'" +
+                "(`OBJECT` LIKE '%" + textBox3.Text.Replace("'", "''") + "%'" +
+                " OR `DESCRIPTION` LIKE '%" + textBox3.Text.Replace("'", "''") + "%'" +
                 ")" : "")
                 + ")" : "");
             tmp_infos.DefaultView.RowFilter = fltr;

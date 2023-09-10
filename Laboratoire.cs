@@ -250,8 +250,8 @@ namespace ALBAITAR_Softvet.Resources
             if (dataGridView1.Rows.Count > 0)
             {
                 ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = (histo_filter != "" ? histo_filter + " AND " : "") + "(" +
-                (tmp2 ? "DATE_TIME = '" + tmp.ToString("yyyy-MM-dd") + "'" : string.Format("CONVERT(Date_Time, System.String) LIKE '{0}%'", textBox3.Text)) +
-                " OR REF LIKE '%" + textBox3.Text + "%')";
+                (tmp2 ? "DATE_TIME = '" + tmp.ToString("yyyy-MM-dd") + "'" : string.Format("CONVERT(Date_Time, System.String) LIKE '{0}%'", textBox3.Text.Replace("'", "''"))) +
+                " OR REF LIKE '%" + textBox3.Text.Replace("'", "''") + "%')";
             }
             else
             {
