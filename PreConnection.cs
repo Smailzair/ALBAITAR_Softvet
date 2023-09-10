@@ -26,7 +26,7 @@ namespace ALBAITAR_Softvet
 
         public static MySqlConnection mySqlConnection = new MySqlConnection("Server=" + Properties.Settings.Default.Connection_String_IP_Or_LocalHost + ";Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine                
 
-       // static bool Connection_opened = false;
+        // static bool Connection_opened = false;
         public static void open_conn()
         {
             try
@@ -37,11 +37,11 @@ namespace ALBAITAR_Softvet
                     mySqlConnection.Open();
 
                 }
-              //  Connection_opened = true;
+                //  Connection_opened = true;
             }
             catch
             {
-               // Connection_opened = false;
+                // Connection_opened = false;
                 MessageBox.Show("Probleme de connection avec la base donnée, veuillez vérifier ...", "--", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 Process myProcess = Process.Start("ALBAITAR_Softvet.exe", "Open_Connection_Str");
@@ -192,6 +192,27 @@ namespace ALBAITAR_Softvet
             }
         }
 
+        public static void load_rancosoft_gmail_auth()
+        {
+            if (client_manag.State != ConnectionState.Open)
+            {
+                client_manag.Open();
+            }
+            if (client_manag.State == ConnectionState.Open)
+            {
+                try
+                {
+                    //Load Gmail Authent Pass (to use it to send forgot login pass of login of clients)
+                    MySqlDataAdapter adp = new MySqlDataAdapter("SELECT VALUE_TXT FROM PARAMS_AND_VALUES WHERE NME = 'RancoSoft Gmail Auth';", client_manag);
+                    DataTable dt = new DataTable();
+                    adp.Fill(dt);
+                    if (dt.Rows.Count > 0) { Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT = PreConnection.Codify_txt(dt.Rows[0][0].ToString()); Properties.Settings.Default.Save(); }
+                    //==========================================================
+                }
+                catch { }
+                client_manag.Close();
+            }
+        }
         public static int Verif_manual_stop_of_RancoSoft()
         {
             int ID_OUT = -1;
@@ -207,22 +228,14 @@ namespace ALBAITAR_Softvet
                 }
                 if (client_manag.State == ConnectionState.Open)
                 {
-
                     try
                     {
                         cmmd.ExecuteNonQuery();
                         ID_OUT = (int)cmmd.Parameters["MAN_STOP"].Value;
-                        //==========================================================
-                        //Load Gmail Authent Pass (to use it to send forgot login pass of login of clients)
-                        MySqlDataAdapter adp = new MySqlDataAdapter("SELECT VALUE_TXT FROM PARAMS_AND_VALUES WHERE NME = 'RancoSoft Gmail Auth';", client_manag);
-                        DataTable dt = new DataTable();
-                        adp.Fill(dt);
-                        if (dt.Rows.Count > 0) { Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT = PreConnection.Codify_txt(dt.Rows[0][0].ToString()); Properties.Settings.Default.Save(); }
-                        //==========================================================
                     }
                     catch { }
-                    client_manag.Close();
                 }
+
             }
             return ID_OUT;
         }

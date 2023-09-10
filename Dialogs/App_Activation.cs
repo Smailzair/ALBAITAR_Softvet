@@ -28,6 +28,7 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             InitializeComponent();
             //---------------------------
+            PreConnection.load_rancosoft_gmail_auth();
         }
 
         private void App_Activation_Load(object sender, EventArgs e)

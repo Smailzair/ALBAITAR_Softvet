@@ -15,7 +15,7 @@ namespace ALBAITAR_Softvet
         public Login_Pass_Forgot(string User_ID)
         {
             InitializeComponent();
-            Usr_ID = User_ID;
+            Usr_ID = User_ID;            
         }
         DataTable datatt;
         private void Login_Load(object sender, EventArgs e)
@@ -31,6 +31,7 @@ namespace ALBAITAR_Softvet
                 groupBox1.Enabled = false;
             }
             //---------------------------------
+            PreConnection.load_rancosoft_gmail_auth();
             if (datatt.Rows[0]["EMAIL"] != DBNull.Value && datatt.Rows[0]["EMAIL"].ToString().Length > 0 && Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT.Length > 0)
             {
                 groupBox2.Enabled = true;
