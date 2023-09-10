@@ -1,20 +1,13 @@
-﻿using System;
-using System.Windows.Forms;
-using System.Drawing;
-using System.ComponentModel;
-using MimeKit;
-using MailKit;
-using MailKit.Net.Smtp;
-using System.Net.NetworkInformation;
-using System.Linq;
-using System.Text;
-using Xamarin.Forms.Internals;
-using System.Diagnostics;
-using System.Collections.Generic;
+﻿using MimeKit;
 using MySql.Data.MySqlClient;
+using System;
+using System.ComponentModel;
 using System.Data;
-using System.Net.Mail;
+using System.Diagnostics;
+using System.Drawing;
 using System.Net;
+using System.Net.Mail;
+using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Dialogs
 {
@@ -32,18 +25,18 @@ namespace ALBAITAR_Softvet.Dialogs
         }
 
         private void App_Activation_Load(object sender, EventArgs e)
-        {            
+        {
             //--------------------
             label8.Text = PreConnection.generate_ID_of_client();
             label9.Text = Environment.MachineName;
             label7.Text = Environment.UserName;
-            textBox1.Validating -= textBox1_Validating;            
+            textBox1.Validating -= textBox1_Validating;
             textBox1.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email);
             textBox1.Validating += textBox1_Validating;
             textBox5.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Tel);
             textBox6.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Nme);
             string cmd_dent_dte = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Command_dmnd_date);
-            
+
             bool fff = DateTime.TryParse(cmd_dent_dte, out DateTime dd);
             if (fff)
             {
@@ -62,8 +55,8 @@ namespace ALBAITAR_Softvet.Dialogs
                 this.Size = new System.Drawing.Size(this.Width, this.Height - panel3.Height);
             }
             else
-            {                
-                
+            {
+
                 if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
                 {
                     string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
@@ -136,20 +129,32 @@ namespace ALBAITAR_Softvet.Dialogs
             textBox5.BackColor = string.IsNullOrWhiteSpace(textBox5.Text) ? Color.LightCoral : Color.White;
             textBox6.BackColor = string.IsNullOrWhiteSpace(textBox6.Text) ? Color.LightCoral : Color.White;
             if (label8.Text.Length == 29 && textBox1.BackColor != Color.LightCoral && textBox5.BackColor != Color.LightCoral && textBox6.BackColor != Color.LightCoral)
-            {                
+            {
                 //-------------------
                 if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
                 {
+                    //------------------------
+                    DataTable dt = new DataTable();
+                    MySqlCommand cmd = new MySqlCommand("SELECT VAL FROM SETTINGS WHERE NME = 'EMAIL_TO_RECIEVE_COMMANDS';", albaitar_online);
+                    if(albaitar_online.State != ConnectionState.Open)
+                    {
+                        albaitar_online.Open();
+                    }
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    dt.Load(reader);
+                    albaitar_online.Close();
+                    string Albaitar_Email = dt.Rows[0][0].ToString();
+                    //-----------------------
                     MimeMessage Mssg = new MimeMessage();
                     Mssg.From.Add(new MailboxAddress("AlBaitar SoftVet", textBox1.Text));
-                    Mssg.To.Add(MailboxAddress.Parse("albaitar.technologie@gmail.com"));
+                    Mssg.To.Add(MailboxAddress.Parse(Albaitar_Email));
                     Mssg.Subject = "ALBAITAR Softvet - Demande code d'activation";
                     Mssg.Body = new TextPart("plain")
                     {
                         Text = "======================================================\n" +
-                " -<< AlBaitar SoftVet >>-  [ albaitar.technologie@gmail.com ]\n" +
-                "======================================================\n\n\n" + 
-                "Une demande d'activation de logiciel 'ALBAITAR Softvet' :\n\n" +
+                        " -<< AlBaitar SoftVet >>-  [ albaitar.technologie@gmail.com ]\n" +
+                        "======================================================\n\n\n" +
+                        "Une demande d'activation de logiciel 'ALBAITAR Softvet' :\n\n" +
                         "1)- Veuillez confirmer les informations. \n" +
                         "2)- Si tous est bien, générer le code d'activation utilisant son ID envoyé. \n" +
                         "3)- Envoyer ce code d'activation (généré) par un message Email déstiné au : " + textBox1.Text + ".\n\n" +
@@ -158,11 +163,11 @@ namespace ALBAITAR_Softvet.Dialogs
                         "-----------------\n" +
                         "ID : " + label8.Text + "\n" +
                         "Email : " + textBox1.Text + "\n\n" +
-                        "Nom Complet : " +textBox6.Text+"\n" +
-                        "N° Tél : " + textBox5.Text + "\n" +                        
+                        "Nom Complet : " + textBox6.Text + "\n" +
+                        "N° Tél : " + textBox5.Text + "\n" +
                         "Ordinateur : " + label9.Text + "\n" +
                         "Utilisateur (de PC) : " + label7.Text + "\n" +
-                        "Tentative reste : " +label13.Text+"\n\n" +
+                        "Tentative reste : " + label13.Text + "\n\n" +
                         "====================================="
                     };
                     bool good_sent = true;
@@ -175,7 +180,7 @@ namespace ALBAITAR_Softvet.Dialogs
                         clnt.Send(Mssg);
                         MessageBox.Show("Votre demande a bien été envoyée, \nVous recevrez -prochainement- votre numéro d'activation par mail.\n\nMerci.", "Bien envoyé :", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
-                    catch 
+                    catch
                     {
                         good_sent = false;
                         MessageBox.Show("Il y a eu un problème, veuillez réessayer.", "Non éffectué :", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -204,8 +209,8 @@ namespace ALBAITAR_Softvet.Dialogs
                             Properties.Settings.Default.Save();
                             label17.Visible = true;
                             label17.Text = "Demande envoyée le : " + DateTime.Now.ToString("dd/MM/yyyy");
-                            
-                        }                        
+
+                        }
                         //-------------------------------
                     }
                     //-----------
@@ -235,11 +240,11 @@ namespace ALBAITAR_Softvet.Dialogs
             textBox1.BackColor = Color.White;
         }
 
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             bool ready = true;
-            if(textBox3.Text.Trim().Length == 0)
+            if (textBox3.Text.Trim().Length == 0)
             {
                 ready = false;
                 textBox3.BackColor = Color.LightCoral;
@@ -247,10 +252,10 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             if (string.IsNullOrWhiteSpace(textBox1.Text) || string.IsNullOrWhiteSpace(textBox5.Text) || string.IsNullOrWhiteSpace(textBox6.Text))
             {
-                MessageBox.Show("Veuillez d'abord saisir tous les champs requis :\n-Email\n-N° Tél\n-Nom Complet","",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Veuillez d'abord saisir tous les champs requis :\n-Email\n-N° Tél\n-Nom Complet", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ready = false;
             }
-            if(ready)            
+            if (ready)
             {
                 if (label8.Text.Length == 29)
                 {
@@ -258,7 +263,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     label11.Refresh();
                     //--------------------------
                     bool Verifyed_001 = false;
-                    
+
                     //---------------------
                     MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) VALUES (" +
                         "'" + PreConnection.generate_ID_of_client() + "'," + //CLIENT_ID
@@ -271,7 +276,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     albaitar_online.Close();
                     //-------------------------------
                     DataTable dttb = new DataTable();
-                    MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '"+ textBox1.Text.Replace("'", "''") + "' AND `ACTIVAT_CODE` = '" + textBox3.Text.Replace("'", "''") + "';", albaitar_online);
+                    MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + textBox1.Text.Replace("'", "''") + "' AND `ACTIVAT_CODE` = '" + textBox3.Text.Replace("'", "''") + "';", albaitar_online);
                     if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
                     using (MySqlDataReader reader = command2.ExecuteReader())
                     {
@@ -286,7 +291,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     //--------------
                     if (Verifyed_001 || (PreConnection.Verif_Activation_SOftVet(textBox3.Text) && PreConnection.ReadFromRegistry("Déja_try_version") != "OUI"))
                     {
-                        MessageBox.Show("Produit bien Activé !\n\n  ** Bienvenue avec AL BAITAR SoftVet **\n\n","",MessageBoxButtons.OK,MessageBoxIcon.Information);                        
+                        MessageBox.Show("Produit bien Activé !\n\n  ** Bienvenue avec AL BAITAR SoftVet **\n\n", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         label6.Text = textBox3.Text.Substring(0, 3) + "***************" + textBox3.Text.Substring(22, 2);
                         Properties.Settings.Default.Codifed_Activation_Email = PreConnection.Codify_txt(textBox1.Text);
                         Properties.Settings.Default.Codified_Activate_Code = PreConnection.Codify_txt(textBox3.Text);
@@ -323,7 +328,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
 
         private void App_Activation_FormClosed(object sender, FormClosedEventArgs e)
-        {            
+        {
             if (panel4.Visible)
             {
                 Application.Restart();
