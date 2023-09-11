@@ -23,7 +23,6 @@ namespace ALBAITAR_Softvet
         DateTime last_update_time = new DateTime(1900, 12, 31);
         Thread th;
         Thread Activ_Ver;
-        Thread RancoSoft_Verif;
         public static DataTable ADRESSES_SITES;
         bool sites_table_ready = false;
         public static DataTable Autorisations;
