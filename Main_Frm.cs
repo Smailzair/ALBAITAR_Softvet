@@ -125,7 +125,7 @@ namespace ALBAITAR_Softvet
                 bool Verifyed_001 = false;
                 if (Properties.Settings.Default.Codifed_Activation_Email.Length > 2 && Properties.Settings.Default.Codified_Activate_Code.Length > 2)
                 {
-                    MySqlConnection albaitar_online = new MySqlConnection(@"Server=instances.spawn.cc;Port=32092;Database=ALBAITAR_SOFTVET;Uid=root;Pwd=3kcb6PDDPKcQkUIP;");
+                    MySqlConnection albaitar_online = new MySqlConnection(@"Server=62.72.50.1;Port=3306;Database=u844866977_BAITAR_CLIENTS;Uid=u844866977_baitar_user;Pwd=Zsd52##dQemN41;");
                     //---------------------
                     MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`ACTIVAT_CODE`) VALUES (" +
                         "'" + PreConnection.generate_ID_of_client() + "'," +

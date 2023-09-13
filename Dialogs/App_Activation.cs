@@ -15,7 +15,7 @@ namespace ALBAITAR_Softvet.Dialogs
     public partial class App_Activation : Form
     {
 
-        MySqlConnection albaitar_online = new MySqlConnection(@"Server=instances.spawn.cc;Port=32092;Database=ALBAITAR_SOFTVET;Uid=root;Pwd=3kcb6PDDPKcQkUIP;");
+        MySqlConnection albaitar_online = new MySqlConnection(@"Server=62.72.50.1;Port=3306;Database=u844866977_BAITAR_CLIENTS;Uid=u844866977_baitar_user;Pwd=Zsd52##dQemN41;");
         int rest_jrs_delay = 30;
         public App_Activation()
         {
