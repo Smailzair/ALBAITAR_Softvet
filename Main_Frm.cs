@@ -368,7 +368,8 @@ namespace ALBAITAR_Softvet
                     }
                     if (dd != string.Empty)
                     {
-                        PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '" + dd.Replace("'", "''") + "' WHERE `ID` = 1;");
+                        //PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '" + dd.Replace("'", "''") + "' WHERE `ID` = 1;");
+                        PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { dd }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 1 });
                         Params = PreConnection.Load_data("SELECT * FROM tb_params;");
                         label_cab_nme.Text = dd;
                     }
@@ -553,7 +554,8 @@ namespace ALBAITAR_Softvet
             if (old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
             {
                 PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
-                PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = 0 WHERE `ID` = 7;");
+                //PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = 0 WHERE `ID` = 7;");
+                PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
             }
 
             File.WriteAllText(filePath, ((double)old_val + (double)time_delay / 60).ToString("N2"));
@@ -2073,11 +2075,12 @@ namespace ALBAITAR_Softvet
                 }
                 if (!label18.Visible)
                 {
-                    PreConnection.Excut_Cmd("UPDATE `tb_visites` SET "
-                                          + "`DATETIME` = '" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
-                                          + "`VISITOR_FULL_NME` = '" + comboBox5.Text.Replace("'","''") + "',"
-                                          + "`OBJECT` = '" + richTextBox1.Text.Replace("'", "''") + "'"
-                                          + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value + ";");
+                    //PreConnection.Excut_Cmd("UPDATE `tb_visites` SET "
+                    //                      + "`DATETIME` = '" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
+                    //                      + "`VISITOR_FULL_NME` = '" + comboBox5.Text.Replace("'","''") + "',"
+                    //                      + "`OBJECT` = '" + richTextBox1.Text.Replace("'", "''") + "'"
+                    //                      + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value + ";");
+                    PreConnection.Excut_Cmd(2, "tb_visites", new List<string> { "DATETIME", "VISITOR_FULL_NME", "OBJECT" }, new List<object> { dateTimePicker4.Value, comboBox5.Text, richTextBox1.Text }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value });
                 }
                 bool label18_visible = label18.Visible;
                 int curr_idx = dataGridView2.SelectedRows[0].Index;

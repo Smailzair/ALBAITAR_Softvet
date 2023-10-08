@@ -75,13 +75,13 @@ namespace ALBAITAR_Softvet.Dialogs
                     label13.Text = (delay >= 0 ? delay : 0) + " Jours";
                     if (delay <= 0)
                     {
-                        PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = 0 WHERE `ID` = 7;");
+                        PreConnection.Excut_Cmd(2, "tb_params", new System.Collections.Generic.List<string> { "VAL" }, new System.Collections.Generic.List<object> { 0 }, "ID = @P_ID", new System.Collections.Generic.List<string> { "P_ID" }, new System.Collections.Generic.List<object> { 7 });
                         label18.ForeColor = label13.ForeColor = Color.Red;
                     }
                 }
                 else
                 {
-                    PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = 0 WHERE `ID` = 7;");
+                    PreConnection.Excut_Cmd(2, "tb_params", new System.Collections.Generic.List<string> { "VAL" }, new System.Collections.Generic.List<object> { 0 }, "ID = @P_ID", new System.Collections.Generic.List<string> { "P_ID" }, new System.Collections.Generic.List<object> { 7 });
                     label13.Text = "0 Jours";
                     label18.ForeColor = label13.ForeColor = Color.Red;
                 }
@@ -301,8 +301,7 @@ namespace ALBAITAR_Softvet.Dialogs
                         pictureBox1.Image = Properties.Resources.icons8_safe_ok_120px;
                         textBox2.Visible = pictureBox3.Visible = panel3.Visible = false;
                         this.Size = new System.Drawing.Size(this.Width, this.Height - panel3.Height);
-                        PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = 1 WHERE `ID` = 7;");
-
+                        PreConnection.Excut_Cmd(2, "tb_params", new System.Collections.Generic.List<string> { "VAL" }, new System.Collections.Generic.List<object> { 1 }, "ID = @P_ID", new System.Collections.Generic.List<string> { "P_ID" }, new System.Collections.Generic.List<object> { 7 });
                     }
                     else
                     {

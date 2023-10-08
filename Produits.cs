@@ -11,6 +11,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -125,42 +126,84 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     if (Is_New_Product)
                     {
-                        PreConnection.Excut_Cmd("INSERT INTO `tb_produits`"
-                                              + "(`CODE`,"
-                                              + "`NME`,"
-                                              + "`CATEGOR`,"
-                                              + "`QNT`,"
-                                              + "`ALERT_MIN_ON`,"
-                                              + "`QNT_MIN`,"
-                                              + "`REVIENT_PRTICE`,"
-                                              + "`VENTE_PRICE`,"
-                                              + "`TMP_FIRST_INSERT_DATE`)"
-                                              + "VALUES"
-                                              + "('" + textBox2.Text.Replace("'", "''") + "'," //CODE
-                                              + "'" + textBox3.Text.Replace("'", "''") + "'," //NME
-                                              + "'" + ((string)comboBox2.SelectedItem).Replace("'", "''") + "'," //CATEGOR
-                                              + Convert.ToDouble(numericUpDown4.Value) + "," //QNT
-                                              + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
-                                              + Convert.ToDouble(numericUpDown5.Value) + "," //QNT_MIN
-                                              + Convert.ToDouble(numericUpDown1.Value) + "," //REVIENT_PRTICE
-                                              + Convert.ToDouble(numericUpDown3.Value) + "," //VENTE_PRICE
-                                              + "'" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "');" //TMP_FIRST_INSERT_DATE
-                                              );
+                        PreConnection.Excut_Cmd(1, "tb_produits", new List<string> {
+                        "CODE",
+"NME",
+"CATEGOR",
+"QNT",
+"ALERT_MIN_ON",
+"QNT_MIN",
+"REVIENT_PRTICE",
+"VENTE_PRICE",
+"TMP_FIRST_INSERT_DATE"}, new List<object>
+{
+     textBox2.Text, //CODE
+                                              textBox3.Text, //NME
+                                              comboBox2.SelectedItem, //CATEGOR
+                                              Convert.ToDouble(numericUpDown4.Value), //QNT
+                                              (checkBox1.Checked ? 1 : 0), //ALERT_MIN_ON
+                                              Convert.ToDouble(numericUpDown5.Value), //QNT_MIN
+                                              Convert.ToDouble(numericUpDown1.Value), //REVIENT_PRTICE
+                                              Convert.ToDouble(numericUpDown3.Value), //VENTE_PRICE
+                                              dateTimePicker2.Value
+}, null, null, null);
+                        //PreConnection.Excut_Cmd("INSERT INTO `tb_produits`"
+                        //                      + "(`CODE`,"
+                        //                      + "`NME`,"
+                        //                      + "`CATEGOR`,"
+                        //                      + "`QNT`,"
+                        //                      + "`ALERT_MIN_ON`,"
+                        //                      + "`QNT_MIN`,"
+                        //                      + "`REVIENT_PRTICE`,"
+                        //                      + "`VENTE_PRICE`,"
+                        //                      + "`TMP_FIRST_INSERT_DATE`)"
+                        //                      + "VALUES"
+                        //                      + "('" + textBox2.Text.Replace("'", "''") + "'," //CODE
+                        //                      + "'" + textBox3.Text.Replace("'", "''") + "'," //NME
+                        //                      + "'" + ((string)comboBox2.SelectedItem).Replace("'", "''") + "'," //CATEGOR
+                        //                      + Convert.ToDouble(numericUpDown4.Value) + "," //QNT
+                        //                      + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
+                        //                      + Convert.ToDouble(numericUpDown5.Value) + "," //QNT_MIN
+                        //                      + Convert.ToDouble(numericUpDown1.Value) + "," //REVIENT_PRTICE
+                        //                      + Convert.ToDouble(numericUpDown3.Value) + "," //VENTE_PRICE
+                        //                      + "'" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "');" //TMP_FIRST_INSERT_DATE
+                        //                      );
 
                     }
                     else
                     {
-                        PreConnection.Excut_Cmd("UPDATE `tb_produits` SET "
-                                              + "`CODE` = '" + textBox2.Text.Replace("'", "''") + "'," //CODE
-                                              + "`NME` = '" + textBox3.Text.Replace("'", "''") + "'," //NME
-                                              + "`CATEGOR` = '" + ((string)comboBox2.SelectedItem).Replace("'", "''") + "'," //CATEGOR
-                                              + "`QNT` = " + Convert.ToDouble(numericUpDown4.Value) + "," //QNT
-                                              + "`ALERT_MIN_ON` = " + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
-                                              + "`QNT_MIN` = " + Convert.ToDouble(numericUpDown5.Value) + "," //QNT_MIN
-                                              + "`REVIENT_PRTICE` = " + Convert.ToDouble(numericUpDown1.Value) + "," //REVIENT_PRTICE
-                                              + "`VENTE_PRICE` = " + Convert.ToDouble(numericUpDown3.Value) + ","//VENTE_PRICE
-                                              + "`TMP_FIRST_INSERT_DATE` = '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "'"//TMP_FIRST_INSERT_DATE
-                                              + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
+                        PreConnection.Excut_Cmd(2, "tb_produits", new List<string> {
+                        "CODE",
+"NME",
+"CATEGOR",
+"QNT",
+"ALERT_MIN_ON",
+"QNT_MIN",
+"REVIENT_PRTICE",
+"VENTE_PRICE",
+"TMP_FIRST_INSERT_DATE"}, new List<object>
+{
+     textBox2.Text, //CODE
+                                              textBox3.Text, //NME
+                                              comboBox2.SelectedItem, //CATEGOR
+                                              Convert.ToDouble(numericUpDown4.Value), //QNT
+                                              (checkBox1.Checked ? 1 : 0), //ALERT_MIN_ON
+                                              Convert.ToDouble(numericUpDown5.Value), //QNT_MIN
+                                              Convert.ToDouble(numericUpDown1.Value), //REVIENT_PRTICE
+                                              Convert.ToDouble(numericUpDown3.Value), //VENTE_PRICE
+                                              dateTimePicker2.Value
+}, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
+                        //PreConnection.Excut_Cmd("UPDATE `tb_produits` SET "
+                        //                      + "`CODE` = '" + textBox2.Text.Replace("'", "''") + "'," //CODE
+                        //                      + "`NME` = '" + textBox3.Text.Replace("'", "''") + "'," //NME
+                        //                      + "`CATEGOR` = '" + ((string)comboBox2.SelectedItem).Replace("'", "''") + "'," //CATEGOR
+                        //                      + "`QNT` = " + Convert.ToDouble(numericUpDown4.Value) + "," //QNT
+                        //                      + "`ALERT_MIN_ON` = " + (checkBox1.Checked ? 1 : 0) + "," //ALERT_MIN_ON
+                        //                      + "`QNT_MIN` = " + Convert.ToDouble(numericUpDown5.Value) + "," //QNT_MIN
+                        //                      + "`REVIENT_PRTICE` = " + Convert.ToDouble(numericUpDown1.Value) + "," //REVIENT_PRTICE
+                        //                      + "`VENTE_PRICE` = " + Convert.ToDouble(numericUpDown3.Value) + ","//VENTE_PRICE
+                        //                      + "`TMP_FIRST_INSERT_DATE` = '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + "'"//TMP_FIRST_INSERT_DATE
+                        //                      + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
                     }
                     load_prods(Is_New_Product);
                     load_stocks(false);
@@ -384,7 +427,8 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (MessageBox.Show("Êtes-vous sûr de supprimer ces [" + cnt + "] produits ?\n\nAttention :\nTous les dépôts concernés seront supprimés.", "Confirmation :", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
-                    PreConnection.Excut_Cmd("DELETE FROM tb_produits WHERE `ID` IN (" + ids_to_delete + ");");
+                    //PreConnection.Excut_Cmd("DELETE FROM tb_produits WHERE `ID` IN (" + ids_to_delete + ");");
+                    PreConnection.Excut_Cmd(3, "tb_produits", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { ids_to_delete });
                     load_prods(false);
                     load_stocks(false);
                 }
@@ -413,7 +457,8 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (MessageBox.Show("Êtes-vous sûr de supprimer ces [" + cntt + "] Mouvements ?", "Confirmation :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    PreConnection.Excut_Cmd("DELETE FROM tb_stock_mouv WHERE `ID` IN (" + ids_to_delette + ");");
+                    //PreConnection.Excut_Cmd("DELETE FROM tb_stock_mouv WHERE `ID` IN (" + ids_to_delette + ");");
+                    PreConnection.Excut_Cmd(3, "tb_produits", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { ids_to_delette });
                     load_stocks(false);
                 }
             }
@@ -679,32 +724,58 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     if (Is_New_Stock)
                     {
-                        PreConnection.Excut_Cmd("INSERT INTO `tb_stock_mouv`"
-                                            + "(`OP_DATE`,"
-                                            + "`PROD_ID`,"
-                                            + "`QNT_IN`,"
-                                            + "`QNT_OUT`,"
-                                            + "`OBSERV`)"
-                                            + "VALUES"
-                                            + "('" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
-                                            + comboBox3.SelectedValue + ","//PROD_ID
-                                            + (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0) + ","//QNT_IN
-                                            + (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0) + ","//QNT_OUT
-                                            + "'" + textBox5.Text.Replace("'", "''") + "');");//OBSERV
+                        PreConnection.Excut_Cmd(1, "tb_stock_mouv", new List<string> {
+                        "OP_DATE",
+"PROD_ID",
+"QNT_IN",
+"QNT_OUT",
+"OBSERV"},new List<object>
+{
+    dateTimePicker1.Value,//OP_DATE
+                                            comboBox3.SelectedValue,//PROD_ID
+                                            (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0), //QNT_IN
+                                            (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0), //QNT_OUT
+                                            textBox5.Text //OBSERV
+                    },null,null,null);
+                        //PreConnection.Excut_Cmd("INSERT INTO `tb_stock_mouv`"
+                        //                    + "(`OP_DATE`,"
+                        //                    + "`PROD_ID`,"
+                        //                    + "`QNT_IN`,"
+                        //                    + "`QNT_OUT`,"
+                        //                    + "`OBSERV`)"
+                        //                    + "VALUES"
+                        //                    + "('" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
+                        //                    + comboBox3.SelectedValue + ","//PROD_ID
+                        //                    + (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0) + ","//QNT_IN
+                        //                    + (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0) + ","//QNT_OUT
+                        //                    + "'" + textBox5.Text.Replace("'", "''") + "');");//OBSERV
                     }
                     else
                     {
-                        PreConnection.Excut_Cmd("UPDATE `tb_stock_mouv` SET "
-                                            + "`OP_DATE` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
-                                            + "`PROD_ID` = " + comboBox3.SelectedValue + ","//PROD_ID
-                                            + "`QNT_IN` = " + (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0) + ","//QNT_IN
-                                            + "`QNT_OUT` = " + (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0) + ","//QNT_OUT
-                                            + "`OBSERV` = '" + textBox5.Text.Replace("'", "''") + "' "//OBSERV
-                                            + "WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID2"].Value + ";");
+                        PreConnection.Excut_Cmd(2, "tb_stock_mouv", new List<string> {
+                        "OP_DATE",
+"PROD_ID",
+"QNT_IN",
+"QNT_OUT",
+"OBSERV"}, new List<object>
+{
+    dateTimePicker1.Value,//OP_DATE
+                                            comboBox3.SelectedValue,//PROD_ID
+                                            (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0), //QNT_IN
+                                            (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0), //QNT_OUT
+                                            textBox5.Text //OBSERV
+                    }, "ID = @P_ID", new List<string> { "P_ID"}, new List<object> { dataGridView2.SelectedRows[0].Cells["ID2"].Value });
+                        //PreConnection.Excut_Cmd("UPDATE `tb_stock_mouv` SET "
+                        //                    + "`OP_DATE` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
+                        //                    + "`PROD_ID` = " + comboBox3.SelectedValue + ","//PROD_ID
+                        //                    + "`QNT_IN` = " + (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0) + ","//QNT_IN
+                        //                    + "`QNT_OUT` = " + (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0) + ","//QNT_OUT
+                        //                    + "`OBSERV` = '" + textBox5.Text.Replace("'", "''") + "' "//OBSERV
+                        //                    + "WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID2"].Value + ";");
                         if (textBox5.Text == "Achat (Premier Stock)")
                         {
-                            Debug.WriteLine("UPDATE tb_produits SET `QNT` = " + Convert.ToDouble(numericUpDown2.Value) + " WHERE `ID` = " + comboBox3.SelectedValue + ";");
-                            PreConnection.Excut_Cmd("UPDATE tb_produits SET `QNT` = " + Convert.ToDouble(numericUpDown2.Value) + " WHERE `ID` = " + comboBox3.SelectedValue + ";");
+                            PreConnection.Excut_Cmd_personnel("UPDATE tb_produits SET `QNT` = @Param_01 WHERE `ID` = @Param_002;",new List<string> { "Param_01","Param_002"},new List<object> { Convert.ToDouble(numericUpDown2.Value) , comboBox3.SelectedValue });
+                            //PreConnection.Excut_Cmd("UPDATE tb_produits SET `QNT` = " + Convert.ToDouble(numericUpDown2.Value) + " WHERE `ID` = " + comboBox3.SelectedValue + ";");
                             load_prods(false);
                         }
                     }

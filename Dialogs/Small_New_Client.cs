@@ -30,31 +30,34 @@ namespace ALBAITAR_Softvet.Dialogs
             all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
             //-------------------------
             if (all_ready)
-            {               
-                    PreConnection.Excut_Cmd("INSERT INTO `tb_clients` "
-                            + "(`SEX`,"
-                            + "`FAMNME`,"
-                            + "`NME`,"
-                            + "`NUM_CNI`,"
-                            + "`ADRESS`,"
-                            + "`POSTAL_CODE`,"
-                            + "`CITY`,"
-                            + "`WILAYA`,"
-                            + "`NUM_PHONE`,"
-                            + "`EMAIL`,"
-                            + "`OBSERVATIONS`)"
-                            + "VALUES"
-                            + "('" + comboBox1.Text.Replace("'","''") + "',"
-                            + "'" + textBox3.Text.Replace("'", "''") + "',"
-                            + "'" + textBox2.Text.Replace("'", "''") + "',"
-                            + "'" + textBox4.Text.Replace("'", "''") + "',"
-                            + "'',"
-                            + "'',"
-                            + "'',"
-                            + "'',"
-                            + "'',"
-                            + "'',"
-                            + "'');");                
+            {
+                PreConnection.Excut_Cmd(1, "tb_clients",new List<string>
+                {
+                    "SEX",
+                    "FAMNME",
+                    "NME",
+                    "NUM_CNI",
+                    "ADRESS",
+                    "POSTAL_CODE",
+                    "CITY",
+                    "WILAYA",
+                    "NUM_PHONE",
+                    "EMAIL",
+                    "OBSERVATIONS"
+                },new List<object>
+                {
+                    comboBox1.Text,
+                    textBox3.Text,
+                    textBox2.Text,
+                    textBox4.Text,
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "" },null,null,null
+                );
                 //----------------
                 Close();
             }

@@ -152,14 +152,14 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (Properties.Settings.Default.Last_login_is_admin)
                 {
-                    PreConnection.Excut_Cmd("UPDATE tb_autoriz SET " + (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") : "DEFAULT_VALUES") + " = 1 WHERE CODE = " + row.Cells["CODE"].Value);
+                    PreConnection.Excut_Cmd(2, "tb_autoriz", new List<string> { (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") : "DEFAULT_VALUES") }, new List<object> { 1 }, "CODE = @P_CODE", new List<string> { "P_CODE" }, new List<object> { row.Cells["CODE"].Value });
                     row.Cells["VALUES"].Value = 1;
                 }
                 else
                 {
                     if ((int)row.Cells["CODE"].Value < 92000)
                     {
-                        PreConnection.Excut_Cmd("UPDATE tb_autoriz SET " + (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") : "DEFAULT_VALUES") + " = 1 WHERE CODE = " + row.Cells["CODE"].Value);
+                        PreConnection.Excut_Cmd(2, "tb_autoriz", new List<string> { (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") : "DEFAULT_VALUES") }, new List<object> { 1 }, "CODE = @P_CODE", new List<string> { "P_CODE" }, new List<object> { row.Cells["CODE"].Value });
                         row.Cells["VALUES"].Value = 1;
                     }
                     else
@@ -189,14 +189,14 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (Properties.Settings.Default.Last_login_is_admin)
                 {
-                    PreConnection.Excut_Cmd("UPDATE tb_autoriz SET " + (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") : "DEFAULT_VALUES") + " = 0 WHERE CODE = " + row.Cells["CODE"].Value);
+                    PreConnection.Excut_Cmd(2, "tb_autoriz", new List<string> { (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") : "DEFAULT_VALUES") }, new List<object> { 0 }, "CODE = @P_CODE", new List<string> { "P_CODE" }, new List<object> { row.Cells["CODE"].Value });
                     row.Cells["VALUES"].Value = 0;
                 }
                 else
                 {
                     if ((int)row.Cells["CODE"].Value < 92000)
                     {
-                        PreConnection.Excut_Cmd("UPDATE tb_autoriz SET " + (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") : "DEFAULT_VALUES") + " = 0 WHERE CODE = " + row.Cells["CODE"].Value);
+                        PreConnection.Excut_Cmd(2, "tb_autoriz", new List<string> { (comboBox1.SelectedValue.ToString() != "0" ? "Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") : "DEFAULT_VALUES") }, new List<object> { 0 }, "CODE = @P_CODE", new List<string> { "P_CODE" }, new List<object> { row.Cells["CODE"].Value });
                         row.Cells["VALUES"].Value = 0;
                     }
                     else
@@ -240,7 +240,7 @@ namespace ALBAITAR_Softvet.Resources
                 if (Properties.Settings.Default.Last_login_is_admin)
                 {
                     int default_val = int.Parse(Autoriz_data.Rows.Cast<DataRow>().FirstOrDefault(x => x["CODE"].ToString() == row.Cells["CODE"].Value.ToString())["DEFAULT_VALUES"].ToString());
-                    PreConnection.Excut_Cmd("UPDATE tb_autoriz SET Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") + " = " + default_val + " WHERE CODE = " + row.Cells["CODE"].Value + ";");
+                    PreConnection.Excut_Cmd(2, "tb_autoriz", new List<string> { "Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") }, new List<object> { default_val }, "CODE = @P_CODE", new List<string> { "P_CODE" }, new List<object> { row.Cells["CODE"].Value });
                     row.Cells["VALUES"].Value = default_val;
                 }
                 else
@@ -248,7 +248,7 @@ namespace ALBAITAR_Softvet.Resources
                     if ((int)row.Cells["CODE"].Value < 92000)
                     {
                         int default_val = int.Parse(Autoriz_data.Rows.Cast<DataRow>().FirstOrDefault(x => x["CODE"].ToString() == row.Cells["CODE"].Value.ToString())["DEFAULT_VALUES"].ToString());
-                        PreConnection.Excut_Cmd("UPDATE tb_autoriz SET Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") + " = " + default_val + " WHERE CODE = " + row.Cells["CODE"].Value + ";");
+                        PreConnection.Excut_Cmd(2, "tb_autoriz", new List<string> { "Usr_" + comboBox1.SelectedValue.ToString().Replace("'", "''") }, new List<object> { default_val }, "CODE = @P_CODE", new List<string> { "P_CODE" }, new List<object> { row.Cells["CODE"].Value });
                         row.Cells["VALUES"].Value = default_val;
                     }
                     else

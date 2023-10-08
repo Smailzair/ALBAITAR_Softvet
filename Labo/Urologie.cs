@@ -211,69 +211,156 @@ namespace ALBAITAR_Softvet.Labo
                 {
                     if (is_new)
                     {
-                        PreConnection.Excut_Cmd("INSERT INTO `tb_labo_urologie`"
-                                              + "(`REF`,"
-                                              + "`DATE_TIME`,"
-                                              + "`ANIM_ID`,"
-                                              + "`OBSERV`,"
-                                              + "`Densité`,"
-                                              + "`Leucocites`,"
-                                              + "`Nitrites`,"
-                                              + "`pH`,"
-                                              + "`Proteines`,"
-                                              + "`Couleur`,"
-                                              + "`Glucose`,"
-                                              + "`Corps Cétoniques`,"
-                                              + "`Urobilirogenes`,"
-                                              + "`Bilirubine`,"
-                                              + "`Sang`,"
-                                              + "`Hémoglobine`,"
-                                              + "`Turbulances`,"
-                                              + "`Sediment Urinaire`)"
-                                              + " VALUES "
-                                              + "('" + textBox3.Text.Replace("'", "''") + "'," //REF
-                                              + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," //DATE_TIME
-                                              + selected_animm.Cells["ID"].Value + "," //ANIM_ID
-                                              + "'" + textBox1.Text.ToString().Replace("'", "''") + "'," //OBSERV
-                                              + (dataGridView1.Rows[0].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells[1].Value + "'" : "NULL") + "," //Densité
-                                              + (dataGridView1.Rows[1].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells[1].Value + "'" : "NULL") + "," //Leucocites
-                                              + (dataGridView1.Rows[2].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells[1].Value + "'" : "NULL") + "," //Nitrites
-                                              + (dataGridView1.Rows[3].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells[1].Value + "'" : "NULL") + "," //pH
-                                              + (dataGridView1.Rows[4].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells[1].Value + "'" : "NULL") + "," //Proteines
-                                              + (dataGridView1.Rows[5].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells[1].Value + "'" : "NULL") + "," //Couleur
+                        PreConnection.Excut_Cmd(1, "tb_labo_urologie",new List<string>
+                        {
+                            "REF",
+"DATE_TIME",
+"ANIM_ID",
+"OBSERV",
+"Densité",
+"Leucocites",
+"Nitrites",
+"pH",
+"Proteines",
+"Couleur",
+"Glucose",
+"Corps Cétoniques",
+"Urobilirogenes",
+"Bilirubine",
+"Sang",
+"Hémoglobine",
+"Turbulances",
+"Sediment Urinaire"
+                        },new List<object>
+                        {
+                            textBox3.Text, //REF
+                                              dateTimePicker1.Value, //DATE_TIME
+                                              selected_animm.Cells["ID"].Value, //ANIM_ID
+                                              textBox1.Text, //OBSERV
+                                              dataGridView1.Rows[0].Cells[1].Value, //Densité
 
-                                              + (dataGridView3.Rows[0].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[0].Cells[1].Value + "'" : "NULL") + "," //Glucose
-                                              + (dataGridView3.Rows[1].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[1].Cells[1].Value + "'" : "NULL") + "," //Corps Cétoniques
-                                              + (dataGridView3.Rows[2].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[2].Cells[1].Value + "'" : "NULL") + "," //Urobilirogenes
-                                              + (dataGridView3.Rows[3].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[3].Cells[1].Value + "'" : "NULL") + "," //Bilirubine
-                                              + (dataGridView3.Rows[4].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[4].Cells[1].Value + "'" : "NULL") + "," //Sang
-                                              + (dataGridView3.Rows[5].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[5].Cells[1].Value + "'" : "NULL") + "," //Hémoglobine
-                                              + (dataGridView3.Rows[6].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[6].Cells[1].Value + "'" : "NULL") + "," //Turbulances
+dataGridView1.Rows[1].Cells[1].Value, //Leucocites
+dataGridView1.Rows[2].Cells[1].Value, //Nitrites
+dataGridView1.Rows[3].Cells[1].Value, //pH
+dataGridView1.Rows[4].Cells[1].Value, //Proteines
+dataGridView1.Rows[5].Cells[1].Value, //Couleur
 
-                                              + "'" + textBox5.Text + "');"); //Sediment Urinaire
+dataGridView3.Rows[0].Cells[1].Value, //Glucose
+dataGridView3.Rows[1].Cells[1].Value, //Corps Cétoniques
+dataGridView3.Rows[2].Cells[1].Value, //Urobilirogenes
+dataGridView3.Rows[3].Cells[1].Value, //Bilirubine
+dataGridView3.Rows[4].Cells[1].Value, //Sang
+dataGridView3.Rows[5].Cells[1].Value, //Hémoglobine
+dataGridView3.Rows[6].Cells[1].Value, //Turbulances
+
+textBox5.Text //Sediment Urinaire
+                    },null,null,null);
+                        //PreConnection.Excut_Cmd("INSERT INTO `tb_labo_urologie`"
+                        //                      + "(`REF`,"
+                        //                      + "`DATE_TIME`,"
+                        //                      + "`ANIM_ID`,"
+                        //                      + "`OBSERV`,"
+                        //                      + "`Densité`,"
+                        //                      + "`Leucocites`,"
+                        //                      + "`Nitrites`,"
+                        //                      + "`pH`,"
+                        //                      + "`Proteines`,"
+                        //                      + "`Couleur`,"
+                        //                      + "`Glucose`,"
+                        //                      + "`Corps Cétoniques`,"
+                        //                      + "`Urobilirogenes`,"
+                        //                      + "`Bilirubine`,"
+                        //                      + "`Sang`,"
+                        //                      + "`Hémoglobine`,"
+                        //                      + "`Turbulances`,"
+                        //                      + "`Sediment Urinaire`)"
+                        //                      + " VALUES "
+                        //                      + "('" + textBox3.Text.Replace("'", "''") + "'," //REF
+                        //                      + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," //DATE_TIME
+                        //                      + selected_animm.Cells["ID"].Value + "," //ANIM_ID
+                        //                      + "'" + textBox1.Text.ToString().Replace("'", "''") + "'," //OBSERV
+                        //                      + (dataGridView1.Rows[0].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells[1].Value + "'" : "NULL") + "," //Densité
+                        //                      + (dataGridView1.Rows[1].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells[1].Value + "'" : "NULL") + "," //Leucocites
+                        //                      + (dataGridView1.Rows[2].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells[1].Value + "'" : "NULL") + "," //Nitrites
+                        //                      + (dataGridView1.Rows[3].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells[1].Value + "'" : "NULL") + "," //pH
+                        //                      + (dataGridView1.Rows[4].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells[1].Value + "'" : "NULL") + "," //Proteines
+                        //                      + (dataGridView1.Rows[5].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells[1].Value + "'" : "NULL") + "," //Couleur
+
+                        //                      + (dataGridView3.Rows[0].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[0].Cells[1].Value + "'" : "NULL") + "," //Glucose
+                        //                      + (dataGridView3.Rows[1].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[1].Cells[1].Value + "'" : "NULL") + "," //Corps Cétoniques
+                        //                      + (dataGridView3.Rows[2].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[2].Cells[1].Value + "'" : "NULL") + "," //Urobilirogenes
+                        //                      + (dataGridView3.Rows[3].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[3].Cells[1].Value + "'" : "NULL") + "," //Bilirubine
+                        //                      + (dataGridView3.Rows[4].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[4].Cells[1].Value + "'" : "NULL") + "," //Sang
+                        //                      + (dataGridView3.Rows[5].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[5].Cells[1].Value + "'" : "NULL") + "," //Hémoglobine
+                        //                      + (dataGridView3.Rows[6].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[6].Cells[1].Value + "'" : "NULL") + "," //Turbulances
+
+                        //                      + "'" + textBox5.Text + "');"); //Sediment Urinaire
 
                     }
                     else
                     {
-                         PreConnection.Excut_Cmd("UPDATE `tb_labo_urologie` SET "
-                                              + "`REF` = '" + textBox3.Text.Replace("'", "''") + "',"
-                                              + "`DATE_TIME` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
-                                              + "`OBSERV` = '" + textBox1.Text.ToString().Replace("'", "''") + "',"
-                                              + "`Densité` = " + (dataGridView1.Rows[0].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells[1].Value + "'" : "NULL") + "," //Densité
-                                              + "`Leucocites` = " + (dataGridView1.Rows[1].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells[1].Value + "'" : "NULL") + "," //Leucocites
-                                              + "`Nitrites` = " + (dataGridView1.Rows[2].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells[1].Value + "'" : "NULL") + "," //Nitrites
-                                              + "`pH` = " + (dataGridView1.Rows[3].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells[1].Value + "'" : "NULL") + "," //pH
-                                              + "`Proteines` = " + (dataGridView1.Rows[4].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells[1].Value + "'" : "NULL") + "," //Proteines
-                                              + "`Couleur` = " + (dataGridView1.Rows[5].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells[1].Value + "'" : "NULL") + "," //Couleur
-                                              + "`Glucose` = " + (dataGridView3.Rows[0].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[0].Cells[1].Value + "'" : "NULL") + "," //Glucose
-                                              + "`Corps Cétoniques` = " + (dataGridView3.Rows[1].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[1].Cells[1].Value + "'" : "NULL") + "," //Corps Cétoniques
-                                              + "`Urobilirogenes` = " + (dataGridView3.Rows[2].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[2].Cells[1].Value + "'" : "NULL") + "," //Urobilirogenes
-                                              + "`Bilirubine` = " + (dataGridView3.Rows[3].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[3].Cells[1].Value + "'" : "NULL") + "," //Bilirubine
-                                              + "`Sang` = " + (dataGridView3.Rows[4].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[4].Cells[1].Value + "'" : "NULL") + "," //Sang
-                                              + "`Hémoglobine` = " + (dataGridView3.Rows[5].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[5].Cells[1].Value + "'" : "NULL") + "," //Hémoglobine
-                                              + "`Turbulances` = " + (dataGridView3.Rows[6].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[6].Cells[1].Value + "'" : "NULL") + "," //Turbulances
-                                              + "`Sediment Urinaire` = '" + textBox5.Text + "'"
-                                              + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
+                        PreConnection.Excut_Cmd(2, "tb_labo_urologie", new List<string>
+                        {
+                            "REF",
+"DATE_TIME",
+"OBSERV",
+"Densité",
+"Leucocites",
+"Nitrites",
+"pH",
+"Proteines",
+"Couleur",
+"Glucose",
+"Corps Cétoniques",
+"Urobilirogenes",
+"Bilirubine",
+"Sang",
+"Hémoglobine",
+"Turbulances",
+"Sediment Urinaire"
+                        }, new List<object>
+                        {
+                            textBox3.Text, //REF
+                                              dateTimePicker1.Value, //DATE_TIME
+                                              textBox1.Text, //OBSERV
+                                              dataGridView1.Rows[0].Cells[1].Value, //Densité
+
+dataGridView1.Rows[1].Cells[1].Value, //Leucocites
+dataGridView1.Rows[2].Cells[1].Value, //Nitrites
+dataGridView1.Rows[3].Cells[1].Value, //pH
+dataGridView1.Rows[4].Cells[1].Value, //Proteines
+dataGridView1.Rows[5].Cells[1].Value, //Couleur
+
+dataGridView3.Rows[0].Cells[1].Value, //Glucose
+dataGridView3.Rows[1].Cells[1].Value, //Corps Cétoniques
+dataGridView3.Rows[2].Cells[1].Value, //Urobilirogenes
+dataGridView3.Rows[3].Cells[1].Value, //Bilirubine
+dataGridView3.Rows[4].Cells[1].Value, //Sang
+dataGridView3.Rows[5].Cells[1].Value, //Hémoglobine
+dataGridView3.Rows[6].Cells[1].Value, //Turbulances
+
+textBox5.Text //Sediment Urinaire
+                    }, "ID = @P_ID", new List<string> { "P_ID"}, new List<object> { dataGridView2.SelectedRows[0].Cells["ID"].Value });
+                        //PreConnection.Excut_Cmd("UPDATE `tb_labo_urologie` SET "
+                        //                      + "`REF` = '" + textBox3.Text.Replace("'", "''") + "',"
+                        //                      + "`DATE_TIME` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
+                        //                      + "`OBSERV` = '" + textBox1.Text.ToString().Replace("'", "''") + "',"
+                        //                      + "`Densité` = " + (dataGridView1.Rows[0].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells[1].Value + "'" : "NULL") + "," //Densité
+                        //                      + "`Leucocites` = " + (dataGridView1.Rows[1].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells[1].Value + "'" : "NULL") + "," //Leucocites
+                        //                      + "`Nitrites` = " + (dataGridView1.Rows[2].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells[1].Value + "'" : "NULL") + "," //Nitrites
+                        //                      + "`pH` = " + (dataGridView1.Rows[3].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells[1].Value + "'" : "NULL") + "," //pH
+                        //                      + "`Proteines` = " + (dataGridView1.Rows[4].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells[1].Value + "'" : "NULL") + "," //Proteines
+                        //                      + "`Couleur` = " + (dataGridView1.Rows[5].Cells[1].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells[1].Value + "'" : "NULL") + "," //Couleur
+                        //                      + "`Glucose` = " + (dataGridView3.Rows[0].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[0].Cells[1].Value + "'" : "NULL") + "," //Glucose
+                        //                      + "`Corps Cétoniques` = " + (dataGridView3.Rows[1].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[1].Cells[1].Value + "'" : "NULL") + "," //Corps Cétoniques
+                        //                      + "`Urobilirogenes` = " + (dataGridView3.Rows[2].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[2].Cells[1].Value + "'" : "NULL") + "," //Urobilirogenes
+                        //                      + "`Bilirubine` = " + (dataGridView3.Rows[3].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[3].Cells[1].Value + "'" : "NULL") + "," //Bilirubine
+                        //                      + "`Sang` = " + (dataGridView3.Rows[4].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[4].Cells[1].Value + "'" : "NULL") + "," //Sang
+                        //                      + "`Hémoglobine` = " + (dataGridView3.Rows[5].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[5].Cells[1].Value + "'" : "NULL") + "," //Hémoglobine
+                        //                      + "`Turbulances` = " + (dataGridView3.Rows[6].Cells[1].Value != DBNull.Value ? "'" + dataGridView3.Rows[6].Cells[1].Value + "'" : "NULL") + "," //Turbulances
+                        //                      + "`Sediment Urinaire` = '" + textBox5.Text + "'"
+                        //                      + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
+
                         
                     }
                     //--------
@@ -419,7 +506,8 @@ namespace ALBAITAR_Softvet.Labo
                     string dq = "";
                     dataGridView2.SelectedRows.Cast<DataGridViewRow>().ForEach(row => { dq += "," + row.Cells["ID"].Value; });
                     dq = dq.Substring(1, dq.Length - 1);
-                    PreConnection.Excut_Cmd("DELETE FROM tb_labo_urologie WHERE ID IN (" + dq + ");");
+                    //PreConnection.Excut_Cmd("DELETE FROM tb_labo_urologie WHERE ID IN (" + dq + ");");
+                    PreConnection.Excut_Cmd(3, "tb_labo_urologie", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { dq });
                     //--------
                     Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
                     Laboratoire.make_historic_refesh = true;

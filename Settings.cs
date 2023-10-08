@@ -95,11 +95,16 @@ namespace ALBAITAR_Softvet
             textBox1.BackColor = textBox1.Text.Trim().Length == 0 ? Color.LightCoral : SystemColors.Window;
             if(textBox1.BackColor == SystemColors.Window)
             {
-                string cmmd = "UPDATE tb_params SET `VAL` = '" + textBox1.Text.Replace("'", "''") + "' WHERE `ID` = 1;";
-                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox2.Text.Replace("'", "''") + "' WHERE `ID` = 2;";
-                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox3.Text.Replace("'", "''") + "' WHERE `ID` = 3;";
-                cmmd += " UPDATE tb_params SET `VAL` = '" + textBox4.Text.Replace("'", "''") + "' WHERE `ID` = 4;";                
-                PreConnection.Excut_Cmd(cmmd);
+                PreConnection.Excut_Cmd_personnel("UPDATE tb_params SET `VAL` = @Param001 WHERE `ID` = 1;",new System.Collections.Generic.List<string> { "Param001" },new System.Collections.Generic.List<object> { textBox1.Text });
+                PreConnection.Excut_Cmd_personnel("UPDATE tb_params SET `VAL` = @Param002 WHERE `ID` = 2;", new System.Collections.Generic.List<string> { "Param002" }, new System.Collections.Generic.List<object> { textBox2.Text });
+                PreConnection.Excut_Cmd_personnel("UPDATE tb_params SET `VAL` = @Param003 WHERE `ID` = 3;", new System.Collections.Generic.List<string> { "Param003" }, new System.Collections.Generic.List<object> { textBox3.Text });
+                PreConnection.Excut_Cmd_personnel("UPDATE tb_params SET `VAL` = @Param004 WHERE `ID` = 4;", new System.Collections.Generic.List<string> { "Param004" }, new System.Collections.Generic.List<object> { textBox4.Text });
+
+                //string cmmd = "UPDATE tb_params SET `VAL` = '" + textBox1.Text.Replace("'", "''") + "' WHERE `ID` = 1;";
+                //cmmd += " UPDATE tb_params SET `VAL` = '" + textBox2.Text.Replace("'", "''") + "' WHERE `ID` = 2;";
+                //cmmd += " UPDATE tb_params SET `VAL` = '" + textBox3.Text.Replace("'", "''") + "' WHERE `ID` = 3;";
+                //cmmd += " UPDATE tb_params SET `VAL` = '" + textBox4.Text.Replace("'", "''") + "' WHERE `ID` = 4;";                
+                //PreConnection.Excut_Cmd(cmmd);
                 
                 
 
@@ -124,7 +129,8 @@ namespace ALBAITAR_Softvet
         {
             if(save_tva_perc)
             {
-                PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '" + numericUpDown1.Value + "' WHERE `ID` = 5;");
+                PreConnection.Excut_Cmd_personnel("UPDATE tb_params SET `VAL` = @Param005 WHERE `ID` = 5;", new System.Collections.Generic.List<string> { "Param005" }, new System.Collections.Generic.List<object> { numericUpDown1.Value });
+                //PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '" + numericUpDown1.Value + "' WHERE `ID` = 5;");
                 Main_Frm.Params = PreConnection.Load_data("SELECT * FROM tb_params;");
             }            
         }

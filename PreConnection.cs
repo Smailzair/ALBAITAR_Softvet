@@ -1,10 +1,14 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
+using Microsoft.ReportingServices.Diagnostics.Internal;
 using Microsoft.Win32;
 using MySql.Data.MySqlClient;
+using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Diagnostics.SymbolStore;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -12,6 +16,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
 using Excc = Microsoft.Office.Interop.Excel;
@@ -25,7 +30,6 @@ namespace ALBAITAR_Softvet
         //  public static Loading loading = new Loading();
 
         public static MySqlConnection mySqlConnection = new MySqlConnection("Server=" + Properties.Settings.Default.Connection_String_IP_Or_LocalHost + ";Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine                
-
         // static bool Connection_opened = false;
         public static void open_conn()
         {
@@ -117,26 +121,116 @@ namespace ALBAITAR_Softvet
             //----------------------------------
         }
 
-        public static int Excut_Cmd(string cmd)
+        //public static int Excut_Cmd(string cmd)
+        //{
+        //    int rows_nb = 0;
+        //    MySqlCommand cmmd = new MySqlCommand(cmd, mySqlConnection);
+        //    open_conn();
+        //    //try { cmmd.ExecuteNonQuery(); } catch { if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée, veuillez vérifier l'internet et ..."); } }
+        //    try { rows_nb = cmmd.ExecuteNonQuery(); }
+        //    catch
+        //    {
+        //        //if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée !"); }
+        //    }
+        //    close_conn();
+        //    return rows_nb;
+        //}
+
+        public static int Excut_Cmd(int Insert_1_or_Update_2_Delete_3, string Table_nme, List<string> Columns_names, List<object> col_values, string where_expression, List<string> where_columns, List<object> where_values)
         {
-            int rows_nb = 0;
-            MySqlCommand cmmd = new MySqlCommand(cmd, mySqlConnection);
-            open_conn();
-            //try { cmmd.ExecuteNonQuery(); } catch { if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée, veuillez vérifier l'internet et ..."); } }
-            try { rows_nb = cmmd.ExecuteNonQuery(); }
-            catch
+            string cmmd = "";
+            if (Insert_1_or_Update_2_Delete_3 == 1) //INSERT
             {
-                //if (!Connection_opened) { MessageBox.Show("Probleme de connection avec la base donnée !"); }
+                cmmd += "INSERT INTO " + Table_nme + " (";
+                foreach (var col in Columns_names)
+                {
+                    cmmd += col + ",";
+                }
+                cmmd = cmmd.TrimEnd(',');
+                cmmd += ") VALUES (";
+                for (int i = 0; i < Columns_names.Count; i++)
+                {
+                    cmmd += "@i" + i.ToString() + "_" + Columns_names[i] + ",";
+                }
+                cmmd = cmmd.TrimEnd(',');
+                cmmd += ")";
+                if (where_expression != null) { if (where_expression.Length > 0) { cmmd += " WHERE " + where_expression; } }
+                cmmd += ";";
             }
+            else if (Insert_1_or_Update_2_Delete_3 == 2) //UPDATE
+            {
+                cmmd += "UPDATE " + Table_nme + " SET ";
+                for (int i = 0; i < Columns_names.Count; i++)
+                {
+                    cmmd += Columns_names[i] + " = @i" + i.ToString() + "_" + Columns_names[i] + ",";
+                }
+                cmmd = cmmd.TrimEnd(',');
+                if (where_expression != null) { if (where_expression.Length > 0) { cmmd += " WHERE " + where_expression; } }
+                cmmd += ";";
+            }
+            else //DELETE
+            {
+                cmmd += "DELETE FROM " + Table_nme;
+                if (where_expression != null) { if (where_expression.Length > 0) { cmmd += " WHERE " + where_expression; } }
+                cmmd += ";";
+            }
+
+            int rows_nb = 0;
+            open_conn();
+            try
+            {
+                using (MySqlCommand command = new MySqlCommand(cmmd, mySqlConnection))
+                {
+                    for (int i = 0; i < Columns_names.Count; i++)
+                    {
+                        command.Parameters.AddWithValue("@i" + i.ToString() + "_" + Columns_names[i], col_values[i]);
+                    }
+                    if (where_columns != null)
+                    {
+                        for (int i = 0; i < where_columns.Count; i++)
+                        {
+                            command.Parameters.AddWithValue(where_columns[i], where_values[i]);
+                        }
+                    }
+                    rows_nb = command.ExecuteNonQuery();
+                }
+
+            }
+            catch (MySqlException excc) { Debug.WriteLine(">>>>>>>>>> EXECPTION : >>>>>>>>>> " + excc.Message); }
             close_conn();
             return rows_nb;
         }
 
+        public static int Excut_Cmd_personnel(string cmmd,List<string> params_names, List<object> params_values)
+        {                   
+            int rows_nb = 0;
+            open_conn();
+            try
+            {
+                using (MySqlCommand command = new MySqlCommand(cmmd, mySqlConnection))
+                {
+                    if (params_names != null)
+                    {
+                        if (params_names.Count > 0)
+                        {
+                            for (int i = 0; i < params_names.Count; i++)
+                            {
+                                command.Parameters.AddWithValue("@" + params_names[i], params_values[i]);
+                            }
+                        }
+                    }                        
+                    rows_nb = command.ExecuteNonQuery();
+                }
 
+            }
+            catch (MySqlException excc) { Debug.WriteLine(">>>>>>>>>> EXECPTION : >>>>>>>>>> " + excc.Message); }
+            close_conn();
+            return rows_nb;
+        }
         ///////////////////////  RancoSoft Cammands   /////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////
-        public static MySqlConnection client_manag = new MySqlConnection(@"Server=srv1103.hstgr.io;Port=3306;Database=u844866977_CLIENTS_MANAG;Uid=u844866977_RANCO_USER;Pwd=v[y:hyiN3W4;");
+        public static MySqlConnection client_manag = new MySqlConnection(@"Server=62.72.50.1;Port=3306;Database=u844866977_CLIENTS_MANAG;Uid=u844866977_RANCO_USER;Pwd=v[y:hyiN3W4;");
         ////////////////////////////////////////////        
         static string SERIAL = "zXdsf14s6q35EDdc7xc82vvc6d";
         ////////////////////////////////////////////

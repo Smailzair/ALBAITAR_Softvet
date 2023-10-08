@@ -226,162 +226,362 @@ namespace ALBAITAR_Softvet.Labo
                 if (ready)
                 {
                     if (is_new)
-                    {   
-                        PreConnection.Excut_Cmd("INSERT INTO `tb_labo_immunologie`"
-                                              + "(`REF`,"
-                                              + "`DATE_TIME`,"
-                                              + "`ANIM_ID`,"
-                                              + "`OBSERV`,"
-                                              + "`MALAD_NME_001`,"
-                                              + "`MALAD_NME_002`,"
-                                              + "`MALAD_NME_003`,"
-                                              + "`MALAD_NME_004`,"
-                                              + "`MALAD_NME_005`,"
-                                              + "`MALAD_NME_006`,"
-                                              + "`MALAD_NME_007`,"
-                                              + "`MALAD_NME_008`,"
-                                              + "`MALAD_NME_009`,"
-                                              + "`MALAD_NME_010`,"
-                                              + "`MALAD_NME_011`,"
-                                              + "`MALAD_NME_012`,"
-                                              + "`MALAD_NME_013`,"
-                                              + "`MALAD_NME_014`,"
-                                              + "`MALAD_NME_015`,"
-                                              + "`METHODE_001`,"
-                                              + "`METHODE_002`,"
-                                              + "`METHODE_003`,"
-                                              + "`METHODE_004`,"
-                                              + "`METHODE_005`,"
-                                              + "`METHODE_006`,"
-                                              + "`METHODE_007`,"
-                                              + "`METHODE_008`,"
-                                              + "`METHODE_009`,"
-                                              + "`METHODE_010`,"
-                                              + "`METHODE_011`,"
-                                              + "`METHODE_012`,"
-                                              + "`METHODE_013`,"
-                                              + "`METHODE_014`,"
-                                              + "`METHODE_015`,"
-                                              + "`MALAD_RESULT_001`,"
-                                              + "`MALAD_RESULT_002`,"
-                                              + "`MALAD_RESULT_003`,"
-                                              + "`MALAD_RESULT_004`,"
-                                              + "`MALAD_RESULT_005`,"
-                                              + "`MALAD_RESULT_006`,"
-                                              + "`MALAD_RESULT_007`,"
-                                              + "`MALAD_RESULT_008`,"
-                                              + "`MALAD_RESULT_009`,"
-                                              + "`MALAD_RESULT_010`,"
-                                              + "`MALAD_RESULT_011`,"
-                                              + "`MALAD_RESULT_012`,"
-                                              + "`MALAD_RESULT_013`,"
-                                              + "`MALAD_RESULT_014`,"
-                                              + "`MALAD_RESULT_015`)"
-                                              + "VALUES"
-                                              + "('" + textBox3.Text.Replace("'", "''") + "'," //REF
-                                              + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," //DATE_TIME
-                                              + selected_animm.Cells["ID"].Value + "," //ANIM_ID
-                                              + "'" + textBox1.Text.Replace("'", "''") + "'," //OBSERV
-                                              + "'" + (dataGridView1.Rows[0].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[1].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[2].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[3].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[4].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[5].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[6].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[7].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[8].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[9].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[10].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[11].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[12].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[13].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[14].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[0].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[1].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[2].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[3].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[4].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[5].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[6].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[7].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[8].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[9].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[10].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[11].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[12].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[13].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[14].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "'" + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "');");
+                    {
+                        PreConnection.Excut_Cmd(1, "tb_labo_immunologie",new List<string> {
+                        "REF",
+"DATE_TIME",
+"ANIM_ID",
+"OBSERV",
+"MALAD_NME_001",
+"MALAD_NME_002",
+"MALAD_NME_003",
+"MALAD_NME_004",
+"MALAD_NME_005",
+"MALAD_NME_006",
+"MALAD_NME_007",
+"MALAD_NME_008",
+"MALAD_NME_009",
+"MALAD_NME_010",
+"MALAD_NME_011",
+"MALAD_NME_012",
+"MALAD_NME_013",
+"MALAD_NME_014",
+"MALAD_NME_015",
+"METHODE_001",
+"METHODE_002",
+"METHODE_003",
+"METHODE_004",
+"METHODE_005",
+"METHODE_006",
+"METHODE_007",
+"METHODE_008",
+"METHODE_009",
+"METHODE_010",
+"METHODE_011",
+"METHODE_012",
+"METHODE_013",
+"METHODE_014",
+"METHODE_015",
+"MALAD_RESULT_001",
+"MALAD_RESULT_002",
+"MALAD_RESULT_003",
+"MALAD_RESULT_004",
+"MALAD_RESULT_005",
+"MALAD_RESULT_006",
+"MALAD_RESULT_007",
+"MALAD_RESULT_008",
+"MALAD_RESULT_009",
+"MALAD_RESULT_010",
+"MALAD_RESULT_011",
+"MALAD_RESULT_012",
+"MALAD_RESULT_013",
+"MALAD_RESULT_014",
+"MALAD_RESULT_015"},new List<object>
+{
+    textBox3.Text, //REF
+                                              dateTimePicker1.Value, //DATE_TIME
+                                             selected_animm.Cells["ID"].Value, //ANIM_ID
+                                              textBox1.Text, //OBSERV
+                                              dataGridView1.Rows[0].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[1].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[2].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[3].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[4].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[5].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[6].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[7].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[8].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[9].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[10].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[11].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[12].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[13].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[14].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[0].Cells["METHODE"].Value,
+dataGridView1.Rows[1].Cells["METHODE"].Value,
+dataGridView1.Rows[2].Cells["METHODE"].Value,
+dataGridView1.Rows[3].Cells["METHODE"].Value,
+dataGridView1.Rows[4].Cells["METHODE"].Value,
+dataGridView1.Rows[5].Cells["METHODE"].Value,
+dataGridView1.Rows[6].Cells["METHODE"].Value,
+dataGridView1.Rows[7].Cells["METHODE"].Value,
+dataGridView1.Rows[8].Cells["METHODE"].Value,
+dataGridView1.Rows[9].Cells["METHODE"].Value,
+dataGridView1.Rows[10].Cells["METHODE"].Value,
+dataGridView1.Rows[11].Cells["METHODE"].Value,
+dataGridView1.Rows[12].Cells["METHODE"].Value,
+dataGridView1.Rows[13].Cells["METHODE"].Value,
+dataGridView1.Rows[14].Cells["METHODE"].Value,
+dataGridView1.Rows[0].Cells["VALUE2"].Value,
+dataGridView1.Rows[1].Cells["VALUE2"].Value,
+dataGridView1.Rows[2].Cells["VALUE2"].Value,
+dataGridView1.Rows[3].Cells["VALUE2"].Value,
+dataGridView1.Rows[4].Cells["VALUE2"].Value,
+dataGridView1.Rows[5].Cells["VALUE2"].Value,
+dataGridView1.Rows[6].Cells["VALUE2"].Value,
+dataGridView1.Rows[7].Cells["VALUE2"].Value,
+dataGridView1.Rows[8].Cells["VALUE2"].Value,
+dataGridView1.Rows[9].Cells["VALUE2"].Value,
+dataGridView1.Rows[10].Cells["VALUE2"].Value,
+dataGridView1.Rows[11].Cells["VALUE2"].Value,
+dataGridView1.Rows[12].Cells["VALUE2"].Value,
+dataGridView1.Rows[13].Cells["VALUE2"].Value,
+dataGridView1.Rows[14].Cells["VALUE2"].Value
+},null,null,null);
+                        //PreConnection.Excut_Cmd("INSERT INTO `tb_labo_immunologie`"
+                        //                      + "(`REF`,"
+                        //                      + "`DATE_TIME`,"
+                        //                      + "`ANIM_ID`,"
+                        //                      + "`OBSERV`,"
+                        //                      + "`MALAD_NME_001`,"
+                        //                      + "`MALAD_NME_002`,"
+                        //                      + "`MALAD_NME_003`,"
+                        //                      + "`MALAD_NME_004`,"
+                        //                      + "`MALAD_NME_005`,"
+                        //                      + "`MALAD_NME_006`,"
+                        //                      + "`MALAD_NME_007`,"
+                        //                      + "`MALAD_NME_008`,"
+                        //                      + "`MALAD_NME_009`,"
+                        //                      + "`MALAD_NME_010`,"
+                        //                      + "`MALAD_NME_011`,"
+                        //                      + "`MALAD_NME_012`,"
+                        //                      + "`MALAD_NME_013`,"
+                        //                      + "`MALAD_NME_014`,"
+                        //                      + "`MALAD_NME_015`,"
+                        //                      + "`METHODE_001`,"
+                        //                      + "`METHODE_002`,"
+                        //                      + "`METHODE_003`,"
+                        //                      + "`METHODE_004`,"
+                        //                      + "`METHODE_005`,"
+                        //                      + "`METHODE_006`,"
+                        //                      + "`METHODE_007`,"
+                        //                      + "`METHODE_008`,"
+                        //                      + "`METHODE_009`,"
+                        //                      + "`METHODE_010`,"
+                        //                      + "`METHODE_011`,"
+                        //                      + "`METHODE_012`,"
+                        //                      + "`METHODE_013`,"
+                        //                      + "`METHODE_014`,"
+                        //                      + "`METHODE_015`,"
+                        //                      + "`MALAD_RESULT_001`,"
+                        //                      + "`MALAD_RESULT_002`,"
+                        //                      + "`MALAD_RESULT_003`,"
+                        //                      + "`MALAD_RESULT_004`,"
+                        //                      + "`MALAD_RESULT_005`,"
+                        //                      + "`MALAD_RESULT_006`,"
+                        //                      + "`MALAD_RESULT_007`,"
+                        //                      + "`MALAD_RESULT_008`,"
+                        //                      + "`MALAD_RESULT_009`,"
+                        //                      + "`MALAD_RESULT_010`,"
+                        //                      + "`MALAD_RESULT_011`,"
+                        //                      + "`MALAD_RESULT_012`,"
+                        //                      + "`MALAD_RESULT_013`,"
+                        //                      + "`MALAD_RESULT_014`,"
+                        //                      + "`MALAD_RESULT_015`)"
+                        //                      + "VALUES"
+                        //                      + "('" + textBox3.Text.Replace("'", "''") + "'," //REF
+                        //                      + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," //DATE_TIME
+                        //                      + selected_animm.Cells["ID"].Value + "," //ANIM_ID
+                        //                      + "'" + textBox1.Text.Replace("'", "''") + "'," //OBSERV
+                        //                      + "'" + (dataGridView1.Rows[0].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[1].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[2].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[3].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[4].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[5].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[6].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[7].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[8].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[9].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[10].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[11].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[12].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[13].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[14].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[0].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[1].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[2].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[3].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[4].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[5].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[6].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[7].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[8].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[9].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[10].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[11].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[12].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[13].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[14].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "'" + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "');");
                     }
                     else
                     {
-                        PreConnection.Excut_Cmd("UPDATE `tb_labo_immunologie`"
-                                              + "SET "
-                                              + "`REF` = '" + textBox3.Text.Replace("'", "''") + "',"
-                                              + "`DATE_TIME` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
-                                              + "`ANIM_ID` = "+ selected_animm.Cells["ID"].Value + ","
-                                              + "`OBSERV` = '" + textBox1.Text.Replace("'", "''") + "',"
-                                              + "`MALAD_NME_001` = '" + (dataGridView1.Rows[0].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_002` = '" + (dataGridView1.Rows[1].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_003` = '" + (dataGridView1.Rows[2].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_004` = '" + (dataGridView1.Rows[3].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_005` = '" + (dataGridView1.Rows[4].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_006` = '" + (dataGridView1.Rows[5].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_007` = '" + (dataGridView1.Rows[6].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_008` = '" + (dataGridView1.Rows[7].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_009` = '" + (dataGridView1.Rows[8].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_010` = '" + (dataGridView1.Rows[9].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_011` = '" + (dataGridView1.Rows[10].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_012` = '" + (dataGridView1.Rows[11].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_013` = '" + (dataGridView1.Rows[12].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_014` = '" + (dataGridView1.Rows[13].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_NME_015` = '" + (dataGridView1.Rows[14].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_001` = '" + (dataGridView1.Rows[0].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_002` = '" + (dataGridView1.Rows[1].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_003` = '" + (dataGridView1.Rows[2].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_004` = '" + (dataGridView1.Rows[3].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_005` = '" + (dataGridView1.Rows[4].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_006` = '" + (dataGridView1.Rows[5].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_007` = '" + (dataGridView1.Rows[6].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_008` = '" + (dataGridView1.Rows[7].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_009` = '" + (dataGridView1.Rows[8].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_010` = '" + (dataGridView1.Rows[9].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_011` = '" + (dataGridView1.Rows[10].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_012` = '" + (dataGridView1.Rows[11].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_013` = '" + (dataGridView1.Rows[12].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_014` = '" + (dataGridView1.Rows[13].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`METHODE_015` = '" + (dataGridView1.Rows[14].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_001` = '" + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_002` = '" + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_003` = '" + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_004` = '" + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_005` = '" + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_006` = '" + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_007` = '" + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_008` = '" + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_009` = '" + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_010` = '" + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_011` = '" + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_012` = '" + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_013` = '" + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_014` = '" + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
-                                              + "`MALAD_RESULT_015` = '" + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "'"
-                                              + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
+                        //PreConnection.Excut_Cmd("UPDATE `tb_labo_immunologie`"
+                        //                      + "SET "
+                        //                      + "`REF` = '" + textBox3.Text.Replace("'", "''") + "',"
+                        //                      + "`DATE_TIME` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
+                        //                      + "`ANIM_ID` = "+ selected_animm.Cells["ID"].Value + ","
+                        //                      + "`OBSERV` = '" + textBox1.Text.Replace("'", "''") + "',"
+                        //                      + "`MALAD_NME_001` = '" + (dataGridView1.Rows[0].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_002` = '" + (dataGridView1.Rows[1].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_003` = '" + (dataGridView1.Rows[2].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_004` = '" + (dataGridView1.Rows[3].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_005` = '" + (dataGridView1.Rows[4].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_006` = '" + (dataGridView1.Rows[5].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_007` = '" + (dataGridView1.Rows[6].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_008` = '" + (dataGridView1.Rows[7].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_009` = '" + (dataGridView1.Rows[8].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_010` = '" + (dataGridView1.Rows[9].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_011` = '" + (dataGridView1.Rows[10].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_012` = '" + (dataGridView1.Rows[11].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_013` = '" + (dataGridView1.Rows[12].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_014` = '" + (dataGridView1.Rows[13].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_NME_015` = '" + (dataGridView1.Rows[14].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["MALAD_NME"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_001` = '" + (dataGridView1.Rows[0].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_002` = '" + (dataGridView1.Rows[1].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_003` = '" + (dataGridView1.Rows[2].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_004` = '" + (dataGridView1.Rows[3].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_005` = '" + (dataGridView1.Rows[4].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_006` = '" + (dataGridView1.Rows[5].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_007` = '" + (dataGridView1.Rows[6].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_008` = '" + (dataGridView1.Rows[7].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_009` = '" + (dataGridView1.Rows[8].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_010` = '" + (dataGridView1.Rows[9].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_011` = '" + (dataGridView1.Rows[10].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_012` = '" + (dataGridView1.Rows[11].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_013` = '" + (dataGridView1.Rows[12].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_014` = '" + (dataGridView1.Rows[13].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`METHODE_015` = '" + (dataGridView1.Rows[14].Cells["METHODE"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["METHODE"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_001` = '" + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_002` = '" + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_003` = '" + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_004` = '" + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_005` = '" + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_006` = '" + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_007` = '" + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_008` = '" + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_009` = '" + (dataGridView1.Rows[8].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[8].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_010` = '" + (dataGridView1.Rows[9].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[9].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_011` = '" + (dataGridView1.Rows[10].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[10].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_012` = '" + (dataGridView1.Rows[11].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[11].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_013` = '" + (dataGridView1.Rows[12].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[12].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_014` = '" + (dataGridView1.Rows[13].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[13].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "',"
+                        //                      + "`MALAD_RESULT_015` = '" + (dataGridView1.Rows[14].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[14].Cells["VALUE2"].Value.ToString().Replace("'","''") : "") + "'"
+                        //                      + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
+                        PreConnection.Excut_Cmd(2, "tb_labo_immunologie", new List<string> {
+                        "REF",
+"DATE_TIME",
+"OBSERV",
+"MALAD_NME_001",
+"MALAD_NME_002",
+"MALAD_NME_003",
+"MALAD_NME_004",
+"MALAD_NME_005",
+"MALAD_NME_006",
+"MALAD_NME_007",
+"MALAD_NME_008",
+"MALAD_NME_009",
+"MALAD_NME_010",
+"MALAD_NME_011",
+"MALAD_NME_012",
+"MALAD_NME_013",
+"MALAD_NME_014",
+"MALAD_NME_015",
+"METHODE_001",
+"METHODE_002",
+"METHODE_003",
+"METHODE_004",
+"METHODE_005",
+"METHODE_006",
+"METHODE_007",
+"METHODE_008",
+"METHODE_009",
+"METHODE_010",
+"METHODE_011",
+"METHODE_012",
+"METHODE_013",
+"METHODE_014",
+"METHODE_015",
+"MALAD_RESULT_001",
+"MALAD_RESULT_002",
+"MALAD_RESULT_003",
+"MALAD_RESULT_004",
+"MALAD_RESULT_005",
+"MALAD_RESULT_006",
+"MALAD_RESULT_007",
+"MALAD_RESULT_008",
+"MALAD_RESULT_009",
+"MALAD_RESULT_010",
+"MALAD_RESULT_011",
+"MALAD_RESULT_012",
+"MALAD_RESULT_013",
+"MALAD_RESULT_014",
+"MALAD_RESULT_015"}, new List<object>
+{
+    textBox3.Text, //REF
+                                              dateTimePicker1.Value, //DATE_TIME
+                                              textBox1.Text, //OBSERV
+                                              dataGridView1.Rows[0].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[1].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[2].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[3].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[4].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[5].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[6].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[7].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[8].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[9].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[10].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[11].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[12].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[13].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[14].Cells["MALAD_NME"].Value,
+dataGridView1.Rows[0].Cells["METHODE"].Value,
+dataGridView1.Rows[1].Cells["METHODE"].Value,
+dataGridView1.Rows[2].Cells["METHODE"].Value,
+dataGridView1.Rows[3].Cells["METHODE"].Value,
+dataGridView1.Rows[4].Cells["METHODE"].Value,
+dataGridView1.Rows[5].Cells["METHODE"].Value,
+dataGridView1.Rows[6].Cells["METHODE"].Value,
+dataGridView1.Rows[7].Cells["METHODE"].Value,
+dataGridView1.Rows[8].Cells["METHODE"].Value,
+dataGridView1.Rows[9].Cells["METHODE"].Value,
+dataGridView1.Rows[10].Cells["METHODE"].Value,
+dataGridView1.Rows[11].Cells["METHODE"].Value,
+dataGridView1.Rows[12].Cells["METHODE"].Value,
+dataGridView1.Rows[13].Cells["METHODE"].Value,
+dataGridView1.Rows[14].Cells["METHODE"].Value,
+dataGridView1.Rows[0].Cells["VALUE2"].Value,
+dataGridView1.Rows[1].Cells["VALUE2"].Value,
+dataGridView1.Rows[2].Cells["VALUE2"].Value,
+dataGridView1.Rows[3].Cells["VALUE2"].Value,
+dataGridView1.Rows[4].Cells["VALUE2"].Value,
+dataGridView1.Rows[5].Cells["VALUE2"].Value,
+dataGridView1.Rows[6].Cells["VALUE2"].Value,
+dataGridView1.Rows[7].Cells["VALUE2"].Value,
+dataGridView1.Rows[8].Cells["VALUE2"].Value,
+dataGridView1.Rows[9].Cells["VALUE2"].Value,
+dataGridView1.Rows[10].Cells["VALUE2"].Value,
+dataGridView1.Rows[11].Cells["VALUE2"].Value,
+dataGridView1.Rows[12].Cells["VALUE2"].Value,
+dataGridView1.Rows[13].Cells["VALUE2"].Value,
+dataGridView1.Rows[14].Cells["VALUE2"].Value
+}, "ID = @P_ID", new List<string> { "P_ID"}, new List<object> { dataGridView2.SelectedRows[0].Cells["ID"].Value });
                     }
                     //--------
                     Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
@@ -519,7 +719,8 @@ namespace ALBAITAR_Softvet.Labo
                     string dq = "";
                     dataGridView2.SelectedRows.Cast<DataGridViewRow>().ForEach(row => { dq += "," + row.Cells["ID"].Value; });
                     dq = dq.Substring(1, dq.Length - 1);
-                    PreConnection.Excut_Cmd("DELETE FROM tb_labo_immunologie WHERE ID IN (" + dq + ");");
+                    //PreConnection.Excut_Cmd("DELETE FROM tb_labo_immunologie WHERE ID IN (" + dq + ");");
+                    PreConnection.Excut_Cmd(3, "tb_labo_immunologie", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { dq });
                     //--------
                     Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
                     Laboratoire.make_historic_refesh = true;

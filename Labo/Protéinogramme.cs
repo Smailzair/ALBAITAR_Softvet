@@ -287,102 +287,226 @@ namespace ALBAITAR_Softvet.Labo
                 {
                     if (is_new)
                     {
-                        PreConnection.Excut_Cmd("INSERT INTO `tb_labo_proteinogramme` "
-                                              + "(`REF`,"
-                                              + "`DATE_TIME`,"
-                                              + "`ANIM_ID`,"
-                                              + "`OBSERV`,"
-                                              + "`Index_Normatif_De`,"
-                                              + "`Protéines Totales`,"
-                                              + "`Albumine`,"
-                                              + "`Alpha-1-Globulines`,"
-                                              + "`Alpha-2-Globulines`,"
-                                              + "`Beta-Globulines`,"
-                                              + "`Gamma-Globulines`,"
-                                              + "`Globulines Totales`,"
-                                              + "`Coefficient A/G`,"
-                                              + "`Protéines Totales_UNIT`,"
-                                              + "`Albumine_UNIT`,"
-                                              + "`Alpha-1-Globulines_UNIT`,"
-                                              + "`Alpha-2-Globulines_UNIT`,"
-                                              + "`Beta-Globulines_UNIT`,"
-                                              + "`Gamma-Globulines_UNIT`,"
-                                              + "`Globulines Totales_UNIT`,"
-                                              + "`Coefficient A/G_UNIT`,"
-                                              + "`Protéines Totales_NORMATIF`,"
-                                              + "`Albumine_NORMATIF`,"
-                                              + "`Alpha-1-Globulines_NORMATIF`,"
-                                              + "`Alpha-2-Globulines_NORMATIF`,"
-                                              + "`Beta-Globulines_NORMATIF`,"
-                                              + "`Gamma-Globulines_NORMATIF`,"
-                                              + "`Globulines Totales_NORMATIF`,"
-                                              + "`Coefficient A/G_NORMATIF`)"
-                                              + " VALUES "
-                                              + "('" + textBox3.Text.Replace("'", "''") + "'," //REF
-                                              + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," //DATE_TIME
-                                              + selected_animm.Cells["ID"].Value + "," //ANIM_ID
-                                              + "'" + textBox1.Text.Replace("'", "''") + "'," //OBSERV
-                                              + comboBox1.SelectedIndex + "," //Index_Normatif_De
+                        PreConnection.Excut_Cmd(1, "tb_labo_proteinogramme", new List<string> {
+                        "REF",
+"DATE_TIME",
+"ANIM_ID",
+"OBSERV",
+"Index_Normatif_De",
+"Protéines Totales",
+"Albumine",
+"Alpha-1-Globulines",
+"Alpha-2-Globulines",
+"Beta-Globulines",
+"Gamma-Globulines",
+"Globulines Totales",
+"Coefficient A/G",
+"Protéines Totales_UNIT",
+"Albumine_UNIT",
+"Alpha-1-Globulines_UNIT",
+"Alpha-2-Globulines_UNIT",
+"Beta-Globulines_UNIT",
+"Gamma-Globulines_UNIT",
+"Globulines Totales_UNIT",
+"Coefficient A/G_UNIT",
+"Protéines Totales_NORMATIF",
+"Albumine_NORMATIF",
+"Alpha-1-Globulines_NORMATIF",
+"Alpha-2-Globulines_NORMATIF",
+"Beta-Globulines_NORMATIF",
+"Gamma-Globulines_NORMATIF",
+"Globulines Totales_NORMATIF",
+"Coefficient A/G_NORMATIF"},new List<object>
+{
+    textBox3.Text, //REF
+                                              dateTimePicker1.Value, //DATE_TIME
+                                              selected_animm.Cells["ID"].Value, //ANIM_ID
+                                              textBox1.Text, //OBSERV
+                                              comboBox1.SelectedIndex, //Index_Normatif_De
+                                              dataGridView1.Rows[0].Cells["VALUE2"].Value,
+dataGridView1.Rows[1].Cells["VALUE2"].Value,
+dataGridView1.Rows[2].Cells["VALUE2"].Value,
+dataGridView1.Rows[3].Cells["VALUE2"].Value,
+dataGridView1.Rows[4].Cells["VALUE2"].Value,
+dataGridView1.Rows[5].Cells["VALUE2"].Value,
+dataGridView1.Rows[6].Cells["VALUE2"].Value,
+dataGridView1.Rows[7].Cells["VALUE2"].Value,
 
-                                              + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+dataGridView1.Rows[0].Cells["UNIT2"].Value,
+dataGridView1.Rows[1].Cells["UNIT2"].Value,
+dataGridView1.Rows[2].Cells["UNIT2"].Value,
+dataGridView1.Rows[3].Cells["UNIT2"].Value,
+dataGridView1.Rows[4].Cells["UNIT2"].Value,
+dataGridView1.Rows[5].Cells["UNIT2"].Value,
+dataGridView1.Rows[6].Cells["UNIT2"].Value,
+dataGridView1.Rows[7].Cells["UNIT2"].Value,
 
-                                              + (dataGridView1.Rows[0].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[1].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[2].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[3].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[4].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[5].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[6].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[7].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value
+},null,null,null);
+                        //PreConnection.Excut_Cmd("INSERT INTO `tb_labo_proteinogramme` "
+                        //                      + "(`REF`,"
+                        //                      + "`DATE_TIME`,"
+                        //                      + "`ANIM_ID`,"
+                        //                      + "`OBSERV`,"
+                        //                      + "`Index_Normatif_De`,"
+                        //                      + "`Protéines Totales`,"
+                        //                      + "`Albumine`,"
+                        //                      + "`Alpha-1-Globulines`,"
+                        //                      + "`Alpha-2-Globulines`,"
+                        //                      + "`Beta-Globulines`,"
+                        //                      + "`Gamma-Globulines`,"
+                        //                      + "`Globulines Totales`,"
+                        //                      + "`Coefficient A/G`,"
+                        //                      + "`Protéines Totales_UNIT`,"
+                        //                      + "`Albumine_UNIT`,"
+                        //                      + "`Alpha-1-Globulines_UNIT`,"
+                        //                      + "`Alpha-2-Globulines_UNIT`,"
+                        //                      + "`Beta-Globulines_UNIT`,"
+                        //                      + "`Gamma-Globulines_UNIT`,"
+                        //                      + "`Globulines Totales_UNIT`,"
+                        //                      + "`Coefficient A/G_UNIT`,"
+                        //                      + "`Protéines Totales_NORMATIF`,"
+                        //                      + "`Albumine_NORMATIF`,"
+                        //                      + "`Alpha-1-Globulines_NORMATIF`,"
+                        //                      + "`Alpha-2-Globulines_NORMATIF`,"
+                        //                      + "`Beta-Globulines_NORMATIF`,"
+                        //                      + "`Gamma-Globulines_NORMATIF`,"
+                        //                      + "`Globulines Totales_NORMATIF`,"
+                        //                      + "`Coefficient A/G_NORMATIF`)"
+                        //                      + " VALUES "
+                        //                      + "('" + textBox3.Text.Replace("'", "''") + "'," //REF
+                        //                      + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," //DATE_TIME
+                        //                      + selected_animm.Cells["ID"].Value + "," //ANIM_ID
+                        //                      + "'" + textBox1.Text.Replace("'", "''") + "'," //OBSERV
+                        //                      + comboBox1.SelectedIndex + "," //Index_Normatif_De
 
-                                              + (dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ", "
-                                              + (dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + (dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ");");
+                        //                      + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+
+                        //                      + (dataGridView1.Rows[0].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[1].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[2].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[3].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[4].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[5].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[6].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[7].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+
+                        //                      + (dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ", "
+                        //                      + (dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ");");
                     }
                     else
                     {
-                        PreConnection.Excut_Cmd("UPDATE `tb_labo_proteinogramme` SET "
-                                              + "`REF` = '" + textBox3.Text.Replace("'", "''") + "',"
-                                              + "`DATE_TIME` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
-                                              + "`OBSERV` = '" + textBox1.Text.Replace("'", "''") + "',"
-                                              + "`Index_Normatif_De` = " + comboBox1.SelectedIndex + ","
-                                              + "`Protéines Totales` = " + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + "`Albumine` = " + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + "`Alpha-1-Globulines` = " + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + "`Alpha-2-Globulines` = " + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + "`Beta-Globulines` = " + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + "`Gamma-Globulines` = " + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + "`Globulines Totales` = " + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + "`Coefficient A/G` = " + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
-                                              + "`Protéines Totales_UNIT` = " + (dataGridView1.Rows[0].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Albumine_UNIT` = " + (dataGridView1.Rows[1].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Alpha-1-Globulines_UNIT` = " + (dataGridView1.Rows[2].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Alpha-2-Globulines_UNIT` = " + (dataGridView1.Rows[3].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Beta-Globulines_UNIT` = " + (dataGridView1.Rows[4].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Gamma-Globulines_UNIT` = " + (dataGridView1.Rows[5].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Globulines Totales_UNIT` = " + (dataGridView1.Rows[6].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Coefficient A/G_UNIT` = " + (dataGridView1.Rows[7].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Protéines Totales_NORMATIF` = " + (dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Albumine_NORMATIF` = " + (dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Alpha-1-Globulines_NORMATIF` = " + (dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Alpha-2-Globulines_NORMATIF` = " + (dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Beta-Globulines_NORMATIF` = " + (dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Gamma-Globulines_NORMATIF` = " + (dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Globulines Totales_NORMATIF` = " + (dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
-                                              + "`Coefficient A/G_NORMATIF` = " + (dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL")
-                                              + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
+                        PreConnection.Excut_Cmd(2, "tb_labo_proteinogramme", new List<string> {
+                        "REF",
+"DATE_TIME",
+"OBSERV",
+"Index_Normatif_De",
+"Protéines Totales",
+"Albumine",
+"Alpha-1-Globulines",
+"Alpha-2-Globulines",
+"Beta-Globulines",
+"Gamma-Globulines",
+"Globulines Totales",
+"Coefficient A/G",
+"Protéines Totales_UNIT",
+"Albumine_UNIT",
+"Alpha-1-Globulines_UNIT",
+"Alpha-2-Globulines_UNIT",
+"Beta-Globulines_UNIT",
+"Gamma-Globulines_UNIT",
+"Globulines Totales_UNIT",
+"Coefficient A/G_UNIT",
+"Protéines Totales_NORMATIF",
+"Albumine_NORMATIF",
+"Alpha-1-Globulines_NORMATIF",
+"Alpha-2-Globulines_NORMATIF",
+"Beta-Globulines_NORMATIF",
+"Gamma-Globulines_NORMATIF",
+"Globulines Totales_NORMATIF",
+"Coefficient A/G_NORMATIF"}, new List<object>
+{
+    textBox3.Text, //REF
+                                              dateTimePicker1.Value, //DATE_TIME
+                                              textBox1.Text, //OBSERV
+                                              comboBox1.SelectedIndex, //Index_Normatif_De
+                                              dataGridView1.Rows[0].Cells["VALUE2"].Value,
+dataGridView1.Rows[1].Cells["VALUE2"].Value,
+dataGridView1.Rows[2].Cells["VALUE2"].Value,
+dataGridView1.Rows[3].Cells["VALUE2"].Value,
+dataGridView1.Rows[4].Cells["VALUE2"].Value,
+dataGridView1.Rows[5].Cells["VALUE2"].Value,
+dataGridView1.Rows[6].Cells["VALUE2"].Value,
+dataGridView1.Rows[7].Cells["VALUE2"].Value,
+
+dataGridView1.Rows[0].Cells["UNIT2"].Value,
+dataGridView1.Rows[1].Cells["UNIT2"].Value,
+dataGridView1.Rows[2].Cells["UNIT2"].Value,
+dataGridView1.Rows[3].Cells["UNIT2"].Value,
+dataGridView1.Rows[4].Cells["UNIT2"].Value,
+dataGridView1.Rows[5].Cells["UNIT2"].Value,
+dataGridView1.Rows[6].Cells["UNIT2"].Value,
+dataGridView1.Rows[7].Cells["UNIT2"].Value,
+
+dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value,
+dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value
+}, "ID = @P_ID", new List<string> { "P_ID"}, new List<object> { dataGridView2.SelectedRows[0].Cells["ID"].Value });
+                        //PreConnection.Excut_Cmd("UPDATE `tb_labo_proteinogramme` SET "
+                        //                      + "`REF` = '" + textBox3.Text.Replace("'", "''") + "',"
+                        //                      + "`DATE_TIME` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
+                        //                      + "`OBSERV` = '" + textBox1.Text.Replace("'", "''") + "',"
+                        //                      + "`Index_Normatif_De` = " + comboBox1.SelectedIndex + ","
+                        //                      + "`Protéines Totales` = " + (dataGridView1.Rows[0].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[0].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + "`Albumine` = " + (dataGridView1.Rows[1].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[1].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + "`Alpha-1-Globulines` = " + (dataGridView1.Rows[2].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[2].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + "`Alpha-2-Globulines` = " + (dataGridView1.Rows[3].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[3].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + "`Beta-Globulines` = " + (dataGridView1.Rows[4].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[4].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + "`Gamma-Globulines` = " + (dataGridView1.Rows[5].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[5].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + "`Globulines Totales` = " + (dataGridView1.Rows[6].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[6].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + "`Coefficient A/G` = " + (dataGridView1.Rows[7].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[7].Cells["VALUE2"].Value.ToString().Replace(",",".") : "NULL") + ","
+                        //                      + "`Protéines Totales_UNIT` = " + (dataGridView1.Rows[0].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Albumine_UNIT` = " + (dataGridView1.Rows[1].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Alpha-1-Globulines_UNIT` = " + (dataGridView1.Rows[2].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Alpha-2-Globulines_UNIT` = " + (dataGridView1.Rows[3].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Beta-Globulines_UNIT` = " + (dataGridView1.Rows[4].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Gamma-Globulines_UNIT` = " + (dataGridView1.Rows[5].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Globulines Totales_UNIT` = " + (dataGridView1.Rows[6].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Coefficient A/G_UNIT` = " + (dataGridView1.Rows[7].Cells["UNIT2"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["UNIT2"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Protéines Totales_NORMATIF` = " + (dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Albumine_NORMATIF` = " + (dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Alpha-1-Globulines_NORMATIF` = " + (dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Alpha-2-Globulines_NORMATIF` = " + (dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Beta-Globulines_NORMATIF` = " + (dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Gamma-Globulines_NORMATIF` = " + (dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Globulines Totales_NORMATIF` = " + (dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + "`Coefficient A/G_NORMATIF` = " + (dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL")
+                        //                      + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID"].Value + ";");
                     }
                     //--------
                     Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
@@ -522,7 +646,8 @@ namespace ALBAITAR_Softvet.Labo
                     string dq = "";
                     dataGridView2.SelectedRows.Cast<DataGridViewRow>().ForEach(row => { dq += "," + row.Cells["ID"].Value; });
                     dq = dq.Substring(1, dq.Length - 1);
-                    PreConnection.Excut_Cmd("DELETE FROM tb_labo_proteinogramme WHERE ID IN (" + dq + ");");
+                    //PreConnection.Excut_Cmd("DELETE FROM tb_labo_proteinogramme WHERE ID IN (" + dq + ");");
+                    PreConnection.Excut_Cmd(3, "tb_labo_proteinogramme", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" },new List<object> { dq});
                     //--------
                     Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
                     Laboratoire.make_historic_refesh = true;

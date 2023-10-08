@@ -296,38 +296,7 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     if (insert_autori)
                     {
-                        try
-                        {
-                            PreConnection.Excut_Cmd("INSERT INTO `tb_clients` "
-                            + "(`SEX`,"
-                            + "`FAMNME`,"
-                            + "`NME`,"
-                            + "`NUM_CNI`,"
-                            + "`ADRESS`,"
-                            + "`POSTAL_CODE`,"
-                            + "`CITY`,"
-                            + "`WILAYA`,"
-                            + "`NUM_PHONE`,"
-                            + "`EMAIL`,"
-                            + "`OBSERVATIONS`)"
-                            + "VALUES"
-                            + "('" + comboBox1.Text.Replace("'", "''") + "',"
-                            + "'" + textBox3.Text.Replace("'", "''") + "',"
-                            + "'" + textBox2.Text.Replace("'", "''") + "',"
-                            + "'" + textBox4.Text.Replace("'", "''") + "',"
-                            + "'" + textBox5.Text.Replace("'", "''") + "',"
-                            + "'" + textBox6.Text.Replace("'", "''") + "',"
-                            + "'" + comboBox2.Text.Replace("'", "''") + "',"
-                            + "'" + comboBox3.Text.Replace("'", "''") + "',"
-                            + "'" + maskedTextBox1.Text.Replace("'", "''") + "',"
-                            + "'" + textBox7.Text.Replace("'", "''") + "',"
-                            + "'" + textBox8.Text.Replace("'", "''") + "');");
-                        }
-                        catch(Exception ex)
-                        {
-                            MessageBox.Show(ex.Message, "Insert Exception");
-                        }
-                        
+                        PreConnection.Excut_Cmd(1, "tb_clients", new List<string> { "SEX", "FAMNME", "NME", "NUM_CNI", "ADRESS", "POSTAL_CODE", "CITY", "WILAYA", "NUM_PHONE", "EMAIL", "OBSERVATIONS" }, new List<object> { comboBox1.Text, textBox3.Text, textBox2.Text, textBox4.Text, textBox5.Text, textBox6.Text, comboBox2.Text, comboBox3.Text, maskedTextBox1.Text, textBox7.Text, textBox8.Text },null,null,null);
                     }
                     else
                     {
@@ -339,19 +308,7 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     if (updadate_autori)
                     {
-                        PreConnection.Excut_Cmd("UPDATE `tb_clients` SET "
-                            + "`SEX` = '" + comboBox1.Text.Replace("'", "''") + "',"
-                            + "`FAMNME` = '" + textBox3.Text.Replace("'", "''") + "',"
-                            + "`NME` = '" + textBox2.Text.Replace("'", "''") + "',"
-                            + "`NUM_CNI` = '" + textBox4.Text.Replace("'", "''") + "',"
-                            + "`ADRESS` = '" + textBox5.Text.Replace("'", "''") + "',"
-                            + "`POSTAL_CODE` = '" + textBox6.Text.Replace("'", "''") + "',"
-                            + "`CITY` = '" + comboBox2.Text.Replace("'", "''") + "',"
-                            + "`WILAYA` = '" + comboBox3.Text.Replace("'", "''") + "',"
-                            + "`NUM_PHONE` = '" + maskedTextBox1.Text.Replace("'", "''") + "',"
-                            + "`EMAIL` = '" + textBox7.Text.Replace("'", "''") + "',"
-                            + "`OBSERVATIONS` = '" + textBox8.Text.Replace("'", "''") + "' "
-                            + "WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
+                        PreConnection.Excut_Cmd(2, "tb_clients", new List<string> { "SEX", "FAMNME", "NME", "NUM_CNI", "ADRESS", "POSTAL_CODE", "CITY", "WILAYA", "NUM_PHONE", "EMAIL", "OBSERVATIONS" }, new List<object> { comboBox1.Text, textBox3.Text, textBox2.Text, textBox4.Text, textBox5.Text, textBox6.Text, comboBox2.Text, comboBox3.Text, maskedTextBox1.Text, textBox7.Text, textBox8.Text }, "ID = @P_ID", new List<string> { "P_ID" },new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
                     }
                     else
                     {
@@ -450,7 +407,7 @@ namespace ALBAITAR_Softvet.Resources
                 string slld = dd != 0 ? "- Il y a des soldes monétiques non réglés !" : "";
                 if (MessageBox.Show("Vous étes sures de supprimer " + (dataGridView1.SelectedRows.Count > 1 ? ("ces [" + dataGridView1.SelectedRows.Count + "] clients ?") : "ce client ?") + "\n\n\nAttention :\n\n" + slld + "\n\n-Tous " + (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " animaux seront supprimés!\n(Avec tous informations associés (Laboratires, Agenda ...))\n", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    PreConnection.Excut_Cmd("DELETE FROM tb_clients WHERE ID IN (" + fff + ");");
+                    PreConnection.Excut_Cmd(3, "tb_clients", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { fff });
                     Load_clients_from_DB();
                 }
             }
@@ -648,27 +605,11 @@ namespace ALBAITAR_Softvet.Resources
                 bool is_update = (int)dataGridView2.Rows[e.RowIndex].Cells["IDD_FINANC"].Value > -1;
                 if (is_update) //UPDATE
                 {
-                    PreConnection.Excut_Cmd("UPDATE tb_clients_finance SET " +
-                        "`OP_DATE`='" + (dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value != DBNull.Value ? ((DateTime)dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value).ToString("yyyy-MM-dd HH:mm:ss") : "NULL") + "'," +
-                        "`OBJECT`='" + dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value + "'," +
-                        "`DEBIT`=" + (dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : "0") + "," +
-                        "`CREDIT`=" + (dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : "0") +
-                        " WHERE `ID` = " + dataGridView2.Rows[e.RowIndex].Cells["IDD_FINANC"].Value + ";");
+                    PreConnection.Excut_Cmd(2, "tb_clients_finance", new List<string> { "OP_DATE", "OBJECT", "DEBIT", "CREDIT" }, new List<object> { dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value, dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value, dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : 0, dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView2.Rows[e.RowIndex].Cells["IDD_FINANC"].Value });
                 }
                 else //INSERT
                 {
-                    PreConnection.Excut_Cmd("INSERT INTO `tb_clients_finance`"
-                                          + "(`CLIENT_ID`,"
-                                          + "`OP_DATE`,"
-                                          + "`OBJECT`,"
-                                          + "`DEBIT`,"
-                                          + "`CREDIT`)"
-                                          + "VALUES"
-                                          + "(" + dataGridView1.SelectedRows[0].Cells["ID"].Value + ","
-                                          + "'" + (dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value != DBNull.Value ? ((DateTime)dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value).ToString("yyyy-MM-dd HH:mm:ss") : "NULL") + "',"
-                                          + "'" + dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value.ToString().Replace("'", "''") + "',"
-                                          + (dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : "0") + ","
-                                          + (dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : "0") + ");");
+                    PreConnection.Excut_Cmd(1, "tb_clients_finance", new List<string> { "OP_DATE", "OBJECT", "DEBIT", "CREDIT" }, new List<object> { dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value, dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value, dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : 0, dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : 0 },null,null,null);
                 }
                 Load_finace_historic();
 
@@ -712,7 +653,7 @@ namespace ALBAITAR_Softvet.Resources
                 if (ids.Length > 0)
                 {
                     ids = ids.Substring(1);
-                    PreConnection.Excut_Cmd("DELETE FROM tb_clients_finance WHERE `ID` IN (" + ids + ");");
+                    PreConnection.Excut_Cmd(3, "tb_clients", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { ids });
                     //Load_finace_historic();
                 }
                 dataGridView2.Rows.Cast<DataGridViewRow>().Where(zz => selected_row_delete_db.Contains(zz.Index) || selected_row_just_from_dgv.Contains(zz.Index)).ToList().ForEach(ff => dataGridView2.Rows.Remove(ff)); ;

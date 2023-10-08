@@ -100,22 +100,22 @@ namespace ALBAITAR_Softvet
                 //----------------
                 if (ready_to_save)
                 {
-                    PreConnection.Excut_Cmd("UPDATE `tb_login_and_users` SET "
-                        + "`USER_NME` = '" + textBox1.Text.Replace("'","''") + "',"
-                        + "`USER_FAMNME` = '" + textBox5.Text.Replace("'", "''") + "',"
-                        + "`SEX` = '" + (radioButton4.Checked ? "M" : "F") + "',"
-                        + "`PASSWORD` = '" + maskedTextBox1.Text.Replace("'", "''") + "',"
-                        + "`FUNCTION` = '" + ((string)comboBox1.SelectedItem).Replace("'", "''") + "',"
-                        + "`IS_ADMIN` = " + (radioButton1.Checked ? "True" : "False") + ","
-                        + "`QUESTION` = '" + textBox2.Text.Replace("'", "''") + "',"
-                        + "`ANSWER` = '" + textBox3.Text.Replace("'", "''") + "',"
-                        + "`EMAIL` = '" + textBox4.Text.Replace("'", "''") + "',"
-                        + "`CNI_NUM` = '" + textBox6.Text.Replace("'", "''") + "',"
-                        + "`ANV_NUM` = '" + textBox7.Text.Replace("'", "''") + "'"
-                        + "WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString() + ";");
+                    PreConnection.Excut_Cmd(2, "tb_login_and_users", new List<string> { "USER_NME", "USER_FAMNME", "SEX", "PASSWORD", "FUNCTION", "IS_ADMIN", "QUESTION", "ANSWER", "EMAIL", "CNI_NUM", "ANV_NUM" }, new List<object> {
+                    textBox1.Text,
+                    textBox5.Text,
+                    radioButton4.Checked ? "M" : "F",
+                    maskedTextBox1.Text,
+                    comboBox1.SelectedItem,
+                    radioButton1.Checked,
+                    textBox2.Text,
+                    textBox3.Text,
+                    textBox4.Text,
+                    textBox6.Text,
+                    textBox7.Text}, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
+                    
                     if (was_admin && !radioButton1.Checked && MessageBox.Show("Voulez-vous mettre les autorisations 'par defaut' [Oui] \n ou de conserver les autorisations précédentes (avant d'étre 'Admin') ? [Non]", "Autorisations :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        PreConnection.Excut_Cmd("UPDATE tb_autoriz t1 JOIN tb_autoriz t2 ON t1.id = t2.id SET t2.Usr_" + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString().Replace("'", "''") + " = t1.`DEFAULT_VALUES`;");
+                        PreConnection.Excut_Cmd_personnel("UPDATE tb_autoriz t1 JOIN tb_autoriz t2 ON t1.id = t2.id SET t2.Usr_" + dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString().Replace("'", "''") + " = t1.`DEFAULT_VALUES`;", null, null);
                     }
 
 
@@ -130,36 +130,37 @@ namespace ALBAITAR_Softvet
                 //----------------
                 if (ready_to_save)
                 {
-                    PreConnection.Excut_Cmd("INSERT INTO `tb_login_and_users` ("
-                        + "`USER_NME`,"
-                        + "`USER_FAMNME`,"
-                        + "`SEX`,"
-                        + "`PASSWORD`,"
-                        + "`FUNCTION`,"
-                        + "`IS_ADMIN`,"
-                        + "`QUESTION`,"
-                        + "`ANSWER`,"
-                        + "`EMAIL`,"
-                        + "`CNI_NUM`,"
-                        + "`ANV_NUM`)"
-                        + "VALUES"
-                        + "('" + textBox1.Text.Replace("'", "''") + "',"
-                        + "'" + textBox5.Text.Replace("'", "''") + "',"
-                        + "'" + (radioButton4.Checked ? "M" : "F") + "',"
-                        + "'" + maskedTextBox1.Text.Replace("'", "''") + "',"
-                        + "'" + ((string)comboBox1.SelectedItem).Replace("'", "''") + "',"
-                        + (radioButton1.Checked ? "True" : "False") + ","
-                        + "'" + textBox2.Text.Replace("'", "''") + "',"
-                        + "'" + textBox3.Text.Replace("'", "''") + "',"
-                        + "'" + textBox4.Text.Replace("'", "''") + "',"
-                        + "'" + textBox6.Text.Replace("'", "''") + "',"
-                        + "'" + textBox7.Text.Replace("'", "''") + "');");
+                    PreConnection.Excut_Cmd(1, "tb_login_and_users", new List<string> { 
+                        "USER_NME",
+                        "USER_FAMNME",
+                        "SEX",
+                        "PASSWORD",
+                        "FUNCTION",
+                        "IS_ADMIN",
+                        "QUESTION",
+                        "ANSWER",
+                        "EMAIL",
+                        "CNI_NUM",
+                        "ANV_NUM"
+                    }, new List<object>
+                    {
+                        textBox1.Text,
+                        textBox5.Text,
+                        radioButton4.Checked ? "M" : "F",
+                        maskedTextBox1.Text,
+                        comboBox1.SelectedItem,
+                        radioButton1.Checked,
+                        textBox2.Text,
+                        textBox3.Text,
+                        textBox4.Text,
+                        textBox6.Text,
+                        textBox7.Text
+                    },null,null,null);                   
 
                     //------Autorisations -------------------
                     DataTable dt = PreConnection.Load_data("SELECT MAX(ID) FROM tb_login_and_users");
-                    PreConnection.Excut_Cmd("ALTER TABLE tb_autoriz ADD COLUMN Usr_" + dt.Rows[0][0].ToString() + " INT; " +
-                        "UPDATE tb_autoriz e1 JOIN tb_autoriz e2 ON e1.ID = e2.ID SET e1.Usr_" + dt.Rows[0][0].ToString() + " = e2.DEFAULT_VALUES;");
-
+                    PreConnection.Excut_Cmd_personnel("ALTER TABLE tb_autoriz ADD COLUMN Usr_" + dt.Rows[0][0].ToString().Replace("'","''") + " INT;", null, null);
+                    PreConnection.Excut_Cmd_personnel("UPDATE tb_autoriz e1 JOIN tb_autoriz e2 ON e1.ID = e2.ID SET e1.Usr_" + dt.Rows[0][0].ToString().Replace("'", "''") + " = e2.DEFAULT_VALUES;", null, null);
                 }
             }
             //--------------------------
@@ -372,7 +373,6 @@ namespace ALBAITAR_Softvet
         {
             if (dataGridView1.Rows.Count >= 2)
             {
-                string command = "";
                 int eee = int.Parse(dataGridView1.SelectedRows[0].Cells["ID"].Value.ToString());
                 //----------------------------------
                 int Admin_Rest = dataGridView1.Rows
@@ -390,10 +390,10 @@ namespace ALBAITAR_Softvet
                                 .Cast<DataGridViewRow>()
                                 .FirstOrDefault(row => int.Parse(row.Cells["ID"].Value.ToString()) != eee).Cells["FULL_NME"].Value + "' acquerra les droits 'Admin')") : ""), "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        command += warning ? "UPDATE tb_login_and_users SET IS_ADMIN = True; " : "";
-                        command += "DELETE FROM tb_login_and_users WHERE ID = " + eee + ";";
-                        command += "ALTER TABLE tb_autoriz DROP COLUMN Usr_" + eee + ";";
-                        PreConnection.Excut_Cmd(command);
+                        if (warning) { PreConnection.Excut_Cmd_personnel("UPDATE tb_login_and_users SET IS_ADMIN = True;", null,null); }
+                        PreConnection.Excut_Cmd_personnel("DELETE FROM tb_login_and_users WHERE ID = " + eee + ";",null,null);
+                        PreConnection.Excut_Cmd_personnel("ALTER TABLE tb_autoriz DROP COLUMN Usr_" + eee + ";", null, null);
+
                         if (eee == Properties.Settings.Default.Last_login_user_idx)
                         {
                             Application.Restart();

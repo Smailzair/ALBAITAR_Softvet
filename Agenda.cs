@@ -1091,7 +1091,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             if (label16.Visible) //supprimer les icons
             {
-                PreConnection.Excut_Cmd("DELETE FROM tb_images WHERE `ID` = " + listView_Icons.SelectedItems[0].ImageKey + ";");
+                PreConnection.Excut_Cmd(3, "tb_images", null, null,"ID = @P_ID",new List<string> {"P_ID"},new List<object> { listView_Icons.SelectedItems[0].ImageKey });
                 listView_Icons.SelectedItems[0].Remove();
             }
             else //selectionner une icon
@@ -1256,11 +1256,12 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (Supprimer_pour_tous_40005)
                 {
-                    PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID IN (" + selected_ids_to_delete + ");");
+                    PreConnection.Excut_Cmd(3, "tb_agenda", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { selected_ids_to_delete });
                 }
                 else if (Supprimer_pour_juste_lui_40006)
                 {
-                    int tmpppp = PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID IN (" + selected_ids_to_delete + ") AND `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + ",%' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + ",%';");
+                    //int tmpppp = PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID IN (" + selected_ids_to_delete + ") AND `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + ",%' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + ",%';");
+                    int tmpppp = PreConnection.Excut_Cmd(3, "tb_agenda", null, null, "ID IN (@P_ID) AND `FOR_THIS_USERS` LIKE @P_Last_login_user_idx OR `FOR_THIS_USERS` LIKE CONCAT('%,', @P_Last_login_user_idx , '%,')  OR `FOR_THIS_USERS` LIKE CONCAT('%,', @P_Last_login_user_idx)  OR `FOR_THIS_USERS` LIKE CONCAT(@P_Last_login_user_idx , '%,')", new List<string> { "P_ID", "P_Last_login_user_idx" }, new List<object> { selected_ids_to_delete, Properties.Settings.Default.Last_login_user_idx });
                     if (list_tmp.Count != tmpppp)
                     {
                         if (tmpppp == 0)
@@ -1319,11 +1320,12 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (Supprimer_pour_tous_40005)
                 {
-                    PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID = " + Current_items_id + ";");
+                    PreConnection.Excut_Cmd(3, "tb_agenda", null, null, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { Current_items_id });
                 }
                 else if (Supprimer_pour_juste_lui_40006)
                 {
-                    int tmpppp = PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID = " + Current_items_id + " AND `FOR_THIS_USERS` IN ('',CONCAT(','," + Properties.Settings.Default.Last_login_user_idx + "),CONCAT(" + Properties.Settings.Default.Last_login_user_idx + ",','),CONCAT(','," + Properties.Settings.Default.Last_login_user_idx + ",','));");
+                    int tmpppp = PreConnection.Excut_Cmd(3, "tb_agenda", null, null, "ID = @P_ID AND `FOR_THIS_USERS` IN ('',CONCAT(',',@P_LOGIN_USR_ID),CONCAT(@P_LOGIN_USR_ID,','),CONCAT(',',@P_LOGIN_USR_ID,','))", new List<string> { "P_ID,@P_LOGIN_USR_ID" }, new List<object> { Current_items_id, Properties.Settings.Default.Last_login_user_idx });
+                    //int tmpppp = PreConnection.Excut_Cmd("DELETE FROM tb_agenda WHERE ID = " + Current_items_id + " AND `FOR_THIS_USERS` IN ('',CONCAT(','," + Properties.Settings.Default.Last_login_user_idx + "),CONCAT(" + Properties.Settings.Default.Last_login_user_idx + ",','),CONCAT(','," + Properties.Settings.Default.Last_login_user_idx + ",','));");
                     if (tmpppp == 0)
                     {
                         new Non_Autorized_Msg("Vous n'êtes pas autorisé à supprimer cet événement.").Show();

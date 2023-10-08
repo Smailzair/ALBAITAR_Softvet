@@ -1,5 +1,6 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using MySql.Data.MySqlClient;
+using ServiceStack.Script;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -307,70 +308,110 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         if (Is_New) //INSERT
                         {
-                            //byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : (pictureBox2.Image != null ? PreConnection.ImageToByteArray(pictureBox2.Image) : null);
                             byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
-                            string insert_cmnd = "INSERT INTO `tb_animaux`"
-                                    + "(`DATE_ADDED`,"
-                                    + "`NME`,"
-                                    + "`NUM_IDENTIF`,"
-                                    + "`NUM_PASSPORT`,"
-                                    + "`CLIENT_ID`,"
-                                    + "`ESPECE`,"
-                                    + "`RACE`,"
-                                    + "`SEXE`,"
-                                    + "`NISS_DATE`,"
-                                    + "`ROBE`,"
-                                    + "`OBSERVATIONS`,"
-                                    + "`IS_RADIATED`,"
-                                    + "`RADIATION_DATE`,"
-                                    + "`RADIATION_CAUSES`"
-                                    + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE`" : "")
-                                    + ") VALUES "
-                                    + "('" + dateTimePicker3.Value.Date.ToString("yyyy-MM-dd") + "',"//<{ DATE_ADDED: }>,
-                                    + "'" + textBox3.Text.Replace("'", "''") + "',"//<{ NME: }>,
-                                    + "'" + textBox2.Text.Replace("'", "''") + "',"//{ NUM_IDENTIF: }>,
-                                    + "'" + textBox4.Text.Replace("'", "''") + "',"//{ NUM_PASSPORT: }>,
-                                    + comboBox1.SelectedValue + ","//{ CLIENT_ID: }>,
-                                    + "'" + comboBox2.Text.Replace("'", "''") + "',"//{ ESPECE: }>,
-                                    + "'" + comboBox3.Text.Replace("'", "''") + "',"//{ RACE: }>,
-                                    + "'" + comboBox4.Text.Replace("'", "''") + "',"//{ SEXE: }>,
-                                    + (checkBox2.Checked ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ NISS_DATE: }>,
-                                    + "'" + textBox6.Text.Replace("'", "''") + "',"//{ ROBE: }>,
-                                    + "'" + textBox8.Text.Replace("'", "''") + "',"//{ OBSERVATIONS: }>,
-                                    + (checkBox1.Checked ? "TRUE" : "FALSE") + ","//{ IS_RADIATED: 0}>,
-                                    + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","//{ RADIATION_DATE: }>,
-                                    + "'" + (checkBox1.Checked ? textBox5.Text.Replace("'", "''") : "") + "'" //{ RADIATION_CAUSES 
-                                    + (File.Exists(openFileDialog1.FileName) ? ",@Pic" : "")
-                                    + ");";
-                            MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
-                            if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
-                            PreConnection.open_conn();
-                            cmd.ExecuteNonQuery();
+                            List<string> Cols = new List<string> {"DATE_ADDED",
+"NME",
+"NUM_IDENTIF",
+"NUM_PASSPORT",
+"CLIENT_ID",
+"ESPECE",
+"RACE",
+"SEXE",
+"NISS_DATE",
+"ROBE",
+"OBSERVATIONS",
+"IS_RADIATED",
+"RADIATION_DATE",
+"RADIATION_CAUSES" };
+                            if (File.Exists(openFileDialog1.FileName)) { Cols.Add("PICTURE"); }
+                            List<object> varrs = new List<object>{
+                                dateTimePicker3.Value.Date,
+textBox3.Text,
+textBox2.Text,
+textBox4.Text,
+comboBox1.SelectedValue,
+comboBox2.Text,
+comboBox3.Text,
+comboBox4.Text,
+(checkBox2.Checked ? dateTimePicker1.Value.Date : (DateTime?)null),
+textBox6.Text,
+textBox8.Text,
+checkBox1.Checked,
+(checkBox1.Checked ? dateTimePicker2.Value.Date : (DateTime?)null),
+(checkBox1.Checked ? textBox5.Text : "")
+};
+                            if (File.Exists(openFileDialog1.FileName)) { varrs.Add(imageData); }
+                            PreConnection.Excut_Cmd(1, "tb_animaux", Cols, varrs, null, null, null);
                         }
                         else //UPDATE
                         {
+
                             byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
-                            string insert_cmnd = "UPDATE `tb_animaux` SET "
-                                    + "`DATE_ADDED` = '" + dateTimePicker3.Value.Date.ToString("yyyy-MM-dd") + "',"
-                                    + "`NME` = '" + textBox3.Text.Replace("'", "''") + "',"
-                                    + "`NUM_IDENTIF` = '" + textBox2.Text.Replace("'", "''") + "',"
-                                    + "`NUM_PASSPORT` = '" + textBox4.Text.Replace("'", "''") + "',"
-                                    + "`CLIENT_ID` = " + comboBox1.SelectedValue + ","
-                                    + "`ESPECE` = '" + comboBox2.Text.Replace("'", "''") + "',"
-                                    + "`RACE` = '" + comboBox3.Text.Replace("'", "''") + "',"
-                                    + "`SEXE` = '" + comboBox4.Text.Replace("'", "''") + "',"
-                                    + "`NISS_DATE` = " + (checkBox2.Checked ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
-                                    + "`ROBE` = '" + textBox6.Text.Replace("'", "''") + "',"
-                                    + "`OBSERVATIONS` = '" + textBox8.Text.Replace("'", "''") + "',"
-                                    + "`IS_RADIATED` = " + (checkBox1.Checked ? "TRUE" : "FALSE") + ","
-                                    + "`RADIATION_DATE` = " + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
-                                    + "`RADIATION_CAUSES` = '" + (checkBox1.Checked ? textBox5.Text.Replace("'", "''") : "") + "'"
-                                    + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE` = @Pic" : (!button7.Visible ? ",`PICTURE` = NULL" : ""))
-                                    + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";";
-                            MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
-                            if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
-                            PreConnection.open_conn();
-                            cmd.ExecuteNonQuery();
+                            List<string> Cols = new List<string> {"DATE_ADDED",
+"NME",
+"NUM_IDENTIF",
+"NUM_PASSPORT",
+"CLIENT_ID",
+"ESPECE",
+"RACE",
+"SEXE",
+"NISS_DATE",
+"ROBE",
+"OBSERVATIONS",
+"IS_RADIATED",
+"RADIATION_DATE",
+"RADIATION_CAUSES" };
+                            if (File.Exists(openFileDialog1.FileName) || !button7.Visible) { Cols.Add("PICTURE"); }
+                            List<object> varrs = new List<object>{
+                                dateTimePicker3.Value.Date,
+textBox3.Text,
+textBox2.Text,
+textBox4.Text,
+comboBox1.SelectedValue,
+comboBox2.Text,
+comboBox3.Text,
+comboBox4.Text,
+(checkBox2.Checked ? dateTimePicker1.Value.Date : (DateTime?)null),
+textBox6.Text,
+textBox8.Text,
+checkBox1.Checked,
+(checkBox1.Checked ? dateTimePicker2.Value.Date : (DateTime?)null),
+(checkBox1.Checked ? textBox5.Text : "")
+};
+                            if (File.Exists(openFileDialog1.FileName))
+                            {
+                                varrs.Add(imageData);
+                            }
+                            else if (!button7.Visible)
+                            {
+                                varrs.Add(DBNull.Value);
+                            }
+                            PreConnection.Excut_Cmd(2, "tb_animaux", Cols, varrs, "ID = @ID", new List<string> { "ID" }, new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
+
+                            //================================== OLD CODE !! ==========================================================================================================
+                            //byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
+                            //string insert_cmnd = "UPDATE `tb_animaux` SET "
+                            //        + "`DATE_ADDED` = '" + dateTimePicker3.Value.Date.ToString("yyyy-MM-dd") + "',"
+                            //        + "`NME` = '" + textBox3.Text.Replace("'", "''") + "',"
+                            //        + "`NUM_IDENTIF` = '" + textBox2.Text.Replace("'", "''") + "',"
+                            //        + "`NUM_PASSPORT` = '" + textBox4.Text.Replace("'", "''") + "',"
+                            //        + "`CLIENT_ID` = " + comboBox1.SelectedValue + ","
+                            //        + "`ESPECE` = '" + comboBox2.Text.Replace("'", "''") + "',"
+                            //        + "`RACE` = '" + comboBox3.Text.Replace("'", "''") + "',"
+                            //        + "`SEXE` = '" + comboBox4.Text.Replace("'", "''") + "',"
+                            //        + "`NISS_DATE` = " + (checkBox2.Checked ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
+                            //        + "`ROBE` = '" + textBox6.Text.Replace("'", "''") + "',"
+                            //        + "`OBSERVATIONS` = '" + textBox8.Text.Replace("'", "''") + "',"
+                            //        + "`IS_RADIATED` = " + (checkBox1.Checked ? "TRUE" : "FALSE") + ","
+                            //        + "`RADIATION_DATE` = " + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
+                            //        + "`RADIATION_CAUSES` = '" + (checkBox1.Checked ? textBox5.Text.Replace("'", "''") : "") + "'"
+                            //        + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE` = @Pic" : (!button7.Visible ? ",`PICTURE` = NULL" : ""))
+                            //        + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";";
+                            //MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
+                            //if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
+                            //PreConnection.open_conn();
+                            //cmd.ExecuteNonQuery();
+                            //============================================================================================================================================
                         }
                         //----------------
                         Load_anims_from_DB();
@@ -537,11 +578,12 @@ namespace ALBAITAR_Softvet.Resources
                     string fff = "";
                     dataGridView1.SelectedRows.Cast<DataGridViewRow>().ToList().ForEach(row => fff += "," + row.Cells["ID"].Value);
                     fff = fff.Substring(1);
-                    PreConnection.Excut_Cmd("DELETE FROM tb_animaux WHERE ID IN (" + fff + ");");
+                    //PreConnection.Excut_Cmd("DELETE FROM tb_animaux WHERE ID IN (" + fff + ");");
+                    PreConnection.Excut_Cmd(3, "tb_animaux", null, null, "ID IN (@ID)", new List<string> { "ID" }, new List<object> { fff });
                     Load_anims_from_DB();
                     tabControl1.SelectedTab = tabPage1;
                 }
-                
+
             }
 
         }
@@ -867,7 +909,7 @@ namespace ALBAITAR_Softvet.Resources
                 dt.Rows.Add(new object[] { "CABINET_TEL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
                 dt.Rows.Add(new object[] { "CABINET_EMAIL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
                 dt.Rows.Add(new object[] { "CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
-                dt.Rows.Add(new object[] { "POIDS", poids_tbl.Rows.Count > 0 ? poids_tbl.AsEnumerable().Last().Field<double>("POIDS").ToString("N2") : "--"});
+                dt.Rows.Add(new object[] { "POIDS", poids_tbl.Rows.Count > 0 ? poids_tbl.AsEnumerable().Last().Field<double>("POIDS").ToString("N2") : "--" });
 
                 DataRow rww = clients.Rows.Cast<DataRow>().Where(FF => (int)FF["ID"] == (int)comboBox1.SelectedValue).FirstOrDefault();
                 dt.Rows.Add(new object[] { "CLIENT_SEX", rww["SEX"] != DBNull.Value ? rww["SEX"].ToString() : null });
@@ -950,24 +992,40 @@ namespace ALBAITAR_Softvet.Resources
 
                 if (Is_New_Visite && !label18.Visible)
                 {
-                    PreConnection.Excut_Cmd("INSERT INTO `tb_visites`"
-                                          + "(`DATETIME`,"
-                                          + "`ANIM_ID`,"
-                                          + "`VISITOR_FULL_NME`,"
-                                          + "`OBJECT`)"
-                                          + "VALUES"
-                                          + "('" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
-                                          + dataGridView1.SelectedRows[0].Cells["ID"].Value + ","
-                                          + "'" + comboBox5.Text + "',"
-                                          + "'" + richTextBox1.Text + "');");
+                    //PreConnection.Excut_Cmd("INSERT INTO `tb_visites`"
+                    //                      + "(`DATETIME`,"
+                    //                      + "`ANIM_ID`,"
+                    //                      + "`VISITOR_FULL_NME`,"
+                    //                      + "`OBJECT`)"
+                    //                      + "VALUES"
+                    //                      + "('" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
+                    //                      + dataGridView1.SelectedRows[0].Cells["ID"].Value + ","
+                    //                      + "'" + comboBox5.Text + "',"
+                    //                      + "'" + richTextBox1.Text + "');");
+                    PreConnection.Excut_Cmd(1, "tb_visites", new List<string> {"DATETIME",
+"ANIM_ID",
+"VISITOR_FULL_NME",
+"OBJECT"}, new List<object> { dateTimePicker4.Value,
+dataGridView1.SelectedRows[0].Cells["ID"].Value,
+comboBox5.Text,
+richTextBox1.Text
+}, null, null, null);
                 }
                 else if (!label18.Visible)
                 {
-                    PreConnection.Excut_Cmd("UPDATE `tb_visites` SET "
-                                          + "`DATETIME` = '" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
-                                          + "`VISITOR_FULL_NME` = '" + comboBox5.Text + "',"
-                                          + "`OBJECT` = '" + richTextBox1.Text + "'"
-                                          + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value + ";");
+                    //PreConnection.Excut_Cmd("UPDATE `tb_visites` SET "
+                    //                      + "`DATETIME` = '" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
+                    //                      + "`VISITOR_FULL_NME` = '" + comboBox5.Text + "',"
+                    //                      + "`OBJECT` = '" + richTextBox1.Text + "'"
+                    //                      + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value + ";");
+                    PreConnection.Excut_Cmd(2, "tb_visites", new List<string> {"DATETIME",
+"ANIM_ID",
+"VISITOR_FULL_NME",
+"OBJECT"}, new List<object> { dateTimePicker4.Value,
+dataGridView1.SelectedRows[0].Cells["ID"].Value,
+comboBox5.Text,
+richTextBox1.Text
+}, "ID = @W_ID", new List<string> {"W_ID"}, new List<object> { dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value });
                 }
                 bool label18_visible = label18.Visible;
                 load_visites();
@@ -1137,85 +1195,84 @@ namespace ALBAITAR_Softvet.Resources
                     if (ids.Length > 0)
                     {
                         ids = ids.Substring(1);
-                        PreConnection.Excut_Cmd("DELETE FROM tb_visites WHERE `ID` IN (" + ids + ");");
+                        PreConnection.Excut_Cmd(3, "tb_visites", null, null, "ID IN (@W_ID)", new List<string> { "W_ID" }, new List<object> { ids });
                         //-----------
                         if (fact_ref.Length > 0)
                         {
-                            PreConnection.Excut_Cmd("UPDATE tb_factures_vente SET "
-                                                     + "`ITEM_PROD_CODE_01` = IF(`ITEM_IS_PROD_01` = FALSE AND `ITEM_PROD_CODE_01` IN (" + ids + "), NULL, `ITEM_PROD_CODE_01`),"
-                                                    + "`ITEM_PROD_CODE_02` = IF(`ITEM_IS_PROD_02` = FALSE AND `ITEM_PROD_CODE_02` IN (" + ids + "), NULL, `ITEM_PROD_CODE_02`),"
-                                                    + "`ITEM_PROD_CODE_03` = IF(`ITEM_IS_PROD_03` = FALSE AND `ITEM_PROD_CODE_03` IN (" + ids + "), NULL, `ITEM_PROD_CODE_03`),"
-                                                    + "`ITEM_PROD_CODE_04` = IF(`ITEM_IS_PROD_04` = FALSE AND `ITEM_PROD_CODE_04` IN (" + ids + "), NULL, `ITEM_PROD_CODE_04`),"
-                                                    + "`ITEM_PROD_CODE_05` = IF(`ITEM_IS_PROD_05` = FALSE AND `ITEM_PROD_CODE_05` IN (" + ids + "), NULL, `ITEM_PROD_CODE_05`),"
-                                                    + "`ITEM_PROD_CODE_06` = IF(`ITEM_IS_PROD_06` = FALSE AND `ITEM_PROD_CODE_06` IN (" + ids + "), NULL, `ITEM_PROD_CODE_06`),"
-                                                    + "`ITEM_PROD_CODE_07` = IF(`ITEM_IS_PROD_07` = FALSE AND `ITEM_PROD_CODE_07` IN (" + ids + "), NULL, `ITEM_PROD_CODE_07`),"
-                                                    + "`ITEM_PROD_CODE_08` = IF(`ITEM_IS_PROD_08` = FALSE AND `ITEM_PROD_CODE_08` IN (" + ids + "), NULL, `ITEM_PROD_CODE_08`),"
-                                                    + "`ITEM_PROD_CODE_09` = IF(`ITEM_IS_PROD_09` = FALSE AND `ITEM_PROD_CODE_09` IN (" + ids + "), NULL, `ITEM_PROD_CODE_09`),"
-                                                    + "`ITEM_PROD_CODE_10` = IF(`ITEM_IS_PROD_10` = FALSE AND `ITEM_PROD_CODE_10` IN (" + ids + "), NULL, `ITEM_PROD_CODE_10`),"
-                                                    + "`ITEM_PROD_CODE_11` = IF(`ITEM_IS_PROD_11` = FALSE AND `ITEM_PROD_CODE_11` IN (" + ids + "), NULL, `ITEM_PROD_CODE_11`),"
-                                                    + "`ITEM_PROD_CODE_12` = IF(`ITEM_IS_PROD_12` = FALSE AND `ITEM_PROD_CODE_12` IN (" + ids + "), NULL, `ITEM_PROD_CODE_12`),"
-                                                    + "`ITEM_PROD_CODE_13` = IF(`ITEM_IS_PROD_13` = FALSE AND `ITEM_PROD_CODE_13` IN (" + ids + "), NULL, `ITEM_PROD_CODE_13`),"
-                                                    + "`ITEM_PROD_CODE_14` = IF(`ITEM_IS_PROD_14` = FALSE AND `ITEM_PROD_CODE_14` IN (" + ids + "), NULL, `ITEM_PROD_CODE_14`),"
-                                                    + "`ITEM_PROD_CODE_15` = IF(`ITEM_IS_PROD_15` = FALSE AND `ITEM_PROD_CODE_15` IN (" + ids + "), NULL, `ITEM_PROD_CODE_15`),"
-                                                    + "`ITEM_PROD_CODE_16` = IF(`ITEM_IS_PROD_16` = FALSE AND `ITEM_PROD_CODE_16` IN (" + ids + "), NULL, `ITEM_PROD_CODE_16`),"
-                                                    + "`ITEM_PROD_CODE_17` = IF(`ITEM_IS_PROD_17` = FALSE AND `ITEM_PROD_CODE_17` IN (" + ids + "), NULL, `ITEM_PROD_CODE_17`),"
-                                                    + "`ITEM_PROD_CODE_18` = IF(`ITEM_IS_PROD_18` = FALSE AND `ITEM_PROD_CODE_18` IN (" + ids + "), NULL, `ITEM_PROD_CODE_18`),"
-                                                    + "`ITEM_PROD_CODE_19` = IF(`ITEM_IS_PROD_19` = FALSE AND `ITEM_PROD_CODE_19` IN (" + ids + "), NULL, `ITEM_PROD_CODE_19`),"
-                                                    + "`ITEM_PROD_CODE_20` = IF(`ITEM_IS_PROD_20` = FALSE AND `ITEM_PROD_CODE_20` IN (" + ids + "), NULL, `ITEM_PROD_CODE_20`),"
-                                                    + "`ITEM_PROD_CODE_21` = IF(`ITEM_IS_PROD_21` = FALSE AND `ITEM_PROD_CODE_21` IN (" + ids + "), NULL, `ITEM_PROD_CODE_21`),"
-                                                    + "`ITEM_PROD_CODE_22` = IF(`ITEM_IS_PROD_22` = FALSE AND `ITEM_PROD_CODE_22` IN (" + ids + "), NULL, `ITEM_PROD_CODE_22`),"
-                                                    + "`ITEM_PROD_CODE_23` = IF(`ITEM_IS_PROD_23` = FALSE AND `ITEM_PROD_CODE_23` IN (" + ids + "), NULL, `ITEM_PROD_CODE_23`),"
-                                                    + "`ITEM_PROD_CODE_24` = IF(`ITEM_IS_PROD_24` = FALSE AND `ITEM_PROD_CODE_24` IN (" + ids + "), NULL, `ITEM_PROD_CODE_24`),"
-                                                    + "`ITEM_PROD_CODE_25` = IF(`ITEM_IS_PROD_25` = FALSE AND `ITEM_PROD_CODE_25` IN (" + ids + "), NULL, `ITEM_PROD_CODE_25`),"
-                                                    + "`ITEM_PROD_CODE_26` = IF(`ITEM_IS_PROD_26` = FALSE AND `ITEM_PROD_CODE_26` IN (" + ids + "), NULL, `ITEM_PROD_CODE_26`),"
-                                                    + "`ITEM_PROD_CODE_27` = IF(`ITEM_IS_PROD_27` = FALSE AND `ITEM_PROD_CODE_27` IN (" + ids + "), NULL, `ITEM_PROD_CODE_27`),"
-                                                    + "`ITEM_PROD_CODE_28` = IF(`ITEM_IS_PROD_28` = FALSE AND `ITEM_PROD_CODE_28` IN (" + ids + "), NULL, `ITEM_PROD_CODE_28`),"
-                                                    + "`ITEM_PROD_CODE_29` = IF(`ITEM_IS_PROD_29` = FALSE AND `ITEM_PROD_CODE_29` IN (" + ids + "), NULL, `ITEM_PROD_CODE_29`),"
-                                                    + "`ITEM_PROD_CODE_30` = IF(`ITEM_IS_PROD_30` = FALSE AND `ITEM_PROD_CODE_30` IN (" + ids + "), NULL, `ITEM_PROD_CODE_30`),"
-                                                    + "`ITEM_PROD_CODE_31` = IF(`ITEM_IS_PROD_31` = FALSE AND `ITEM_PROD_CODE_31` IN (" + ids + "), NULL, `ITEM_PROD_CODE_31`),"
-                                                    + "`ITEM_PROD_CODE_32` = IF(`ITEM_IS_PROD_32` = FALSE AND `ITEM_PROD_CODE_32` IN (" + ids + "), NULL, `ITEM_PROD_CODE_32`),"
-                                                    + "`ITEM_PROD_CODE_33` = IF(`ITEM_IS_PROD_33` = FALSE AND `ITEM_PROD_CODE_33` IN (" + ids + "), NULL, `ITEM_PROD_CODE_33`),"
-                                                    + "`ITEM_PROD_CODE_34` = IF(`ITEM_IS_PROD_34` = FALSE AND `ITEM_PROD_CODE_34` IN (" + ids + "), NULL, `ITEM_PROD_CODE_34`),"
-                                                    + "`ITEM_PROD_CODE_35` = IF(`ITEM_IS_PROD_35` = FALSE AND `ITEM_PROD_CODE_35` IN (" + ids + "), NULL, `ITEM_PROD_CODE_35`),"
-                                                    + "`ITEM_PROD_CODE_36` = IF(`ITEM_IS_PROD_36` = FALSE AND `ITEM_PROD_CODE_36` IN (" + ids + "), NULL, `ITEM_PROD_CODE_36`),"
-                                                    + "`ITEM_PROD_CODE_37` = IF(`ITEM_IS_PROD_37` = FALSE AND `ITEM_PROD_CODE_37` IN (" + ids + "), NULL, `ITEM_PROD_CODE_37`),"
-                                                    + "`ITEM_PROD_CODE_38` = IF(`ITEM_IS_PROD_38` = FALSE AND `ITEM_PROD_CODE_38` IN (" + ids + "), NULL, `ITEM_PROD_CODE_38`),"
-                                                    + "`ITEM_PROD_CODE_39` = IF(`ITEM_IS_PROD_39` = FALSE AND `ITEM_PROD_CODE_39` IN (" + ids + "), NULL, `ITEM_PROD_CODE_39`),"
-                                                    + "`ITEM_PROD_CODE_40` = IF(`ITEM_IS_PROD_40` = FALSE AND `ITEM_PROD_CODE_40` IN (" + ids + "), NULL, `ITEM_PROD_CODE_40`),"
-                                                    + "`ITEM_PROD_CODE_41` = IF(`ITEM_IS_PROD_41` = FALSE AND `ITEM_PROD_CODE_41` IN (" + ids + "), NULL, `ITEM_PROD_CODE_41`),"
-                                                    + "`ITEM_PROD_CODE_42` = IF(`ITEM_IS_PROD_42` = FALSE AND `ITEM_PROD_CODE_42` IN (" + ids + "), NULL, `ITEM_PROD_CODE_42`),"
-                                                    + "`ITEM_PROD_CODE_43` = IF(`ITEM_IS_PROD_43` = FALSE AND `ITEM_PROD_CODE_43` IN (" + ids + "), NULL, `ITEM_PROD_CODE_43`),"
-                                                    + "`ITEM_PROD_CODE_44` = IF(`ITEM_IS_PROD_44` = FALSE AND `ITEM_PROD_CODE_44` IN (" + ids + "), NULL, `ITEM_PROD_CODE_44`),"
-                                                    + "`ITEM_PROD_CODE_45` = IF(`ITEM_IS_PROD_45` = FALSE AND `ITEM_PROD_CODE_45` IN (" + ids + "), NULL, `ITEM_PROD_CODE_45`),"
-                                                    + "`ITEM_PROD_CODE_46` = IF(`ITEM_IS_PROD_46` = FALSE AND `ITEM_PROD_CODE_46` IN (" + ids + "), NULL, `ITEM_PROD_CODE_46`),"
-                                                    + "`ITEM_PROD_CODE_47` = IF(`ITEM_IS_PROD_47` = FALSE AND `ITEM_PROD_CODE_47` IN (" + ids + "), NULL, `ITEM_PROD_CODE_47`),"
-                                                    + "`ITEM_PROD_CODE_48` = IF(`ITEM_IS_PROD_48` = FALSE AND `ITEM_PROD_CODE_48` IN (" + ids + "), NULL, `ITEM_PROD_CODE_48`),"
-                                                    + "`ITEM_PROD_CODE_49` = IF(`ITEM_IS_PROD_49` = FALSE AND `ITEM_PROD_CODE_49` IN (" + ids + "), NULL, `ITEM_PROD_CODE_49`),"
-                                                    + "`ITEM_PROD_CODE_50` = IF(`ITEM_IS_PROD_50` = FALSE AND `ITEM_PROD_CODE_50` IN (" + ids + "), NULL, `ITEM_PROD_CODE_50`),"
-                                                    + "`ITEM_PROD_CODE_51` = IF(`ITEM_IS_PROD_51` = FALSE AND `ITEM_PROD_CODE_51` IN (" + ids + "), NULL, `ITEM_PROD_CODE_51`),"
-                                                    + "`ITEM_PROD_CODE_52` = IF(`ITEM_IS_PROD_52` = FALSE AND `ITEM_PROD_CODE_52` IN (" + ids + "), NULL, `ITEM_PROD_CODE_52`),"
-                                                    + "`ITEM_PROD_CODE_53` = IF(`ITEM_IS_PROD_53` = FALSE AND `ITEM_PROD_CODE_53` IN (" + ids + "), NULL, `ITEM_PROD_CODE_53`),"
-                                                    + "`ITEM_PROD_CODE_54` = IF(`ITEM_IS_PROD_54` = FALSE AND `ITEM_PROD_CODE_54` IN (" + ids + "), NULL, `ITEM_PROD_CODE_54`),"
-                                                    + "`ITEM_PROD_CODE_55` = IF(`ITEM_IS_PROD_55` = FALSE AND `ITEM_PROD_CODE_55` IN (" + ids + "), NULL, `ITEM_PROD_CODE_55`),"
-                                                    + "`ITEM_PROD_CODE_56` = IF(`ITEM_IS_PROD_56` = FALSE AND `ITEM_PROD_CODE_56` IN (" + ids + "), NULL, `ITEM_PROD_CODE_56`),"
-                                                    + "`ITEM_PROD_CODE_57` = IF(`ITEM_IS_PROD_57` = FALSE AND `ITEM_PROD_CODE_57` IN (" + ids + "), NULL, `ITEM_PROD_CODE_57`),"
-                                                    + "`ITEM_PROD_CODE_58` = IF(`ITEM_IS_PROD_58` = FALSE AND `ITEM_PROD_CODE_58` IN (" + ids + "), NULL, `ITEM_PROD_CODE_58`),"
-                                                    + "`ITEM_PROD_CODE_59` = IF(`ITEM_IS_PROD_59` = FALSE AND `ITEM_PROD_CODE_59` IN (" + ids + "), NULL, `ITEM_PROD_CODE_59`),"
-                                                    + "`ITEM_PROD_CODE_60` = IF(`ITEM_IS_PROD_60` = FALSE AND `ITEM_PROD_CODE_60` IN (" + ids + "), NULL, `ITEM_PROD_CODE_60`),"
-                                                    + "`ITEM_PROD_CODE_61` = IF(`ITEM_IS_PROD_61` = FALSE AND `ITEM_PROD_CODE_61` IN (" + ids + "), NULL, `ITEM_PROD_CODE_61`),"
-                                                    + "`ITEM_PROD_CODE_62` = IF(`ITEM_IS_PROD_62` = FALSE AND `ITEM_PROD_CODE_62` IN (" + ids + "), NULL, `ITEM_PROD_CODE_62`),"
-                                                    + "`ITEM_PROD_CODE_63` = IF(`ITEM_IS_PROD_63` = FALSE AND `ITEM_PROD_CODE_63` IN (" + ids + "), NULL, `ITEM_PROD_CODE_63`),"
-                                                    + "`ITEM_PROD_CODE_64` = IF(`ITEM_IS_PROD_64` = FALSE AND `ITEM_PROD_CODE_64` IN (" + ids + "), NULL, `ITEM_PROD_CODE_64`),"
-                                                    + "`ITEM_PROD_CODE_65` = IF(`ITEM_IS_PROD_65` = FALSE AND `ITEM_PROD_CODE_65` IN (" + ids + "), NULL, `ITEM_PROD_CODE_65`),"
-                                                    + "`ITEM_PROD_CODE_66` = IF(`ITEM_IS_PROD_66` = FALSE AND `ITEM_PROD_CODE_66` IN (" + ids + "), NULL, `ITEM_PROD_CODE_66`),"
-                                                    + "`ITEM_PROD_CODE_67` = IF(`ITEM_IS_PROD_67` = FALSE AND `ITEM_PROD_CODE_67` IN (" + ids + "), NULL, `ITEM_PROD_CODE_67`),"
-                                                    + "`ITEM_PROD_CODE_68` = IF(`ITEM_IS_PROD_68` = FALSE AND `ITEM_PROD_CODE_68` IN (" + ids + "), NULL, `ITEM_PROD_CODE_68`),"
-                                                    + "`ITEM_PROD_CODE_69` = IF(`ITEM_IS_PROD_69` = FALSE AND `ITEM_PROD_CODE_69` IN (" + ids + "), NULL, `ITEM_PROD_CODE_69`),"
-                                                    + "`ITEM_PROD_CODE_70` = IF(`ITEM_IS_PROD_70` = FALSE AND `ITEM_PROD_CODE_70` IN (" + ids + "), NULL, `ITEM_PROD_CODE_70`)"
-                                + ";");
+                            PreConnection.Excut_Cmd_personnel("UPDATE tb_factures_vente SET "
+                                                     + "`ITEM_PROD_CODE_01` = IF(`ITEM_IS_PROD_01` = FALSE AND `ITEM_PROD_CODE_01` IN (@param_xx), NULL, `ITEM_PROD_CODE_01`),"
+                                                    + "`ITEM_PROD_CODE_02` = IF(`ITEM_IS_PROD_02` = FALSE AND `ITEM_PROD_CODE_02` IN (@param_xx), NULL, `ITEM_PROD_CODE_02`),"
+                                                    + "`ITEM_PROD_CODE_03` = IF(`ITEM_IS_PROD_03` = FALSE AND `ITEM_PROD_CODE_03` IN (@param_xx), NULL, `ITEM_PROD_CODE_03`),"
+                                                    + "`ITEM_PROD_CODE_04` = IF(`ITEM_IS_PROD_04` = FALSE AND `ITEM_PROD_CODE_04` IN (@param_xx), NULL, `ITEM_PROD_CODE_04`),"
+                                                    + "`ITEM_PROD_CODE_05` = IF(`ITEM_IS_PROD_05` = FALSE AND `ITEM_PROD_CODE_05` IN (@param_xx), NULL, `ITEM_PROD_CODE_05`),"
+                                                    + "`ITEM_PROD_CODE_06` = IF(`ITEM_IS_PROD_06` = FALSE AND `ITEM_PROD_CODE_06` IN (@param_xx), NULL, `ITEM_PROD_CODE_06`),"
+                                                    + "`ITEM_PROD_CODE_07` = IF(`ITEM_IS_PROD_07` = FALSE AND `ITEM_PROD_CODE_07` IN (@param_xx), NULL, `ITEM_PROD_CODE_07`),"
+                                                    + "`ITEM_PROD_CODE_08` = IF(`ITEM_IS_PROD_08` = FALSE AND `ITEM_PROD_CODE_08` IN (@param_xx), NULL, `ITEM_PROD_CODE_08`),"
+                                                    + "`ITEM_PROD_CODE_09` = IF(`ITEM_IS_PROD_09` = FALSE AND `ITEM_PROD_CODE_09` IN (@param_xx), NULL, `ITEM_PROD_CODE_09`),"
+                                                    + "`ITEM_PROD_CODE_10` = IF(`ITEM_IS_PROD_10` = FALSE AND `ITEM_PROD_CODE_10` IN (@param_xx), NULL, `ITEM_PROD_CODE_10`),"
+                                                    + "`ITEM_PROD_CODE_11` = IF(`ITEM_IS_PROD_11` = FALSE AND `ITEM_PROD_CODE_11` IN (@param_xx), NULL, `ITEM_PROD_CODE_11`),"
+                                                    + "`ITEM_PROD_CODE_12` = IF(`ITEM_IS_PROD_12` = FALSE AND `ITEM_PROD_CODE_12` IN (@param_xx), NULL, `ITEM_PROD_CODE_12`),"
+                                                    + "`ITEM_PROD_CODE_13` = IF(`ITEM_IS_PROD_13` = FALSE AND `ITEM_PROD_CODE_13` IN (@param_xx), NULL, `ITEM_PROD_CODE_13`),"
+                                                    + "`ITEM_PROD_CODE_14` = IF(`ITEM_IS_PROD_14` = FALSE AND `ITEM_PROD_CODE_14` IN (@param_xx), NULL, `ITEM_PROD_CODE_14`),"
+                                                    + "`ITEM_PROD_CODE_15` = IF(`ITEM_IS_PROD_15` = FALSE AND `ITEM_PROD_CODE_15` IN (@param_xx), NULL, `ITEM_PROD_CODE_15`),"
+                                                    + "`ITEM_PROD_CODE_16` = IF(`ITEM_IS_PROD_16` = FALSE AND `ITEM_PROD_CODE_16` IN (@param_xx), NULL, `ITEM_PROD_CODE_16`),"
+                                                    + "`ITEM_PROD_CODE_17` = IF(`ITEM_IS_PROD_17` = FALSE AND `ITEM_PROD_CODE_17` IN (@param_xx), NULL, `ITEM_PROD_CODE_17`),"
+                                                    + "`ITEM_PROD_CODE_18` = IF(`ITEM_IS_PROD_18` = FALSE AND `ITEM_PROD_CODE_18` IN (@param_xx), NULL, `ITEM_PROD_CODE_18`),"
+                                                    + "`ITEM_PROD_CODE_19` = IF(`ITEM_IS_PROD_19` = FALSE AND `ITEM_PROD_CODE_19` IN (@param_xx), NULL, `ITEM_PROD_CODE_19`),"
+                                                    + "`ITEM_PROD_CODE_20` = IF(`ITEM_IS_PROD_20` = FALSE AND `ITEM_PROD_CODE_20` IN (@param_xx), NULL, `ITEM_PROD_CODE_20`),"
+                                                    + "`ITEM_PROD_CODE_21` = IF(`ITEM_IS_PROD_21` = FALSE AND `ITEM_PROD_CODE_21` IN (@param_xx), NULL, `ITEM_PROD_CODE_21`),"
+                                                    + "`ITEM_PROD_CODE_22` = IF(`ITEM_IS_PROD_22` = FALSE AND `ITEM_PROD_CODE_22` IN (@param_xx), NULL, `ITEM_PROD_CODE_22`),"
+                                                    + "`ITEM_PROD_CODE_23` = IF(`ITEM_IS_PROD_23` = FALSE AND `ITEM_PROD_CODE_23` IN (@param_xx), NULL, `ITEM_PROD_CODE_23`),"
+                                                    + "`ITEM_PROD_CODE_24` = IF(`ITEM_IS_PROD_24` = FALSE AND `ITEM_PROD_CODE_24` IN (@param_xx), NULL, `ITEM_PROD_CODE_24`),"
+                                                    + "`ITEM_PROD_CODE_25` = IF(`ITEM_IS_PROD_25` = FALSE AND `ITEM_PROD_CODE_25` IN (@param_xx), NULL, `ITEM_PROD_CODE_25`),"
+                                                    + "`ITEM_PROD_CODE_26` = IF(`ITEM_IS_PROD_26` = FALSE AND `ITEM_PROD_CODE_26` IN (@param_xx), NULL, `ITEM_PROD_CODE_26`),"
+                                                    + "`ITEM_PROD_CODE_27` = IF(`ITEM_IS_PROD_27` = FALSE AND `ITEM_PROD_CODE_27` IN (@param_xx), NULL, `ITEM_PROD_CODE_27`),"
+                                                    + "`ITEM_PROD_CODE_28` = IF(`ITEM_IS_PROD_28` = FALSE AND `ITEM_PROD_CODE_28` IN (@param_xx), NULL, `ITEM_PROD_CODE_28`),"
+                                                    + "`ITEM_PROD_CODE_29` = IF(`ITEM_IS_PROD_29` = FALSE AND `ITEM_PROD_CODE_29` IN (@param_xx), NULL, `ITEM_PROD_CODE_29`),"
+                                                    + "`ITEM_PROD_CODE_30` = IF(`ITEM_IS_PROD_30` = FALSE AND `ITEM_PROD_CODE_30` IN (@param_xx), NULL, `ITEM_PROD_CODE_30`),"
+                                                    + "`ITEM_PROD_CODE_31` = IF(`ITEM_IS_PROD_31` = FALSE AND `ITEM_PROD_CODE_31` IN (@param_xx), NULL, `ITEM_PROD_CODE_31`),"
+                                                    + "`ITEM_PROD_CODE_32` = IF(`ITEM_IS_PROD_32` = FALSE AND `ITEM_PROD_CODE_32` IN (@param_xx), NULL, `ITEM_PROD_CODE_32`),"
+                                                    + "`ITEM_PROD_CODE_33` = IF(`ITEM_IS_PROD_33` = FALSE AND `ITEM_PROD_CODE_33` IN (@param_xx), NULL, `ITEM_PROD_CODE_33`),"
+                                                    + "`ITEM_PROD_CODE_34` = IF(`ITEM_IS_PROD_34` = FALSE AND `ITEM_PROD_CODE_34` IN (@param_xx), NULL, `ITEM_PROD_CODE_34`),"
+                                                    + "`ITEM_PROD_CODE_35` = IF(`ITEM_IS_PROD_35` = FALSE AND `ITEM_PROD_CODE_35` IN (@param_xx), NULL, `ITEM_PROD_CODE_35`),"
+                                                    + "`ITEM_PROD_CODE_36` = IF(`ITEM_IS_PROD_36` = FALSE AND `ITEM_PROD_CODE_36` IN (@param_xx), NULL, `ITEM_PROD_CODE_36`),"
+                                                    + "`ITEM_PROD_CODE_37` = IF(`ITEM_IS_PROD_37` = FALSE AND `ITEM_PROD_CODE_37` IN (@param_xx), NULL, `ITEM_PROD_CODE_37`),"
+                                                    + "`ITEM_PROD_CODE_38` = IF(`ITEM_IS_PROD_38` = FALSE AND `ITEM_PROD_CODE_38` IN (@param_xx), NULL, `ITEM_PROD_CODE_38`),"
+                                                    + "`ITEM_PROD_CODE_39` = IF(`ITEM_IS_PROD_39` = FALSE AND `ITEM_PROD_CODE_39` IN (@param_xx), NULL, `ITEM_PROD_CODE_39`),"
+                                                    + "`ITEM_PROD_CODE_40` = IF(`ITEM_IS_PROD_40` = FALSE AND `ITEM_PROD_CODE_40` IN (@param_xx), NULL, `ITEM_PROD_CODE_40`),"
+                                                    + "`ITEM_PROD_CODE_41` = IF(`ITEM_IS_PROD_41` = FALSE AND `ITEM_PROD_CODE_41` IN (@param_xx), NULL, `ITEM_PROD_CODE_41`),"
+                                                    + "`ITEM_PROD_CODE_42` = IF(`ITEM_IS_PROD_42` = FALSE AND `ITEM_PROD_CODE_42` IN (@param_xx), NULL, `ITEM_PROD_CODE_42`),"
+                                                    + "`ITEM_PROD_CODE_43` = IF(`ITEM_IS_PROD_43` = FALSE AND `ITEM_PROD_CODE_43` IN (@param_xx), NULL, `ITEM_PROD_CODE_43`),"
+                                                    + "`ITEM_PROD_CODE_44` = IF(`ITEM_IS_PROD_44` = FALSE AND `ITEM_PROD_CODE_44` IN (@param_xx), NULL, `ITEM_PROD_CODE_44`),"
+                                                    + "`ITEM_PROD_CODE_45` = IF(`ITEM_IS_PROD_45` = FALSE AND `ITEM_PROD_CODE_45` IN (@param_xx), NULL, `ITEM_PROD_CODE_45`),"
+                                                    + "`ITEM_PROD_CODE_46` = IF(`ITEM_IS_PROD_46` = FALSE AND `ITEM_PROD_CODE_46` IN (@param_xx), NULL, `ITEM_PROD_CODE_46`),"
+                                                    + "`ITEM_PROD_CODE_47` = IF(`ITEM_IS_PROD_47` = FALSE AND `ITEM_PROD_CODE_47` IN (@param_xx), NULL, `ITEM_PROD_CODE_47`),"
+                                                    + "`ITEM_PROD_CODE_48` = IF(`ITEM_IS_PROD_48` = FALSE AND `ITEM_PROD_CODE_48` IN (@param_xx), NULL, `ITEM_PROD_CODE_48`),"
+                                                    + "`ITEM_PROD_CODE_49` = IF(`ITEM_IS_PROD_49` = FALSE AND `ITEM_PROD_CODE_49` IN (@param_xx), NULL, `ITEM_PROD_CODE_49`),"
+                                                    + "`ITEM_PROD_CODE_50` = IF(`ITEM_IS_PROD_50` = FALSE AND `ITEM_PROD_CODE_50` IN (@param_xx), NULL, `ITEM_PROD_CODE_50`),"
+                                                    + "`ITEM_PROD_CODE_51` = IF(`ITEM_IS_PROD_51` = FALSE AND `ITEM_PROD_CODE_51` IN (@param_xx), NULL, `ITEM_PROD_CODE_51`),"
+                                                    + "`ITEM_PROD_CODE_52` = IF(`ITEM_IS_PROD_52` = FALSE AND `ITEM_PROD_CODE_52` IN (@param_xx), NULL, `ITEM_PROD_CODE_52`),"
+                                                    + "`ITEM_PROD_CODE_53` = IF(`ITEM_IS_PROD_53` = FALSE AND `ITEM_PROD_CODE_53` IN (@param_xx), NULL, `ITEM_PROD_CODE_53`),"
+                                                    + "`ITEM_PROD_CODE_54` = IF(`ITEM_IS_PROD_54` = FALSE AND `ITEM_PROD_CODE_54` IN (@param_xx), NULL, `ITEM_PROD_CODE_54`),"
+                                                    + "`ITEM_PROD_CODE_55` = IF(`ITEM_IS_PROD_55` = FALSE AND `ITEM_PROD_CODE_55` IN (@param_xx), NULL, `ITEM_PROD_CODE_55`),"
+                                                    + "`ITEM_PROD_CODE_56` = IF(`ITEM_IS_PROD_56` = FALSE AND `ITEM_PROD_CODE_56` IN (@param_xx), NULL, `ITEM_PROD_CODE_56`),"
+                                                    + "`ITEM_PROD_CODE_57` = IF(`ITEM_IS_PROD_57` = FALSE AND `ITEM_PROD_CODE_57` IN (@param_xx), NULL, `ITEM_PROD_CODE_57`),"
+                                                    + "`ITEM_PROD_CODE_58` = IF(`ITEM_IS_PROD_58` = FALSE AND `ITEM_PROD_CODE_58` IN (@param_xx), NULL, `ITEM_PROD_CODE_58`),"
+                                                    + "`ITEM_PROD_CODE_59` = IF(`ITEM_IS_PROD_59` = FALSE AND `ITEM_PROD_CODE_59` IN (@param_xx), NULL, `ITEM_PROD_CODE_59`),"
+                                                    + "`ITEM_PROD_CODE_60` = IF(`ITEM_IS_PROD_60` = FALSE AND `ITEM_PROD_CODE_60` IN (@param_xx), NULL, `ITEM_PROD_CODE_60`),"
+                                                    + "`ITEM_PROD_CODE_61` = IF(`ITEM_IS_PROD_61` = FALSE AND `ITEM_PROD_CODE_61` IN (@param_xx), NULL, `ITEM_PROD_CODE_61`),"
+                                                    + "`ITEM_PROD_CODE_62` = IF(`ITEM_IS_PROD_62` = FALSE AND `ITEM_PROD_CODE_62` IN (@param_xx), NULL, `ITEM_PROD_CODE_62`),"
+                                                    + "`ITEM_PROD_CODE_63` = IF(`ITEM_IS_PROD_63` = FALSE AND `ITEM_PROD_CODE_63` IN (@param_xx), NULL, `ITEM_PROD_CODE_63`),"
+                                                    + "`ITEM_PROD_CODE_64` = IF(`ITEM_IS_PROD_64` = FALSE AND `ITEM_PROD_CODE_64` IN (@param_xx), NULL, `ITEM_PROD_CODE_64`),"
+                                                    + "`ITEM_PROD_CODE_65` = IF(`ITEM_IS_PROD_65` = FALSE AND `ITEM_PROD_CODE_65` IN (@param_xx), NULL, `ITEM_PROD_CODE_65`),"
+                                                    + "`ITEM_PROD_CODE_66` = IF(`ITEM_IS_PROD_66` = FALSE AND `ITEM_PROD_CODE_66` IN (@param_xx), NULL, `ITEM_PROD_CODE_66`),"
+                                                    + "`ITEM_PROD_CODE_67` = IF(`ITEM_IS_PROD_67` = FALSE AND `ITEM_PROD_CODE_67` IN (@param_xx), NULL, `ITEM_PROD_CODE_67`),"
+                                                    + "`ITEM_PROD_CODE_68` = IF(`ITEM_IS_PROD_68` = FALSE AND `ITEM_PROD_CODE_68` IN (@param_xx), NULL, `ITEM_PROD_CODE_68`),"
+                                                    + "`ITEM_PROD_CODE_69` = IF(`ITEM_IS_PROD_69` = FALSE AND `ITEM_PROD_CODE_69` IN (@param_xx), NULL, `ITEM_PROD_CODE_69`),"
+                                                    + "`ITEM_PROD_CODE_70` = IF(`ITEM_IS_PROD_70` = FALSE AND `ITEM_PROD_CODE_70` IN (@param_xx), NULL, `ITEM_PROD_CODE_70`)"
+                                + ";",new List<string> {"param_xx"},new List<object> {ids});
                         }
                     }
-
                     load_visites();
                 }
             }
@@ -1376,7 +1433,7 @@ namespace ALBAITAR_Softvet.Resources
                 dateTimePicker.Visible = true;
                 dateTimePicker.Location = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location;
                 dateTimePicker.Size = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
-                if(prev_rw_idx == 0) { dataGridView3.BeginEdit(true); }
+                if (prev_rw_idx == 0) { dataGridView3.BeginEdit(true); }
                 dateTimePicker.Focus();
             }
             else if (prev_col_idx == dataGridView3.Columns["POIDS"].Index)
@@ -1410,11 +1467,11 @@ namespace ALBAITAR_Softvet.Resources
                 numericUpDown.Focus();
                 numericUpDown.Select(0, fff.ToString("N2").Length);
             }
-            else if(prev_col_idx == dataGridView3.Columns["DELETE"].Index && prev_rw_idx != dataGridView3.NewRowIndex)
+            else if (prev_col_idx == dataGridView3.Columns["DELETE"].Index && prev_rw_idx != dataGridView3.NewRowIndex)
             {
                 if (MessageBox.Show("Êtes-vous sûrs de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    PreConnection.Excut_Cmd("DELETE FROM tb_poids WHERE ID = "+ dataGridView3.Rows[prev_rw_idx].Cells["IDD"].Value + ";");
+                    PreConnection.Excut_Cmd(3, "tb_poids",null,null,"ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView3.Rows[prev_rw_idx].Cells["IDD"].Value });
                     load_poids();
                 }
             }
@@ -1458,9 +1515,8 @@ namespace ALBAITAR_Softvet.Resources
 
                 if (cmd.Length > 0)
                 {
-                    PreConnection.Excut_Cmd(cmd);
+                    PreConnection.Excut_Cmd_personnel(cmd,null,null);
                     load_poids();
-
                 }
             }
 
@@ -1480,13 +1536,13 @@ namespace ALBAITAR_Softvet.Resources
             //dataGridView3.Refresh();
 
         }
-             
+
 
         private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dataGridView3.Columns[e.ColumnIndex].Name == "DELETE" && e.RowIndex == dataGridView3.NewRowIndex)
             {
-               e.Value = Properties.Resources.icons8_trash_25px_1;
+                e.Value = Properties.Resources.icons8_trash_25px_1;
 
             }
         }

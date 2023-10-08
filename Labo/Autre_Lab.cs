@@ -63,7 +63,7 @@ namespace ALBAITAR_Softvet.Labo
             label13.Text = (string)selected_animm.Cells["SEXE"].Value;
             var CCC = Main_Frm.main_poids_tab.AsEnumerable().Where(F => F.Field<int>("ANIM_ID") == (int)selected_animm.Cells["ID"].Value);
             Anim_poids = CCC.Any() ? CCC.Last().Field<double>("POIDS") : 0;
-            label2.Text = Anim_poids.ToString("N2")+" Kg";
+            label2.Text = Anim_poids.ToString("N2") + " Kg";
             label14.Text = selected_animm.Cells["NISS_DATE"].Value != DBNull.Value ? ((DateTime)selected_animm.Cells["NISS_DATE"].Value).ToString("d") : "--";
             textBox2.Text = (string)selected_animm.Cells["OBSERVATIONS"].Value;
             //-------------------------
@@ -72,10 +72,10 @@ namespace ALBAITAR_Softvet.Labo
 
         }
 
-        
+
         private void Load_histor()
         {
-            string[] sss = { "Hemogramme", "Biochimie", "Immunologie", "Protéinogramme", "Urologie"};
+            string[] sss = { "Hemogramme", "Biochimie", "Immunologie", "Protéinogramme", "Urologie" };
             if (Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && !sss.Contains((string)P["LABO_NME"])).Count() > 0)
             {
                 lab_histor = Laboratoire.labo.AsEnumerable().Where(P => (int)P["ANIM_ID"] == (int)selected_animm.Cells["ID"].Value && !sss.Contains((string)P["LABO_NME"])).CopyToDataTable();
@@ -93,8 +93,8 @@ namespace ALBAITAR_Softvet.Labo
             //---------------
 
         }
-                
-        
+
+
         private void button3_Click(object sender, EventArgs e)
         {
             is_new = true;
@@ -130,33 +130,41 @@ namespace ALBAITAR_Softvet.Labo
                 {
                     if (is_new)
                     {
-                        PreConnection.Excut_Cmd("INSERT INTO `tb_labo_autre` "
-                                              + "(`REF`,"
-                                              + "`DATE_TIME`,"
-                                              + "`ANIM_ID`,"
-                                              + "`OBSERV`,"
-                                              + "`TYPE_ANAL`,"
-                                              + "`METHODE`,"
-                                              + "`RESULT`)"
-                                              + " VALUES "
-                                              + "('" + textBox3.Text.Replace("'", "''") + "'," //REF
-                                              + "'" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "'," //DATE_TIME
-                                              + selected_animm.Cells["ID"].Value + "," //ANIM_ID
-                                              + "'" + textBox1.Text.Replace("'", "''") + "'," //OBSERV
-                                              + "'" + current_analys_type + "'," //TYPE_ANAL
-                                              + "'" + textBox5.Text.Replace("'", "''") + "'," //METHODE
-                                              + "'" + textBox6.Text.Replace("'", "''") + "');"); //RESULT
+                        PreConnection.Excut_Cmd(1, "tb_labo_autre", new List<string> {
+                            "REF",
+                            "DATE_TIME",
+                            "ANIM_ID",
+                            "OBSERV",
+                            "TYPE_ANAL",
+                            "METHODE",
+                            "RESULT"}, new List<object>
+                            {
+                                textBox3.Text,
+                                dateTimePicker1.Value,
+                                selected_animm.Cells["ID"].Value,
+                                textBox1.Text,
+                                current_analys_type,
+                                textBox5.Text,
+                                textBox6.Text
+                            }, null, null, null);
                     }
                     else
                     {
-                        PreConnection.Excut_Cmd("UPDATE `tb_labo_autre` SET "
-                                              + "`REF` = '" + textBox3.Text.Replace("'", "''") + "',"
-                                              + "`DATE_TIME` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"
-                                              + "`OBSERV` = '" + textBox1.Text.Replace("'", "''") + "',"
-                                              + "`TYPE_ANAL` = '" + current_analys_type + "',"
-                                              + "`METHODE` = '" + textBox5.Text.Replace("'", "''") + "',"
-                                              + "`RESULT` = '" + textBox6.Text.Replace("'", "''") + "'"
-                                              + " WHERE `ID` = " + dataGridView22.SelectedRows[0].Cells["ID"].Value + ";");
+                        PreConnection.Excut_Cmd(2, "tb_labo_autre", new List<string> {
+                            "REF",
+                            "DATE_TIME",
+                            "OBSERV",
+                            "TYPE_ANAL",
+                            "METHODE",
+                            "RESULT"}, new List<object>
+                            {
+                                textBox3.Text,
+                                dateTimePicker1.Value,
+                                textBox1.Text,
+                                current_analys_type,
+                                textBox5.Text,
+                                textBox6.Text
+                            }, "ID = @P_ID", new List<string> { "P_ID"}, new List<object> { dataGridView22.SelectedRows[0].Cells["ID"].Value });
                     }
                     //--------
                     Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
@@ -195,11 +203,11 @@ namespace ALBAITAR_Softvet.Labo
                 {
                     nmb = lab_histor.AsEnumerable().Where(P => ((string)P["REF"]).Trim().Length > 0 && (string)P["REF"] == textBox3.Text.Trim()).Count();
                 }
-                else if(dataGridView22.SelectedRows.Count > 0)
+                else if (dataGridView22.SelectedRows.Count > 0)
                 {
                     nmb = lab_histor.AsEnumerable().Where(P => (int)dataGridView22.SelectedRows[0].Cells["ID"].Value != (int)P["ID"] && ((string)P["REF"]).Trim().Length > 0 && (string)P["REF"] == textBox3.Text.Trim()).Count();
-                }                                
-                label20.Text = nmb > 0 ? "-Déja existe !\n" : "";                                
+                }
+                label20.Text = nmb > 0 ? "-Déja existe !\n" : "";
             }
             label20.Text += textBox3.Text.Trim().Length < 10 ? "-Nb Chiffres doit > 9" : "";
             label20.TextAlign = ContentAlignment.BottomLeft;
@@ -216,13 +224,13 @@ namespace ALBAITAR_Softvet.Labo
         }
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
-        {            
+        {
 
             if (dataGridView22.SelectedRows.Count > 0)
             {
 
                 DataTable dt = PreConnection.Load_data("SELECT * FROM tb_labo_autre WHERE ID = " + dataGridView22.SelectedRows[0].Cells["ID"].Value + ";");
-                
+
 
                 //--------------------
                 if (dt != null)
@@ -239,9 +247,9 @@ namespace ALBAITAR_Softvet.Labo
                         textBox1.Text = (string)dt.Rows[0]["OBSERV"];
 
                         bool rr = false;
-                        foreach(RadioButton rd in groupBox3.Controls.OfType<RadioButton>())
+                        foreach (RadioButton rd in groupBox3.Controls.OfType<RadioButton>())
                         {
-                            if(rd.Text == (string)dt.Rows[0]["TYPE_ANAL"])
+                            if (rd.Text == (string)dt.Rows[0]["TYPE_ANAL"])
                             {
                                 rr = true;
                                 rd.Checked = true;
@@ -258,7 +266,7 @@ namespace ALBAITAR_Softvet.Labo
                             textBox4.Clear();
                         }
 
-                       
+
 
                         button5.Visible = true;
                     }
@@ -276,7 +284,7 @@ namespace ALBAITAR_Softvet.Labo
             {
                 button3.PerformClick();
             }
-            
+
         }
 
         private void dataGridView2_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -296,7 +304,7 @@ namespace ALBAITAR_Softvet.Labo
                     string dq = "";
                     dataGridView22.SelectedRows.Cast<DataGridViewRow>().ForEach(row => { dq += "," + row.Cells["ID"].Value; });
                     dq = dq.Substring(1, dq.Length - 1);
-                    PreConnection.Excut_Cmd("DELETE FROM tb_labo_autre WHERE ID IN (" + dq + ");");
+                    PreConnection.Excut_Cmd(3, "tb_labo_autre", null, null, "ID IN (@P_ID)",new List<string> { "P_ID"},new List<object> { dq} );
                     //--------
                     Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
                     Laboratoire.make_historic_refesh = true;
@@ -344,7 +352,7 @@ namespace ALBAITAR_Softvet.Labo
                 new Print_report("autre", dt, null).ShowDialog();
             }
 
-        }      
+        }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
@@ -368,7 +376,7 @@ namespace ALBAITAR_Softvet.Labo
                 current_analys_type = textBox4.Text;
             }
             else
-            {                
+            {
                 current_analys_type = ((RadioButton)sender).Text;
             }
             button5.Visible = false;
@@ -376,7 +384,7 @@ namespace ALBAITAR_Softvet.Labo
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            if(radioButton10.Checked)
+            if (radioButton10.Checked)
             {
                 current_analys_type = textBox4.Text;
             }

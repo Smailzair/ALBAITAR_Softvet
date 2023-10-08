@@ -38,6 +38,7 @@ namespace ALBAITAR_Softvet
             c.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
             c.DateTimeFormat.LongTimePattern = "HH:mm:ss";
             Application.CurrentCulture = c;
+
             //---------------------------------------
             if (args.Length > 0 && args[0] == "Open_Connection_Str")
             {
