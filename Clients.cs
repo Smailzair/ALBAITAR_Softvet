@@ -587,7 +587,7 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 else if (sld >= 0)
                 {
-                    label14.Text = "Il est endetté par (" + sld.ToString("N2") + " DA).";
+                    label14.Text = "Il a une dette de (" + sld.ToString("N2") + " DA).";
                 }
                 else
                 {

@@ -59,7 +59,7 @@ namespace ALBAITAR_Softvet
             //--------------------------------
             Load_all_data();
             //------------------
-            
+
         }
 
         private void Load_all_data()
@@ -80,23 +80,27 @@ namespace ALBAITAR_Softvet
                 icons.Rows.Cast<DataRow>().Where(xx => xx["IMG_DATA"] != DBNull.Value).ToList().ForEach(row =>
                 {
                     Image img = PreConnection.ByteArrayToImage((byte[])row["IMG_DATA"]);
-                    bool exist = false;
-                    for (int i = 0; i < items_icon.Images.Count; i++)
+                    if (img != null) ////<<<-----------------
                     {
-                        if (PreConnection.ArePicturesEqual(items_icon.Images[i], img))
+                        bool exist = false;
+                        for (int i = 0; i < items_icon.Images.Count; i++)
                         {
-                            exist = true;
-                            break;
+                            if (PreConnection.ArePicturesEqual(items_icon.Images[i], img))
+                            {
+                                exist = true;
+                                break;
+                            }
                         }
+                        if (!exist)
+                        {
+                            items_icon.Images.Add(row["ID"].ToString(), img);
+                        }
+                        //------------------------
+                        ListViewItem itm = new ListViewItem("");
+                        itm.ImageKey = row["ID"].ToString();
+                        itm.SubItems.Add(row["ID"].ToString());
                     }
-                    if (!exist)
-                    {
-                        items_icon.Images.Add(row["ID"].ToString(), img);
-                    }
-                    //------------------------
-                    ListViewItem itm = new ListViewItem("");
-                    itm.ImageKey = row["ID"].ToString();
-                    itm.SubItems.Add(row["ID"].ToString());
+
                 });
             }
             //-------------------------
@@ -186,11 +190,11 @@ namespace ALBAITAR_Softvet
 
         }
         private void Fill_Event_Fields(string ID)
-        {            
+        {
             intial_Modify_fields();
             DataRow row = infos.Rows.Cast<DataRow>().Where(w => w["ID"].ToString() == ID).FirstOrDefault();
             if (row[0] != null)
-            {                
+            {
                 Current_items_id = ID;
                 //----------Loading Data------------
                 textBox1.Text = row["OBJECT"].ToString(); //OBJECT
@@ -277,7 +281,7 @@ namespace ALBAITAR_Softvet
                     }
                     //----------------
                     label13.Text = listView_Anim.Items.Count > 0 ? string.Concat("Animaux (", listView_Anim.Items.Count, "):") : "Animaux :";
-                }                
+                }
                 //-----------------
                 if (row["RELATED_CLIENTS_IDs"].ToString().Trim().Length > 0)
                 {
@@ -328,7 +332,7 @@ namespace ALBAITAR_Softvet
             }
 
         }
-        
+
         private void Load_day_events(ListView lst, string dte)
         {
             lst.Items.Clear();
@@ -347,7 +351,7 @@ namespace ALBAITAR_Softvet
                 else
                 {
                     fltr += "(RELATED_CLIENTS_IDs NOT IN (NULL, '') AND ',' + RELATED_CLIENTS_IDs + ',' LIKE '%," + Selected_idss + ",%')";
-                }                
+                }
             }
             else  //Tous
             { }
@@ -414,7 +418,7 @@ namespace ALBAITAR_Softvet
                 //---------------------------------
                 listView1_SizeChanged(lst, null);
 
-            }           
+            }
 
         }
 
@@ -446,7 +450,7 @@ namespace ALBAITAR_Softvet
                             ((ListView)ctr1).HeaderStyle = ColumnHeaderStyle.None;
                             ((ListView)ctr1).BorderStyle = BorderStyle.None;
                         }
-                        tmmp = new DateTime(1900,12,12);
+                        tmmp = new DateTime(1900, 12, 12);
                         DateTime.TryParse(string.Concat((int.Parse(ctr1.Name.Substring(5)) - ddds), "/", dateTimePicker1.Value.Month, "/", dateTimePicker1.Value.Year), out tmmp);
                         ((ListView)ctr1).BackColor = DateTime.Today == tmmp ? Color.HotPink : SystemColors.Window;
 
@@ -458,7 +462,7 @@ namespace ALBAITAR_Softvet
 
 
         }
-        
+
         private void dateTimePicker1_CloseUp(object sender, EventArgs e)
         {
             this.SelectNextControl((Control)sender, true, true, true, true);
@@ -512,13 +516,14 @@ namespace ALBAITAR_Softvet
 
         private void Agenda_Just_Display_Enter(object sender, EventArgs e)
         {
-            
+
             if (make_filter_refresh)
             {
-                make_filter_refresh = false;                
+                make_filter_refresh = false;
                 dateTimePicker1_ValueChanged(null, null);
 
-            }else if (make_update)
+            }
+            else if (make_update)
             {
                 make_update = false;
                 Load_all_data();
@@ -571,17 +576,17 @@ namespace ALBAITAR_Softvet
         private void Sam_Flow_SizeChanged(object sender, EventArgs e)
         {
             foreach (Control vw in ((FlowLayoutPanel)sender).Controls.OfType<ListView>())
-            {                
+            {
                 vw.Height = (((FlowLayoutPanel)sender).Height - 60) / 5;
                 vw.Width = (((FlowLayoutPanel)sender).Width - 6);
             }
-            label2.Width = label3.Width = label4.Width = label5.Width = label6.Width = label7.Width = label8.Width = (((FlowLayoutPanel)sender).Width - 6);         
+            label2.Width = label3.Width = label4.Width = label5.Width = label6.Width = label7.Width = label8.Width = (((FlowLayoutPanel)sender).Width - 6);
         }
 
         private void Agenda_Just_Display_SizeChanged(object sender, EventArgs e)
         {
-            Sam_Flow.Height = Dim_Flow.Height = Lun_Flow.Height = Mar_Flow.Height = Mer_Flow.Height = Jeu_Flow.Height = Ven_Flow.Height = (flowLayoutPanel1.ClientSize.Height < flowLayoutPanel1.DisplayRectangle.Height) ? 533 : this.Size.Height - 58;           
-            Sam_Flow.Width = Dim_Flow.Width = Lun_Flow.Width = Mar_Flow.Width = Mer_Flow.Width = Jeu_Flow.Width = Ven_Flow.Width = (flowLayoutPanel1.ClientSize.Width > flowLayoutPanel1.DisplayRectangle.Width) ? 162 : (this.Width - 325) / 7;           
+            Sam_Flow.Height = Dim_Flow.Height = Lun_Flow.Height = Mar_Flow.Height = Mer_Flow.Height = Jeu_Flow.Height = Ven_Flow.Height = (flowLayoutPanel1.ClientSize.Height < flowLayoutPanel1.DisplayRectangle.Height) ? 533 : this.Size.Height - 58;
+            Sam_Flow.Width = Dim_Flow.Width = Lun_Flow.Width = Mar_Flow.Width = Mer_Flow.Width = Jeu_Flow.Width = Ven_Flow.Width = (flowLayoutPanel1.ClientSize.Width > flowLayoutPanel1.DisplayRectangle.Width) ? 162 : (this.Width - 325) / 7;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -610,7 +615,7 @@ namespace ALBAITAR_Softvet
                 }
                 else
                 {
-                    
+
                     button15.Visible = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40001" && (Int32)QQ[3] == 1).Count() > 0 && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40002" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
                     Modif_autorized = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40003" && (Int32)QQ[3] == 1).Count() > 0 && Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40004" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
                     if (!Modif_autorized)

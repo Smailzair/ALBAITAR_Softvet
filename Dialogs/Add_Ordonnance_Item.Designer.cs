@@ -147,7 +147,7 @@
             this.groupBox3.Controls.Add(this.radioButton4);
             this.groupBox3.Controls.Add(this.radioButton5);
             this.groupBox3.Controls.Add(this.radioButton6);
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Font = new System.Drawing.Font("Century Gothic", 8.25F);
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox3.Location = new System.Drawing.Point(6, 78);
             this.groupBox3.Name = "groupBox3";
@@ -250,7 +250,7 @@
             this.groupBox2.Controls.Add(this.numericUpDown2);
             this.groupBox2.Controls.Add(this.radioButton2);
             this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 8.25F);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox2.Location = new System.Drawing.Point(6, 20);
             this.groupBox2.Name = "groupBox2";
@@ -263,7 +263,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(288, 19);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(149, 20);
+            this.textBox2.Size = new System.Drawing.Size(149, 21);
             this.textBox2.TabIndex = 8;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -272,7 +272,7 @@
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(232, 20);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(56, 17);
+            this.radioButton3.Size = new System.Drawing.Size(59, 20);
             this.radioButton3.TabIndex = 7;
             this.radioButton3.Text = "Autre :";
             this.radioButton3.UseVisualStyleBackColor = true;
@@ -287,7 +287,7 @@
             0,
             0});
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(37, 20);
+            this.numericUpDown2.Size = new System.Drawing.Size(37, 21);
             this.numericUpDown2.TabIndex = 6;
             this.numericUpDown2.Value = new decimal(new int[] {
             2,
@@ -301,7 +301,7 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(92, 20);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(126, 17);
+            this.radioButton2.Size = new System.Drawing.Size(134, 20);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.Text = "Chaque                 Jrs";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -313,7 +313,7 @@
             this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(19, 20);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(66, 17);
+            this.radioButton1.Size = new System.Drawing.Size(67, 20);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Toujours";
@@ -329,7 +329,8 @@
             "Sachet",
             "Gélule",
             "Injectable",
-            "Pommade/Crème"});
+            "Pommade/Crème",
+            "Solution"});
             this.comboBox1.Location = new System.Drawing.Point(217, 33);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
@@ -361,7 +362,7 @@
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "Jours",
-            "Semains",
+            "Semaines",
             "Mois",
             "Années"});
             this.comboBox2.Location = new System.Drawing.Point(69, 19);

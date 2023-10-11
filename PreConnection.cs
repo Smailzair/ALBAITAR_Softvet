@@ -201,8 +201,8 @@ namespace ALBAITAR_Softvet
             return rows_nb;
         }
 
-        public static int Excut_Cmd_personnel(string cmmd,List<string> params_names, List<object> params_values)
-        {                   
+        public static int Excut_Cmd_personnel(string cmmd, List<string> params_names, List<object> params_values)
+        {
             int rows_nb = 0;
             open_conn();
             try
@@ -218,7 +218,7 @@ namespace ALBAITAR_Softvet
                                 command.Parameters.AddWithValue("@" + params_names[i], params_values[i]);
                             }
                         }
-                    }                        
+                    }
                     rows_nb = command.ExecuteNonQuery();
                 }
 
@@ -619,6 +619,7 @@ namespace ALBAITAR_Softvet
         {
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
+
         }
 
         public static Image ByteArrayToImage(byte[] imageBytes)

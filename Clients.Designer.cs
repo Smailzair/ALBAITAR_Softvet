@@ -89,6 +89,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.IDD_FINANC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OP_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OBJECT = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,7 +97,6 @@
             this.CREDIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CLIENT_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FACT_NUM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -686,7 +686,7 @@
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(18, 308);
+            this.label15.Location = new System.Drawing.Point(18, 305);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(83, 15);
             this.label15.TabIndex = 58;
@@ -698,7 +698,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label14.Location = new System.Drawing.Point(107, 308);
+            this.label14.Location = new System.Drawing.Point(107, 305);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(17, 15);
             this.label14.TabIndex = 57;
@@ -711,7 +711,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(462, 259);
+            this.button1.Location = new System.Drawing.Point(462, 256);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 31);
             this.button1.TabIndex = 56;
@@ -726,7 +726,7 @@
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(494, 260);
+            this.button5.Location = new System.Drawing.Point(494, 257);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(26, 29);
             this.button5.TabIndex = 55;
@@ -741,7 +741,7 @@
             this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button7.FlatAppearance.BorderSize = 0;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(6, 259);
+            this.button7.Location = new System.Drawing.Point(6, 256);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(26, 29);
             this.button7.TabIndex = 54;
@@ -782,7 +782,7 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(522, 251);
+            this.dataGridView2.Size = new System.Drawing.Size(522, 248);
             this.dataGridView2.TabIndex = 53;
             this.dataGridView2.DataSourceChanged += new System.EventHandler(this.dataGridView2_DataSourceChanged);
             this.dataGridView2.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellValueChanged);
@@ -797,7 +797,7 @@
             this.IDD_FINANC.Name = "IDD_FINANC";
             this.IDD_FINANC.ReadOnly = true;
             this.IDD_FINANC.Visible = false;
-            this.IDD_FINANC.Width = 43;
+            this.IDD_FINANC.Width = 42;
             // 
             // OP_DATE
             // 
@@ -834,7 +834,7 @@
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
             dataGridViewCellStyle4.Format = "N2";
             this.CREDIT.DefaultCellStyle = dataGridViewCellStyle4;
-            this.CREDIT.HeaderText = "[-] Dois";
+            this.CREDIT.HeaderText = "[-] Doit";
             this.CREDIT.Name = "CREDIT";
             this.CREDIT.Width = 68;
             // 
@@ -943,6 +943,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button button14;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDD_FINANC;
         private System.Windows.Forms.DataGridViewTextBoxColumn OP_DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn OBJECT;
@@ -950,6 +951,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CREDIT;
         private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn FACT_NUM;
-        private System.Windows.Forms.Button button14;
     }
 }
