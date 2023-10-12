@@ -108,10 +108,10 @@ namespace ALBAITAR_Softvet
             th.Start();
             th.Join();
             //--------------
-            Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
-            Activ_Ver.Start();
-            Activ_Ver.Join();
-            ////--------------
+            //Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
+            //Activ_Ver.Start();
+            //Activ_Ver.Join();
+            //////--------------
 
 
 
@@ -2113,6 +2113,10 @@ namespace ALBAITAR_Softvet
             }
         }
 
+        private void button31_Click(object sender, EventArgs e)
+        {
+            new New_Pers_Cpt_Rnd_Visit().ShowDialog();
+        }
     }
 }
 

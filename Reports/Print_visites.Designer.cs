@@ -213,7 +213,7 @@
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(112, 20);
             this.checkBox1.TabIndex = 15;
-            this.checkBox1.Text = "Date de report :";
+            this.checkBox1.Text = "Date de rapport :";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
@@ -266,7 +266,7 @@
             this.Name = "Print_visites";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Report des visites :";
+            this.Text = "Rapport des visites :";
             this.Load += new System.EventHandler(this.Print_report_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

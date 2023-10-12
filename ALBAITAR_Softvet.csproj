@@ -363,6 +363,12 @@
     <Compile Include="Dialogs\Add_Ordonnance_Item.Designer.cs">
       <DependentUpon>Add_Ordonnance_Item.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\New_Pers_Cpt_Rnd_Visit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\New_Pers_Cpt_Rnd_Visit.Designer.cs">
+      <DependentUpon>New_Pers_Cpt_Rnd_Visit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\New_Ordonnance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -446,6 +452,12 @@
     </Compile>
     <Compile Include="Labo\Biochimie.Designer.cs">
       <DependentUpon>Biochimie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Print_CRVP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Print_CRVP.Designer.cs">
+      <DependentUpon>Print_CRVP.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\Print_ordonn.cs">
       <SubType>Form</SubType>
@@ -593,6 +605,9 @@
     <EmbeddedResource Include="Dialogs\Add_Ordonnance_Item.resx">
       <DependentUpon>Add_Ordonnance_Item.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\New_Pers_Cpt_Rnd_Visit.resx">
+      <DependentUpon>New_Pers_Cpt_Rnd_Visit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\New_Ordonnance.resx">
       <DependentUpon>New_Ordonnance.cs</DependentUpon>
     </EmbeddedResource>
@@ -635,8 +650,14 @@
     <EmbeddedResource Include="Labo\Biochimie.resx">
       <DependentUpon>Biochimie.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CRVP_2_in_A4.rdlc" />
+    <EmbeddedResource Include="Reports\CRVP_1_in_A4.rdlc" />
     <EmbeddedResource Include="Reports\Ordonnance_1_in_A4.rdlc" />
+    <EmbeddedResource Include="Reports\CRVP_1_in_A5.rdlc" />
     <EmbeddedResource Include="Reports\Ordonnance_2_in_A4.rdlc" />
+    <EmbeddedResource Include="Reports\Print_CRVP.resx">
+      <DependentUpon>Print_CRVP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Print_ordonn.resx">
       <DependentUpon>Print_ordonn.cs</DependentUpon>
     </EmbeddedResource>
@@ -940,6 +961,7 @@
     <None Include="Resources\Paper_002.png" />
     <None Include="Resources\Paper_003.png" />
     <None Include="Resources\Paper_0031.png" />
+    <None Include="Resources\icons8_ball_point_pen_25px.png" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
