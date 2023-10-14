@@ -793,9 +793,9 @@
                 <Style>Solid</Style>
               </Border>
               <VerticalAlign>Top</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
+              <PaddingLeft>6pt</PaddingLeft>
+              <PaddingRight>6pt</PaddingRight>
+              <PaddingTop>8pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>

@@ -181,11 +181,15 @@ namespace ALBAITAR_Softvet
             {
                 using (MySqlCommand command = new MySqlCommand(cmmd, mySqlConnection))
                 {
-                    for (int i = 0; i < Columns_names.Count; i++)
+                    if (Columns_names != null && col_values != null)
                     {
-                        command.Parameters.AddWithValue("@i" + i.ToString() + "_" + Columns_names[i], col_values[i]);
+                        for (int i = 0; i < Columns_names.Count; i++)
+                        {
+                            command.Parameters.AddWithValue("@i" + i.ToString() + "_" + Columns_names[i], col_values[i]);
+                        }
                     }
-                    if (where_columns != null)
+
+                    if (where_columns != null && where_values != null)
                     {
                         for (int i = 0; i < where_columns.Count; i++)
                         {
@@ -196,7 +200,7 @@ namespace ALBAITAR_Softvet
                 }
 
             }
-            catch (MySqlException excc) { Debug.WriteLine(">>>>>>>>>> EXECPTION : >>>>>>>>>> " + excc.Message); }
+            catch { }
             close_conn();
             return rows_nb;
         }

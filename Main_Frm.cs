@@ -801,46 +801,6 @@ namespace ALBAITAR_Softvet
             Refresh_current_tab();
         }
 
-        private string get_blnk_null(object src)
-        {
-            if (src is DataGridViewCell)
-            {
-                if (((DataGridViewCell)src) != null)
-                {
-                    if (((DataGridViewCell)src).Value != DBNull.Value)
-                    {
-                        return ((DataGridViewCell)src).Value.ToString();
-                    }
-                    else
-                    {
-                        return "";
-                    }
-                }
-                else
-                {
-                    return "";
-                }
-            }
-            else
-            {
-                if (src != null)
-                {
-                    if (src != DBNull.Value)
-                    {
-                        return src.ToString();
-                    }
-                    else
-                    {
-                        return "";
-                    }
-                }
-                else
-                {
-                    return "";
-                }
-            }
-        }
-
 
         private void button7_Click_1(object sender, EventArgs e)
         {
@@ -1323,7 +1283,7 @@ namespace ALBAITAR_Softvet
                 + " OR OBSERV LIKE '%{0}%'"
                 + " OR ANIM_NME LIKE '%{0}%'"
                 + " OR CLIENT_FULL_NME LIKE '%{0}%'"
-                + ")") : "",textBox3.Text.Replace("'","''"));
+                + ")") : "", textBox3.Text.Replace("'", "''"));
             bool dd = fltr.Length > 0;
             //===================================================
             int tss = 0;
@@ -1748,7 +1708,7 @@ namespace ALBAITAR_Softvet
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             string ddd = "NUM_IDENTIF LIKE '%{0}%' OR CLIENT_FULL_NME LIKE '%{0}%' OR NME LIKE '%{0}%' OR ESPECE LIKE '%{0}%' OR RACE LIKE '%{0}%' OR SEXE LIKE '%{0}%' OR Convert([NISS_DATE], System.String) LIKE '%{0}%' OR Convert([DATE_ADDED], System.String) LIKE '%{0}%'";
-            ((DataTable)dataGridView3.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox2.Text.Replace("'","''"));
+            ((DataTable)dataGridView3.DataSource).DefaultView.RowFilter = String.Format(ddd, textBox2.Text.Replace("'", "''"));
             label3.Text = "Total: " + dataGridView3.Rows.Count;
         }
 
@@ -1836,7 +1796,7 @@ namespace ALBAITAR_Softvet
                 + " OR FACT_NUM LIKE '%{0}%'"
                 + " OR CONVERT([DEBIT], 'System.String') LIKE '%{0}%'"
                 + " OR CONVERT([CREDIT], 'System.String') LIKE '%{0}%'"
-                + ")" : "",textBox4.Text.Replace("'","''"));
+                + ")" : "", textBox4.Text.Replace("'", "''"));
             ((DataTable)dataGridView4.DataSource).DefaultView.RowFilter = fltr;
             //-------------
             if (dataGridView6.Rows.Count == 0) { dataGridView6.Rows.Add(); }
@@ -1878,7 +1838,7 @@ namespace ALBAITAR_Softvet
                 + " OR CONVERT([TOTAL_TTC], 'System.String') LIKE '%{0}%'"
                 + " OR CONVERT([FACT_PAID_MNT], 'System.String') LIKE '%{0}%'"
                 + " OR CONVERT([SLD_OF_CLIENT], 'System.String') LIKE '%{0}%'"
-                + ")" : "",textBox5.Text.Replace("'","''"));
+                + ")" : "", textBox5.Text.Replace("'", "''"));
             ((DataTable)dataGridView5.DataSource).DefaultView.RowFilter = fltr;
             //-------------
             if (dataGridView7.Rows.Count == 0) { dataGridView7.Rows.Add(); }
@@ -2055,12 +2015,32 @@ namespace ALBAITAR_Softvet
 
         private void button28_Click(object sender, EventArgs e)
         {
-            new New_Ordonnance().Show();
+            int anim_idd = dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value != DBNull.Value ? (int)dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value : -1;
+            if (anim_idd < 0)
+            {
+                if (selected_animal_id > 0) { anim_idd = selected_animal_id; }
+                else if (selected_client_id > 0)
+                {
+                    var yy = Main_Frm_animals_tbl.AsEnumerable().Where(F => (int)F["CLIENT_ID"] == selected_client_id);
+                    if (yy.Any()) { anim_idd = (int)yy.First()["ID"]; }
+                }
+            }
+            new New_Ordonnance(anim_idd).ShowDialog();
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
-            new New_Ordonnance().Show();
+            int anim_idd = dataGridView1.SelectedRows[0].Cells["ANIM_IDD"].Value != DBNull.Value ? (int)dataGridView1.SelectedRows[0].Cells["ANIM_IDD"].Value : -1;
+            if (anim_idd < 0)
+            {
+                if (selected_animal_id > 0) { anim_idd = selected_animal_id; }
+                else if (selected_client_id > 0)
+                {
+                    var yy = Main_Frm_animals_tbl.AsEnumerable().Where(F => (int)F["CLIENT_ID"] == selected_client_id);
+                    if (yy.Any()) { anim_idd = (int)yy.First()["ID"]; }
+                }
+            }
+            new New_Ordonnance(anim_idd).ShowDialog();
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -2086,13 +2066,13 @@ namespace ALBAITAR_Softvet
                 int curr_idx = dataGridView2.SelectedRows[0].Index;
                 int curr_scroll = dataGridView2.FirstDisplayedScrollingRowIndex;
                 Refresh_current_tab();
-                label18.Visible = label18_visible;                           
+                label18.Visible = label18_visible;
                 dataGridView2.Rows[curr_idx].Selected = true;
-                if(dataGridView2.Rows.Count > 1) { dataGridView2.Rows[0].Selected = false; }
+                if (dataGridView2.Rows.Count > 1) { dataGridView2.Rows[0].Selected = false; }
                 dataGridView2.FirstDisplayedScrollingRowIndex = curr_scroll;
             }
         }
-        
+
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView2.SelectedRows.Count > 0)
@@ -2115,7 +2095,17 @@ namespace ALBAITAR_Softvet
 
         private void button31_Click(object sender, EventArgs e)
         {
-            new New_Pers_Cpt_Rnd_Visit().ShowDialog();
+            int anim_idd = dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value != DBNull.Value ? (int)dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value : -1;
+            if (anim_idd < 0)
+            {
+                if (selected_animal_id > 0) { anim_idd = selected_animal_id; }
+                else if (selected_client_id > 0)
+                {
+                    var yy = Main_Frm_animals_tbl.AsEnumerable().Where(F => (int)F["CLIENT_ID"] == selected_client_id);
+                    if (yy.Any()) { anim_idd = (int)yy.First()["ID"]; }
+                }
+            }
+            new New_Pers_Cpt_Rnd_Visit(anim_idd).ShowDialog();
         }
     }
 }

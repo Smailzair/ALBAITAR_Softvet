@@ -12,11 +12,12 @@ namespace ALBAITAR_Softvet.Dialogs
     public partial class New_Pers_Cpt_Rnd_Visit : Form
     {
         DataTable Races_Espèces = new DataTable();
-        public static string Item_to_add;
-        public New_Pers_Cpt_Rnd_Visit()
+        int anim_id = -1;
+        public New_Pers_Cpt_Rnd_Visit(int Anim_ID)
         {
             InitializeComponent();
-            //-------------------------        
+            //-------------------------
+            if (Anim_ID > 0) { anim_id = Anim_ID; }
             //----------------------
             Races_Espèces.Columns.Add("ESPECE", typeof(string));
             Races_Espèces.Columns.Add("RACE", typeof(string));
@@ -151,7 +152,15 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void Add_Vente_Fact_Item_Load(object sender, EventArgs e)
         {
-
+            if(anim_id > 0)
+            {
+                var ttt = Main_Frm.Main_Frm_animals_tbl.AsEnumerable().Where(E=> (int)E["ID"] == anim_id);
+                if (ttt.Any())
+                {
+                    comboBox1.SelectedValue = ttt.First()["CLIENT_ID"];
+                }
+                comboBox2.SelectedValue = anim_id;
+            }
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
