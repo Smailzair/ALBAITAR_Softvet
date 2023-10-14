@@ -34,7 +34,7 @@ namespace ALBAITAR_Softvet.Resources
             ID_to_selectt = ID_to_select;
             Infoss_1_Caiss_2 = Infos_1_Caiss_2;
             Caisse_Idx = Caisse_Id;
-            
+
             //----------------------
             Load_clients_from_DB();
             //---------------------
@@ -74,8 +74,9 @@ namespace ALBAITAR_Softvet.Resources
         private void Load_clients_from_DB()
         {
             int fd = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
-            clients = PreConnection.Load_data_keeping_duplicates("SELECT *,concat(FAMNME,' ',NME) AS FULL_NME FROM tb_clients;");
+            clients = PreConnection.Load_data_keeping_duplicates("SELECT *,concat(FAMNME,' ',NME) AS FULL_NME FROM tb_clients tb1" + (checkBox1.Checked ? " WHERE ID IN (SELECT CLIENT_ID FROM tb_clients_finance HAVING SUM(DEBIT)-SUM(CREDIT) <> 0)" : "") + (checkBox2.Checked ? (checkBox1.Checked ? " AND " : " WHERE ") + "(SELECT COUNT(*) FROM tb_animaux WHERE CLIENT_ID = tb1.ID) = 0" : "") + ";");
             dataGridView1.DataSource = clients;
+            PreConnection.search_filter_datagridview(dataGridView1, textBox1.Text);
             if (dataGridView1.Rows.Count > fd) { dataGridView1.ClearSelection(); dataGridView1.Rows[fd].Selected = true; }
 
         }
@@ -151,7 +152,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void textBox6_Validating(object sender, CancelEventArgs e)
         {
-            if ((!int.TryParse(textBox6.Text.TrimStart().TrimEnd(), out int ff) && textBox6.Text.Length > 0))
+            if ((!int.TryParse(textBox6.Text.TrimStart().TrimEnd(), out _) && textBox6.Text.Length > 0))
             {
                 e.Cancel = true;
                 textBox6.BackColor = Color.LightCoral;
@@ -296,7 +297,7 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     if (insert_autori)
                     {
-                        PreConnection.Excut_Cmd(1, "tb_clients", new List<string> { "SEX", "FAMNME", "NME", "NUM_CNI", "ADRESS", "POSTAL_CODE", "CITY", "WILAYA", "NUM_PHONE", "EMAIL", "OBSERVATIONS" }, new List<object> { comboBox1.Text, textBox3.Text, textBox2.Text, textBox4.Text, textBox5.Text, textBox6.Text, comboBox2.Text, comboBox3.Text, maskedTextBox1.Text, textBox7.Text, textBox8.Text },null,null,null);
+                        PreConnection.Excut_Cmd(1, "tb_clients", new List<string> { "SEX", "FAMNME", "NME", "NUM_CNI", "ADRESS", "POSTAL_CODE", "CITY", "WILAYA", "NUM_PHONE", "EMAIL", "OBSERVATIONS" }, new List<object> { comboBox1.Text, textBox3.Text, textBox2.Text, textBox4.Text, textBox5.Text, textBox6.Text, comboBox2.Text, comboBox3.Text, maskedTextBox1.Text, textBox7.Text, textBox8.Text }, null, null, null);
                     }
                     else
                     {
@@ -308,7 +309,7 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     if (updadate_autori)
                     {
-                        PreConnection.Excut_Cmd(2, "tb_clients", new List<string> { "SEX", "FAMNME", "NME", "NUM_CNI", "ADRESS", "POSTAL_CODE", "CITY", "WILAYA", "NUM_PHONE", "EMAIL", "OBSERVATIONS" }, new List<object> { comboBox1.Text, textBox3.Text, textBox2.Text, textBox4.Text, textBox5.Text, textBox6.Text, comboBox2.Text, comboBox3.Text, maskedTextBox1.Text, textBox7.Text, textBox8.Text }, "ID = @P_ID", new List<string> { "P_ID" },new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
+                        PreConnection.Excut_Cmd(2, "tb_clients", new List<string> { "SEX", "FAMNME", "NME", "NUM_CNI", "ADRESS", "POSTAL_CODE", "CITY", "WILAYA", "NUM_PHONE", "EMAIL", "OBSERVATIONS" }, new List<object> { comboBox1.Text, textBox3.Text, textBox2.Text, textBox4.Text, textBox5.Text, textBox6.Text, comboBox2.Text, comboBox3.Text, maskedTextBox1.Text, textBox7.Text, textBox8.Text }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
                     }
                     else
                     {
@@ -572,7 +573,7 @@ namespace ALBAITAR_Softvet.Resources
                     dataGridView2.CurrentCell.Value = DBNull.Value;
                 }
             }
-            
+
         }
 
         private void calc_sold()
@@ -609,7 +610,7 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 else //INSERT
                 {
-                    PreConnection.Excut_Cmd(1, "tb_clients_finance", new List<string> { "OP_DATE", "OBJECT", "DEBIT", "CREDIT" }, new List<object> { dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value, dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value, dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : 0, dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : 0 },null,null,null);
+                    PreConnection.Excut_Cmd(1, "tb_clients_finance", new List<string> { "OP_DATE", "OBJECT", "DEBIT", "CREDIT" }, new List<object> { dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value, dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value, dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : 0, dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : 0 }, null, null, null);
                 }
                 Load_finace_historic();
 
@@ -722,28 +723,17 @@ namespace ALBAITAR_Softvet.Resources
             }
         }
 
-        private void button14_Click(object sender, EventArgs e)
-        {
-            chosen_client_from_search = new DataTable();
-            Clients_List_Search select = new Clients_List_Search();
-            select.DataTableReturned += ChildForm_DataTableReturned2;
-            select.ShowDialog();
-            if (chosen_client_from_search != null)
-            {
-                textBox1.Clear();
-                comboBox2.SelectedValue = chosen_client_from_search.Rows[0][1];
-                dataGridView1.ClearSelection();
-                dataGridView1.Rows.Cast<DataGridViewRow>().Where(c => c.Cells["ID"].Value.ToString() == chosen_client_from_search.Rows[0]["ID"].ToString()).ForEach(dx => dx.Selected = true);
-            }
-        }
-        private void ChildForm_DataTableReturned2(object sender, DataTableEventArgs_Clients e)
-        {
-            chosen_client_from_search = e.DataTable;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            PreConnection.Excport_to_excel(dataGridView2, "Historique monétique", dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value != DBNull.Value ? "Monét." : dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value.ToString(), null,false);
+            PreConnection.Excport_to_excel(dataGridView2, "Historique monétique", dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value != DBNull.Value ? "Monét." : dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value.ToString(), null, false);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+            Load_clients_from_DB();
+            PreConnection.search_filter_datagridview(dataGridView1, textBox1.Text);
+
         }
     }
 }

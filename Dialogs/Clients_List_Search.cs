@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Dialogs
 {
-    
+
     public partial class Clients_List_Search : Form
     {
 
@@ -25,10 +25,10 @@ namespace ALBAITAR_Softvet.Dialogs
             set { RESULT = value; }
         }
 
-        DataTable props;        
+        DataTable props;
         List<ListViewItem> items2 = new List<ListViewItem>();
         public Clients_List_Search()
-        {         
+        {
             InitializeComponent();
             //-------------------------
         }
@@ -56,7 +56,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     }
                 }
             }
-
+            label1.Visible = listView1.Items.Count == 0;
         }
 
 
@@ -86,16 +86,19 @@ namespace ALBAITAR_Softvet.Dialogs
             DataTableReturned?.Invoke(this, new DataTableEventArgs_Clients(RESULT));
         }
 
-        private void Anims_List_Load(object sender, EventArgs e)
+        private void load_data()
         {
-
-                props = PreConnection.Load_data("SELECT ID, concat(SEX,' ',FAMNME, ' ', NME) AS FULL_NME,NUM_CNI FROM tb_clients;");
-                if (props != null)
+            items2.Clear();
+            listView1.Items.Clear();
+            //----------
+            props = PreConnection.Load_data("SELECT *,concat(FAMNME,' ',NME) AS FULL_NME FROM tb_clients tb1" + (checkBox1.Checked ? " WHERE ID IN (SELECT CLIENT_ID FROM tb_clients_finance HAVING SUM(DEBIT)-SUM(CREDIT) <> 0)" : "") + (checkBox2.Checked ? (checkBox1.Checked ? " AND " : " WHERE ") + "(SELECT COUNT(*) FROM tb_animaux WHERE CLIENT_ID = tb1.ID) = 0" : "") + ";");
+            if (props != null)
+            {
+                if (props.Rows.Count > 0)
                 {
-                    if (props.Rows.Count > 0)
+                    label1.Visible = false;
+                    foreach (DataRow row in props.Rows)
                     {
-                        foreach (DataRow row in props.Rows)
-                        {
                         ListViewItem dd = new ListViewItem(row["ID"].ToString());
                         dd.SubItems.Add(row["FULL_NME"].ToString());
                         dd.SubItems.Add(row["NUM_CNI"].ToString());
@@ -103,19 +106,21 @@ namespace ALBAITAR_Softvet.Dialogs
                         items2.Add(dd);
                     }
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("Aucune personne trouvée !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Close();
-                    }
                 }
                 else
                 {
-                    MessageBox.Show("Aucune personne trouvée !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
-                }           
-            
+                    label1.Visible = true;
+                }
+            }
+            else
+            {
+                label1.Visible = true;
+            }
+        }
+        private void Anims_List_Load(object sender, EventArgs e)
+        {
+
+            load_data();
         }
 
         private void listView1_SizeChanged(object sender, EventArgs e)
@@ -137,7 +142,8 @@ namespace ALBAITAR_Softvet.Dialogs
                 stringFormat.Alignment = StringAlignment.Center;
                 stringFormat.LineAlignment = StringAlignment.Center;
                 e.Graphics.DrawString(e.Header.Text, ((ListView)sender).Font, Brushes.White, e.Bounds, stringFormat);
-            }else
+            }
+            else
             {
                 e.DrawDefault = true;
             }
@@ -161,9 +167,12 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             e.Handled = true;
         }
-        
 
-
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            load_data();
+            textBox1_TextChanged(null, null);
+        }
     }
     public class DataTableEventArgs_Clients : EventArgs
     {
