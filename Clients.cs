@@ -1,4 +1,5 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
+using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,6 +36,8 @@ namespace ALBAITAR_Softvet.Resources
             Infoss_1_Caiss_2 = Infos_1_Caiss_2;
             Caisse_Idx = Caisse_Id;
 
+            dataGridView1.DefaultCellStyle.BackColor = dataGridView1.DefaultCellStyle.SelectionBackColor = Color.White;
+            dataGridView1.DefaultCellStyle.ForeColor = dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
             //----------------------
             Load_clients_from_DB();
             //---------------------
@@ -74,10 +77,51 @@ namespace ALBAITAR_Softvet.Resources
         private void Load_clients_from_DB()
         {
             int fd = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
-            clients = PreConnection.Load_data_keeping_duplicates("SELECT *,concat(FAMNME,' ',NME) AS FULL_NME FROM tb_clients tb1" + (checkBox1.Checked ? " WHERE ID IN (SELECT CLIENT_ID FROM tb_clients_finance HAVING SUM(DEBIT)-SUM(CREDIT) <> 0)" : "") + (checkBox2.Checked ? (checkBox1.Checked ? " AND " : " WHERE ") + "(SELECT COUNT(*) FROM tb_animaux WHERE CLIENT_ID = tb1.ID) = 0" : "") + ";");
-            dataGridView1.DataSource = clients;
-            PreConnection.search_filter_datagridview(dataGridView1, textBox1.Text);
+            //clients = PreConnection.Load_data_keeping_duplicates("SELECT *,concat(FAMNME,' ',NME) AS FULL_NME FROM tb_clients tb1" + (checkBox1.Checked ? " WHERE ID IN (SELECT CLIENT_ID FROM tb_clients_finance HAVING SUM(DEBIT)-SUM(CREDIT) <> 0)" : "") + (checkBox2.Checked ? (checkBox1.Checked ? " AND " : " WHERE ") + "(SELECT COUNT(*) FROM tb_animaux WHERE CLIENT_ID = tb1.ID) = 0" : "") + ";");
+            clients = PreConnection.Load_data_keeping_duplicates("SELECT tb1.*,concat(tb1.FAMNME,' ',tb1.NME) AS FULL_NME,SUM(COALESCE(tb2.DEBIT,0))-SUM(COALESCE(tb2.CREDIT,0)) As SLD,tb3.ANIM_CNT FROM tb_clients tb1 "
+                                                               + "LEFT JOIN tb_clients_finance tb2 ON tb1.ID = tb2.CLIENT_ID "
+                                                               + "LEFT JOIN(SELECT CLIENT_ID, COUNT(*) AS ANIM_CNT FROM tb_animaux) tb3 ON tb1.ID = tb3.CLIENT_ID "
+                                                               + "GROUP BY tb1.ID; ");
+            //dataGridView1.DataSource = clients;
+            dgv1_fltr();
+            // PreConnection.search_filter_datagridview(dataGridView1, textBox1.Text);
             if (dataGridView1.Rows.Count > fd) { dataGridView1.ClearSelection(); dataGridView1.Rows[fd].Selected = true; }
+        }
+
+        private void dgv1_fltr()
+        {
+            DataView dv = new DataView(clients);
+            string fltr = "";
+            if (checkBox1.Checked)
+            {
+                fltr = "SLD <> 0";
+            }
+
+            if (checkBox2.Checked)
+            {
+                fltr += (fltr.Length > 0 ? " AND " : "") + "ANIM_CNT = 0";
+            }
+
+            if (textBox1.Text.Trim().Length > 0)
+            {
+                bool ff = fltr.Length > 0;
+                fltr += (ff ? " AND (" : "");
+                //-------------
+                fltr += "FULL_NME LIKE '%{0}%'";
+                fltr += " OR NUM_CNI LIKE '%{0}%'";
+                fltr += " OR ADRESS LIKE '%{0}%'";
+                fltr += " OR POSTAL_CODE LIKE '%{0}%'";
+                fltr += " OR CITY LIKE '%{0}%'";
+                fltr += " OR WILAYA LIKE '%{0}%'";
+                fltr += " OR NUM_PHONE LIKE '%{0}%'";
+                fltr += " OR EMAIL LIKE '%{0}%'";
+                fltr += " OR OBSERVATIONS LIKE '%{0}%'";
+                //-------------
+                fltr += (ff ? ")" : "");
+
+            }
+            dv.RowFilter = string.Format(fltr, textBox1.Text);
+            dataGridView1.DataSource = dv;
 
         }
         private void Load_selected_client_fields()
@@ -133,21 +177,22 @@ namespace ALBAITAR_Softvet.Resources
         {
             if (textBox2.Text.Length > 0 && textBox3.Text.Length > 0 && (Is_New || (!Is_New && dataGridView1.SelectedRows.Count > 0)))
             {
-                int cnt = clients.Rows.Cast<DataRow>().Where(zz =>
+                DataTable tmmmmp = PreConnection.Load_data("SELECT * FROM tb_clients WHERE FAMNME LIKE '" + textBox3.Text.Replace("'", "''") + "' AND NME LIKE '" + textBox2.Text.Replace("'", "''") + "' AND NUM_CNI LIKE '" + textBox4.Text.Replace("'", "''") + "'" + (!Is_New ? " AND ID <> " + dataGridView1.SelectedRows[0].Cells["ID"].Value : "") + ";");
+                int cnt = tmmmmp != null ? tmmmmp.Rows.Count : 0;
+                //int cnt = clients.Rows.Cast<DataRow>().Where(zz =>
+                //zz["FAMNME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) &&
+                //zz["NME"].ToString().ToLower().Equals(textBox2.Text.ToLower()) &&
+                //zz["NUM_CNI"].ToString().Equals(textBox4.Text) &&
+                //(!Is_New && dataGridView1.SelectedRows.Count > 0 ? (int)zz["ID"] != (int)dataGridView1.SelectedRows[0].Cells["ID"].Value : true)
 
-                zz["FAMNME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) &&
-                zz["NME"].ToString().ToLower().Equals(textBox2.Text.ToLower()) &&
-                zz["NUM_CNI"].ToString().Equals(textBox4.Text) &&
-                (!Is_New && dataGridView1.SelectedRows.Count > 0 ? (int)zz["ID"] != (int)dataGridView1.SelectedRows[0].Cells["ID"].Value : true)
-
-                ).ToList().Count();
+                //).ToList().Count();
                 label13.Visible = cnt > 0;
             }
             else { label13.Visible = false; }
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            PreConnection.search_filter_datagridview(dataGridView1, textBox1.Text);
+            dgv1_fltr();
         }
 
         private void textBox6_Validating(object sender, CancelEventArgs e)
@@ -730,10 +775,41 @@ namespace ALBAITAR_Softvet.Resources
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
+            dgv1_fltr();
 
-            Load_clients_from_DB();
-            PreConnection.search_filter_datagridview(dataGridView1, textBox1.Text);
+        }
 
+        private void dataGridView1_ColumnStateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
+        {
+            if (e.Column.Name == "ID")
+            {
+                if (e.Column.Visible == true)
+                {
+                    e.Column.Visible = false;
+                }
+            }
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+           bool mm = dataGridView1.Rows[e.RowIndex].Cells["SLD"].Value != DBNull.Value;
+           mm = mm ? (decimal)dataGridView1.Rows[e.RowIndex].Cells["SLD"].Value != 0 : false;
+
+
+            dataGridView1.Rows[e.RowIndex].HeaderCell.Style .SelectionBackColor = dataGridView1.Rows[e.RowIndex].HeaderCell.Style.BackColor = mm ? Color.Red : SystemColors.Control;
+
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView1.Rows[e.RowIndex].Selected)
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+            }
+            else
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Regular);
+            }
         }
     }
 }

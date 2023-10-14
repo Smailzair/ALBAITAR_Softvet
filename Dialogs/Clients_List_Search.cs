@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ServiceStack.Diagnostics.Events;
 
 namespace ALBAITAR_Softvet.Dialogs
 {
@@ -85,7 +86,7 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             DataTableReturned?.Invoke(this, new DataTableEventArgs_Clients(RESULT));
         }
-
+        
         private void load_data()
         {
             items2.Clear();
