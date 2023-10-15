@@ -796,7 +796,7 @@ namespace ALBAITAR_Softvet.Resources
            mm = mm ? (decimal)dataGridView1.Rows[e.RowIndex].Cells["SLD"].Value != 0 : false;
 
 
-            dataGridView1.Rows[e.RowIndex].HeaderCell.Style .SelectionBackColor = dataGridView1.Rows[e.RowIndex].HeaderCell.Style.BackColor = mm ? Color.Red : SystemColors.Control;
+            dataGridView1.Rows[e.RowIndex].HeaderCell.Style .SelectionBackColor = dataGridView1.Rows[e.RowIndex].HeaderCell.Style.BackColor = mm ? panel2.BackColor : SystemColors.Control;
 
         }
 

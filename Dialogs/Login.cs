@@ -71,7 +71,8 @@ namespace ALBAITAR_Softvet
             //-----------------------            
             maskedTextBox1.Select();
             //-----
-            BringToFront();
+            Activate();
+
         }
 
         private void maskedTextBox1_Validating(object sender, CancelEventArgs e)

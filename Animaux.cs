@@ -30,11 +30,18 @@ namespace ALBAITAR_Softvet.Resources
         int prev_rw_idx = -1;
         int prev_col_idx = -1;
 
+        int spliter_panel1_wdth = 0;
+        int frm_width = 0;
+        int splitter_prev_dist = 0;
         public Animaux(int ID_to_select, int visite_id)
         {
             InitializeComponent();
             ID_to_selectt = ID_to_select;
             visite_idd = visite_id;
+
+            frm_width = this.Width;
+            spliter_panel1_wdth = splitContainer1.Panel1.Width;
+            splitter_prev_dist = splitContainer1.SplitterDistance;
             //----------------------
             Races_Espèces.Columns.Add("ESPECE", typeof(string));
             Races_Espèces.Columns.Add("RACE", typeof(string));
@@ -1025,7 +1032,7 @@ richTextBox1.Text
 dataGridView1.SelectedRows[0].Cells["ID"].Value,
 comboBox5.Text,
 richTextBox1.Text
-}, "ID = @W_ID", new List<string> {"W_ID"}, new List<object> { dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value });
+}, "ID = @W_ID", new List<string> { "W_ID" }, new List<object> { dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value });
                 }
                 bool label18_visible = label18.Visible;
                 load_visites();
@@ -1270,7 +1277,7 @@ richTextBox1.Text
                                                     + "`ITEM_PROD_CODE_68` = IF(`ITEM_IS_PROD_68` = FALSE AND `ITEM_PROD_CODE_68` IN (@param_xx), NULL, `ITEM_PROD_CODE_68`),"
                                                     + "`ITEM_PROD_CODE_69` = IF(`ITEM_IS_PROD_69` = FALSE AND `ITEM_PROD_CODE_69` IN (@param_xx), NULL, `ITEM_PROD_CODE_69`),"
                                                     + "`ITEM_PROD_CODE_70` = IF(`ITEM_IS_PROD_70` = FALSE AND `ITEM_PROD_CODE_70` IN (@param_xx), NULL, `ITEM_PROD_CODE_70`)"
-                                + ";",new List<string> {"param_xx"},new List<object> {ids});
+                                + ";", new List<string> { "param_xx" }, new List<object> { ids });
                         }
                     }
                     load_visites();
@@ -1471,7 +1478,7 @@ richTextBox1.Text
             {
                 if (MessageBox.Show("Êtes-vous sûrs de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    PreConnection.Excut_Cmd(3, "tb_poids",null,null,"ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView3.Rows[prev_rw_idx].Cells["IDD"].Value });
+                    PreConnection.Excut_Cmd(3, "tb_poids", null, null, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView3.Rows[prev_rw_idx].Cells["IDD"].Value });
                     load_poids();
                 }
             }
@@ -1515,7 +1522,7 @@ richTextBox1.Text
 
                 if (cmd.Length > 0)
                 {
-                    PreConnection.Excut_Cmd_personnel(cmd,null,null);
+                    PreConnection.Excut_Cmd_personnel(cmd, null, null);
                     load_poids();
                 }
             }
@@ -1557,6 +1564,24 @@ richTextBox1.Text
             new Print_visites(1, (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ShowDialog();
         }
 
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBox6.Enabled = checkBox3.Checked;
+            if (comboBox6.Enabled) { comboBox6.Focus(); }
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+            if(splitContainer1.SplitterDistance > splitter_prev_dist)
+            {
+                int difff = this.Size.Width - frm_width;
+                this.Size = new Size(frm_width + (splitContainer1.SplitterDistance - spliter_panel1_wdth) + difff, this.Size.Height);
+                splitContainer1.Dock = DockStyle.Right;
+                splitContainer1.Dock = DockStyle.Fill;
+            }
+            splitter_prev_dist = splitContainer1.SplitterDistance;
+        }
     }
 }
 

@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Animaux));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.button14 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -130,6 +130,8 @@
             this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -159,6 +161,8 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.comboBox6);
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox3);
             this.splitContainer1.Panel1.Controls.Add(this.button14);
             this.splitContainer1.Panel1.Controls.Add(this.button6);
             this.splitContainer1.Panel1.Controls.Add(this.textBox1);
@@ -171,8 +175,9 @@
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Size = new System.Drawing.Size(845, 508);
-            this.splitContainer1.SplitterDistance = 219;
+            this.splitContainer1.SplitterDistance = 285;
             this.splitContainer1.TabIndex = 0;
+            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // button14
             // 
@@ -184,7 +189,7 @@
             this.button14.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button14.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button14.Location = new System.Drawing.Point(189, 12);
+            this.button14.Location = new System.Drawing.Point(255, 12);
             this.button14.Margin = new System.Windows.Forms.Padding(4);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(24, 22);
@@ -201,7 +206,7 @@
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(148, 473);
+            this.button6.Location = new System.Drawing.Point(214, 473);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(26, 31);
             this.button6.TabIndex = 4;
@@ -215,7 +220,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(12, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(173, 21);
+            this.textBox1.Size = new System.Drawing.Size(239, 21);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -226,7 +231,7 @@
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(180, 474);
+            this.button4.Location = new System.Drawing.Point(246, 474);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(26, 29);
             this.button4.TabIndex = 3;
@@ -276,12 +281,12 @@
             this.RADIATION_CAUSES,
             this.PICTURE,
             this.DATE_ADDED});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 39);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 66);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(213, 433);
+            this.dataGridView1.Size = new System.Drawing.Size(279, 406);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -422,9 +427,10 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.MinimumSize = new System.Drawing.Size(556, 508);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(622, 508);
+            this.tabControl1.Size = new System.Drawing.Size(556, 508);
             this.tabControl1.TabIndex = 1;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -469,7 +475,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(614, 479);
+            this.tabPage1.Size = new System.Drawing.Size(548, 479);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Détails : ";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -481,7 +487,7 @@
             this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(373, 64);
+            this.button9.Location = new System.Drawing.Point(307, 64);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(25, 24);
             this.button9.TabIndex = 49;
@@ -530,7 +536,7 @@
             this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
-            this.button8.Location = new System.Drawing.Point(276, 425);
+            this.button8.Location = new System.Drawing.Point(210, 425);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(136, 48);
             this.button8.TabIndex = 47;
@@ -575,7 +581,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(122, 65);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(249, 21);
+            this.textBox2.Size = new System.Drawing.Size(183, 21);
             this.textBox2.TabIndex = 6;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.Enter += new System.EventHandler(this.textBox2_Enter);
@@ -591,7 +597,7 @@
             this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_eraser_tool_30px;
-            this.button7.Location = new System.Drawing.Point(562, 233);
+            this.button7.Location = new System.Drawing.Point(496, 233);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(34, 31);
             this.button7.TabIndex = 44;
@@ -619,7 +625,7 @@
             this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_slr_small_lens_30px;
-            this.button5.Location = new System.Drawing.Point(404, 233);
+            this.button5.Location = new System.Drawing.Point(338, 233);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(34, 31);
             this.button5.TabIndex = 43;
@@ -633,7 +639,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Location = new System.Drawing.Point(68, 38);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(303, 21);
+            this.textBox3.Size = new System.Drawing.Size(237, 21);
             this.textBox3.TabIndex = 5;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox3.Validated += new System.EventHandler(this.textBox2_Validated);
@@ -643,7 +649,7 @@
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(404, 69);
+            this.pictureBox2.Location = new System.Drawing.Point(338, 69);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(192, 195);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -687,7 +693,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Location = new System.Drawing.Point(377, 294);
+            this.groupBox1.Location = new System.Drawing.Point(311, 294);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(229, 124);
             this.groupBox1.TabIndex = 41;
@@ -739,7 +745,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox4.Location = new System.Drawing.Point(123, 92);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(248, 21);
+            this.textBox4.Size = new System.Drawing.Size(182, 21);
             this.textBox4.TabIndex = 7;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
@@ -768,7 +774,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox6.Location = new System.Drawing.Point(88, 267);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(283, 21);
+            this.textBox6.Size = new System.Drawing.Size(217, 21);
             this.textBox6.TabIndex = 13;
             this.textBox6.Tag = "";
             this.toolTip1.SetToolTip(this.textBox6, "ex : Noire et Fauvre");
@@ -781,7 +787,7 @@
             this.textBox8.Location = new System.Drawing.Point(99, 294);
             this.textBox8.Multiline = true;
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(272, 124);
+            this.textBox8.Size = new System.Drawing.Size(206, 124);
             this.textBox8.TabIndex = 14;
             // 
             // label9
@@ -804,7 +810,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_save_close_25px;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(418, 436);
+            this.button2.Location = new System.Drawing.Point(352, 436);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(188, 37);
             this.button2.TabIndex = 18;
@@ -827,7 +833,7 @@
             "Femelle castrée"});
             this.comboBox4.Location = new System.Drawing.Point(88, 209);
             this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(283, 24);
+            this.comboBox4.Size = new System.Drawing.Size(217, 24);
             this.comboBox4.TabIndex = 11;
             this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
@@ -836,7 +842,7 @@
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.Color.Red;
-            this.label12.Location = new System.Drawing.Point(424, 417);
+            this.label12.Location = new System.Drawing.Point(358, 417);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(178, 16);
             this.label12.TabIndex = 23;
@@ -859,7 +865,7 @@
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label13.Location = new System.Drawing.Point(374, 41);
+            this.label13.Location = new System.Drawing.Point(308, 41);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(134, 16);
             this.label13.TabIndex = 24;
@@ -929,7 +935,7 @@
             "Yorkshire Terrier"});
             this.comboBox3.Location = new System.Drawing.Point(88, 179);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(283, 24);
+            this.comboBox3.Size = new System.Drawing.Size(217, 24);
             this.comboBox3.TabIndex = 10;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             this.comboBox3.Validated += new System.EventHandler(this.comboBox3_Validated);
@@ -961,7 +967,7 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(88, 119);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(283, 24);
+            this.comboBox1.Size = new System.Drawing.Size(217, 24);
             this.comboBox1.TabIndex = 8;
             this.comboBox1.DropDown += new System.EventHandler(this.comboBox1_DropDown);
             this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
@@ -987,7 +993,7 @@
             "Camélidé"});
             this.comboBox2.Location = new System.Drawing.Point(88, 149);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(283, 24);
+            this.comboBox2.Size = new System.Drawing.Size(217, 24);
             this.comboBox2.TabIndex = 9;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
@@ -998,7 +1004,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(373, 119);
+            this.button1.Location = new System.Drawing.Point(307, 119);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(25, 24);
             this.button1.TabIndex = 28;
@@ -1021,7 +1027,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(614, 479);
+            this.tabPage3.Size = new System.Drawing.Size(548, 479);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "His. Poids";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1032,14 +1038,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView3.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridView3.ColumnHeadersHeight = 35;
             this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDD,
@@ -1051,7 +1057,7 @@
             this.dataGridView3.Location = new System.Drawing.Point(6, 6);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.Size = new System.Drawing.Size(600, 452);
+            this.dataGridView3.Size = new System.Drawing.Size(534, 449);
             this.dataGridView3.TabIndex = 0;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
             this.dataGridView3.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView3_CellFormatting);
@@ -1091,8 +1097,8 @@
             // 
             // DELETE
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DELETE.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DELETE.DefaultCellStyle = dataGridViewCellStyle18;
             this.DELETE.HeaderText = "";
             this.DELETE.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
             this.DELETE.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
@@ -1114,7 +1120,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(614, 479);
+            this.tabPage2.Size = new System.Drawing.Size(548, 479);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Rapport de visites : ";
             // 
@@ -1130,7 +1136,7 @@
             this.button22.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button22.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
             this.button22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button22.Location = new System.Drawing.Point(508, 237);
+            this.button22.Location = new System.Drawing.Point(442, 236);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(36, 30);
             this.button22.TabIndex = 99;
@@ -1141,9 +1147,9 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox3.Image = global::ALBAITAR_Softvet.Properties.Resources.NOUVEAU_003;
-            this.pictureBox3.Location = new System.Drawing.Point(352, 239);
+            this.pictureBox3.Location = new System.Drawing.Point(286, 239);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(92, 48);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1152,8 +1158,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.button13);
@@ -1167,17 +1172,18 @@
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(8, 274);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(598, 191);
+            this.groupBox2.Size = new System.Drawing.Size(532, 188);
             this.groupBox2.TabIndex = 66;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Détails :";
             // 
             // label18
             // 
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label18.Location = new System.Drawing.Point(500, 54);
+            this.label18.Location = new System.Drawing.Point(440, 54);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(80, 16);
             this.label18.TabIndex = 68;
@@ -1196,7 +1202,7 @@
             this.button13.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button13.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_save_close_25px;
             this.button13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button13.Location = new System.Drawing.Point(494, 14);
+            this.button13.Location = new System.Drawing.Point(428, 14);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(98, 37);
             this.button13.TabIndex = 67;
@@ -1235,7 +1241,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(9, 93);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(583, 92);
+            this.richTextBox1.Size = new System.Drawing.Size(517, 89);
             this.richTextBox1.TabIndex = 63;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -1274,12 +1280,12 @@
             // 
             // button10
             // 
-            this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button10.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button10.BackgroundImage")));
             this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button10.FlatAppearance.BorderSize = 0;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(550, 236);
+            this.button10.Location = new System.Drawing.Point(484, 236);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(26, 31);
             this.button10.TabIndex = 60;
@@ -1289,12 +1295,12 @@
             // 
             // button11
             // 
-            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button11.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
             this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button11.FlatAppearance.BorderSize = 0;
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Location = new System.Drawing.Point(582, 237);
+            this.button11.Location = new System.Drawing.Point(516, 237);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(26, 29);
             this.button11.TabIndex = 59;
@@ -1304,6 +1310,7 @@
             // 
             // button12
             // 
+            this.button12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button12.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
             this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button12.FlatAppearance.BorderSize = 0;
@@ -1320,20 +1327,21 @@
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridView2.ColumnHeadersHeight = 35;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_VISITE,
@@ -1348,7 +1356,7 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(608, 230);
+            this.dataGridView2.Size = new System.Drawing.Size(542, 230);
             this.dataGridView2.TabIndex = 57;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
@@ -1367,8 +1375,8 @@
             // 
             this.DATETIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.DATETIME.DataPropertyName = "DATETIME";
-            dataGridViewCellStyle6.Format = "dd/MM/yyyy HH:mm";
-            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle20.Format = "dd/MM/yyyy HH:mm";
+            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle20;
             this.DATETIME.HeaderText = "Date";
             this.DATETIME.Name = "DATETIME";
             this.DATETIME.ReadOnly = true;
@@ -1413,6 +1421,28 @@
             this.openFileDialog1.Filter = "Images |*.bmp;*.jpg;*.jpeg;*.png";
             this.openFileDialog1.Title = "Choisir une image :";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(12, 39);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(99, 20);
+            this.checkBox3.TabIndex = 34;
+            this.checkBox3.Text = "A le maladie :";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox6.Enabled = false;
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(113, 37);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(165, 24);
+            this.comboBox6.TabIndex = 35;
             // 
             // Animaux
             // 
@@ -1551,5 +1581,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn POIDS;
         private System.Windows.Forms.DataGridViewImageColumn DELETE;
         private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.ComboBox comboBox6;
     }
 }
