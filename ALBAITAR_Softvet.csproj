@@ -11,7 +11,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ALBAITAR_Softvet</RootNamespace>
     <AssemblyName>ALBAITAR_Softvet</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
