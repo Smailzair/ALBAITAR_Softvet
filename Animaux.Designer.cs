@@ -30,11 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Animaux));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle89 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle90 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle91 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle95 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle96 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle92 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle93 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle94 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label19 = new System.Windows.Forms.Label();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.button14 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -106,6 +113,8 @@
             this.DATETIMEE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.POIDS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DELETE = new System.Windows.Forms.DataGridViewImageColumn();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button22 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -130,8 +139,20 @@
             this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.ID_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_ID_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.START_DATE_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MALAD_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MALAD_LEVEL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ESTIM_END_DATE_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DEL_MALAD = new System.Windows.Forms.DataGridViewImageColumn();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -144,10 +165,13 @@
             this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -161,8 +185,8 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer1.Panel1.Controls.Add(this.comboBox6);
-            this.splitContainer1.Panel1.Controls.Add(this.checkBox3);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
+            this.splitContainer1.Panel1.Controls.Add(this.label19);
             this.splitContainer1.Panel1.Controls.Add(this.button14);
             this.splitContainer1.Panel1.Controls.Add(this.button6);
             this.splitContainer1.Panel1.Controls.Add(this.textBox1);
@@ -178,6 +202,40 @@
             this.splitContainer1.SplitterDistance = 285;
             this.splitContainer1.TabIndex = 0;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
+            // 
+            // label19
+            // 
+            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.label19.Location = new System.Drawing.Point(69, 210);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(148, 39);
+            this.label19.TabIndex = 36;
+            this.label19.Text = "Aucun Résultat";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label19.Visible = false;
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox6.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBox6.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(65, 25);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(196, 24);
+            this.comboBox6.TabIndex = 35;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(9, -1);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(79, 20);
+            this.checkBox3.TabIndex = 34;
+            this.checkBox3.Text = "Malade : ";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // button14
             // 
@@ -223,6 +281,7 @@
             this.textBox1.Size = new System.Drawing.Size(239, 21);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // button4
             // 
@@ -261,7 +320,7 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.ColumnHeadersVisible = false;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -281,12 +340,12 @@
             this.RADIATION_CAUSES,
             this.PICTURE,
             this.DATE_ADDED});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 66);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 153);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(279, 406);
+            this.dataGridView1.Size = new System.Drawing.Size(279, 319);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -424,6 +483,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -433,6 +493,7 @@
             this.tabControl1.Size = new System.Drawing.Size(556, 508);
             this.tabControl1.TabIndex = 1;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             // 
             // tabPage1
             // 
@@ -1038,14 +1099,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView3.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle89.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle89.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle89.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle89.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle89.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle89.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle89;
             this.dataGridView3.ColumnHeadersHeight = 35;
             this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDD,
@@ -1057,7 +1118,7 @@
             this.dataGridView3.Location = new System.Drawing.Point(6, 6);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.Size = new System.Drawing.Size(534, 449);
+            this.dataGridView3.Size = new System.Drawing.Size(534, 462);
             this.dataGridView3.TabIndex = 0;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
             this.dataGridView3.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView3_CellFormatting);
@@ -1097,8 +1158,8 @@
             // 
             // DELETE
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DELETE.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle90.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DELETE.DefaultCellStyle = dataGridViewCellStyle90;
             this.DELETE.HeaderText = "";
             this.DELETE.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
             this.DELETE.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
@@ -1106,6 +1167,52 @@
             this.DELETE.ReadOnly = true;
             this.DELETE.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.DELETE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.dataGridView4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(548, 479);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "His. Maladies";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView4.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle91.BackColor = System.Drawing.Color.Purple;
+            dataGridViewCellStyle91.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle91.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle91.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle91.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle91.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView4.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle91;
+            this.dataGridView4.ColumnHeadersHeight = 35;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID_MALAD,
+            this.ANIM_ID_MALAD,
+            this.START_DATE_MALAD,
+            this.MALAD_NME,
+            this.MALAD_LEVEL,
+            this.ESTIM_END_DATE_MALAD,
+            this.DEL_MALAD});
+            this.dataGridView4.EnableHeadersVisualStyles = false;
+            this.dataGridView4.Location = new System.Drawing.Point(7, 7);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.RowHeadersVisible = false;
+            this.dataGridView4.Size = new System.Drawing.Size(534, 459);
+            this.dataGridView4.TabIndex = 1;
+            this.dataGridView4.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellClick);
+            this.dataGridView4.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView4_CellFormatting);
+            this.dataGridView4.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView4_CellValueChanged);
+            this.dataGridView4.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView4_DataError);
+            this.dataGridView4.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridView4_Scroll);
             // 
             // tabPage2
             // 
@@ -1117,10 +1224,10 @@
             this.tabPage2.Controls.Add(this.button11);
             this.tabPage2.Controls.Add(this.button12);
             this.tabPage2.Controls.Add(this.dataGridView2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(548, 479);
+            this.tabPage2.Size = new System.Drawing.Size(548, 482);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Rapport de visites : ";
             // 
@@ -1136,7 +1243,7 @@
             this.button22.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button22.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
             this.button22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button22.Location = new System.Drawing.Point(442, 236);
+            this.button22.Location = new System.Drawing.Point(442, 233);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(36, 30);
             this.button22.TabIndex = 99;
@@ -1149,7 +1256,7 @@
             // 
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox3.Image = global::ALBAITAR_Softvet.Properties.Resources.NOUVEAU_003;
-            this.pictureBox3.Location = new System.Drawing.Point(286, 239);
+            this.pictureBox3.Location = new System.Drawing.Point(286, 236);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(92, 48);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1170,7 +1277,7 @@
             this.groupBox2.Controls.Add(this.comboBox5);
             this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 8.25F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(8, 274);
+            this.groupBox2.Location = new System.Drawing.Point(8, 271);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(532, 188);
             this.groupBox2.TabIndex = 66;
@@ -1285,7 +1392,7 @@
             this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button10.FlatAppearance.BorderSize = 0;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(484, 236);
+            this.button10.Location = new System.Drawing.Point(484, 233);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(26, 31);
             this.button10.TabIndex = 60;
@@ -1300,7 +1407,7 @@
             this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button11.FlatAppearance.BorderSize = 0;
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Location = new System.Drawing.Point(516, 237);
+            this.button11.Location = new System.Drawing.Point(516, 234);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(26, 29);
             this.button11.TabIndex = 59;
@@ -1315,7 +1422,7 @@
             this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button12.FlatAppearance.BorderSize = 0;
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.Location = new System.Drawing.Point(8, 239);
+            this.button12.Location = new System.Drawing.Point(8, 236);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(26, 29);
             this.button12.TabIndex = 58;
@@ -1334,14 +1441,14 @@
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle95.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle95.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle95.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle95.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle95.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle95.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle95.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle95;
             this.dataGridView2.ColumnHeadersHeight = 35;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_VISITE,
@@ -1356,7 +1463,7 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(542, 230);
+            this.dataGridView2.Size = new System.Drawing.Size(542, 227);
             this.dataGridView2.TabIndex = 57;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
@@ -1375,8 +1482,8 @@
             // 
             this.DATETIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.DATETIME.DataPropertyName = "DATETIME";
-            dataGridViewCellStyle20.Format = "dd/MM/yyyy HH:mm";
-            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle96.Format = "dd/MM/yyyy HH:mm";
+            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle96;
             this.DATETIME.HeaderText = "Date";
             this.DATETIME.Name = "DATETIME";
             this.DATETIME.ReadOnly = true;
@@ -1422,27 +1529,151 @@
             this.openFileDialog1.Title = "Choisir une image :";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
-            // checkBox3
+            // ID_MALAD
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(12, 39);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(99, 20);
-            this.checkBox3.TabIndex = 34;
-            this.checkBox3.Text = "A le maladie :";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            this.ID_MALAD.DataPropertyName = "ID";
+            this.ID_MALAD.HeaderText = "ID";
+            this.ID_MALAD.Name = "ID_MALAD";
+            this.ID_MALAD.ReadOnly = true;
+            this.ID_MALAD.Visible = false;
             // 
-            // comboBox6
+            // ANIM_ID_MALAD
             // 
-            this.comboBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox6.Enabled = false;
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(113, 37);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(165, 24);
-            this.comboBox6.TabIndex = 35;
+            this.ANIM_ID_MALAD.DataPropertyName = "ANIM_ID";
+            this.ANIM_ID_MALAD.HeaderText = "ANIM_ID";
+            this.ANIM_ID_MALAD.Name = "ANIM_ID_MALAD";
+            this.ANIM_ID_MALAD.ReadOnly = true;
+            this.ANIM_ID_MALAD.Visible = false;
+            // 
+            // START_DATE_MALAD
+            // 
+            this.START_DATE_MALAD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.START_DATE_MALAD.DataPropertyName = "START_DATE";
+            dataGridViewCellStyle92.Format = "d";
+            dataGridViewCellStyle92.NullValue = null;
+            this.START_DATE_MALAD.DefaultCellStyle = dataGridViewCellStyle92;
+            this.START_DATE_MALAD.HeaderText = "Date";
+            this.START_DATE_MALAD.Name = "START_DATE_MALAD";
+            this.START_DATE_MALAD.Width = 58;
+            // 
+            // MALAD_NME
+            // 
+            this.MALAD_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.MALAD_NME.DataPropertyName = "MALAD_NME";
+            this.MALAD_NME.HeaderText = "Maladie";
+            this.MALAD_NME.Name = "MALAD_NME";
+            // 
+            // MALAD_LEVEL
+            // 
+            this.MALAD_LEVEL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.MALAD_LEVEL.DataPropertyName = "MALAD_LEVEL";
+            this.MALAD_LEVEL.HeaderText = "Niveau";
+            this.MALAD_LEVEL.Name = "MALAD_LEVEL";
+            this.MALAD_LEVEL.Width = 71;
+            // 
+            // ESTIM_END_DATE_MALAD
+            // 
+            this.ESTIM_END_DATE_MALAD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            this.ESTIM_END_DATE_MALAD.DataPropertyName = "ESTIM_END_DATE";
+            dataGridViewCellStyle93.Format = "d";
+            this.ESTIM_END_DATE_MALAD.DefaultCellStyle = dataGridViewCellStyle93;
+            this.ESTIM_END_DATE_MALAD.HeaderText = "Date prévue de la fin de la maladie";
+            this.ESTIM_END_DATE_MALAD.MinimumWidth = 120;
+            this.ESTIM_END_DATE_MALAD.Name = "ESTIM_END_DATE_MALAD";
+            this.ESTIM_END_DATE_MALAD.Width = 120;
+            // 
+            // DEL_MALAD
+            // 
+            dataGridViewCellStyle94.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DEL_MALAD.DefaultCellStyle = dataGridViewCellStyle94;
+            this.DEL_MALAD.HeaderText = "";
+            this.DEL_MALAD.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
+            this.DEL_MALAD.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.DEL_MALAD.Name = "DEL_MALAD";
+            this.DEL_MALAD.ReadOnly = true;
+            this.DEL_MALAD.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DEL_MALAD.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Location = new System.Drawing.Point(86, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(26, 13);
+            this.panel3.TabIndex = 43;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.radioButton2);
+            this.groupBox3.Controls.Add(this.radioButton1);
+            this.groupBox3.Controls.Add(this.comboBox7);
+            this.groupBox3.Controls.Add(this.label21);
+            this.groupBox3.Controls.Add(this.panel3);
+            this.groupBox3.Controls.Add(this.checkBox3);
+            this.groupBox3.Controls.Add(this.comboBox6);
+            this.groupBox3.Controls.Add(this.label20);
+            this.groupBox3.Enabled = false;
+            this.groupBox3.Location = new System.Drawing.Point(11, 39);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(267, 108);
+            this.groupBox3.TabIndex = 44;
+            this.groupBox3.TabStop = false;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(6, 28);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(62, 16);
+            this.label20.TabIndex = 44;
+            this.label20.Text = "Maladie : ";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 56);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(56, 16);
+            this.label21.TabIndex = 46;
+            this.label21.Text = "Niveau : ";
+            // 
+            // comboBox7
+            // 
+            this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Items.AddRange(new object[] {
+            "- Tous -",
+            "Légère",
+            "Modéré",
+            "Grave"});
+            this.comboBox7.Location = new System.Drawing.Point(65, 53);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(121, 24);
+            this.comboBox7.TabIndex = 47;
+            this.comboBox7.SelectedIndexChanged += new System.EventHandler(this.comboBox7_SelectedIndexChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(21, 82);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(142, 20);
+            this.radioButton1.TabIndex = 48;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Actuellement malade";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(169, 82);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(48, 20);
+            this.radioButton2.TabIndex = 49;
+            this.radioButton2.Text = "Tous";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // Animaux
             // 
@@ -1474,11 +1705,15 @@
             this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1583,5 +1818,22 @@
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_MALAD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_ID_MALAD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn START_DATE_MALAD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MALAD_NME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MALAD_LEVEL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ESTIM_END_DATE_MALAD;
+        private System.Windows.Forms.DataGridViewImageColumn DEL_MALAD;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }

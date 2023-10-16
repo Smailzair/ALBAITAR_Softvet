@@ -185,6 +185,7 @@ namespace ALBAITAR_Softvet
                     {
                         for (int i = 0; i < Columns_names.Count; i++)
                         {
+                            Debug.WriteLine("xxxxxxxxx >>>>>>>>>>>>>>> " + "@i" + i.ToString() + "_" + Columns_names[i] + " >>>>>>>>>>>> " + col_values[i]);
                             command.Parameters.AddWithValue("@i" + i.ToString() + "_" + Columns_names[i], col_values[i]);
                         }
                     }
@@ -193,9 +194,13 @@ namespace ALBAITAR_Softvet
                     {
                         for (int i = 0; i < where_columns.Count; i++)
                         {
+                            Debug.WriteLine("WHERE >>>>>>>>>>>>>>> " + where_columns[i] + " >>>>>>>>>>>> " + where_values[i]);
                             command.Parameters.AddWithValue(where_columns[i], where_values[i]);
                         }
                     }
+
+
+                    Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>> " + command.CommandText);
                     rows_nb = command.ExecuteNonQuery();
                 }
 
