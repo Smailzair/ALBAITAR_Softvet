@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
 using Excc = Microsoft.Office.Interop.Excel;
@@ -34,6 +36,8 @@ namespace ALBAITAR_Softvet.Resources
         int spliter_panel1_wdth = 0;
         int frm_width = 0;
         int splitter_prev_dist = 0;
+
+        string[] default_maladies;
         public Animaux(int ID_to_select, int visite_id)
         {
             InitializeComponent();
@@ -155,14 +159,9 @@ namespace ALBAITAR_Softvet.Resources
             Races_Espèces.Rows.Add(new object[] { "Oiseaux", "Perroquet" });
             Races_Espèces.Rows.Add(new object[] { "Oiseaux", "Perruche" });
             //---
-
             comboBox3.DataSource = Races_Espèces;
             comboBox3.ValueMember = "RACE";
             comboBox3.DisplayMember = "RACE";
-            //---------------------------
-            tabControl1.TabPages.Remove(tabPage3);
-            tabControl1.TabPages.Remove(tabPage4);
-            tabControl1.TabPages.Remove(tabPage2);
             //----------------------
             comboBox2.SelectedIndex = comboBox3.SelectedIndex = comboBox4.SelectedIndex = 0;
             //----------------------
@@ -180,6 +179,56 @@ namespace ALBAITAR_Softvet.Resources
             //--------------------
             comboBox5.AutoCompleteCustomSource.AddRange(clients.AsEnumerable().Select(row => row.Field<string>("FULL_NME")).ToArray());
             //---------------------
+            default_maladies = new string[] {
+                "- Tous -",
+                "Anémie infectieuse des équidés",
+                "Avortement enzootique des brebis",
+                "Bronchite infectieuse aviaire",
+                "Brucellose dans les espèces bovine, ovine, caprine",
+                "Bursite infectieuse (Gomboro)",
+                "Campylobactériose génitale bovine",
+                "Charbon Symptomatique",
+                "Choléra aviaire",
+                "Clavelée et Variole caprine",
+                "Cysticercose",
+                "Dourine",
+                "Echinococcose/Hydatidose",
+                "Encéphalopathie spongiforme des bovins",
+                "Fièvre Aphteuse",
+                "Fièvre catarrhale du mouton",
+                "Fièvre charbonneuse chez toutes les espèces mammifères",
+                "Fièvre de la vallée du Rift",
+                "Fièvre Q",
+                "Gale des équidés",
+                "Leishmaniose",
+                "Leptospirose bovine",
+                "Leucose bovine enzootique",
+                "Leucoses aviaires",
+                "Loque, la Nosémose et l’acariose des abeilles",
+                "Marek",
+                "New-castle",
+                "Maladie hémorragique virale du lapin",
+                "Métrite contagieuse équine",
+                "Morve",
+                "Myxomatose",
+                "Ornithose/Psittacoses",
+                "Paratuberculose",
+                "Péripneumonie contagieuse bovine",
+                "Peste aviaire",
+                "Peste Bovine",
+                "Peste des petits ruminants",
+                "peste Équine",
+                "Rage dans toutes les espèces",
+                "Rhinotrachéite infectieuse bovine",
+                "Salmonelloses aviaires à Salmonella : pullorum-gallinarum",
+                "Trichomonose bovine",
+                "Trypanosomose des camelins à Tevansi (surra)",
+                "Tuberculose bovine",
+                "Tularémie",
+                "Variole aviaire",
+                "Variole cameline",
+                "Varoise des abeilles"
+            };
             comboBox7.SelectedIndexChanged -= comboBox7_SelectedIndexChanged;
             comboBox7.SelectedIndex = 0;
             comboBox7.SelectedIndexChanged += comboBox7_SelectedIndexChanged;
@@ -187,12 +236,12 @@ namespace ALBAITAR_Softvet.Resources
             Load_anims_from_DB();
             //---------------------
 
-            
+
         }
         private void Load_anims_from_DB()
         {
             int fd = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 99999999;
-            animaux = PreConnection.Load_data_keeping_duplicates("SELECT * FROM tb_animaux;");            
+            animaux = PreConnection.Load_data_keeping_duplicates("SELECT * FROM tb_animaux;");
             dataGridView1.DataSource = animaux;
             if (dataGridView1.Rows.Count > fd)
             { dataGridView1.ClearSelection(); dataGridView1.Rows[fd].Selected = true; }
@@ -201,23 +250,14 @@ namespace ALBAITAR_Softvet.Resources
 
             Load_malad();
             //------------------
-            int prev_sel_cbx6 = comboBox6.SelectedIndex;
-            comboBox6.Items.Clear();
-            comboBox6.Items.Add("- Tous -");
-            var mal_types = maladies_tbl.AsEnumerable().Select(V => V["MALAD_NME"]);
-            if (mal_types.Any())
-            {
-                comboBox6.DataSource = mal_types.Distinct().ToList();
-            }
-            
+            reload_cbx6_data();
             //-----------------
             anim_filter();
         }
         private void Load_selected_anim_fields()
         {
             openFileDialog1.FileName = "";
-            //if (dataGridView1.SelectedRows.Count > 0)
-            //{
+
             label13.Visible = false;
             textBox2.Validated -= textBox2_Validated;
             textBox3.Validated -= textBox2_Validated;
@@ -255,11 +295,7 @@ namespace ALBAITAR_Softvet.Resources
             textBox3.Validated += textBox2_Validated;
             comboBox1.Validating += comboBox1_Validating;
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
-            //}
-            //else
-            //{
-            //    button3.PerformClick();
-            //}
+
 
         }
 
@@ -296,7 +332,7 @@ namespace ALBAITAR_Softvet.Resources
             anim_filter();
             textBox1.Focus();
 
-            
+
 
 
         }
@@ -304,28 +340,111 @@ namespace ALBAITAR_Softvet.Resources
         private void anim_filter()
         {
             string fltr = textBox1.Text != string.Empty ? String.Format("NME LIKE '%{0}%'", textBox1.Text) : "";
-            //if (checkBox3.Checked)
-            //{
-            //    fltr += string.IsNullOrWhiteSpace(fltr) ? "" : " AND ";
-            //    if(radioButton1.Checked) //Actually
-            //    {
-            //        if(comboBox6.Text == "%Tous%" || string.IsNullOrWhiteSpace(comboBox6.Text))
-            //        {
-            //            //"ID IN ";
-            //        }
-            //        else
-            //        {
+            if (checkBox3.Checked)
+            {
 
-            //        }
-            //    }
-            //    else
-            //    {
+                fltr += string.IsNullOrWhiteSpace(fltr) ? "" : " AND ";
+                string iddx = "";
+                if (radioButton1.Checked) //Actually
+                {
+                    if (comboBox6.Text.Contains("Tous") || string.IsNullOrWhiteSpace(comboBox6.Text))
+                    {
+                        if (comboBox7.SelectedIndex > 0)
+                        {
+                            maladies_tbl.AsEnumerable().Where(V =>
+                            (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) &&
+                            (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
+                            (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true))
+                                .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            {
+                                iddx += "," + H.ToString();
+                            });
+                        }
+                        else
+                        {
+                            maladies_tbl.AsEnumerable().Where(V => (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true)).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            {
+                                iddx += "," + H.ToString();
+                            });
+                        }
+                    }
+                    else
+                    {
+                        if (comboBox7.SelectedIndex > 0)
+                        {
+                            maladies_tbl.AsEnumerable().Where(V => (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) && (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true)).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            {
+                                iddx += "," + H.ToString();
+                            });
+                        }
+                        else
+                        {
+                            maladies_tbl.AsEnumerable().Where(V => (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true)).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            {
+                                iddx += "," + H.ToString();
+                            });
+                        }
+                    }
+                }
+                else
+                {
+                    if (comboBox6.Text.Contains("Tous") || string.IsNullOrWhiteSpace(comboBox6.Text))
+                    {
+                        if (comboBox7.SelectedIndex > 0)
+                        {
+                            maladies_tbl.AsEnumerable().Where(V => V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            {
+                                iddx += "," + H.ToString();
+                            });
+                        }
+                        else
+                        {
+                            maladies_tbl.AsEnumerable().Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            {
+                                iddx += "," + H.ToString();
+                            });
+                        }
+                    }
+                    else
+                    {
+                        if (comboBox7.SelectedIndex > 0)
+                        {
+                            maladies_tbl.AsEnumerable().Where(V => (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false)).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            {
+                                iddx += "," + H.ToString();
+                            });
+                        }
+                        else
+                        {
+                            maladies_tbl.AsEnumerable().Where(V => V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            {
+                                iddx += "," + H.ToString();
+                            });
+                        }
+                    }
+                }
 
-            //    }
-            //}
 
-            fdf
-                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
+                iddx = iddx.Length > 0 ? iddx.Substring(1) : string.Empty;
+
+                if (iddx.Length == 0 && !(comboBox6.Text.Contains("Tous") && string.IsNullOrWhiteSpace(comboBox6.Text) && comboBox7.SelectedIndex > 0 && radioButton1.Checked))
+                {
+                    fltr = "ID = -1";
+                }
+                else
+                {
+                    fltr += !string.IsNullOrWhiteSpace(iddx) ? "ID IN (" + iddx + ")" : "";
+                }
+                //-------------
+                label25.Text = comboBox6.Text;
+                label26.Text = comboBox7.SelectedIndex > 0 ? comboBox7.Text : "- Tous -";
+                label27.Text = radioButton1.Checked ? "Oui" : "- Tous -";
+            }
+            else
+            {
+                label25.Text = label26.Text = label27.Text = "- Tous -";
+            }
+            ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
             dataGridView1.Columns["ID"].Visible = false;
 
 
@@ -522,13 +641,15 @@ checkBox1.Checked,
             verif_if_déja_exist_animal();
         }
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        private async void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+            await Task.Delay(TimeSpan.FromMilliseconds(300));
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                if (tabControl1.TabPages["tabPage3"] == null) { tabControl1.TabPages.Add(tabPage3); }
-                if (tabControl1.TabPages["tabPage4"] == null) { tabControl1.TabPages.Add(tabPage4); }
-                if (tabControl1.TabPages["tabPage2"] == null) { tabControl1.TabPages.Add(tabPage2); }
+                Poid_Panel.Show();
+                Malad_Panel.Show();
+                Visit_Panel.Show();
+                //-----------------
                 Is_New = false;
 
                 if (tabControl1.SelectedTab == tabPage1)
@@ -548,36 +669,13 @@ checkBox1.Checked,
                     label18.Visible = false;
                     load_visites();
                 }
-
-                //if (tabControl1.TabPages[prev_selected_tab_name] != null)
-                //{
-                //    dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
-                //    switch (prev_selected_tab_name)
-                //    {
-                //        case "tabPage1":
-                //            tabControl1.SelectedTab = tabPage1;
-                //            break;
-                //        case "tabPage3":
-                //            tabControl1.SelectedTab = tabPage3;
-                //            break;
-                //        case "tabPage4":
-                //            tabControl1.SelectedTab = tabPage4;
-                //            break;
-                //        case "tabPage2":
-                //            tabControl1.SelectedTab = tabPage2;
-                //            break;
-                //    }
-                //    dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-                //}
-
             }
-            //else
-            //{
-            //    if (tabControl1.TabPages["tabPage3"] != null) { tabControl1.TabPages.Remove(tabPage3); }
-            //    if (tabControl1.TabPages["tabPage4"] != null) { tabControl1.TabPages.Remove(tabPage4); }
-            //    if (tabControl1.TabPages["tabPage2"] != null) { tabControl1.TabPages.Remove(tabPage2); }
-            //    new_anim(false);
-            //}
+            else
+            {
+                Poid_Panel.Hide();
+                Malad_Panel.Hide();
+                Visit_Panel.Hide();
+            }
 
 
 
@@ -642,10 +740,6 @@ checkBox1.Checked,
                 {
                     ((ComboBox)ctrl).SelectedValue = -1;
                 }
-                //else if (ctrl.GetType() == typeof(DateTimePicker))
-                //{
-                //    ((DateTimePicker)ctrl).Value = DateTime.Now;
-                //}
             }
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             comboBox4.SelectedIndexChanged += comboBox4_SelectedIndexChanged;
@@ -659,14 +753,12 @@ checkBox1.Checked,
             label13.Visible = false;
             pictureBox1.Image = Properties.Resources.NOUVEAU;
             poids_tbl.Rows.Clear();
-
-
-            if (tabControl1.TabPages["tabPage3"] != null) { tabControl1.TabPages.Remove(tabPage3); }
-            if (tabControl1.TabPages["tabPage4"] != null) { tabControl1.TabPages.Remove(tabPage4); }
-            if (tabControl1.TabPages["tabPage2"] != null) { tabControl1.TabPages.Remove(tabPage2); }
-
+            //------------------------
+            Poid_Panel.Hide();
+            Malad_Panel.Hide();
+            Visit_Panel.Hide();
             tabControl1.SelectedTab = tabPage1;
-
+            //-----------
             if (btn_clicked) { textBox3.Select(); }
         }
         private void button3_Click(object sender, EventArgs e)
@@ -824,7 +916,6 @@ checkBox1.Checked,
             new Small_New_Client().ShowDialog();
 
             comboBox1.Validating -= comboBox1_Validating;
-            //clients = PreConnection.Load_data_keeping_duplicates("SELECT ID,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
             clients = PreConnection.Load_data_keeping_duplicates("SELECT *,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
             comboBox1.DataSource = clients;
             comboBox1.DisplayMember = "FULL_NME";
@@ -850,11 +941,6 @@ checkBox1.Checked,
         private void comboBox1_TextChanged(object sender, EventArgs e)
         {
             comboBox1.BackColor = SystemColors.Window;
-            //----------------
-            //if((int)comboBox1.SelectedValue > 0 && comboBox1.Text == "")
-            //{
-            //    comboBox1.SelectedValue = comboBox1.SelectedValue;
-            //}
         }
 
         private void comboBox1_DropDown(object sender, EventArgs e)
@@ -1099,16 +1185,6 @@ checkBox1.Checked,
 
                 if (Is_New_Visite && !label18.Visible)
                 {
-                    //PreConnection.Excut_Cmd("INSERT INTO `tb_visites`"
-                    //                      + "(`DATETIME`,"
-                    //                      + "`ANIM_ID`,"
-                    //                      + "`VISITOR_FULL_NME`,"
-                    //                      + "`OBJECT`)"
-                    //                      + "VALUES"
-                    //                      + "('" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
-                    //                      + dataGridView1.SelectedRows[0].Cells["ID"].Value + ","
-                    //                      + "'" + comboBox5.Text + "',"
-                    //                      + "'" + richTextBox1.Text + "');");
                     PreConnection.Excut_Cmd(1, "tb_visites", new List<string> {"DATETIME",
 "ANIM_ID",
 "VISITOR_FULL_NME",
@@ -1120,11 +1196,6 @@ richTextBox1.Text
                 }
                 else if (!label18.Visible)
                 {
-                    //PreConnection.Excut_Cmd("UPDATE `tb_visites` SET "
-                    //                      + "`DATETIME` = '" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
-                    //                      + "`VISITOR_FULL_NME` = '" + comboBox5.Text + "',"
-                    //                      + "`OBJECT` = '" + richTextBox1.Text + "'"
-                    //                      + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value + ";");
                     PreConnection.Excut_Cmd(2, "tb_visites", new List<string> {"DATETIME",
 "ANIM_ID",
 "VISITOR_FULL_NME",
@@ -1630,7 +1701,7 @@ richTextBox1.Text
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-             dataGridView1_SelectionChanged(null, null);
+            dataGridView1_SelectionChanged(null, null);
         }
 
         private void dataGridView3_Scroll(object sender, ScrollEventArgs e)
@@ -1639,8 +1710,6 @@ richTextBox1.Text
             {
                 dataGridView3.Controls.Remove(ctrr);
             }
-            //dataGridView3.Refresh();
-
         }
 
 
@@ -1667,6 +1736,7 @@ richTextBox1.Text
         {
             groupBox3.Enabled = checkBox3.Checked;
             if (groupBox3.Enabled) { comboBox6.Focus(); }
+            anim_filter();
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
@@ -1716,6 +1786,9 @@ richTextBox1.Text
 
                 }
                 Load_malad();
+                //------------------
+                reload_cbx6_data();
+                //-----------------
 
             }
         }
@@ -1730,9 +1803,11 @@ richTextBox1.Text
                 int prev_select = dataGridView4.SelectedRows.Count > 0 ? (int)dataGridView4.SelectedRows[0].Cells["ID_MALAD"].Value : -1;
 
                 dataGridView4.CellValueChanged -= dataGridView4_CellValueChanged;
-                if(dataGridView4.DataSource != null) { 
+                if (dataGridView4.DataSource != null)
+                {
                     ((DataTable)dataGridView4.DataSource).Rows.Clear();
-                    maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ToList().ForEach(KK => {
+                    maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ToList().ForEach(KK =>
+                    {
                         DataRow rww = ((DataTable)dataGridView4.DataSource).NewRow();
                         rww.ItemArray = KK.ItemArray;
                         ((DataTable)dataGridView4.DataSource).Rows.Add(rww);
@@ -1741,7 +1816,8 @@ richTextBox1.Text
                 else
                 {
                     var ggg = maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value);
-                    if (ggg != null) {
+                    if (ggg.Any())
+                    {
                         dataGridView4.DataSource = ggg.CopyToDataTable();
                     };
                 }
@@ -1764,6 +1840,7 @@ richTextBox1.Text
                 }
                 dataGridView4_Scroll(null, null);
             }
+
         }
 
         private void dataGridView4_Scroll(object sender, ScrollEventArgs e)
@@ -1808,6 +1885,39 @@ richTextBox1.Text
                 if (prev_rw_idx == 0) { dataGridView4.BeginEdit(true); }
                 dateTimePicker.Focus();
             }
+            else if (prev_col_idx == dataGridView4.Columns["MALAD_NME"].Index)
+            {
+                ComboBox cbx = new ComboBox();
+                cbx.Items.AddRange(comboBox6.Items.Cast<object>().Where(G => G.ToString() != "- Tous -").ToArray());
+                cbx.DropDownStyle = ComboBoxStyle.DropDown;
+                cbx.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cbx.AutoCompleteMode = AutoCompleteMode.Suggest;
+
+                try
+                {
+                    if (dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value != DBNull.Value)
+                    {
+                        if (cbx.Items.Contains(dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value))
+                        {
+                            cbx.SelectedItem = dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value;
+                        }
+                    }
+                }
+                catch { cbx.SelectedIndex = -1; }
+                cbx.Leave += (s, args) =>
+                {
+                    dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value = cbx.Text;
+                    dataGridView4_Scroll(null, null);
+                };
+
+
+                dataGridView4.Controls.Add(cbx);
+                dataGridView4.CurrentCell.Style.Padding = new Padding(0);
+                cbx.Visible = true;
+                cbx.Location = dataGridView4.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location;
+                cbx.Size = dataGridView4.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
+                cbx.Focus();
+            }
             else if (prev_col_idx == dataGridView4.Columns["MALAD_LEVEL"].Index)
             {
                 ComboBox cbx = new ComboBox();
@@ -1823,7 +1933,6 @@ richTextBox1.Text
                 cbx.SelectedIndexChanged += (s, args) =>
                 {
                     dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value = cbx.SelectedItem.ToString();
-                    //dataGridView4_CellValueChanged(null, new DataGridViewCellEventArgs(prev_col_idx, prev_rw_idx));
                     dataGridView4_Scroll(null, null);
                 };
 
@@ -1841,24 +1950,30 @@ richTextBox1.Text
                 {
                     PreConnection.Excut_Cmd(3, "tb_maladies", null, null, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView4.Rows[prev_rw_idx].Cells["ID_MALAD"].Value });
                     Load_malad();
+                    //------------------
+                    reload_cbx6_data();
+                    //-----------------
                 }
             }
         }
 
-        private void Cbx_SelectedIndexChanged(object sender, EventArgs e)
+        private void reload_cbx6_data()
         {
-            throw new NotImplementedException();
-        }
-
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 0)
+            //------------------
+            string prev_sel_cbx6 = comboBox6.Text;
+            var mal_types = maladies_tbl.AsEnumerable().Select(V => V["MALAD_NME"].ToString());
+            if (mal_types.Any())
             {
-                if (tabControl1.TabPages["tabPage3"] != null) { tabControl1.TabPages.Remove(tabPage3); }
-                if (tabControl1.TabPages["tabPage4"] != null) { tabControl1.TabPages.Remove(tabPage4); }
-                if (tabControl1.TabPages["tabPage2"] != null) { tabControl1.TabPages.Remove(tabPage2); }
-                new_anim(true);
+                string[] tmmp = default_maladies.CreateCopy().Concat(mal_types.Distinct()).ToArray();
+                Array.Sort(tmmp);
+                comboBox6.DataSource = tmmp.Distinct().ToList();
             }
+            else
+            {
+                comboBox6.DataSource = default_maladies;
+            }
+            comboBox6.Text = comboBox6.Items.Contains(prev_sel_cbx6) ? prev_sel_cbx6 : "- Tous -";
+            //-----------------
         }
 
         private void dataGridView4_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -1880,8 +1995,47 @@ richTextBox1.Text
 
         private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            anim_filter();
         }
+
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            dataGridView1.Rows[e.RowIndex].HeaderCell.Style.BackColor = dataGridView1.Rows[e.RowIndex].HeaderCell.Style.SelectionBackColor = maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value).ToList().Count > 0 ? panel3.BackColor : Color.White;
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked)
+            {
+                anim_filter();
+            }
+        }
+
+
+        private void comboBox6_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(comboBox6.Text))
+            {
+                comboBox6.Text = "- Tous -";
+                comboBox6.SelectAll();
+            }
+            anim_filter();
+        }
+
+        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.State == DataGridViewElementStates.Selected)
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+            }
+            else
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Regular);
+            }
+        }
+
+       
     }
 }
 
