@@ -1,5 +1,4 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
-using Npgsql.Replication.PgOutput.Messages;
 using ServiceStack;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
@@ -165,7 +163,6 @@ namespace ALBAITAR_Softvet.Resources
             //----------------------
             comboBox2.SelectedIndex = comboBox3.SelectedIndex = comboBox4.SelectedIndex = 0;
             //----------------------
-            //clients = PreConnection.Load_data_keeping_duplicates("SELECT ID,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
             clients = PreConnection.Load_data_keeping_duplicates("SELECT *,CONCAT(FAMNME,' ',NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
             comboBox1.DataSource = clients;
             comboBox1.DisplayMember = "FULL_NME";
@@ -248,7 +245,7 @@ namespace ALBAITAR_Softvet.Resources
             else if (dataGridView1.Rows.Count > 0)
             { dataGridView1.ClearSelection(); dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true; }
 
-            Load_malad();
+            Load_malad_1();
             //------------------
             reload_cbx6_data();
             //-----------------
@@ -336,9 +333,10 @@ namespace ALBAITAR_Softvet.Resources
 
 
         }
-
+        DataTable filtred_maladies_tbl;
         private void anim_filter()
         {
+            filtred_maladies_tbl = new DataTable();
             string fltr = textBox1.Text != string.Empty ? String.Format("NME LIKE '%{0}%'", textBox1.Text) : "";
             if (checkBox3.Checked)
             {
@@ -351,38 +349,86 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         if (comboBox7.SelectedIndex > 0)
                         {
-                            maladies_tbl.AsEnumerable().Where(V =>
-                            (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) &&
-                            (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
-                            (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true))
-                                .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            {
-                                iddx += "," + H.ToString();
-                            });
+                            //maladies_tbl.AsEnumerable().Where(V =>
+                            //(V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) &&
+                            //(V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
+                            //(V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true))
+                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            //{
+                            //    iddx += "," + H.ToString();
+                            //});
+
+
+                            var FFF = maladies_tbl.AsEnumerable().Where(V =>
+                             (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) &&
+                             (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
+                             (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true));
+
+                            if (FFF.Any()) { filtred_maladies_tbl = FFF.CopyToDataTable(); }
                         }
                         else
                         {
-                            maladies_tbl.AsEnumerable().Where(V => (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true)).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            {
-                                iddx += "," + H.ToString();
-                            });
+                            //maladies_tbl.AsEnumerable().Where(V => 
+                            //(V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && 
+                            //(V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true))
+                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            //{
+                            //    iddx += "," + H.ToString();
+                            //});
+
+
+
+                            var FFF = maladies_tbl.AsEnumerable().Where(V =>
+                            (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
+                            (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true));
+
+                            if (FFF.Any()) { filtred_maladies_tbl = FFF.CopyToDataTable(); }
                         }
                     }
                     else
                     {
                         if (comboBox7.SelectedIndex > 0)
                         {
-                            maladies_tbl.AsEnumerable().Where(V => (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) && (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true)).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            {
-                                iddx += "," + H.ToString();
-                            });
+                            //maladies_tbl.AsEnumerable().Where(V => 
+                            //(V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && 
+                            //(V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) && 
+                            //(V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && 
+                            //(V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true))
+                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            //{
+                            //    iddx += "," + H.ToString();
+                            //});
+
+
+                            var FFF = maladies_tbl.AsEnumerable().Where(V =>
+                            (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) &&
+                            (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) &&
+                            (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
+                            (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true));
+
+                            if (FFF.Any()) { filtred_maladies_tbl = FFF.CopyToDataTable(); }
+
+
                         }
                         else
                         {
-                            maladies_tbl.AsEnumerable().Where(V => (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true)).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            {
-                                iddx += "," + H.ToString();
-                            });
+                            //maladies_tbl.AsEnumerable().Where(V => 
+                            //(V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && 
+                            //(V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && 
+                            //(V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true))
+                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            //{
+                            //    iddx += "," + H.ToString();
+                            //});
+
+
+
+                            var FFF = maladies_tbl.AsEnumerable().Where(V =>
+                            (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) &&
+                            (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
+                            (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true));
+
+                            if (FFF.Any()) { filtred_maladies_tbl = FFF.CopyToDataTable(); }
                         }
                     }
                 }
@@ -392,49 +438,98 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         if (comboBox7.SelectedIndex > 0)
                         {
-                            maladies_tbl.AsEnumerable().Where(V => V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            {
-                                iddx += "," + H.ToString();
-                            });
+                            //maladies_tbl.AsEnumerable().Where(V => 
+                            //V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false)
+                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            //{
+                            //    iddx += "," + H.ToString();
+                            //});
+
+
+
+                            var FFF = maladies_tbl.AsEnumerable().Where(V =>
+                            V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false);
+
+                            if (FFF.Any()) { filtred_maladies_tbl = FFF.CopyToDataTable(); }
                         }
                         else
                         {
-                            maladies_tbl.AsEnumerable().Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            {
-                                iddx += "," + H.ToString();
-                            });
+                            //maladies_tbl.AsEnumerable().Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            //{
+                            //    iddx += "," + H.ToString();
+                            //});
+
+                            filtred_maladies_tbl = maladies_tbl.Copy();
+
                         }
                     }
                     else
                     {
                         if (comboBox7.SelectedIndex > 0)
                         {
-                            maladies_tbl.AsEnumerable().Where(V => (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false)).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            {
-                                iddx += "," + H.ToString();
-                            });
+                            //maladies_tbl.AsEnumerable().Where(V => 
+                            //(V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && 
+                            //(V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false))
+                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            //{
+                            //    iddx += "," + H.ToString();
+                            //});
+
+
+                            var FFF = maladies_tbl.AsEnumerable().Where(V =>
+                            (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) &&
+                            (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false));
+
+                            if (FFF.Any()) { filtred_maladies_tbl = FFF.CopyToDataTable(); }
                         }
                         else
                         {
-                            maladies_tbl.AsEnumerable().Where(V => V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false).Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            //maladies_tbl.AsEnumerable().Where(V => 
+                            //V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false)
+                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
+                            //{
+                            //    iddx += "," + H.ToString();
+                            //});
+
+
+
+                            var FFF = maladies_tbl.AsEnumerable().Where(V =>
+                            V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false);
+
+                            if (FFF.Any()) { filtred_maladies_tbl = FFF.CopyToDataTable(); }
+                        }
+                    }
+                }
+                //------------------------------
+                if (filtred_maladies_tbl != null)
+                {
+                    if (filtred_maladies_tbl.Rows.Count > 0)
+                    {
+                        filtred_maladies_tbl.AsEnumerable()
+                                .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
                             {
                                 iddx += "," + H.ToString();
                             });
-                        }
                     }
+
                 }
 
 
                 iddx = iddx.Length > 0 ? iddx.Substring(1) : string.Empty;
 
-                if (iddx.Length == 0 && !(comboBox6.Text.Contains("Tous") && string.IsNullOrWhiteSpace(comboBox6.Text) && comboBox7.SelectedIndex > 0 && radioButton1.Checked))
-                {
-                    fltr = "ID = -1";
-                }
-                else
+                if (iddx.Length > 0)
                 {
                     fltr += !string.IsNullOrWhiteSpace(iddx) ? "ID IN (" + iddx + ")" : "";
                 }
+                else if ((comboBox6.Text.Contains("Tous") || string.IsNullOrWhiteSpace(comboBox6.Text)) && comboBox7.SelectedIndex == 0 && radioButton2.Checked)
+                {
+                    fltr = "";
+                }
+                else
+                {
+                    fltr = "ID = -1";
+                }
+
                 //-------------
                 label25.Text = comboBox6.Text;
                 label26.Text = comboBox7.SelectedIndex > 0 ? comboBox7.Text : "- Tous -";
@@ -443,7 +538,12 @@ namespace ALBAITAR_Softvet.Resources
             else
             {
                 label25.Text = label26.Text = label27.Text = "- Tous -";
+                filtred_maladies_tbl = maladies_tbl.Copy();
             }
+
+            Debug.WriteLine(">>>>>>>>>>>>>>> filtred_maladies_tbl >>>>>>>>>>>>>>> " + filtred_maladies_tbl.Rows.Count);
+            Debug.WriteLine(">>>>>>>>>>>>>>> maladies_tbl >>>>>>>>>>>>>>> " + maladies_tbl.Rows.Count);
+
             ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
             dataGridView1.Columns["ID"].Visible = false;
 
@@ -662,7 +762,7 @@ checkBox1.Checked,
                 }
                 else if (tabControl1.SelectedTab == tabPage4)
                 {
-                    Load_malad();
+                    Load_malad_1();
                 }
                 else if (tabControl1.SelectedTab == tabPage2)
                 {
@@ -1785,7 +1885,7 @@ richTextBox1.Text
 
 
                 }
-                Load_malad();
+                Load_malad_1();
                 //------------------
                 reload_cbx6_data();
                 //-----------------
@@ -1793,11 +1893,8 @@ richTextBox1.Text
             }
         }
 
-        private void Load_malad()
+        private void Load_malad_2()
         {
-            maladies_tbl.Rows.Clear();
-            maladies_tbl = PreConnection.Load_data("SELECT * FROM tb_maladies ORDER BY START_DATE ASC;");
-            //--------------
             if (tabControl1.SelectedTab == tabPage4 && dataGridView1.SelectedRows.Count > 0)
             {
                 int prev_select = dataGridView4.SelectedRows.Count > 0 ? (int)dataGridView4.SelectedRows[0].Cells["ID_MALAD"].Value : -1;
@@ -1806,21 +1903,39 @@ richTextBox1.Text
                 if (dataGridView4.DataSource != null)
                 {
                     ((DataTable)dataGridView4.DataSource).Rows.Clear();
-                    maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ToList().ForEach(KK =>
-                    {
-                        DataRow rww = ((DataTable)dataGridView4.DataSource).NewRow();
-                        rww.ItemArray = KK.ItemArray;
-                        ((DataTable)dataGridView4.DataSource).Rows.Add(rww);
-                    });
                 }
-                else
+                if (filtred_maladies_tbl != null)
                 {
-                    var ggg = maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value);
-                    if (ggg.Any())
+                    if (dataGridView4.DataSource != null)
                     {
-                        dataGridView4.DataSource = ggg.CopyToDataTable();
-                    };
+                        //((DataTable)dataGridView4.DataSource).Rows.Clear();
+                        //maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ToList().ForEach(KK =>
+                        //{
+                        //    DataRow rww = ((DataTable)dataGridView4.DataSource).NewRow();
+                        //    rww.ItemArray = KK.ItemArray;
+                        //    ((DataTable)dataGridView4.DataSource).Rows.Add(rww);
+                        //});
+
+
+                        filtred_maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ToList().ForEach(KK =>
+                        {
+                            DataRow rww = ((DataTable)dataGridView4.DataSource).NewRow();
+                            rww.ItemArray = KK.ItemArray;
+                            ((DataTable)dataGridView4.DataSource).Rows.Add(rww);
+                        });
+
+                    }
+                    else
+                    {
+                        var ggg = filtred_maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value);
+                        if (ggg.Any())
+                        {
+                            dataGridView4.DataSource = ggg.CopyToDataTable();
+                        };
+                    }
+
                 }
+
 
 
                 dataGridView4.CellValueChanged += dataGridView4_CellValueChanged;
@@ -1840,6 +1955,14 @@ richTextBox1.Text
                 }
                 dataGridView4_Scroll(null, null);
             }
+        }
+        private void Load_malad_1()
+        {
+            maladies_tbl.Rows.Clear();
+            maladies_tbl = PreConnection.Load_data("SELECT * FROM tb_maladies ORDER BY START_DATE ASC;");
+            //--------------
+            anim_filter();
+            Load_malad_2();
 
         }
 
@@ -1949,7 +2072,7 @@ richTextBox1.Text
                 if (MessageBox.Show("Êtes-vous sûrs de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     PreConnection.Excut_Cmd(3, "tb_maladies", null, null, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView4.Rows[prev_rw_idx].Cells["ID_MALAD"].Value });
-                    Load_malad();
+                    Load_malad_1();
                     //------------------
                     reload_cbx6_data();
                     //-----------------
@@ -2035,7 +2158,7 @@ richTextBox1.Text
             }
         }
 
-       
+
     }
 }
 
