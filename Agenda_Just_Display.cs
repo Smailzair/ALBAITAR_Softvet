@@ -1,22 +1,15 @@
 ﻿
 using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
-using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using ServiceStack;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
-using Xamarin.Forms.PlatformConfiguration;
-//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ALBAITAR_Softvet
 {
@@ -32,7 +25,6 @@ namespace ALBAITAR_Softvet
         ImageList items_icon = new ImageList();
         string Current_items_id = string.Empty;
         ListView prev_selected = null;
-        string Userss;
         bool tmp_stop = false;
         bool Modif_autorized = false;
 
@@ -68,7 +60,7 @@ namespace ALBAITAR_Softvet
             //+ (textBox3.Text.Length > 0 || comboBox1.SelectedIndex > 0 ? " AND (" + (comboBox1.SelectedIndex > 0 ? "`TYPE` LIKE '"+comboBox1.Text+"'" : "") +  (textBox3.Text.Length > 0 ? (comboBox1.SelectedIndex > 0 ? " AND " : "") + "(`OBJECT` LIKE '%" +textBox3.Text+"%' OR `DESCRIPTION` LIKE '%"+textBox3.Text+"%')" : "")  + ")": "") + ";"
             //    );
 
-            infos = PreConnection.Load_data("SELECT * FROM tb_agenda WHERE `FOR_THIS_USERS` IN (NULL, '') OR FIND_IN_SET(" + Properties.Settings.Default.Last_login_user_idx + ",`FOR_THIS_USERS`);");
+            infos = PreConnection.Load_data("SELECT * FROM tb_agenda WHERE `FOR_THIS_USERS` IN (NULL, '') OR `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + ",%' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + ",%';");
 
             // infos = PreConnection.Load_data("SELECT tb1.*,tb2.* FROM tb_agenda tb1 LEFT JOIN (SELECT tbb1.`ID` AS ANIM_ID,tbb1.`NME` AS ANIM_NME,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) tb2 ON FIND_IN_SET(tb2.`ANIM_ID`, tb1.`RELATED_ANIMALS_IDs`) WHERE (tb1.`FOR_THIS_USERS` IN (NULL, '') OR FIND_IN_SET(" + Properties.Settings.Default.Last_login_user_idx + ",tb1.`FOR_THIS_USERS`));");
             icons = PreConnection.Load_data("SELECT * FROM tb_images WHERE IMG_DATA IS NOT NULL GROUP BY IMG_DATA ORDER BY MODIF_TIME;");
@@ -121,7 +113,7 @@ namespace ALBAITAR_Softvet
         {
             listView1.Items.Clear();
             pictureBox2.Image = Properties.Resources.icons8_camera_30px;
-            Userss = Properties.Settings.Default.Last_login_user_idx.ToString();
+            //Userss = Properties.Settings.Default.Last_login_user_idx.ToString();
             label22.Text = DateTime.Now.ToString("dddd dd/MM/yyyy HH:mm");
             label23.Text = DateTime.Now.AddHours(1).ToString("dddd dd/MM/yyyy HH:mm");
             label24.Text = "Une Fois";
@@ -313,7 +305,7 @@ namespace ALBAITAR_Softvet
                     listView1.Items.Add("- Tout le monde -");
                 }
                 //--------------
-                Userss = row["FOR_THIS_USERS"].ToString();
+               // Userss = row["FOR_THIS_USERS"].ToString();
             }
             else
             {
@@ -344,13 +336,16 @@ namespace ALBAITAR_Softvet
             string fltr = "";
             if (Selected_idss > -1)
             {
+
                 if (for_animal)
                 {
-                    fltr += "(RELATED_ANIMALS_IDs NOT IN (NULL, '') AND ',' + RELATED_ANIMALS_IDs + ',' LIKE '%," + Selected_idss + ",%')";
+                    fltr += "(RELATED_ANIMALS_IDs IS NULL OR (LEN(RELATED_ANIMALS_IDs) > 0 AND ',' + RELATED_ANIMALS_IDs + ',' LIKE '%," + Selected_idss + ",%'))";
+                    //fltr += "(RELATED_ANIMALS_IDs NOT IN (NULL, '') AND (',' + RELATED_ANIMALS_IDs + ',') LIKE '%," + Selected_idss + ",%')";
                 }
                 else
                 {
-                    fltr += "(RELATED_CLIENTS_IDs NOT IN (NULL, '') AND ',' + RELATED_CLIENTS_IDs + ',' LIKE '%," + Selected_idss + ",%')";
+                    fltr += "(RELATED_CLIENTS_IDs IS NULL OR (LEN(RELATED_CLIENTS_IDs) > 0 AND ',' + RELATED_CLIENTS_IDs + ',' LIKE '%," + Selected_idss + ",%'))";
+                    //fltr += "(RELATED_CLIENTS_IDs NOT IN (NULL, '') AND (',' + RELATED_CLIENTS_IDs + ',') LIKE '%," + Selected_idss + ",%')";
                 }
             }
             else  //Tous
@@ -361,7 +356,11 @@ namespace ALBAITAR_Softvet
                 " OR `DESCRIPTION` LIKE '%" + textBox3.Text.Replace("'", "''") + "%'" +
                 ")" : "")
                 + ")" : "");
+
+
+            Debug.WriteLine(">>>>>>>>>>>>>>> fltr = " + fltr);
             tmp_infos.DefaultView.RowFilter = fltr;
+            
             //-------------------------------------------
             if (tmp_infos.DefaultView.Cast<DataRowView>().Count() > 0 && dtt > DateTime.Parse("01/01/1999"))
             {

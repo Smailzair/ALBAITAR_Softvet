@@ -987,13 +987,13 @@ namespace ALBAITAR_Softvet.Resources
 
             if (ready_to_save)
             {
-                string related_clients = "K";
+                string related_clients = "";
                 listView_Clients.Items.Cast<ListViewItem>().ToList().ForEach(ZZZ => { related_clients += "," + ZZZ.SubItems[1].Text; });
                 related_clients = related_clients.Replace("K,", "").Replace("K", "");
-                string related_Animaux = "M";
+                string related_Animaux = "";
                 listView_Anim.Items.Cast<ListViewItem>().ToList().ForEach(ZZZ => { related_Animaux += "," + ZZZ.SubItems[1].Text; });
                 related_Animaux = related_Animaux.Replace("M,", "").Replace("M", "");
-                string cmmd = "";
+                //string cmmd = "";
                 if (Is_New_To_Insert) //Insert
                 {
                     PreConnection.Excut_Cmd(1, "tb_agenda", new List<string>
@@ -1026,8 +1026,8 @@ namespace ALBAITAR_Softvet.Resources
                         textBox1.Text,
                         textBox2.Text,
                         numericUpDown3.Enabled ? (object)numericUpDown3.Value : DBNull.Value,
-                        related_clients,
-                        related_Animaux,
+                        string.IsNullOrWhiteSpace(related_clients) ? DBNull.Value : (object)related_clients,
+                        string.IsNullOrWhiteSpace(related_Animaux) ? DBNull.Value : (object)related_Animaux,
                         selected_img_idx > -1 ? (object)selected_img_idx : DBNull.Value,
                         Userss
                     }, null, null, null);
@@ -1070,7 +1070,7 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 else //Update
                 {
-                    PreConnection.Excut_Cmd(1, "tb_agenda", new List<string>
+                    PreConnection.Excut_Cmd(2, "tb_agenda", new List<string>
                     {
                         "START_TIME",
 "END_TIME",
@@ -1100,8 +1100,8 @@ namespace ALBAITAR_Softvet.Resources
                         textBox1.Text,
                         textBox2.Text,
                         numericUpDown3.Enabled ? (object)numericUpDown3.Value : DBNull.Value,
-                        related_clients,
-                        related_Animaux,
+                        string.IsNullOrWhiteSpace(related_clients) ? DBNull.Value : (object)related_clients,
+                        string.IsNullOrWhiteSpace(related_Animaux) ? DBNull.Value : (object)related_Animaux,
                         selected_img_idx > -1 ? (object)selected_img_idx : DBNull.Value,
                         Userss
                     }, "ID = @IDD", new List<string> { "IDD" }, new List<object>
@@ -1169,8 +1169,7 @@ namespace ALBAITAR_Softvet.Resources
             }
             else //selectionner une icon
             {
-                selected_img_idx = int.Parse(listView_Icons.SelectedItems[0].ImageKey);
-                Debug.WriteLine(">>>>>>>>>>>count >>>>>>>> " + items_icon.Images.Count);
+                selected_img_idx = int.Parse(listView_Icons.SelectedItems[0].ImageKey); 
                 pictureBox2.Image = items_icon.Images[listView_Icons.SelectedItems[0].Index + 1];
 
 
@@ -1229,9 +1228,9 @@ namespace ALBAITAR_Softvet.Resources
         private void button13_Click(object sender, EventArgs e)
         {
             pictureBox2.Image = Properties.Resources.icons8_camera_30px;
-            selected_img_idx = -1;
             panel14.Visible = false;
             textBox1.Focus();
+            selected_img_idx = -1;
         }
 
         private void listView_Icons_KeyDown(object sender, KeyEventArgs e)
