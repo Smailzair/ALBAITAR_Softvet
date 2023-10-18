@@ -60,8 +60,13 @@ namespace ALBAITAR_Softvet
                     label26.Text = inf["NISS_DATE"] != DBNull.Value ? ((DateTime)inf["NISS_DATE"]).ToString("dd/MM/yyyy") : "--";
                     label19.Text = inf["ROBE"] != DBNull.Value ? (string)inf["ROBE"] : "--";
                     textBox8.Text = inf["OBSERVATIONS"] != DBNull.Value ? (string)inf["OBSERVATIONS"] : "";
-                    var ppoids = Main_Frm.main_poids_tab.AsEnumerable().Where(EE => EE.Field<int>("ANIM_ID") == selected_anim_id);
-                    label1.Text  = ppoids.Any() ? ppoids.Last().Field<double>("POIDS").ToString("N2") + " Kg" : "--";
+                    var ppoids = Main_Frm.main_poids_tab.AsEnumerable().Where(x => (x["ANIM_ID"] != DBNull.Value ? (int)x["ANIM_ID"] : -1) == selected_anim_id);
+                    if (ppoids.Any())
+                    {
+                        var ddd = ppoids.OrderByDescending(F => F["DATETIME"]).First();
+                        label1.Text = ddd["POIDS"] != DBNull.Value ? ddd["POIDS"] + " (Kg)" + (ddd["DATETIME"] != DBNull.Value ? " - Le: " + ((DateTime)ddd["DATETIME"]).ToString("dd/MM/yyyy") : "") : "--";
+                    }
+                    label29.Text = inf["MALAD_NME"] != DBNull.Value ? ((string)inf["MALAD_NME"] + (inf["LAST_MALAD_DATE"] != DBNull.Value ? " (Depuis: " + ((DateTime)inf["LAST_MALAD_DATE"]).ToString("dd/MM/yyyy") + ")" : "")) : "(Aucune)";
                     bool ttt = inf["IS_RADIATED"] != DBNull.Value;
                     ttt = ttt ? (sbyte)inf["IS_RADIATED"] == 1 : false;
                     if (ttt)
@@ -124,6 +129,16 @@ namespace ALBAITAR_Softvet
         private void textBox8_Enter(object sender, EventArgs e)
         {
             button16.Focus();
+        }
+
+        private void label30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label29_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

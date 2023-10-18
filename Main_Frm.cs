@@ -108,9 +108,9 @@ namespace ALBAITAR_Softvet
             th.Start();
             th.Join();
             //--------------
-            //Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
-            //Activ_Ver.Start();
-            //Activ_Ver.Join();
+            Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
+            Activ_Ver.Start();
+            Activ_Ver.Join();
             //////--------------
 
 
@@ -461,9 +461,14 @@ namespace ALBAITAR_Softvet
             comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
             //----------------
             Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
+            //Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
+            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME`,tb3.MALAD_NME,tb3.LAST_MALAD_DATE FROM tb_animaux tb1 "
+                                                         + "LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID` "
+                                                         + "LEFT JOIN (SELECT ANIM_ID, MAX(START_DATE) AS LAST_MALAD_DATE,MALAD_NME "
+                                                         + "FROM tb_maladies WHERE (START_DATE <= current_timestamp() OR START_DATE IS NULL) AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL) "
+                                                         + "GROUP BY ANIM_ID) tb3 ON tb3.ANIM_ID = tb1.ID;");
             main_poids_tab = PreConnection.Load_data("SELECT * FROM tb_poids;");
-            comboBox1.SelectedIndex = 0;
+            comboBox1.SelectedIndex = 1;
             //-----
             Application.OpenForms["Splash"]?.Close();
         }
@@ -474,7 +479,12 @@ namespace ALBAITAR_Softvet
             //------------
             int cb1_idx = comboBox1.SelectedIndex > -1 ? comboBox1.SelectedIndex : 0;
             Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
+            //Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
+            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME`,tb3.MALAD_NME,tb3.LAST_MALAD_DATE FROM tb_animaux tb1 "
+                                                         + "LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID` "
+                                                         + "LEFT JOIN (SELECT ANIM_ID, MAX(START_DATE) AS LAST_MALAD_DATE,MALAD_NME "
+                                                         + "FROM tb_maladies WHERE (START_DATE <= current_timestamp() OR START_DATE IS NULL) AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL) "
+                                                         + "GROUP BY ANIM_ID) tb3 ON tb3.ANIM_ID = tb1.ID;");
             comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
             comboBox1.SelectedIndex = cb1_idx;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;

@@ -2054,12 +2054,9 @@ richTextBox1.Text
 
         private void dataGridView4_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-
             if (dataGridView4.Columns[e.ColumnIndex].Name == "DEL_MALAD")
             {
-
                 e.Value = e.RowIndex == dataGridView4.NewRowIndex ? Properties.Resources.icons8_square_full_25px_1 : Properties.Resources.icons8_trash_25px_1;
-
             }
         }
 
