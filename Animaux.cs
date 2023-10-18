@@ -26,6 +26,7 @@ namespace ALBAITAR_Softvet.Resources
         List<string> full_nme_clients;
         bool Is_New = true;
         bool Is_New_Visite = true;
+        bool visites_not_autorsed = false;
         DataTable Races_Espèces = new DataTable();
         DataTable chosen_anim_from_search;
         int prev_rw_idx = -1;
@@ -215,7 +216,7 @@ namespace ALBAITAR_Softvet.Resources
                 "Peste Bovine",
                 "Peste des petits ruminants",
                 "peste Équine",
-                "Rage dans toutes les espèces",
+                "Rage",
                 "Rhinotrachéite infectieuse bovine",
                 "Salmonelloses aviaires à Salmonella : pullorum-gallinarum",
                 "Trichomonose bovine",
@@ -230,6 +231,7 @@ namespace ALBAITAR_Softvet.Resources
             comboBox7.SelectedIndex = 0;
             comboBox7.SelectedIndexChanged += comboBox7_SelectedIndexChanged;
             //---------------------
+            poids_tbl = PreConnection.Load_data("SELECT * FROM tb_poids ORDER BY DATETIME ASC;");
             Load_anims_from_DB();
             //---------------------
 
@@ -267,7 +269,9 @@ namespace ALBAITAR_Softvet.Resources
             button8.Visible = true;
             panel1.Visible = false;
             panel2.Visible = false;
-
+            label32.Text = "(Aucune)";
+            label33.Text = "--";
+            label34.Text = "--";
 
             //----------------------------------------------                
             dateTimePicker3.Value = (DateTime)dataGridView1.SelectedRows[0].Cells["DATE_ADDED"].Value;
@@ -287,6 +291,37 @@ namespace ALBAITAR_Softvet.Resources
             textBox5.Text = (string)dataGridView1.SelectedRows[0].Cells["RADIATION_CAUSES"].Value;
             pictureBox2.Image = dataGridView1.SelectedRows[0].Cells["picture"].Value != DBNull.Value ? PreConnection.ByteArrayToImage((byte[])dataGridView1.SelectedRows[0].Cells["picture"].Value) : (Properties.Settings.Default.Use_animals_logo ? (Image)Properties.Resources.ResourceManager.GetObject(comboBox2.Text) : null);
             button7.Visible = dataGridView1.SelectedRows[0].Cells["picture"].Value != DBNull.Value;
+            if (maladies_tbl != null)
+            {
+                if (maladies_tbl.Rows.Count > 0)
+                {
+                    var tt = maladies_tbl.AsEnumerable().Where(V =>
+                            (V["ANIM_ID"] != DBNull.Value ? (int)V["ANIM_ID"] == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value : false) &&
+                             (V["MALAD_NME"] != DBNull.Value ? !string.IsNullOrWhiteSpace((string)V["MALAD_NME"]) : false) &&
+                            (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
+                            (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true));
+                    if (tt.Any())
+                    {
+                        var g = tt.OrderByDescending(F => F["START_DATE"]).First();
+                        label32.Text = (string)g["MALAD_NME"];
+                        label33.Text = g["START_DATE"] != DBNull.Value ? "Depuis: " + ((DateTime)g["START_DATE"]).ToString("dd/MM/yyyy") : "--";
+                    }
+                }
+            }
+            if(poids_tbl != null)
+            {
+                if(poids_tbl.Rows.Count > 0)
+                {
+                    var ttt = poids_tbl.AsEnumerable().Where(x => (x["ANIM_ID"] != DBNull.Value ? (int)x["ANIM_ID"] : -1) == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value);
+                    if (ttt.Any())
+                    {
+                        var ddd = ttt.OrderByDescending(F => F["DATETIME"]).First();
+                        label34.Text = ddd["POIDS"] != DBNull.Value ? ddd["POIDS"] + " (Kg)" + (ddd["DATETIME"] != DBNull.Value ? " - Le: " + ((DateTime)ddd["DATETIME"]).ToString("dd/MM/yyyy") : "") : "--";
+                    }
+                    
+                }
+            }
+
             //----------------------------------------------
             textBox2.Validated += textBox2_Validated;
             textBox3.Validated += textBox2_Validated;
@@ -349,16 +384,6 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         if (comboBox7.SelectedIndex > 0)
                         {
-                            //maladies_tbl.AsEnumerable().Where(V =>
-                            //(V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) &&
-                            //(V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
-                            //(V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true))
-                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            //{
-                            //    iddx += "," + H.ToString();
-                            //});
-
-
                             var FFF = maladies_tbl.AsEnumerable().Where(V =>
                              (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) &&
                              (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
@@ -368,16 +393,6 @@ namespace ALBAITAR_Softvet.Resources
                         }
                         else
                         {
-                            //maladies_tbl.AsEnumerable().Where(V => 
-                            //(V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && 
-                            //(V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true))
-                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            //{
-                            //    iddx += "," + H.ToString();
-                            //});
-
-
-
                             var FFF = maladies_tbl.AsEnumerable().Where(V =>
                             (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
                             (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true));
@@ -389,17 +404,6 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         if (comboBox7.SelectedIndex > 0)
                         {
-                            //maladies_tbl.AsEnumerable().Where(V => 
-                            //(V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && 
-                            //(V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) && 
-                            //(V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && 
-                            //(V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true))
-                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            //{
-                            //    iddx += "," + H.ToString();
-                            //});
-
-
                             var FFF = maladies_tbl.AsEnumerable().Where(V =>
                             (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) &&
                             (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false) &&
@@ -412,17 +416,6 @@ namespace ALBAITAR_Softvet.Resources
                         }
                         else
                         {
-                            //maladies_tbl.AsEnumerable().Where(V => 
-                            //(V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && 
-                            //(V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) && 
-                            //(V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true))
-                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            //{
-                            //    iddx += "," + H.ToString();
-                            //});
-
-
-
                             var FFF = maladies_tbl.AsEnumerable().Where(V =>
                             (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) &&
                             (V["START_DATE"] != DBNull.Value ? (DateTime)V["START_DATE"] <= DateTime.Now : true) &&
@@ -438,15 +431,6 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         if (comboBox7.SelectedIndex > 0)
                         {
-                            //maladies_tbl.AsEnumerable().Where(V => 
-                            //V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false)
-                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            //{
-                            //    iddx += "," + H.ToString();
-                            //});
-
-
-
                             var FFF = maladies_tbl.AsEnumerable().Where(V =>
                             V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false);
 
@@ -454,11 +438,6 @@ namespace ALBAITAR_Softvet.Resources
                         }
                         else
                         {
-                            //maladies_tbl.AsEnumerable().Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            //{
-                            //    iddx += "," + H.ToString();
-                            //});
-
                             filtred_maladies_tbl = maladies_tbl.Copy();
 
                         }
@@ -467,15 +446,6 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         if (comboBox7.SelectedIndex > 0)
                         {
-                            //maladies_tbl.AsEnumerable().Where(V => 
-                            //(V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) && 
-                            //(V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false))
-                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            //{
-                            //    iddx += "," + H.ToString();
-                            //});
-
-
                             var FFF = maladies_tbl.AsEnumerable().Where(V =>
                             (V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false) &&
                             (V["MALAD_LEVEL"] != DBNull.Value ? (string)V["MALAD_LEVEL"] == comboBox7.Text : false));
@@ -484,15 +454,6 @@ namespace ALBAITAR_Softvet.Resources
                         }
                         else
                         {
-                            //maladies_tbl.AsEnumerable().Where(V => 
-                            //V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false)
-                            //    .Select(F => F["ANIM_ID"]).Distinct().ToList().ForEach(H =>
-                            //{
-                            //    iddx += "," + H.ToString();
-                            //});
-
-
-
                             var FFF = maladies_tbl.AsEnumerable().Where(V =>
                             V["MALAD_NME"] != DBNull.Value ? (string)V["MALAD_NME"] == comboBox6.Text : false);
 
@@ -540,10 +501,6 @@ namespace ALBAITAR_Softvet.Resources
                 label25.Text = label26.Text = label27.Text = "- Tous -";
                 filtred_maladies_tbl = maladies_tbl.Copy();
             }
-
-            Debug.WriteLine(">>>>>>>>>>>>>>> filtred_maladies_tbl >>>>>>>>>>>>>>> " + filtred_maladies_tbl.Rows.Count);
-            Debug.WriteLine(">>>>>>>>>>>>>>> maladies_tbl >>>>>>>>>>>>>>> " + maladies_tbl.Rows.Count);
-
             ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
             dataGridView1.Columns["ID"].Visible = false;
 
@@ -793,9 +750,17 @@ checkBox1.Checked,
                 int prev_select = dataGridView3.SelectedRows.Count > 0 ? (int)dataGridView3.SelectedRows[0].Cells["IDD"].Value : -1;
 
                 dataGridView3.CellValueChanged -= dataGridView3_CellValueChanged;
-                poids_tbl.Rows.Clear();
-                poids_tbl = PreConnection.Load_data("SELECT * FROM tb_poids WHERE ANIM_ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + " ORDER BY DATETIME ASC;");
-                dataGridView3.DataSource = poids_tbl;
+
+                var ttt = poids_tbl.AsEnumerable().Where(x => (x["ANIM_ID"] != DBNull.Value ? (int)x["ANIM_ID"] : -1) == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value);
+                if (ttt.Any())
+                {
+                    dataGridView3.DataSource = ttt.CopyToDataTable();
+                }
+                else
+                {
+                    if(dataGridView3.DataSource != null) { ((DataTable)dataGridView3.DataSource).Rows.Clear(); }
+                }
+                
                 dataGridView3.CellValueChanged += dataGridView3_CellValueChanged;
 
                 dataGridView3.ClearSelection();
@@ -852,7 +817,7 @@ checkBox1.Checked,
             checkBox1.Checked = checkBox2.Checked = false;
             label13.Visible = false;
             pictureBox1.Image = Properties.Resources.NOUVEAU;
-            poids_tbl.Rows.Clear();
+            //poids_tbl.Rows.Clear();
             //------------------------
             Poid_Panel.Hide();
             Malad_Panel.Hide();
@@ -1112,7 +1077,7 @@ checkBox1.Checked,
         {
             verif_if_déja_exist_animal();
         }
-        bool visites_not_autorsed = false;
+
         private void Animaux_Load(object sender, EventArgs e)
         {
             if (!Properties.Settings.Default.Last_login_is_admin)
@@ -1267,7 +1232,8 @@ checkBox1.Checked,
             dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
             dataGridView2.ClearSelection();
             dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
-            richTextBox1.Focus();
+            if (sender != null) { richTextBox1.Focus(); }
+
 
         }
 
@@ -1618,7 +1584,6 @@ richTextBox1.Text
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //PreConnection.Excport_to_excel(dataGridView2, "Visites", dataGridView1.SelectedRows[0].Cells["NME"].Value != DBNull.Value ? "Visites" : dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value.ToString(), null, true);
             if (dataGridView2.Rows.Count > 0)
             {
                 Excc.Application xcelApp = new Excc.Application();
@@ -1650,14 +1615,7 @@ richTextBox1.Text
                 {
                     t.Cells.Cast<DataGridViewCell>().ToList().ForEach(b =>
                     {
-                        //if (xcelApp.Cells[1, b.ColumnIndex + 1].Value == "Propriétaire")
-                        //{
-                        //    xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? (((DataRow)clients.AsEnumerable().FirstOrDefault(row => row.Field<int>("ID") == (int)dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value))["FULL_NME"]) : "";
-                        //}
-                        //else
-                        //{
                         xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView2.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView2.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").Replace("00:00:00", "").TrimStart().TrimEnd() : "";
-                        //}
                     });
                 });
                 xcelApp.Columns[3].Delete();
@@ -1749,6 +1707,7 @@ richTextBox1.Text
                 if (MessageBox.Show("Êtes-vous sûrs de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     PreConnection.Excut_Cmd(3, "tb_poids", null, null, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView3.Rows[prev_rw_idx].Cells["IDD"].Value });
+                    poids_tbl = PreConnection.Load_data("SELECT * FROM tb_poids ORDER BY DATETIME ASC;");
                     load_poids();
                 }
             }
@@ -1793,6 +1752,7 @@ richTextBox1.Text
                 if (cmd.Length > 0)
                 {
                     PreConnection.Excut_Cmd_personnel(cmd, null, null);
+                    poids_tbl = PreConnection.Load_data("SELECT * FROM tb_poids ORDER BY DATETIME ASC;");
                     load_poids();
                 }
             }
@@ -1815,9 +1775,10 @@ richTextBox1.Text
 
         private void dataGridView3_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGridView3.Columns[e.ColumnIndex].Name == "DELETE" && e.RowIndex == dataGridView3.NewRowIndex)
+            if (dataGridView3.Columns[e.ColumnIndex].Name == "DELETE")
             {
-                e.Value = Properties.Resources.icons8_trash_25px_1;
+
+                e.Value = e.RowIndex == dataGridView3.NewRowIndex ? Properties.Resources.icons8_square_full_25px_1 : Properties.Resources.icons8_trash_25px_1;
 
             }
         }
@@ -1908,14 +1869,6 @@ richTextBox1.Text
                 {
                     if (dataGridView4.DataSource != null)
                     {
-                        //((DataTable)dataGridView4.DataSource).Rows.Clear();
-                        //maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ToList().ForEach(KK =>
-                        //{
-                        //    DataRow rww = ((DataTable)dataGridView4.DataSource).NewRow();
-                        //    rww.ItemArray = KK.ItemArray;
-                        //    ((DataTable)dataGridView4.DataSource).Rows.Add(rww);
-                        //});
-
 
                         filtred_maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ToList().ForEach(KK =>
                         {
@@ -2101,9 +2054,11 @@ richTextBox1.Text
 
         private void dataGridView4_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGridView4.Columns[e.ColumnIndex].Name == "DEL_MALAD" && e.RowIndex == dataGridView4.NewRowIndex)
+
+            if (dataGridView4.Columns[e.ColumnIndex].Name == "DEL_MALAD")
             {
-                e.Value = Properties.Resources.icons8_trash_25px_1;
+
+                e.Value = e.RowIndex == dataGridView4.NewRowIndex ? Properties.Resources.icons8_square_full_25px_1 : Properties.Resources.icons8_trash_25px_1;
 
             }
         }
@@ -2158,7 +2113,37 @@ richTextBox1.Text
             }
         }
 
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(dataGridView1.SelectedRows.Count> 0)
+            {
+                if (e.KeyCode == Keys.Down)
+                {
+                    if ((dataGridView1.SelectedRows[0].Index + 1) < dataGridView1.Rows.Count)
+                    {
+                        int p = dataGridView1.SelectedRows[0].Index + 1;
+                        dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                        dataGridView1.ClearSelection();
+                        dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                        dataGridView1.Rows[p].Selected = true;
+                    }
 
+                }
+                else if (e.KeyCode == Keys.Up)
+                {
+                    if (dataGridView1.SelectedRows[0].Index >= 1)
+                    {
+                        int p = dataGridView1.SelectedRows[0].Index - 1;
+                        dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                        dataGridView1.ClearSelection();
+                        dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+                        
+                        dataGridView1.Rows[p].Selected = true;
+                    }
+                }
+            }
+            
+        }
     }
 }
 

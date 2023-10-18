@@ -964,6 +964,7 @@
     <None Include="Resources\icons8_ball_point_pen_25px.png" />
     <None Include="Resources\Bovine.png" />
     <None Include="Resources\Chameau.png" />
+    <None Include="Resources\icons8_square_full_25px_1.png" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
