@@ -197,7 +197,7 @@ namespace ALBAITAR_Softvet
                         }
                     }
 
-
+                    Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>> CMD = " + command.CommandText);
                     rows_nb = command.ExecuteNonQuery();
                 }
 
@@ -630,10 +630,26 @@ namespace ALBAITAR_Softvet
 
         public static Image ByteArrayToImage(byte[] imageBytes)
         {
-            using (var memoryStream = new MemoryStream(imageBytes))
+            try
             {
-                return Image.FromStream(memoryStream);
+                //using (var memoryStream = new MemoryStream(imageBytes))
+                //{
+                //    return Image.FromStream(memoryStream);
+                //}
+
+
+                using (MemoryStream ms = new MemoryStream(imageBytes))
+                {
+                    Image image = Image.FromStream(ms, false, false);
+                    return image;
+                }
             }
+            catch (Exception e)
+            {
+                Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + e.Message);
+                return null;
+            }
+            
         }
         //================================================
         public static string generate_ID_of_client()

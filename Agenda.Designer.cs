@@ -2661,6 +2661,7 @@
             this.openFileDialog_icon_choose.DefaultExt = "*.png";
             this.openFileDialog_icon_choose.Filter = "Png Image files (*.png)|*.png";
             this.openFileDialog_icon_choose.RestoreDirectory = true;
+            this.openFileDialog_icon_choose.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_icon_choose_FileOk);
             // 
             // panel15
             // 

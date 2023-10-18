@@ -71,7 +71,7 @@ namespace ALBAITAR_Softvet
             infos = PreConnection.Load_data("SELECT * FROM tb_agenda WHERE `FOR_THIS_USERS` IN (NULL, '') OR FIND_IN_SET(" + Properties.Settings.Default.Last_login_user_idx + ",`FOR_THIS_USERS`);");
 
             // infos = PreConnection.Load_data("SELECT tb1.*,tb2.* FROM tb_agenda tb1 LEFT JOIN (SELECT tbb1.`ID` AS ANIM_ID,tbb1.`NME` AS ANIM_NME,tbb2.`ID` AS CLIENT_ID,CONCAT(tbb2.`FAMNME`,' ',tbb2.`NME`) AS CLIENT_FULL_NME FROM tb_animaux tbb1 LEFT JOIN tb_clients tbb2 ON tbb1.`CLIENT_ID` = tbb2.`ID`) tb2 ON FIND_IN_SET(tb2.`ANIM_ID`, tb1.`RELATED_ANIMALS_IDs`) WHERE (tb1.`FOR_THIS_USERS` IN (NULL, '') OR FIND_IN_SET(" + Properties.Settings.Default.Last_login_user_idx + ",tb1.`FOR_THIS_USERS`));");
-            icons = PreConnection.Load_data("SELECT MIN(tb1.`ID`) AS ID,tb2.`MODIF_TIME`,tb2.`NME`,tb1.`IMG_DATA` FROM tb_images tb1 LEFT JOIN tb_images tb2 ON tb1.ID = tb2.ID WHERE tb1.`IMG_DATA` IS NOT NULL  GROUP BY tb1.`IMG_DATA`;");
+            icons = PreConnection.Load_data("SELECT * FROM tb_images WHERE IMG_DATA IS NOT NULL GROUP BY IMG_DATA ORDER BY MODIF_TIME;");
             users = PreConnection.Load_data("SELECT `ID`,CONCAT(`USER_FAMNME`,' ',`USER_NME`) AS FULL_NME FROM tb_login_and_users;");
             //--------------------------------------
             items_icon.Images.Add("-1", Properties.Resources.icons8_Checkmark_30px);

@@ -461,7 +461,6 @@ namespace ALBAITAR_Softvet
             comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
             //----------------
             Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            //Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
             Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME`,tb3.MALAD_NME,tb3.LAST_MALAD_DATE FROM tb_animaux tb1 "
                                                          + "LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID` "
                                                          + "LEFT JOIN (SELECT ANIM_ID, MAX(START_DATE) AS LAST_MALAD_DATE,MALAD_NME "
@@ -479,7 +478,6 @@ namespace ALBAITAR_Softvet
             //------------
             int cb1_idx = comboBox1.SelectedIndex > -1 ? comboBox1.SelectedIndex : 0;
             Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            //Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME` FROM tb_animaux tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
             Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME`,tb3.MALAD_NME,tb3.LAST_MALAD_DATE FROM tb_animaux tb1 "
                                                          + "LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID` "
                                                          + "LEFT JOIN (SELECT ANIM_ID, MAX(START_DATE) AS LAST_MALAD_DATE,MALAD_NME "
