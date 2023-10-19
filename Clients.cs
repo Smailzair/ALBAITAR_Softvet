@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Excc = Microsoft.Office.Interop.Excel;
 
 namespace ALBAITAR_Softvet.Resources
@@ -28,10 +29,13 @@ namespace ALBAITAR_Softvet.Resources
         bool can_start_historic_saving = false;
         DataTable chosen_client_from_search;
         bool monetic_not_autorsed = false;
+        bool monetic_del_autorised = true;
+        int prev_rw_idx = -1;
+        int prev_col_idx = -1;
         public Clients(int ID_to_select, int Infos_1_Caiss_2, int Caisse_Id)
         {
             InitializeComponent();
-            tabControl1.TabPages.Remove(tabPage1);
+            //tabControl1.TabPages.Remove(tabPage1);
             ID_to_selectt = ID_to_select;
             Infoss_1_Caiss_2 = Infos_1_Caiss_2;
             Caisse_Idx = Caisse_Id;
@@ -78,10 +82,18 @@ namespace ALBAITAR_Softvet.Resources
         {
             int fd = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
             //clients = PreConnection.Load_data_keeping_duplicates("SELECT *,concat(FAMNME,' ',NME) AS FULL_NME FROM tb_clients tb1" + (checkBox1.Checked ? " WHERE ID IN (SELECT CLIENT_ID FROM tb_clients_finance HAVING SUM(DEBIT)-SUM(CREDIT) <> 0)" : "") + (checkBox2.Checked ? (checkBox1.Checked ? " AND " : " WHERE ") + "(SELECT COUNT(*) FROM tb_animaux WHERE CLIENT_ID = tb1.ID) = 0" : "") + ";");
-            clients = PreConnection.Load_data_keeping_duplicates("SELECT tb1.*,concat(tb1.FAMNME,' ',tb1.NME) AS FULL_NME,SUM(COALESCE(tb2.DEBIT,0))-SUM(COALESCE(tb2.CREDIT,0)) As SLD,tb3.ANIM_CNT FROM tb_clients tb1 "
+            clients = PreConnection.Load_data_keeping_duplicates("SELECT tb1.*, "
+                                                               + "CONCAT(tb1.FAMNME, ' ', tb1.NME) AS FULL_NME, "
+                                                               + "    SUM(COALESCE(tb2.DEBIT, 0)) - SUM(COALESCE(tb2.CREDIT, 0)) AS SLD, "
+                                                               + "    tb3.ANIM_CNT "
+                                                               + "FROM tb_clients tb1 "
                                                                + "LEFT JOIN tb_clients_finance tb2 ON tb1.ID = tb2.CLIENT_ID "
-                                                               + "LEFT JOIN(SELECT CLIENT_ID, COUNT(*) AS ANIM_CNT FROM tb_animaux) tb3 ON tb1.ID = tb3.CLIENT_ID "
-                                                               + "GROUP BY tb1.ID; ");
+                                                               + "LEFT JOIN ("
+                                                               + "    SELECT CLIENT_ID, COUNT(*) AS ANIM_CNT"
+                                                               + "    FROM tb_animaux"
+                                                               + "    GROUP BY CLIENT_ID"
+                                                               + ") tb3 ON tb1.ID = tb3.CLIENT_ID "
+                                                               + "GROUP BY tb1.ID, tb1.FAMNME, tb1.NME, FULL_NME, tb3.ANIM_CNT; ");
             //dataGridView1.DataSource = clients;
             dgv1_fltr();
             // PreConnection.search_filter_datagridview(dataGridView1, textBox1.Text);
@@ -90,6 +102,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dgv1_fltr()
         {
+
             DataView dv = new DataView(clients);
             string fltr = "";
             if (checkBox1.Checked)
@@ -120,8 +133,14 @@ namespace ALBAITAR_Softvet.Resources
                 fltr += (ff ? ")" : "");
 
             }
-            dv.RowFilter = string.Format(fltr, textBox1.Text);
+            if (clients.Columns.Count > 0)
+            {
+                dv.RowFilter = string.Format(fltr, textBox1.Text);
+            }
+
             dataGridView1.DataSource = dv;
+
+
 
         }
         private void Load_selected_client_fields()
@@ -141,7 +160,8 @@ namespace ALBAITAR_Softvet.Resources
                 textBox7.TextChanged -= textBox7_TextChanged;
                 textBox7.Validating -= textBox7_Validating;
                 pictureBox1.Image = Properties.Resources.MODIF;
-                if (tabControl1.TabPages.Count < 2) { tabControl1.TabPages.Add(tabPage1); }
+                panel3.Visible = true;
+                //if (tabControl1.TabPages.Count < 2) { tabControl1.TabPages.Add(tabPage1); }
                 //----------------------------------------------
                 comboBox1.SelectedItem = (string)dataGridView1.SelectedRows[0].Cells["SEX"].Value;
                 textBox3.Text = (string)dataGridView1.SelectedRows[0].Cells["FAMNME"].Value;
@@ -409,10 +429,11 @@ namespace ALBAITAR_Softvet.Resources
             Is_New = false;
             Load_selected_client_fields();
             Load_finace_historic();
-            if (monetic_not_autorsed && tabPage1 != null)
-            {
-                tabControl1.TabPages.Remove(tabPage1);
-            }
+
+            //if (monetic_not_autorsed && tabPage1 != null)
+            //{
+            //    tabControl1.TabPages.Remove(tabPage1);
+            //}
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -437,7 +458,8 @@ namespace ALBAITAR_Softvet.Resources
             }
             label13.Visible = false;
             pictureBox1.Image = Properties.Resources.NOUVEAU;
-            if (tabControl1.TabPages.Count > 1) { tabControl1.TabPages.Remove(tabPage1); }
+            panel3.Visible = false;
+            //if (tabControl1.TabPages.Count > 1) { tabControl1.TabPages.Remove(tabPage1); }
             if (!textBox1.Focused) { textBox3.Select(); }
         }
 
@@ -563,13 +585,14 @@ namespace ALBAITAR_Softvet.Resources
                 if (Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50000" && (Int32)QQ[3] == 1).Count() == 0)
                 {
                     monetic_not_autorsed = true;
-                    tabControl1.TabPages.Remove(tabPage1);
+                    panel3.Visible = false;
+                    //tabControl1.TabPages.Remove(tabPage1);
                 }
                 else
                 {
-                    button7.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60001" && (Int32)QQ[3] == 1).Count() > 0;//Ajouter
-                    dataGridView2.ReadOnly = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60002" && (Int32)QQ[3] == 1).Count() > 0;//Modifier
-                    button5.Enabled = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60003" && (Int32)QQ[3] == 1).Count() > 0;//Supprimer
+                    dataGridView2.ReadOnly = (Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60001" && (Int32)QQ[3] == 1).Count() +
+                        Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60002" && (Int32)QQ[3] == 1).Count()) == 2;
+                    monetic_del_autorised = Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60003" && (Int32)QQ[3] == 1).Count() > 0;
                 }
             }
             //--------------
@@ -595,8 +618,6 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 else if (Caisse_Idx == -2)
                 {
-
-                    button7.PerformClick();
                     Caisse_Idx = -1;
                 }
 
@@ -611,14 +632,15 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dataGridView2_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!monetic_not_autorsed)
+            if (e.KeyCode == Keys.Delete && monetic_del_autorised && dataGridView2.SelectedCells.Count > 0)
             {
-                if (e.KeyCode == Keys.Delete && !dataGridView2.CurrentCell.ReadOnly)
+                if (MessageBox.Show("Êtes-vous sûrs de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    dataGridView2.CurrentCell.Value = DBNull.Value;
+                    PreConnection.Excut_Cmd(3, "tb_clients_finance", null, null, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView2.Rows[dataGridView2.SelectedCells[0].RowIndex].Cells["IDD_FINANC"].Value });
+                    Load_finace_historic();
+                    //------------------
                 }
             }
-
         }
 
         private void calc_sold()
@@ -644,29 +666,53 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            calc_sold();
-            //---------------------
-            if (can_start_historic_saving)
+            if (e.RowIndex > -1)
             {
-                bool is_update = (int)dataGridView2.Rows[e.RowIndex].Cells["IDD_FINANC"].Value > -1;
-                if (is_update) //UPDATE
+                //if (dataGridView2.Rows[e.RowIndex].Cells["CLIENT_ID"].Value == DBNull.Value) //INSERT
+                if (dataGridView2.Rows[e.RowIndex].IsNewRow) //INSERT
                 {
-                    PreConnection.Excut_Cmd(2, "tb_clients_finance", new List<string> { "OP_DATE", "OBJECT", "DEBIT", "CREDIT" }, new List<object> { dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value, dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value, dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : 0, dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView2.Rows[e.RowIndex].Cells["IDD_FINANC"].Value });
+                    PreConnection.Excut_Cmd(1, "tb_clients_finance", new List<string> {
+                        "CLIENT_ID",
+                        "OP_DATE",
+                        "OBJECT",
+                        "DEBIT",
+                        "CREDIT" },
+                        new List<object>
+                    {
+                        dataGridView1.SelectedRows[0].Cells["ID"].Value,
+                        dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value : DateTime.Now,
+                        dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value : DBNull.Value,
+                        dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : 0,
+                        dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : 0
+                    }, null, null, null);
                 }
-                else //INSERT
+                else //UPDATE
                 {
-                    PreConnection.Excut_Cmd(1, "tb_clients_finance", new List<string> { "OP_DATE", "OBJECT", "DEBIT", "CREDIT" }, new List<object> { dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value, dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value, dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : 0, dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : 0 }, null, null, null);
+                    PreConnection.Excut_Cmd(2, "tb_clients_finance", new List<string> {
+                        "OP_DATE",
+                        "OBJECT",
+                        "DEBIT",
+                        "CREDIT" },
+                        new List<object>
+                    {
+                        dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value : DateTime.Now,
+                        dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value : DBNull.Value,
+                        dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : 0,
+                        dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : 0
+                    }, "ID = @IDD", new List<string> { "IDD" }, new List<object> { dataGridView2.Rows[e.RowIndex].Cells["IDD_FINANC"].Value });
                 }
-                Load_finace_historic();
+
+
 
             }
-
+            Load_finace_historic();
         }
         private void Load_finace_historic()
         {
-            can_start_historic_saving = false;
             int prev_select_rw = dataGridView2.SelectedCells.Count > 0 ? dataGridView2.SelectedCells[0].RowIndex : -1;
             int prev_select_col = dataGridView2.SelectedCells.Count > 0 ? dataGridView2.SelectedCells[0].ColumnIndex : -1;
+
+            dataGridView2.CellValueChanged -= dataGridView2_CellValueChanged;
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
@@ -676,61 +722,32 @@ namespace ALBAITAR_Softvet.Resources
             }
             else
             {
-                dataGridView2.Rows.Cast<DataGridViewRow>().ForEach(rr => { if (rr.Index < dataGridView2.NewRowIndex) { dataGridView2.Rows.RemoveAt(rr.Index); } });
+                if (dataGridView2.DataSource != null)
+                {
+                    ((DataTable)dataGridView2.DataSource).Rows.Clear();
+                }
+                //dataGridView2.Rows.Cast<DataGridViewRow>().ForEach(rr =>
+                //{
+                //    if (rr.Index < dataGridView2.NewRowIndex)
+                //    {
+                //        dataGridView2.Rows.RemoveAt(rr.Index);
+                //    }
+                //});
             }
             if (dataGridView2.Rows.Count > prev_select_rw && prev_select_rw > -1) { dataGridView2.CurrentCell = dataGridView2.Rows[prev_select_rw].Cells[prev_select_col]; }
-            can_start_historic_saving = true;
-        }
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (dataGridView2.SelectedCells.Count > 0)
-            {
-                string ids = "";
-                List<int> selected_row_delete_db = new List<int>();
-                List<int> selected_row_just_from_dgv = new List<int>();
-                dataGridView2.SelectedCells.Cast<DataGridViewCell>().ForEach(cl =>
-                {
-                    if (dataGridView2.Rows[cl.RowIndex].Cells["IDD_FINANC"].Value != DBNull.Value && (int)dataGridView2.Rows[cl.RowIndex].Cells["IDD_FINANC"].Value > -1 && !selected_row_delete_db.Contains(cl.RowIndex)) { selected_row_delete_db.Add(cl.RowIndex); }
-                    else if (!selected_row_just_from_dgv.Contains(cl.RowIndex) && (int)dataGridView2.Rows[cl.RowIndex].Cells["IDD_FINANC"].Value != -1) { selected_row_just_from_dgv.Add(cl.RowIndex); }
-                });
-                selected_row_delete_db.ForEach(rw => ids += "," + dataGridView2.Rows[rw].Cells["IDD_FINANC"].Value);
 
-
-                if (ids.Length > 0)
-                {
-                    ids = ids.Substring(1);
-                    PreConnection.Excut_Cmd(3, "tb_clients", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { ids });
-                    //Load_finace_historic();
-                }
-                dataGridView2.Rows.Cast<DataGridViewRow>().Where(zz => selected_row_delete_db.Contains(zz.Index) || selected_row_just_from_dgv.Contains(zz.Index)).ToList().ForEach(ff => dataGridView2.Rows.Remove(ff)); ;
-
-            }
-            calc_sold();
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            dataGridView2.CellValueChanged -= dataGridView2_CellValueChanged;
-            //((DataTable)dataGridView2.DataSource).Rows.Add(-1, dataGridView1.SelectedRows[0].Cells["ID"].Value, DateTime.Now);
-            ((DataTable)dataGridView2.DataSource).Rows.Add();
-            if (dataGridView2.DisplayedRowCount(false) < dataGridView2.RowCount) { dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.Rows.Count - 1; }
-            dataGridView2.Rows[dataGridView2.Rows.Count - 1].Cells["OP_DATE"].Value = DateTime.Now;
-            dataGridView2.Rows[dataGridView2.Rows.Count - 1].Cells["IDD_FINANC"].Value = -1;
-            dataGridView2.ClearSelection();
-            dataGridView2.CurrentCell = dataGridView2.Rows[dataGridView2.Rows.Count - 1].Cells["OBJECT"];
-            dataGridView2.BeginEdit(true);
             dataGridView2.CellValueChanged += dataGridView2_CellValueChanged;
+            calc_sold();
+            //--------------
+            // panel3.Visible = !Is_New || !monetic_not_autorsed;
         }
+
 
         private void dataGridView2_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.ThrowException = false; // don't throw an exception
         }
 
-        private void dataGridView2_DataSourceChanged(object sender, EventArgs e)
-        {
-            calc_sold();
-        }
 
         private void Clients_Activated(object sender, EventArgs e)
         {
@@ -757,7 +774,6 @@ namespace ALBAITAR_Softvet.Resources
                 else if (Caisse_Idx == -2)
                 {
                     dataGridView2.Focus();
-                    button7.PerformClick();
                     Caisse_Idx = -1;
                 }
             }
@@ -792,11 +808,11 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-           bool mm = dataGridView1.Rows[e.RowIndex].Cells["SLD"].Value != DBNull.Value;
-           mm = mm ? (decimal)dataGridView1.Rows[e.RowIndex].Cells["SLD"].Value != 0 : false;
+            bool mm = dataGridView1.Rows[e.RowIndex].Cells["SLD"].Value != DBNull.Value;
+            mm = mm ? (decimal)dataGridView1.Rows[e.RowIndex].Cells["SLD"].Value != 0 : false;
 
 
-            dataGridView1.Rows[e.RowIndex].HeaderCell.Style .SelectionBackColor = dataGridView1.Rows[e.RowIndex].HeaderCell.Style.BackColor = mm ? panel2.BackColor : SystemColors.Control;
+            dataGridView1.Rows[e.RowIndex].HeaderCell.Style.SelectionBackColor = dataGridView1.Rows[e.RowIndex].HeaderCell.Style.BackColor = mm ? panel2.BackColor : SystemColors.Control;
 
         }
 
@@ -809,6 +825,127 @@ namespace ALBAITAR_Softvet.Resources
             else
             {
                 e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Regular);
+            }
+        }
+
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            prev_rw_idx = dataGridView2.CurrentCell.RowIndex;
+            prev_col_idx = dataGridView2.CurrentCell.ColumnIndex;
+            if (!dataGridView2.ReadOnly)
+            {
+                if (prev_col_idx == dataGridView2.Columns["OP_DATE"].Index)
+                {
+                    //DateTimePicker dateTimePicker = new DateTimePicker();
+                    //dateTimePicker.Format = DateTimePickerFormat.Custom;
+                    //dateTimePicker.CustomFormat = "dd/MM/yyyy HH:mm";
+                    try { dateTimePicker1.Value = dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value != DBNull.Value ? DateTime.Parse(dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value.ToString()) : DateTime.Now; } catch { dateTimePicker1.Value = DateTime.Now; }
+                    //dateTimePicker.Leave += (s, args) =>
+                    //{
+                    //    dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value = dateTimePicker.Value.ToString("dd/MM/yyyy HH:mm");
+
+                    //    dataGridView2_Scroll(null, null);
+                    //};
+                    //dataGridView2.Controls.Add(dateTimePicker);
+                    dataGridView2.CurrentCell.Style.Padding = new Padding(0);
+                    dateTimePicker1.Visible = true;
+                    dateTimePicker1.Location = new Point(dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + 2, dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + 3);
+                    dateTimePicker1.Size = dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
+                    if (prev_rw_idx == 0) { dataGridView2.BeginEdit(true); }
+                    dateTimePicker1.Focus();
+                }
+                else if (prev_col_idx == dataGridView2.Columns["DEBIT"].Index || prev_col_idx == dataGridView2.Columns["CREDIT"].Index)
+                {
+                    //NumericUpDown numericUpDown = new NumericUpDown();
+
+                    //numericUpDown.Minimum = 0;
+                    //numericUpDown.Maximum = 100000000000;
+                    //numericUpDown.DecimalPlaces = 2;
+                    //numericUpDown.TextAlign = HorizontalAlignment.Right;
+                    //numericUpDown.UpDownAlign = LeftRightAlignment.Left;
+                    //numericUpDown.ThousandsSeparator = true;
+                    decimal fff = 0;
+                    if (dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value != null) { decimal.TryParse(dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value.ToString(), out fff); }
+                    numericUpDown1.Value = fff;
+                    //numericUpDown.Leave += numupdown_leave_event;
+                    //dataGridView2.Controls.Add(numericUpDown);
+                    dataGridView2.CurrentCell.Style.Padding = new Padding(0);
+                    numericUpDown1.Visible = true;
+                    numericUpDown1.Location = new Point(dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + 2, dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + 3);
+                    numericUpDown1.Size = dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
+                    numericUpDown1.Focus();
+                    numericUpDown1.Select(0, fff.ToString("N2").Length);
+                }
+            }
+
+            if (prev_col_idx == dataGridView2.Columns["DEL_FNC"].Index && prev_rw_idx != dataGridView2.NewRowIndex && monetic_del_autorised)
+            {
+                if (MessageBox.Show("Êtes-vous sûrs de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    PreConnection.Excut_Cmd(3, "tb_clients_finance", null, null, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView2.Rows[prev_rw_idx].Cells["IDD_FINANC"].Value });
+                    Load_finace_historic();
+                    dateTimePicker1.Visible = numericUpDown1.Visible = false;
+                    //------------------
+                }
+            }
+        }
+
+        private void dataGridView2_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (prev_col_idx == dataGridView2.Columns["OP_DATE"].Index)
+            {
+                dateTimePicker1.Location = new Point(dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + 2, dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + 3);
+                dateTimePicker1.Visible = prev_rw_idx >= dataGridView2.FirstDisplayedScrollingRowIndex && prev_rw_idx < (dataGridView2.FirstDisplayedScrollingRowIndex + dataGridView2.DisplayedRowCount(false));
+            }
+            else if ((prev_col_idx == dataGridView2.Columns["DEBIT"].Index || prev_col_idx == dataGridView2.Columns["CREDIT"].Index) && dataGridView2.CurrentCell.ColumnIndex == prev_col_idx)
+            {
+                numericUpDown1.Location = new Point(dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + 2, dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + 3);
+                numericUpDown1.Visible = prev_rw_idx >= dataGridView2.FirstDisplayedScrollingRowIndex && prev_rw_idx < (dataGridView2.FirstDisplayedScrollingRowIndex + dataGridView2.DisplayedRowCount(false));
+            }
+        }
+
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView2.Columns[e.ColumnIndex].Name == "DEL_FNC")
+            {
+                e.Value = e.RowIndex == dataGridView2.NewRowIndex || !monetic_del_autorised ? Properties.Resources.icons8_square_full_25px_1 : Properties.Resources.icons8_trash_25px_1;
+            }
+        }
+
+        private void numericUpDown1_Leave(object sender, EventArgs e)
+        {
+            
+            if (prev_col_idx > -1 && prev_rw_idx > -1)
+            {
+                dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value = numericUpDown1.Value;
+            }
+            numericUpDown1.Visible = false;
+        }
+
+        private void numericUpDown1_VisibleChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown1.Visible)
+            {
+                numericUpDown1.Select();
+            }
+        }
+
+        private void dateTimePicker1_Leave(object sender, EventArgs e)
+        {
+            
+            if (prev_col_idx > -1 && prev_rw_idx > -1)
+            {
+                dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value = dateTimePicker1.Value;
+            }
+            dateTimePicker1.Visible = false;
+        }
+
+        private void dateTimePicker1_VisibleChanged(object sender, EventArgs e)
+        {
+            if (dateTimePicker1.Visible)
+            {
+                dateTimePicker1.Select();
             }
         }
     }
