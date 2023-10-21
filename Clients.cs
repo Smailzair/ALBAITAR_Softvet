@@ -642,24 +642,32 @@ namespace ALBAITAR_Softvet.Resources
                 }
             }
         }
-
         private void calc_sold()
         {
             if (dataGridView2.Columns["DEBIT"] != null && dataGridView2.Columns["CREDIT"] != null)
             {
-                decimal sld = 0;
-                sld = dataGridView2.Rows.Cast<DataGridViewRow>().Sum(row => row.Cells["DEBIT"].Value != DBNull.Value ? Convert.ToDecimal(row.Cells["DEBIT"].Value) : 0) - dataGridView2.Rows.Cast<DataGridViewRow>().Sum(row => row.Cells["CREDIT"].Value != DBNull.Value ? Convert.ToDecimal(row.Cells["CREDIT"].Value) : 0);
-                if (sld == 0)
+                double tot_debit = dataGridView2.Rows.Cast<DataGridViewRow>().Sum(row =>
+                     row.Cells["DEBIT"].Value != null && row.Cells["DEBIT"].Value != DBNull.Value ?
+                     Convert.ToDouble(row.Cells["DEBIT"].Value) : 0);
+
+                double tot_credit = dataGridView2.Rows.Cast<DataGridViewRow>().Sum(row =>
+                    row.Cells["CREDIT"].Value != null && row.Cells["CREDIT"].Value != DBNull.Value ?
+                    Convert.ToDouble(row.Cells["CREDIT"].Value) : 0);
+                //---------
+                double sld = tot_debit - tot_credit;
+                //-----------------
+                if(dataGridView3.Columns.Count > 0)
                 {
-                    label14.Text = "Rien (0.00 DA).";
-                }
-                else if (sld >= 0)
-                {
-                    label14.Text = "Il a une dette de (" + sld.ToString("N2") + " DA).";
-                }
-                else
-                {
-                    label14.Text = "On lui doit (" + (sld * -1).ToString("N2") + " DA).";
+                    if(dataGridView3.Rows.Count == 0)
+                    {
+                        dataGridView3.Rows.Add();
+                        dataGridView3.Rows[0].Cells[0].Value = "dd";
+                        dataGridView3.Rows[0].Cells[1].Value = tot_debit;
+                        dataGridView3.Rows[0].Cells[2].Value = tot_credit;
+                    }
+                    dataGridView3.Rows[0].Cells[0].Value = "Solde Total : " + (sld == 0 ? "Rien (0.00 DA)." : (sld >= 0 ? "Il a une dette de (" + sld.ToString("N2") + " DA)." : "On lui doit (" + (sld * -1).ToString("N2") + " DA)."));
+                    dataGridView3.Rows[0].Cells[1].Value = tot_debit;
+                    dataGridView3.Rows[0].Cells[2].Value = tot_credit;
                 }
             }
         }
@@ -716,7 +724,7 @@ namespace ALBAITAR_Softvet.Resources
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                DataTable dt = PreConnection.Load_data("SELECT * FROM tb_clients_finance WHERE CLIENT_ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
+                DataTable dt = PreConnection.Load_data("SELECT * FROM tb_clients_finance WHERE CLIENT_ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + " ORDER BY OP_DATE;");
                 dataGridView2.DataSource = dt;
                 if (dataGridView2.DisplayedRowCount(false) < dataGridView2.RowCount) { dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.Rows.Count - 1; }
             }
@@ -726,20 +734,12 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     ((DataTable)dataGridView2.DataSource).Rows.Clear();
                 }
-                //dataGridView2.Rows.Cast<DataGridViewRow>().ForEach(rr =>
-                //{
-                //    if (rr.Index < dataGridView2.NewRowIndex)
-                //    {
-                //        dataGridView2.Rows.RemoveAt(rr.Index);
-                //    }
-                //});
             }
             if (dataGridView2.Rows.Count > prev_select_rw && prev_select_rw > -1) { dataGridView2.CurrentCell = dataGridView2.Rows[prev_select_rw].Cells[prev_select_col]; }
 
             dataGridView2.CellValueChanged += dataGridView2_CellValueChanged;
             calc_sold();
             //--------------
-            // panel3.Visible = !Is_New || !monetic_not_autorsed;
         }
 
 
@@ -837,17 +837,7 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (prev_col_idx == dataGridView2.Columns["OP_DATE"].Index)
                 {
-                    //DateTimePicker dateTimePicker = new DateTimePicker();
-                    //dateTimePicker.Format = DateTimePickerFormat.Custom;
-                    //dateTimePicker.CustomFormat = "dd/MM/yyyy HH:mm";
                     try { dateTimePicker1.Value = dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value != DBNull.Value ? DateTime.Parse(dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value.ToString()) : DateTime.Now; } catch { dateTimePicker1.Value = DateTime.Now; }
-                    //dateTimePicker.Leave += (s, args) =>
-                    //{
-                    //    dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value = dateTimePicker.Value.ToString("dd/MM/yyyy HH:mm");
-
-                    //    dataGridView2_Scroll(null, null);
-                    //};
-                    //dataGridView2.Controls.Add(dateTimePicker);
                     dataGridView2.CurrentCell.Style.Padding = new Padding(0);
                     dateTimePicker1.Visible = true;
                     dateTimePicker1.Location = new Point(dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + 2, dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + 3);
@@ -857,19 +847,9 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 else if (prev_col_idx == dataGridView2.Columns["DEBIT"].Index || prev_col_idx == dataGridView2.Columns["CREDIT"].Index)
                 {
-                    //NumericUpDown numericUpDown = new NumericUpDown();
-
-                    //numericUpDown.Minimum = 0;
-                    //numericUpDown.Maximum = 100000000000;
-                    //numericUpDown.DecimalPlaces = 2;
-                    //numericUpDown.TextAlign = HorizontalAlignment.Right;
-                    //numericUpDown.UpDownAlign = LeftRightAlignment.Left;
-                    //numericUpDown.ThousandsSeparator = true;
                     decimal fff = 0;
                     if (dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value != null) { decimal.TryParse(dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value.ToString(), out fff); }
                     numericUpDown1.Value = fff;
-                    //numericUpDown.Leave += numupdown_leave_event;
-                    //dataGridView2.Controls.Add(numericUpDown);
                     dataGridView2.CurrentCell.Style.Padding = new Padding(0);
                     numericUpDown1.Visible = true;
                     numericUpDown1.Location = new Point(dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + 2, dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + 3);
@@ -915,7 +895,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void numericUpDown1_Leave(object sender, EventArgs e)
         {
-            
+
             if (prev_col_idx > -1 && prev_rw_idx > -1)
             {
                 dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value = numericUpDown1.Value;
@@ -933,7 +913,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dateTimePicker1_Leave(object sender, EventArgs e)
         {
-            
+
             if (prev_col_idx > -1 && prev_rw_idx > -1)
             {
                 dataGridView2.Rows[prev_rw_idx].Cells[prev_col_idx].Value = dateTimePicker1.Value;
@@ -947,6 +927,27 @@ namespace ALBAITAR_Softvet.Resources
             {
                 dateTimePicker1.Select();
             }
+        }
+
+        private void dataGridView2_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+
+            if(dataGridView3.Columns.Count >= 3)
+            {
+                if(dataGridView2.Columns["OBJECT"] != null && dataGridView2.Columns["DEL_FNC"] != null)
+                {
+                    dataGridView3.Location = new Point(dataGridView2.GetColumnDisplayRectangle(dataGridView2.Columns["OBJECT"].Index, true).Location.X, dataGridView3.Location.Y);
+                    dataGridView3.Width = dataGridView2.GetColumnDisplayRectangle(dataGridView2.Columns["DEL_FNC"].Index, true).Location.X - dataGridView2.GetColumnDisplayRectangle(dataGridView2.Columns["OBJECT"].Index, true).Location.X;
+                }
+
+                if (dataGridView2.Columns["DEBIT"] != null && dataGridView2.Columns["CREDIT"] != null)
+                {
+                    dataGridView3.Columns[1].Width = dataGridView2.Columns["DEBIT"].Width;
+                    dataGridView3.Columns[2].Width = dataGridView2.Columns["CREDIT"].Width;
+                }
+
+            }
+            
         }
     }
 }

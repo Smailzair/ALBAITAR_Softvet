@@ -1988,7 +1988,6 @@ namespace ALBAITAR_Softvet
                 this.Text += text_to_add_to_title;
                 text_to_add_to_title = "";
             }
-
         }
 
         private void button23_Click(object sender, EventArgs e)
