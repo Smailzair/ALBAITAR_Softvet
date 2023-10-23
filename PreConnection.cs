@@ -185,6 +185,7 @@ namespace ALBAITAR_Softvet
                     {
                         for (int i = 0; i < Columns_names.Count; i++)
                         {
+                            Debug.WriteLine(Columns_names[i] + " ==> " + col_values[i]);
                             command.Parameters.AddWithValue("@i" + i.ToString() + "_" + Columns_names[i], col_values[i]);
                         }
                     }
@@ -198,6 +199,7 @@ namespace ALBAITAR_Softvet
                     }
 
                     Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>> CMD = " + command.CommandText);
+                    Debug.WriteLine("<<------------------------------------------------------------------>>");
                     rows_nb = command.ExecuteNonQuery();
                 }
 
@@ -644,9 +646,8 @@ namespace ALBAITAR_Softvet
                     return image;
                 }
             }
-            catch (Exception e)
+            catch
             {
-                Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + e.Message);
                 return null;
             }
             

@@ -24,6 +24,7 @@ namespace ALBAITAR_Softvet.Resources
         DataTable animaux;
         DataTable poids_tbl = new DataTable();
         DataTable maladies_tbl = new DataTable();
+        DataTable filtred_maladies_tbl;
         List<string> full_nme_clients;
         bool Is_New = true;
         bool Is_New_Visite = true;
@@ -41,6 +42,7 @@ namespace ALBAITAR_Softvet.Resources
         //int prev_cb8_rww = -1;
 
         DateTime prev_dt6_val = DateTime.Now;
+        //DateTime prev_dt6_val2 = new DateTime(1999, 12, 12);
         int prev_dt6_rww = -1;
         int prev_dt6_coll = -1;
         //----------
@@ -381,7 +383,7 @@ namespace ALBAITAR_Softvet.Resources
 
 
         }
-        DataTable filtred_maladies_tbl;
+
         private void anim_filter()
         {
             filtred_maladies_tbl = new DataTable();
@@ -1809,43 +1811,59 @@ richTextBox1.Text
 
         private void dataGridView4_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex > -1)
             {
-                string ANIM_ID_MALAD = dataGridView4.Rows[e.RowIndex].Cells["ANIM_ID_MALAD"].Value != null ? (dataGridView4.Rows[e.RowIndex].Cells["ANIM_ID_MALAD"].Value != DBNull.Value ? dataGridView4.Rows[e.RowIndex].Cells["ANIM_ID_MALAD"].Value.ToString() : "") : "";
-                string ID_MALAD = dataGridView4.Rows[e.RowIndex].Cells["ID_MALAD"].Value != null ? (dataGridView4.Rows[e.RowIndex].Cells["ID_MALAD"].Value != DBNull.Value ? dataGridView4.Rows[e.RowIndex].Cells["ID_MALAD"].Value.ToString() : "") : "";
-                if (!string.IsNullOrWhiteSpace(ANIM_ID_MALAD) && !string.IsNullOrWhiteSpace(ID_MALAD)) //UPDATE
+                DateTime tmmp = dataGridView4.Rows[e.RowIndex].Cells["START_DATE_MALAD"].Value != null ? (dataGridView4.Rows[e.RowIndex].Cells["START_DATE_MALAD"].Value != DBNull.Value ? (DateTime)dataGridView4.Rows[e.RowIndex].Cells["START_DATE_MALAD"].Value : new DateTime(1999, 12, 12)) : new DateTime(1999, 12, 12);
+                string tmp_START_DATE_MALAD = dataGridView4.Rows[prev_rw_idx].Cells["START_DATE_MALAD"] != null ? (dataGridView4.Rows[prev_rw_idx].Cells["START_DATE_MALAD"].Value != null ? (dataGridView4.Rows[prev_rw_idx].Cells["START_DATE_MALAD"].Value != DBNull.Value ? dataGridView4.Rows[prev_rw_idx].Cells["START_DATE_MALAD"].Value.ToString() : "") : "") : "";
+                string tmp_MALAD_NME = dataGridView4.Rows[prev_rw_idx].Cells["MALAD_NME"] != null ? (dataGridView4.Rows[prev_rw_idx].Cells["MALAD_NME"].Value != null ? (dataGridView4.Rows[prev_rw_idx].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView4.Rows[prev_rw_idx].Cells["MALAD_NME"].Value.ToString() : "") : "") : "";
+
+                if (!string.IsNullOrWhiteSpace(tmp_MALAD_NME) || (!string.IsNullOrWhiteSpace(tmp_START_DATE_MALAD) && tmmp.Year > 2000 && tmmp.Year < 2100))
                 {
-                    PreConnection.Excut_Cmd(2, "tb_maladies", new List<string> { "START_DATE", "MALAD_NME", "MALAD_LEVEL", "ESTIM_END_DATE" }, new List<object>
+                    string ANIM_ID_MALAD = dataGridView4.Rows[e.RowIndex].Cells["ANIM_ID_MALAD"].Value != null ? (dataGridView4.Rows[e.RowIndex].Cells["ANIM_ID_MALAD"].Value != DBNull.Value ? dataGridView4.Rows[e.RowIndex].Cells["ANIM_ID_MALAD"].Value.ToString() : "") : "";
+                    string ID_MALAD = dataGridView4.Rows[e.RowIndex].Cells["ID_MALAD"].Value != null ? (dataGridView4.Rows[e.RowIndex].Cells["ID_MALAD"].Value != DBNull.Value ? dataGridView4.Rows[e.RowIndex].Cells["ID_MALAD"].Value.ToString() : "") : "";
+                    if (!string.IsNullOrWhiteSpace(ANIM_ID_MALAD) && !string.IsNullOrWhiteSpace(ID_MALAD)) //UPDATE
+                    {
+                        PreConnection.Excut_Cmd(2, "tb_maladies", new List<string> { "START_DATE", "MALAD_NME", "MALAD_LEVEL", "ESTIM_END_DATE" }, new List<object>
                     {
                         dataGridView4.Rows[e.RowIndex].Cells["START_DATE_MALAD"].Value,
                         dataGridView4.Rows[e.RowIndex].Cells["MALAD_NME"].Value,
                         dataGridView4.Rows[e.RowIndex].Cells["MALAD_LEVEL"].Value,
                         dataGridView4.Rows[e.RowIndex].Cells["ESTIM_END_DATE_MALAD"].Value
                     }, "ID = @PP_IDD", new List<string> { "PP_IDD" }, new List<object> { dataGridView4.Rows[e.RowIndex].Cells["ID_MALAD"].Value });
-                }
-                else if (dataGridView1.SelectedRows.Count > 0) //INSERT
-                {
-                    PreConnection.Excut_Cmd(1, "tb_maladies", new List<string> {
+                    }
+                    else if (dataGridView1.SelectedRows.Count > 0) //INSERT
+                    {
+
+                        PreConnection.Excut_Cmd(1, "tb_maladies", new List<string> {
                         "ANIM_ID",
                         "START_DATE",
                         "MALAD_NME",
                         "MALAD_LEVEL",
                         "ESTIM_END_DATE" },
-                        new List<object>
-                    {
+                            new List<object>
+                        {
                         dataGridView1.SelectedRows[0].Cells["ID"].Value,
                         dataGridView4.Rows[e.RowIndex].Cells["START_DATE_MALAD"].Value != DBNull.Value ? dataGridView4.Rows[e.RowIndex].Cells["START_DATE_MALAD"].Value : DateTime.Now,
                         dataGridView4.Rows[e.RowIndex].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView4.Rows[e.RowIndex].Cells["MALAD_NME"].Value : DBNull.Value,
                         dataGridView4.Rows[e.RowIndex].Cells["MALAD_LEVEL"].Value != DBNull.Value ? dataGridView4.Rows[e.RowIndex].Cells["MALAD_LEVEL"].Value : DBNull.Value,
                         dataGridView4.Rows[e.RowIndex].Cells["ESTIM_END_DATE_MALAD"].Value
-                    }, null, null, null);
+                        }, null, null, null);
 
 
+
+
+
+                    }
+                    Load_malad_1();
+                    //------------------
+                    reload_cbx6_data();
+                    //-----------------
                 }
-                Load_malad_1();
-                //------------------
-                reload_cbx6_data();
-                //-----------------
+
+
+
+
 
             }
         }
@@ -1855,6 +1873,7 @@ richTextBox1.Text
             if (tabControl1.SelectedTab == tabPage4 && dataGridView1.SelectedRows.Count > 0)
             {
                 int prev_select = dataGridView4.SelectedRows.Count > 0 ? (int)dataGridView4.SelectedRows[0].Cells["ID_MALAD"].Value : -1;
+
 
                 dataGridView4.CellValueChanged -= dataGridView4_CellValueChanged;
                 if (dataGridView4.DataSource != null)
@@ -1884,9 +1903,6 @@ richTextBox1.Text
                     }
 
                 }
-
-
-
                 dataGridView4.CellValueChanged += dataGridView4_CellValueChanged;
 
                 dataGridView4.ClearSelection();
@@ -1917,14 +1933,16 @@ richTextBox1.Text
 
         private void dataGridView4_Scroll(object sender, ScrollEventArgs e)
         {
-            if (prev_col_idx == dataGridView4.Columns["START_DATE_MALAD"].Index || prev_col_idx == dataGridView4.Columns["ESTIM_END_DATE_MALAD"].Index)
+            if (prev_col_idx == dataGridView4.Columns["START_DATE_MALAD"].Index)// || prev_col_idx == dataGridView4.Columns["ESTIM_END_DATE_MALAD"].Index)
             {
                 dateTimePicker6.Location = new Point(dataGridView4.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + dataGridView4.Location.X, dataGridView4.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + dataGridView4.Location.Y);
                 dateTimePicker6.Visible = prev_rw_idx >= dataGridView4.FirstDisplayedScrollingRowIndex && prev_rw_idx < (dataGridView4.FirstDisplayedScrollingRowIndex + dataGridView4.DisplayedRowCount(false));
+
+
             }
 
-
             dataGridView4.Controls.Cast<Control>().ForEach(F => { dataGridView4.Controls.Remove(F); });
+
 
         }
 
@@ -2150,23 +2168,44 @@ richTextBox1.Text
                 dateTimePicker5.Select();
             }
         }
-
         private void dateTimePicker6_Leave(object sender, EventArgs e)
         {
-            if (prev_dt6_coll == dataGridView4.Columns["START_DATE_MALAD"].Index || prev_dt6_coll == dataGridView4.Columns["ESTIM_END_DATE_MALAD"].Index)
+            timer1_val = 0;
+            int prevvv_rww = prev_rw_idx;
+
+            if (prev_rw_idx == dataGridView4.NewRowIndex)
             {
-                if (prev_dt6_rww > -1 && dataGridView4.Columns[prev_dt6_coll] != null && (prev_dt6_rww < dataGridView4.NewRowIndex || dataGridView4.Rows[prev_dt6_rww].Cells["MALAD_NME"].Value != DBNull.Value || dataGridView4.Rows[prev_dt6_rww].Cells["MALAD_LEVEL"].Value != DBNull.Value || dataGridView4.Rows[prev_dt6_rww].Cells["ESTIM_END_DATE_MALAD"].Value != DBNull.Value))
+                string tmp_START_DATE_MALAD = dataGridView4.Rows[prev_rw_idx].Cells["START_DATE_MALAD"] != null ? (dataGridView4.Rows[prev_rw_idx].Cells["START_DATE_MALAD"].Value != null ? (dataGridView4.Rows[prev_rw_idx].Cells["START_DATE_MALAD"].Value != DBNull.Value ? dataGridView4.Rows[prev_rw_idx].Cells["START_DATE_MALAD"].Value.ToString() : "") : "") : "";
+                string tmp_MALAD_NME = dataGridView4.Rows[prev_rw_idx].Cells["MALAD_NME"] != null ? (dataGridView4.Rows[prev_rw_idx].Cells["MALAD_NME"].Value != null ? (dataGridView4.Rows[prev_rw_idx].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView4.Rows[prev_rw_idx].Cells["MALAD_NME"].Value.ToString() : "") : "") : "";
+
+
+                if (string.IsNullOrWhiteSpace(tmp_MALAD_NME) && string.IsNullOrWhiteSpace(tmp_START_DATE_MALAD))
                 {
-                    DateTime dt = dataGridView4.Rows[prev_dt6_rww].Cells[prev_dt6_coll].Value != DBNull.Value ? (DateTime)dataGridView4.Rows[prev_dt6_rww].Cells[prev_dt6_coll].Value : new DateTime(1999,12,12);
-                    if(prev_dt6_val != dt)
+                    if (dateTimePicker6.Value.Date != DateTime.Now.Date)
                     {
-                        dataGridView4.Rows[prev_dt6_rww].Cells[prev_dt6_coll].Value = prev_dt6_val;
-                    }                    
+                        dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value = dateTimePicker6.Value;
+                        dataGridView4.Focus();
+                    }
                 }
-                dateTimePicker6.Visible = false;
-                prev_dt6_coll = prev_dt6_rww = -1;
-                dataGridView4.Controls.Cast<Control>().ForEach(F => { dataGridView4.Controls.Remove(F); });
             }
+            else if (prev_col_idx == dataGridView4.Columns["START_DATE_MALAD"].Index && prev_rw_idx > -1)
+            {
+                dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value = dateTimePicker6.Value;
+            }
+
+            //if (prev_col_idx == dataGridView4.Columns["START_DATE_MALAD"].Index && prev_rw_idx > -1 && (prev_rw_idx < dataGridView4.NewRowIndex || dateTimePicker6.Value != DateTime.Now))//|| (dataGridView4.Rows[prev_rw_idx].Cells["MALAD_NME"].Value != DBNull.Value ? dataGridView4.Rows[prev_rw_idx].Cells["MALAD_NME"].Value.ToString() : "").Trim().Length > 0))
+            //{
+            //    dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value = dateTimePicker6.Value;
+            //}
+            dateTimePicker6.Visible = false;
+
+            if (prevvv_rww > -1)
+            {
+                dataGridView4.CurrentCell = dataGridView4.Rows[prevvv_rww].Cells[prev_col_idx];
+                if (prevvv_rww > dataGridView4.DisplayedRowCount(false)) { dataGridView4.FirstDisplayedScrollingRowIndex = prevvv_rww; }
+            }
+
+
         }
 
         private void dateTimePicker6_VisibleChanged(object sender, EventArgs e)
@@ -2177,64 +2216,46 @@ richTextBox1.Text
             }
         }
 
-        private void dataGridView4_CurrentCellChanged(object sender, EventArgs e)
-        {
-
-            //comboBox8.Visible = false;
-
-        }
 
         private void dataGridView4_SelectionChanged(object sender, EventArgs e)
         {
+
+            //---------------
             dataGridView4.Rows.Cast<DataGridViewRow>().ForEach(T =>
             {
                 T.HeaderCell.Style.BackColor = SystemColors.Control;
             });
-            if(dataGridView4.SelectedCells.Count > 0)
+            if (dataGridView4.SelectedCells.Count > 0)
             {
                 dataGridView4.SelectedCells[0].OwningRow.HeaderCell.Style.BackColor = Color.Blue;
             }
-            
             //--------------------------
             if (dataGridView4.SelectedCells.Count > 0) //if (dataGridView4.CurrentCell != null)
             {
-
-                prev_dt6_val = dateTimePicker6.Value;
-                prev_dt6_rww = prev_rw_idx;
-                prev_dt6_coll = prev_col_idx;
+                //prev_dt6_val = dateTimePicker6.Value;
+                //if (prev_col_idx == dataGridView4.Columns["START_DATE_MALAD"].Index)
+                //{
+                //    prev_dt6_rww = prev_rw_idx;
+                //    prev_dt6_coll = prev_col_idx;
+                //}
+                //else
+                //{
+                //    prev_dt6_rww = prev_dt6_coll = -1;
+                //}
                 //-----------------------------------
                 prev_rw_idx = dataGridView4.SelectedCells[0].RowIndex;
                 prev_col_idx = dataGridView4.SelectedCells[0].ColumnIndex;
 
-                if (prev_col_idx == dataGridView4.Columns["START_DATE_MALAD"].Index || prev_col_idx == dataGridView4.Columns["ESTIM_END_DATE_MALAD"].Index)
+                prev_dt6_val = new DateTime(1999, 12, 12);
+                if (prev_col_idx == dataGridView4.Columns["START_DATE_MALAD"].Index)// || prev_col_idx == dataGridView4.Columns["ESTIM_END_DATE_MALAD"].Index)
                 {
-                    dateTimePicker6.Value = dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value != null ? (dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value != DBNull.Value ? DateTime.Parse(dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value.ToString()) : DateTime.Now) : new DateTime(DateTime.Now.Year, 1,);
+                    prev_dt6_val = prev_rw_idx == dataGridView4.NewRowIndex ? new DateTime(1999, 12, 12) : dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value != null ? (dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value != DBNull.Value ? DateTime.Parse(dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value.ToString()) : new DateTime(1999, 12, 12)) : new DateTime(1999, 12, 12);
+                    dateTimePicker6.Value = dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value != null ? (dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value != DBNull.Value ? DateTime.Parse(dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value.ToString()) : DateTime.Now) : DateTime.Now;
                     dataGridView4.CurrentCell.Style.Padding = new Padding(0);
                     dateTimePicker6.Visible = true;
                     dateTimePicker6.Location = new Point(dataGridView4.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + dataGridView4.Location.X, dataGridView4.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + dataGridView4.Location.Y);
                     dateTimePicker6.Size = dataGridView4.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
                     dateTimePicker6.Focus();
-                }
-                else if (prev_col_idx == dataGridView4.Columns["MALAD_NME"].Index)
-                {
-                    //comboBox8.SelectedIndex = -1;
-                    //comboBox8.Text = dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value != DBNull.Value ? (string)dataGridView4.Rows[prev_rw_idx].Cells[prev_col_idx].Value : "";
-
-                    ////if(prev_rw_idx == dataGridView4.NewRowIndex)
-                    ////{
-                    ////    comboBox8.Location = new Point(dataGridView4.GetCellDisplayRectangle(prev_col_idx, dataGridView4.NewRowIndex, false).Location.X + dataGridView4.Location.X, dataGridView4.GetCellDisplayRectangle(prev_col_idx, dataGridView4.NewRowIndex, false).Location.Y + dataGridView4.Location.Y);
-                    ////}
-                    ////else
-                    ////{
-                    //comboBox8.Location = new Point(dataGridView4.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + dataGridView4.Location.X, dataGridView4.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + dataGridView4.Location.Y);
-                    ////}
-
-                    //comboBox8.Size = dataGridView4.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
-                    //comboBox8.Visible = true;
-                    ////comboBox8.Focus();
-                    ///
-
-
 
 
                 }
@@ -2279,16 +2300,6 @@ richTextBox1.Text
 
         }
 
-        private void dataGridView4_CellEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            //dataGridView4.Rows.Cast<DataGridViewRow>().ForEach(T =>
-            //{
-            //    T.HeaderCell.Style.BackColor = T.Index == e.RowIndex ? Color.Blue : SystemColors.Control;
-            //});
-        }
-
-
-
         private void dataGridView4_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if (dataGridView4.CurrentCell.OwningColumn == dataGridView4.Columns["MALAD_NME"])
@@ -2325,6 +2336,13 @@ richTextBox1.Text
                     cell.Value = e.FormattedValue;
                 }
             }
+            else if (dataGridView4.Columns[e.ColumnIndex].Name == "ESTIM_END_DATE_MALAD" && e.FormattedValue != null)
+            {
+                if (!DateTime.TryParse(e.FormattedValue.ToString(), out _))
+                {
+                    dataGridView4.CancelEdit();
+                }
+            }
 
         }
 
@@ -2339,56 +2357,60 @@ richTextBox1.Text
 
         private void dateTimePicker6_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Down)
+
+            if (e.KeyCode == Keys.Enter)
             {
                 dataGridView4.Focus();
-                SendKeys.Send("{DOWN}");
+                if (dataGridView4.CurrentRow.Index < dataGridView4.NewRowIndex)
+                {
+                    SendKeys.Send("{ENTER}");
+                }
+
+
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                dataGridView4.Focus();
+                if (dataGridView4.CurrentRow.Index < dataGridView4.NewRowIndex)
+                {
+                    SendKeys.Send("{DOWN}");
+                }
+
+
             }
             else if (e.KeyCode == Keys.Up)
             {
+
                 dataGridView4.Focus();
                 SendKeys.Send("{UP}");
+
+
+                //SendKeys.Send("{UP}");
             }
-            else if (e.KeyCode == Keys.Right)
-            {
-                dataGridView4.Focus();
-                SendKeys.Send("{RIGHT}");
-
-            }
-            else if (e.KeyCode == Keys.Left)
-            {
-                dataGridView4.Focus();
-                SendKeys.Send("{LEFT}");
-
-            }
-
-
-
-            //if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
+            //else if (e.KeyCode == Keys.Right)
             //{
-            //    //dataGridView4.EndEdit();
-            //    if (e.KeyCode == Keys.Up)
-            //    {
-            //        if (dataGridView4.Rows.Count > dataGridView4.CurrentCell.RowIndex - 1 && dataGridView4.CurrentCell.RowIndex > 0)
-            //        {
-            //            dataGridView4.CurrentCell = dataGridView4.Rows[dataGridView4.CurrentCell.RowIndex - 1].Cells[prev_col_idx];
-            //        }
-            //    }
-            //    else if (e.KeyCode == Keys.Down)
-            //    {
-            //        if (dataGridView4.Rows.Count > dataGridView4.CurrentCell.RowIndex && (dataGridView4.CurrentCell.RowIndex + 1) < dataGridView4.Rows.Count)
-            //        {
-            //            dataGridView4.CurrentCell = dataGridView4.Rows[dataGridView4.CurrentCell.RowIndex + 1].Cells[prev_col_idx];
-            //        }
-            //    }
-            //    if (e.KeyCode == Keys.Up)
-            //    {
-            //        if (dataGridView4.Rows.Count > dataGridView4.CurrentCell.RowIndex - 1 && dataGridView4.CurrentCell.RowIndex > 0)
-            //        {
-            //            dataGridView4.CurrentCell = dataGridView4.Rows[dataGridView4.CurrentCell.RowIndex - 1].Cells[prev_col_idx];
-            //        }
-            //    }
+            //    dataGridView4.Focus();
+            //    SendKeys.Send("{RIGHT}");
+
             //}
+            //else if (e.KeyCode == Keys.Left)
+            //{
+            //    dataGridView4.Focus();
+            //    SendKeys.Send("{LEFT}");
+
+            //}
+            //else
+            //{
+            //    e.Handled = true;
+            //}
+
+        }
+
+
+        int timer1_val = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1_val++;
         }
     }
 }
