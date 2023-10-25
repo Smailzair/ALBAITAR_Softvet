@@ -33,12 +33,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel3 = new System.Windows.Forms.Panel();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -133,6 +133,7 @@
             this.label30 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.Malad_Panel = new System.Windows.Forms.Panel();
+            this.button17 = new System.Windows.Forms.Button();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.button16 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -154,6 +155,12 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.ID_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_ID_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.START_DATE_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MALAD_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MALAD_LEVEL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ESTIM_END_DATE_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label29 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Visit_Panel = new System.Windows.Forms.Panel();
@@ -183,13 +190,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.button17 = new System.Windows.Forms.Button();
-            this.ID_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIM_ID_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.START_DATE_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MALAD_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MALAD_LEVEL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ESTIM_END_DATE_MALAD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1441,6 +1441,22 @@
             this.Malad_Panel.TabIndex = 2;
             this.Malad_Panel.Visible = false;
             // 
+            // button17
+            // 
+            this.button17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button17.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
+            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button17.FlatAppearance.BorderSize = 0;
+            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button17.Location = new System.Drawing.Point(512, 400);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(26, 29);
+            this.button17.TabIndex = 70;
+            this.toolTip1.SetToolTip(this.button17, "Supprimer");
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Visible = false;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
             // pictureBox4
             // 
             this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1735,6 +1751,66 @@
             this.dataGridView4.TabIndex = 2;
             this.dataGridView4.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView4_DataError);
             this.dataGridView4.SelectionChanged += new System.EventHandler(this.dataGridView4_SelectionChanged);
+            this.dataGridView4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView4_KeyDown);
+            // 
+            // ID_MALAD
+            // 
+            this.ID_MALAD.DataPropertyName = "ID";
+            this.ID_MALAD.HeaderText = "ID";
+            this.ID_MALAD.Name = "ID_MALAD";
+            this.ID_MALAD.ReadOnly = true;
+            this.ID_MALAD.Visible = false;
+            // 
+            // ANIM_ID_MALAD
+            // 
+            this.ANIM_ID_MALAD.DataPropertyName = "ANIM_ID";
+            this.ANIM_ID_MALAD.HeaderText = "ANIM_ID";
+            this.ANIM_ID_MALAD.Name = "ANIM_ID_MALAD";
+            this.ANIM_ID_MALAD.ReadOnly = true;
+            this.ANIM_ID_MALAD.Visible = false;
+            // 
+            // START_DATE_MALAD
+            // 
+            this.START_DATE_MALAD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.START_DATE_MALAD.DataPropertyName = "START_DATE";
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.START_DATE_MALAD.DefaultCellStyle = dataGridViewCellStyle4;
+            this.START_DATE_MALAD.FillWeight = 85F;
+            this.START_DATE_MALAD.HeaderText = "Date";
+            this.START_DATE_MALAD.Name = "START_DATE_MALAD";
+            this.START_DATE_MALAD.ReadOnly = true;
+            this.START_DATE_MALAD.Width = 58;
+            // 
+            // MALAD_NME
+            // 
+            this.MALAD_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.MALAD_NME.DataPropertyName = "MALAD_NME";
+            this.MALAD_NME.HeaderText = "Maladie";
+            this.MALAD_NME.Name = "MALAD_NME";
+            this.MALAD_NME.ReadOnly = true;
+            this.MALAD_NME.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // MALAD_LEVEL
+            // 
+            this.MALAD_LEVEL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.MALAD_LEVEL.DataPropertyName = "MALAD_LEVEL";
+            this.MALAD_LEVEL.HeaderText = "Niveau";
+            this.MALAD_LEVEL.Name = "MALAD_LEVEL";
+            this.MALAD_LEVEL.ReadOnly = true;
+            this.MALAD_LEVEL.Width = 71;
+            // 
+            // ESTIM_END_DATE_MALAD
+            // 
+            this.ESTIM_END_DATE_MALAD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            this.ESTIM_END_DATE_MALAD.DataPropertyName = "ESTIM_END_DATE";
+            dataGridViewCellStyle5.Format = "d";
+            this.ESTIM_END_DATE_MALAD.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ESTIM_END_DATE_MALAD.HeaderText = "Date de la fin de la maladie";
+            this.ESTIM_END_DATE_MALAD.MinimumWidth = 120;
+            this.ESTIM_END_DATE_MALAD.Name = "ESTIM_END_DATE_MALAD";
+            this.ESTIM_END_DATE_MALAD.ReadOnly = true;
+            this.ESTIM_END_DATE_MALAD.Width = 120;
             // 
             // label29
             // 
@@ -2109,79 +2185,6 @@
             this.dataGridViewImageColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewImageColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewImageColumn2.Width = 20;
-            // 
-            // button17
-            // 
-            this.button17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button17.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
-            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button17.FlatAppearance.BorderSize = 0;
-            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button17.Location = new System.Drawing.Point(512, 400);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(26, 29);
-            this.button17.TabIndex = 70;
-            this.toolTip1.SetToolTip(this.button17, "Supprimer");
-            this.button17.UseVisualStyleBackColor = true;
-            // 
-            // ID_MALAD
-            // 
-            this.ID_MALAD.DataPropertyName = "ID";
-            this.ID_MALAD.HeaderText = "ID";
-            this.ID_MALAD.Name = "ID_MALAD";
-            this.ID_MALAD.ReadOnly = true;
-            this.ID_MALAD.Visible = false;
-            // 
-            // ANIM_ID_MALAD
-            // 
-            this.ANIM_ID_MALAD.DataPropertyName = "ANIM_ID";
-            this.ANIM_ID_MALAD.HeaderText = "ANIM_ID";
-            this.ANIM_ID_MALAD.Name = "ANIM_ID_MALAD";
-            this.ANIM_ID_MALAD.ReadOnly = true;
-            this.ANIM_ID_MALAD.Visible = false;
-            // 
-            // START_DATE_MALAD
-            // 
-            this.START_DATE_MALAD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.START_DATE_MALAD.DataPropertyName = "START_DATE";
-            dataGridViewCellStyle4.Format = "d";
-            dataGridViewCellStyle4.NullValue = null;
-            this.START_DATE_MALAD.DefaultCellStyle = dataGridViewCellStyle4;
-            this.START_DATE_MALAD.FillWeight = 85F;
-            this.START_DATE_MALAD.HeaderText = "Date";
-            this.START_DATE_MALAD.Name = "START_DATE_MALAD";
-            this.START_DATE_MALAD.ReadOnly = true;
-            this.START_DATE_MALAD.Width = 58;
-            // 
-            // MALAD_NME
-            // 
-            this.MALAD_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.MALAD_NME.DataPropertyName = "MALAD_NME";
-            this.MALAD_NME.HeaderText = "Maladie";
-            this.MALAD_NME.Name = "MALAD_NME";
-            this.MALAD_NME.ReadOnly = true;
-            this.MALAD_NME.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // MALAD_LEVEL
-            // 
-            this.MALAD_LEVEL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.MALAD_LEVEL.DataPropertyName = "MALAD_LEVEL";
-            this.MALAD_LEVEL.HeaderText = "Niveau";
-            this.MALAD_LEVEL.Name = "MALAD_LEVEL";
-            this.MALAD_LEVEL.ReadOnly = true;
-            this.MALAD_LEVEL.Width = 71;
-            // 
-            // ESTIM_END_DATE_MALAD
-            // 
-            this.ESTIM_END_DATE_MALAD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-            this.ESTIM_END_DATE_MALAD.DataPropertyName = "ESTIM_END_DATE";
-            dataGridViewCellStyle5.Format = "d";
-            this.ESTIM_END_DATE_MALAD.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ESTIM_END_DATE_MALAD.HeaderText = "Date de la fin de la maladie";
-            this.ESTIM_END_DATE_MALAD.MinimumWidth = 120;
-            this.ESTIM_END_DATE_MALAD.Name = "ESTIM_END_DATE_MALAD";
-            this.ESTIM_END_DATE_MALAD.ReadOnly = true;
-            this.ESTIM_END_DATE_MALAD.Width = 120;
             // 
             // Animaux
             // 

@@ -2035,6 +2035,7 @@ richTextBox1.Text
         {
             if (dataGridView4.SelectedRows.Count > 0)
             {
+                button17.Visible = true;
                 //------initiat -----------
                 panel4.Visible = false;
                 checkBox4.Checked = false;
@@ -2059,6 +2060,7 @@ richTextBox1.Text
             }
             else
             {
+                button17.Visible = false;
                 button16_Click(null, null);
             }
 
@@ -2158,6 +2160,34 @@ richTextBox1.Text
         private void comboBox8_TextUpdate(object sender, EventArgs e)
         {
             comboBox8.BackColor = Color.White;
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Vous-étes sur de faire la suppression de (" + dataGridView4.SelectedRows.Count + ") maladie ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                string ids = "";
+                List<int> selected_row_delete_db = new List<int>();
+                dataGridView4.SelectedRows.Cast<DataGridViewRow>().ForEach(rw =>
+                {
+                    ids += "," + rw.Cells["ID_MALAD"].Value;
+                });
+                if (ids.Length > 0)
+                {
+                    ids = ids.Substring(1);
+                    PreConnection.Excut_Cmd(3, "tb_maladies", null, null, "ID IN (@W_ID)", new List<string> { "W_ID" }, new List<object> { ids });
+                    Load_malad_1();
+                }
+                
+            }
+        }
+
+        private void dataGridView4_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete && dataGridView4.SelectedRows.Count > 0)
+            {
+                button17.PerformClick();
+            }
         }
     }
 }
