@@ -444,7 +444,7 @@ namespace ALBAITAR_Softvet
             // 
             // button22
             // 
-            this.button22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button22.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
             this.button22.FlatAppearance.BorderSize = 2;
@@ -454,7 +454,7 @@ namespace ALBAITAR_Softvet
             this.button22.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button22.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
             this.button22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button22.Location = new System.Drawing.Point(562, 447);
+            this.button22.Location = new System.Drawing.Point(318, 447);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(43, 36);
             this.button22.TabIndex = 98;
@@ -465,7 +465,7 @@ namespace ALBAITAR_Softvet
             // 
             // button24
             // 
-            this.button24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button24.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button24.FlatAppearance.BorderColor = System.Drawing.Color.Green;
             this.button24.FlatAppearance.BorderSize = 2;
@@ -475,7 +475,7 @@ namespace ALBAITAR_Softvet
             this.button24.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button24.Image = global::ALBAITAR_Softvet.Properties.Resources.Excel_In;
             this.button24.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button24.Location = new System.Drawing.Point(611, 447);
+            this.button24.Location = new System.Drawing.Point(367, 447);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(43, 36);
             this.button24.TabIndex = 97;
@@ -949,11 +949,11 @@ namespace ALBAITAR_Softvet
             this.button31.ForeColor = System.Drawing.Color.SteelBlue;
             this.button31.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_ball_point_pen_25px;
             this.button31.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button31.Location = new System.Drawing.Point(371, 447);
+            this.button31.Location = new System.Drawing.Point(780, 440);
             this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(185, 36);
+            this.button31.Size = new System.Drawing.Size(145, 45);
             this.button31.TabIndex = 102;
-            this.button31.Text = "Compte Rendu de Visite";
+            this.button31.Text = "Ecrire un compte \r\nrendu de visite";
             this.button31.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
@@ -969,9 +969,9 @@ namespace ALBAITAR_Softvet
             this.groupBox1.Controls.Add(this.dateTimePicker4);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.comboBox5);
-            this.groupBox1.Location = new System.Drawing.Point(660, 70);
+            this.groupBox1.Location = new System.Drawing.Point(646, 34);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(265, 377);
+            this.groupBox1.Size = new System.Drawing.Size(279, 350);
             this.groupBox1.TabIndex = 101;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Modifier :";
@@ -983,7 +983,7 @@ namespace ALBAITAR_Softvet
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label18.Location = new System.Drawing.Point(83, 345);
+            this.label18.Location = new System.Drawing.Point(83, 318);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(80, 16);
             this.label18.TabIndex = 74;
@@ -1003,9 +1003,9 @@ namespace ALBAITAR_Softvet
             this.button30.ForeColor = System.Drawing.Color.Teal;
             this.button30.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_save_close_25px;
             this.button30.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button30.Location = new System.Drawing.Point(6, 335);
+            this.button30.Location = new System.Drawing.Point(6, 308);
             this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(253, 36);
+            this.button30.Size = new System.Drawing.Size(267, 36);
             this.button30.TabIndex = 73;
             this.button30.Text = "Enregistrer";
             this.button30.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1041,7 +1041,7 @@ namespace ALBAITAR_Softvet
             this.richTextBox1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(6, 120);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(253, 209);
+            this.richTextBox1.Size = new System.Drawing.Size(267, 182);
             this.richTextBox1.TabIndex = 69;
             this.richTextBox1.Text = "";
             // 
@@ -1076,7 +1076,7 @@ namespace ALBAITAR_Softvet
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Location = new System.Drawing.Point(11, 69);
             this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(248, 24);
+            this.comboBox5.Size = new System.Drawing.Size(262, 24);
             this.comboBox5.TabIndex = 68;
             // 
             // button28
@@ -1091,9 +1091,9 @@ namespace ALBAITAR_Softvet
             this.button28.ForeColor = System.Drawing.Color.MediumVioletRed;
             this.button28.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_treatment_25px;
             this.button28.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button28.Location = new System.Drawing.Point(238, 447);
+            this.button28.Location = new System.Drawing.Point(646, 440);
             this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(127, 36);
+            this.button28.Size = new System.Drawing.Size(128, 45);
             this.button28.TabIndex = 100;
             this.button28.Text = "Ordonnance";
             this.button28.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1103,7 +1103,7 @@ namespace ALBAITAR_Softvet
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(349, 11);
+            this.label10.Location = new System.Drawing.Point(335, 13);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(75, 16);
             this.label10.TabIndex = 99;
@@ -1113,7 +1113,7 @@ namespace ALBAITAR_Softvet
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(430, 8);
+            this.textBox1.Location = new System.Drawing.Point(416, 10);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(224, 21);
             this.textBox1.TabIndex = 68;
@@ -1192,7 +1192,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(647, 407);
+            this.dataGridView2.Size = new System.Drawing.Size(633, 407);
             this.dataGridView2.TabIndex = 58;
             this.dataGridView2.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDoubleClick);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);

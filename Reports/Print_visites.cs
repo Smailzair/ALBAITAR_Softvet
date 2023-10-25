@@ -126,7 +126,7 @@ namespace ALBAITAR_Softvet
         }
         private void load_report()
         {
-            vistes_infos = PreConnection.Load_data("SELECT tb1.*,tb2.NME AS ANIM_NME,tb2.CLIENT_ID,tb2.NUM_IDENTIF,tb2.SEXE,tb2.ESPECE,tb2.RACE,(SELECT AI.POIDS FROM tb_poids AI WHERE AI.ANIM_ID = tb1.ANIM_ID AND AI.DATETIME < tb1.DATETIME ORDER  AND AI.POIDS > 0 BY AI.DATETIME DESC LIMIT 1) AS POIDS FROM tb_visites tb1 LEFT JOIN tb_animaux tb2 ON tb1.ANIM_ID = tb2.ID" + (groupBox1.Enabled ? (" WHERE DATETIME >= '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND DATETIME <= '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59'") : "") + " ORDER BY DATETIME ASC;");
+            vistes_infos = PreConnection.Load_data("SELECT tb1.*,tb2.NME AS ANIM_NME,tb2.CLIENT_ID,tb2.NUM_IDENTIF,tb2.SEXE,tb2.ESPECE,tb2.RACE,(SELECT AI.POIDS FROM tb_poids AI WHERE AI.ANIM_ID = tb1.ANIM_ID AND AI.DATETIME < tb1.DATETIME AND AI.POIDS > 0 ORDER BY AI.DATETIME DESC LIMIT 1) AS POIDS FROM tb_visites tb1 LEFT JOIN tb_animaux tb2 ON tb1.ANIM_ID = tb2.ID" + (groupBox1.Enabled ? (" WHERE DATETIME >= '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND DATETIME <= '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59'") : "") + " ORDER BY DATETIME ASC;");
             ReportParameterCollection reportParameters = new ReportParameterCollection();
             DataTable filtred_data = new DataTable();
             //-----------

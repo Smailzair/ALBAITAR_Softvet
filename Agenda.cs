@@ -362,12 +362,16 @@ namespace ALBAITAR_Softvet.Resources
                     mnth.ForEach(AA =>
                     {
                         DataRow cllt = clients.Rows.Cast<DataRow>().Where(h => h["ID"].ToString() == AA).FirstOrDefault();
-                        if (cllt[0] != null)
+                        if(cllt != null)
                         {
-                            ListViewItem dd = new ListViewItem(string.Concat(cllt["FAMNME"].ToString(), " ", cllt["NME"].ToString()));
-                            dd.SubItems.Add(cllt["ID"].ToString());
-                            listView_Clients.Items.Add(dd);
+                            if (cllt[0] != null)
+                            {
+                                ListViewItem dd = new ListViewItem(string.Concat(cllt["FAMNME"].ToString(), " ", cllt["NME"].ToString()));
+                                dd.SubItems.Add(cllt["ID"].ToString());
+                                listView_Clients.Items.Add(dd);
+                            }
                         }
+                        
 
                     });
                     label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires (", listView_Clients.Items.Count, "):") : "Propriétaires :";

@@ -209,9 +209,9 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(675, 36);
+            this.checkBox1.Location = new System.Drawing.Point(669, 36);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(112, 20);
+            this.checkBox1.Size = new System.Drawing.Size(121, 20);
             this.checkBox1.TabIndex = 15;
             this.checkBox1.Text = "Date de rapport :";
             this.checkBox1.UseVisualStyleBackColor = true;
