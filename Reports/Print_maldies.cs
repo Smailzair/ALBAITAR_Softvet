@@ -118,7 +118,44 @@ namespace ALBAITAR_Softvet
 
         private void Print_report_Load(object sender, EventArgs e)
         {
-
+           Main_Frm.Main_Frm_animals_tbl = PreConnection.Load_data("SELECT  " +
+"    tb1.*,  " +
+"    tb2.CLIENT_FULL_NME,  " +
+"    tb4.MALAD_NME,  " +
+"    tb4.LAST_MALAD_DATE  " +
+"FROM  " +
+"    tb_animaux tb1  " +
+"LEFT JOIN  " +
+"    (SELECT  " +
+"        ID,  " +
+"        CONCAT(FAMNME,' ',NME) AS CLIENT_FULL_NME  " +
+"     FROM  " +
+"        tb_clients) tb2  " +
+"ON  " +
+"    tb1.CLIENT_ID = tb2.ID  " +
+"LEFT JOIN  " +
+"    (SELECT  " +
+"        tb_maladies.ANIM_ID,  " +
+"        tb_maladies.START_DATE AS LAST_MALAD_DATE,  " +
+"        tb_maladies.MALAD_NME  " +
+"     FROM  " +
+"        tb_maladies  " +
+"     JOIN  " +
+"        (SELECT  " +
+"            ANIM_ID,  " +
+"            MAX(START_DATE) AS max_start_date  " +
+"         FROM  " +
+"            tb_maladies  " +
+"         WHERE  " +
+"            (START_DATE <= current_timestamp() OR START_DATE IS NULL)  " +
+"            AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL)  " +
+"         GROUP BY  " +
+"            ANIM_ID) tb3  " +
+"     ON  " +
+"        tb_maladies.ANIM_ID = tb3.ANIM_ID  " +
+"        AND tb_maladies.START_DATE = tb3.max_start_date) tb4  " +
+"ON  " +
+"    tb4.ANIM_ID = tb1.ID; ");
             //----------------
             comboBox1.DataSource = Main_Frm.Main_Frm_animals_tbl;
             comboBox1.DisplayMember = "NME";
@@ -489,11 +526,6 @@ namespace ALBAITAR_Softvet
             }
             load_report();
         }
-
-        private void comboBox6_MouseDown(object sender, MouseEventArgs e)
-        {
-        }
-
         private void comboBox6_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)

@@ -322,7 +322,6 @@
             this.comboBox6.TabIndex = 35;
             this.comboBox6.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox6_KeyDown);
             this.comboBox6.Leave += new System.EventHandler(this.comboBox6_Leave);
-            this.comboBox6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.comboBox6_MouseDown);
             // 
             // Print_maldies
             // 

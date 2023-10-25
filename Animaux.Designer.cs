@@ -1082,7 +1082,7 @@
             this.Poid_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Poid_Panel.Location = new System.Drawing.Point(3, 3);
             this.Poid_Panel.Name = "Poid_Panel";
-            this.Poid_Panel.Size = new System.Drawing.Size(550, 550);
+            this.Poid_Panel.Size = new System.Drawing.Size(550, 547);
             this.Poid_Panel.TabIndex = 2;
             this.Poid_Panel.Visible = false;
             // 
@@ -1140,12 +1140,13 @@
             this.dataGridView3.Location = new System.Drawing.Point(3, 4);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.Size = new System.Drawing.Size(544, 541);
+            this.dataGridView3.Size = new System.Drawing.Size(544, 538);
             this.dataGridView3.TabIndex = 0;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
             this.dataGridView3.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView3_CellFormatting);
             this.dataGridView3.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellValueChanged);
             this.dataGridView3.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView3_DataError);
+            this.dataGridView3.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView3_RowPostPaint);
             this.dataGridView3.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridView3_Scroll);
             // 
             // IDD

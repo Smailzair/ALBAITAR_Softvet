@@ -773,28 +773,15 @@ namespace ALBAITAR_Softvet
             if (comboBox1.SelectedIndex == 0) //CLIENT
             {
                 bool rb8 = radioButton8.Checked;
-                int cb2_idx = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : 0) : 0;
-                comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
                 //---------------
                 comboBox2.DataSource = Main_Frm_clients_tbl;
                 comboBox2.ValueMember = "ID";
                 comboBox2.DisplayMember = "FULL_NME";
                 //--------------------
-                if (cb2_idx > 0)
-                {
-                    try { comboBox2.SelectedValue = cb2_idx; } catch { if (comboBox2.Items.Count > 0) { comboBox2.SelectedIndex = 0; } }
-                }
-                else
-                {
-                    if (comboBox2.Items.Count > 0) { comboBox2.SelectedIndex = 0; }
-                }
-                //--------------
-                comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
                 //--------
                 if (rb8)
                 {
                     if (!radioButton8.Checked) { radioButton8.CheckedChanged -= radioButton8_CheckedChanged; radioButton8.Checked = true; radioButton8.CheckedChanged += radioButton8_CheckedChanged; }
-                    comboBox2_SelectedIndexChanged(null, null);
                 }
                 else
                 {
@@ -845,7 +832,6 @@ namespace ALBAITAR_Softvet
                 }
 
             }
-            comboBox2_SelectedIndexChanged(null, null);
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -1912,7 +1898,7 @@ namespace ALBAITAR_Softvet
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
-            string fltr = radioButton8.Checked && comboBox2.SelectedValue != DBNull.Value ? "CLIENT_ID = " + comboBox2.SelectedValue.ToString() : "";
+            string fltr = radioButton8.Checked && comboBox2.SelectedIndex >= 0 /*!= DBNull.Value*/ ? "CLIENT_ID = " + comboBox2.SelectedValue.ToString() : "";
             fltr += string.Format(textBox5.Text.Trim().Length > 0 ? (fltr.Length > 0 ? " AND " : "") + "("
                 + "CLIENT_FULL_NME LIKE '%{0}%'"
                 + " OR CONVERT(DATE, 'System.String') LIKE '%{0}%'"

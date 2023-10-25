@@ -39,13 +39,12 @@ namespace ALBAITAR_Softvet.Resources
         AutoCompleteStringCollection malad_lst;
         int prev_rw_idx = -1;
         int prev_col_idx = -1;
+        int prev_rw_idx_dgv3 = -1;
+        int prev_col_idx_dgv3 = -1;
         string last_selected_column = "START_DATE_MALAD";
 
-        //string prev_cbx8_val = "";
-        //int prev_cb8_rww = -1;
 
         DateTime prev_dt6_val = DateTime.Now;
-        //DateTime prev_dt6_val2 = new DateTime(1999, 12, 12);
         int prev_dt6_rww = -1;
         int prev_dt6_coll = -1;
         //----------
@@ -809,7 +808,7 @@ checkBox1.Checked,
             comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
             comboBox4.SelectedIndexChanged -= comboBox4_SelectedIndexChanged;
             comboBox3.Text = "--";
-            foreach (Control ctrl in tabPage1.Controls)
+            foreach (Control ctrl in Infos_Panel.Controls)// tabPage1.Controls)
             {
                 if (ctrl.GetType() == typeof(TextBox) || ctrl.GetType() == typeof(MaskedTextBox))
                 {
@@ -1662,34 +1661,34 @@ richTextBox1.Text
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            prev_rw_idx = dataGridView3.CurrentCell.RowIndex;
-            prev_col_idx = dataGridView3.CurrentCell.ColumnIndex;
-            if (prev_col_idx == dataGridView3.Columns["DATETIMEE"].Index)
+            prev_rw_idx_dgv3 = dataGridView3.CurrentCell.RowIndex;
+            prev_col_idx_dgv3 = dataGridView3.CurrentCell.ColumnIndex;
+            if (prev_col_idx_dgv3 == dataGridView3.Columns["DATETIMEE"].Index)
             {
-                dateTimePicker5.Value = dataGridView3.Rows[prev_rw_idx].Cells["DATETIMEE"].Value != DBNull.Value ? DateTime.Parse(dataGridView3.Rows[prev_rw_idx].Cells["DATETIMEE"].Value.ToString()) : DateTime.Now;
+                dateTimePicker5.Value = dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value != DBNull.Value ? DateTime.Parse(dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value.ToString()) : DateTime.Now;
                 dataGridView3.CurrentCell.Style.Padding = new Padding(0);
                 dateTimePicker5.Visible = true;
-                dateTimePicker5.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + dataGridView3.Location.Y);
-                dateTimePicker5.Size = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
+                dateTimePicker5.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.Y + dataGridView3.Location.Y);
+                dateTimePicker5.Size = dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Size;
                 dateTimePicker5.Focus();
             }
-            else if (prev_col_idx == dataGridView3.Columns["POIDS"].Index)
+            else if (prev_col_idx_dgv3 == dataGridView3.Columns["POIDS"].Index)
             {
                 decimal fff = 0;
-                if (dataGridView3.Rows[prev_rw_idx].Cells[prev_col_idx].Value != null) { decimal.TryParse(dataGridView3.Rows[prev_rw_idx].Cells[prev_col_idx].Value.ToString(), out fff); }
+                if (dataGridView3.Rows[prev_rw_idx_dgv3].Cells[prev_col_idx_dgv3].Value != null) { decimal.TryParse(dataGridView3.Rows[prev_rw_idx_dgv3].Cells[prev_col_idx_dgv3].Value.ToString(), out fff); }
                 numericUpDown1.Value = fff;
                 dataGridView3.CurrentCell.Style.Padding = new Padding(0);
                 numericUpDown1.Visible = true;
-                numericUpDown1.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + dataGridView3.Location.Y);
-                numericUpDown1.Size = dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Size;
+                numericUpDown1.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.Y + dataGridView3.Location.Y);
+                numericUpDown1.Size = dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Size;
                 numericUpDown1.Focus();
                 numericUpDown1.Select(0, fff.ToString("N2").Length);
             }
-            else if (prev_col_idx == dataGridView3.Columns["DELETE"].Index && prev_rw_idx != dataGridView3.NewRowIndex)
+            else if (prev_col_idx_dgv3 == dataGridView3.Columns["DELETE"].Index && prev_rw_idx_dgv3 != dataGridView3.NewRowIndex)
             {
                 if (MessageBox.Show("Êtes-vous sûrs de faire la suppression ?", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    PreConnection.Excut_Cmd(3, "tb_poids", null, null, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView3.Rows[prev_rw_idx].Cells["IDD"].Value });
+                    PreConnection.Excut_Cmd(3, "tb_poids", null, null, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView3.Rows[prev_rw_idx_dgv3].Cells["IDD"].Value });
                     poids_tbl = PreConnection.Load_data("SELECT * FROM tb_poids ORDER BY DATETIME ASC;");
                     load_poids();
                     dateTimePicker5.Visible = numericUpDown1.Visible = false;
@@ -1713,7 +1712,7 @@ richTextBox1.Text
                 }
                 else //INSERT
                 {
-                    if (dataGridView3.Columns[e.ColumnIndex].Name == "DATETIMEE" && dataGridView3.Rows[e.RowIndex].Cells["DATETIMEE"].Value != DBNull.Value)
+                    if (dataGridView3.Columns[e.ColumnIndex].Name == "DATETIMEE" && dataGridView3.Rows[e.RowIndex].Cells["DATETIMEE"].Value != null && dataGridView3.Rows[e.RowIndex].Cells["DATETIMEE"].Value != DBNull.Value)
                     {
                         if (dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value != DBNull.Value)
                         {
@@ -1726,7 +1725,7 @@ richTextBox1.Text
                         }
 
                     }
-                    else if (dataGridView3.Columns[e.ColumnIndex].Name == "POIDS" && dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value != DBNull.Value)
+                    else if (dataGridView3.Columns[e.ColumnIndex].Name == "POIDS" && dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value  != null && dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value != DBNull.Value)
                     {
                         if ((decimal)dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value > 0)
                         {
@@ -1758,16 +1757,15 @@ richTextBox1.Text
 
         private void dataGridView3_Scroll(object sender, ScrollEventArgs e)
         {
-            if (prev_col_idx == dataGridView3.Columns["DATETIMEE"].Index)
+            if (prev_col_idx_dgv3 == dataGridView3.Columns["DATETIMEE"].Index)
             {
-                //dateTimePicker5.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + 2, dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + 4);
-                dateTimePicker5.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + dataGridView3.Location.Y);
-                dateTimePicker5.Visible = prev_rw_idx >= dataGridView3.FirstDisplayedScrollingRowIndex && prev_rw_idx < (dataGridView3.FirstDisplayedScrollingRowIndex + dataGridView3.DisplayedRowCount(false));
+                dateTimePicker5.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.Y + dataGridView3.Location.Y);
+                dateTimePicker5.Visible = prev_rw_idx_dgv3 >= dataGridView3.FirstDisplayedScrollingRowIndex && prev_rw_idx_dgv3 < (dataGridView3.FirstDisplayedScrollingRowIndex + dataGridView3.DisplayedRowCount(false));
             }
-            else if (prev_col_idx == dataGridView3.Columns["POIDS"].Index && dataGridView3.CurrentCell.ColumnIndex == prev_col_idx)
+            else if (prev_col_idx_dgv3 == dataGridView3.Columns["POIDS"].Index && dataGridView3.CurrentCell.ColumnIndex == prev_col_idx_dgv3)
             {
-                numericUpDown1.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + dataGridView3.Location.Y);
-                numericUpDown1.Visible = prev_rw_idx >= dataGridView3.FirstDisplayedScrollingRowIndex && prev_rw_idx < (dataGridView3.FirstDisplayedScrollingRowIndex + dataGridView3.DisplayedRowCount(false));
+                numericUpDown1.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.Y + dataGridView3.Location.Y);
+                numericUpDown1.Visible = prev_rw_idx_dgv3 >= dataGridView3.FirstDisplayedScrollingRowIndex && prev_rw_idx_dgv3 < (dataGridView3.FirstDisplayedScrollingRowIndex + dataGridView3.DisplayedRowCount(false));
             }
         }
 
@@ -1998,18 +1996,18 @@ richTextBox1.Text
 
         private void numericUpDown1_Leave(object sender, EventArgs e)
         {
-            if (prev_col_idx > -1 && prev_rw_idx > -1)
+            if (prev_col_idx_dgv3 > -1 && prev_rw_idx_dgv3 > -1)
             {
-                dataGridView3.Rows[prev_rw_idx].Cells[prev_col_idx].Value = numericUpDown1.Value;
+                dataGridView3.Rows[prev_rw_idx_dgv3].Cells[prev_col_idx_dgv3].Value = numericUpDown1.Value;
             }
             numericUpDown1.Visible = false;
         }
 
         private void dateTimePicker5_Leave(object sender, EventArgs e)
         {
-            if (prev_col_idx > -1 && prev_rw_idx > -1)
+            if (prev_col_idx_dgv3 > -1 && prev_rw_idx_dgv3 > -1)
             {
-                dataGridView3.Rows[prev_rw_idx].Cells[prev_col_idx].Value = dateTimePicker5.Value;
+                dataGridView3.Rows[prev_rw_idx_dgv3].Cells[prev_col_idx_dgv3].Value = dateTimePicker5.Value;
             }
             dateTimePicker5.Visible = false;
         }
@@ -2257,6 +2255,14 @@ richTextBox1.Text
         private void button18_Click(object sender, EventArgs e)
         {
             new Print_maldies(1, (int)dataGridView1.SelectedRows[0].Cells["ID"].Value,label25.Text != "- Tous -" ? label25.Text : "",label26.Text,label27.Text == "Oui").ShowDialog();
+        }
+
+        private void dataGridView3_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            string vv = dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value != null && dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value != DBNull.Value ? dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value.ToString() : "";
+            decimal dd = 0;
+            decimal.TryParse(vv, out dd);
+            dataGridView3.Rows[e.RowIndex].DefaultCellStyle.BackColor = e.RowIndex != dataGridView3.NewRowIndex && dd == 0 ? Color.Yellow : SystemColors.Window;
         }
     }
 }
