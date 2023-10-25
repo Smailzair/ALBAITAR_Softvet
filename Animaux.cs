@@ -2256,7 +2256,7 @@ richTextBox1.Text
 
         private void button18_Click(object sender, EventArgs e)
         {
-            new Print_maldies(1, (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ShowDialog();
+            new Print_maldies(1, (int)dataGridView1.SelectedRows[0].Cells["ID"].Value,label25.Text != "- Tous -" ? label25.Text : "",label26.Text,label27.Text == "Oui").ShowDialog();
         }
     }
 }

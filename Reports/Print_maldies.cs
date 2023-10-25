@@ -15,13 +15,72 @@ namespace ALBAITAR_Softvet
         DataTable maladies_infos;
         int IDDx = -1;
         bool is_anim = true;
-        public Print_maldies(int Anim_1_Or_Prop_2, int ID)
+        string malade_nme = "";
+        string malade_level = "";
+        bool actually_malad = false;
+        AutoCompleteStringCollection malad_lst;
+        string[] default_maladies;
+        public Print_maldies(int Anim_1_Or_Prop_2, int ID, string malad_nme, string malad_level, bool just_actually_malad)
         {
             InitializeComponent();
             //-------------------
             IDDx = ID;
             is_anim = Anim_1_Or_Prop_2 == 1;
+            malade_nme = malad_nme;
+            malade_level = malad_level;
+            actually_malad = just_actually_malad;
             //---------------------
+            default_maladies = new string[] {
+                "- Tous -",
+                "Anémie infectieuse des équidés",
+                "Avortement enzootique des brebis",
+                "Bronchite infectieuse aviaire",
+                "Brucellose dans les espèces bovine, ovine, caprine",
+                "Bursite infectieuse (Gomboro)",
+                "Campylobactériose génitale bovine",
+                "Charbon Symptomatique",
+                "Choléra aviaire",
+                "Clavelée et Variole caprine",
+                "Cysticercose",
+                "Dourine",
+                "Echinococcose/Hydatidose",
+                "Encéphalopathie spongiforme des bovins",
+                "Fièvre Aphteuse",
+                "Fièvre catarrhale du mouton",
+                "Fièvre charbonneuse chez toutes les espèces mammifères",
+                "Fièvre de la vallée du Rift",
+                "Fièvre Q",
+                "Gale des équidés",
+                "Leishmaniose",
+                "Leptospirose bovine",
+                "Leucose bovine enzootique",
+                "Leucoses aviaires",
+                "Loque, la Nosémose et l’acariose des abeilles",
+                "Marek",
+                "New-castle",
+                "Maladie hémorragique virale du lapin",
+                "Métrite contagieuse équine",
+                "Morve",
+                "Myxomatose",
+                "Ornithose/Psittacoses",
+                "Paratuberculose",
+                "Péripneumonie contagieuse bovine",
+                "Peste aviaire",
+                "Peste Bovine",
+                "Peste des petits ruminants",
+                "peste Équine",
+                "Rage",
+                "Rhinotrachéite infectieuse bovine",
+                "Salmonelloses aviaires à Salmonella : pullorum-gallinarum",
+                "Trichomonose bovine",
+                "Trypanosomose des camelins à Tevansi (surra)",
+                "Tuberculose bovine",
+                "Tularémie",
+                "Variole aviaire",
+                "Variole cameline",
+                "Varoise des abeilles"
+            };
+            //-------------------------
             dateTimePicker1.ValueChanged -= dateTimePicker1_ValueChanged;
             dateTimePicker2.ValueChanged -= dateTimePicker2_ValueChanged;
             dateTimePicker3.ValueChanged -= dateTimePicker3_ValueChanged;
@@ -29,7 +88,16 @@ namespace ALBAITAR_Softvet
             radioButton2.CheckedChanged -= radioButton2_CheckedChanged;
             comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
             comboBox2.SelectedIndexChanged -= comboBox2_SelectedIndexChanged;
+            comboBox7.SelectedIndexChanged -= comboBox7_SelectedIndexChanged;
+            radioButton4.CheckedChanged -= radioButton4_CheckedChanged;
+            radioButton3.CheckedChanged -= radioButton4_CheckedChanged;
+            comboBox6.Leave -= comboBox6_Leave;
             //-----------------------
+            comboBox6.DataSource = default_maladies;
+            comboBox6.Text = "- Tous -";
+            comboBox7.SelectedIndex = 0;
+            if (just_actually_malad) { radioButton4.Checked = true; } else { radioButton3.Checked = true; }
+            //-----------------
             dateTimePicker1.Value = DateTime.Now.AddMonths(-1);
             dateTimePicker2.MinDate = dateTimePicker1.Value;
             dateTimePicker3.MinDate = dateTimePicker2.Value;
@@ -84,12 +152,21 @@ namespace ALBAITAR_Softvet
             radioButton2.CheckedChanged += radioButton2_CheckedChanged;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            comboBox7.SelectedIndexChanged += comboBox7_SelectedIndexChanged;
+            comboBox6.Leave += comboBox6_Leave;
+            radioButton4.CheckedChanged += radioButton4_CheckedChanged;
+            radioButton3.CheckedChanged += radioButton4_CheckedChanged;
 
         }
         private void load_report()
         {
             // vistes_infos = PreConnection.Load_data("SELECT tb1.*,tb2.NME AS ANIM_NME,tb2.CLIENT_ID,tb2.NUM_IDENTIF,tb2.SEXE,tb2.ESPECE,tb2.RACE,(SELECT AI.POIDS FROM tb_poids AI WHERE AI.ANIM_ID = tb1.ANIM_ID AND AI.DATETIME < tb1.DATETIME ORDER BY AI.DATETIME DESC LIMIT 1) AS POIDS FROM tb_visites tb1 LEFT JOIN tb_animaux tb2 ON tb1.ANIM_ID = tb2.ID" + (groupBox1.Enabled ? (" WHERE DATETIME >= '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND DATETIME <= '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59'") : "") + " ORDER BY DATETIME ASC;");
-            maladies_infos = PreConnection.Load_data("SELECT tb1.*,tb2.NME AS ANIM_NME,tb2.CLIENT_ID,tb2.NUM_IDENTIF,tb2.SEXE,tb2.ESPECE,tb2.RACE,(SELECT AI.POIDS FROM tb_poids AI WHERE AI.ANIM_ID = tb1.ANIM_ID AND IF(tb1.ESTIM_END_DATE IS NOT NULL,AI.DATETIME <= tb1.ESTIM_END_DATE,AI.DATETIME <= tb1.START_DATE) AND AI.POIDS > 0 ORDER BY AI.DATETIME DESC LIMIT 1) AS POIDS FROM tb_maladies tb1 LEFT JOIN tb_animaux tb2 ON tb1.ANIM_ID = tb2.ID" + (groupBox1.Enabled ? " WHERE (('" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' BETWEEN START_DATE AND ESTIM_END_DATE) OR ('" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59' BETWEEN START_DATE AND ESTIM_END_DATE) OR (START_DATE BETWEEN '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59'))" : "") + " ORDER BY START_DATE ASC;");
+            maladies_infos = PreConnection.Load_data("SELECT tb1.*,tb2.NME AS ANIM_NME,tb2.CLIENT_ID,tb2.NUM_IDENTIF,tb2.SEXE,tb2.ESPECE,tb2.RACE,(SELECT AI.POIDS FROM tb_poids AI WHERE AI.ANIM_ID = tb1.ANIM_ID AND IF(tb1.ESTIM_END_DATE IS NOT NULL,AI.DATETIME <= tb1.ESTIM_END_DATE,AI.DATETIME <= tb1.START_DATE) AND AI.POIDS > 0 ORDER BY AI.DATETIME DESC LIMIT 1) AS POIDS FROM tb_maladies tb1 LEFT JOIN tb_animaux tb2 ON tb1.ANIM_ID = tb2.ID" +
+                (groupBox1.Enabled ? " WHERE (('" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' BETWEEN START_DATE AND ESTIM_END_DATE) OR ('" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59' BETWEEN START_DATE AND ESTIM_END_DATE) OR (START_DATE BETWEEN '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59') OR (ESTIM_END_DATE BETWEEN '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59'))" : "") +
+                (!string.IsNullOrWhiteSpace(comboBox6.Text) && comboBox6.Text.Trim() != "- Tous -" ? ((groupBox1.Enabled ? " AND " : " WHERE ") + "MALAD_NME LIKE '%" + comboBox6.Text + "%'") : "") +
+                (comboBox7.SelectedIndex > 0 ? ((groupBox1.Enabled || (!string.IsNullOrWhiteSpace(comboBox6.Text) && comboBox6.Text.Trim() != "- Tous -") ? " AND " : " WHERE ") + "MALAD_LEVEL LIKE '%" + comboBox7.Text + "%'") : "") +
+                (radioButton4.Checked ? ((groupBox1.Enabled || (!string.IsNullOrWhiteSpace(comboBox6.Text) && comboBox6.Text.Trim() != "- Tous -") || comboBox7.SelectedIndex > 0 ? " AND " : " WHERE ") + "(START_DATE <= CURRENT_DATE OR START_DATE IS NULL) AND (ESTIM_END_DATE >= CURRENT_DATE OR ESTIM_END_DATE IS NULL)") : "") +
+                " ORDER BY START_DATE ASC;");
             ReportParameterCollection reportParameters = new ReportParameterCollection();
             DataTable filtred_data = new DataTable();
             //-----------
@@ -108,9 +185,6 @@ namespace ALBAITAR_Softvet
             {
                 if (maladies_infos.Rows.Count > 0)
                 {
-
-
-
                     if (radioButton1.Checked) //par animal
                     {
                         var ggg = maladies_infos.AsEnumerable().Where(W => W.Field<int?>("ANIM_ID") == (comboBox1.SelectedValue != null && comboBox1.SelectedValue != DBNull.Value ? (int)comboBox1.SelectedValue : -1));
@@ -130,7 +204,7 @@ namespace ALBAITAR_Softvet
                 }
             }
             //------
-            //--------------
+            //============= Load Client Infos ==========================
             int clt_int = -1;
             clt_int = filtred_data.Rows.Count > 0 ? (int)filtred_data.Rows[0]["CLIENT_ID"] : -1;
             if (clt_int == -1)
@@ -169,7 +243,7 @@ namespace ALBAITAR_Softvet
                 reportParameters.Add(new ReportParameter("CLIENT_NUM_PHONE", ""));
                 reportParameters.Add(new ReportParameter("CLIENT_EMAIL", ""));
             }
-            //------------
+            //===================================================================
             reportViewer1.LocalReport.DataSources.Clear();
             reportViewer1.LocalReport.ReportEmbeddedResource = null;
             reportViewer1.LocalReport.ReportEmbeddedResource = "ALBAITAR_Softvet.Reports.maladie_report.rdlc";
@@ -392,6 +466,40 @@ namespace ALBAITAR_Softvet
         {
             groupBox1.Enabled = checkBox2.Checked;
             load_report();
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((RadioButton)sender).Checked)
+            {
+                load_report();
+            }
+        }
+
+        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            load_report();
+        }
+
+        private void comboBox6_Leave(object sender, EventArgs e)
+        {
+            if (!malad_lst.Contains(comboBox6.Text))
+            {
+                malad_lst.Add(comboBox6.Text);
+            }
+            load_report();
+        }
+
+        private void comboBox6_MouseDown(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void comboBox6_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                load_report();
+            }
         }
     }
 }
