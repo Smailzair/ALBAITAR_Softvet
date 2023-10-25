@@ -7,16 +7,15 @@ using System.Linq;
 using System.Windows.Forms;
 using word = Microsoft.Office.Interop.Word;
 using Excel = Microsoft.Office.Interop.Excel.Application;
-using System.Diagnostics;
 
 namespace ALBAITAR_Softvet
 {
-    public partial class Print_visites : Form
+    public partial class Print_maldies : Form
     {
-        System.Data.DataTable vistes_infos;
+        DataTable maladies_infos;
         int IDDx = -1;
         bool is_anim = true;
-        public Print_visites(int Anim_1_Or_Prop_2, int ID)
+        public Print_maldies(int Anim_1_Or_Prop_2, int ID)
         {
             InitializeComponent();
             //-------------------
@@ -89,7 +88,8 @@ namespace ALBAITAR_Softvet
         }
         private void load_report()
         {
-            vistes_infos = PreConnection.Load_data("SELECT tb1.*,tb2.NME AS ANIM_NME,tb2.CLIENT_ID,tb2.NUM_IDENTIF,tb2.SEXE,tb2.ESPECE,tb2.RACE,(SELECT AI.POIDS FROM tb_poids AI WHERE AI.ANIM_ID = tb1.ANIM_ID AND AI.DATETIME < tb1.DATETIME ORDER  AND AI.POIDS > 0 BY AI.DATETIME DESC LIMIT 1) AS POIDS FROM tb_visites tb1 LEFT JOIN tb_animaux tb2 ON tb1.ANIM_ID = tb2.ID" + (groupBox1.Enabled ? (" WHERE DATETIME >= '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND DATETIME <= '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59'") : "") + " ORDER BY DATETIME ASC;");
+            // vistes_infos = PreConnection.Load_data("SELECT tb1.*,tb2.NME AS ANIM_NME,tb2.CLIENT_ID,tb2.NUM_IDENTIF,tb2.SEXE,tb2.ESPECE,tb2.RACE,(SELECT AI.POIDS FROM tb_poids AI WHERE AI.ANIM_ID = tb1.ANIM_ID AND AI.DATETIME < tb1.DATETIME ORDER BY AI.DATETIME DESC LIMIT 1) AS POIDS FROM tb_visites tb1 LEFT JOIN tb_animaux tb2 ON tb1.ANIM_ID = tb2.ID" + (groupBox1.Enabled ? (" WHERE DATETIME >= '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND DATETIME <= '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59'") : "") + " ORDER BY DATETIME ASC;");
+            maladies_infos = PreConnection.Load_data("SELECT tb1.*,tb2.NME AS ANIM_NME,tb2.CLIENT_ID,tb2.NUM_IDENTIF,tb2.SEXE,tb2.ESPECE,tb2.RACE,(SELECT AI.POIDS FROM tb_poids AI WHERE AI.ANIM_ID = tb1.ANIM_ID AND IF(tb1.ESTIM_END_DATE IS NOT NULL,AI.DATETIME <= tb1.ESTIM_END_DATE,AI.DATETIME <= tb1.START_DATE) AND AI.POIDS > 0 ORDER BY AI.DATETIME DESC LIMIT 1) AS POIDS FROM tb_maladies tb1 LEFT JOIN tb_animaux tb2 ON tb1.ANIM_ID = tb2.ID" + (groupBox1.Enabled ? " WHERE (('" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' BETWEEN START_DATE AND ESTIM_END_DATE) OR ('" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59' BETWEEN START_DATE AND ESTIM_END_DATE) OR (START_DATE BETWEEN '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + " 00:00:00' AND '" + dateTimePicker2.Value.ToString("yyyy-MM-dd") + " 23:59:59'))" : "") + " ORDER BY START_DATE ASC;");
             ReportParameterCollection reportParameters = new ReportParameterCollection();
             DataTable filtred_data = new DataTable();
             //-----------
@@ -104,16 +104,16 @@ namespace ALBAITAR_Softvet
 
             //----------
 
-            if (vistes_infos != null)
+            if (maladies_infos != null)
             {
-                if (vistes_infos.Rows.Count > 0)
+                if (maladies_infos.Rows.Count > 0)
                 {
 
 
 
                     if (radioButton1.Checked) //par animal
                     {
-                        var ggg = vistes_infos.AsEnumerable().Where(W => W.Field<int?>("ANIM_ID") == (comboBox1.SelectedValue != null && comboBox1.SelectedValue != DBNull.Value ? (int)comboBox1.SelectedValue : -1));
+                        var ggg = maladies_infos.AsEnumerable().Where(W => W.Field<int?>("ANIM_ID") == (comboBox1.SelectedValue != null && comboBox1.SelectedValue != DBNull.Value ? (int)comboBox1.SelectedValue : -1));
                         if (ggg.Any())
                         {
                             filtred_data = ggg.CopyToDataTable();
@@ -121,7 +121,7 @@ namespace ALBAITAR_Softvet
                     }
                     else //par propr.
                     {
-                        var ggg = vistes_infos.AsEnumerable().Where(W => W.Field<int?>("CLIENT_ID") == (comboBox2.SelectedValue != null && comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : -1));
+                        var ggg = maladies_infos.AsEnumerable().Where(W => W.Field<int?>("CLIENT_ID") == (comboBox2.SelectedValue != null && comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : -1));
                         if (ggg.Any())
                         {
                             filtred_data = ggg.CopyToDataTable();
@@ -172,7 +172,7 @@ namespace ALBAITAR_Softvet
             //------------
             reportViewer1.LocalReport.DataSources.Clear();
             reportViewer1.LocalReport.ReportEmbeddedResource = null;
-            reportViewer1.LocalReport.ReportEmbeddedResource = "ALBAITAR_Softvet.Reports.visite_report.rdlc";
+            reportViewer1.LocalReport.ReportEmbeddedResource = "ALBAITAR_Softvet.Reports.maladie_report.rdlc";
             reportViewer1.LocalReport.SetParameters(reportParameters);
             reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", filtred_data));
             reportViewer1.RefreshReport();

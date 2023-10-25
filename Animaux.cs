@@ -2253,6 +2253,11 @@ richTextBox1.Text
                 MessageBox.Show("Aucune donnée");
             }
         }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            new Print_maldies(1, (int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ShowDialog();
+        }
     }
 }
 

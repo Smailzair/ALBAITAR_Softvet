@@ -465,6 +465,12 @@
     <Compile Include="Reports\Print_ordonn.Designer.cs">
       <DependentUpon>Print_ordonn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Print_maldies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Print_maldies.Designer.cs">
+      <DependentUpon>Print_maldies.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Print_visites.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -582,6 +588,14 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maladies_Report_DataSet.cs">
+      <DependentUpon>Maladies_Report_DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Maladies_Report_DataSet.Designer.cs">
+      <DependentUpon>Maladies_Report_DataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Visites_Report_DataSet.cs">
       <DependentUpon>Visites_Report_DataSet.xsd</DependentUpon>
     </Compile>
@@ -661,11 +675,15 @@
     <EmbeddedResource Include="Reports\Print_ordonn.resx">
       <DependentUpon>Print_ordonn.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Print_maldies.resx">
+      <DependentUpon>Print_maldies.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Print_visites.resx">
       <DependentUpon>Print_visites.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Ordonnance_1_in_A5.rdlc" />
     <EmbeddedResource Include="Reports\Report1.rdlc" />
+    <EmbeddedResource Include="Reports\maladie_report.rdlc" />
     <EmbeddedResource Include="Reports\visite_report.rdlc" />
     <EmbeddedResource Include="Reports\urologie.rdlc" />
     <EmbeddedResource Include="Reports\facture_vente.rdlc" />
@@ -768,6 +786,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Maladies_Report_DataSet.xsc">
+      <DependentUpon>Maladies_Report_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Maladies_Report_DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Maladies_Report_DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Maladies_Report_DataSet.xss">
+      <DependentUpon>Maladies_Report_DataSet.xsd</DependentUpon>
+    </None>
     <None Include="Visites_Report_DataSet.xsc">
       <DependentUpon>Visites_Report_DataSet.xsd</DependentUpon>
     </None>

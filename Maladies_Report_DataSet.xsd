@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Maladies_Report_DataSet" targetNamespace="http://tempuri.org/Visites_Report_DataSet.xsd" xmlns:mstns="http://tempuri.org/Visites_Report_DataSet.xsd" xmlns="http://tempuri.org/Visites_Report_DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Maladies_Report_DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="Maladies_Report_DataSet" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Maladies_Report_DataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="tbl1" msprop:Generator_RowEvHandlerName="tbl1RowChangeEventHandler" msprop:Generator_RowDeletedName="tbl1RowDeleted" msprop:Generator_RowDeletingName="tbl1RowDeleting" msprop:Generator_RowEvArgName="tbl1RowChangeEvent" msprop:Generator_TablePropName="tbl1" msprop:Generator_RowChangedName="tbl1RowChanged" msprop:Generator_RowChangingName="tbl1RowChanging" msprop:Generator_TableClassName="tbl1DataTable" msprop:Generator_RowClassName="tbl1Row" msprop:Generator_TableVarName="tabletbl1" msprop:Generator_UserTableName="tbl1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
+              <xs:element name="ANIM_ID" msprop:Generator_ColumnPropNameInRow="ANIM_ID" msprop:Generator_ColumnPropNameInTable="ANIM_IDColumn" msprop:Generator_ColumnVarNameInTable="columnANIM_ID" msprop:Generator_UserColumnName="ANIM_ID" type="xs:int" minOccurs="0" />
+              <xs:element name="START_DATE" msprop:Generator_ColumnPropNameInRow="START_DATE" msprop:Generator_ColumnPropNameInTable="START_DATEColumn" msprop:Generator_ColumnVarNameInTable="columnSTART_DATE" msprop:Generator_UserColumnName="START_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="MALAD_NME" msprop:Generator_ColumnPropNameInRow="MALAD_NME" msprop:Generator_ColumnPropNameInTable="MALAD_NMEColumn" msprop:Generator_ColumnVarNameInTable="columnMALAD_NME" msprop:Generator_UserColumnName="MALAD_NME" type="xs:string" minOccurs="0" />
+              <xs:element name="MALAD_LEVEL" msprop:Generator_ColumnPropNameInRow="MALAD_LEVEL" msprop:Generator_ColumnPropNameInTable="MALAD_LEVELColumn" msprop:Generator_ColumnVarNameInTable="columnMALAD_LEVEL" msprop:Generator_UserColumnName="MALAD_LEVEL" type="xs:string" minOccurs="0" />
+              <xs:element name="ESTIM_END_DATE" msprop:Generator_ColumnPropNameInRow="ESTIM_END_DATE" msprop:Generator_ColumnPropNameInTable="ESTIM_END_DATEColumn" msprop:Generator_ColumnVarNameInTable="columnESTIM_END_DATE" msprop:Generator_UserColumnName="ESTIM_END_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ANIM_NME" msprop:Generator_ColumnPropNameInRow="ANIM_NME" msprop:Generator_ColumnPropNameInTable="ANIM_NMEColumn" msprop:Generator_ColumnVarNameInTable="columnANIM_NME" msprop:Generator_UserColumnName="ANIM_NME" type="xs:string" minOccurs="0" />
+              <xs:element name="CLIENT_ID" msprop:Generator_ColumnPropNameInRow="CLIENT_ID" msprop:Generator_ColumnPropNameInTable="CLIENT_IDColumn" msprop:Generator_ColumnVarNameInTable="columnCLIENT_ID" msprop:Generator_UserColumnName="CLIENT_ID" type="xs:int" minOccurs="0" />
+              <xs:element name="NUM_IDENTIF" msprop:Generator_ColumnPropNameInRow="NUM_IDENTIF" msprop:Generator_ColumnPropNameInTable="NUM_IDENTIFColumn" msprop:Generator_ColumnVarNameInTable="columnNUM_IDENTIF" msprop:Generator_UserColumnName="NUM_IDENTIF" type="xs:string" minOccurs="0" />
+              <xs:element name="SEXE" msprop:Generator_ColumnPropNameInRow="SEXE" msprop:Generator_ColumnPropNameInTable="SEXEColumn" msprop:Generator_ColumnVarNameInTable="columnSEXE" msprop:Generator_UserColumnName="SEXE" type="xs:string" minOccurs="0" />
+              <xs:element name="ESPECE" msprop:Generator_ColumnPropNameInRow="ESPECE" msprop:Generator_ColumnPropNameInTable="ESPECEColumn" msprop:Generator_ColumnVarNameInTable="columnESPECE" msprop:Generator_UserColumnName="ESPECE" type="xs:string" minOccurs="0" />
+              <xs:element name="RACE" msprop:Generator_ColumnPropNameInRow="RACE" msprop:Generator_ColumnPropNameInTable="RACEColumn" msprop:Generator_ColumnVarNameInTable="columnRACE" msprop:Generator_UserColumnName="RACE" type="xs:string" minOccurs="0" />
+              <xs:element name="POIDS" msprop:Generator_ColumnPropNameInRow="POIDS" msprop:Generator_ColumnPropNameInTable="POIDSColumn" msprop:Generator_ColumnVarNameInTable="columnPOIDS" msprop:Generator_UserColumnName="POIDS" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
