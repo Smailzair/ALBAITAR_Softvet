@@ -2178,15 +2178,79 @@ richTextBox1.Text
                     PreConnection.Excut_Cmd(3, "tb_maladies", null, null, "ID IN (@W_ID)", new List<string> { "W_ID" }, new List<object> { ids });
                     Load_malad_1();
                 }
-                
+
             }
         }
 
         private void dataGridView4_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Delete && dataGridView4.SelectedRows.Count > 0)
+            if (e.KeyCode == Keys.Delete && dataGridView4.SelectedRows.Count > 0)
             {
                 button17.PerformClick();
+            }
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            if (dataGridView4.Rows.Count > 0)
+            {
+                //PreConnection.Excport_to_excel(dataGridView4, "Hist. Maladies", "Maladies", ((DataTable)dataGridView4.DataSource), false);
+
+                Excc.Application xcelApp = new Excc.Application();
+                xcelApp.Application.Workbooks.Add(Type.Missing);
+                xcelApp.Application.Workbooks[1].Title = "Hist. Maladies";
+                xcelApp.Application.Workbooks[1].Worksheets[1].Name = "Hist. Maladies";
+                dataGridView4.Columns.Cast<DataGridViewColumn>().ToList().ForEach(g =>
+                {
+                    xcelApp.Cells[1, g.Index + 1].Value = g.HeaderText;
+                    ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
+                    ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Font.Bold = true;
+                    ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
+
+                });
+                ((Excc.Range)xcelApp.Columns[3]).NumberFormat = "dd/MM/yyyy";
+                ((Excc.Range)xcelApp.Columns[6]).NumberFormat = "dd/MM/yyyy";
+
+
+
+                dataGridView4.Rows.Cast<DataGridViewRow>().ToList().ForEach(t =>
+                {
+                    t.Cells.Cast<DataGridViewCell>().ToList().ForEach(b =>
+                    {
+                        if(b.ColumnIndex == dataGridView4.Columns["START_DATE_MALAD"].Index || b.ColumnIndex == dataGridView4.Columns["ESTIM_END_DATE_MALAD"].Index)
+                        {
+                            xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView4.Rows[t.Index].Cells[b.ColumnIndex].Value != DBNull.Value ? ((DateTime)dataGridView4.Rows[t.Index].Cells[b.ColumnIndex].Value).ToString("dd/MM/yyyy") : "";
+                        }
+                        else
+                        {
+                            xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView4.Rows[t.Index].Cells[b.ColumnIndex].Value != DBNull.Value ? dataGridView4.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : "";
+                        }
+                        
+                    });
+
+                });
+
+                xcelApp.Columns[1].Delete(); //Delete ID
+                xcelApp.Columns[1].Delete(); //Keep it !! is to delete ANIM_ID
+
+                xcelApp.Columns.AutoFit();
+                //------------------
+                SaveFileDialog svd = new SaveFileDialog();
+                svd.Filter = "Excel | *.xlsx";
+                svd.DefaultExt = "*.xlsx";
+                svd.FileName = xcelApp.Application.Workbooks[1].Title + "_" + DateTime.Now.ToString("ddMMyyyy_HHmmss") + ".xlsx";
+                if (svd.ShowDialog() == DialogResult.OK)
+                {
+                    xcelApp.Workbooks[1].SaveAs(Path.GetFullPath(svd.FileName));
+                    Process.Start(Path.GetFullPath(svd.FileName));
+                }
+                xcelApp.Application.Workbooks[1].Close(false);
+                xcelApp.Quit();
+                //-------------------
+            }
+            else
+            {
+                MessageBox.Show("Aucune donnée");
             }
         }
     }

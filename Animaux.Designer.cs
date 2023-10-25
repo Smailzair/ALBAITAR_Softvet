@@ -190,6 +190,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1428,6 +1430,8 @@
             // 
             // Malad_Panel
             // 
+            this.Malad_Panel.Controls.Add(this.button18);
+            this.Malad_Panel.Controls.Add(this.button19);
             this.Malad_Panel.Controls.Add(this.button17);
             this.Malad_Panel.Controls.Add(this.pictureBox4);
             this.Malad_Panel.Controls.Add(this.button16);
@@ -1448,7 +1452,7 @@
             this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button17.FlatAppearance.BorderSize = 0;
             this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button17.Location = new System.Drawing.Point(512, 400);
+            this.button17.Location = new System.Drawing.Point(512, 401);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(26, 29);
             this.button17.TabIndex = 70;
@@ -2186,6 +2190,41 @@
             this.dataGridViewImageColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewImageColumn2.Width = 20;
             // 
+            // button18
+            // 
+            this.button18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button18.FlatAppearance.BorderSize = 0;
+            this.button18.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DodgerBlue;
+            this.button18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(206)))), ((int)(((byte)(216)))), ((int)(((byte)(240)))));
+            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button18.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.button18.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
+            this.button18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button18.Location = new System.Drawing.Point(441, 401);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(36, 29);
+            this.button18.TabIndex = 101;
+            this.button18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.button18, "Imprimer");
+            this.button18.UseVisualStyleBackColor = true;
+            // 
+            // button19
+            // 
+            this.button19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button19.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button19.BackgroundImage")));
+            this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button19.FlatAppearance.BorderSize = 0;
+            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button19.Location = new System.Drawing.Point(483, 401);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(26, 29);
+            this.button19.TabIndex = 100;
+            this.toolTip1.SetToolTip(this.button19, "Exporter en Excel");
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
             // Animaux
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -2392,5 +2431,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MALAD_NME;
         private System.Windows.Forms.DataGridViewTextBoxColumn MALAD_LEVEL;
         private System.Windows.Forms.DataGridViewTextBoxColumn ESTIM_END_DATE_MALAD;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
     }
 }
