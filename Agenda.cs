@@ -125,7 +125,7 @@ namespace ALBAITAR_Softvet.Resources
                         {
                             items_icon.Images.Add(row["ID"].ToString(), img);
                         }
-                        catch {  }
+                        catch { }
 
                     }
                     //------------------------
@@ -362,7 +362,7 @@ namespace ALBAITAR_Softvet.Resources
                     mnth.ForEach(AA =>
                     {
                         DataRow cllt = clients.Rows.Cast<DataRow>().Where(h => h["ID"].ToString() == AA).FirstOrDefault();
-                        if(cllt != null)
+                        if (cllt != null)
                         {
                             if (cllt[0] != null)
                             {
@@ -371,7 +371,7 @@ namespace ALBAITAR_Softvet.Resources
                                 listView_Clients.Items.Add(dd);
                             }
                         }
-                        
+
 
                     });
                     label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires (", listView_Clients.Items.Count, "):") : "Propriétaires :";
@@ -993,10 +993,10 @@ namespace ALBAITAR_Softvet.Resources
             {
                 string related_clients = "";
                 listView_Clients.Items.Cast<ListViewItem>().ToList().ForEach(ZZZ => { related_clients += "," + ZZZ.SubItems[1].Text; });
-                related_clients = related_clients.Replace("K,", "").Replace("K", "");
+                related_clients = related_clients.Length > 0 ? related_clients.Replace("K,", "").Replace("K", "").Substring(1) : related_clients;
                 string related_Animaux = "";
                 listView_Anim.Items.Cast<ListViewItem>().ToList().ForEach(ZZZ => { related_Animaux += "," + ZZZ.SubItems[1].Text; });
-                related_Animaux = related_Animaux.Replace("M,", "").Replace("M", "");
+                related_Animaux = related_Animaux.Length > 0 ? related_Animaux.Replace("M,", "").Replace("M", "").Substring(1) : related_Animaux;
                 //string cmmd = "";
                 if (Is_New_To_Insert) //Insert
                 {
@@ -1173,7 +1173,7 @@ namespace ALBAITAR_Softvet.Resources
             }
             else //selectionner une icon
             {
-                selected_img_idx = int.Parse(listView_Icons.SelectedItems[0].ImageKey); 
+                selected_img_idx = int.Parse(listView_Icons.SelectedItems[0].ImageKey);
                 pictureBox2.Image = items_icon.Images[listView_Icons.SelectedItems[0].Index + 1];
 
 

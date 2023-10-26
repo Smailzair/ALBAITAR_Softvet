@@ -473,6 +473,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_comments_30px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_comments_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_copy_20px_1 {
             get {
                 object obj = ResourceManager.GetObject("icons8_copy_20px_1", resourceCulture);
@@ -1066,6 +1076,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap icons8_synchronize_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_synchronize_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_syringe_30px_1 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_syringe_30px_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

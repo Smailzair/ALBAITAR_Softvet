@@ -31,6 +31,7 @@ namespace ALBAITAR_Softvet
         int selected_animal_id = -1;
         public static DataTable Main_Frm_clients_tbl;
         public static DataTable Main_Frm_animals_tbl;
+        public static DataTable Main_Frm_vaccination;
         ImageList tabcontrol_img_lst;
         Font simple_font = new Font("Century Gothic", 9, FontStyle.Regular);
         Font bold_font = new Font("Century Gothic", 10, FontStyle.Bold);

@@ -154,5 +154,10 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             e.Handled = true;
         }
+
+        private void Clients_List_For_Vaccin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

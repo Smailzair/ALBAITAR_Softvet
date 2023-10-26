@@ -1039,6 +1039,8 @@
     <None Include="Resources\0003.png" />
     <None Include="Resources\icons8_schedule_30px.png" />
     <None Include="Resources\icons8_todo_list_30px1.png" />
+    <None Include="Resources\icons8_syringe_30px_1.png" />
+    <None Include="Resources\icons8_comments_30px.png" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

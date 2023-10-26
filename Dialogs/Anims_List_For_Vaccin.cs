@@ -29,7 +29,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
             foreach (ListViewItem item in items2)
             {
-                if (item.SubItems[0].Text.ToLower().Contains(filter) || item.SubItems[2].Text.ToLower().Contains(filter) || textBox1.Text.Trim().Length == 0)
+                if (item.SubItems[0].Text.ToLower().Contains(filter) || item.SubItems[2].Text.ToLower().Contains(filter) || item.SubItems[4].Text.ToLower().Contains(filter) || textBox1.Text.Trim().Length == 0)
                 {
 
                     if (!listView1.Items.Contains(item) && !listView2.Items.Contains(item))
@@ -114,7 +114,7 @@ namespace ALBAITAR_Softvet.Dialogs
             //        cmmd += "," + x;
             //    });
             //    cmmd = cmmd.Substring(1, cmmd.Length - 1);
-            props = PreConnection.Load_data("SELECT tb1.ID,tb1.NME,tb1.CLIENT_ID,CONCAT(tb2.FAMNME, ' ', tb2.NME) AS CLIENT_FULL_NME FROM tb_animaux AS tb1 LEFT JOIN tb_clients AS tb2 ON tb1.`CLIENT_ID` = tb2.ID;");
+            props = PreConnection.Load_data("SELECT tb1.ID,tb1.NME,tb1.CLIENT_ID,CONCAT(tb2.FAMNME, ' ', tb2.NME) AS CLIENT_FULL_NME,tb1.NUM_IDENTIF FROM tb_animaux AS tb1 LEFT JOIN tb_clients AS tb2 ON tb1.`CLIENT_ID` = tb2.ID;");
             if (props != null)
             {
                 if (props.Rows.Count > 0)
@@ -125,6 +125,7 @@ namespace ALBAITAR_Softvet.Dialogs
                         dd.SubItems.Add(row["ID"].ToString());
                         dd.SubItems.Add(row["CLIENT_FULL_NME"].ToString());
                         dd.SubItems.Add(row["CLIENT_ID"].ToString());
+                        dd.SubItems.Add(row["NUM_IDENTIF"].ToString());
                         listView1.Items.Add(dd);
                         items2.Add(dd);
                     }
@@ -179,8 +180,8 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void listView1_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
         {
-            e.Graphics.FillRectangle((e.ColumnIndex == 0 ? Brushes.Peru : Brushes.SaddleBrown), e.Bounds);
-            if (e.ColumnIndex == 0 || e.ColumnIndex == 2)
+            e.Graphics.FillRectangle((e.ColumnIndex == 0 || e.ColumnIndex == 4 ? Brushes.Peru : Brushes.SaddleBrown), e.Bounds);
+            if (e.ColumnIndex == 0 || e.ColumnIndex == 2 || e.ColumnIndex == 4)
             {
                 StringFormat stringFormat = new StringFormat();
                 stringFormat.Alignment = StringAlignment.Center;
@@ -196,7 +197,7 @@ namespace ALBAITAR_Softvet.Dialogs
         private void listView1_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
             e.Graphics.FillRectangle(Brushes.WhiteSmoke, e.Bounds);
-            if (e.ColumnIndex == 0 || e.ColumnIndex == 2)
+            if (e.ColumnIndex == 0 || e.ColumnIndex == 2 || e.ColumnIndex == 4)
             {
                 StringFormat stringFormat = new StringFormat();
                 stringFormat.Alignment = StringAlignment.Near;
