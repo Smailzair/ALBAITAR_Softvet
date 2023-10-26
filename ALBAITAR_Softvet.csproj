@@ -357,11 +357,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB_TMPDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Add_Modif_Vaccin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Add_Modif_Vaccin.Designer.cs">
+      <DependentUpon>Add_Modif_Vaccin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Add_Ordonnance_Item.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\Add_Ordonnance_Item.Designer.cs">
       <DependentUpon>Add_Ordonnance_Item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Anims_List_For_Vaccin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Anims_List_For_Vaccin.Designer.cs">
+      <DependentUpon>Anims_List_For_Vaccin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Clients_List_For_Vaccin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Clients_List_For_Vaccin.Designer.cs">
+      <DependentUpon>Clients_List_For_Vaccin.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\New_Pers_Cpt_Rnd_Visit.cs">
       <SubType>Form</SubType>
@@ -476,6 +494,12 @@
     </Compile>
     <Compile Include="Reports\Print_visites.Designer.cs">
       <DependentUpon>Print_visites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vaccination.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vaccination.Designer.cs">
+      <DependentUpon>Vaccination.cs</DependentUpon>
     </Compile>
     <Compile Include="Vente.cs">
       <SubType>Form</SubType>
@@ -616,8 +640,17 @@
     <EmbeddedResource Include="Client_Infos.resx">
       <DependentUpon>Client_Infos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Add_Modif_Vaccin.resx">
+      <DependentUpon>Add_Modif_Vaccin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Add_Ordonnance_Item.resx">
       <DependentUpon>Add_Ordonnance_Item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Anims_List_For_Vaccin.resx">
+      <DependentUpon>Anims_List_For_Vaccin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Clients_List_For_Vaccin.resx">
+      <DependentUpon>Clients_List_For_Vaccin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\New_Pers_Cpt_Rnd_Visit.resx">
       <DependentUpon>New_Pers_Cpt_Rnd_Visit.cs</DependentUpon>
@@ -688,6 +721,9 @@
     <EmbeddedResource Include="Reports\urologie.rdlc" />
     <EmbeddedResource Include="Reports\facture_vente.rdlc" />
     <EmbeddedResource Include="Reports\certificat_enreg.rdlc" />
+    <EmbeddedResource Include="Vaccination.resx">
+      <DependentUpon>Vaccination.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vente.resx">
       <DependentUpon>Vente.cs</DependentUpon>
     </EmbeddedResource>
@@ -994,6 +1030,15 @@
     <None Include="Resources\Bovine.png" />
     <None Include="Resources\Chameau.png" />
     <None Include="Resources\icons8_square_full_25px_1.png" />
+    <None Include="Resources\icons8_vaccin_notif.png" />
+    <None Include="Resources\icons8_vaccin_notif2.png" />
+    <None Include="Resources\0004.png" />
+    <None Include="Resources\0005.png" />
+    <None Include="Resources\0006.png" />
+    <None Include="Resources\0007.png" />
+    <None Include="Resources\0003.png" />
+    <None Include="Resources\icons8_schedule_30px.png" />
+    <None Include="Resources\icons8_todo_list_30px1.png" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

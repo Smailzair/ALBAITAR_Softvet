@@ -1,20 +1,12 @@
-﻿using ALBAITAR_Softvet.Resources;
-using MySqlX.XDevAPI;
-using ServiceStack;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Dialogs
 {
-    
+
     public partial class Anims_List_Search : Form
     {
 
@@ -59,7 +51,7 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             listView1.Visible = listView1.Items.Count > 0;
         }
-      
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -69,7 +61,7 @@ namespace ALBAITAR_Softvet.Dialogs
             RESULT.Columns.Add("CLIENT_FULL_NME");
             RESULT.Columns.Add("CLIENT_ID");
             RESULT.Columns.Add("NUM_IDENTIF_ANIM");
-            if(listView1.SelectedItems.Count > 0 && listView1.Visible)
+            if (listView1.SelectedItems.Count > 0 && listView1.Visible)
             {
                 RESULT.Rows.Add(listView1.SelectedItems[0].SubItems[0].Text,
                     listView1.SelectedItems[0].SubItems[1].Text,
@@ -81,7 +73,7 @@ namespace ALBAITAR_Softvet.Dialogs
             else
             {
                 RESULT = null;
-            }        
+            }
             Close();
         }
 
@@ -93,34 +85,34 @@ namespace ALBAITAR_Softvet.Dialogs
         private void Anims_List_Load(object sender, EventArgs e)
         {
 
-                props = PreConnection.Load_data("SELECT tb1.ID,tb1.NME,tb1.`NUM_IDENTIF` AS 'NUM_IDENTIF_ANIM',tb1.CLIENT_ID,CONCAT(tb2.FAMNME, ' ', tb2.NME) AS CLIENT_FULL_NME FROM tb_animaux AS tb1 LEFT JOIN tb_clients AS tb2 ON tb1.`CLIENT_ID` = tb2.ID;");
-                if (props != null)
+            props = PreConnection.Load_data("SELECT tb1.ID,tb1.NME,tb1.`NUM_IDENTIF` AS 'NUM_IDENTIF_ANIM',tb1.CLIENT_ID,CONCAT(tb2.FAMNME, ' ', tb2.NME) AS CLIENT_FULL_NME FROM tb_animaux AS tb1 LEFT JOIN tb_clients AS tb2 ON tb1.`CLIENT_ID` = tb2.ID;");
+            if (props != null)
+            {
+                if (props.Rows.Count > 0)
                 {
-                    if (props.Rows.Count > 0)
+                    foreach (DataRow row in props.Rows)
                     {
-                        foreach (DataRow row in props.Rows)
-                        {
-                            ListViewItem dd = new ListViewItem(row["NME"].ToString());
-                            dd.SubItems.Add(row["ID"].ToString());
+                        ListViewItem dd = new ListViewItem(row["NME"].ToString());
+                        dd.SubItems.Add(row["ID"].ToString());
                         dd.SubItems.Add(row["CLIENT_FULL_NME"].ToString());
                         dd.SubItems.Add(row["CLIENT_ID"].ToString());
                         dd.SubItems.Add(row["NUM_IDENTIF_ANIM"].ToString());
                         listView1.Items.Add(dd);
-                            items2.Add(dd);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Aucun animal trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Close();
+                        items2.Add(dd);
                     }
                 }
                 else
                 {
                     MessageBox.Show("Aucun animal trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
-                }           
-            
+                }
+            }
+            else
+            {
+                MessageBox.Show("Aucun animal trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
+            }
+
         }
 
         private void listView1_SizeChanged(object sender, EventArgs e)
@@ -143,7 +135,7 @@ namespace ALBAITAR_Softvet.Dialogs
         private void listView1_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
         {
             if (e.Item.Selected)
-            {                
+            {
                 e.Graphics.FillRectangle(Brushes.LightSeaGreen, e.Bounds);
             }
             else
@@ -159,10 +151,6 @@ namespace ALBAITAR_Softvet.Dialogs
             e.Handled = true;
         }
 
-        private void listView1_ControlAdded(object sender, ControlEventArgs e)
-        {
-           
-        }
     }
     public class DataTableEventArgs : EventArgs
     {

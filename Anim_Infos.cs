@@ -60,11 +60,16 @@ namespace ALBAITAR_Softvet
                     label26.Text = inf["NISS_DATE"] != DBNull.Value ? ((DateTime)inf["NISS_DATE"]).ToString("dd/MM/yyyy") : "--";
                     label19.Text = inf["ROBE"] != DBNull.Value ? (string)inf["ROBE"] : "--";
                     textBox8.Text = inf["OBSERVATIONS"] != DBNull.Value ? (string)inf["OBSERVATIONS"] : "";
-                    var ppoids = Main_Frm.main_poids_tab.AsEnumerable().Where(x => (x["ANIM_ID"] != DBNull.Value ? (int)x["ANIM_ID"] : -1) == selected_anim_id);
+                    //var ppoids = Main_Frm.main_poids_tab.AsEnumerable().Where(x => (x["ANIM_ID"] != DBNull.Value ? (int)x["ANIM_ID"] : -1) == selected_anim_id);
+                    var ppoids = Main_Frm.main_poids_tab.AsEnumerable().Where(x => (x["ANIM_ID"] != DBNull.Value ? (int)x["ANIM_ID"] : -1) == selected_anim_id && (x["POIDS"] != DBNull.Value ? (double)x["POIDS"] : -1) > 0);
                     if (ppoids.Any())
                     {
                         var ddd = ppoids.OrderByDescending(F => F["DATETIME"]).First();
                         label1.Text = ddd["POIDS"] != DBNull.Value ? ddd["POIDS"] + " (Kg)" + (ddd["DATETIME"] != DBNull.Value ? " - Le: " + ((DateTime)ddd["DATETIME"]).ToString("dd/MM/yyyy") : "") : "--";
+                    }
+                    else
+                    {
+                        label1.Text = "--";
                     }
                     label29.Text = inf["MALAD_NME"] != DBNull.Value ? ((string)inf["MALAD_NME"] + (inf["LAST_MALAD_DATE"] != DBNull.Value ? " (Depuis: " + ((DateTime)inf["LAST_MALAD_DATE"]).ToString("dd/MM/yyyy") + ")" : "")) : "(Aucune)";
                     bool ttt = inf["IS_RADIATED"] != DBNull.Value;

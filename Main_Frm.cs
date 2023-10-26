@@ -1061,6 +1061,23 @@ namespace ALBAITAR_Softvet
                         textBox5_TextChanged(null, null);
                     }
                     break;
+                case "tabPage_vaccin":
+                    if (tabPage_vaccin.Controls["Anim_Infos"] == null)
+                    {
+
+                        tabPage_vaccin.Controls.Add(new Vaccination());
+                        tabPage_vaccin.Controls["Vaccination"].Dock = DockStyle.Fill;
+                        tabPage_vaccin.Controls["Vaccination"].BringToFront();
+
+                    }
+                    else
+                    {
+                        //Anim_Infos.selected_anim_id = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : -1) : -1;
+                        //Anim_Infos.make_refresh = true;
+                        tabPage_vaccin.Controls["Vaccination"].Focus();
+                        tabPage_vaccin.Controls["Vaccination"].BringToFront();
+                    }
+                    break;
                     //==================================================================
             }
             save_and_restore_select_sit(2);

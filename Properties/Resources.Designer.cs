@@ -63,6 +63,56 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _0003 {
+            get {
+                object obj = ResourceManager.GetObject("0003", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _0004 {
+            get {
+                object obj = ResourceManager.GetObject("0004", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _0005 {
+            get {
+                object obj = ResourceManager.GetObject("0005", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _0006 {
+            get {
+                object obj = ResourceManager.GetObject("0006", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _0007 {
+            get {
+                object obj = ResourceManager.GetObject("0007", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap agenda_001 {
             get {
                 object obj = ResourceManager.GetObject("agenda_001", resourceCulture);
@@ -903,6 +953,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_schedule_30px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_schedule_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_search_20px {
             get {
                 object obj = ResourceManager.GetObject("icons8_search_20px", resourceCulture);
@@ -1053,6 +1113,16 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_todo_list_30px1 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_todo_list_30px1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_trash_25px_1 {
             get {
                 object obj = ResourceManager.GetObject("icons8_trash_25px_1", resourceCulture);
@@ -1076,6 +1146,26 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap icons8_user_shield_30px {
             get {
                 object obj = ResourceManager.GetObject("icons8_user_shield_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_vaccin_notif {
+            get {
+                object obj = ResourceManager.GetObject("icons8_vaccin_notif", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_vaccin_notif2 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_vaccin_notif2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
