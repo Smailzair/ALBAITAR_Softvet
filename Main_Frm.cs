@@ -2195,6 +2195,20 @@ namespace ALBAITAR_Softvet
             }
             new New_Pers_Cpt_Rnd_Visit(anim_idd).ShowDialog();
         }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["Vaccinations"] == null)
+            {
+                new Vaccinations().Show();
+            }
+            else
+            {
+                Application.OpenForms["Vaccinations"].WindowState = Application.OpenForms["Vaccinations"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Vaccinations"].WindowState;
+                Application.OpenForms["Vaccinations"].BringToFront();
+            }
+            panel1.Visible = false;
+        }
     }
 }
 

@@ -1,13 +1,13 @@
-﻿namespace ALBAITAR_Softvet
+﻿namespace ALBAITAR_Softvet.Dialogs
 {
-    partial class Vaccination
+    partial class Vaccinations
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,15 +20,17 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Vaccinations));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VACCIN_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +55,8 @@
             this.SEND_ALERT_TO_CLIENT_EMAIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,12 +100,14 @@
             this.SEND_ALERT_TO_CABINE_EMAIL,
             this.SEND_ALERT_TO_CLIENT_EMAIL});
             this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 59);
+            this.dataGridView1.Location = new System.Drawing.Point(5, 102);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(842, 411);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(922, 407);
+            this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // ID
             // 
@@ -145,7 +151,7 @@
             this.EVERY_TYPE_0_FIXED_1_PERIDIC.Name = "EVERY_TYPE_0_FIXED_1_PERIDIC";
             this.EVERY_TYPE_0_FIXED_1_PERIDIC.ReadOnly = true;
             this.EVERY_TYPE_0_FIXED_1_PERIDIC.Visible = false;
-            this.EVERY_TYPE_0_FIXED_1_PERIDIC.Width = 203;
+            this.EVERY_TYPE_0_FIXED_1_PERIDIC.Width = 204;
             // 
             // EVERY_DAY_NB
             // 
@@ -155,7 +161,7 @@
             this.EVERY_DAY_NB.Name = "EVERY_DAY_NB";
             this.EVERY_DAY_NB.ReadOnly = true;
             this.EVERY_DAY_NB.Visible = false;
-            this.EVERY_DAY_NB.Width = 112;
+            this.EVERY_DAY_NB.Width = 113;
             // 
             // EVERY_MOUNTH_NB
             // 
@@ -165,7 +171,7 @@
             this.EVERY_MOUNTH_NB.Name = "EVERY_MOUNTH_NB";
             this.EVERY_MOUNTH_NB.ReadOnly = true;
             this.EVERY_MOUNTH_NB.Visible = false;
-            this.EVERY_MOUNTH_NB.Width = 140;
+            this.EVERY_MOUNTH_NB.Width = 141;
             // 
             // IS_IMPORTANT
             // 
@@ -175,7 +181,7 @@
             this.IS_IMPORTANT.Name = "IS_IMPORTANT";
             this.IS_IMPORTANT.ReadOnly = true;
             this.IS_IMPORTANT.Visible = false;
-            this.IS_IMPORTANT.Width = 109;
+            this.IS_IMPORTANT.Width = 110;
             // 
             // IS_CONCERN_WHO
             // 
@@ -185,7 +191,7 @@
             this.IS_CONCERN_WHO.Name = "IS_CONCERN_WHO";
             this.IS_CONCERN_WHO.ReadOnly = true;
             this.IS_CONCERN_WHO.Visible = false;
-            this.IS_CONCERN_WHO.Width = 138;
+            this.IS_CONCERN_WHO.Width = 139;
             // 
             // ANIM_NUM_IDENs
             // 
@@ -195,7 +201,7 @@
             this.ANIM_NUM_IDENs.Name = "ANIM_NUM_IDENs";
             this.ANIM_NUM_IDENs.ReadOnly = true;
             this.ANIM_NUM_IDENs.Visible = false;
-            this.ANIM_NUM_IDENs.Width = 128;
+            this.ANIM_NUM_IDENs.Width = 129;
             // 
             // ANIM_ESPECE
             // 
@@ -205,7 +211,7 @@
             this.ANIM_ESPECE.Name = "ANIM_ESPECE";
             this.ANIM_ESPECE.ReadOnly = true;
             this.ANIM_ESPECE.Visible = false;
-            this.ANIM_ESPECE.Width = 106;
+            this.ANIM_ESPECE.Width = 107;
             // 
             // ANIM_RACE
             // 
@@ -215,7 +221,7 @@
             this.ANIM_RACE.Name = "ANIM_RACE";
             this.ANIM_RACE.ReadOnly = true;
             this.ANIM_RACE.Visible = false;
-            this.ANIM_RACE.Width = 95;
+            this.ANIM_RACE.Width = 96;
             // 
             // ANIM_SEXE
             // 
@@ -225,7 +231,7 @@
             this.ANIM_SEXE.Name = "ANIM_SEXE";
             this.ANIM_SEXE.ReadOnly = true;
             this.ANIM_SEXE.Visible = false;
-            this.ANIM_SEXE.Width = 91;
+            this.ANIM_SEXE.Width = 92;
             // 
             // POIDS_MAX
             // 
@@ -235,7 +241,7 @@
             this.POIDS_MAX.Name = "POIDS_MAX";
             this.POIDS_MAX.ReadOnly = true;
             this.POIDS_MAX.Visible = false;
-            this.POIDS_MAX.Width = 96;
+            this.POIDS_MAX.Width = 97;
             // 
             // DATE_NISS_MIN
             // 
@@ -245,7 +251,7 @@
             this.DATE_NISS_MIN.Name = "DATE_NISS_MIN";
             this.DATE_NISS_MIN.ReadOnly = true;
             this.DATE_NISS_MIN.Visible = false;
-            this.DATE_NISS_MIN.Width = 114;
+            this.DATE_NISS_MIN.Width = 115;
             // 
             // DATE_NISS_MAX
             // 
@@ -255,7 +261,7 @@
             this.DATE_NISS_MAX.Name = "DATE_NISS_MAX";
             this.DATE_NISS_MAX.ReadOnly = true;
             this.DATE_NISS_MAX.Visible = false;
-            this.DATE_NISS_MAX.Width = 117;
+            this.DATE_NISS_MAX.Width = 118;
             // 
             // DESCRIPTION
             // 
@@ -289,7 +295,7 @@
             this.SEND_ALERT_TO_CABINE_EMAIL.Name = "SEND_ALERT_TO_CABINE_EMAIL";
             this.SEND_ALERT_TO_CABINE_EMAIL.ReadOnly = true;
             this.SEND_ALERT_TO_CABINE_EMAIL.Visible = false;
-            this.SEND_ALERT_TO_CABINE_EMAIL.Width = 199;
+            this.SEND_ALERT_TO_CABINE_EMAIL.Width = 200;
             // 
             // SEND_ALERT_TO_CLIENT_EMAIL
             // 
@@ -299,27 +305,27 @@
             this.SEND_ALERT_TO_CLIENT_EMAIL.Name = "SEND_ALERT_TO_CLIENT_EMAIL";
             this.SEND_ALERT_TO_CLIENT_EMAIL.ReadOnly = true;
             this.SEND_ALERT_TO_CLIENT_EMAIL.Visible = false;
-            this.SEND_ALERT_TO_CLIENT_EMAIL.Width = 196;
+            this.SEND_ALERT_TO_CLIENT_EMAIL.Width = 197;
             // 
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Chocolate;
             this.button3.FlatAppearance.BorderSize = 2;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Peru;
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button3.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_pencil_drawing_25px_1;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(106, 476);
+            this.button3.Location = new System.Drawing.Point(57, 513);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(88, 36);
-            this.button3.TabIndex = 75;
-            this.button3.Text = "Modifier";
+            this.button3.Size = new System.Drawing.Size(38, 36);
+            this.button3.TabIndex = 77;
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.button3, "Modifier");
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -337,28 +343,53 @@
             this.button15.ForeColor = System.Drawing.Color.ForestGreen;
             this.button15.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
             this.button15.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button15.Location = new System.Drawing.Point(3, 476);
+            this.button15.Location = new System.Drawing.Point(12, 513);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(97, 36);
-            this.button15.TabIndex = 74;
-            this.button15.Text = "Nouveau";
+            this.button15.Size = new System.Drawing.Size(39, 36);
+            this.button15.TabIndex = 76;
             this.button15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.button15, "Ajouter");
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
-            // Vaccination
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button1.FlatAppearance.BorderSize = 2;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.button1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(223, 513);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(38, 36);
+            this.button1.TabIndex = 78;
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.button1, "Supprimer");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            // 
+            // Vaccinations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(933, 554);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "Vaccination";
-            this.Size = new System.Drawing.Size(848, 524);
-            this.Load += new System.EventHandler(this.Vaccination_Load);
-            this.Enter += new System.EventHandler(this.Vaccination_Enter);
+            this.Name = "Vaccinations";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Vaccinations";
+            this.Load += new System.EventHandler(this.Vaccinations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -367,8 +398,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button15;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn VACCIN_NME;
         private System.Windows.Forms.DataGridViewTextBoxColumn START_DATE;
@@ -390,5 +419,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ALERT_BEFORE_DAYS;
         private System.Windows.Forms.DataGridViewTextBoxColumn SEND_ALERT_TO_CABINE_EMAIL;
         private System.Windows.Forms.DataGridViewTextBoxColumn SEND_ALERT_TO_CLIENT_EMAIL;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

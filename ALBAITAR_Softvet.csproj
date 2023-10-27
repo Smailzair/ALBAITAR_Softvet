@@ -441,6 +441,12 @@
     <Compile Include="Dialogs\Splash.Designer.cs">
       <DependentUpon>Splash.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Vaccinations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Vaccinations.Designer.cs">
+      <DependentUpon>Vaccinations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Labo\Autre_Lab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -681,6 +687,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Splash.resx">
       <DependentUpon>Splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Vaccinations.resx">
+      <DependentUpon>Vaccinations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Labo\Autre_Lab.resx">
       <DependentUpon>Autre_Lab.cs</DependentUpon>

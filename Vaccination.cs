@@ -36,5 +36,10 @@ namespace ALBAITAR_Softvet
                 Load_Data();
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

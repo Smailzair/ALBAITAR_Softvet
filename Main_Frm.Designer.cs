@@ -177,6 +177,7 @@ namespace ALBAITAR_Softvet
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton8 = new System.Windows.Forms.RadioButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tabPage_vaccin = new System.Windows.Forms.TabPage();
             this.button33 = new System.Windows.Forms.Button();
             this.button32 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -210,7 +211,6 @@ namespace ALBAITAR_Softvet
             this.button21 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
-            this.tabPage_vaccin = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_animaux.SuspendLayout();
@@ -329,10 +329,10 @@ namespace ALBAITAR_Softvet
             this.tabPage_animaux.Controls.Add(this.dataGridView3);
             this.tabPage_animaux.Controls.Add(this.button8);
             this.tabPage_animaux.Controls.Add(this.button10);
-            this.tabPage_animaux.Location = new System.Drawing.Point(37, 4);
+            this.tabPage_animaux.Location = new System.Drawing.Point(70, 4);
             this.tabPage_animaux.Name = "tabPage_animaux";
             this.tabPage_animaux.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_animaux.Size = new System.Drawing.Size(966, 491);
+            this.tabPage_animaux.Size = new System.Drawing.Size(933, 491);
             this.tabPage_animaux.TabIndex = 4;
             this.tabPage_animaux.Text = "Animaux";
             // 
@@ -571,10 +571,10 @@ namespace ALBAITAR_Softvet
             this.tabPage_visites.Controls.Add(this.button24);
             this.tabPage_visites.Controls.Add(this.button17);
             this.tabPage_visites.Controls.Add(this.button18);
-            this.tabPage_visites.Location = new System.Drawing.Point(37, 4);
+            this.tabPage_visites.Location = new System.Drawing.Point(70, 4);
             this.tabPage_visites.Name = "tabPage_visites";
             this.tabPage_visites.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_visites.Size = new System.Drawing.Size(966, 491);
+            this.tabPage_visites.Size = new System.Drawing.Size(933, 491);
             this.tabPage_visites.TabIndex = 1;
             this.tabPage_visites.Text = "Visites";
             // 
@@ -868,9 +868,9 @@ namespace ALBAITAR_Softvet
             this.tabPage_labo.Controls.Add(this.dataGridView1);
             this.tabPage_labo.Controls.Add(this.button14);
             this.tabPage_labo.Controls.Add(this.button13);
-            this.tabPage_labo.Location = new System.Drawing.Point(37, 4);
+            this.tabPage_labo.Location = new System.Drawing.Point(70, 4);
             this.tabPage_labo.Name = "tabPage_labo";
-            this.tabPage_labo.Size = new System.Drawing.Size(966, 491);
+            this.tabPage_labo.Size = new System.Drawing.Size(933, 491);
             this.tabPage_labo.TabIndex = 2;
             this.tabPage_labo.Text = "Laboratoire";
             this.tabPage_labo.UseVisualStyleBackColor = true;
@@ -1094,9 +1094,9 @@ namespace ALBAITAR_Softvet
             this.tabPage_monetique.Controls.Add(this.button21);
             this.tabPage_monetique.Controls.Add(this.button16);
             this.tabPage_monetique.Controls.Add(this.button19);
-            this.tabPage_monetique.Location = new System.Drawing.Point(37, 4);
+            this.tabPage_monetique.Location = new System.Drawing.Point(70, 4);
             this.tabPage_monetique.Name = "tabPage_monetique";
-            this.tabPage_monetique.Size = new System.Drawing.Size(966, 491);
+            this.tabPage_monetique.Size = new System.Drawing.Size(933, 491);
             this.tabPage_monetique.TabIndex = 5;
             this.tabPage_monetique.Text = "Monétique";
             this.tabPage_monetique.UseVisualStyleBackColor = true;
@@ -1744,6 +1744,15 @@ namespace ALBAITAR_Softvet
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // tabPage_vaccin
+            // 
+            this.tabPage_vaccin.Location = new System.Drawing.Point(70, 4);
+            this.tabPage_vaccin.Name = "tabPage_vaccin";
+            this.tabPage_vaccin.Size = new System.Drawing.Size(933, 491);
+            this.tabPage_vaccin.TabIndex = 6;
+            this.tabPage_vaccin.Text = "Vaccinations";
+            this.tabPage_vaccin.UseVisualStyleBackColor = true;
+            // 
             // button33
             // 
             this.button33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1780,6 +1789,7 @@ namespace ALBAITAR_Softvet
             this.button32.Text = "Rappels de vaccination";
             this.toolTip1.SetToolTip(this.button32, "Produits");
             this.button32.UseVisualStyleBackColor = false;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
             // button6
             // 
@@ -2415,15 +2425,6 @@ namespace ALBAITAR_Softvet
             this.button19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
-            // 
-            // tabPage_vaccin
-            // 
-            this.tabPage_vaccin.Location = new System.Drawing.Point(70, 4);
-            this.tabPage_vaccin.Name = "tabPage_vaccin";
-            this.tabPage_vaccin.Size = new System.Drawing.Size(933, 491);
-            this.tabPage_vaccin.TabIndex = 6;
-            this.tabPage_vaccin.Text = "Vaccinations";
-            this.tabPage_vaccin.UseVisualStyleBackColor = true;
             // 
             // Main_Frm
             // 

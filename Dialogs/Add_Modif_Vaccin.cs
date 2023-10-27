@@ -28,11 +28,6 @@ namespace ALBAITAR_Softvet.Dialogs
             }
         }
 
-        private void checkBox3_CheckedChanged(object sender, System.EventArgs e)
-        {
-            numericUpDown1.Enabled = checkBox1.Visible = checkBox2.Visible = checkBox3.Checked;
-        }
-
         private void Add_Modif_Vaccin_Load(object sender, System.EventArgs e)
         {
             dateTimePicker3.MinDate = dateTimePicker2.Value.AddDays(1);
@@ -192,13 +187,14 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void button2_Click(object sender, System.EventArgs e)
         {
-            DateTime START_DATE;
-            DateTime END_DATE;
-            int EVERY_TYPE_0_FIXED_1_PERIDIC;
-            int EVERY_DAY_NB;
-            int EVERY_MOUNTH_NB;
+            DateTime FIXED_DATE = new DateTime(1999, 1, 1); ;
+            DateTime START_DATE = new DateTime(1999, 1, 1); ;
+            DateTime END_DATE = new DateTime(1999, 1, 1); ;
+            string IS_PERIODIC = "Non";
+            int EVERY_DAY_NB = 0;
+            int EVERY_MOUNTH_NB = 0;
             string VACCIN_NME;
-            int IS_IMPORTANT;
+            string IS_IMPORTANT;
             string IS_CONCERN_WHO;
             string ANIM_NUM_IDENs = "";
             string ANIM_ESPECE = "";
@@ -222,19 +218,25 @@ namespace ALBAITAR_Softvet.Dialogs
 
             //------------------------
             VACCIN_NME = textBox1.Text; //NME
-            IS_IMPORTANT = checkBox10.Checked ? 1 : 0;
-            EVERY_TYPE_0_FIXED_1_PERIDIC = radioButton1.Checked ? 0 : 1;
+            IS_IMPORTANT = checkBox10.Checked ? "Oui" : "Non";
+            IS_PERIODIC = radioButton1.Checked ? "Non" : "Oui";
             if (radioButton1.Checked) //FIXED DATE
             {
-                START_DATE = END_DATE = dateTimePicker4.Value.Date;
-                EVERY_DAY_NB = EVERY_MOUNTH_NB = 0;
+                FIXED_DATE = dateTimePicker4.Value.Date;
+               // START_DATE = END_DATE = dateTimePicker4.Value.Date;
+               // EVERY_DAY_NB = EVERY_MOUNTH_NB = 0;
             }
             else //PERIODIQUE
-            {
+            {                
                 START_DATE = new DateTime(dateTimePicker2.Value.Year, 1, 1);
                 END_DATE = new DateTime(dateTimePicker3.Value.Year, 12, 31);
                 EVERY_DAY_NB = dateTimePicker1.Value.Day;
                 EVERY_MOUNTH_NB = dateTimePicker1.Value.Month;
+                //if(new DateTime(dateTimePicker2.Value.Year, EVERY_MOUNTH_NB, EVERY_DAY_NB) < START_DATE || new DateTime(dateTimePicker3.Value.Year, EVERY_MOUNTH_NB, EVERY_DAY_NB) > END_DATE)
+                //{
+                //    pret = false;
+                //    error_msg += "\n- Date périodique un correcte.";
+                //}
             }
             if (comboBox1.SelectedIndex == 0) //Specific anims
             {
@@ -296,9 +298,9 @@ namespace ALBAITAR_Softvet.Dialogs
 
             IS_CONCERN_WHO = comboBox1.Text;
             DESCRIPTION = richTextBox1.Text;
-            ALERT_BEFORE_DAYS = checkBox3.Checked ? (int)numericUpDown1.Value : 0;
-            SEND_ALERT_TO_CABINE_EMAIL = checkBox3.Checked && checkBox2.Checked ? 1 : 0;
-            SEND_ALERT_TO_CLIENT_EMAIL = checkBox3.Checked && checkBox1.Checked ? 1 : 0;
+            ALERT_BEFORE_DAYS = (int)numericUpDown1.Value;
+            SEND_ALERT_TO_CABINE_EMAIL = checkBox2.Checked ? 1 : 0;
+            SEND_ALERT_TO_CLIENT_EMAIL = checkBox1.Checked ? 1 : 0;
             //-------------------------
             if (pret)
             {
@@ -309,9 +311,10 @@ namespace ALBAITAR_Softvet.Dialogs
                 else //INSERT
                 {
                     PreConnection.Excut_Cmd(1, "tb_vaccin", new List<string> {
+                        "FIXED_DATE",                        
                         "START_DATE",
                         "END_DATE",
-                        "EVERY_TYPE_0_FIXED_1_PERIDIC",
+                        "IS_PERIODIC",
                         "EVERY_DAY_NB",
                         "EVERY_MOUNTH_NB",
                         "VACCIN_NME",
@@ -331,9 +334,10 @@ namespace ALBAITAR_Softvet.Dialogs
                         "SEND_ALERT_TO_CLIENT_EMAIL"
                     }, new List<object>
                     {
-                        START_DATE,
-END_DATE,
-EVERY_TYPE_0_FIXED_1_PERIDIC,
+                        FIXED_DATE != new DateTime(1999, 1, 1) ? FIXED_DATE : (object)DBNull.Value,
+                        START_DATE != new DateTime(1999, 1, 1) ? START_DATE : (object)DBNull.Value,
+                        END_DATE != new DateTime(1999, 1, 1) ? END_DATE : (object)DBNull.Value,
+IS_PERIODIC,
 EVERY_DAY_NB,
 EVERY_MOUNTH_NB,
 VACCIN_NME,
