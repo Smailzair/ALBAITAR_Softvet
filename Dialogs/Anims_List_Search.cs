@@ -151,6 +151,10 @@ namespace ALBAITAR_Softvet.Dialogs
             e.Handled = true;
         }
 
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            button2.PerformClick();
+        }
     }
     public class DataTableEventArgs : EventArgs
     {

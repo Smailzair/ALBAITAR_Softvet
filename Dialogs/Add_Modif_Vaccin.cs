@@ -319,7 +319,7 @@ namespace ALBAITAR_Softvet.Dialogs
             int ALERT_BEFORE_DAYS;
             int SEND_ALERT_TO_CABINE_EMAIL = 0;
             int SEND_ALERT_TO_CLIENT_EMAIL = 0;
-
+            int IS_FOR_ALL = 0;
             //-----------------------------
             bool pret = true;
             string error_msg = string.IsNullOrWhiteSpace(textBox1.Text) ? "\n- Aucun nom de vaccination." : "";
@@ -402,10 +402,10 @@ namespace ALBAITAR_Softvet.Dialogs
 
                 }
             }
-            //else //All Anims
-            //{
-
-            //}
+            else //All Anims
+            {
+                IS_FOR_ALL = 1;
+            }
 
             IS_CONCERN_WHO = comboBox1.Text;
             DESCRIPTION = richTextBox1.Text;
@@ -438,7 +438,8 @@ namespace ALBAITAR_Softvet.Dialogs
                         "RELATED_CLIENTS_IDS",
                         "ALERT_BEFORE_DAYS",
                         "SEND_ALERT_TO_CABINE_EMAIL",
-                        "SEND_ALERT_TO_CLIENT_EMAIL"
+                        "SEND_ALERT_TO_CLIENT_EMAIL",
+                        "IS_FOR_ALL"
                     }, new List<object>
                     {
                         FIXED_DATE != new DateTime(1999, 1, 1) ? FIXED_DATE : (object)DBNull.Value,
@@ -461,7 +462,8 @@ DESCRIPTION,
 RELATED_CLIENTS_IDS,
 ALERT_BEFORE_DAYS,
 SEND_ALERT_TO_CABINE_EMAIL,
-SEND_ALERT_TO_CLIENT_EMAIL
+SEND_ALERT_TO_CLIENT_EMAIL,
+IS_FOR_ALL
                     }, "ID = @ID", new List<string> { "ID" }, new List<object> { ID_Modif });
                 }
                 else //INSERT
@@ -487,7 +489,8 @@ SEND_ALERT_TO_CLIENT_EMAIL
                         "RELATED_CLIENTS_IDS",
                         "ALERT_BEFORE_DAYS",
                         "SEND_ALERT_TO_CABINE_EMAIL",
-                        "SEND_ALERT_TO_CLIENT_EMAIL"
+                        "SEND_ALERT_TO_CLIENT_EMAIL",
+                        "IS_FOR_ALL"
                     }, new List<object>
                     {
                         FIXED_DATE != new DateTime(1999, 1, 1) ? FIXED_DATE : (object)DBNull.Value,
@@ -510,7 +513,8 @@ DESCRIPTION,
 RELATED_CLIENTS_IDS,
 ALERT_BEFORE_DAYS,
 SEND_ALERT_TO_CABINE_EMAIL,
-SEND_ALERT_TO_CLIENT_EMAIL
+SEND_ALERT_TO_CLIENT_EMAIL,
+IS_FOR_ALL
                     }, null, null, null);
                 }
                 Vaccinations.theres_changes = true;

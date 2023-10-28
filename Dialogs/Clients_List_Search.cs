@@ -1,16 +1,8 @@
-﻿using ALBAITAR_Softvet.Resources;
-using MySqlX.XDevAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ServiceStack.Diagnostics.Events;
 
 namespace ALBAITAR_Softvet.Dialogs
 {
@@ -86,7 +78,7 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             DataTableReturned?.Invoke(this, new DataTableEventArgs_Clients(RESULT));
         }
-        
+
         private void load_data()
         {
             items2.Clear();
@@ -173,6 +165,11 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             load_data();
             textBox1_TextChanged(null, null);
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            button2.PerformClick();
         }
     }
     public class DataTableEventArgs_Clients : EventArgs

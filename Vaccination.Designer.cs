@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,6 +50,14 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.radioButton9 = new System.Windows.Forms.RadioButton();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VACCIN_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IS_PERIODIC = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,15 +83,13 @@
             this.ALERT_BEFORE_DAYS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SEND_ALERT_TO_CABINE_EMAIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SEND_ALERT_TO_CLIENT_EMAIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.button2 = new System.Windows.Forms.Button();
+            this.IS_FOR_ALL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NEXT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox4.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBox1
@@ -198,9 +204,9 @@
             this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(435, 7);
+            this.groupBox1.Location = new System.Drawing.Point(13, 60);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(162, 47);
+            this.groupBox1.Size = new System.Drawing.Size(165, 47);
             this.groupBox1.TabIndex = 92;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Vaccin important ? :";
@@ -243,7 +249,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 63);
+            this.label1.Location = new System.Drawing.Point(10, 116);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 16);
             this.label1.TabIndex = 91;
@@ -253,9 +259,9 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(90, 60);
+            this.textBox1.Location = new System.Drawing.Point(89, 113);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(748, 21);
+            this.textBox1.Size = new System.Drawing.Size(655, 21);
             this.textBox1.TabIndex = 90;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -332,14 +338,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeight = 38;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -366,18 +372,109 @@
             this.RELATED_CLIENTS_IDS,
             this.ALERT_BEFORE_DAYS,
             this.SEND_ALERT_TO_CABINE_EMAIL,
-            this.SEND_ALERT_TO_CLIENT_EMAIL});
+            this.SEND_ALERT_TO_CLIENT_EMAIL,
+            this.IS_FOR_ALL,
+            this.NEXT_DATE});
             this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 87);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 140);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(922, 312);
+            this.dataGridView1.Size = new System.Drawing.Size(829, 259);
             this.dataGridView1.TabIndex = 85;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
+            // 
+            // radioButton9
+            // 
+            this.radioButton9.AutoSize = true;
+            this.radioButton9.Location = new System.Drawing.Point(6, 44);
+            this.radioButton9.Name = "radioButton9";
+            this.radioButton9.Size = new System.Drawing.Size(75, 20);
+            this.radioButton9.TabIndex = 0;
+            this.radioButton9.Text = "L\'animal :";
+            this.radioButton9.UseVisualStyleBackColor = true;
+            this.radioButton9.CheckedChanged += new System.EventHandler(this.radioButton9_CheckedChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(323, 41);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(22, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "...";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(323, 67);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(22, 23);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "...";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // radioButton10
+            // 
+            this.radioButton10.AutoSize = true;
+            this.radioButton10.Location = new System.Drawing.Point(6, 68);
+            this.radioButton10.Name = "radioButton10";
+            this.radioButton10.Size = new System.Drawing.Size(107, 20);
+            this.radioButton10.TabIndex = 0;
+            this.radioButton10.Text = "Le Propriétaire :";
+            this.radioButton10.UseVisualStyleBackColor = true;
+            this.radioButton10.CheckedChanged += new System.EventHandler(this.radioButton10_CheckedChanged);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.label4);
+            this.groupBox6.Controls.Add(this.button4);
+            this.groupBox6.Controls.Add(this.button2);
+            this.groupBox6.Controls.Add(this.radioButton9);
+            this.groupBox6.Controls.Add(this.radioButton10);
+            this.groupBox6.Controls.Add(this.radioButton11);
+            this.groupBox6.Location = new System.Drawing.Point(435, 7);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(351, 94);
+            this.groupBox6.TabIndex = 95;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Concernant :";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(113, 70);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(15, 16);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "--";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(82, 46);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(15, 16);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "--";
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Checked = true;
+            this.radioButton11.Location = new System.Drawing.Point(6, 21);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(48, 20);
+            this.radioButton11.TabIndex = 2;
+            this.radioButton11.TabStop = true;
+            this.radioButton11.Text = "Tous";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            this.radioButton11.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
             // ID
             // 
@@ -408,9 +505,9 @@
             // 
             this.FIXED_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.FIXED_DATE.DataPropertyName = "FIXED_DATE";
-            dataGridViewCellStyle6.Format = "d";
-            dataGridViewCellStyle6.NullValue = null;
-            this.FIXED_DATE.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.FIXED_DATE.DefaultCellStyle = dataGridViewCellStyle2;
             this.FIXED_DATE.HeaderText = "Date fixé";
             this.FIXED_DATE.Name = "FIXED_DATE";
             this.FIXED_DATE.ReadOnly = true;
@@ -433,7 +530,7 @@
             this.EVERY_DAY_NB.Name = "EVERY_DAY_NB";
             this.EVERY_DAY_NB.ReadOnly = true;
             this.EVERY_DAY_NB.Visible = false;
-            this.EVERY_DAY_NB.Width = 113;
+            this.EVERY_DAY_NB.Width = 112;
             // 
             // START_DATE
             // 
@@ -459,7 +556,7 @@
             this.EVERY_MOUNTH_NB.Name = "EVERY_MOUNTH_NB";
             this.EVERY_MOUNTH_NB.ReadOnly = true;
             this.EVERY_MOUNTH_NB.Visible = false;
-            this.EVERY_MOUNTH_NB.Width = 141;
+            this.EVERY_MOUNTH_NB.Width = 140;
             // 
             // START_YEAR
             // 
@@ -505,7 +602,7 @@
             this.ANIM_NUM_IDENs.Name = "ANIM_NUM_IDENs";
             this.ANIM_NUM_IDENs.ReadOnly = true;
             this.ANIM_NUM_IDENs.Visible = false;
-            this.ANIM_NUM_IDENs.Width = 129;
+            this.ANIM_NUM_IDENs.Width = 128;
             // 
             // ANIM_ESPECE
             // 
@@ -515,7 +612,7 @@
             this.ANIM_ESPECE.Name = "ANIM_ESPECE";
             this.ANIM_ESPECE.ReadOnly = true;
             this.ANIM_ESPECE.Visible = false;
-            this.ANIM_ESPECE.Width = 107;
+            this.ANIM_ESPECE.Width = 106;
             // 
             // ANIM_RACE
             // 
@@ -525,7 +622,7 @@
             this.ANIM_RACE.Name = "ANIM_RACE";
             this.ANIM_RACE.ReadOnly = true;
             this.ANIM_RACE.Visible = false;
-            this.ANIM_RACE.Width = 96;
+            this.ANIM_RACE.Width = 95;
             // 
             // ANIM_SEXE
             // 
@@ -535,7 +632,7 @@
             this.ANIM_SEXE.Name = "ANIM_SEXE";
             this.ANIM_SEXE.ReadOnly = true;
             this.ANIM_SEXE.Visible = false;
-            this.ANIM_SEXE.Width = 92;
+            this.ANIM_SEXE.Width = 91;
             // 
             // POIDS_MAX
             // 
@@ -545,7 +642,7 @@
             this.POIDS_MAX.Name = "POIDS_MAX";
             this.POIDS_MAX.ReadOnly = true;
             this.POIDS_MAX.Visible = false;
-            this.POIDS_MAX.Width = 97;
+            this.POIDS_MAX.Width = 96;
             // 
             // DATE_NISS_MIN
             // 
@@ -555,7 +652,7 @@
             this.DATE_NISS_MIN.Name = "DATE_NISS_MIN";
             this.DATE_NISS_MIN.ReadOnly = true;
             this.DATE_NISS_MIN.Visible = false;
-            this.DATE_NISS_MIN.Width = 115;
+            this.DATE_NISS_MIN.Width = 114;
             // 
             // DATE_NISS_MAX
             // 
@@ -565,7 +662,7 @@
             this.DATE_NISS_MAX.Name = "DATE_NISS_MAX";
             this.DATE_NISS_MAX.ReadOnly = true;
             this.DATE_NISS_MAX.Visible = false;
-            this.DATE_NISS_MAX.Width = 118;
+            this.DATE_NISS_MAX.Width = 117;
             // 
             // DESCRIPTION
             // 
@@ -600,7 +697,7 @@
             this.SEND_ALERT_TO_CABINE_EMAIL.Name = "SEND_ALERT_TO_CABINE_EMAIL";
             this.SEND_ALERT_TO_CABINE_EMAIL.ReadOnly = true;
             this.SEND_ALERT_TO_CABINE_EMAIL.Visible = false;
-            this.SEND_ALERT_TO_CABINE_EMAIL.Width = 200;
+            this.SEND_ALERT_TO_CABINE_EMAIL.Width = 199;
             // 
             // SEND_ALERT_TO_CLIENT_EMAIL
             // 
@@ -610,57 +707,28 @@
             this.SEND_ALERT_TO_CLIENT_EMAIL.Name = "SEND_ALERT_TO_CLIENT_EMAIL";
             this.SEND_ALERT_TO_CLIENT_EMAIL.ReadOnly = true;
             this.SEND_ALERT_TO_CLIENT_EMAIL.Visible = false;
-            this.SEND_ALERT_TO_CLIENT_EMAIL.Width = 197;
+            this.SEND_ALERT_TO_CLIENT_EMAIL.Width = 196;
             // 
-            // groupBox4
+            // IS_FOR_ALL
             // 
-            this.groupBox4.Controls.Add(this.button2);
-            this.groupBox4.Controls.Add(this.radioButton7);
-            this.groupBox4.Controls.Add(this.radioButton9);
-            this.groupBox4.Location = new System.Drawing.Point(603, 7);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(235, 47);
-            this.groupBox4.TabIndex = 93;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Concernant l\'Animal :";
+            this.IS_FOR_ALL.DataPropertyName = "IS_FOR_ALL";
+            this.IS_FOR_ALL.HeaderText = "IS_FOR_ALL";
+            this.IS_FOR_ALL.Name = "IS_FOR_ALL";
+            this.IS_FOR_ALL.ReadOnly = true;
+            this.IS_FOR_ALL.Visible = false;
             // 
-            // radioButton7
+            // NEXT_DATE
             // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Checked = true;
-            this.radioButton7.Location = new System.Drawing.Point(6, 21);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(48, 20);
-            this.radioButton7.TabIndex = 2;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "Tous";
-            this.radioButton7.UseVisualStyleBackColor = true;
-            // 
-            // radioButton9
-            // 
-            this.radioButton9.AutoSize = true;
-            this.radioButton9.Location = new System.Drawing.Point(60, 21);
-            this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(33, 20);
-            this.radioButton9.TabIndex = 0;
-            this.radioButton9.Text = "--";
-            this.radioButton9.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(207, 18);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(22, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "...";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.NEXT_DATE.DataPropertyName = "NEXT_DATE";
+            this.NEXT_DATE.HeaderText = "Prochaine Date";
+            this.NEXT_DATE.Name = "NEXT_DATE";
+            this.NEXT_DATE.ReadOnly = true;
             // 
             // Vaccination
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -675,7 +743,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(747, 235);
             this.Name = "Vaccination";
-            this.Size = new System.Drawing.Size(928, 444);
+            this.Size = new System.Drawing.Size(835, 444);
             this.Load += new System.EventHandler(this.Vaccination_Load);
             this.Enter += new System.EventHandler(this.Vaccination_Enter);
             this.groupBox3.ResumeLayout(false);
@@ -685,8 +753,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -714,6 +782,14 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.RadioButton radioButton9;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.RadioButton radioButton10;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.RadioButton radioButton11;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn VACCIN_NME;
         private System.Windows.Forms.DataGridViewTextBoxColumn IS_PERIODIC;
@@ -739,9 +815,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ALERT_BEFORE_DAYS;
         private System.Windows.Forms.DataGridViewTextBoxColumn SEND_ALERT_TO_CABINE_EMAIL;
         private System.Windows.Forms.DataGridViewTextBoxColumn SEND_ALERT_TO_CLIENT_EMAIL;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton9;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IS_FOR_ALL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NEXT_DATE;
     }
 }

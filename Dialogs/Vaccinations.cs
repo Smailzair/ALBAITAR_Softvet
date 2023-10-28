@@ -9,7 +9,19 @@ namespace ALBAITAR_Softvet.Dialogs
 {
     public partial class Vaccinations : Form
     {
+        //----------
+        DataTable chosen_anim_from_search;
+        DataTable chosen_client_from_search;
+
+
+        int selected_anim_id_for_filter = -1;
+        string selected_anim_ident_for_filter = "";
+        int selected_client_id_for_filter = -1;
+
         public static bool theres_changes = false;
+
+
+        int prev_selected_rbx = 0; //0 -> Tous  1 -> Animal  2 -> Propr
         public Vaccinations()
         {
             InitializeComponent();
@@ -21,12 +33,41 @@ namespace ALBAITAR_Softvet.Dialogs
         }
         private void Load_Data()
         {
-            Main_Frm.Main_Frm_vaccination = PreConnection.Load_data("SELECT * FROM tb_vaccin;");
+            Main_Frm.Main_Frm_vaccination = PreConnection.Load_data("SELECT *,"
++ "     IF("
++ "         FIXED_DATE >= CURRENT_DATE, "
++ "         FIXED_DATE,"
++ "         IF("
++ "             CURRENT_DATE BETWEEN START_DATE AND END_DATE,"
++ "             IF("
++ "                 STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d') >= CURRENT_DATE,"
++ "                 STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
++ "                 IF("
++ "                     (YEAR(CURRENT_DATE) + 1) <= END_YEAR,"
++ "                     STR_TO_DATE(CONCAT(CAST((YEAR(CURRENT_DATE) + 1) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
++ "                     NULL"
++ "                 )"
++ "             ),"
++ "             IF(CURRENT_DATE < STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
++ "                 STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
++ "                 NULL"
++ "                 )"
++ "         )"
++ "     ) AS NEXT_DATE "
++ " FROM tb_vaccin ORDER BY NEXT_DATE;");
+
             dataGridView1.DataSource = Main_Frm.Main_Frm_vaccination;
             apply_filter();
         }
         private void Vaccinations_Load(object sender, EventArgs e)
         {
+            dateTimePicker1.ValueChanged -= dateTimePicker1_ValueChanged;
+            dateTimePicker1.Value = DateTime.Now.AddDays(-15);
+            dateTimePicker2.Value = DateTime.Now.AddDays(15);
+            dateTimePicker2.MinDate = dateTimePicker1.Value;
+            dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
+            dateTimePicker2.ValueChanged += dateTimePicker1_ValueChanged;
+            //-----------
             Load_Data();
         }
 
@@ -88,22 +129,31 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void apply_filter()
         {
-            string fltr = !string.IsNullOrWhiteSpace(textBox1.Text) ? string.Format("VACCIN_NME LIKE '%{0}%'", textBox1.Text) : "";
-            fltr += !radioButton3.Checked ? (fltr.Length > 0 ? " AND " : "") + "IS_IMPORTANT = '" + (radioButton1.Checked ? "Oui" : "Non") + "'" : "";
-            fltr += !radioButton4.Checked ? (fltr.Length > 0 ? " AND " : "") + "FIXED_DATE IS " + (radioButton5.Checked ? "NOT " : "") + "NULL" : "";
-            if (checkBox1.Checked)
+            if (dataGridView1.DataSource != null)
             {
-                fltr += (fltr.Length > 0 ? " AND " : "");
-                fltr += $"((FIXED_DATE IS NOT NULL AND FIXED_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND FIXED_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#) OR " +
-                    $"(FIXED_DATE IS NULL AND (" +
-                    $"(START_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND START_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#) OR " +
-                    $"(END_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND END_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#)" +
-                    $")))";
+                string fltr = !string.IsNullOrWhiteSpace(textBox1.Text) ? string.Format("VACCIN_NME LIKE '%{0}%'", textBox1.Text) : "";
+                fltr += radioButton9.Checked ? (fltr.Length > 0 ? " AND " : "") + $"(IS_FOR_ALL = 1 OR ANIM_NUM_IDENs LIKE '%{selected_anim_ident_for_filter}%')" : "";
+                if (radioButton10.Checked)
+                {
+                    string tmmp_anms = "";
+                    Main_Frm.Main_Frm_animals_tbl.AsEnumerable().Where(Z => (Z["CLIENT_ID"] != DBNull.Value ? (int)Z["CLIENT_ID"] : -1) == selected_client_id_for_filter).ForEach(V => tmmp_anms += ",'" + V["NUM_IDENTIF"] + "'");
+                    tmmp_anms = tmmp_anms.Length > 0 ? tmmp_anms.Substring(1) : "";
+                    fltr += radioButton10.Checked ? (fltr.Length > 0 ? " AND " : "") + $"(IS_FOR_ALL = 1 OR RELATED_CLIENTS_IDS LIKE '{selected_client_id_for_filter},%' OR RELATED_CLIENTS_IDS LIKE '%,{selected_client_id_for_filter},%' OR RELATED_CLIENTS_IDS LIKE '%,{selected_client_id_for_filter}'" + (!string.IsNullOrEmpty(tmmp_anms) ? $" OR ANIM_NUM_IDENs IN ({tmmp_anms})" : "") + ")" : "";
+                }
+                fltr += !radioButton3.Checked ? (fltr.Length > 0 ? " AND " : "") + "IS_IMPORTANT = '" + (radioButton1.Checked ? "Oui" : "Non") + "'" : "";
+                fltr += !radioButton4.Checked ? (fltr.Length > 0 ? " AND " : "") + "FIXED_DATE IS " + (radioButton5.Checked ? "NOT " : "") + "NULL" : "";
+                if (checkBox1.Checked)
+                {
+                    fltr += (fltr.Length > 0 ? " AND " : "");
+                    fltr += $"((FIXED_DATE IS NOT NULL AND FIXED_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND FIXED_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#) OR " +
+                        $"(FIXED_DATE IS NULL AND (" +
+                        $"(START_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND START_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#) OR " +
+                        $"(END_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND END_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#)" +
+                        $")))";
+                }
+
+                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
             }
-
-
-
-            ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
 
         }
 
@@ -111,6 +161,10 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             if (((RadioButton)sender).Checked)
             {
+                if (sender == radioButton11)
+                {
+                    prev_selected_rbx = 0;
+                }
                 apply_filter();
             }
         }
@@ -129,6 +183,117 @@ namespace ALBAITAR_Softvet.Dialogs
             apply_filter();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            chosen_anim_from_search = new DataTable();
+            Anims_List_Search select = new Anims_List_Search();
+            select.DataTableReturned += ChildForm_DataTableReturned;
+            select.ShowDialog();
+            if (chosen_anim_from_search != null)
+            {
+                selected_anim_id_for_filter = int.Parse(chosen_anim_from_search.Rows[0][1].ToString());
+                selected_anim_ident_for_filter = (string)chosen_anim_from_search.Rows[0][4];
+                label4.Text = (string)chosen_anim_from_search.Rows[0][0];
+                if (!radioButton9.Checked) { radioButton9.Checked = true; }
+                prev_selected_rbx = 1; //0 -> Tous  1 -> Animal  2 -> Propr
+                apply_filter();
+            }
+            else
+            {
+                switch (prev_selected_rbx)
+                {
+                    case 1:
+                        radioButton9.CheckedChanged -= radioButton9_CheckedChanged;
+                        radioButton9.Checked = true;
+                        radioButton9.CheckedChanged += radioButton9_CheckedChanged;
+                        break;
+                    case 2:
+                        radioButton10.CheckedChanged -= radioButton10_CheckedChanged;
+                        radioButton10.Checked = true;
+                        radioButton10.CheckedChanged += radioButton10_CheckedChanged;
+                        break;
+                    case 0:
+                        radioButton11.CheckedChanged -= radioButton1_CheckedChanged;
+                        radioButton11.Checked = true;
+                        radioButton11.CheckedChanged += radioButton1_CheckedChanged;
+                        break;
+                }
+            }
+        }
+        private void ChildForm_DataTableReturned(object sender, DataTableEventArgs e)
+        {
+            chosen_anim_from_search = e.DataTable;
+        }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            chosen_client_from_search = new DataTable();
+            Clients_List_Search select = new Clients_List_Search();
+            select.DataTableReturned += Select_DataTableReturned;
+            select.ShowDialog();
+            if (chosen_client_from_search != null)
+            {
+                selected_client_id_for_filter = int.Parse(chosen_client_from_search.Rows[0][0].ToString());
+                label5.Text = (string)chosen_client_from_search.Rows[0][1];
+                if (!radioButton10.Checked) { radioButton10.Checked = true; }
+                prev_selected_rbx = 2; //0 -> Tous  1 -> Animal  2 -> Propr
+                apply_filter();
+            }
+            else
+            {
+                switch (prev_selected_rbx)
+                {
+                    case 1:
+                        radioButton9.CheckedChanged -= radioButton9_CheckedChanged;
+                        radioButton9.Checked = true;
+                        radioButton9.CheckedChanged += radioButton9_CheckedChanged;
+                        break;
+                    case 2:
+                        radioButton10.CheckedChanged -= radioButton10_CheckedChanged;
+                        radioButton10.Checked = true;
+                        radioButton10.CheckedChanged += radioButton10_CheckedChanged;
+                        break;
+                    case 0:
+                        radioButton11.CheckedChanged -= radioButton1_CheckedChanged;
+                        radioButton11.Checked = true;
+                        radioButton11.CheckedChanged += radioButton1_CheckedChanged;
+                        break;
+                }
+            }
+        }
+        private void Select_DataTableReturned(object sender, DataTableEventArgs_Clients e)
+        {
+            chosen_client_from_search = e.DataTable;
+        }
+
+        private void radioButton9_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton9.Checked)
+            {
+                if (selected_anim_id_for_filter <= 0)
+                {
+                    button2.PerformClick();
+                }
+                else
+                {
+                    apply_filter();
+                }
+            }
+        }
+
+        private void radioButton10_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton10.Checked)
+            {
+                if (selected_client_id_for_filter <= 0)
+                {
+                    button4.PerformClick();
+                }
+                else
+                {
+                    apply_filter();
+                }
+            }
+        }
     }
 }

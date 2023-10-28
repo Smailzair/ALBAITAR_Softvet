@@ -87,7 +87,8 @@ namespace ALBAITAR_Softvet
                 Properties.Resources.icons8_tear_off_calendar_30px,//calendar
                 Properties.Resources.icons8_info_15px_1,//Red Notification
                 Properties.Resources.icons8_dog_30px, //Animaux
-                Properties.Resources.icons8_profit_30px //Monetique
+                Properties.Resources.icons8_profit_30px, //Monetique
+                Properties.Resources.agenda_004 //Vaccination
             });
             tabControl1.ImageList = tabcontrol_img_lst;
 
@@ -97,6 +98,7 @@ namespace ALBAITAR_Softvet
             tabPage_Calendar.ImageIndex = 3;
             tabPage_animaux.ImageIndex = 5;
             tabPage_monetique.ImageIndex = 6;
+            tabPage_vaccin.ImageIndex = 7;
             //---------------------------
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
@@ -870,6 +872,9 @@ namespace ALBAITAR_Softvet
             {
                 Agenda_Just_Display.make_filter_refresh = true;
             }
+            Vaccination.selected_anim_id = selected_animal_id;
+            Vaccination.selected_client_id = selected_client_id;
+            Vaccination.make_refresh = true;
             Refresh_current_tab();
         }
 
@@ -1065,7 +1070,21 @@ namespace ALBAITAR_Softvet
                 case "tabPage_vaccin":
                     if (tabPage_vaccin.Controls["Vaccination"] == null)
                     {
+                        if (radioButton8.Checked)
+                        {
+                            if (comboBox2.SelectedValue != null)
+                            {
+                                if (comboBox1.SelectedIndex == 0)
+                                {
+                                    Vaccination.selected_client_id = (int)comboBox2.SelectedValue;
+                                }
+                                else
+                                {
+                                    Vaccination.selected_anim_id = (int)comboBox2.SelectedValue;
+                                }
+                            }
 
+                        }
                         tabPage_vaccin.Controls.Add(new Vaccination());
                         tabPage_vaccin.Controls["Vaccination"].Dock = DockStyle.Fill;
                         tabPage_vaccin.Controls["Vaccination"].BringToFront();
