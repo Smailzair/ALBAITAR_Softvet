@@ -44,6 +44,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -91,7 +92,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -158,8 +159,9 @@
             // 
             this.dateTimePicker3.CustomFormat = "yyyy";
             this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(142, 30);
+            this.dateTimePicker3.Location = new System.Drawing.Point(169, 30);
             this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.ShowUpDown = true;
             this.dateTimePicker3.Size = new System.Drawing.Size(62, 21);
             this.dateTimePicker3.TabIndex = 7;
             // 
@@ -169,6 +171,7 @@
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker2.Location = new System.Drawing.Point(45, 30);
             this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.ShowUpDown = true;
             this.dateTimePicker2.Size = new System.Drawing.Size(61, 21);
             this.dateTimePicker2.TabIndex = 6;
             this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
@@ -178,18 +181,18 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(112, 32);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(26, 16);
+            this.label4.Size = new System.Drawing.Size(54, 16);
             this.label4.TabIndex = 5;
-            this.label4.Text = "Et : ";
+            this.label4.Text = "Jusqu\'à :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 32);
+            this.label3.Location = new System.Drawing.Point(11, 32);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 16);
+            this.label3.Size = new System.Drawing.Size(31, 16);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Entre : ";
+            this.label3.Text = "De : ";
             // 
             // dateTimePicker1
             // 
@@ -263,6 +266,15 @@
             this.groupBox2.TabIndex = 35;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "         Rappel : ";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(73, 22);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(47, 16);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Avant :";
             // 
             // checkBox2
             // 
@@ -338,9 +350,9 @@
             this.panel8.Controls.Add(this.button4);
             this.panel8.Controls.Add(this.button3);
             this.panel8.Controls.Add(this.listView_Clients);
-            this.panel8.Location = new System.Drawing.Point(1, 56);
+            this.panel8.Location = new System.Drawing.Point(2, 56);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(353, 245);
+            this.panel8.Size = new System.Drawing.Size(350, 245);
             this.panel8.TabIndex = 38;
             this.panel8.Visible = false;
             // 
@@ -353,7 +365,7 @@
             this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(297, 4);
+            this.button4.Location = new System.Drawing.Point(294, 4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(24, 24);
             this.button4.TabIndex = 34;
@@ -369,7 +381,7 @@
             this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(270, 4);
+            this.button3.Location = new System.Drawing.Point(267, 4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(24, 24);
             this.button3.TabIndex = 33;
@@ -392,7 +404,7 @@
             this.listView_Clients.HideSelection = false;
             this.listView_Clients.Location = new System.Drawing.Point(0, 31);
             this.listView_Clients.Name = "listView_Clients";
-            this.listView_Clients.Size = new System.Drawing.Size(353, 211);
+            this.listView_Clients.Size = new System.Drawing.Size(350, 211);
             this.listView_Clients.TabIndex = 32;
             this.listView_Clients.UseCompatibleStateImageBehavior = false;
             this.listView_Clients.View = System.Windows.Forms.View.Details;
@@ -414,9 +426,9 @@
             this.panel4.Controls.Add(this.panel7);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Controls.Add(this.comboBox2);
-            this.panel4.Location = new System.Drawing.Point(1, 57);
+            this.panel4.Location = new System.Drawing.Point(2, 57);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(353, 245);
+            this.panel4.Size = new System.Drawing.Size(349, 245);
             this.panel4.TabIndex = 2;
             // 
             // panel7
@@ -695,7 +707,7 @@
             this.panel5.Controls.Add(this.button6);
             this.panel5.Location = new System.Drawing.Point(1, 36);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(350, 206);
+            this.panel5.Size = new System.Drawing.Size(346, 206);
             this.panel5.TabIndex = 3;
             // 
             // listView_Anim
@@ -717,7 +729,7 @@
             this.listView_Anim.HideSelection = false;
             this.listView_Anim.Location = new System.Drawing.Point(2, 33);
             this.listView_Anim.Name = "listView_Anim";
-            this.listView_Anim.Size = new System.Drawing.Size(345, 170);
+            this.listView_Anim.Size = new System.Drawing.Size(341, 170);
             this.listView_Anim.TabIndex = 38;
             this.listView_Anim.UseCompatibleStateImageBehavior = false;
             this.listView_Anim.View = System.Windows.Forms.View.Details;
@@ -785,7 +797,7 @@
             "Autre"});
             this.comboBox2.Location = new System.Drawing.Point(92, 7);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(226, 24);
+            this.comboBox2.Size = new System.Drawing.Size(222, 24);
             this.comboBox2.TabIndex = 1;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
@@ -889,20 +901,34 @@
             this.richTextBox1.TabIndex = 43;
             this.richTextBox1.Text = "";
             // 
-            // label10
+            // button1
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(73, 22);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 16);
-            this.label10.TabIndex = 13;
-            this.label10.Text = "Avant :";
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button1.FlatAppearance.BorderSize = 2;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.CornflowerBlue;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.button1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(497, 471);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(38, 36);
+            this.button1.TabIndex = 79;
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Add_Modif_Vaccin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(746, 519);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.label9);
@@ -957,8 +983,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dateTimePicker4;
@@ -1011,5 +1035,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Button button1;
     }
 }
