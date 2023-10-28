@@ -68,6 +68,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     idds = idds.Substring(1);
                     PreConnection.Excut_Cmd(3, "tb_vaccin", null, null, "ID IN (@IDDs)", new List<string> { "IDDs" }, new List<object> { idds });
                     Load_Data();
+                    Vaccination.make_refresh = true;
                 }
             }
         }

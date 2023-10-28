@@ -1063,7 +1063,7 @@ namespace ALBAITAR_Softvet
                     }
                     break;
                 case "tabPage_vaccin":
-                    if (tabPage_vaccin.Controls["Anim_Infos"] == null)
+                    if (tabPage_vaccin.Controls["Vaccination"] == null)
                     {
 
                         tabPage_vaccin.Controls.Add(new Vaccination());
@@ -1791,6 +1791,9 @@ namespace ALBAITAR_Softvet
                     textBox4_TextChanged(null, null);
                     textBox5_TextChanged(null, null);
                     break;
+                case "tabPage_vaccin":
+                    Refresh_current_tab();
+                    break;
             }
         }
 
@@ -2208,6 +2211,11 @@ namespace ALBAITAR_Softvet
                 Application.OpenForms["Vaccinations"].BringToFront();
             }
             panel1.Visible = false;
+        }
+
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
