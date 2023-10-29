@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
-            this.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.Untitled_2;
+            this.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.Untitled_3;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(604, 316);
             this.ControlBox = false;

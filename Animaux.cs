@@ -667,6 +667,7 @@ checkBox1.Checked,
                         }
                         //----------------
                         Load_anims_from_DB();
+                        ((Main_Frm)Application.OpenForms["Main_Frm"]).refresh_main_tables();
                     }
                 }
 

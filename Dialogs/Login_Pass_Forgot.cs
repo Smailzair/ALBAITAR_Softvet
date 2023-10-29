@@ -1,11 +1,9 @@
-﻿using MimeKit;
-using MailKit;
-using MailKit.Net.Smtp;
-using System.Data;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
+﻿using MailKit.Net.Smtp;
+using MimeKit;
 using System;
+using System.Data;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet
 {
@@ -15,7 +13,7 @@ namespace ALBAITAR_Softvet
         public Login_Pass_Forgot(string User_ID)
         {
             InitializeComponent();
-            Usr_ID = User_ID;            
+            Usr_ID = User_ID;
         }
         DataTable datatt;
         private void Login_Load(object sender, EventArgs e)
@@ -84,7 +82,7 @@ namespace ALBAITAR_Softvet
                 Mssg.Subject = "ALBAITAR Softvet - Récuperation de mot de passe";
                 Mssg.Body = new TextPart("plain")
                 {
-                    Text = @"Bonjour "+ (datatt.Rows[0]["SEX"].ToString() == "M" ? "Mr." : "Mlle.") + datatt.Rows[0]["USER_NME"].ToString() + " " + datatt.Rows[0]["USER_FAMNME"].ToString() + @",
+                    Text = @"Bonjour " + (datatt.Rows[0]["SEX"].ToString() == "M" ? "Mr." : "Mlle.") + datatt.Rows[0]["USER_NME"].ToString() + " " + datatt.Rows[0]["USER_FAMNME"].ToString() + @",
 Voici votre mot de passe de logiciel '" + Application.ProductName.ToString() + "' : " + ((datatt.Rows[0]["PASSWORD"].ToString() ?? "").Length > 0 ? (datatt.Rows[0]["PASSWORD"].ToString() ?? "") : "'Vide !'")
                 };
 

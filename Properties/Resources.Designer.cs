@@ -1433,9 +1433,9 @@ namespace ALBAITAR_Softvet.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Untitled_2 {
+        internal static System.Drawing.Bitmap Untitled_3 {
             get {
-                object obj = ResourceManager.GetObject("Untitled-2", resourceCulture);
+                object obj = ResourceManager.GetObject("Untitled-3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

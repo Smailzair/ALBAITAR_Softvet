@@ -1,14 +1,10 @@
-﻿using ALBAITAR_Softvet.Dialogs;
-using Microsoft.ReportingServices.Diagnostics.Internal;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using MySql.Data.MySqlClient;
 using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Diagnostics.SymbolStore;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -16,7 +12,6 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
 using Excc = Microsoft.Office.Interop.Excel;
@@ -35,7 +30,6 @@ namespace ALBAITAR_Softvet
         {
             try
             {
-
                 if (mySqlConnection.State != ConnectionState.Open)
                 {
                     mySqlConnection.Open();
@@ -650,7 +644,7 @@ namespace ALBAITAR_Softvet
             {
                 return null;
             }
-            
+
         }
         //================================================
         public static string generate_ID_of_client()

@@ -1,5 +1,6 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
+using MimeKit;
 using MySql.Data.MySqlClient;
 using ServiceStack;
 using System;
@@ -13,16 +14,21 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using MailKit;
+using MailKit.Net.Smtp;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using DataTable = System.Data.DataTable;
+using Xamarin.Forms.Internals;
 
 namespace ALBAITAR_Softvet
 {
     public partial class Main_Frm : Form
     {
         int time_delay = 0;
-        DateTime last_update_time = new DateTime(1900, 12, 31);
+        static DateTime last_update_time = new DateTime(1900, 12, 31);
         Thread th;
         Thread Activ_Ver;
+        Thread Send_Vaccin_Alerts;
         public static DataTable ADRESSES_SITES;
         bool sites_table_ready = false;
         public static DataTable Autorisations;
@@ -114,12 +120,98 @@ namespace ALBAITAR_Softvet
             Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
             Activ_Ver.Start();
             Activ_Ver.Join();
-            //////--------------
-
+            //--------------
 
 
         }
 
+        public void Send_Email_Vaccin_Alerts()
+        {
+            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) //If the internet available
+            {
+                DataTable vaccin_alerts = PreConnection.Load_data("SELECT tb2.*,"
+                                         + "IF(SEND_ALERT_TO_CABINE_EMAIL = 1, IF(LAST_ALERT_EMAIL_CABINET_SENT_DATE <= NEXT_DATE AND LAST_ALERT_EMAIL_CABINET_SENT_DATE >= NEXT_ALARM,'Oui','Non'),'(Désactivé)') AS CABINET_EMAIL_ALREADY_SENT,"
+                                         + "IF(SEND_ALERT_TO_CLIENT_EMAIL = 1, IF(LAST_ALERT_EMAIL_CLIENT_SENT_DATE <= NEXT_DATE AND LAST_ALERT_EMAIL_CLIENT_SENT_DATE >= NEXT_ALARM,'Oui','Non'),'(Désactivé)') AS CLIENT_EMAIL_ALREADY_SENT "
+                                         + "FROM ("
+                                         + "SELECT tb1.*,DATE_SUB(tb1.NEXT_DATE, INTERVAL tb1.ALERT_BEFORE_DAYS DAY) as NEXT_ALARM FROM ("
+                                         + "SELECT *,"
+                                         + "    IF("
+                                         + "        FIXED_DATE >= CURRENT_DATE, "
+                                         + "        FIXED_DATE,"
+                                         + "        IF("
+                                         + "            CURRENT_DATE BETWEEN START_DATE AND END_DATE,"
+                                         + "            IF("
+                                         + "                STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d') >= CURRENT_DATE,"
+                                         + "                STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
+                                         + "                IF("
+                                         + "                    (YEAR(CURRENT_DATE) + 1) <= END_YEAR,"
+                                         + "                    STR_TO_DATE(CONCAT(CAST((YEAR(CURRENT_DATE) + 1) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
+                                         + "                    NULL"
+                                         + "                )"
+                                         + "            ),"
+                                         + "            IF(CURRENT_DATE < STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
+                                         + "                STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
+                                         + "                NULL"
+                                         + "                )"
+                                         + "        )"
+                                         + "    ) AS NEXT_DATE "
+                                         + "FROM tb_vaccin ORDER BY NEXT_DATE DESC) tb1) tb2  WHERE current_date <= NEXT_DATE AND current_date >= NEXT_ALARM;");
+                if (vaccin_alerts != null)
+                {
+                    if (vaccin_alerts.Rows.Count > 0)
+                    {
+                        button33.Visible = true;
+                        //---------
+                        string standard_mail_msg = "";
+                        vaccin_alerts.AsEnumerable().Where(F => (string)F["CLIENT_EMAIL_ALREADY_SENT"] == "Non" && (int)F["IS_FOR_ALL"] == 1).ForEach(G =>
+                        {
+                            standard_mail_msg += "";
+                        });
+
+                        vaccin_alerts.AsEnumerable().Where(F => (string)F["CLIENT_EMAIL_ALREADY_SENT"] == "Non" && (int)F["IS_FOR_ALL"] == 0).ForEach(G =>
+                        {
+                            string mail = standard_mail_msg;
+                            mail += "";
+
+                            MimeMessage Mssg = new MimeMessage();
+                            Mssg.From.Add(new MailboxAddress("RancoSoft", "rancosoft@gmail.com"));
+                            Mssg.To.Add(MailboxAddress.Parse(datatt.Rows[0]["EMAIL"].ToString()));
+                            Mssg.Subject = "ALBAITAR Softvet - Récuperation de mot de passe";
+                            Mssg.Body = new TextPart("plain")
+                            {
+                                Text = @"Bonjour " + (datatt.Rows[0]["SEX"].ToString() == "M" ? "Mr." : "Mlle.") + datatt.Rows[0]["USER_NME"].ToString() + " " + datatt.Rows[0]["USER_FAMNME"].ToString() + @",
+                        Voici votre mot de passe de logiciel '" + Application.ProductName.ToString() + "' : " + ((datatt.Rows[0]["PASSWORD"].ToString() ?? "").Length > 0 ? (datatt.Rows[0]["PASSWORD"].ToString() ?? "") : "'Vide !'")
+                            };
+
+                            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) //If the internet available
+                            {
+                                SmtpClient clnt = new SmtpClient();
+                                try
+                                {
+                                    clnt.Connect("smtp.gmail.com", 465, true);
+                                    clnt.Authenticate("rancosoft@gmail.com", PreConnection.Traduct_Codified_txt(Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT));
+                                    clnt.Send(Mssg);
+                                   // MessageBox.Show("Veuillez consultez votre Email, pour trouver votre mot de passe.", "Bien envoyé :", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                }
+                                catch (Exception ex)
+                                {
+                                }
+                                finally
+                                {
+                                    clnt.Disconnect(true);
+                                    clnt.Dispose();
+                                }
+                                //-----------
+                                Close();
+
+                            }
+                        });
+                    }
+                }
+            }
+            //---------------------
+
+        }
         public void Activ_Verif()
         {
 
@@ -511,10 +603,14 @@ namespace ALBAITAR_Softvet
             main_poids_tab = PreConnection.Load_data("SELECT * FROM tb_poids;");
             comboBox1.SelectedIndex = 1;
             //-----
+            Send_Vaccin_Alerts = new Thread(new ThreadStart(Send_Email_Vaccin_Alerts));
+            Send_Vaccin_Alerts.Start();
+            Send_Vaccin_Alerts.Join();
+            //--------------
             Application.OpenForms["Splash"]?.Close();
         }
 
-        private void refresh_main_tables()
+        public void refresh_main_tables()
         {
             last_update_time = DateTime.Now;
             //------------
@@ -2235,6 +2331,31 @@ namespace ALBAITAR_Softvet
         private void radioButton7_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            if (!panel5.Visible)
+            {
+                if (panel5.Controls["Vaccin_Alerts"] == null)
+                {
+                    panel5.Controls.Add(new Vaccin_Alerts());
+                    panel5.Controls["Vaccin_Alerts"].Dock = DockStyle.Fill;
+                }
+                panel5.Visible = true;
+                panel5.Focus();
+                ((Vaccin_Alerts)panel5.Controls[0]).load_data();
+            }
+            else
+            {
+                panel5.Visible = false;
+            }
+
+        }
+
+        private void panel5_Leave(object sender, EventArgs e)
+        {
+            panel5.Visible = false;
         }
     }
 }

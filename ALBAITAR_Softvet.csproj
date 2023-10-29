@@ -447,6 +447,12 @@
     <Compile Include="Dialogs\Vaccinations.Designer.cs">
       <DependentUpon>Vaccinations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Vaccin_Alerts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Vaccin_Alerts.Designer.cs">
+      <DependentUpon>Vaccin_Alerts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Labo\Autre_Lab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -690,6 +696,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Vaccinations.resx">
       <DependentUpon>Vaccinations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Vaccin_Alerts.resx">
+      <DependentUpon>Vaccin_Alerts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Labo\Autre_Lab.resx">
       <DependentUpon>Autre_Lab.cs</DependentUpon>
@@ -1050,6 +1059,7 @@
     <None Include="Resources\icons8_todo_list_30px1.png" />
     <None Include="Resources\icons8_syringe_30px_1.png" />
     <None Include="Resources\icons8_comments_30px.png" />
+    <None Include="Resources\Untitled-3.png" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

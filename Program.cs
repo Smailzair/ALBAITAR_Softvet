@@ -54,7 +54,7 @@ namespace ALBAITAR_Softvet
 
                 if (processes.Length <= 1)
                 {
-
+                    PreConnection.load_rancosoft_gmail_auth();
                     if (Properties.Settings.Default.Login_Auto_Enter && (DateTime.Now - Properties.Settings.Default.Last_entred_date_by_Auto_Enter).Days < 7)
                     {
                         Properties.Settings.Default.Last_entred_date_by_Auto_Enter = DateTime.Now;

@@ -83,6 +83,8 @@
             this.ALERT_BEFORE_DAYS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SEND_ALERT_TO_CABINE_EMAIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SEND_ALERT_TO_CLIENT_EMAIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IS_FOR_ALL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NEXT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3.SuspendLayout();
@@ -204,7 +206,7 @@
             this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(13, 60);
+            this.groupBox1.Location = new System.Drawing.Point(13, 54);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(165, 47);
             this.groupBox1.TabIndex = 92;
@@ -249,7 +251,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 116);
+            this.label1.Location = new System.Drawing.Point(10, 110);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 16);
             this.label1.TabIndex = 91;
@@ -259,7 +261,7 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(89, 113);
+            this.textBox1.Location = new System.Drawing.Point(91, 107);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(655, 21);
             this.textBox1.TabIndex = 90;
@@ -373,15 +375,17 @@
             this.ALERT_BEFORE_DAYS,
             this.SEND_ALERT_TO_CABINE_EMAIL,
             this.SEND_ALERT_TO_CLIENT_EMAIL,
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE,
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE,
             this.IS_FOR_ALL,
             this.NEXT_DATE});
             this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 140);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 134);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(829, 259);
+            this.dataGridView1.Size = new System.Drawing.Size(829, 265);
             this.dataGridView1.TabIndex = 85;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
@@ -709,6 +713,22 @@
             this.SEND_ALERT_TO_CLIENT_EMAIL.Visible = false;
             this.SEND_ALERT_TO_CLIENT_EMAIL.Width = 196;
             // 
+            // LAST_ALERT_EMAIL_CABINET_SENT_DATE
+            // 
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.DataPropertyName = "LAST_ALERT_EMAIL_CABINET_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.HeaderText = "LAST_ALERT_EMAIL_CABINET_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.Name = "LAST_ALERT_EMAIL_CABINET_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.ReadOnly = true;
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.Visible = false;
+            // 
+            // LAST_ALERT_EMAIL_CLIENT_SENT_DATE
+            // 
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.DataPropertyName = "LAST_ALERT_EMAIL_CLIENT_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.HeaderText = "LAST_ALERT_EMAIL_CLIENT_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.Name = "LAST_ALERT_EMAIL_CLIENT_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.ReadOnly = true;
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.Visible = false;
+            // 
             // IS_FOR_ALL
             // 
             this.IS_FOR_ALL.DataPropertyName = "IS_FOR_ALL";
@@ -815,6 +835,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ALERT_BEFORE_DAYS;
         private System.Windows.Forms.DataGridViewTextBoxColumn SEND_ALERT_TO_CABINE_EMAIL;
         private System.Windows.Forms.DataGridViewTextBoxColumn SEND_ALERT_TO_CLIENT_EMAIL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LAST_ALERT_EMAIL_CABINET_SENT_DATE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LAST_ALERT_EMAIL_CLIENT_SENT_DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn IS_FOR_ALL;
         private System.Windows.Forms.DataGridViewTextBoxColumn NEXT_DATE;
     }
