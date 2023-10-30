@@ -90,6 +90,7 @@
             this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IS_FOR_ALL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NEXT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LAST_ALERT_LUE_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -143,7 +144,8 @@
             this.LAST_ALERT_EMAIL_CABINET_SENT_DATE,
             this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE,
             this.IS_FOR_ALL,
-            this.NEXT_DATE});
+            this.NEXT_DATE,
+            this.LAST_ALERT_LUE_DATE});
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.Location = new System.Drawing.Point(5, 141);
             this.dataGridView1.Name = "dataGridView1";
@@ -752,6 +754,14 @@
             this.NEXT_DATE.ReadOnly = true;
             this.NEXT_DATE.Width = 106;
             // 
+            // LAST_ALERT_LUE_DATE
+            // 
+            this.LAST_ALERT_LUE_DATE.DataPropertyName = "LAST_ALERT_LUE_DATE";
+            this.LAST_ALERT_LUE_DATE.HeaderText = "LAST_ALERT_LUE_DATE";
+            this.LAST_ALERT_LUE_DATE.Name = "LAST_ALERT_LUE_DATE";
+            this.LAST_ALERT_LUE_DATE.ReadOnly = true;
+            this.LAST_ALERT_LUE_DATE.Visible = false;
+            // 
             // Vaccinations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -851,5 +861,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LAST_ALERT_EMAIL_CLIENT_SENT_DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn IS_FOR_ALL;
         private System.Windows.Forms.DataGridViewTextBoxColumn NEXT_DATE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LAST_ALERT_LUE_DATE;
     }
 }

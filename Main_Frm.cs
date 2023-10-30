@@ -19,6 +19,7 @@ using MailKit.Net.Smtp;
 //using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using DataTable = System.Data.DataTable;
 using Xamarin.Forms.Internals;
+using MethodInvoker = System.Windows.Forms.MethodInvoker;
 
 namespace ALBAITAR_Softvet
 {
@@ -160,7 +161,10 @@ namespace ALBAITAR_Softvet
                 {
                     if (vaccin_alerts.Rows.Count > 0)
                     {
-                        button33.Visible = true;
+                        button33.Invoke((MethodInvoker)delegate
+                        {
+                            button33.Visible = true;
+                        });
                         //---------
                         string standard_mail_msg = "";
                         vaccin_alerts.AsEnumerable().Where(F => (string)F["CLIENT_EMAIL_ALREADY_SENT"] == "Non" && (int)F["IS_FOR_ALL"] == 1).ForEach(G =>
@@ -173,38 +177,38 @@ namespace ALBAITAR_Softvet
                             string mail = standard_mail_msg;
                             mail += "";
 
-                            MimeMessage Mssg = new MimeMessage();
-                            Mssg.From.Add(new MailboxAddress("RancoSoft", "rancosoft@gmail.com"));
-                            Mssg.To.Add(MailboxAddress.Parse(datatt.Rows[0]["EMAIL"].ToString()));
-                            Mssg.Subject = "ALBAITAR Softvet - Récuperation de mot de passe";
-                            Mssg.Body = new TextPart("plain")
-                            {
-                                Text = @"Bonjour " + (datatt.Rows[0]["SEX"].ToString() == "M" ? "Mr." : "Mlle.") + datatt.Rows[0]["USER_NME"].ToString() + " " + datatt.Rows[0]["USER_FAMNME"].ToString() + @",
-                        Voici votre mot de passe de logiciel '" + Application.ProductName.ToString() + "' : " + ((datatt.Rows[0]["PASSWORD"].ToString() ?? "").Length > 0 ? (datatt.Rows[0]["PASSWORD"].ToString() ?? "") : "'Vide !'")
-                            };
+                        //    MimeMessage Mssg = new MimeMessage();
+                        //    Mssg.From.Add(new MailboxAddress("RancoSoft", "rancosoft@gmail.com"));
+                        //    Mssg.To.Add(MailboxAddress.Parse(datatt.Rows[0]["EMAIL"].ToString()));
+                        //    Mssg.Subject = "ALBAITAR Softvet - Récuperation de mot de passe";
+                        //    Mssg.Body = new TextPart("plain")
+                        //    {
+                        //        Text = @"Bonjour " + (datatt.Rows[0]["SEX"].ToString() == "M" ? "Mr." : "Mlle.") + datatt.Rows[0]["USER_NME"].ToString() + " " + datatt.Rows[0]["USER_FAMNME"].ToString() + @",
+                        //Voici votre mot de passe de logiciel '" + Application.ProductName.ToString() + "' : " + ((datatt.Rows[0]["PASSWORD"].ToString() ?? "").Length > 0 ? (datatt.Rows[0]["PASSWORD"].ToString() ?? "") : "'Vide !'")
+                        //    };
 
-                            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) //If the internet available
-                            {
-                                SmtpClient clnt = new SmtpClient();
-                                try
-                                {
-                                    clnt.Connect("smtp.gmail.com", 465, true);
-                                    clnt.Authenticate("rancosoft@gmail.com", PreConnection.Traduct_Codified_txt(Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT));
-                                    clnt.Send(Mssg);
-                                   // MessageBox.Show("Veuillez consultez votre Email, pour trouver votre mot de passe.", "Bien envoyé :", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                                }
-                                catch (Exception ex)
-                                {
-                                }
-                                finally
-                                {
-                                    clnt.Disconnect(true);
-                                    clnt.Dispose();
-                                }
-                                //-----------
-                                Close();
+                        //    if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) //If the internet available
+                        //    {
+                        //        SmtpClient clnt = new SmtpClient();
+                        //        try
+                        //        {
+                        //            clnt.Connect("smtp.gmail.com", 465, true);
+                        //            clnt.Authenticate("rancosoft@gmail.com", PreConnection.Traduct_Codified_txt(Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT));
+                        //            clnt.Send(Mssg);
+                        //           // MessageBox.Show("Veuillez consultez votre Email, pour trouver votre mot de passe.", "Bien envoyé :", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        //        }
+                        //        catch (Exception ex)
+                        //        {
+                        //        }
+                        //        finally
+                        //        {
+                        //            clnt.Disconnect(true);
+                        //            clnt.Dispose();
+                        //        }
+                        //        //-----------
+                        //        Close();
 
-                            }
+                        //    }
                         });
                     }
                 }
@@ -605,7 +609,7 @@ namespace ALBAITAR_Softvet
             //-----
             Send_Vaccin_Alerts = new Thread(new ThreadStart(Send_Email_Vaccin_Alerts));
             Send_Vaccin_Alerts.Start();
-            Send_Vaccin_Alerts.Join();
+           // Send_Vaccin_Alerts.Join();
             //--------------
             Application.OpenForms["Splash"]?.Close();
         }

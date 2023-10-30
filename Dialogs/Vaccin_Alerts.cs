@@ -101,9 +101,35 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
+                PreConnection.Excut_Cmd(2, "tb_vaccin", new List<string> { "LAST_ALERT_LUE_DATE" }, new List<object> { DateTime.Now.Date }, "ID = @ID", new List<string> { "ID" }, new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
+                //---------
                 new Add_Modif_Vaccin((int)dataGridView1.SelectedRows[0].Cells["ID"].Value).ShowDialog();
                 refresh_main_vaccin_tbl();
             }
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.RowIndex < dataGridView1.Rows.Count)
+            {
+                if ((dataGridView1.Rows[e.RowIndex].Cells["LAST_ALERT_LUE_DATE"].Value != DBNull.Value ? (DateTime)dataGridView1.Rows[e.RowIndex].Cells["LAST_ALERT_LUE_DATE"].Value : new DateTime(1999, 12, 12)) < (DateTime)dataGridView1.Rows[e.RowIndex].Cells["NEXT_ALARM"].Value)
+                {
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView1.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.Yellow;
+                }
+                else
+                {
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView1.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = SystemColors.ControlLight;
+                }
+            }
+        }
+
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            PreConnection.Excut_Cmd(2, "tb_vaccin", new List<string> {"LAST_ALERT_LUE_DATE"}, new List<object>{ DateTime.Now.Date}, "ID = @ID", new List<string> { "ID" }, new List<object> { dataGridView1.Rows[e.RowIndex].Cells["ID"].Value });
+            int prev_scrol = dataGridView1.FirstDisplayedScrollingRowIndex;
+            load_data();
+            dataGridView1.FirstDisplayedScrollingRowIndex = prev_scrol;
+
         }
     }
 }

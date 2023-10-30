@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NEXT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VACCIN_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,6 +64,8 @@
             this.CABINET_EMAIL_ALREADY_SENT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CLIENT_EMAIL_ALREADY_SENT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NEXT_ALARM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LAST_ALERT_LUE_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,9 +73,6 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -117,30 +116,28 @@
             this.IS_FOR_ALL,
             this.CABINET_EMAIL_ALREADY_SENT,
             this.CLIENT_EMAIL_ALREADY_SENT,
-            this.NEXT_ALARM});
+            this.NEXT_ALARM,
+            this.LAST_ALERT_LUE_DATE});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(610, 167);
+            this.dataGridView1.Size = new System.Drawing.Size(616, 173);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Teal;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Salmon;
-            this.label1.Location = new System.Drawing.Point(597, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(14, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "X";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
+            this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
             // ID
             // 
@@ -175,7 +172,7 @@
             this.IS_PERIODIC.Name = "IS_PERIODIC";
             this.IS_PERIODIC.ReadOnly = true;
             this.IS_PERIODIC.Visible = false;
-            this.IS_PERIODIC.Width = 96;
+            this.IS_PERIODIC.Width = 97;
             // 
             // FIXED_DATE
             // 
@@ -188,7 +185,7 @@
             this.FIXED_DATE.Name = "FIXED_DATE";
             this.FIXED_DATE.ReadOnly = true;
             this.FIXED_DATE.Visible = false;
-            this.FIXED_DATE.Width = 73;
+            this.FIXED_DATE.Width = 74;
             // 
             // EVERY_TXT
             // 
@@ -198,7 +195,7 @@
             this.EVERY_TXT.Name = "EVERY_TXT";
             this.EVERY_TXT.ReadOnly = true;
             this.EVERY_TXT.Visible = false;
-            this.EVERY_TXT.Width = 91;
+            this.EVERY_TXT.Width = 92;
             // 
             // EVERY_DAY_NB
             // 
@@ -208,7 +205,7 @@
             this.EVERY_DAY_NB.Name = "EVERY_DAY_NB";
             this.EVERY_DAY_NB.ReadOnly = true;
             this.EVERY_DAY_NB.Visible = false;
-            this.EVERY_DAY_NB.Width = 112;
+            this.EVERY_DAY_NB.Width = 113;
             // 
             // START_DATE
             // 
@@ -234,7 +231,7 @@
             this.EVERY_MOUNTH_NB.Name = "EVERY_MOUNTH_NB";
             this.EVERY_MOUNTH_NB.ReadOnly = true;
             this.EVERY_MOUNTH_NB.Visible = false;
-            this.EVERY_MOUNTH_NB.Width = 140;
+            this.EVERY_MOUNTH_NB.Width = 141;
             // 
             // START_YEAR
             // 
@@ -244,7 +241,7 @@
             this.START_YEAR.Name = "START_YEAR";
             this.START_YEAR.ReadOnly = true;
             this.START_YEAR.Visible = false;
-            this.START_YEAR.Width = 91;
+            this.START_YEAR.Width = 92;
             // 
             // END_YEAR
             // 
@@ -254,7 +251,7 @@
             this.END_YEAR.Name = "END_YEAR";
             this.END_YEAR.ReadOnly = true;
             this.END_YEAR.Visible = false;
-            this.END_YEAR.Width = 91;
+            this.END_YEAR.Width = 92;
             // 
             // IS_CONCERN_WHO
             // 
@@ -282,7 +279,7 @@
             this.ANIM_NUM_IDENs.Name = "ANIM_NUM_IDENs";
             this.ANIM_NUM_IDENs.ReadOnly = true;
             this.ANIM_NUM_IDENs.Visible = false;
-            this.ANIM_NUM_IDENs.Width = 128;
+            this.ANIM_NUM_IDENs.Width = 129;
             // 
             // ANIM_ESPECE
             // 
@@ -292,7 +289,7 @@
             this.ANIM_ESPECE.Name = "ANIM_ESPECE";
             this.ANIM_ESPECE.ReadOnly = true;
             this.ANIM_ESPECE.Visible = false;
-            this.ANIM_ESPECE.Width = 106;
+            this.ANIM_ESPECE.Width = 107;
             // 
             // ANIM_RACE
             // 
@@ -302,7 +299,7 @@
             this.ANIM_RACE.Name = "ANIM_RACE";
             this.ANIM_RACE.ReadOnly = true;
             this.ANIM_RACE.Visible = false;
-            this.ANIM_RACE.Width = 95;
+            this.ANIM_RACE.Width = 96;
             // 
             // ANIM_SEXE
             // 
@@ -312,7 +309,7 @@
             this.ANIM_SEXE.Name = "ANIM_SEXE";
             this.ANIM_SEXE.ReadOnly = true;
             this.ANIM_SEXE.Visible = false;
-            this.ANIM_SEXE.Width = 91;
+            this.ANIM_SEXE.Width = 92;
             // 
             // POIDS_MAX
             // 
@@ -322,7 +319,7 @@
             this.POIDS_MAX.Name = "POIDS_MAX";
             this.POIDS_MAX.ReadOnly = true;
             this.POIDS_MAX.Visible = false;
-            this.POIDS_MAX.Width = 96;
+            this.POIDS_MAX.Width = 97;
             // 
             // DATE_NISS_MIN
             // 
@@ -332,7 +329,7 @@
             this.DATE_NISS_MIN.Name = "DATE_NISS_MIN";
             this.DATE_NISS_MIN.ReadOnly = true;
             this.DATE_NISS_MIN.Visible = false;
-            this.DATE_NISS_MIN.Width = 114;
+            this.DATE_NISS_MIN.Width = 115;
             // 
             // DATE_NISS_MAX
             // 
@@ -342,7 +339,7 @@
             this.DATE_NISS_MAX.Name = "DATE_NISS_MAX";
             this.DATE_NISS_MAX.ReadOnly = true;
             this.DATE_NISS_MAX.Visible = false;
-            this.DATE_NISS_MAX.Width = 117;
+            this.DATE_NISS_MAX.Width = 118;
             // 
             // DESCRIPTION
             // 
@@ -377,7 +374,7 @@
             this.SEND_ALERT_TO_CABINE_EMAIL.Name = "SEND_ALERT_TO_CABINE_EMAIL";
             this.SEND_ALERT_TO_CABINE_EMAIL.ReadOnly = true;
             this.SEND_ALERT_TO_CABINE_EMAIL.Visible = false;
-            this.SEND_ALERT_TO_CABINE_EMAIL.Width = 199;
+            this.SEND_ALERT_TO_CABINE_EMAIL.Width = 200;
             // 
             // SEND_ALERT_TO_CLIENT_EMAIL
             // 
@@ -387,7 +384,7 @@
             this.SEND_ALERT_TO_CLIENT_EMAIL.Name = "SEND_ALERT_TO_CLIENT_EMAIL";
             this.SEND_ALERT_TO_CLIENT_EMAIL.ReadOnly = true;
             this.SEND_ALERT_TO_CLIENT_EMAIL.Visible = false;
-            this.SEND_ALERT_TO_CLIENT_EMAIL.Width = 196;
+            this.SEND_ALERT_TO_CLIENT_EMAIL.Width = 197;
             // 
             // LAST_ALERT_EMAIL_CABINET_SENT_DATE
             // 
@@ -438,6 +435,28 @@
             this.NEXT_ALARM.Name = "NEXT_ALARM";
             this.NEXT_ALARM.ReadOnly = true;
             this.NEXT_ALARM.Visible = false;
+            // 
+            // LAST_ALERT_LUE_DATE
+            // 
+            this.LAST_ALERT_LUE_DATE.DataPropertyName = "LAST_ALERT_LUE_DATE";
+            this.LAST_ALERT_LUE_DATE.HeaderText = "LAST_ALERT_LUE_DATE";
+            this.LAST_ALERT_LUE_DATE.Name = "LAST_ALERT_LUE_DATE";
+            this.LAST_ALERT_LUE_DATE.ReadOnly = true;
+            this.LAST_ALERT_LUE_DATE.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Teal;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Salmon;
+            this.label1.Location = new System.Drawing.Point(598, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(14, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "X";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // Vaccin_Alerts
             // 
@@ -494,5 +513,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CABINET_EMAIL_ALREADY_SENT;
         private System.Windows.Forms.DataGridViewTextBoxColumn CLIENT_EMAIL_ALREADY_SENT;
         private System.Windows.Forms.DataGridViewTextBoxColumn NEXT_ALARM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LAST_ALERT_LUE_DATE;
     }
 }

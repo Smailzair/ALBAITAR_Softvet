@@ -439,7 +439,10 @@ namespace ALBAITAR_Softvet.Dialogs
                         "ALERT_BEFORE_DAYS",
                         "SEND_ALERT_TO_CABINE_EMAIL",
                         "SEND_ALERT_TO_CLIENT_EMAIL",
-                        "IS_FOR_ALL"
+                        "LAST_ALERT_EMAIL_CABINET_SENT_DATE",
+                        "LAST_ALERT_EMAIL_CLIENT_SENT_DATE",
+                        "IS_FOR_ALL",
+                        "LAST_ALERT_LUE_DATE"
                     }, new List<object>
                     {
                         FIXED_DATE != new DateTime(1999, 1, 1) ? FIXED_DATE : (object)DBNull.Value,
@@ -463,7 +466,10 @@ RELATED_CLIENTS_IDS,
 ALERT_BEFORE_DAYS,
 SEND_ALERT_TO_CABINE_EMAIL,
 SEND_ALERT_TO_CLIENT_EMAIL,
-IS_FOR_ALL
+DBNull.Value,
+DBNull.Value,
+IS_FOR_ALL,
+DBNull.Value
                     }, "ID = @ID", new List<string> { "ID" }, new List<object> { ID_Modif });
                 }
                 else //INSERT
