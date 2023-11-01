@@ -128,35 +128,98 @@ namespace ALBAITAR_Softvet
 
         public void Send_Email_Vaccin_Alerts()
         {
-            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) //If the internet available
+            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && Params != null) //If the internet available
             {
-                DataTable vaccin_alerts = PreConnection.Load_data("SELECT tb2.*,"
-                                         + "IF(SEND_ALERT_TO_CABINE_EMAIL = 1, IF(LAST_ALERT_EMAIL_CABINET_SENT_DATE <= NEXT_DATE AND LAST_ALERT_EMAIL_CABINET_SENT_DATE >= NEXT_ALARM,'Oui','Non'),'(Désactivé)') AS CABINET_EMAIL_ALREADY_SENT,"
-                                         + "IF(SEND_ALERT_TO_CLIENT_EMAIL = 1, IF(LAST_ALERT_EMAIL_CLIENT_SENT_DATE <= NEXT_DATE AND LAST_ALERT_EMAIL_CLIENT_SENT_DATE >= NEXT_ALARM,'Oui','Non'),'(Désactivé)') AS CLIENT_EMAIL_ALREADY_SENT "
-                                         + "FROM ("
-                                         + "SELECT tb1.*,DATE_SUB(tb1.NEXT_DATE, INTERVAL tb1.ALERT_BEFORE_DAYS DAY) as NEXT_ALARM FROM ("
-                                         + "SELECT *,"
-                                         + "    IF("
-                                         + "        FIXED_DATE >= CURRENT_DATE, "
-                                         + "        FIXED_DATE,"
-                                         + "        IF("
-                                         + "            CURRENT_DATE BETWEEN START_DATE AND END_DATE,"
-                                         + "            IF("
-                                         + "                STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d') >= CURRENT_DATE,"
-                                         + "                STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
-                                         + "                IF("
-                                         + "                    (YEAR(CURRENT_DATE) + 1) <= END_YEAR,"
-                                         + "                    STR_TO_DATE(CONCAT(CAST((YEAR(CURRENT_DATE) + 1) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
-                                         + "                    NULL"
-                                         + "                )"
-                                         + "            ),"
-                                         + "            IF(CURRENT_DATE < STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
-                                         + "                STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
-                                         + "                NULL"
-                                         + "                )"
-                                         + "        )"
-                                         + "    ) AS NEXT_DATE "
-                                         + "FROM tb_vaccin ORDER BY NEXT_DATE DESC) tb1) tb2  WHERE current_date <= NEXT_DATE AND current_date >= NEXT_ALARM;");
+                DataTable vaccin_alerts = PreConnection.Load_data("SELECT * FROM ( " +
+                                                                  "SELECT * FROM (" +
+                                                                  "SELECT " +
+                                                                  "concat(tb5.SEX,tb5.FAMNME,' ',tb5.NME) AS CLIENT_FULL_NME," +
+                                                                  "tb4.ID AS ANIM_ID,tb4.NME AS ANIM_NME,tb4.NUM_IDENTIF AS ANIM_NUM_IDENTIF,tb4.ESPECE AS ANIM_ESPECE,coalesce(ROUND(DATEDIFF(CURRENT_DATE, tb4.NISS_DATE)/365),'--') AS ANIM_AGE," +
+                                                                  "tb3.NEXT_DATE AS DATE,tb3.ID AS VACCIN_ID,tb3.VACCIN_NME,tb3.CABINET_EMAIL_ALREADY_SENT,tb3.CLIENT_EMAIL_ALREADY_SENT,tb3.IS_FOR_ALL," +
+                                                                  "tb5.EMAIL AS CLIENT_EMAIL FROM (SELECT * FROM tb_animaux WHERE coalesce(IS_RADIATED, 0) = 0) tb4 RIGHT JOIN (" +
+                                                                  "SELECT tb2.*," +
+                                                                  "IF(SEND_ALERT_TO_CABINE_EMAIL = 1, IF(LAST_ALERT_EMAIL_CABINET_SENT_DATE <= NEXT_DATE AND LAST_ALERT_EMAIL_CABINET_SENT_DATE >= NEXT_ALARM,'Oui','Non'),'(Désactivé)') AS CABINET_EMAIL_ALREADY_SENT," +
+                                                                  "IF(SEND_ALERT_TO_CLIENT_EMAIL = 1, IF(LAST_ALERT_EMAIL_CLIENT_SENT_DATE <= NEXT_DATE AND LAST_ALERT_EMAIL_CLIENT_SENT_DATE >= NEXT_ALARM,'Oui','Non'),'(Désactivé)') AS CLIENT_EMAIL_ALREADY_SENT " +
+                                                                  "FROM (" +
+                                                                  "SELECT tb1.*,DATE_SUB(tb1.NEXT_DATE, INTERVAL tb1.ALERT_BEFORE_DAYS DAY) as NEXT_ALARM FROM (" +
+                                                                  "SELECT *," +
+                                                                  "    IF(" +
+                                                                  "        FIXED_DATE >= CURRENT_DATE, " +
+                                                                  "        FIXED_DATE," +
+                                                                  "        IF(" +
+                                                                  "            CURRENT_DATE BETWEEN START_DATE AND END_DATE," +
+                                                                  "            IF(" +
+                                                                  "                STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d') >= CURRENT_DATE," +
+                                                                  "                STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d')," +
+                                                                  "                IF(" +
+                                                                  "                    (YEAR(CURRENT_DATE) + 1) <= END_YEAR," +
+                                                                  "                    STR_TO_DATE(CONCAT(CAST((YEAR(CURRENT_DATE) + 1) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d')," +
+                                                                  "                    NULL" +
+                                                                  "                )" +
+                                                                  "            )," +
+                                                                  "            IF(CURRENT_DATE < STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d')," +
+                                                                  "                STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d')," +
+                                                                  "                NULL" +
+                                                                  "                )" +
+                                                                  "        )" +
+                                                                  "    ) AS NEXT_DATE " +
+                                                                  "FROM tb_vaccin ORDER BY NEXT_DATE DESC) tb1) tb2  WHERE current_date <= NEXT_DATE AND current_date >= NEXT_ALARM AND IS_FOR_ALL = 0) tb3 ON " +
+                                                                  "(length(COALESCE(tb3.ANIM_NUM_IDENs, '')) > 0 AND tb3.ANIM_NUM_IDENs LIKE CONCAT('%',tb4.NUM_IDENTIF,'%')) OR " +
+                                                                  "(length(COALESCE(tb3.RELATED_CLIENTS_IDS, '')) > 0 AND (tb3.RELATED_CLIENTS_IDS LIKE CONCAT('%,',tb4.CLIENT_ID,',%') OR tb3.RELATED_CLIENTS_IDS LIKE CONCAT(tb4.CLIENT_ID,',%') OR tb3.RELATED_CLIENTS_IDS LIKE CONCAT('%,',tb4.CLIENT_ID) OR tb3.RELATED_CLIENTS_IDS LIKE tb4.CLIENT_ID)) OR " +
+                                                                  "(length(COALESCE(tb3.ANIM_NUM_IDENs, '')) = 0 AND length(COALESCE(tb3.RELATED_CLIENTS_IDS, '')) = 0 AND " +
+                                                                  "(length(COALESCE(tb3.ANIM_ESPECE, '')) = 0 OR (length(COALESCE(tb3.ANIM_ESPECE, '')) > 0 AND tb3.ANIM_ESPECE LIKE tb4.ESPECE)) AND " +
+                                                                  "(length(COALESCE(tb3.ANIM_RACE, '')) = 0 OR (length(COALESCE(tb3.ANIM_RACE, '')) > 0 AND tb3.ANIM_RACE LIKE tb4.RACE)) AND " +
+                                                                  "(length(COALESCE(tb3.ANIM_SEXE, '')) = 0 OR (length(COALESCE(tb3.ANIM_SEXE, '')) > 0 AND tb3.ANIM_SEXE LIKE tb4.SEXE)) AND " +
+                                                                  "((COALESCE(tb3.DATE_NISS_MIN, '1900-01-01') = '1900-01-01' AND COALESCE(tb3.DATE_NISS_MAX, '1900-01-01') = '1900-01-01') OR (YEAR(COALESCE(tb3.DATE_NISS_MIN, '1900-01-01')) > 2000  AND YEAR(COALESCE(tb3.DATE_NISS_MAX, '1900-01-01')) > 2000 AND COALESCE(tb4.NISS_DATE, '1800-01-01') BETWEEN COALESCE(tb3.DATE_NISS_MIN, '1900-01-01') AND COALESCE(tb3.DATE_NISS_MAX, '1900-01-01'))) AND " +
+                                                                  "(COALESCE(tb3.POIDS_MAX, 0) = 0 OR (COALESCE(tb3.POIDS_MAX, 0) > 0 AND coalesce((SELECT POIDS FROM tb_poids  WHERE ANIM_ID = tb4.ID ORDER BY DATETIME DESC LIMIT 1), -1) BETWEEN 0 AND COALESCE(tb3.POIDS_MAX, 0))) AND" +
+                                                                  "(length(COALESCE(tb3.RELATED_CLIENTS_IDS, '')) = 0 OR tb3.RELATED_CLIENTS_IDS LIKE CONCAT('%,',tb4.CLIENT_ID,',%') OR tb3.RELATED_CLIENTS_IDS LIKE CONCAT(tb4.CLIENT_ID,',%') OR tb3.RELATED_CLIENTS_IDS LIKE CONCAT('%,',tb4.CLIENT_ID) OR tb3.RELATED_CLIENTS_IDS LIKE tb4.CLIENT_ID))" +
+                                                                  "LEFT JOIN tb_clients tb5 ON tb5.ID = tb4.CLIENT_ID) tb5" +
+                                                                  " UNION " +
+                                                                  "SELECT DISTINCT(CLIENT_FULL_NME),NULL AS ANIM_ID, '-Tous-' AS ANIM_NME,'--' AS ANIM_NUM_IDENTIF,'-Tous-' AS ANIM_ESPECE,'--' AS ANIM_AGE," +
+                                                                  "DATE,VACCIN_ID,VACCIN_NME,CABINET_EMAIL_ALREADY_SENT,CLIENT_EMAIL_ALREADY_SENT,IS_FOR_ALL," +
+                                                                  "CLIENT_EMAIL " +
+                                                                  "FROM (" +
+                                                                  "SELECT tb4.ID AS ANIM_ID,tb4.NME AS ANIM_NME,tb4.NUM_IDENTIF AS ANIM_NUM_IDENTIF,tb4.ESPECE AS ANIM_ESPECE,coalesce(ROUND(DATEDIFF(CURRENT_DATE, tb4.NISS_DATE)/365),NULL) AS ANIM_AGE," +
+                                                                  "tb3.NEXT_DATE AS DATE,tb3.ID AS VACCIN_ID,tb3.VACCIN_NME,tb3.CABINET_EMAIL_ALREADY_SENT,tb3.CLIENT_EMAIL_ALREADY_SENT,tb3.IS_FOR_ALL," +
+                                                                  "concat(tb6.SEX,tb6.FAMNME,' ',tb6.NME) AS CLIENT_FULL_NME,tb6.EMAIL AS CLIENT_EMAIL FROM (SELECT * FROM tb_animaux WHERE coalesce(IS_RADIATED, 0) = 0) tb4 RIGHT JOIN (" +
+                                                                  "SELECT tb2.*," +
+                                                                  "IF(SEND_ALERT_TO_CABINE_EMAIL = 1, IF(LAST_ALERT_EMAIL_CABINET_SENT_DATE <= NEXT_DATE AND LAST_ALERT_EMAIL_CABINET_SENT_DATE >= NEXT_ALARM,'Oui','Non'),'(Désactivé)') AS CABINET_EMAIL_ALREADY_SENT," +
+                                                                  "IF(SEND_ALERT_TO_CLIENT_EMAIL = 1, IF(LAST_ALERT_EMAIL_CLIENT_SENT_DATE <= NEXT_DATE AND LAST_ALERT_EMAIL_CLIENT_SENT_DATE >= NEXT_ALARM,'Oui','Non'),'(Désactivé)') AS CLIENT_EMAIL_ALREADY_SENT " +
+                                                                  "FROM (" +
+                                                                  "SELECT tb1.*,DATE_SUB(tb1.NEXT_DATE, INTERVAL tb1.ALERT_BEFORE_DAYS DAY) as NEXT_ALARM FROM (" +
+                                                                  "SELECT *," +
+                                                                  "    IF(" +
+                                                                  "        FIXED_DATE >= CURRENT_DATE, " +
+                                                                  "        FIXED_DATE," +
+                                                                  "        IF(" +
+                                                                  "            CURRENT_DATE BETWEEN START_DATE AND END_DATE," +
+                                                                  "            IF(" +
+                                                                  "                STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d') >= CURRENT_DATE," +
+                                                                  "                STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d')," +
+                                                                  "                IF(" +
+                                                                  "                    (YEAR(CURRENT_DATE) + 1) <= END_YEAR," +
+                                                                  "                    STR_TO_DATE(CONCAT(CAST((YEAR(CURRENT_DATE) + 1) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d')," +
+                                                                  "                    NULL" +
+                                                                  "                )" +
+                                                                  "            )," +
+                                                                  "            IF(CURRENT_DATE < STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d')," +
+                                                                  "                STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d')," +
+                                                                  "                NULL" +
+                                                                  "                )" +
+                                                                  "        )" +
+                                                                  "    ) AS NEXT_DATE " +
+                                                                  "FROM tb_vaccin ORDER BY NEXT_DATE DESC) tb1) tb2  WHERE current_date <= NEXT_DATE AND current_date >= NEXT_ALARM AND IS_FOR_ALL = 1) tb3 ON " +
+                                                                  "(length(COALESCE(tb3.ANIM_NUM_IDENs, '')) > 0 AND tb3.ANIM_NUM_IDENs LIKE CONCAT('%',tb4.NUM_IDENTIF,'%')) OR " +
+                                                                  "(length(COALESCE(tb3.RELATED_CLIENTS_IDS, '')) > 0 AND (tb3.RELATED_CLIENTS_IDS LIKE CONCAT('%,',tb4.CLIENT_ID,',%') OR tb3.RELATED_CLIENTS_IDS LIKE CONCAT(tb4.CLIENT_ID,',%') OR tb3.RELATED_CLIENTS_IDS LIKE CONCAT('%,',tb4.CLIENT_ID) OR tb3.RELATED_CLIENTS_IDS LIKE tb4.CLIENT_ID)) OR " +
+                                                                  "(length(COALESCE(tb3.ANIM_NUM_IDENs, '')) = 0 AND length(COALESCE(tb3.RELATED_CLIENTS_IDS, '')) = 0 AND " +
+                                                                  "(length(COALESCE(tb3.ANIM_ESPECE, '')) = 0 OR (length(COALESCE(tb3.ANIM_ESPECE, '')) > 0 AND tb3.ANIM_ESPECE LIKE tb4.ESPECE)) AND " +
+                                                                  "(length(COALESCE(tb3.ANIM_RACE, '')) = 0 OR (length(COALESCE(tb3.ANIM_RACE, '')) > 0 AND tb3.ANIM_RACE LIKE tb4.RACE)) AND " +
+                                                                  "(length(COALESCE(tb3.ANIM_SEXE, '')) = 0 OR (length(COALESCE(tb3.ANIM_SEXE, '')) > 0 AND tb3.ANIM_SEXE LIKE tb4.SEXE)) AND " +
+                                                                  "((COALESCE(tb3.DATE_NISS_MIN, '1900-01-01') = '1900-01-01' AND COALESCE(tb3.DATE_NISS_MAX, '1900-01-01') = '1900-01-01') OR (YEAR(COALESCE(tb3.DATE_NISS_MIN, '1900-01-01')) > 2000  AND YEAR(COALESCE(tb3.DATE_NISS_MAX, '1900-01-01')) > 2000 AND COALESCE(tb4.NISS_DATE, '1800-01-01') BETWEEN COALESCE(tb3.DATE_NISS_MIN, '1900-01-01') AND COALESCE(tb3.DATE_NISS_MAX, '1900-01-01'))) AND " +
+                                                                  "(COALESCE(tb3.POIDS_MAX, 0) = 0 OR (COALESCE(tb3.POIDS_MAX, 0) > 0 AND coalesce((SELECT POIDS FROM tb_poids  WHERE ANIM_ID = tb4.ID ORDER BY DATETIME DESC LIMIT 1), -1) BETWEEN 0 AND COALESCE(tb3.POIDS_MAX, 0))) AND" +
+                                                                  "(length(COALESCE(tb3.RELATED_CLIENTS_IDS, '')) = 0 OR tb3.RELATED_CLIENTS_IDS LIKE CONCAT('%,',tb4.CLIENT_ID,',%') OR tb3.RELATED_CLIENTS_IDS LIKE CONCAT(tb4.CLIENT_ID,',%') OR tb3.RELATED_CLIENTS_IDS LIKE CONCAT('%,',tb4.CLIENT_ID) OR tb3.RELATED_CLIENTS_IDS LIKE tb4.CLIENT_ID))" +
+                                                                  "LEFT JOIN tb_clients tb6 ON tb6.ID = tb4.CLIENT_ID) tb6) tb7 ORDER BY CLIENT_FULL_NME,DATE;");//WHERE tb6.CABINET_EMAIL_ALREADY_SENT LIKE 'Non' OR tb6.CLIENT_EMAIL_ALREADY_SENT LIKE 'Non'
+
                 if (vaccin_alerts != null)
                 {
                     if (vaccin_alerts.Rows.Count > 0)
@@ -165,51 +228,306 @@ namespace ALBAITAR_Softvet
                         {
                             button33.Visible = true;
                         });
-                        //---------
-                        string standard_mail_msg = "";
-                        vaccin_alerts.AsEnumerable().Where(F => (string)F["CLIENT_EMAIL_ALREADY_SENT"] == "Non" && (int)F["IS_FOR_ALL"] == 1).ForEach(G =>
+                        //================= I - For te clients ===============================================
+                        vaccin_alerts.AsEnumerable().Where(G => (string)G["CLIENT_EMAIL_ALREADY_SENT"] == "Non" && !string.IsNullOrWhiteSpace(G["CLIENT_EMAIL"] != DBNull.Value ? (string)G["CLIENT_EMAIL"] : "")).Select(H => H["CLIENT_FULL_NME"]).Distinct().ForEach(D =>
                         {
-                            standard_mail_msg += "";
-                        });
+                            string client_full_nme = (string)D;
 
-                        vaccin_alerts.AsEnumerable().Where(F => (string)F["CLIENT_EMAIL_ALREADY_SENT"] == "Non" && (int)F["IS_FOR_ALL"] == 0).ForEach(G =>
+                            var builder = new BodyBuilder();
+                            builder.HtmlBody = @"<body>
+    <style>
+        table {
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+
+        th,
+        td {
+            border: 1px solid rgb(214, 214, 214);
+            padding: 5px;
+        }
+
+        p {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: black;
+        }
+    </style>
+    <p>Cher propriétaire d'animal, " + client_full_nme + @":</p>
+    <p>Nous espérons que vous et votre animal vous portez bien. Nous tenons à vous rappeler que la date de vaccination
+        de votre animal de compagnie approche à grands pas. La santé et le bien-être de votre animal de compagnie sont
+        d'une importance capitale pour nous, c'est pourquoi nous souhaitons vous assurer que votre animal reçoit les
+        soins appropriés et les vaccins nécessaires pour rester en bonne santé.</p>";
+
+                            var specif = vaccin_alerts.AsEnumerable().Where(K => (string)K["CLIENT_FULL_NME"] == client_full_nme && (int)K["IS_FOR_ALL"] == 0);
+
+                            if (specif.Any())
+                            {
+                                builder.HtmlBody += @"<p>Veuillez noter que le rendez-vous pour la vaccination de votre animal est prévu comme de suite:</p>
+    <p style=""color: chocolate; text-decoration: underline;"">&#8226; Vaccinations Spécifiées :</p>
+    <table>
+        <tr
+            style=""background-color: rgb(78, 83, 160); color: rgb(255, 255, 255); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"">
+            <th>Date</th>
+            <th>Vaccination</th>
+            <th>Animal (Nom)</th>
+            <th>N° Ident.</th>
+            <th>Espéce</th>
+            <th>Age</th>
+        </tr>";
+                                specif.ForEach(X =>
+                                {
+                                    builder.HtmlBody += @"<tr>
+            <td>" + ((DateTime)X["DATE"]).ToString("dd/MM/yyyy") + @"</td>
+            <td>" + X["VACCIN_NME"] + @"</td>
+            <td>" + X["ANIM_NME"] + @"</td>
+            <td>" + X["ANIM_NUM_IDENTIF"] + @"</td>
+            <td>" + X["ANIM_ESPECE"] + @"</td>
+            <td>" + X["ANIM_AGE"] + @"</td>
+        </tr>";
+                                });
+                                builder.HtmlBody += "</table>";
+                            }
+
+                            var for_all = vaccin_alerts.AsEnumerable().Where(K => (string)K["CLIENT_FULL_NME"] == client_full_nme && (int)K["IS_FOR_ALL"] == 1);
+                            if (for_all.Any())
+                            {
+                                builder.HtmlBody += @"<p style=""color: rgb(0, 92, 145); text-decoration: underline;"">&#8226; Vaccinations Globales :</p>
+    <table>
+        <tr
+            style=""background-color: rgb(78, 83, 160); color: rgb(255, 255, 255); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"">
+            <th>Date</th>
+            <th>Vaccination</th>
+            <th>Animal</th>
+        </tr>";
+                                for_all.ForEach(X =>
+                                {
+                                    builder.HtmlBody += @"<tr>
+            <td>" + ((DateTime)X["DATE"]).ToString("dd/MM/yyyy") + @"</td>
+            <td>" + X["VACCIN_NME"] + @"</td>
+            <td>" + X["ANIM_NME"] + @"</td>
+        </tr>";
+                                });
+                                builder.HtmlBody += "</table>";
+                            }
+
+                            builder.HtmlBody += @"<p>Nous vous prions de bien vouloir prendre les dispositions nécessaires pour être présent à l'heure convenue. Si
+        vous rencontrez des problèmes ou si vous avez des questions, n'hésitez pas à nous contacter immédiatement afin
+        que nous puissions trouver une solution adaptée à vos besoins.<br><br>
+        Nous nous engageons à fournir les meilleurs soins possibles à votre animal de compagnie, et nous vous remercions
+        pour votre confiance continue en nos services vétérinaires. Si vous avez besoin de plus d'informations ou si
+        vous souhaitez discuter de tout aspect spécifique de la vaccination, n'hésitez pas à nous contacter.<br><br>
+        Nous sommes impatients de vous accueillir avec votre animal de compagnie à la date convenue pour assurer sa
+        santé et son bien-être à long terme.<br><br>
+        Cordialement,</p>
+    
+<p style=""color: rgb(146, 100, 0);"">--------------------------------------------<br>
+                            <span style=""font-weight: bold; color: rgb(95, 182, 95);"">" + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + @"</span><br>";
+
+                            if (Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString().Length > 0)
+                            {
+                                builder.HtmlBody += @"Tél: " + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + "<br>";
+                            }
+                            if (Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString().Length > 0)
+                            {
+                                builder.HtmlBody += @"Email: " + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + "<br>";
+                            }
+                            if (Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString().Length > 0)
+                            {
+                                builder.HtmlBody += @"Adresse: " + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + "<br>";
+                            }
+                            builder.HtmlBody += "--------------------------------------------</p>" +
+                            "<p style=\"color: rgb(184, 223, 235);\">RancoSoft&copy;</p>" +
+                            "</body>";
+
+
+                            //---------------------------------------
+
+                            MimeMessage Mssg = new MimeMessage();
+                            Mssg.From.Add(new MailboxAddress("RancoSoft", "rancosoft@gmail.com"));
+                            string clt_email = vaccin_alerts.AsEnumerable().Where(G => (G["CLIENT_FULL_NME"] != DBNull.Value ? (string)G["CLIENT_FULL_NME"] : "") == client_full_nme).FirstOrDefault()["CLIENT_EMAIL"].ToString();
+                            Mssg.To.Add(MailboxAddress.Parse(clt_email));
+                            Mssg.Subject = "ALBAITAR Softvet - Rappel de rendez-vous pour la vaccination de votre animal";
+                            Mssg.Body = builder.ToMessageBody();
+                            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) //If the internet available
+                            {
+                                SmtpClient clnt = new SmtpClient();
+                                try
+                                {
+                                    clnt.Connect("smtp.gmail.com", 465, true);
+                                    clnt.Authenticate("rancosoft@gmail.com", PreConnection.Traduct_Codified_txt(Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT));
+                                    clnt.Send(Mssg);
+                                    //------------------                                    
+                                }
+                                catch (Exception ex)
+                                {
+                                    return;
+                                }
+                                finally
+                                {
+                                    clnt.Disconnect(true);
+                                    clnt.Dispose();
+                                }
+                                //-----------
+
+                            }
+                        });
+                        string vaccin_ids = "";
+                        vaccin_alerts.AsEnumerable().Select(E => E["VACCIN_ID"]).Distinct().ForEach(Z => vaccin_ids += "," + Z);
+                        vaccin_ids = vaccin_ids.Length > 0 ? vaccin_ids.Substring(1) : vaccin_ids;
+                        if (vaccin_ids.Length > 0)
                         {
-                            string mail = standard_mail_msg;
-                            mail += "";
+                            PreConnection.Excut_Cmd_personnel("UPDATE tb_vaccin SET LAST_ALERT_EMAIL_CLIENT_SENT_DATE = '" + DateTime.Now.ToString("yyyy-MM-dd") + "' WHERE ID IN (" + vaccin_ids + ");", null, null);
+                        }
+                        //================= II - For the Cabinet ===============================================
 
-                        //    MimeMessage Mssg = new MimeMessage();
-                        //    Mssg.From.Add(new MailboxAddress("RancoSoft", "rancosoft@gmail.com"));
-                        //    Mssg.To.Add(MailboxAddress.Parse(datatt.Rows[0]["EMAIL"].ToString()));
-                        //    Mssg.Subject = "ALBAITAR Softvet - Récuperation de mot de passe";
-                        //    Mssg.Body = new TextPart("plain")
-                        //    {
-                        //        Text = @"Bonjour " + (datatt.Rows[0]["SEX"].ToString() == "M" ? "Mr." : "Mlle.") + datatt.Rows[0]["USER_NME"].ToString() + " " + datatt.Rows[0]["USER_FAMNME"].ToString() + @",
-                        //Voici votre mot de passe de logiciel '" + Application.ProductName.ToString() + "' : " + ((datatt.Rows[0]["PASSWORD"].ToString() ?? "").Length > 0 ? (datatt.Rows[0]["PASSWORD"].ToString() ?? "") : "'Vide !'")
-                        //    };
+                        string cabinet_nme = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1 && !string.IsNullOrWhiteSpace(QQ["VAL"] != DBNull.Value ? (string)QQ["VAL"] : "")).Any() ? Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() : "";
+                        string cabinet_email = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3 && !string.IsNullOrWhiteSpace(QQ["VAL"] != DBNull.Value ? (string)QQ["VAL"] : "")).Any() ? Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() : "";
 
-                        //    if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) //If the internet available
-                        //    {
-                        //        SmtpClient clnt = new SmtpClient();
-                        //        try
-                        //        {
-                        //            clnt.Connect("smtp.gmail.com", 465, true);
-                        //            clnt.Authenticate("rancosoft@gmail.com", PreConnection.Traduct_Codified_txt(Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT));
-                        //            clnt.Send(Mssg);
-                        //           // MessageBox.Show("Veuillez consultez votre Email, pour trouver votre mot de passe.", "Bien envoyé :", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        //        }
-                        //        catch (Exception ex)
-                        //        {
-                        //        }
-                        //        finally
-                        //        {
-                        //            clnt.Disconnect(true);
-                        //            clnt.Dispose();
-                        //        }
-                        //        //-----------
-                        //        Close();
+                        if (!string.IsNullOrWhiteSpace(cabinet_nme) && !string.IsNullOrWhiteSpace(cabinet_email))
+                        {
+                            var vaccin_alertss = vaccin_alerts.AsEnumerable().Where(G => (string)G["CABINET_EMAIL_ALREADY_SENT"] == "Non");
+                            if (vaccin_alertss.Any())
+                            {
+                                var builder = new BodyBuilder();
+                                builder.HtmlBody = @"<body>
+                                                        <style>
+                                                            table {
+                                                                border-collapse: collapse;
+                                                                font-family: Arial, sans-serif;
+                                                            }
+                                                             th,
+                                                             td {
+                                                                 border: 1px solid rgb(214, 214, 214);
+                                                                 padding: 5px;
+                                                             }
 
-                        //    }
-                        });
+                                                             p {
+                                                                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                                                 color: black;
+                                                             }
+                                                         </style>
+                                                         <p>Cher personnel du cabinet '" + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + @"',<br>
+                                                             Nous souhaitons attirer votre attention sur les rendez-vous de vaccination proches qui nécessitent une préparation adéquate. Il est important de vous assurer que vous disposez des ressources nécessaires et que votre équipe est prête à fournir des services de qualité supérieure à nos patients à fourrure bien-aimés.<br>
+                                                             Veuillez assurer que les fournitures médicales pertinentes sont en stock.</p>
+                                                             </p>";
+                                var specif = vaccin_alertss.AsEnumerable().Where(K => (int)K["IS_FOR_ALL"] == 0);
+                                if (specif.Any())
+                                {
+                                    builder.HtmlBody += @"<p style=""color: chocolate; text-decoration: underline;"">&#8226; Vaccinations Spécifiées :</p>
+    <table>
+        <tr
+            style=""background-color: rgb(78, 83, 160); color: rgb(255, 255, 255); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"">
+            <th>Date</th>
+            <th>Vaccination</th>
+            <th style=""background-color: rgb(1, 172, 92);"">Animal (Nom)</th>
+            <th style=""background-color: rgb(1, 172, 92);"">N° Ident.</th>
+            <th style=""background-color: rgb(1, 172, 92);"">Espéce</th>
+            <th style=""background-color: rgb(1, 172, 92);"">Age</th>
+            <th style=""background-color: rgb(172, 35, 1);"">Propriétaire</th>
+            <th style=""background-color: rgb(172, 35, 1);"">Propriétaire Email</th>
+            <th style=""background-color: rgb(172, 35, 1);"">Rappel email envoyé au propriétaire?</th>
+        </tr>";
+                                    specif.ForEach(X =>
+                                    {
+                                        builder.HtmlBody += @"<tr>
+            <td>" + ((DateTime)X["DATE"]).ToString("dd/MM/yyyy") + @"</td>
+            <td>" + X["VACCIN_NME"] + @"</td>
+            <td>" + X["ANIM_NME"] + @"</td>
+            <td>" + X["ANIM_NUM_IDENTIF"] + @"</td>
+            <td>" + X["ANIM_ESPECE"] + @"</td>
+            <td>" + X["ANIM_AGE"] + @"</td>
+            <td>" + X["CLIENT_FULL_NME"] + @"</td>
+            <td>" + X["CLIENT_EMAIL"] + @"</td>
+            <td>" + X["CLIENT_EMAIL_ALREADY_SENT"] + @"</td>
+        </tr>";
+                                    });
+                                    builder.HtmlBody += "</table>";
+                                }
+
+                                var for_all = vaccin_alertss.AsEnumerable().Where(K => (int)K["IS_FOR_ALL"] == 1);
+                                if (for_all.Any())
+                                {
+                                    builder.HtmlBody += @"<p style=""color: rgb(0, 92, 145); text-decoration: underline;"">&#8226; Vaccinations Globales :</p>
+    <table>
+        <tr
+            style=""background-color: rgb(78, 83, 160); color: rgb(255, 255, 255); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"">
+            <th>Date</th>
+            <th>Vaccination</th>
+            <th>Animal</th>
+        </tr>";
+
+                                    List<int> alredy_wrote = new List<int>();
+                                    for_all.ForEach(X =>
+                                    {
+                                        if (!alredy_wrote.Contains((int)X["VACCIN_ID"]))
+                                        {
+                                            alredy_wrote.Add((int)X["VACCIN_ID"]);
+
+                                            builder.HtmlBody += @"<tr>
+            <td>" + ((DateTime)X["DATE"]).ToString("dd/MM/yyyy") + @"</td>
+            <td>" + X["VACCIN_NME"] + @"</td>
+            <td>" + X["ANIM_NME"] + @"</td>
+        </tr>";
+                                        }
+                                    });
+                                    builder.HtmlBody += "</table>";
+                                }
+
+                                builder.HtmlBody += @"<p>Nous encourageons également une communication proactive avec les propriétaires d'animaux pour confirmer leurs rendez-vous et leur fournir toute information supplémentaire dont ils pourraient avoir besoin.<br>
+        N'hésitez pas à contacter notre équipe de gestion si vous avez des questions ou des préoccupations concernant les rendez-vous à venir. Votre diligence et votre engagement envers le bien-être des animaux de compagnie sont grandement appréciés.<br>
+        Avec nos remerciements anticipés pour votre attention et votre soin continus.</p>
+    
+<p style=""color: rgb(146, 100, 0);"">--------------------------------------------<br>
+                            <span style=""font-weight: bold; color: rgb(95, 182, 95);"">" + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + @"</span><br>";
+
+                                if (Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString().Length > 0)
+                                {
+                                    builder.HtmlBody += @"Tél: " + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + "<br>";
+                                }
+                                builder.HtmlBody += @"Email: " + cabinet_email + "<br>";
+                                if (Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString().Length > 0)
+                                {
+                                    builder.HtmlBody += @"Adresse: " + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + "<br>";
+                                }
+                                builder.HtmlBody += "--------------------------------------------</p>" +
+                                "<p style=\"color: rgb(184, 223, 235);\">RancoSoft&copy;</p>" +
+                                "</body>";
+                                //---------------------------------------
+                                MimeMessage Mssg = new MimeMessage();
+                                Mssg.From.Add(new MailboxAddress("RancoSoft", "rancosoft@gmail.com"));
+                                Mssg.To.Add(MailboxAddress.Parse(cabinet_email));
+                                Mssg.Subject = "ALBAITAR Softvet - Rappel de rendez-vous pour les prochaines vaccinations";
+                                Mssg.Body = builder.ToMessageBody();
+                                if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) //If the internet available
+                                {
+                                    SmtpClient clnt = new SmtpClient();
+                                    try
+                                    {
+                                        clnt.Connect("smtp.gmail.com", 465, true);
+                                        clnt.Authenticate("rancosoft@gmail.com", PreConnection.Traduct_Codified_txt(Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT));
+                                        clnt.Send(Mssg);
+                                        //------------------                                    
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        return;
+                                    }
+                                    finally
+                                    {
+                                        clnt.Disconnect(true);
+                                        clnt.Dispose();
+                                    }
+                                    //-----------
+                                    string vaccin_idsz = "";
+                                    vaccin_alertss.AsEnumerable().Select(E => E["VACCIN_ID"]).Distinct().ForEach(Z => vaccin_idsz += "," + Z);
+                                    vaccin_idsz = vaccin_idsz.Length > 0 ? vaccin_idsz.Substring(1) : vaccin_idsz;
+                                    if (vaccin_idsz.Length > 0)
+                                    {
+                                        PreConnection.Excut_Cmd_personnel("UPDATE tb_vaccin SET LAST_ALERT_EMAIL_CABINET_SENT_DATE = '" + DateTime.Now.ToString("yyyy-MM-dd") + "' WHERE ID IN (" + vaccin_ids + ");", null, null);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -547,7 +865,7 @@ namespace ALBAITAR_Softvet
                     label4.Visible = textBox4.Visible = dataGridView4.Visible = dataGridView6.Visible = label9.Visible = button27.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60000" && (Int32)QQ[3] == 1).Count() > 0;
                     button16.Visible = dataGridView4.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
                     button19.Visible = dataGridView4.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier                    
-                    //---->> Factures
+                                                                                                                                                                                   //---->> Factures
                     label5.Visible = textBox5.Visible = dataGridView5.Visible = dataGridView7.Visible = panel3.Visible = panel4.Visible = label7.Visible = label8.Visible = label6.Visible = button26.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70000" && (Int32)QQ[3] == 1).Count() > 0;
                     button20.Visible = dataGridView5.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
                     button21.Visible = dataGridView5.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier                    
@@ -567,49 +885,49 @@ namespace ALBAITAR_Softvet
             //                                             + "FROM tb_maladies WHERE (START_DATE <= current_timestamp() OR START_DATE IS NULL) AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL) "
             //                                             + "GROUP BY ANIM_ID) tb3 ON tb3.ANIM_ID = tb1.ID;");
             Main_Frm_animals_tbl = PreConnection.Load_data("SELECT  " +
-"    tb1.*,  " +
-"    tb2.CLIENT_FULL_NME,  " +
-"    tb4.MALAD_NME,  " +
-"    tb4.LAST_MALAD_DATE  " +
-"FROM  " +
-"    tb_animaux tb1  " +
-"LEFT JOIN  " +
-"    (SELECT  " +
-"        ID,  " +
-"        CONCAT(FAMNME,' ',NME) AS CLIENT_FULL_NME  " +
-"     FROM  " +
-"        tb_clients) tb2  " +
-"ON  " +
-"    tb1.CLIENT_ID = tb2.ID  " +
-"LEFT JOIN  " +
-"    (SELECT  " +
-"        tb_maladies.ANIM_ID,  " +
-"        tb_maladies.START_DATE AS LAST_MALAD_DATE,  " +
-"        tb_maladies.MALAD_NME  " +
-"     FROM  " +
-"        tb_maladies  " +
-"     JOIN  " +
-"        (SELECT  " +
-"            ANIM_ID,  " +
-"            MAX(START_DATE) AS max_start_date  " +
-"         FROM  " +
-"            tb_maladies  " +
-"         WHERE  " +
-"            (START_DATE <= current_timestamp() OR START_DATE IS NULL)  " +
-"            AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL)  " +
-"         GROUP BY  " +
-"            ANIM_ID) tb3  " +
-"     ON  " +
-"        tb_maladies.ANIM_ID = tb3.ANIM_ID  " +
-"        AND tb_maladies.START_DATE = tb3.max_start_date) tb4  " +
-"ON  " +
-"    tb4.ANIM_ID = tb1.ID; ");
+    "    tb1.*,  " +
+    "    tb2.CLIENT_FULL_NME,  " +
+    "    tb4.MALAD_NME,  " +
+    "    tb4.LAST_MALAD_DATE  " +
+    "FROM  " +
+    "    tb_animaux tb1  " +
+    "LEFT JOIN  " +
+    "    (SELECT  " +
+    "        ID,  " +
+    "        CONCAT(FAMNME,' ',NME) AS CLIENT_FULL_NME  " +
+    "     FROM  " +
+    "        tb_clients) tb2  " +
+    "ON  " +
+    "    tb1.CLIENT_ID = tb2.ID  " +
+    "LEFT JOIN  " +
+    "    (SELECT  " +
+    "        tb_maladies.ANIM_ID,  " +
+    "        tb_maladies.START_DATE AS LAST_MALAD_DATE,  " +
+    "        tb_maladies.MALAD_NME  " +
+    "     FROM  " +
+    "        tb_maladies  " +
+    "     JOIN  " +
+    "        (SELECT  " +
+    "            ANIM_ID,  " +
+    "            MAX(START_DATE) AS max_start_date  " +
+    "         FROM  " +
+    "            tb_maladies  " +
+    "         WHERE  " +
+    "            (START_DATE <= current_timestamp() OR START_DATE IS NULL)  " +
+    "            AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL)  " +
+    "         GROUP BY  " +
+    "            ANIM_ID) tb3  " +
+    "     ON  " +
+    "        tb_maladies.ANIM_ID = tb3.ANIM_ID  " +
+    "        AND tb_maladies.START_DATE = tb3.max_start_date) tb4  " +
+    "ON  " +
+    "    tb4.ANIM_ID = tb1.ID; ");
             main_poids_tab = PreConnection.Load_data("SELECT * FROM tb_poids;");
             comboBox1.SelectedIndex = 1;
             //-----
             Send_Vaccin_Alerts = new Thread(new ThreadStart(Send_Email_Vaccin_Alerts));
             Send_Vaccin_Alerts.Start();
-           // Send_Vaccin_Alerts.Join();
+            // Send_Vaccin_Alerts.Join();
             //--------------
             Application.OpenForms["Splash"]?.Close();
         }
@@ -626,43 +944,43 @@ namespace ALBAITAR_Softvet
             //                                             + "FROM tb_maladies WHERE (START_DATE <= current_timestamp() OR START_DATE IS NULL) AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL) "
             //                                             + "GROUP BY ANIM_ID) tb3 ON tb3.ANIM_ID = tb1.ID;");
             Main_Frm_animals_tbl = PreConnection.Load_data("SELECT  " +
-"    tb1.*,  " +
-"    tb2.CLIENT_FULL_NME,  " +
-"    tb4.MALAD_NME,  " +
-"    tb4.LAST_MALAD_DATE  " +
-"FROM  " +
-"    tb_animaux tb1  " +
-"LEFT JOIN  " +
-"    (SELECT  " +
-"        ID,  " +
-"        CONCAT(FAMNME,' ',NME) AS CLIENT_FULL_NME  " +
-"     FROM  " +
-"        tb_clients) tb2  " +
-"ON  " +
-"    tb1.CLIENT_ID = tb2.ID  " +
-"LEFT JOIN  " +
-"    (SELECT  " +
-"        tb_maladies.ANIM_ID,  " +
-"        tb_maladies.START_DATE AS LAST_MALAD_DATE,  " +
-"        tb_maladies.MALAD_NME  " +
-"     FROM  " +
-"        tb_maladies  " +
-"     JOIN  " +
-"        (SELECT  " +
-"            ANIM_ID,  " +
-"            MAX(START_DATE) AS max_start_date  " +
-"         FROM  " +
-"            tb_maladies  " +
-"         WHERE  " +
-"            (START_DATE <= current_timestamp() OR START_DATE IS NULL)  " +
-"            AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL)  " +
-"         GROUP BY  " +
-"            ANIM_ID) tb3  " +
-"     ON  " +
-"        tb_maladies.ANIM_ID = tb3.ANIM_ID  " +
-"        AND tb_maladies.START_DATE = tb3.max_start_date) tb4  " +
-"ON  " +
-"    tb4.ANIM_ID = tb1.ID; ");
+    "    tb1.*,  " +
+    "    tb2.CLIENT_FULL_NME,  " +
+    "    tb4.MALAD_NME,  " +
+    "    tb4.LAST_MALAD_DATE  " +
+    "FROM  " +
+    "    tb_animaux tb1  " +
+    "LEFT JOIN  " +
+    "    (SELECT  " +
+    "        ID,  " +
+    "        CONCAT(FAMNME,' ',NME) AS CLIENT_FULL_NME  " +
+    "     FROM  " +
+    "        tb_clients) tb2  " +
+    "ON  " +
+    "    tb1.CLIENT_ID = tb2.ID  " +
+    "LEFT JOIN  " +
+    "    (SELECT  " +
+    "        tb_maladies.ANIM_ID,  " +
+    "        tb_maladies.START_DATE AS LAST_MALAD_DATE,  " +
+    "        tb_maladies.MALAD_NME  " +
+    "     FROM  " +
+    "        tb_maladies  " +
+    "     JOIN  " +
+    "        (SELECT  " +
+    "            ANIM_ID,  " +
+    "            MAX(START_DATE) AS max_start_date  " +
+    "         FROM  " +
+    "            tb_maladies  " +
+    "         WHERE  " +
+    "            (START_DATE <= current_timestamp() OR START_DATE IS NULL)  " +
+    "            AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL)  " +
+    "         GROUP BY  " +
+    "            ANIM_ID) tb3  " +
+    "     ON  " +
+    "        tb_maladies.ANIM_ID = tb3.ANIM_ID  " +
+    "        AND tb_maladies.START_DATE = tb3.max_start_date) tb4  " +
+    "ON  " +
+    "    tb4.ANIM_ID = tb1.ID; ");
             comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
             comboBox1.SelectedIndex = cb1_idx;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;

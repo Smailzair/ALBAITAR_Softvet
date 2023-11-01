@@ -33,34 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Vaccinations));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.radioButton10 = new System.Windows.Forms.RadioButton();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VACCIN_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IS_PERIODIC = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,6 +63,34 @@
             this.IS_FOR_ALL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NEXT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LAST_ALERT_LUE_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.radioButton9 = new System.Windows.Forms.RadioButton();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -152,11 +152,285 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(829, 208);
+            this.dataGridView1.Size = new System.Drawing.Size(941, 208);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // VACCIN_NME
+            // 
+            this.VACCIN_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.VACCIN_NME.DataPropertyName = "VACCIN_NME";
+            this.VACCIN_NME.HeaderText = "Vaccination";
+            this.VACCIN_NME.Name = "VACCIN_NME";
+            this.VACCIN_NME.ReadOnly = true;
+            // 
+            // IS_PERIODIC
+            // 
+            this.IS_PERIODIC.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.IS_PERIODIC.DataPropertyName = "IS_PERIODIC";
+            this.IS_PERIODIC.HeaderText = "Periodique?";
+            this.IS_PERIODIC.Name = "IS_PERIODIC";
+            this.IS_PERIODIC.ReadOnly = true;
+            this.IS_PERIODIC.Width = 96;
+            // 
+            // FIXED_DATE
+            // 
+            this.FIXED_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FIXED_DATE.DataPropertyName = "FIXED_DATE";
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.FIXED_DATE.DefaultCellStyle = dataGridViewCellStyle2;
+            this.FIXED_DATE.HeaderText = "Date fixé";
+            this.FIXED_DATE.Name = "FIXED_DATE";
+            this.FIXED_DATE.ReadOnly = true;
+            this.FIXED_DATE.Width = 73;
+            // 
+            // EVERY_TXT
+            // 
+            this.EVERY_TXT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.EVERY_TXT.DataPropertyName = "EVERY_TXT";
+            this.EVERY_TXT.HeaderText = "Périodique - Chaque";
+            this.EVERY_TXT.Name = "EVERY_TXT";
+            this.EVERY_TXT.ReadOnly = true;
+            this.EVERY_TXT.Width = 91;
+            // 
+            // EVERY_DAY_NB
+            // 
+            this.EVERY_DAY_NB.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.EVERY_DAY_NB.DataPropertyName = "EVERY_DAY_NB";
+            this.EVERY_DAY_NB.HeaderText = "EVERY_DAY_NB";
+            this.EVERY_DAY_NB.Name = "EVERY_DAY_NB";
+            this.EVERY_DAY_NB.ReadOnly = true;
+            this.EVERY_DAY_NB.Visible = false;
+            this.EVERY_DAY_NB.Width = 113;
+            // 
+            // START_DATE
+            // 
+            this.START_DATE.DataPropertyName = "START_DATE";
+            this.START_DATE.HeaderText = "START_DATE";
+            this.START_DATE.Name = "START_DATE";
+            this.START_DATE.ReadOnly = true;
+            this.START_DATE.Visible = false;
+            // 
+            // END_DATE
+            // 
+            this.END_DATE.DataPropertyName = "END_DATE";
+            this.END_DATE.HeaderText = "END_DATE";
+            this.END_DATE.Name = "END_DATE";
+            this.END_DATE.ReadOnly = true;
+            this.END_DATE.Visible = false;
+            // 
+            // EVERY_MOUNTH_NB
+            // 
+            this.EVERY_MOUNTH_NB.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.EVERY_MOUNTH_NB.DataPropertyName = "EVERY_MOUNTH_NB";
+            this.EVERY_MOUNTH_NB.HeaderText = "EVERY_MOUNTH_NB";
+            this.EVERY_MOUNTH_NB.Name = "EVERY_MOUNTH_NB";
+            this.EVERY_MOUNTH_NB.ReadOnly = true;
+            this.EVERY_MOUNTH_NB.Visible = false;
+            this.EVERY_MOUNTH_NB.Width = 141;
+            // 
+            // START_YEAR
+            // 
+            this.START_YEAR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.START_YEAR.DataPropertyName = "START_YEAR";
+            this.START_YEAR.HeaderText = "Périodique - De";
+            this.START_YEAR.Name = "START_YEAR";
+            this.START_YEAR.ReadOnly = true;
+            this.START_YEAR.Width = 91;
+            // 
+            // END_YEAR
+            // 
+            this.END_YEAR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.END_YEAR.DataPropertyName = "END_YEAR";
+            this.END_YEAR.HeaderText = "Périodique - Jusqu\'à";
+            this.END_YEAR.Name = "END_YEAR";
+            this.END_YEAR.ReadOnly = true;
+            this.END_YEAR.Width = 91;
+            // 
+            // IS_CONCERN_WHO
+            // 
+            this.IS_CONCERN_WHO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.IS_CONCERN_WHO.DataPropertyName = "IS_CONCERN_WHO";
+            this.IS_CONCERN_WHO.HeaderText = "Concernant";
+            this.IS_CONCERN_WHO.Name = "IS_CONCERN_WHO";
+            this.IS_CONCERN_WHO.ReadOnly = true;
+            this.IS_CONCERN_WHO.Width = 97;
+            // 
+            // IS_IMPORTANT
+            // 
+            this.IS_IMPORTANT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.IS_IMPORTANT.DataPropertyName = "IS_IMPORTANT";
+            this.IS_IMPORTANT.HeaderText = "Important?";
+            this.IS_IMPORTANT.Name = "IS_IMPORTANT";
+            this.IS_IMPORTANT.ReadOnly = true;
+            this.IS_IMPORTANT.Width = 92;
+            // 
+            // ANIM_NUM_IDENs
+            // 
+            this.ANIM_NUM_IDENs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIM_NUM_IDENs.DataPropertyName = "ANIM_NUM_IDENs";
+            this.ANIM_NUM_IDENs.HeaderText = "ANIM_NUM_IDENs";
+            this.ANIM_NUM_IDENs.Name = "ANIM_NUM_IDENs";
+            this.ANIM_NUM_IDENs.ReadOnly = true;
+            this.ANIM_NUM_IDENs.Visible = false;
+            this.ANIM_NUM_IDENs.Width = 129;
+            // 
+            // ANIM_ESPECE
+            // 
+            this.ANIM_ESPECE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIM_ESPECE.DataPropertyName = "ANIM_ESPECE";
+            this.ANIM_ESPECE.HeaderText = "ANIM_ESPECE";
+            this.ANIM_ESPECE.Name = "ANIM_ESPECE";
+            this.ANIM_ESPECE.ReadOnly = true;
+            this.ANIM_ESPECE.Visible = false;
+            this.ANIM_ESPECE.Width = 107;
+            // 
+            // ANIM_RACE
+            // 
+            this.ANIM_RACE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIM_RACE.DataPropertyName = "ANIM_RACE";
+            this.ANIM_RACE.HeaderText = "ANIM_RACE";
+            this.ANIM_RACE.Name = "ANIM_RACE";
+            this.ANIM_RACE.ReadOnly = true;
+            this.ANIM_RACE.Visible = false;
+            this.ANIM_RACE.Width = 96;
+            // 
+            // ANIM_SEXE
+            // 
+            this.ANIM_SEXE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIM_SEXE.DataPropertyName = "ANIM_SEXE";
+            this.ANIM_SEXE.HeaderText = "ANIM_SEXE";
+            this.ANIM_SEXE.Name = "ANIM_SEXE";
+            this.ANIM_SEXE.ReadOnly = true;
+            this.ANIM_SEXE.Visible = false;
+            this.ANIM_SEXE.Width = 92;
+            // 
+            // POIDS_MAX
+            // 
+            this.POIDS_MAX.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.POIDS_MAX.DataPropertyName = "POIDS_MAX";
+            this.POIDS_MAX.HeaderText = "POIDS_MAX";
+            this.POIDS_MAX.Name = "POIDS_MAX";
+            this.POIDS_MAX.ReadOnly = true;
+            this.POIDS_MAX.Visible = false;
+            this.POIDS_MAX.Width = 97;
+            // 
+            // DATE_NISS_MIN
+            // 
+            this.DATE_NISS_MIN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATE_NISS_MIN.DataPropertyName = "DATE_NISS_MIN";
+            this.DATE_NISS_MIN.HeaderText = "DATE_NISS_MIN";
+            this.DATE_NISS_MIN.Name = "DATE_NISS_MIN";
+            this.DATE_NISS_MIN.ReadOnly = true;
+            this.DATE_NISS_MIN.Visible = false;
+            this.DATE_NISS_MIN.Width = 115;
+            // 
+            // DATE_NISS_MAX
+            // 
+            this.DATE_NISS_MAX.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATE_NISS_MAX.DataPropertyName = "DATE_NISS_MAX";
+            this.DATE_NISS_MAX.HeaderText = "DATE_NISS_MAX";
+            this.DATE_NISS_MAX.Name = "DATE_NISS_MAX";
+            this.DATE_NISS_MAX.ReadOnly = true;
+            this.DATE_NISS_MAX.Visible = false;
+            this.DATE_NISS_MAX.Width = 118;
+            // 
+            // DESCRIPTION
+            // 
+            this.DESCRIPTION.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.DESCRIPTION.DataPropertyName = "DESCRIPTION";
+            this.DESCRIPTION.HeaderText = "Déscription";
+            this.DESCRIPTION.Name = "DESCRIPTION";
+            this.DESCRIPTION.ReadOnly = true;
+            this.DESCRIPTION.Visible = false;
+            // 
+            // RELATED_CLIENTS_IDS
+            // 
+            this.RELATED_CLIENTS_IDS.DataPropertyName = "RELATED_CLIENTS_IDS";
+            this.RELATED_CLIENTS_IDS.HeaderText = "RELATED_CLIENTS_IDS";
+            this.RELATED_CLIENTS_IDS.Name = "RELATED_CLIENTS_IDS";
+            this.RELATED_CLIENTS_IDS.ReadOnly = true;
+            this.RELATED_CLIENTS_IDS.Visible = false;
+            // 
+            // ALERT_BEFORE_DAYS
+            // 
+            this.ALERT_BEFORE_DAYS.DataPropertyName = "ALERT_BEFORE_DAYS";
+            this.ALERT_BEFORE_DAYS.HeaderText = "ALERT_BEFORE_DAYS";
+            this.ALERT_BEFORE_DAYS.Name = "ALERT_BEFORE_DAYS";
+            this.ALERT_BEFORE_DAYS.ReadOnly = true;
+            this.ALERT_BEFORE_DAYS.Visible = false;
+            // 
+            // SEND_ALERT_TO_CABINE_EMAIL
+            // 
+            this.SEND_ALERT_TO_CABINE_EMAIL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.SEND_ALERT_TO_CABINE_EMAIL.DataPropertyName = "SEND_ALERT_TO_CABINE_EMAIL";
+            this.SEND_ALERT_TO_CABINE_EMAIL.HeaderText = "SEND_ALERT_TO_CABINE_EMAIL";
+            this.SEND_ALERT_TO_CABINE_EMAIL.Name = "SEND_ALERT_TO_CABINE_EMAIL";
+            this.SEND_ALERT_TO_CABINE_EMAIL.ReadOnly = true;
+            this.SEND_ALERT_TO_CABINE_EMAIL.Visible = false;
+            this.SEND_ALERT_TO_CABINE_EMAIL.Width = 200;
+            // 
+            // SEND_ALERT_TO_CLIENT_EMAIL
+            // 
+            this.SEND_ALERT_TO_CLIENT_EMAIL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.SEND_ALERT_TO_CLIENT_EMAIL.DataPropertyName = "SEND_ALERT_TO_CLIENT_EMAIL";
+            this.SEND_ALERT_TO_CLIENT_EMAIL.HeaderText = "SEND_ALERT_TO_CLIENT_EMAIL";
+            this.SEND_ALERT_TO_CLIENT_EMAIL.Name = "SEND_ALERT_TO_CLIENT_EMAIL";
+            this.SEND_ALERT_TO_CLIENT_EMAIL.ReadOnly = true;
+            this.SEND_ALERT_TO_CLIENT_EMAIL.Visible = false;
+            this.SEND_ALERT_TO_CLIENT_EMAIL.Width = 197;
+            // 
+            // LAST_ALERT_EMAIL_CABINET_SENT_DATE
+            // 
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.DataPropertyName = "LAST_ALERT_EMAIL_CABINET_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.HeaderText = "LAST_ALERT_EMAIL_CABINET_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.Name = "LAST_ALERT_EMAIL_CABINET_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.ReadOnly = true;
+            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.Visible = false;
+            // 
+            // LAST_ALERT_EMAIL_CLIENT_SENT_DATE
+            // 
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.DataPropertyName = "LAST_ALERT_EMAIL_CLIENT_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.HeaderText = "LAST_ALERT_EMAIL_CLIENT_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.Name = "LAST_ALERT_EMAIL_CLIENT_SENT_DATE";
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.ReadOnly = true;
+            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.Visible = false;
+            // 
+            // IS_FOR_ALL
+            // 
+            this.IS_FOR_ALL.DataPropertyName = "IS_FOR_ALL";
+            this.IS_FOR_ALL.HeaderText = "IS_FOR_ALL";
+            this.IS_FOR_ALL.Name = "IS_FOR_ALL";
+            this.IS_FOR_ALL.ReadOnly = true;
+            this.IS_FOR_ALL.Visible = false;
+            // 
+            // NEXT_DATE
+            // 
+            this.NEXT_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.NEXT_DATE.DataPropertyName = "NEXT_DATE";
+            this.NEXT_DATE.HeaderText = "Prochaine Date";
+            this.NEXT_DATE.Name = "NEXT_DATE";
+            this.NEXT_DATE.ReadOnly = true;
+            this.NEXT_DATE.Width = 106;
+            // 
+            // LAST_ALERT_LUE_DATE
+            // 
+            this.LAST_ALERT_LUE_DATE.DataPropertyName = "LAST_ALERT_LUE_DATE";
+            this.LAST_ALERT_LUE_DATE.HeaderText = "LAST_ALERT_LUE_DATE";
+            this.LAST_ALERT_LUE_DATE.Name = "LAST_ALERT_LUE_DATE";
+            this.LAST_ALERT_LUE_DATE.ReadOnly = true;
+            this.LAST_ALERT_LUE_DATE.Visible = false;
             // 
             // button3
             // 
@@ -232,7 +506,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(92, 114);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(742, 21);
+            this.textBox1.Size = new System.Drawing.Size(854, 21);
             this.textBox1.TabIndex = 79;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -488,285 +762,11 @@
             this.radioButton11.UseVisualStyleBackColor = true;
             this.radioButton11.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // VACCIN_NME
-            // 
-            this.VACCIN_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.VACCIN_NME.DataPropertyName = "VACCIN_NME";
-            this.VACCIN_NME.HeaderText = "Vaccination";
-            this.VACCIN_NME.Name = "VACCIN_NME";
-            this.VACCIN_NME.ReadOnly = true;
-            // 
-            // IS_PERIODIC
-            // 
-            this.IS_PERIODIC.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.IS_PERIODIC.DataPropertyName = "IS_PERIODIC";
-            this.IS_PERIODIC.HeaderText = "Periodique?";
-            this.IS_PERIODIC.Name = "IS_PERIODIC";
-            this.IS_PERIODIC.ReadOnly = true;
-            this.IS_PERIODIC.Width = 96;
-            // 
-            // FIXED_DATE
-            // 
-            this.FIXED_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.FIXED_DATE.DataPropertyName = "FIXED_DATE";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.FIXED_DATE.DefaultCellStyle = dataGridViewCellStyle2;
-            this.FIXED_DATE.HeaderText = "Date fixé";
-            this.FIXED_DATE.Name = "FIXED_DATE";
-            this.FIXED_DATE.ReadOnly = true;
-            this.FIXED_DATE.Width = 73;
-            // 
-            // EVERY_TXT
-            // 
-            this.EVERY_TXT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.EVERY_TXT.DataPropertyName = "EVERY_TXT";
-            this.EVERY_TXT.HeaderText = "Périodique - Chaque";
-            this.EVERY_TXT.Name = "EVERY_TXT";
-            this.EVERY_TXT.ReadOnly = true;
-            this.EVERY_TXT.Width = 91;
-            // 
-            // EVERY_DAY_NB
-            // 
-            this.EVERY_DAY_NB.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.EVERY_DAY_NB.DataPropertyName = "EVERY_DAY_NB";
-            this.EVERY_DAY_NB.HeaderText = "EVERY_DAY_NB";
-            this.EVERY_DAY_NB.Name = "EVERY_DAY_NB";
-            this.EVERY_DAY_NB.ReadOnly = true;
-            this.EVERY_DAY_NB.Visible = false;
-            this.EVERY_DAY_NB.Width = 112;
-            // 
-            // START_DATE
-            // 
-            this.START_DATE.DataPropertyName = "START_DATE";
-            this.START_DATE.HeaderText = "START_DATE";
-            this.START_DATE.Name = "START_DATE";
-            this.START_DATE.ReadOnly = true;
-            this.START_DATE.Visible = false;
-            // 
-            // END_DATE
-            // 
-            this.END_DATE.DataPropertyName = "END_DATE";
-            this.END_DATE.HeaderText = "END_DATE";
-            this.END_DATE.Name = "END_DATE";
-            this.END_DATE.ReadOnly = true;
-            this.END_DATE.Visible = false;
-            // 
-            // EVERY_MOUNTH_NB
-            // 
-            this.EVERY_MOUNTH_NB.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.EVERY_MOUNTH_NB.DataPropertyName = "EVERY_MOUNTH_NB";
-            this.EVERY_MOUNTH_NB.HeaderText = "EVERY_MOUNTH_NB";
-            this.EVERY_MOUNTH_NB.Name = "EVERY_MOUNTH_NB";
-            this.EVERY_MOUNTH_NB.ReadOnly = true;
-            this.EVERY_MOUNTH_NB.Visible = false;
-            this.EVERY_MOUNTH_NB.Width = 140;
-            // 
-            // START_YEAR
-            // 
-            this.START_YEAR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.START_YEAR.DataPropertyName = "START_YEAR";
-            this.START_YEAR.HeaderText = "Périodique - De";
-            this.START_YEAR.Name = "START_YEAR";
-            this.START_YEAR.ReadOnly = true;
-            this.START_YEAR.Width = 91;
-            // 
-            // END_YEAR
-            // 
-            this.END_YEAR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.END_YEAR.DataPropertyName = "END_YEAR";
-            this.END_YEAR.HeaderText = "Périodique - Jusqu\'à";
-            this.END_YEAR.Name = "END_YEAR";
-            this.END_YEAR.ReadOnly = true;
-            this.END_YEAR.Width = 91;
-            // 
-            // IS_CONCERN_WHO
-            // 
-            this.IS_CONCERN_WHO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.IS_CONCERN_WHO.DataPropertyName = "IS_CONCERN_WHO";
-            this.IS_CONCERN_WHO.HeaderText = "Concernant";
-            this.IS_CONCERN_WHO.Name = "IS_CONCERN_WHO";
-            this.IS_CONCERN_WHO.ReadOnly = true;
-            this.IS_CONCERN_WHO.Width = 97;
-            // 
-            // IS_IMPORTANT
-            // 
-            this.IS_IMPORTANT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.IS_IMPORTANT.DataPropertyName = "IS_IMPORTANT";
-            this.IS_IMPORTANT.HeaderText = "Important?";
-            this.IS_IMPORTANT.Name = "IS_IMPORTANT";
-            this.IS_IMPORTANT.ReadOnly = true;
-            this.IS_IMPORTANT.Width = 92;
-            // 
-            // ANIM_NUM_IDENs
-            // 
-            this.ANIM_NUM_IDENs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIM_NUM_IDENs.DataPropertyName = "ANIM_NUM_IDENs";
-            this.ANIM_NUM_IDENs.HeaderText = "ANIM_NUM_IDENs";
-            this.ANIM_NUM_IDENs.Name = "ANIM_NUM_IDENs";
-            this.ANIM_NUM_IDENs.ReadOnly = true;
-            this.ANIM_NUM_IDENs.Visible = false;
-            this.ANIM_NUM_IDENs.Width = 128;
-            // 
-            // ANIM_ESPECE
-            // 
-            this.ANIM_ESPECE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIM_ESPECE.DataPropertyName = "ANIM_ESPECE";
-            this.ANIM_ESPECE.HeaderText = "ANIM_ESPECE";
-            this.ANIM_ESPECE.Name = "ANIM_ESPECE";
-            this.ANIM_ESPECE.ReadOnly = true;
-            this.ANIM_ESPECE.Visible = false;
-            this.ANIM_ESPECE.Width = 106;
-            // 
-            // ANIM_RACE
-            // 
-            this.ANIM_RACE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIM_RACE.DataPropertyName = "ANIM_RACE";
-            this.ANIM_RACE.HeaderText = "ANIM_RACE";
-            this.ANIM_RACE.Name = "ANIM_RACE";
-            this.ANIM_RACE.ReadOnly = true;
-            this.ANIM_RACE.Visible = false;
-            this.ANIM_RACE.Width = 95;
-            // 
-            // ANIM_SEXE
-            // 
-            this.ANIM_SEXE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIM_SEXE.DataPropertyName = "ANIM_SEXE";
-            this.ANIM_SEXE.HeaderText = "ANIM_SEXE";
-            this.ANIM_SEXE.Name = "ANIM_SEXE";
-            this.ANIM_SEXE.ReadOnly = true;
-            this.ANIM_SEXE.Visible = false;
-            this.ANIM_SEXE.Width = 91;
-            // 
-            // POIDS_MAX
-            // 
-            this.POIDS_MAX.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.POIDS_MAX.DataPropertyName = "POIDS_MAX";
-            this.POIDS_MAX.HeaderText = "POIDS_MAX";
-            this.POIDS_MAX.Name = "POIDS_MAX";
-            this.POIDS_MAX.ReadOnly = true;
-            this.POIDS_MAX.Visible = false;
-            this.POIDS_MAX.Width = 96;
-            // 
-            // DATE_NISS_MIN
-            // 
-            this.DATE_NISS_MIN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DATE_NISS_MIN.DataPropertyName = "DATE_NISS_MIN";
-            this.DATE_NISS_MIN.HeaderText = "DATE_NISS_MIN";
-            this.DATE_NISS_MIN.Name = "DATE_NISS_MIN";
-            this.DATE_NISS_MIN.ReadOnly = true;
-            this.DATE_NISS_MIN.Visible = false;
-            this.DATE_NISS_MIN.Width = 114;
-            // 
-            // DATE_NISS_MAX
-            // 
-            this.DATE_NISS_MAX.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DATE_NISS_MAX.DataPropertyName = "DATE_NISS_MAX";
-            this.DATE_NISS_MAX.HeaderText = "DATE_NISS_MAX";
-            this.DATE_NISS_MAX.Name = "DATE_NISS_MAX";
-            this.DATE_NISS_MAX.ReadOnly = true;
-            this.DATE_NISS_MAX.Visible = false;
-            this.DATE_NISS_MAX.Width = 117;
-            // 
-            // DESCRIPTION
-            // 
-            this.DESCRIPTION.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DESCRIPTION.DataPropertyName = "DESCRIPTION";
-            this.DESCRIPTION.HeaderText = "Déscription";
-            this.DESCRIPTION.Name = "DESCRIPTION";
-            this.DESCRIPTION.ReadOnly = true;
-            this.DESCRIPTION.Visible = false;
-            // 
-            // RELATED_CLIENTS_IDS
-            // 
-            this.RELATED_CLIENTS_IDS.DataPropertyName = "RELATED_CLIENTS_IDS";
-            this.RELATED_CLIENTS_IDS.HeaderText = "RELATED_CLIENTS_IDS";
-            this.RELATED_CLIENTS_IDS.Name = "RELATED_CLIENTS_IDS";
-            this.RELATED_CLIENTS_IDS.ReadOnly = true;
-            this.RELATED_CLIENTS_IDS.Visible = false;
-            // 
-            // ALERT_BEFORE_DAYS
-            // 
-            this.ALERT_BEFORE_DAYS.DataPropertyName = "ALERT_BEFORE_DAYS";
-            this.ALERT_BEFORE_DAYS.HeaderText = "ALERT_BEFORE_DAYS";
-            this.ALERT_BEFORE_DAYS.Name = "ALERT_BEFORE_DAYS";
-            this.ALERT_BEFORE_DAYS.ReadOnly = true;
-            this.ALERT_BEFORE_DAYS.Visible = false;
-            // 
-            // SEND_ALERT_TO_CABINE_EMAIL
-            // 
-            this.SEND_ALERT_TO_CABINE_EMAIL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.SEND_ALERT_TO_CABINE_EMAIL.DataPropertyName = "SEND_ALERT_TO_CABINE_EMAIL";
-            this.SEND_ALERT_TO_CABINE_EMAIL.HeaderText = "SEND_ALERT_TO_CABINE_EMAIL";
-            this.SEND_ALERT_TO_CABINE_EMAIL.Name = "SEND_ALERT_TO_CABINE_EMAIL";
-            this.SEND_ALERT_TO_CABINE_EMAIL.ReadOnly = true;
-            this.SEND_ALERT_TO_CABINE_EMAIL.Visible = false;
-            this.SEND_ALERT_TO_CABINE_EMAIL.Width = 199;
-            // 
-            // SEND_ALERT_TO_CLIENT_EMAIL
-            // 
-            this.SEND_ALERT_TO_CLIENT_EMAIL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.SEND_ALERT_TO_CLIENT_EMAIL.DataPropertyName = "SEND_ALERT_TO_CLIENT_EMAIL";
-            this.SEND_ALERT_TO_CLIENT_EMAIL.HeaderText = "SEND_ALERT_TO_CLIENT_EMAIL";
-            this.SEND_ALERT_TO_CLIENT_EMAIL.Name = "SEND_ALERT_TO_CLIENT_EMAIL";
-            this.SEND_ALERT_TO_CLIENT_EMAIL.ReadOnly = true;
-            this.SEND_ALERT_TO_CLIENT_EMAIL.Visible = false;
-            this.SEND_ALERT_TO_CLIENT_EMAIL.Width = 196;
-            // 
-            // LAST_ALERT_EMAIL_CABINET_SENT_DATE
-            // 
-            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.DataPropertyName = "LAST_ALERT_EMAIL_CABINET_SENT_DATE";
-            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.HeaderText = "LAST_ALERT_EMAIL_CABINET_SENT_DATE";
-            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.Name = "LAST_ALERT_EMAIL_CABINET_SENT_DATE";
-            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.ReadOnly = true;
-            this.LAST_ALERT_EMAIL_CABINET_SENT_DATE.Visible = false;
-            // 
-            // LAST_ALERT_EMAIL_CLIENT_SENT_DATE
-            // 
-            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.DataPropertyName = "LAST_ALERT_EMAIL_CLIENT_SENT_DATE";
-            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.HeaderText = "LAST_ALERT_EMAIL_CLIENT_SENT_DATE";
-            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.Name = "LAST_ALERT_EMAIL_CLIENT_SENT_DATE";
-            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.ReadOnly = true;
-            this.LAST_ALERT_EMAIL_CLIENT_SENT_DATE.Visible = false;
-            // 
-            // IS_FOR_ALL
-            // 
-            this.IS_FOR_ALL.DataPropertyName = "IS_FOR_ALL";
-            this.IS_FOR_ALL.HeaderText = "IS_FOR_ALL";
-            this.IS_FOR_ALL.Name = "IS_FOR_ALL";
-            this.IS_FOR_ALL.ReadOnly = true;
-            this.IS_FOR_ALL.Visible = false;
-            // 
-            // NEXT_DATE
-            // 
-            this.NEXT_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.NEXT_DATE.DataPropertyName = "NEXT_DATE";
-            this.NEXT_DATE.HeaderText = "Prochaine Date";
-            this.NEXT_DATE.Name = "NEXT_DATE";
-            this.NEXT_DATE.ReadOnly = true;
-            this.NEXT_DATE.Width = 106;
-            // 
-            // LAST_ALERT_LUE_DATE
-            // 
-            this.LAST_ALERT_LUE_DATE.DataPropertyName = "LAST_ALERT_LUE_DATE";
-            this.LAST_ALERT_LUE_DATE.HeaderText = "LAST_ALERT_LUE_DATE";
-            this.LAST_ALERT_LUE_DATE.Name = "LAST_ALERT_LUE_DATE";
-            this.LAST_ALERT_LUE_DATE.ReadOnly = true;
-            this.LAST_ALERT_LUE_DATE.Visible = false;
-            // 
             // Vaccinations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(840, 394);
+            this.ClientSize = new System.Drawing.Size(952, 394);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.groupBox3);
