@@ -50,6 +50,7 @@
             this.CLIENT_WILAYA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CLIENT_NUM_PHONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CLIENT_EMAIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -60,7 +61,6 @@
             this.IDD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ANIM_ID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OBSERV2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button7 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -183,7 +183,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(264, 470);
+            this.dataGridView1.Size = new System.Drawing.Size(264, 467);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -315,6 +315,24 @@
             this.CLIENT_EMAIL.ReadOnly = true;
             this.CLIENT_EMAIL.Visible = false;
             // 
+            // button7
+            // 
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
+            this.button7.FlatAppearance.BorderSize = 2;
+            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button7.Location = new System.Drawing.Point(31, 410);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(167, 37);
+            this.button7.TabIndex = 21;
+            this.button7.Text = "Urologie";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // button8
             // 
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -437,24 +455,6 @@
             this.OBSERV2.ReadOnly = true;
             this.OBSERV2.Visible = false;
             // 
-            // button7
-            // 
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Teal;
-            this.button7.FlatAppearance.BorderSize = 2;
-            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
-            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(31, 410);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(167, 37);
-            this.button7.TabIndex = 21;
-            this.button7.Text = "Urologie";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -541,7 +541,7 @@
             this.label10.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(379, 45);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(111, 15);
+            this.label10.Size = new System.Drawing.Size(119, 15);
             this.label10.TabIndex = 42;
             this.label10.Text = "Date de naissance :";
             // 
@@ -598,7 +598,7 @@
             this.label5.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(18, 44);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 15);
+            this.label5.Size = new System.Drawing.Size(80, 15);
             this.label5.TabIndex = 3;
             this.label5.Text = "Propriétaire :";
             // 

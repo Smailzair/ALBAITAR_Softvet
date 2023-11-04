@@ -799,10 +799,15 @@ namespace ALBAITAR_Softvet.Resources
                         listView_Clients.Items.Add(itttm);
                     }
                 }
+                //----------------
+                label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires (", listView_Clients.Items.Count, "):") : "Propriétaires :";
+            }
+            else
+            {
+                label12.Text = "Propriétaires :";
             }
 
-            //----------------
-            label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires (", listView_Clients.Items.Count, "):") : "Propriétaires :";
+            
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -856,6 +861,12 @@ namespace ALBAITAR_Softvet.Resources
                     }
                     label12.Text = listView_Clients.Items.Count > 0 ? string.Concat("Propriétaires (", listView_Clients.Items.Count, "):") : "Propriétaires :";
                 }
+                //----------------
+                label13.Text = listView_Anim.Items.Count > 0 ? string.Concat("Animaux (", listView_Anim.Items.Count, "):") : "Animaux :";
+            }
+            else
+            {
+                label13.Text = "Animaux :";
             }
             //------------
             foreach (ColumnHeader column in listView_Anim.Columns)
@@ -865,8 +876,7 @@ namespace ALBAITAR_Softvet.Resources
                     column.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
                 }
             }
-            //----------------
-            label13.Text = listView_Anim.Items.Count > 0 ? string.Concat("Animaux (", listView_Anim.Items.Count, "):") : "Animaux :";
+            
         }
 
         private void button5_Click(object sender, EventArgs e)

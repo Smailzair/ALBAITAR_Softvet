@@ -51,12 +51,16 @@ namespace ALBAITAR_Softvet
 
         public static void close_conn()
         {
-
-            if (mySqlConnection.State == ConnectionState.Open)
+            try
             {
-                mySqlConnection.Close();
+                if (mySqlConnection.State == ConnectionState.Open)
+                {
+                    mySqlConnection.Close();
 
+                }
             }
+            catch { }
+            
 
         }
 

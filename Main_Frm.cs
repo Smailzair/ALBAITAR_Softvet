@@ -14,9 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using MailKit;
 using MailKit.Net.Smtp;
-//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using DataTable = System.Data.DataTable;
 using Xamarin.Forms.Internals;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
@@ -30,6 +28,7 @@ namespace ALBAITAR_Softvet
         Thread th;
         Thread Activ_Ver;
         Thread Send_Vaccin_Alerts;
+        bool close_app_because_act = false;
         public static DataTable ADRESSES_SITES;
         bool sites_table_ready = false;
         public static DataTable Autorisations;
@@ -114,7 +113,7 @@ namespace ALBAITAR_Softvet
             //----------------------------
             Params = PreConnection.Load_data("SELECT * FROM tb_params;");
             //------------------------------
-            th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting perfermance of "Clients" from
+            th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting perfermance of "Clients" form
             th.Start();
             th.Join();
             //--------------
@@ -536,7 +535,6 @@ namespace ALBAITAR_Softvet
         }
         public void Activ_Verif()
         {
-
             if (Properties.Settings.Default.Connection_String_IP_Or_LocalHost == "localhost")
             {
                 bool Verifyed_001 = false;
@@ -579,7 +577,7 @@ namespace ALBAITAR_Softvet
                 {
                     if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
                     {
-                        string filePath = "C:\\ProgramData\\Sys32.txt";
+                        string filePath = "C:\\ProgramData\\Al_Baitar_Activation.txt";
 
                         if (File.Exists(filePath))
                         {
@@ -601,7 +599,6 @@ namespace ALBAITAR_Softvet
                                 File.WriteAllText(filePath, "28000");
                                 PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
                             }
-                            string tt = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
                         }
                         //----------------
                         string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
@@ -612,31 +609,39 @@ namespace ALBAITAR_Softvet
                             if (strt_date == "")
                             {
                                 PreConnection.WriteIntoRegistry("SoftVet_Start_Date", dt.ToString("dd/MM/yyyy"));
+                                close_app_because_act = true;
+                                Application.Run(new App_Activation());
+                                
                             }
                             else
                             {
                                 DateTime.TryParse(strt_date, out dt);
+                                int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
+
+                                text_to_add_to_title = " (Produit non activé - réste [" + delay + "] jours)";
+                                if (delay <= 0)
+                                {
+                                    PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
+                                    Properties.Settings.Default.Codified_Activate_Code = "";
+                                    Properties.Settings.Default.Save();
+                                    //Close();
+                                    close_app_because_act = true;
+                                    Application.Run(new App_Activation());
+                                }
                             }
 
-                            int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
-
-                            text_to_add_to_title = " (Produit non activé - réste [" + delay + "] jours)";
-                            if (delay <= 0)
-                            {
-                                PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
-                                Properties.Settings.Default.Codified_Activate_Code = "";
-                                Properties.Settings.Default.Save();
-                                Close();
-                                Application.Run(new Dialogs.App_Activation());
-                            }
+                            
                         }
                     }
                     else
                     {
                         Properties.Settings.Default.Codified_Activate_Code = "";
                         Properties.Settings.Default.Save();
-                        Close();
-                        Application.Run(new Dialogs.App_Activation());
+                        //Close();
+                        close_app_because_act = true;
+                        Application.Run(new App_Activation());
+                        
+
                     }
 
                 }
@@ -770,26 +775,37 @@ namespace ALBAITAR_Softvet
 
         private void Main_Frm_Load(object sender, EventArgs e)
         {
-            WindowState = Properties.Settings.Default.Maximize_Main_Frm ? FormWindowState.Maximized : FormWindowState.Normal;
-            Text = "ALBAITAR Softvet - " + Properties.Settings.Default.Last_login_user_full_nme;
-            string cab_doct = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
-            if (cab_doct == null || cab_doct.Trim() == string.Empty)
+            if (close_app_because_act)
             {
-                if (Properties.Settings.Default.Last_login_is_admin || Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92004" && (Int32)QQ[3] == 1).Count() > 0)
+                Close();
+            }
+            else
+            {
+                WindowState = Properties.Settings.Default.Maximize_Main_Frm ? FormWindowState.Maximized : FormWindowState.Normal;
+                Text = "ALBAITAR Softvet - " + Properties.Settings.Default.Last_login_user_full_nme;
+                string cab_doct = Params != null ? Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Any() ? Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() : "" : "";
+                if (cab_doct == null || cab_doct.Trim() == string.Empty)
                 {
-                    string dd = "";
-                    int p = 3;
-                    while (dd == string.Empty && p > 0)
+                    if (Properties.Settings.Default.Last_login_is_admin || Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "92004" && (Int32)QQ[3] == 1).Count() > 0)
                     {
-                        PreConnection.InputBox("Veuillez saisir votre identification : ", "Exp : Dr.xxx , Cabinet xxx, ...", ref dd);
-                        p--;
-                    }
-                    if (dd != string.Empty)
-                    {
-                        //PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '" + dd.Replace("'", "''") + "' WHERE `ID` = 1;");
-                        PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { dd }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 1 });
-                        Params = PreConnection.Load_data("SELECT * FROM tb_params;");
-                        label_cab_nme.Text = dd;
+                        string dd = "";
+                        int p = 3;
+                        while (dd == string.Empty && p > 0)
+                        {
+                            PreConnection.InputBox("Veuillez saisir votre identification : ", "Exp : Dr.xxx , Cabinet xxx, ...", ref dd);
+                            p--;
+                        }
+                        if (dd != string.Empty)
+                        {
+                            //PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '" + dd.Replace("'", "''") + "' WHERE `ID` = 1;");
+                            PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { dd }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 1 });
+                            Params = PreConnection.Load_data("SELECT * FROM tb_params;");
+                            label_cab_nme.Text = dd;
+                        }
+                        else
+                        {
+                            Application.Exit();
+                        }
                     }
                     else
                     {
@@ -798,138 +814,135 @@ namespace ALBAITAR_Softvet
                 }
                 else
                 {
-                    Application.Exit();
+                    label_cab_nme.Text = cab_doct;
                 }
-            }
-            else
-            {
-                label_cab_nme.Text = cab_doct;
-            }
-            ///--------------------            
-            if (!Properties.Settings.Default.Last_login_is_admin)
-            {
-                button9.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10000" && (Int32)QQ[3] == 1).Count() > 0;
-                button11.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20000" && (Int32)QQ[3] == 1).Count() > 0;
-                button12.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30000" && (Int32)QQ[3] == 1).Count() > 0;
-                button4.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31000" && (Int32)QQ[3] == 1).Count() > 0;
-                button5.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40000" && (Int32)QQ[3] == 1).Count() > 0;
-                button6.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70000" && (Int32)QQ[3] == 1).Count() > 0;
-                //---------------tabPage_animaux
-                if (Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
+                ///--------------------            
+                if (!Properties.Settings.Default.Last_login_is_admin)
                 {
-                    tabPage_animaux.Controls.Add(new Nn_Autorized());
-                    tabPage_animaux.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
-                    tabPage_animaux.Controls["Nn_Autorized"].BringToFront();
-                }
-                else
-                {
-                    button8.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
-                    button10.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
-                }
-                //---------------tabPage_visites
-                if (Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
-                {
-                    tabPage_visites.Controls.Add(new Nn_Autorized());
-                    tabPage_visites.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
-                    tabPage_visites.Controls["Nn_Autorized"].BringToFront();
-                }
-                else
-                {
-                    button17.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
-                    button18.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
-                }
-                //---------------tabPage_labo
-                if (Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
-                {
-                    tabPage_labo.Controls.Add(new Nn_Autorized());
-                    tabPage_labo.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
-                    tabPage_labo.Controls["Nn_Autorized"].BringToFront();
-                }
-                else
-                {
-                    button15.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
-                    button14.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
-                    button13.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30004" && (Int32)QQ[3] == 1).Count() > 0; //Imprimer
-                }
-                //---------------tabPage_monetique
-                bool alll = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60000" && (Int32)QQ[3] == 1).Count() == 0 && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70000" && (Int32)QQ[3] == 1).Count() == 0;
-                if (alll) //Monetic + Factures
-                {
-                    tabPage_monetique.Controls.Add(new Nn_Autorized());
-                    tabPage_monetique.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
-                    tabPage_monetique.Controls["Nn_Autorized"].BringToFront();
-                }
-                else
-                {
-                    //---->> Monetic
-                    label4.Visible = textBox4.Visible = dataGridView4.Visible = dataGridView6.Visible = label9.Visible = button27.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60000" && (Int32)QQ[3] == 1).Count() > 0;
-                    button16.Visible = dataGridView4.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
-                    button19.Visible = dataGridView4.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier                    
-                                                                                                                                                                                   //---->> Factures
-                    label5.Visible = textBox5.Visible = dataGridView5.Visible = dataGridView7.Visible = panel3.Visible = panel4.Visible = label7.Visible = label8.Visible = label6.Visible = button26.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70000" && (Int32)QQ[3] == 1).Count() > 0;
-                    button20.Visible = dataGridView5.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
-                    button21.Visible = dataGridView5.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier                    
+                    button9.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "10000" && (Int32)QQ[3] == 1).Count() > 0;
+                    button11.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20000" && (Int32)QQ[3] == 1).Count() > 0;
+                    button12.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30000" && (Int32)QQ[3] == 1).Count() > 0;
+                    button4.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "31000" && (Int32)QQ[3] == 1).Count() > 0;
+                    button5.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "40000" && (Int32)QQ[3] == 1).Count() > 0;
+                    button6.Enabled = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70000" && (Int32)QQ[3] == 1).Count() > 0;
+                    //---------------tabPage_animaux
+                    if (Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
+                    {
+                        tabPage_animaux.Controls.Add(new Nn_Autorized());
+                        tabPage_animaux.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
+                        tabPage_animaux.Controls["Nn_Autorized"].BringToFront();
+                    }
+                    else
+                    {
+                        button8.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                        button10.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
+                    }
+                    //---------------tabPage_visites
+                    if (Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
+                    {
+                        tabPage_visites.Controls.Add(new Nn_Autorized());
+                        tabPage_visites.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
+                        tabPage_visites.Controls["Nn_Autorized"].BringToFront();
+                    }
+                    else
+                    {
+                        button17.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                        button18.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
+                    }
+                    //---------------tabPage_labo
+                    if (Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
+                    {
+                        tabPage_labo.Controls.Add(new Nn_Autorized());
+                        tabPage_labo.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
+                        tabPage_labo.Controls["Nn_Autorized"].BringToFront();
+                    }
+                    else
+                    {
+                        button15.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                        button14.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier
+                        button13.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "30004" && (Int32)QQ[3] == 1).Count() > 0; //Imprimer
+                    }
+                    //---------------tabPage_monetique
+                    bool alll = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60000" && (Int32)QQ[3] == 1).Count() == 0 && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70000" && (Int32)QQ[3] == 1).Count() == 0;
+                    if (alll) //Monetic + Factures
+                    {
+                        tabPage_monetique.Controls.Add(new Nn_Autorized());
+                        tabPage_monetique.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
+                        tabPage_monetique.Controls["Nn_Autorized"].BringToFront();
+                    }
+                    else
+                    {
+                        //---->> Monetic
+                        label4.Visible = textBox4.Visible = dataGridView4.Visible = dataGridView6.Visible = label9.Visible = button27.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60000" && (Int32)QQ[3] == 1).Count() > 0;
+                        button16.Visible = dataGridView4.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                        button19.Visible = dataGridView4.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "60003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier                    
+                                                                                                                                                                                       //---->> Factures
+                        label5.Visible = textBox5.Visible = dataGridView5.Visible = dataGridView7.Visible = panel3.Visible = panel4.Visible = label7.Visible = label8.Visible = label6.Visible = button26.Visible = Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70000" && (Int32)QQ[3] == 1).Count() > 0;
+                        button20.Visible = dataGridView5.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70001" && (Int32)QQ[3] == 1).Count() > 0; //Nouveau
+                        button21.Visible = dataGridView5.Visible && Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "70003" && (Int32)QQ[3] == 1).Count() > 0; //Modifier                    
+                    }
+
                 }
 
+                //--------------------
+                comboBox3.SelectedIndexChanged -= comboBox3_SelectedIndexChanged;
+                comboBox3.SelectedIndex = 0;
+                comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
+                //----------------
+                Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
+                //Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME`,tb3.MALAD_NME,tb3.LAST_MALAD_DATE FROM tb_animaux tb1 "
+                //                                             + "LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID` "
+                //                                             + "LEFT JOIN (SELECT ANIM_ID, MAX(START_DATE) AS LAST_MALAD_DATE,MALAD_NME "
+                //                                             + "FROM tb_maladies WHERE (START_DATE <= current_timestamp() OR START_DATE IS NULL) AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL) "
+                //                                             + "GROUP BY ANIM_ID) tb3 ON tb3.ANIM_ID = tb1.ID;");
+                Main_Frm_animals_tbl = PreConnection.Load_data("SELECT  " +
+        "    tb1.*,  " +
+        "    tb2.CLIENT_FULL_NME,  " +
+        "    tb4.MALAD_NME,  " +
+        "    tb4.LAST_MALAD_DATE  " +
+        "FROM  " +
+        "    tb_animaux tb1  " +
+        "LEFT JOIN  " +
+        "    (SELECT  " +
+        "        ID,  " +
+        "        CONCAT(FAMNME,' ',NME) AS CLIENT_FULL_NME  " +
+        "     FROM  " +
+        "        tb_clients) tb2  " +
+        "ON  " +
+        "    tb1.CLIENT_ID = tb2.ID  " +
+        "LEFT JOIN  " +
+        "    (SELECT  " +
+        "        tb_maladies.ANIM_ID,  " +
+        "        tb_maladies.START_DATE AS LAST_MALAD_DATE,  " +
+        "        tb_maladies.MALAD_NME  " +
+        "     FROM  " +
+        "        tb_maladies  " +
+        "     JOIN  " +
+        "        (SELECT  " +
+        "            ANIM_ID,  " +
+        "            MAX(START_DATE) AS max_start_date  " +
+        "         FROM  " +
+        "            tb_maladies  " +
+        "         WHERE  " +
+        "            (START_DATE <= current_timestamp() OR START_DATE IS NULL)  " +
+        "            AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL)  " +
+        "         GROUP BY  " +
+        "            ANIM_ID) tb3  " +
+        "     ON  " +
+        "        tb_maladies.ANIM_ID = tb3.ANIM_ID  " +
+        "        AND tb_maladies.START_DATE = tb3.max_start_date) tb4  " +
+        "ON  " +
+        "    tb4.ANIM_ID = tb1.ID; ");
+                main_poids_tab = PreConnection.Load_data("SELECT * FROM tb_poids;");
+                comboBox1.SelectedIndex = 1;
+                //-----
+                Send_Vaccin_Alerts = new Thread(new ThreadStart(Send_Email_Vaccin_Alerts));
+                Send_Vaccin_Alerts.Start();
+                // Send_Vaccin_Alerts.Join();
+                //--------------
+                Application.OpenForms["Splash"]?.Close();
             }
-
-            //--------------------
-            comboBox3.SelectedIndexChanged -= comboBox3_SelectedIndexChanged;
-            comboBox3.SelectedIndex = 0;
-            comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
-            //----------------
-            Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            //Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME`,tb3.MALAD_NME,tb3.LAST_MALAD_DATE FROM tb_animaux tb1 "
-            //                                             + "LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID` "
-            //                                             + "LEFT JOIN (SELECT ANIM_ID, MAX(START_DATE) AS LAST_MALAD_DATE,MALAD_NME "
-            //                                             + "FROM tb_maladies WHERE (START_DATE <= current_timestamp() OR START_DATE IS NULL) AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL) "
-            //                                             + "GROUP BY ANIM_ID) tb3 ON tb3.ANIM_ID = tb1.ID;");
-            Main_Frm_animals_tbl = PreConnection.Load_data("SELECT  " +
-    "    tb1.*,  " +
-    "    tb2.CLIENT_FULL_NME,  " +
-    "    tb4.MALAD_NME,  " +
-    "    tb4.LAST_MALAD_DATE  " +
-    "FROM  " +
-    "    tb_animaux tb1  " +
-    "LEFT JOIN  " +
-    "    (SELECT  " +
-    "        ID,  " +
-    "        CONCAT(FAMNME,' ',NME) AS CLIENT_FULL_NME  " +
-    "     FROM  " +
-    "        tb_clients) tb2  " +
-    "ON  " +
-    "    tb1.CLIENT_ID = tb2.ID  " +
-    "LEFT JOIN  " +
-    "    (SELECT  " +
-    "        tb_maladies.ANIM_ID,  " +
-    "        tb_maladies.START_DATE AS LAST_MALAD_DATE,  " +
-    "        tb_maladies.MALAD_NME  " +
-    "     FROM  " +
-    "        tb_maladies  " +
-    "     JOIN  " +
-    "        (SELECT  " +
-    "            ANIM_ID,  " +
-    "            MAX(START_DATE) AS max_start_date  " +
-    "         FROM  " +
-    "            tb_maladies  " +
-    "         WHERE  " +
-    "            (START_DATE <= current_timestamp() OR START_DATE IS NULL)  " +
-    "            AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL)  " +
-    "         GROUP BY  " +
-    "            ANIM_ID) tb3  " +
-    "     ON  " +
-    "        tb_maladies.ANIM_ID = tb3.ANIM_ID  " +
-    "        AND tb_maladies.START_DATE = tb3.max_start_date) tb4  " +
-    "ON  " +
-    "    tb4.ANIM_ID = tb1.ID; ");
-            main_poids_tab = PreConnection.Load_data("SELECT * FROM tb_poids;");
-            comboBox1.SelectedIndex = 1;
-            //-----
-            Send_Vaccin_Alerts = new Thread(new ThreadStart(Send_Email_Vaccin_Alerts));
-            Send_Vaccin_Alerts.Start();
-            // Send_Vaccin_Alerts.Join();
-            //--------------
-            Application.OpenForms["Splash"]?.Close();
+            
         }
 
         public void refresh_main_tables()
@@ -1046,7 +1059,7 @@ namespace ALBAITAR_Softvet
         {
             Application.OpenForms["Splash"]?.Close();
             //-----------
-            string filePath = "C:\\ProgramData\\Sys32.txt";
+            string filePath = "C:\\ProgramData\\Al_Baitar_Activation.txt";
             if (!File.Exists(filePath))
             {
                 File.Create(filePath).Dispose();
@@ -1167,11 +1180,14 @@ namespace ALBAITAR_Softvet
             //-----------
             try
             {
-                label_cab_nme.Text = Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 1).FirstOrDefault()["VAL"].ToString();
-                //----------
                 DateTime tt = DateTime.Now;
-                if (Params != null) { DateTime.TryParse(Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 6).FirstOrDefault()["VAL"].ToString(), out tt); }
-
+                if (Params != null) {
+                    Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Params.Rows.Count = " + Params.Rows.Count);
+                    Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Params.Columns.Count = " + Params.Columns.Count);
+                    label_cab_nme.Text = Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 1).FirstOrDefault()["VAL"].ToString();
+                    //----------
+                    DateTime.TryParse(Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 6).FirstOrDefault()["VAL"].ToString(), out tt);
+                }
                 if ((tt - last_update_time).Seconds > 0)
                 {
                     refresh_main_tables();
@@ -1195,9 +1211,12 @@ namespace ALBAITAR_Softvet
             {
                 bool rb8 = radioButton8.Checked;
                 //---------------
-                comboBox2.DataSource = Main_Frm_clients_tbl;
-                comboBox2.ValueMember = "ID";
-                comboBox2.DisplayMember = "FULL_NME";
+                if(Main_Frm_clients_tbl != null)
+                {
+                    comboBox2.DataSource = Main_Frm_clients_tbl;
+                    comboBox2.ValueMember = "ID";
+                    comboBox2.DisplayMember = "FULL_NME";
+                }                
                 //--------------------
                 //--------
                 if (rb8)
@@ -1240,9 +1259,13 @@ namespace ALBAITAR_Softvet
             }
             else //ANIMAL
             {
-                comboBox2.DataSource = Main_Frm_animals_tbl;
-                comboBox2.ValueMember = "ID";
-                comboBox2.DisplayMember = "NME";
+                if (Main_Frm_animals_tbl != null && Main_Frm_animals_tbl.Columns.Count > 0)
+                {
+                    comboBox2.DataSource = Main_Frm_animals_tbl;
+                    comboBox2.ValueMember = "ID";
+                    comboBox2.DisplayMember = "NME";
+
+                }
                 if (tabControl1.TabPages["tabPage_animaux"] != null)
                 {
                     tabControl1.TabPages.Remove(tabPage_animaux);
@@ -1251,7 +1274,6 @@ namespace ALBAITAR_Softvet
                 {
                     tabControl1.TabPages.Remove(tabPage_monetique);
                 }
-
             }
         }
 
@@ -1677,7 +1699,6 @@ namespace ALBAITAR_Softvet
             if (update_tot && main_visites_tab != null)
             {
                 DataTable tmppp = main_visites_tab.Copy();
-                Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>> " + fltr);
                 tmppp.DefaultView.RowFilter = fltr;
                 tss = tmppp.DefaultView.Cast<DataRowView>().Count();
                 //----
