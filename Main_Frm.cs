@@ -592,12 +592,12 @@ namespace ALBAITAR_Softvet
                         else
                         {
                             DateTime dtt = DateTime.UtcNow;
-                            DateTime.TryParse(PreConnection.ReadFromRegistry("SoftVet_Start_Date"), out dtt);
-                            if ((DateTime.UtcNow.Date - dtt.Date).Days == 0)
+                            bool rr = DateTime.TryParse(PreConnection.ReadFromRegistry("SoftVet_Start_Date"), out dtt);
+
+                            if (!rr || dtt == DateTime.Now)
                             {
-                                File.Create(filePath).Dispose();
-                                File.WriteAllText(filePath, "28000");
-                                PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
+                                Application.Run(new App_Activation());
+                                return;
                             }
                         }
                         //----------------
@@ -1061,7 +1061,6 @@ namespace ALBAITAR_Softvet
             if (!File.Exists(filePath))
             {
                 File.Create(filePath).Dispose();
-
             }
 
             string fileContents = File.ReadAllText(filePath);
