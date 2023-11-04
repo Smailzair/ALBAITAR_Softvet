@@ -609,38 +609,36 @@ namespace ALBAITAR_Softvet
                             if (strt_date == "")
                             {
                                 PreConnection.WriteIntoRegistry("SoftVet_Start_Date", dt.ToString("dd/MM/yyyy"));
+                            }
+
+                            DateTime.TryParse(strt_date, out dt);
+                            int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
+
+                            text_to_add_to_title = " (Produit non activé - réste [" + delay + "] jours)";
+                            if(delay >= 30)
+                            {
+                                new App_Activation().ShowDialog();
+                            }
+                            else if (delay <= 0)
+                            {
+                                PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
+                                Properties.Settings.Default.Codified_Activate_Code = "";
+                                Properties.Settings.Default.Save();
                                 close_app_because_act = true;
                                 Application.Run(new App_Activation());
-                                
-                            }
-                            else
-                            {
-                                DateTime.TryParse(strt_date, out dt);
-                                int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
-
-                                text_to_add_to_title = " (Produit non activé - réste [" + delay + "] jours)";
-                                if (delay <= 0)
-                                {
-                                    PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
-                                    Properties.Settings.Default.Codified_Activate_Code = "";
-                                    Properties.Settings.Default.Save();
-                                    //Close();
-                                    close_app_because_act = true;
-                                    Application.Run(new App_Activation());
-                                }
                             }
 
-                            
+
+
                         }
                     }
                     else
                     {
                         Properties.Settings.Default.Codified_Activate_Code = "";
                         Properties.Settings.Default.Save();
-                        //Close();
                         close_app_because_act = true;
                         Application.Run(new App_Activation());
-                        
+
 
                     }
 
@@ -942,7 +940,7 @@ namespace ALBAITAR_Softvet
                 //--------------
                 Application.OpenForms["Splash"]?.Close();
             }
-            
+
         }
 
         public void refresh_main_tables()
@@ -1181,7 +1179,8 @@ namespace ALBAITAR_Softvet
             try
             {
                 DateTime tt = DateTime.Now;
-                if (Params != null) {
+                if (Params != null)
+                {
                     Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Params.Rows.Count = " + Params.Rows.Count);
                     Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Params.Columns.Count = " + Params.Columns.Count);
                     label_cab_nme.Text = Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 1).FirstOrDefault()["VAL"].ToString();
@@ -1211,12 +1210,12 @@ namespace ALBAITAR_Softvet
             {
                 bool rb8 = radioButton8.Checked;
                 //---------------
-                if(Main_Frm_clients_tbl != null)
+                if (Main_Frm_clients_tbl != null)
                 {
                     comboBox2.DataSource = Main_Frm_clients_tbl;
                     comboBox2.ValueMember = "ID";
                     comboBox2.DisplayMember = "FULL_NME";
-                }                
+                }
                 //--------------------
                 //--------
                 if (rb8)
