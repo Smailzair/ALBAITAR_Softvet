@@ -114,7 +114,14 @@ namespace ALBAITAR_Softvet.Resources
             stock_to_modify.Rows.Clear();
             selected_item = new DataGridViewRow();
             TVA_percent = decimal.Parse(Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 5).Select(QQ => QQ["VAL"]).First().ToString());
+            //----------
             dataGridView3.Rows[1].Cells[0].Value = "TVA (" + TVA_percent.ToString("N2") + " %):";
+            dataGridView3.Rows[2].Cells[0].Value = "--";
+            dataGridView3.Rows[0].Cells[1].Value = 0.00;
+            dataGridView3.Rows[1].Cells[1].Value = 0.00;
+            dataGridView3.Rows[2].Cells[1].Value = 0.00;
+            dataGridView3.Rows[3].Cells[1].Value = 0.00;
+            //----------
             label3.Visible = false;
             comboBox1.BackColor = SystemColors.Window;
             comboBox1.Text = "";
@@ -446,14 +453,14 @@ namespace ALBAITAR_Softvet.Resources
                                 }
                                 else if (cb1_selected_value == -1)
                                 {
-                                    PreConnection.Excut_Cmd(3, "tb_clients_finance",null,null, "FACT_NUM LIKE @FACTTT",new List<string> { "@FACTTT" },new List<object> { "FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text});
+                                    PreConnection.Excut_Cmd(3, "tb_clients_finance", null, null, "FACT_NUM LIKE @FACTTT", new List<string> { "@FACTTT" }, new List<object> { "FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text });
                                 }
                             }
                             else
                             {
                                 if (cb1_selected_value > -1)
                                 {
-                                    PreConnection.Excut_Cmd(1, "tb_clients_finance",new List<string>
+                                    PreConnection.Excut_Cmd(1, "tb_clients_finance", new List<string>
                                     {
                                         "CLIENT_ID",
                                         "OP_DATE",
@@ -461,7 +468,7 @@ namespace ALBAITAR_Softvet.Resources
                                         "DEBIT",
                                         "CREDIT",
                                         "FACT_NUM"
-                                    },new List<object>
+                                    }, new List<object>
                                     {
                                         cb1_selected_value,
                                         dateTimePicker1.Value,
@@ -469,7 +476,7 @@ namespace ALBAITAR_Softvet.Resources
                                         dataGridView3.Rows[3].Cells[1].Value,
                                         Convert.ToDouble(numericUpDown2.Value),
                                         "FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text
-                                    },null,null,null);
+                                    }, null, null, null);
                                 }
                             }
                         }
@@ -481,7 +488,7 @@ namespace ALBAITAR_Softvet.Resources
                                                     "`OBJECT`=CONCAT(`OBJECT`,'(Annulé)')," +
                                                     "`DEBIT`=0," +
                                                     "`FACT_NUM`=NULL" +
-                                                    " WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "';",null,null);
+                                                    " WHERE `FACT_NUM` LIKE 'FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''") + "';", null, null);
                             }
 
                             if (cb1_selected_value > -1)
@@ -508,7 +515,7 @@ namespace ALBAITAR_Softvet.Resources
                     }
                     else
                     {
-                        PreConnection.Excut_Cmd(3, "tb_clients_finance",null,null, "FACT_NUM LIKE @FFCT",new List<string> { "@FFCT" },new List<object> {"FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text });
+                        PreConnection.Excut_Cmd(3, "tb_clients_finance", null, null, "FACT_NUM LIKE @FFCT", new List<string> { "@FFCT" }, new List<object> { "FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text });
                         if (cb1_selected_value > -1)
                         {
                             PreConnection.Excut_Cmd(1, "tb_clients_finance", new List<string>
@@ -550,14 +557,14 @@ namespace ALBAITAR_Softvet.Resources
                                             + "`QNT_IN`,"
                                             + "`QNT_OUT`,"
                                             + "`OBSERV`)"
-                                            + "VALUES"
-                                            + "(@OP_DATE,"//OP_DATE
+                                            + " SELECT "
+                                            + "@OP_DATE,"//OP_DATE
                                             + "(SELECT `ID` FROM tb_produits WHERE `CODE` LIKE @PROD_CODE LIMIT 1),"//PROD_ID
                                             + (sumSLD < 0 ? sumSLD * -1 : 0) + ","//QNT_IN
                                             + (sumSLD > 0 ? sumSLD : 0) + "," //QNT_OUT
-                                            + "'Vente (Facture [" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''")) + "]) -" + (Is_New ? "Crée" : "Modifiée") + "-') "  //OBSERV
+                                            + "'Vente (Facture [" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''")) + "]) -" + (Is_New ? "Crée" : "Modifiée") + "-' "  //OBSERV
                                             + "WHERE (SELECT COUNT(`CODE`) FROM tb_produits WHERE `CODE` LIKE @PROD_CODE) > 0;"
-                                            + ";",new List<string> { "@OP_DATE", "@PROD_CODE" },new List<object> { dateTimePicker1.Value, group.First()["PROD_CODE"],});
+                                            , new List<string> { "@OP_DATE", "@PROD_CODE" }, new List<object> { dateTimePicker1.Value, group.First()["PROD_CODE"] });
                         }
                     }
                 }
@@ -737,43 +744,52 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //////if (dataGridView1.SelectedRows.Count > 0)
-            //////{
-            //////    if (MessageBox.Show("Êtes-vous sûr de supprimer (" + dataGridView1.SelectedRows.Count + ") factures ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            //////    {
-            //////        string idx = "";
-            //////        dataGridView1.SelectedRows.Cast<DataGridViewRow>().ForEach(row => idx += "," + row.Cells["ID"].Value);
-            //////        idx = idx.Substring(1);
-            //////        bool ZZZ = MessageBox.Show("Retourner la quantité des produits au stock ?\n\n(Excepte les produits connus dans la base donné)", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
-            //////        if (ZZZ)
-            //////        {
-            //////            string cmd_tmp = "";
-            //////            for (int f = 1; f < 71; f++)
-            //////            {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                if (MessageBox.Show("Êtes-vous sûr de supprimer (" + dataGridView1.SelectedRows.Count + ") factures ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    string idx = "";
+                    dataGridView1.SelectedRows.Cast<DataGridViewRow>().ForEach(row => idx += "," + row.Cells["ID"].Value);
+                    idx = idx.Substring(1);
+                    //----------
+                    bool ZZZ = MessageBox.Show("Retourner la quantité des produits au stock ?\n\n(Concerne juste les produits connus dans la base donné)", "Stock :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+                    if (ZZZ)
+                    {
+                        string cmd_tmp = "";
+                        for (int f = 1; f < 71; f++)
+                        {
 
-            //////                //cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_NME',`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_PROD_CODE',SUM(`ITEM_QNT_" + (f < 10 ? "0" : "") + f + "`) AS 'ITEM_QNT' FROM tb_factures_vente WHERE `ID` IN ("+idx+") AND `ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f + "` AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ";
-            //////                cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_NME',`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_PROD_CODE',`ITEM_QNT_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_QNT' FROM tb_factures_vente WHERE `ID` IN (" + idx + ") AND `ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f + "` AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ALL ";
-            //////            }
-            //////            cmd_tmp += ";";
-            //////            cmd_tmp = cmd_tmp.Replace(" UNION ALL ;", "");
-            //////            DataTable codes = PreConnection.Load_data("SELECT  tb1.ITEM_NME,SUM(tb1.ITEM_QNT) AS ITEM_QNT, PROD.`ID` AS 'PROD_ID' FROM (" + cmd_tmp + ") AS tb1 LEFT JOIN tb_produits AS PROD ON PROD.CODE = tb1.ITEM_PROD_CODE WHERE tb1.ITEM_NME IS NOT NULL AND PROD.`ID` IS NOT NULL GROUP BY tb1.ITEM_NME;");
+                            //cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_NME',`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_PROD_CODE',SUM(`ITEM_QNT_" + (f < 10 ? "0" : "") + f + "`) AS 'ITEM_QNT' FROM tb_factures_vente WHERE `ID` IN ("+idx+") AND `ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f + "` AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ";
+                            cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_NME',`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_PROD_CODE',`ITEM_QNT_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_QNT' FROM tb_factures_vente WHERE `ID` IN (" + idx + ") AND `ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f + "` AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ALL ";
+                        }
+                        cmd_tmp += ";";
+                        cmd_tmp = cmd_tmp.Replace(" UNION ALL ;", "");
+                        DataTable codes = PreConnection.Load_data("SELECT  tb1.ITEM_NME,SUM(tb1.ITEM_QNT) AS ITEM_QNT, PROD.`ID` AS 'PROD_ID' FROM (" + cmd_tmp + ") AS tb1 LEFT JOIN tb_produits AS PROD ON PROD.CODE = tb1.ITEM_PROD_CODE WHERE tb1.ITEM_NME IS NOT NULL AND PROD.`ID` IS NOT NULL GROUP BY tb1.ITEM_NME,PROD.`ID`;");
 
-            //////            //RESULT COLUMNS >>> : ITEM_NME / ITEM_QNT / PROD_ID
-            //////            foreach (DataRow row in codes.Rows)
-            //////            {
-            //////                PreConnection.Excut_Cmd("INSERT INTO `tb_stock_mouv`(`OP_DATE`,`PROD_ID`,`QNT_IN`,`QNT_OUT`,`OBSERV`) VALUES ("
-            //////                                               + "'" + DateTime.Now.ToString("yyyy-MM-dd") + "',"
-            //////                                               + "'" + row["PROD_ID"] + "',"
-            //////                                               + row["ITEM_QNT"] + ","
-            //////                                               + "0,"
-            //////                                               + "'Vente (Factures Annulées)');");
-            //////            }
-            //////        }
-            //////        //-------
-            //////        PreConnection.Excut_Cmd("DELETE FROM tb_factures_vente WHERE ID IN (" + idx + ")");
-            //////        load_factures();
-            //////    }
-            //////}
+                        //RESULT COLUMNS >>> : ITEM_NME / ITEM_QNT / PROD_ID
+                        foreach (DataRow row in codes.Rows)
+                        {
+                            PreConnection.Excut_Cmd(1, "tb_stock_mouv", new List<string> { "OP_DATE", "PROD_ID", "QNT_IN", "QNT_OUT", "OBSERV" }, new List<object> {
+                                DateTime.Now,
+                                row["PROD_ID"],
+                                row["ITEM_QNT"],
+                                0,
+                                "Vente (Factures Annulées)"
+                            }, null, null, null);
+                            //PreConnection.Excut_Cmd("INSERT INTO `tb_stock_mouv`(`OP_DATE`,`PROD_ID`,`QNT_IN`,`QNT_OUT`,`OBSERV`) VALUES ("
+                            //                               + "'" + DateTime.Now.ToString("yyyy-MM-dd") + "',"
+                            //                               + "'" + row["PROD_ID"] + "',"
+                            //                               + row["ITEM_QNT"] + ","
+                            //                               + "0,"
+                            //                               + "'Vente (Factures Annulées)');");
+                        }
+                    }
+                    //-------
+                    PreConnection.Excut_Cmd(3, "tb_factures_vente", null, null, "ID IN (@IDD)", new List<string> { "@IDD" }, new List<object> { idx });
+                    //PreConnection.Excut_Cmd("DELETE FROM tb_factures_vente WHERE ID IN (" + idx + ")");
+                    load_factures();
+                }
+            }
 
         }
 
@@ -892,6 +908,17 @@ namespace ALBAITAR_Softvet.Resources
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             PreConnection.search_filter_datagridview(dataGridView1, textBox1.Text.Replace("'", "''"));
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            new Small_New_Client().ShowDialog();
+            //-----------------------
+            clients = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients ORDER BY FULL_NME ASC;");
+            comboBox1.DataSource = clients;
+            comboBox1.DisplayMember = "FULL_NME";
+            comboBox1.ValueMember = "ID";
+            if (clients.Rows.Count > 0) { comboBox1.SelectedValue = (int)clients.AsEnumerable().Max(row => row.Field<int>("ID")); }
         }
     }
 }

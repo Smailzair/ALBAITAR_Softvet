@@ -1,23 +1,14 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
-using MySql.Data.MySqlClient;
 using ServiceStack;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Xamarin.Forms.Internals;
 using Excc = Microsoft.Office.Interop.Excel;
 
 namespace ALBAITAR_Softvet.Resources
@@ -307,7 +298,14 @@ namespace ALBAITAR_Softvet.Resources
                 prec_select = dataGridView2.SelectedRows[0].Index;
             }
             Stock = PreConnection.Load_data("SELECT tb1.*,tb2.SLD FROM (SELECT tb1.`ID`,tb1.`OP_DATE`,tb1.`PROD_ID`,tb2.`CODE`,tb2.`NME`,tb1.`OBSERV`,IF(tb1.`QNT_IN` > 0, tb1.`QNT_IN`,tb1.QNT_OUT * -1) AS QNT FROM tb_stock_mouv tb1 LEFT JOIN tb_produits tb2 ON tb2.`ID` = tb1.`PROD_ID`) tb1 LEFT JOIN (SELECT `PROD_ID`,SUM(`QNT_IN`) - SUM(`QNT_OUT`) AS SLD FROM tb_stock_mouv GROUP BY `PROD_ID`) tb2 ON tb1.`PROD_ID` = tb2.`PROD_ID` ORDER BY `OP_DATE` DESC, `ID` DESC;");
-            dataGridView2.DataSource = Stock;
+
+            if (Stock != null)
+            {
+                dataGridView2.DataSource = Stock;
+            }
+
+
+
             radioButton1_CheckedChanged(null, null);
             dataGridView2.SelectionChanged -= dataGridView2_SelectionChanged;
             dataGridView2.ClearSelection();
@@ -446,7 +444,7 @@ namespace ALBAITAR_Softvet.Resources
             string ids_to_delette = string.Empty;
             dataGridView2.SelectedRows.Cast<DataGridViewRow>().ToList().ForEach(row =>
             {
-                if ((string)row.Cells["OBSERV"].Value != "Achat (Premier Stock)")
+                if ((string)row.Cells["OBSERV"].Value != "Achat (Premier Stock)") //DON'T DELETE FIRST MOUV !!
                 {
                     cntt++;
                     ids_to_delette += "," + row.Cells["ID2"].Value;
@@ -458,7 +456,7 @@ namespace ALBAITAR_Softvet.Resources
                 if (MessageBox.Show("Êtes-vous sûr de supprimer ces [" + cntt + "] Mouvements ?", "Confirmation :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     //PreConnection.Excut_Cmd("DELETE FROM tb_stock_mouv WHERE `ID` IN (" + ids_to_delette + ");");
-                    PreConnection.Excut_Cmd(3, "tb_produits", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { ids_to_delette });
+                    PreConnection.Excut_Cmd(3, "tb_stock_mouv", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { ids_to_delette });
                     load_stocks(false);
                 }
             }
@@ -558,9 +556,8 @@ namespace ALBAITAR_Softvet.Resources
             DateTime minDate = new DateTime(1900, 01, 01);
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                minDate = Stock.AsEnumerable()
-                                 .Where(row => row.Field<int>("PROD_ID") == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value)
-                                   .Min(row => row.Field<DateTime>("OP_DATE"));
+                var gg = Stock.AsEnumerable().Where(row => row.Field<int>("PROD_ID") == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value);
+                if (gg.Any()) { minDate = gg.Min(row => row.Field<DateTime>("OP_DATE")); }
             }
             dateTimePicker1.MinDate = minDate;
             dateTimePicker1.Value = DateTime.Now >= minDate ? DateTime.Now : minDate;
@@ -729,14 +726,14 @@ namespace ALBAITAR_Softvet.Resources
 "PROD_ID",
 "QNT_IN",
 "QNT_OUT",
-"OBSERV"},new List<object>
+"OBSERV"}, new List<object>
 {
     dateTimePicker1.Value,//OP_DATE
                                             comboBox3.SelectedValue,//PROD_ID
                                             (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0), //QNT_IN
                                             (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0), //QNT_OUT
                                             textBox5.Text //OBSERV
-                    },null,null,null);
+                    }, null, null, null);
                         //PreConnection.Excut_Cmd("INSERT INTO `tb_stock_mouv`"
                         //                    + "(`OP_DATE`,"
                         //                    + "`PROD_ID`,"
@@ -764,7 +761,7 @@ namespace ALBAITAR_Softvet.Resources
                                             (numericUpDown2.Value > 0 ? numericUpDown2.Value : 0), //QNT_IN
                                             (numericUpDown2.Value < 0 ? numericUpDown2.Value * -1 : 0), //QNT_OUT
                                             textBox5.Text //OBSERV
-                    }, "ID = @P_ID", new List<string> { "P_ID"}, new List<object> { dataGridView2.SelectedRows[0].Cells["ID2"].Value });
+                    }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView2.SelectedRows[0].Cells["ID2"].Value });
                         //PreConnection.Excut_Cmd("UPDATE `tb_stock_mouv` SET "
                         //                    + "`OP_DATE` = '" + dateTimePicker1.Value.ToString("yyyy-MM-dd") + "',"//OP_DATE
                         //                    + "`PROD_ID` = " + comboBox3.SelectedValue + ","//PROD_ID
@@ -774,7 +771,7 @@ namespace ALBAITAR_Softvet.Resources
                         //                    + "WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID2"].Value + ";");
                         if (textBox5.Text == "Achat (Premier Stock)")
                         {
-                            PreConnection.Excut_Cmd_personnel("UPDATE tb_produits SET `QNT` = @Param_01 WHERE `ID` = @Param_002;",new List<string> { "Param_01","Param_002"},new List<object> { Convert.ToDouble(numericUpDown2.Value) , comboBox3.SelectedValue });
+                            PreConnection.Excut_Cmd_personnel("UPDATE tb_produits SET `QNT` = @Param_01 WHERE `ID` = @Param_002;", new List<string> { "Param_01", "Param_002" }, new List<object> { Convert.ToDouble(numericUpDown2.Value), comboBox3.SelectedValue });
                             //PreConnection.Excut_Cmd("UPDATE tb_produits SET `QNT` = " + Convert.ToDouble(numericUpDown2.Value) + " WHERE `ID` = " + comboBox3.SelectedValue + ";");
                             load_prods(false);
                         }
@@ -810,15 +807,15 @@ namespace ALBAITAR_Softvet.Resources
             decimal.TryParse(dataGridView2.Rows[e.RowIndex].Cells["QNT2"].Value.ToString().Replace(" ", ""), out tmpp);
             if (tmpp == 0)
             {
-                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView2.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = SystemColors.Window;
             }
             else if (tmpp > 0)
             {
-                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(192, 255, 192);
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView2.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.FromArgb(192, 255, 192);
             }
             else
             {
-                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(255, 192, 192);
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView2.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 192, 192);
             }
         }
 
@@ -828,7 +825,7 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (textBox6.Text.Length > 0)
                 {
-                    if (radioButton2.Checked)
+                    if (radioButton2.Checked && dataGridView1.SelectedRows.Count > 0)
                     {
                         string ddd = "PROD_ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value;
                         ddd += " AND (Convert([OP_DATE], System.String) LIKE '%{0}%'";
@@ -848,7 +845,7 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 else
                 {
-                    if (radioButton2.Checked)
+                    if (radioButton2.Checked && dataGridView1.SelectedRows.Count > 0)
                     {
                         ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = "PROD_ID = " + dataGridView1.SelectedRows[0].Cells["ID"].Value;
                     }
@@ -859,7 +856,7 @@ namespace ALBAITAR_Softvet.Resources
                 }
 
             }
-            if (dataGridView2.SelectedRows.Count < 2)
+            if (dataGridView2.SelectedRows.Count == 1)
             {
                 decimal sum = dataGridView2.Rows.Cast<DataGridViewRow>().Sum(row => Convert.ToDecimal(row.Cells["QNT2"].Value));
                 label21.Text = "Total : " + sum.ToString("# ##0.00");
@@ -873,7 +870,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            numericUpDown1.BackColor = SystemColors.Control;
+            numericUpDown1.BackColor = SystemColors.Window;
         }
 
         private void numericUpDown4_ValueChanged(object sender, EventArgs e)
@@ -975,6 +972,18 @@ namespace ALBAITAR_Softvet.Resources
             else
             {
                 MessageBox.Show("Aucun donnés !", ".", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView2.Rows[e.RowIndex].Selected)
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+            }
+            else
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Regular);
             }
         }
     }

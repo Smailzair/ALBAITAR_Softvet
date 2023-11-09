@@ -15,7 +15,7 @@ namespace ALBAITAR_Softvet.Dialogs
 {
     public partial class Anims_List : Form
     {
-        
+
         DataTable props;
         int selected_items_count = 0;
         List<ListViewItem> items2 = new List<ListViewItem>();
@@ -30,7 +30,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string filter = textBox1.Text.ToLower().Replace("'","''");
+            string filter = textBox1.Text.ToLower().Replace("'", "''");
 
             foreach (ListViewItem item in items2)
             {
@@ -119,54 +119,54 @@ namespace ALBAITAR_Softvet.Dialogs
             //        cmmd += "," + x;
             //    });
             //    cmmd = cmmd.Substring(1, cmmd.Length - 1);
-                props = PreConnection.Load_data("SELECT tb1.ID,tb1.NME,tb1.CLIENT_ID,CONCAT(tb2.FAMNME, ' ', tb2.NME) AS CLIENT_FULL_NME FROM tb_animaux AS tb1 LEFT JOIN tb_clients AS tb2 ON tb1.`CLIENT_ID` = tb2.ID;");
-                if (props != null)
+            props = PreConnection.Load_data("SELECT tb1.ID,tb1.NME,tb1.CLIENT_ID,CONCAT(tb2.FAMNME, ' ', tb2.NME) AS CLIENT_FULL_NME FROM tb_animaux AS tb1 LEFT JOIN tb_clients AS tb2 ON tb1.`CLIENT_ID` = tb2.ID;");
+            if (props != null)
+            {
+                if (props.Rows.Count > 0)
                 {
-                    if (props.Rows.Count > 0)
+                    foreach (DataRow row in props.Rows)
                     {
-                        foreach (DataRow row in props.Rows)
-                        {
-                            ListViewItem dd = new ListViewItem(row["NME"].ToString());
-                            dd.SubItems.Add(row["ID"].ToString());
+                        ListViewItem dd = new ListViewItem(row["NME"].ToString());
+                        dd.SubItems.Add(row["ID"].ToString());
                         dd.SubItems.Add(row["CLIENT_FULL_NME"].ToString());
                         dd.SubItems.Add(row["CLIENT_ID"].ToString());
-                            listView1.Items.Add(dd);
-                            items2.Add(dd);
-                        }
-
-                        if (Agenda.Animm2.Length > 0)
-                        {
-                            for (int dd = 0; dd < Agenda.Animm2.Length; dd++)
-                            {
-                                ListViewItem item = listView1.Items.Cast<ListViewItem>().Where(XX => XX.SubItems[0].Text == Agenda.Animm2[dd].SubItems[0].Text).FirstOrDefault();
-                                listView1.Items.Remove(item);
-                                items2.Remove(item);
-                                listView2.ItemSelectionChanged -= listView2_ItemSelectionChanged;
-                                listView2.Items.Add(item);
-                                listView2.SelectedIndices.Clear();
-                                listView2.ItemSelectionChanged += listView2_ItemSelectionChanged;
-                                selected_items_count++;
-                            }
-                        }
-
-                        button2.Enabled = selected_items_count > 0;
-                        button2.Text = "OK " + (button2.Enabled ? "[" + selected_items_count + "]" : "");
-
-
-
-                        btn2_enabled_first_time = button2.Enabled;
+                        listView1.Items.Add(dd);
+                        items2.Add(dd);
                     }
-                    else
+
+                    if (Agenda.Animm2.Length > 0)
                     {
-                        MessageBox.Show("Aucun animal trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Close();
+                        for (int dd = 0; dd < Agenda.Animm2.Length; dd++)
+                        {
+                            ListViewItem item = listView1.Items.Cast<ListViewItem>().Where(XX => XX.SubItems[0].Text == Agenda.Animm2[dd].SubItems[0].Text).FirstOrDefault();
+                            listView1.Items.Remove(item);
+                            items2.Remove(item);
+                            listView2.ItemSelectionChanged -= listView2_ItemSelectionChanged;
+                            listView2.Items.Add(item);
+                            listView2.SelectedIndices.Clear();
+                            listView2.ItemSelectionChanged += listView2_ItemSelectionChanged;
+                            selected_items_count++;
+                        }
                     }
+
+                    button2.Enabled = selected_items_count > 0;
+                    button2.Text = "OK " + (button2.Enabled ? "[" + selected_items_count + "]" : "");
+
+
+
+                    btn2_enabled_first_time = button2.Enabled;
                 }
                 else
                 {
                     MessageBox.Show("Aucun animal trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Aucun animal trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
+            }
             //}
             //else
             //{
@@ -174,8 +174,8 @@ namespace ALBAITAR_Softvet.Dialogs
             //    Close();
             //}
 
-            
-            
+
+
         }
 
         private void listView1_SizeChanged(object sender, EventArgs e)
@@ -197,7 +197,8 @@ namespace ALBAITAR_Softvet.Dialogs
                 stringFormat.Alignment = StringAlignment.Center;
                 stringFormat.LineAlignment = StringAlignment.Center;
                 e.Graphics.DrawString(e.Header.Text, ((ListView)sender).Font, Brushes.White, e.Bounds, stringFormat);
-            }else
+            }
+            else
             {
                 e.DrawDefault = true;
             }

@@ -95,7 +95,9 @@ namespace ALBAITAR_Softvet.Resources
             else if (lab_nmee.Length > 0)
             {                
                 switch (lab_nmee)
-                {                    
+                {
+                    case "- Tous -":
+                        break;
                     case "Hemogramme":
                         button2.PerformClick();
                         break;

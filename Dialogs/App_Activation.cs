@@ -131,7 +131,7 @@ namespace ALBAITAR_Softvet.Dialogs
             if (label8.Text.Length == 29 && textBox1.BackColor != Color.LightCoral && textBox5.BackColor != Color.LightCoral && textBox6.BackColor != Color.LightCoral)
             {
                 //-------------------
-                if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                if (PreConnection.IsInternetAvailable())
                 {
                     //------------------------
                     DataTable dt = new DataTable();

@@ -608,12 +608,20 @@ namespace ALBAITAR_Softvet.Resources
                 if (Caisse_Idx > -1)
                 {
                     dataGridView2.ClearSelection();
-                    dataGridView2.Rows.Cast<DataGridViewRow>().Where(Q => (int)Q.Cells["IDD_FINANC"].Value == Caisse_Idx).ToList().ForEach(W =>
+                    //var yy = dataGridView2.Rows.Cast<DataGridViewRow>().Where(F => F.Cells["IDD_FINANC"] != null).Where(Q => (Q.Cells["IDD_FINANC"].Value != DBNull.Value ? (int)Q.Cells["IDD_FINANC"].Value : -999) == Caisse_Idx);
+                    var yy = dataGridView2.Rows.Cast<DataGridViewRow>()
+    .Where(F => F.Cells["IDD_FINANC"] != null && F.Cells["IDD_FINANC"].Value != null)
+    .Where(Q => Convert.ToInt32(Q.Cells["IDD_FINANC"].Value) == Caisse_Idx);
+                    if (yy.Any())
                     {
-                        W.Cells[4].Selected = true;
-                        dataGridView2.CurrentCell = dataGridView2.SelectedCells[0];
-                        dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.SelectedCells[0].RowIndex;
-                    });
+                        yy.ForEach(W =>
+                        {
+                            W.Cells[4].Selected = true;
+                            dataGridView2.CurrentCell = dataGridView2.SelectedCells[0];
+                            dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.SelectedCells[0].RowIndex;
+                        });
+                    }
+
                     Caisse_Idx = -1;
                 }
                 else if (Caisse_Idx == -2)
@@ -656,9 +664,9 @@ namespace ALBAITAR_Softvet.Resources
                 //---------
                 double sld = tot_debit - tot_credit;
                 //-----------------
-                if(dataGridView3.Columns.Count > 0)
+                if (dataGridView3.Columns.Count > 0)
                 {
-                    if(dataGridView3.Rows.Count == 0)
+                    if (dataGridView3.Rows.Count == 0)
                     {
                         dataGridView3.Rows.Add();
                         dataGridView3.Rows[0].Cells[0].Value = "dd";
@@ -932,9 +940,9 @@ namespace ALBAITAR_Softvet.Resources
         private void dataGridView2_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
 
-            if(dataGridView3.Columns.Count >= 3)
+            if (dataGridView3.Columns.Count >= 3)
             {
-                if(dataGridView2.Columns["OBJECT"] != null && dataGridView2.Columns["DEL_FNC"] != null)
+                if (dataGridView2.Columns["OBJECT"] != null && dataGridView2.Columns["DEL_FNC"] != null)
                 {
                     dataGridView3.Location = new Point(dataGridView2.GetColumnDisplayRectangle(dataGridView2.Columns["OBJECT"].Index, true).Location.X, dataGridView3.Location.Y);
                     dataGridView3.Width = dataGridView2.GetColumnDisplayRectangle(dataGridView2.Columns["DEL_FNC"].Index, true).Location.X - dataGridView2.GetColumnDisplayRectangle(dataGridView2.Columns["OBJECT"].Index, true).Location.X;
@@ -947,7 +955,7 @@ namespace ALBAITAR_Softvet.Resources
                 }
 
             }
-            
+
         }
     }
 }

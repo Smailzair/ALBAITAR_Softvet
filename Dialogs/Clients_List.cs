@@ -1,14 +1,8 @@
 ﻿using ALBAITAR_Softvet.Resources;
-using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Dialogs
@@ -23,54 +17,7 @@ namespace ALBAITAR_Softvet.Dialogs
         public Clients_List()
         {
             InitializeComponent();
-            //-------------------------
-            props = PreConnection.Load_data("SELECT ID, concat(FAMNME, ' ', NME) AS FULL_NME FROM tb_clients;");
-            if (props != null)
-            {
-                if (props.Rows.Count > 0)
-                {
-                    foreach (DataRow row in props.Rows)
-                    {
-                        ListViewItem dd = new ListViewItem(row["FULL_NME"].ToString());
-                        dd.SubItems.Add(row["ID"].ToString());
-                        listView1.Items.Add(dd);
-                        items2.Add(dd);
-                    }
-                    
-                        if (Agenda.Clientss2.Length > 0)
-                        {
-                            for (int dd = 0; dd < Agenda.Clientss2.Length; dd++)
-                            {
-                                ListViewItem item = listView1.Items.Cast<ListViewItem>().Where(XX => XX.SubItems[0].Text == Agenda.Clientss2[dd].SubItems[0].Text).FirstOrDefault();
-                                listView1.Items.Remove(item);
-                                items2.Remove(item);
-                                listView2.ItemSelectionChanged -= listView2_ItemSelectionChanged;
-                                listView2.Items.Add(item);
-                                listView2.SelectedIndices.Clear();
-                                listView2.ItemSelectionChanged += listView2_ItemSelectionChanged;
-                                selected_items_count++;
-                            }
-                        }
-                    
-                    
-                    button2.Enabled = selected_items_count > 0;
-                    button2.Text = "OK " + (button2.Enabled ? "[" + selected_items_count + "]" : "");
-
-
-
-                    btn2_enabled_first_time = button2.Enabled;
-                }
-                else
-                {
-                    MessageBox.Show("Aucun propriétaire trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Aucun propriétaire trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Close();
-            }
+            
         }
 
 
@@ -159,6 +106,58 @@ namespace ALBAITAR_Softvet.Dialogs
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void Clients_List_Load(object sender, EventArgs e)
+        {
+            //-------------------------
+            props = PreConnection.Load_data("SELECT ID, concat(FAMNME, ' ', NME) AS FULL_NME FROM tb_clients;");
+            if (props != null)
+            {
+                if (props.Rows.Count > 0)
+                {
+                    foreach (DataRow row in props.Rows)
+                    {
+                        ListViewItem dd = new ListViewItem(row["FULL_NME"].ToString());
+                        dd.SubItems.Add(row["ID"].ToString());
+                        listView1.Items.Add(dd);
+                        items2.Add(dd);
+                    }
+
+                    if (Agenda.Clientss2.Length > 0)
+                    {
+                        for (int dd = 0; dd < Agenda.Clientss2.Length; dd++)
+                        {
+                            ListViewItem item = listView1.Items.Cast<ListViewItem>().Where(XX => XX.SubItems[0].Text == Agenda.Clientss2[dd].SubItems[0].Text).FirstOrDefault();
+                            listView1.Items.Remove(item);
+                            items2.Remove(item);
+                            listView2.ItemSelectionChanged -= listView2_ItemSelectionChanged;
+                            listView2.Items.Add(item);
+                            listView2.SelectedIndices.Clear();
+                            listView2.ItemSelectionChanged += listView2_ItemSelectionChanged;
+                            selected_items_count++;
+                        }
+                    }
+
+
+                    button2.Enabled = selected_items_count > 0;
+                    button2.Text = "OK " + (button2.Enabled ? "[" + selected_items_count + "]" : "");
+
+
+
+                    btn2_enabled_first_time = button2.Enabled;
+                }
+                else
+                {
+                    MessageBox.Show("Aucun propriétaire trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Aucun propriétaire trouvé !", ".", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
+            }
         }
     }
 }

@@ -127,7 +127,7 @@ namespace ALBAITAR_Softvet
 
         public void Send_Email_Vaccin_Alerts()
         {
-            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && Params != null) //If the internet available
+            if (PreConnection.IsInternetAvailable() && Params != null) //If the internet available
             {
                 DataTable vaccin_alerts = PreConnection.Load_data("SELECT * FROM ( " +
                                                                   "SELECT * FROM (" +
@@ -347,7 +347,7 @@ namespace ALBAITAR_Softvet
                             Mssg.To.Add(MailboxAddress.Parse(clt_email));
                             Mssg.Subject = "ALBAITAR Softvet - Rappel de rendez-vous pour la vaccination de votre animal";
                             Mssg.Body = builder.ToMessageBody();
-                            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) //If the internet available
+                            if (PreConnection.IsInternetAvailable()) //If the internet available
                             {
                                 SmtpClient clnt = new SmtpClient();
                                 try
@@ -497,7 +497,7 @@ namespace ALBAITAR_Softvet
                                 Mssg.To.Add(MailboxAddress.Parse(cabinet_email));
                                 Mssg.Subject = "ALBAITAR Softvet - Rappel de rendez-vous pour les prochaines vaccinations";
                                 Mssg.Body = builder.ToMessageBody();
-                                if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) //If the internet available
+                                if (PreConnection.IsInternetAvailable()) //If the internet available
                                 {
                                     SmtpClient clnt = new SmtpClient();
                                     try
@@ -1180,8 +1180,6 @@ namespace ALBAITAR_Softvet
                 DateTime tt = DateTime.Now;
                 if (Params != null)
                 {
-                    Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Params.Rows.Count = " + Params.Rows.Count);
-                    Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Params.Columns.Count = " + Params.Columns.Count);
                     label_cab_nme.Text = Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 1).FirstOrDefault()["VAL"].ToString();
                     //----------
                     DateTime.TryParse(Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 6).FirstOrDefault()["VAL"].ToString(), out tt);
@@ -1425,7 +1423,7 @@ namespace ALBAITAR_Softvet
                         }
                         else
                         {
-                            Anim_Infos.selected_anim_id = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int)comboBox2.SelectedValue : -1) : -1;
+                            Anim_Infos.selected_anim_id = comboBox2.SelectedValue != null ? (comboBox2.SelectedValue != DBNull.Value ? (int.TryParse(comboBox2.SelectedValue.ToString(), out _) ? (int)comboBox2.SelectedValue : -1) : -1) : -1;
                             Anim_Infos.make_refresh = true;
                             tabPage_infos.Controls["Anim_Infos"].Focus();
                             tabPage_infos.Controls["Anim_Infos"].BringToFront();
@@ -1766,12 +1764,15 @@ namespace ALBAITAR_Softvet
 
         private void button14_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows[0].Cells["REF2"].Value != DBNull.Value)
+            if(dataGridView1.SelectedRows.Count > 0)
             {
+                if (dataGridView1.SelectedRows[0].Cells["REF2"].Value != DBNull.Value)
+                {
 
-                (new Laboratoire(selected_animal_id, dataGridView1.SelectedRows[0].Cells["REF2"].Value.ToString(), false, "")).ShowDialog();
+                    (new Laboratoire(selected_animal_id, dataGridView1.SelectedRows[0].Cells["REF2"].Value.ToString(), false, "")).ShowDialog();
+                }
+                Refresh_current_tab();
             }
-            Refresh_current_tab();
         }
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -2364,7 +2365,7 @@ namespace ALBAITAR_Softvet
             }
             else if (sld >= 0)
             {
-                label9.Text = (textBox4.Text.Length == 0 && radioButton8.Checked ? "Il est endetté par " : "Ils sont endettés par ") + "(" + sld.ToString("N2") + " DA).";
+                label9.Text = (textBox4.Text.Length == 0 && radioButton8.Checked ? "Il est endetté de " : "Ils sont endettés de ") + "(" + sld.ToString("N2") + " DA).";
             }
             else
             {
@@ -2502,15 +2503,13 @@ namespace ALBAITAR_Softvet
             if (e.RowIndex >= 0)
             {
                 decimal cellValue = dataGridView5.Rows[e.RowIndex].Cells["FACT_PAID_MNT"].Value != DBNull.Value ? (decimal)dataGridView5.Rows[e.RowIndex].Cells["FACT_PAID_MNT"].Value : 0;
-                // decimal cellValue2 = (decimal)dataGridView5.Rows[e.RowIndex].Cells["TOTAL_TTC"].Value;
-
                 if (dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn2"].Value != DBNull.Value) //CLIENT_ID
                 {
-                    dataGridView5.Rows[e.RowIndex].DefaultCellStyle.BackColor = cellValue > 0 ? Color.FromArgb(255, 192, 192) : Color.FromArgb(128, 255, 128);
+                    dataGridView5.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView5.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = cellValue > 0 ? Color.FromArgb(255, 192, 192) : Color.FromArgb(128, 255, 128);
                 }
                 else
                 {
-                    dataGridView5.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView5.DefaultCellStyle.BackColor;
+                    dataGridView5.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView5.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = dataGridView5.DefaultCellStyle.BackColor;
                 }
             }
         }
@@ -2562,32 +2561,34 @@ namespace ALBAITAR_Softvet
 
         private void button28_Click(object sender, EventArgs e)
         {
-            int anim_idd = dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value != DBNull.Value ? (int)dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value : -1;
+
+            int anim_idd = dataGridView2.SelectedRows.Count > 0 ? dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value != DBNull.Value ? (int)dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value : -1 : -1;
             if (anim_idd < 0)
             {
                 if (selected_animal_id > 0) { anim_idd = selected_animal_id; }
-                else if (selected_client_id > 0)
+                else if (selected_client_id > 0 && Main_Frm_animals_tbl != null)
                 {
                     var yy = Main_Frm_animals_tbl.AsEnumerable().Where(F => (int)F["CLIENT_ID"] == selected_client_id);
                     if (yy.Any()) { anim_idd = (int)yy.First()["ID"]; }
                 }
             }
-            new New_Ordonnance(anim_idd).ShowDialog();
+            if(anim_idd > 0) { new New_Ordonnance(anim_idd).ShowDialog(); }
+            
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
-            int anim_idd = dataGridView1.SelectedRows[0].Cells["ANIM_IDD"].Value != DBNull.Value ? (int)dataGridView1.SelectedRows[0].Cells["ANIM_IDD"].Value : -1;
+            int anim_idd = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Cells["ANIM_IDD"].Value != DBNull.Value ? (int)dataGridView1.SelectedRows[0].Cells["ANIM_IDD"].Value : -1 : -1;
             if (anim_idd < 0)
             {
                 if (selected_animal_id > 0) { anim_idd = selected_animal_id; }
-                else if (selected_client_id > 0)
+                else if (selected_client_id > 0 && Main_Frm_animals_tbl != null)
                 {
                     var yy = Main_Frm_animals_tbl.AsEnumerable().Where(F => (int)F["CLIENT_ID"] == selected_client_id);
                     if (yy.Any()) { anim_idd = (int)yy.First()["ID"]; }
                 }
             }
-            new New_Ordonnance(anim_idd).ShowDialog();
+            if (anim_idd > 0) { new New_Ordonnance(anim_idd).ShowDialog(); }
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -2642,17 +2643,19 @@ namespace ALBAITAR_Softvet
 
         private void button31_Click(object sender, EventArgs e)
         {
-            int anim_idd = dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value != DBNull.Value ? (int)dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value : -1;
+            int anim_idd = dataGridView2.SelectedRows.Count > 0 ? dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value != DBNull.Value ? (int)dataGridView2.SelectedRows[0].Cells["ANIM_ID"].Value : -1 : -1;
             if (anim_idd < 0)
             {
                 if (selected_animal_id > 0) { anim_idd = selected_animal_id; }
-                else if (selected_client_id > 0)
+                else if (selected_client_id > 0 && Main_Frm_animals_tbl != null)
                 {
                     var yy = Main_Frm_animals_tbl.AsEnumerable().Where(F => (int)F["CLIENT_ID"] == selected_client_id);
                     if (yy.Any()) { anim_idd = (int)yy.First()["ID"]; }
                 }
             }
-            new New_Pers_Cpt_Rnd_Visit(anim_idd).ShowDialog();
+
+            if(anim_idd > 0) { new New_Pers_Cpt_Rnd_Visit(anim_idd).ShowDialog(); }
+            
         }
 
         private void button32_Click(object sender, EventArgs e)
@@ -2697,6 +2700,18 @@ namespace ALBAITAR_Softvet
         private void panel5_Leave(object sender, EventArgs e)
         {
             panel5.Visible = false;
+        }
+
+        private void dataGridView5_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView5.Rows[e.RowIndex].Selected)
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+            }
+            else
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Regular);
+            }
         }
     }
 }

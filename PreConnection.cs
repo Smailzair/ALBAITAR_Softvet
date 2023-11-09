@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -171,6 +172,7 @@ namespace ALBAITAR_Softvet
                 cmmd += "DELETE FROM " + Table_nme;
                 if (where_expression != null) { if (where_expression.Length > 0) { cmmd += " WHERE " + where_expression; } }
                 cmmd += ";";
+                Debug.WriteLine(">>>>>>>>>>>>>>> cmmd = " + cmmd);
             }
 
             int rows_nb = 0;
@@ -183,7 +185,6 @@ namespace ALBAITAR_Softvet
                     {
                         for (int i = 0; i < Columns_names.Count; i++)
                         {
-                            Debug.WriteLine(Columns_names[i] + " ==> " + col_values[i]);
                             command.Parameters.AddWithValue("@i" + i.ToString() + "_" + Columns_names[i], col_values[i]);
                         }
                     }
@@ -192,7 +193,6 @@ namespace ALBAITAR_Softvet
                     {
                         for (int i = 0; i < where_columns.Count; i++)
                         {
-                            Debug.WriteLine("WHERE>> "+ where_columns[i] +" --> " + where_values[i]);
                             command.Parameters.AddWithValue(where_columns[i], where_values[i]);
                         }
                     }
@@ -289,26 +289,45 @@ namespace ALBAITAR_Softvet
                 Application.Exit();
             }
         }
-
+        public static bool IsInternetAvailable()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    using (client.OpenRead("http://clients3.google.com/generate_204"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public static void load_rancosoft_gmail_auth()
         {
-            if (client_manag.State != ConnectionState.Open)
+            if (IsInternetAvailable())
             {
-                client_manag.Open();
-            }
-            if (client_manag.State == ConnectionState.Open)
-            {
-                try
+                if (client_manag.State != ConnectionState.Open)
                 {
-                    //Load Gmail Authent Pass (to use it to send forgot login pass of login of clients)
-                    MySqlDataAdapter adp = new MySqlDataAdapter("SELECT VALUE_TXT FROM PARAMS_AND_VALUES WHERE NME = 'RancoSoft Gmail Auth';", client_manag);
-                    DataTable dt = new DataTable();
-                    adp.Fill(dt);
-                    if (dt.Rows.Count > 0) { Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT = PreConnection.Codify_txt(dt.Rows[0][0].ToString()); Properties.Settings.Default.Save(); }
-                    //==========================================================
+                    client_manag.Open();
                 }
-                catch { }
-                client_manag.Close();
+                if (client_manag.State == ConnectionState.Open)
+                {
+                    try
+                    {
+                        //Load Gmail Authent Pass (to use it to send forgot login pass of login of clients)
+                        MySqlDataAdapter adp = new MySqlDataAdapter("SELECT VALUE_TXT FROM PARAMS_AND_VALUES WHERE NME = 'RancoSoft Gmail Auth';", client_manag);
+                        DataTable dt = new DataTable();
+                        adp.Fill(dt);
+                        if (dt.Rows.Count > 0) { Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT = PreConnection.Codify_txt(dt.Rows[0][0].ToString()); Properties.Settings.Default.Save(); }
+                        //==========================================================
+                    }
+                    catch { }
+                    client_manag.Close();
+                }
             }
         }
         public static int Verif_manual_stop_of_RancoSoft()

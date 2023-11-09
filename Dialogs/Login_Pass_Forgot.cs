@@ -74,7 +74,7 @@ namespace ALBAITAR_Softvet
         private void button2_Click(object sender, EventArgs e)
         {
 
-            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            if (PreConnection.IsInternetAvailable())
             {
                 MimeMessage Mssg = new MimeMessage();
                 Mssg.From.Add(new MailboxAddress("RancoSoft", "rancosoft@gmail.com"));

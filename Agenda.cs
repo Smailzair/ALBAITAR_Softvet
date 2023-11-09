@@ -784,12 +784,11 @@ namespace ALBAITAR_Softvet.Resources
                 Clientss2[i] = listView_Clients.Items[i];
             }
             //--------------
-            Clients_List lsst = new Clients_List();
-            lsst.ShowDialog();
+            new Clients_List().ShowDialog();
             //-------------
+            listView_Clients.Items.Clear();
             if (Clientss != null)
             {
-                listView_Clients.Items.Clear();
                 if (Clientss.Length > 0)
                 {
                     for (int yd = 0; yd < Clientss.Length; yd++)
@@ -807,7 +806,7 @@ namespace ALBAITAR_Softvet.Resources
                 label12.Text = "Propriétaires :";
             }
 
-            
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -837,8 +836,8 @@ namespace ALBAITAR_Softvet.Resources
                 Animm2[i] = listView_Anim.Items[i];
             }
             //--------------
-            Anims_List ann = new Anims_List();
-            ann.ShowDialog();
+            //Anims_List ann = new Anims_List();
+            new Anims_List().ShowDialog();
             //--------------
             listView_Anim.Items.Clear();
             if (Animm != null)
@@ -876,7 +875,7 @@ namespace ALBAITAR_Softvet.Resources
                     column.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
                 }
             }
-            
+
         }
 
         private void button5_Click(object sender, EventArgs e)

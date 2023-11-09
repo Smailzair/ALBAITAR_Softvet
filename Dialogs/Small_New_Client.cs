@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Dialogs
@@ -28,10 +25,11 @@ namespace ALBAITAR_Softvet.Dialogs
             textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
             all_ready &= textBox2.Text.TrimStart().TrimEnd() != string.Empty;
             all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+            all_ready &= !label13.Visible;
             //-------------------------
             if (all_ready)
             {
-                PreConnection.Excut_Cmd(1, "tb_clients",new List<string>
+                PreConnection.Excut_Cmd(1, "tb_clients", new List<string>
                 {
                     "SEX",
                     "FAMNME",
@@ -44,7 +42,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     "NUM_PHONE",
                     "EMAIL",
                     "OBSERVATIONS"
-                },new List<object>
+                }, new List<object>
                 {
                     comboBox1.Text,
                     textBox3.Text,
@@ -56,7 +54,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     "",
                     "",
                     "",
-                    "" },null,null,null
+                    "" }, null, null, null
                 );
                 //----------------
                 Close();
@@ -73,7 +71,7 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             if (textBox2.Text.Length > 0 && textBox3.Text.Length > 0)
             {
-                int cnt = clients.Rows.Cast<DataRow>().Where(zz => zz["FAMNME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) && zz["NME"].ToString().ToLower().Equals(textBox2.Text.ToLower()) && zz["NUM_CNI"].ToString().ToLower().Equals(textBox2.Text.ToLower())).ToList().Count();
+                int cnt = clients.Rows.Cast<DataRow>().Where(zz => zz["FAMNME"].ToString().ToLower().Equals(textBox3.Text.ToLower()) && zz["NME"].ToString().ToLower().Equals(textBox2.Text.ToLower()) && (string.IsNullOrWhiteSpace(textBox4.Text) || zz["NUM_CNI"].ToString().ToLower().Equals(textBox4.Text.ToLower()))).ToList().Count();
                 label13.Visible = cnt > 0;
             }
             else { label13.Visible = false; }

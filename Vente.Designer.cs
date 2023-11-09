@@ -56,6 +56,8 @@
             this.TOTAL_TTC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TOTAL_HT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button9 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -63,7 +65,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -240,6 +241,37 @@
             this.TOTAL_HT.ReadOnly = true;
             this.TOTAL_HT.Visible = false;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(138, 359);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(120, 20);
+            this.checkBox1.TabIndex = 41;
+            this.checkBox1.Text = "Rég. en espèce ?";
+            this.toolTip1.SetToolTip(this.checkBox1, "Méthode de calcule D.Timbre :\r\n----------------------\r\nD.Timbre = (HT + TVA) x 1%" +
+        "\r\n---------\r\nRMQ :\r\n** (5 DA < D.Timbre < 2500.00 DA)\r\n** (HT + TVA) > 20.00 DA\r" +
+        "\n");
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkBox1_MouseClick);
+            // 
+            // button9
+            // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button9.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_user_male_skin_type_7_25px;
+            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Location = new System.Drawing.Point(493, 46);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(26, 29);
+            this.button9.TabIndex = 80;
+            this.toolTip1.SetToolTip(this.button9, "Nouveau propriétaire");
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // button7
             // 
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -254,7 +286,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(26, 23);
             this.button7.TabIndex = 42;
-            this.toolTip1.SetToolTip(this.button7, "Vous pouvez modifier le pourcentage dans \"Parametres\".");
+            this.toolTip1.SetToolTip(this.button7, "Vous pouvez modifier le pourcentage dans \"Parametres\" de logiciel.");
             this.button7.UseVisualStyleBackColor = true;
             // 
             // button2
@@ -357,22 +389,6 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(138, 359);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(120, 20);
-            this.checkBox1.TabIndex = 41;
-            this.checkBox1.Text = "Rég. en espèce ?";
-            this.toolTip1.SetToolTip(this.checkBox1, "Méthode de calcule D.Timbre :\r\n----------------------\r\nD.Timbre = (HT + TVA) x 1%" +
-        "\r\n---------\r\nRMQ :\r\n** (5 DA < D.Timbre < 2500.00 DA)\r\n** (HT + TVA) > 20.00 DA\r" +
-        "\n");
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            this.checkBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkBox1_MouseClick);
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -395,6 +411,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.button9);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.button8);
@@ -613,7 +630,7 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(135, 49);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(384, 24);
+            this.comboBox1.Size = new System.Drawing.Size(352, 24);
             this.comboBox1.TabIndex = 37;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.TextUpdate += new System.EventHandler(this.comboBox1_TextUpdate);
@@ -897,5 +914,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button9;
     }
 }

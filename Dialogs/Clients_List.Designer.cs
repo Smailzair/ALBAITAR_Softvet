@@ -175,6 +175,7 @@
             this.Text = "Propriétaires :";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Clients_List_FormClosing);
+            this.Load += new System.EventHandler(this.Clients_List_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

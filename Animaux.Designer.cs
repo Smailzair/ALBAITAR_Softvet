@@ -794,7 +794,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
+            this.button1.BackgroundImage = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_user_male_skin_type_7_25px;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1280,10 +1280,10 @@
             // 
             this.tabPage3.Controls.Add(this.Poid_Panel);
             this.tabPage3.Controls.Add(this.label30);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(556, 553);
+            this.tabPage3.Size = new System.Drawing.Size(556, 556);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "His. Poids";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1296,7 +1296,7 @@
             this.Poid_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Poid_Panel.Location = new System.Drawing.Point(3, 3);
             this.Poid_Panel.Name = "Poid_Panel";
-            this.Poid_Panel.Size = new System.Drawing.Size(550, 547);
+            this.Poid_Panel.Size = new System.Drawing.Size(550, 550);
             this.Poid_Panel.TabIndex = 2;
             this.Poid_Panel.Visible = false;
             // 
@@ -1354,7 +1354,7 @@
             this.dataGridView3.Location = new System.Drawing.Point(3, 4);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.Size = new System.Drawing.Size(544, 538);
+            this.dataGridView3.Size = new System.Drawing.Size(544, 541);
             this.dataGridView3.TabIndex = 0;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
             this.dataGridView3.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView3_CellFormatting);
@@ -1421,10 +1421,10 @@
             // 
             this.tabPage4.Controls.Add(this.Malad_Panel);
             this.tabPage4.Controls.Add(this.label29);
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(556, 553);
+            this.tabPage4.Size = new System.Drawing.Size(556, 556);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "His. Maladies";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1442,7 +1442,7 @@
             this.Malad_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Malad_Panel.Location = new System.Drawing.Point(3, 3);
             this.Malad_Panel.Name = "Malad_Panel";
-            this.Malad_Panel.Size = new System.Drawing.Size(550, 547);
+            this.Malad_Panel.Size = new System.Drawing.Size(550, 550);
             this.Malad_Panel.TabIndex = 2;
             this.Malad_Panel.Visible = false;
             // 
@@ -1458,7 +1458,7 @@
             this.button18.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button18.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
             this.button18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button18.Location = new System.Drawing.Point(441, 401);
+            this.button18.Location = new System.Drawing.Point(441, 404);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(36, 29);
             this.button18.TabIndex = 101;
@@ -1474,7 +1474,7 @@
             this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button19.FlatAppearance.BorderSize = 0;
             this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button19.Location = new System.Drawing.Point(483, 401);
+            this.button19.Location = new System.Drawing.Point(483, 404);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(26, 29);
             this.button19.TabIndex = 100;
@@ -1489,7 +1489,7 @@
             this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button17.FlatAppearance.BorderSize = 0;
             this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button17.Location = new System.Drawing.Point(512, 401);
+            this.button17.Location = new System.Drawing.Point(512, 404);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(26, 29);
             this.button17.TabIndex = 70;
@@ -1502,7 +1502,7 @@
             // 
             this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox4.Image = global::ALBAITAR_Softvet.Properties.Resources.NOUVEAU_003;
-            this.pictureBox4.Location = new System.Drawing.Point(317, 401);
+            this.pictureBox4.Location = new System.Drawing.Point(317, 404);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(92, 48);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1516,7 +1516,7 @@
             this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button16.FlatAppearance.BorderSize = 0;
             this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button16.Location = new System.Drawing.Point(13, 401);
+            this.button16.Location = new System.Drawing.Point(13, 404);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(26, 29);
             this.button16.TabIndex = 68;
@@ -1540,7 +1540,7 @@
             this.groupBox5.Controls.Add(this.checkBox4);
             this.groupBox5.Font = new System.Drawing.Font("Century Gothic", 8.25F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(4, 435);
+            this.groupBox5.Location = new System.Drawing.Point(4, 438);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(537, 107);
             this.groupBox5.TabIndex = 67;
@@ -1788,7 +1788,7 @@
             this.dataGridView4.RowHeadersVisible = false;
             this.dataGridView4.RowHeadersWidth = 7;
             this.dataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView4.Size = new System.Drawing.Size(541, 341);
+            this.dataGridView4.Size = new System.Drawing.Size(541, 344);
             this.dataGridView4.TabIndex = 2;
             this.dataGridView4.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView4_DataError);
             this.dataGridView4.SelectionChanged += new System.EventHandler(this.dataGridView4_SelectionChanged);
@@ -1868,10 +1868,10 @@
             this.tabPage2.BackColor = System.Drawing.Color.White;
             this.tabPage2.Controls.Add(this.Visit_Panel);
             this.tabPage2.Controls.Add(this.label28);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(556, 553);
+            this.tabPage2.Size = new System.Drawing.Size(556, 556);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Rapport de visites : ";
             // 
@@ -1887,7 +1887,7 @@
             this.Visit_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Visit_Panel.Location = new System.Drawing.Point(3, 3);
             this.Visit_Panel.Name = "Visit_Panel";
-            this.Visit_Panel.Size = new System.Drawing.Size(550, 547);
+            this.Visit_Panel.Size = new System.Drawing.Size(550, 550);
             this.Visit_Panel.TabIndex = 2;
             this.Visit_Panel.Visible = false;
             // 
@@ -1903,7 +1903,7 @@
             this.button22.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button22.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
             this.button22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button22.Location = new System.Drawing.Point(445, 331);
+            this.button22.Location = new System.Drawing.Point(445, 334);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(36, 30);
             this.button22.TabIndex = 99;
@@ -1945,7 +1945,7 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(542, 322);
+            this.dataGridView2.Size = new System.Drawing.Size(542, 325);
             this.dataGridView2.TabIndex = 57;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
@@ -2009,7 +2009,7 @@
             // 
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox3.Image = global::ALBAITAR_Softvet.Properties.Resources.NOUVEAU_003;
-            this.pictureBox3.Location = new System.Drawing.Point(260, 331);
+            this.pictureBox3.Location = new System.Drawing.Point(260, 334);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(92, 48);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2023,7 +2023,7 @@
             this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button12.FlatAppearance.BorderSize = 0;
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.Location = new System.Drawing.Point(7, 335);
+            this.button12.Location = new System.Drawing.Point(7, 338);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(26, 29);
             this.button12.TabIndex = 58;
@@ -2045,7 +2045,7 @@
             this.groupBox2.Controls.Add(this.comboBox5);
             this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 8.25F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(8, 367);
+            this.groupBox2.Location = new System.Drawing.Point(8, 370);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(537, 177);
             this.groupBox2.TabIndex = 66;
@@ -2160,7 +2160,7 @@
             this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button11.FlatAppearance.BorderSize = 0;
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Location = new System.Drawing.Point(519, 332);
+            this.button11.Location = new System.Drawing.Point(519, 335);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(26, 29);
             this.button11.TabIndex = 59;
@@ -2175,7 +2175,7 @@
             this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button10.FlatAppearance.BorderSize = 0;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(487, 331);
+            this.button10.Location = new System.Drawing.Point(487, 334);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(26, 31);
             this.button10.TabIndex = 60;
