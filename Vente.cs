@@ -44,9 +44,9 @@ namespace ALBAITAR_Softvet.Resources
             to_select_idx = to_select_id;
             //-----------------------
             clients = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-            comboBox1.DataSource = clients;
-            comboBox1.DisplayMember = "FULL_NME";
-            comboBox1.ValueMember = "ID";
+            comboBox1.DataSource = comboBox2.DataSource = clients;
+            comboBox1.DisplayMember = comboBox2.DisplayMember = "FULL_NME";
+            comboBox1.ValueMember = comboBox2.ValueMember = "ID";
             //----------------------
             if (stock_to_modify.Columns.Count == 0)
             {
@@ -239,15 +239,17 @@ namespace ALBAITAR_Softvet.Resources
 
         private void Vente_Load(object sender, EventArgs e)
         {
+            dateTimePicker4.MinDate = DateTime.Now;
+            //----------
             load_factures();
         }
 
         private void load_factures()
         {
             int prev_idx = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : -1;
-            factures = PreConnection.Load_data("SELECT `ID`,`DATE`,`CLIENT_ID`,`CLIENT_FULL_NME`,`REF`,`TVA_PERC`,`DROIT_TIMBRE`,`TOTAL_HT`,`TOTAL_TTC` FROM tb_factures_vente;");
+            factures = PreConnection.Load_data("SELECT `ID`,`DATE`,`CLIENT_ID`,`CLIENT_FULL_NME`,`REF`,`TVA_PERC`,`DROIT_TIMBRE`,`TOTAL_HT`,`TOTAL_TTC`,`LAST_MODIF_BY` FROM tb_factures_vente;");
             dataGridView1.DataSource = factures;
-            textBox1_TextChanged(null, null);
+            factures_filtr();
             if (to_select_idx > -1)
             {
                 dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
@@ -320,7 +322,8 @@ namespace ALBAITAR_Softvet.Resources
                         "TVA_PERC",
                         "DROIT_TIMBRE",
                         "TOTAL_HT",
-                        "TOTAL_TTC"
+                        "TOTAL_TTC",
+                        "LAST_MODIF_BY"
                     };
                     List<object> Columns_vals = new List<object> {
                         dateTimePicker1.Value, //DATE
@@ -330,7 +333,8 @@ namespace ALBAITAR_Softvet.Resources
                         dataGridView3.Rows[1].Cells[1].Value, //TVA_PERC
                         dataGridView3.Rows[2].Cells[1].Value, //DROIT_TIMBRE
                         dataGridView3.Rows[0].Cells[1].Value, //TOTAL_HT
-                        dataGridView3.Rows[3].Cells[1].Value //TOTAL_TTC
+                        dataGridView3.Rows[3].Cells[1].Value, //TOTAL_TTC
+                        Properties.Settings.Default.Last_login_user_full_nme //LAST_MODIF_BY
                     };
 
                     foreach (DataGridViewRow row in dataGridView2.Rows)
@@ -393,7 +397,8 @@ namespace ALBAITAR_Softvet.Resources
                         "TVA_PERC",
                         "DROIT_TIMBRE",
                         "TOTAL_HT",
-                        "TOTAL_TTC"
+                        "TOTAL_TTC",
+                        "LAST_MODIF_BY"
                     };
                     List<object> Columns_vals = new List<object> {
                         dateTimePicker1.Value, //DATE
@@ -403,7 +408,8 @@ namespace ALBAITAR_Softvet.Resources
                         dataGridView3.Rows[1].Cells[1].Value, //TVA_PERC
                         dataGridView3.Rows[2].Cells[1].Value, //DROIT_TIMBRE
                         dataGridView3.Rows[0].Cells[1].Value, //TOTAL_HT
-                        dataGridView3.Rows[3].Cells[1].Value //TOTAL_TTC
+                        dataGridView3.Rows[3].Cells[1].Value, //TOTAL_TTC
+                        Properties.Settings.Default.Last_login_user_full_nme //LAST_MODIF_BY
                     };
 
                     foreach (DataGridViewRow row in dataGridView2.Rows)
@@ -907,7 +913,7 @@ namespace ALBAITAR_Softvet.Resources
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            PreConnection.search_filter_datagridview(dataGridView1, textBox1.Text.Replace("'", "''"));
+            factures_filtr();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -919,6 +925,87 @@ namespace ALBAITAR_Softvet.Resources
             comboBox1.DisplayMember = "FULL_NME";
             comboBox1.ValueMember = "ID";
             if (clients.Rows.Count > 0) { comboBox1.SelectedValue = (int)clients.AsEnumerable().Max(row => row.Field<int>("ID")); }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePicker3.Enabled = dateTimePicker4.Enabled = checkBox2.Checked;
+            factures_filtr();
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            numericUpDown3.Enabled = numericUpDown4.Enabled = checkBox4.Checked;
+            factures_filtr();
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBox2.Enabled = checkBox3.Checked;
+            factures_filtr();
+        }
+
+        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDown4.Minimum = numericUpDown3.Value;
+            factures_filtr();
+        }
+
+        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
+        {
+            factures_filtr();
+        }
+
+        private void factures_filtr()
+        {
+            if (dataGridView1.DataSource != null)
+            {
+                string fltr = "";
+                if (checkBox2.Checked) //Dates
+                {
+                    fltr += !string.IsNullOrWhiteSpace(fltr) ? " AND " : "";
+                    fltr += string.Format("DATE >= '{0}' AND DATE <= '{1}'", dateTimePicker3.Value, dateTimePicker4.Value);
+                }
+                if (checkBox3.Checked && !string.IsNullOrWhiteSpace(comboBox2.Text)) //Client
+                {
+                    fltr += !string.IsNullOrWhiteSpace(fltr) ? " AND " : "";
+                    fltr += string.Format("CLIENT_FULL_NME LIKE '%{0}%'", comboBox2.Text.Replace("'", "''"));
+                }
+                if (checkBox4.Checked) //Montant
+                {
+                    fltr += !string.IsNullOrWhiteSpace(fltr) ? " AND " : "";
+                    fltr += string.Format("TOTAL_TTC >= {0} AND TOTAL_TTC <= {1}", numericUpDown3.Value, numericUpDown4.Value);
+                }
+                if (!string.IsNullOrWhiteSpace(textBox1.Text)) //Recherch
+                {
+                    fltr += !string.IsNullOrWhiteSpace(fltr) ? " AND " : "";
+                    fltr += string.Format("(CONVERT(DATE, 'System.String') LIKE '{0}' OR " +
+                        "CONVERT(CLIENT_FULL_NME, 'System.String') LIKE '%{0}%' OR " +
+                        "CONVERT(REF, 'System.String') LIKE '%{0}%' OR " +
+                        "CONVERT(TOTAL_TTC, 'System.String') LIKE '{0}' OR " +
+                        "CONVERT(LAST_MODIF_BY, 'System.String') LIKE '%{0}%')", textBox1.Text.Replace("'", "''"));
+                }
+                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
+            }
+
+        }
+
+        private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePicker4.ValueChanged -= dateTimePicker3_ValueChanged;
+            dateTimePicker4.MinDate = dateTimePicker3.Value;
+            dateTimePicker4.ValueChanged += dateTimePicker3_ValueChanged;
+            factures_filtr();
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            factures_filtr();
+        }
+
+        private void comboBox2_TextUpdate(object sender, EventArgs e)
+        {
+            factures_filtr();
         }
     }
 }

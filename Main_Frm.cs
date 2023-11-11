@@ -1547,7 +1547,7 @@ namespace ALBAITAR_Softvet
         }
         private void facture_lab_tab()
         {
-            main_factures_tbl = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`DATE`,tb1.`CLIENT_ID`,tb1.`CLIENT_FULL_NME`,tb1.`REF`,tb1.`TOTAL_HT`,tb1.`TVA_PERC`,tb1.`DROIT_TIMBRE`,tb1.`TOTAL_TTC`,tb2.`SLD` AS FACT_PAID_MNT,tb3.SLD AS SLD_OF_CLIENT FROM tb_factures_vente tb1 LEFT JOIN (SELECT SUM(`DEBIT` - `CREDIT`) AS SLD, `FACT_NUM` FROM tb_clients_finance WHERE `FACT_NUM` IS NOT NULL GROUP BY `FACT_NUM`) tb2 ON tb1.`REF` = tb2.`FACT_NUM` LEFT JOIN (SELECT `CLIENT_ID`,SUM(`DEBIT` - `CREDIT`) AS SLD FROM tb_clients_finance WHERE `CLIENT_ID` IS NOT NULL GROUP BY `CLIENT_ID`) tb3 ON tb1.`CLIENT_ID` = tb3.`CLIENT_ID`;");
+            main_factures_tbl = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`DATE`,tb1.`CLIENT_ID`,tb1.`CLIENT_FULL_NME`,tb1.`REF`,tb1.`TOTAL_HT`,tb1.`TVA_PERC`,tb1.`DROIT_TIMBRE`,tb1.`TOTAL_TTC`,tb1.`LAST_MODIF_BY`,tb2.`SLD` AS FACT_PAID_MNT,tb3.SLD AS SLD_OF_CLIENT FROM tb_factures_vente tb1 LEFT JOIN (SELECT SUM(`DEBIT` - `CREDIT`) AS SLD, `FACT_NUM` FROM tb_clients_finance WHERE `FACT_NUM` IS NOT NULL GROUP BY `FACT_NUM`) tb2 ON tb1.`REF` = tb2.`FACT_NUM` LEFT JOIN (SELECT `CLIENT_ID`,SUM(`DEBIT` - `CREDIT`) AS SLD FROM tb_clients_finance WHERE `CLIENT_ID` IS NOT NULL GROUP BY `CLIENT_ID`) tb3 ON tb1.`CLIENT_ID` = tb3.`CLIENT_ID`;");
             ended_loading_fact_tab = true;
         }
         private void animal_lab_tab()
@@ -2385,6 +2385,7 @@ namespace ALBAITAR_Softvet
                 + " OR CONVERT([TVA_PERC], 'System.String') LIKE '%{0}%'"
                 + " OR CONVERT([DROIT_TIMBRE], 'System.String') LIKE '%{0}%'"
                 + " OR CONVERT([TOTAL_TTC], 'System.String') LIKE '%{0}%'"
+                + " OR CONVERT([LAST_MODIF_BY], 'System.String') LIKE '%{0}%'"
                 + " OR CONVERT([FACT_PAID_MNT], 'System.String') LIKE '%{0}%'"
                 + " OR CONVERT([SLD_OF_CLIENT], 'System.String') LIKE '%{0}%'"
                 + ")" : "", textBox5.Text.Replace("'", "''"));
