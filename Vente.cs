@@ -1,20 +1,16 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
-using Microsoft.Reporting.WinForms;
 using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Entity.Core.Metadata.Edm;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
-using Xamarin.Forms.PlatformConfiguration;
-using static System.Data.Entity.Infrastructure.Design.Executor;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Excc = Microsoft.Office.Interop.Excel;
 
 namespace ALBAITAR_Softvet.Resources
 {
@@ -33,6 +29,7 @@ namespace ALBAITAR_Softvet.Resources
         DataTable factures;
         DataTable facture_to_print;
         DataTable Selected_facture_old_infos;
+        DataTable users;
         bool Is_New = true;
         bool Transf_also_caisse = false;
         static public int tmp_current_client_id = -1;
@@ -42,6 +39,14 @@ namespace ALBAITAR_Softvet.Resources
         {
             InitializeComponent();
             to_select_idx = to_select_id;
+            //------------------------
+            users = PreConnection.Load_data("SELECT ID,CONCAT(IF(SEX = 'F','Mme. ','Mr. '),`USER_NME`,' ',`USER_FAMNME`) AS USER_FULL_NME FROM tb_login_and_users;");
+            comboBox3.DataSource = users;
+            comboBox3.DisplayMember = "USER_FULL_NME";
+            comboBox3.ValueMember = "ID";
+            comboBox3.SelectedIndexChanged -= comboBox3_SelectedIndexChanged;
+            comboBox3.SelectedValue = users.AsEnumerable().Where(F => (string)F["USER_FULL_NME"] == Properties.Settings.Default.Last_login_user_full_nme).First()["ID"];
+            comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
             //-----------------------
             clients = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
             comboBox1.DataSource = comboBox2.DataSource = clients;
@@ -247,7 +252,8 @@ namespace ALBAITAR_Softvet.Resources
         private void load_factures()
         {
             int prev_idx = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : -1;
-            factures = PreConnection.Load_data("SELECT `ID`,`DATE`,`CLIENT_ID`,`CLIENT_FULL_NME`,`REF`,`TVA_PERC`,`DROIT_TIMBRE`,`TOTAL_HT`,`TOTAL_TTC`,`LAST_MODIF_BY` FROM tb_factures_vente;");
+            //factures = PreConnection.Load_data("SELECT `ID`,`DATE`,`CLIENT_ID`,`CLIENT_FULL_NME`,`REF`,`TVA_PERC`,`DROIT_TIMBRE`,`TOTAL_HT`,`TOTAL_TTC`,`LAST_MODIF_BY` FROM tb_factures_vente;");
+            factures = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`DATE`,tb1.`CLIENT_ID`,tb1.`CLIENT_FULL_NME`,tb1.`REF`,tb1.`TVA_PERC`,tb1.`DROIT_TIMBRE`,tb1.`TOTAL_HT`,tb1.`TOTAL_TTC`,tb1.`LAST_MODIF_BY`,tb2.`SLD` FROM tb_factures_vente tb1 LEFT JOIN (SELECT `FACT_NUM`,SUM(COALESCE(DEBIT, 0)) - SUM(COALESCE(CREDIT, 0)) AS SLD,CLIENT_ID FROM tb_clients_finance GROUP BY FACT_NUM,CLIENT_ID) tb2 ON tb1.REF = tb2.FACT_NUM AND tb1.CLIENT_ID = tb2.CLIENT_ID;");
             dataGridView1.DataSource = factures;
             factures_filtr();
             if (to_select_idx > -1)
@@ -307,8 +313,22 @@ namespace ALBAITAR_Softvet.Resources
             All_Ready &= !label3.Visible;
             msg_txt += label3.Visible ? "\n- Référence déja utilisée précedemment." : "";
             //---------------
-            All_Ready &= comboBox1.Text.Trim().Length > 0;
-            comboBox1.BackColor = comboBox1.Text.Trim().Length == 0 ? Color.LightCoral : SystemColors.Window;
+            if (string.IsNullOrWhiteSpace(comboBox1.Text))
+            {
+                All_Ready = false;
+                comboBox1.BackColor = Color.LightCoral;
+                msg_txt += "\n- Veuillez séléctionner (ou saisir) le client concerné.";
+            }
+            else
+            {
+                var tt = clients.AsEnumerable().Where(x => (x["FULL_NME"] != DBNull.Value ? (string)x["FULL_NME"] : "") == comboBox1.Text && (x["ID"] != DBNull.Value ? (int)x["ID"] : -999) == (int)comboBox1.SelectedValue);
+                if (!tt.Any())
+                {
+                    All_Ready = false;
+                    comboBox1.BackColor = Color.LightCoral;
+                    msg_txt += "\n- Le client saisi n'est pas encore enregistré (ou a été supprimé), veuillez l'ajouter (via le bouton à côté) et réessayer.";
+                }
+            }
             //-----------------
             if (All_Ready)
             {
@@ -645,6 +665,21 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+            decimal sum = 0;
+            if (dataGridView1.SelectedRows.Count > 1)
+            {
+                sum = dataGridView1.SelectedRows.Cast<DataGridViewRow>()
+                  .Sum(row => Convert.ToDecimal(row.Cells["TOTAL_TTC"].Value));
+                label21.Text = "Séléctionnée (" + dataGridView1.SelectedRows.Count + ") : ";
+            }
+            else if (dataGridView1.Rows.Count > 0)
+            {
+                sum = dataGridView1.Rows.Cast<DataGridViewRow>()
+              .Sum(row => Convert.ToDecimal(row.Cells["TOTAL_TTC"].Value));
+                label21.Text = "Total : ";
+            }
+            label21.Text += sum.ToString("# ##0.00");
+            //----------------------
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 Is_New = false;
@@ -662,7 +697,6 @@ namespace ALBAITAR_Softvet.Resources
                 labos_to_update_fact_num = new List<string>();
                 comboBox1.SelectedValue = DBNull.Value;
                 //-------------------
-                //DataTable data = PreConnection.Load_data("SELECT * FROM tb_factures_vente WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
                 Selected_facture_old_infos = PreConnection.Load_data("SELECT tb1.*,tb2.SLD_REG_FAC FROM tb_factures_vente tb1 LEFT JOIN (SELECT `FACT_NUM`,`CREDIT` AS SLD_REG_FAC FROM tb_clients_finance) tb2 ON tb2.`FACT_NUM` LIKE tb1.`REF` WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
                 if (Selected_facture_old_infos != null)
                 {
@@ -681,8 +715,6 @@ namespace ALBAITAR_Softvet.Resources
                         {
                             comboBox1.Text = Selected_facture_old_infos.Rows[0]["CLIENT_FULL_NME"].ToString();
                         }
-                        //comboBox1.SelectedValue = Selected_facture_old_infos.Rows[0]["CLIENT_ID"] != DBNull.Value ? Selected_facture_old_infos.Rows[0]["CLIENT_ID"] : DBNull.Value;
-                        //if (comboBox1.Text == string.Empty) { comboBox1.Text = Selected_facture_old_infos.Rows[0]["CLIENT_FULL_NME"].ToString(); }
                         checkBox1.CheckedChanged -= checkBox1_CheckedChanged;
                         checkBox1.Checked = Selected_facture_old_infos.Rows[0]["DROIT_TIMBRE"] != DBNull.Value ? ((decimal)Selected_facture_old_infos.Rows[0]["DROIT_TIMBRE"] > 0) : false;
                         checkBox1.CheckedChanged += checkBox1_CheckedChanged;
@@ -886,7 +918,89 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button6_Click(object sender, EventArgs e)
         {
-            PreConnection.Excport_to_excel(dataGridView1, "ALBAITAR SoftVet Factures", "Vente", null, false);
+            //PreConnection.Excport_to_excel(dataGridView1, "ALBAITAR SoftVet Factures", "Vente", null, true);
+            if (dataGridView1.Rows.Count > 0)
+            {
+                Excc.Application xcelApp = new Excc.Application();
+                xcelApp.Application.Workbooks.Add(Type.Missing);
+                xcelApp.Application.Workbooks[1].Title = Application.ProductName + " - Factures";
+                xcelApp.Application.Workbooks[1].Worksheets[1].Name = "Factures";
+                //----------
+                xcelApp.Cells[1, 1].Value = "Date"; //DATE
+                xcelApp.Cells[1, 2].Value = "Ref."; //REF
+                xcelApp.Cells[1, 3].Value = "Client"; //CLIENT_FULL_NME
+                xcelApp.Cells[1, 4].Value = "Total HT"; //TOTAL_HT
+                xcelApp.Cells[1, 5].Value = "TVA"; //TVA_PERC
+                xcelApp.Cells[1, 6].Value = "D.Timbre"; //DROIT_TIMBRE
+                xcelApp.Cells[1, 7].Value = "Total TTC"; //TOTAL_TTC
+                xcelApp.Cells[1, 8].Value = "Montant non payé\n(Jusqu'à " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + ")"; //SLDDD
+                xcelApp.Cells[1, 9].Value = "Crée par"; //LAST_MODIF_BY
+                //-----------
+                for (int i = 1; i < 10; i++)
+                {
+                    ((Excc.Range)xcelApp.Cells[1, i]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
+                    ((Excc.Range)xcelApp.Cells[1, i]).Font.Bold = true;
+                    ((Excc.Range)xcelApp.Cells[1, i]).Font.Color = ColorTranslator.ToOle(Color.White);
+                    ((Excc.Range)xcelApp.Cells[1, i]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
+                }
+                ((Excc.Range)xcelApp.Cells[1, 7]).Interior.Color = ColorTranslator.ToOle(Color.Orange); //TTC
+                //----------------
+                ((Excc.Range)xcelApp.Columns[1]).NumberFormat = "dd/MM/yyyy"; //DATE
+                ((Excc.Range)xcelApp.Columns[4]).NumberFormat = //HT
+                ((Excc.Range)xcelApp.Columns[5]).NumberFormat = //TVA
+                ((Excc.Range)xcelApp.Columns[6]).NumberFormat = //DROIT_TIMBRE
+                ((Excc.Range)xcelApp.Columns[7]).NumberFormat = //TOTAL_TTC
+                ((Excc.Range)xcelApp.Columns[8]).NumberFormat = "#,##0.00 [$Da-fr-dz]"; //SLDDD
+                //--------------
+                dataGridView1.Rows.Cast<DataGridViewRow>().ToList().ForEach(t =>
+                {
+                    xcelApp.Cells[t.Index + 2, 1].Value = dataGridView1.Rows[t.Index].Cells[1].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[1].Value.ToString().Replace("00:00:00", "").TrimStart().TrimEnd() : ""; //DATE
+                    xcelApp.Cells[t.Index + 2, 2].Value = dataGridView1.Rows[t.Index].Cells[4].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[4].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : ""; //REF
+                    xcelApp.Cells[t.Index + 2, 3].Value = dataGridView1.Rows[t.Index].Cells[3].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[3].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : ""; //CLIENT_FULL_NME
+                    xcelApp.Cells[t.Index + 2, 4].Value = dataGridView1.Rows[t.Index].Cells[7].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[7].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : ""; //TOTAL_HT
+                    xcelApp.Cells[t.Index + 2, 5].Value = dataGridView1.Rows[t.Index].Cells[5].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[5].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : ""; //TVA_PERC
+                    xcelApp.Cells[t.Index + 2, 6].Value = dataGridView1.Rows[t.Index].Cells[6].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[6].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : ""; //DROIT_TIMBRE
+                    xcelApp.Cells[t.Index + 2, 7].Value = dataGridView1.Rows[t.Index].Cells[8].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[8].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : ""; //TOTAL_TTC
+                    xcelApp.Cells[t.Index + 2, 8].Value = dataGridView1.Rows[t.Index].Cells[10].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[10].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : "(Unconnu)"; //SLDDD
+                    xcelApp.Cells[t.Index + 2, 9].Value = dataGridView1.Rows[t.Index].Cells[9].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[9].Value.ToString().TrimStart().TrimEnd() : ""; //LAST_MODIF_BY
+
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 7]).Interior.Color = ColorTranslator.ToOle(Color.Moccasin);
+                });
+                //----------
+                xcelApp.Range["D" + (dataGridView1.RowCount + 2)].Formula = "=SUM(D2:D" + (dataGridView1.RowCount + 1) + ")";
+                xcelApp.Range["E" + (dataGridView1.RowCount + 2)].Formula = "=SUM(E2:E" + (dataGridView1.RowCount + 1) + ")";
+                xcelApp.Range["F" + (dataGridView1.RowCount + 2)].Formula = "=SUM(F2:F" + (dataGridView1.RowCount + 1) + ")";
+                xcelApp.Range["G" + (dataGridView1.RowCount + 2)].Formula = "=SUM(G2:G" + (dataGridView1.RowCount + 1) + ")";
+                xcelApp.Range["H" + (dataGridView1.RowCount + 2)].Formula = "=SUM(H2:H" + (dataGridView1.RowCount + 1) + ")";
+                //-------------
+                for (int i = 1; i < 10; i++)
+                {
+                    ((Excc.Range)xcelApp.Cells[dataGridView1.RowCount + 2, i]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
+                    ((Excc.Range)xcelApp.Cells[dataGridView1.RowCount + 2, i]).Font.Bold = true;
+                    ((Excc.Range)xcelApp.Cells[dataGridView1.RowCount + 2, i]).Font.Color = ColorTranslator.ToOle(Color.White);
+                    ((Excc.Range)xcelApp.Cells[dataGridView1.RowCount + 2, i]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
+                }
+                ((Excc.Range)xcelApp.Cells[dataGridView1.RowCount + 2, 7]).Interior.Color = ColorTranslator.ToOle(Color.Orange); //TTC
+                //-----------
+                xcelApp.Columns.AutoFit();
+                //------------------
+                SaveFileDialog svd = new SaveFileDialog();
+                svd.Filter = "Excel | *.xlsx";
+                svd.DefaultExt = "*.xlsx";
+                svd.FileName = xcelApp.Application.Workbooks[1].Title + "_" + DateTime.Now.ToString("ddMMyyyy_HHmmss") + ".xlsx";
+                if (svd.ShowDialog() == DialogResult.OK)
+                {
+                    xcelApp.Workbooks[1].SaveAs(Path.GetFullPath(svd.FileName));
+                    Process.Start(Path.GetFullPath(svd.FileName));
+                }
+                xcelApp.Application.Workbooks[1].Close(false);
+                xcelApp.Quit();
+                //-------------------
+            }
+            else
+            {
+                MessageBox.Show("Aucun donnés !", ".", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
         }
 
         private void Vente_Activated(object sender, EventArgs e)
@@ -976,6 +1090,16 @@ namespace ALBAITAR_Softvet.Resources
                     fltr += !string.IsNullOrWhiteSpace(fltr) ? " AND " : "";
                     fltr += string.Format("TOTAL_TTC >= {0} AND TOTAL_TTC <= {1}", numericUpDown3.Value, numericUpDown4.Value);
                 }
+                if (checkBox5.Checked) //Created by (User)
+                {
+                    fltr += !string.IsNullOrWhiteSpace(fltr) ? " AND " : "";
+                    fltr += string.Format("LAST_MODIF_BY LIKE '{0}'", comboBox3.Text);
+                }
+                if (checkBox6.Checked) //Solde non réglé (+/-)
+                {
+                    fltr += !string.IsNullOrWhiteSpace(fltr) ? " AND " : "";
+                    fltr += "(SLD <> 0 OR SLD IS NULL)";
+                }
                 if (!string.IsNullOrWhiteSpace(textBox1.Text)) //Recherch
                 {
                     fltr += !string.IsNullOrWhiteSpace(fltr) ? " AND " : "";
@@ -987,7 +1111,22 @@ namespace ALBAITAR_Softvet.Resources
                 }
                 ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
             }
-
+            //-----------
+            decimal sum = 0;
+            if (dataGridView1.SelectedRows.Count > 1)
+            {
+                sum = dataGridView1.SelectedRows.Cast<DataGridViewRow>()
+                  .Sum(row => Convert.ToDecimal(row.Cells["TOTAL_TTC"].Value));
+                label21.Text = "Séléctionnée (" + dataGridView1.SelectedRows.Count + ") : ";
+            }
+            else if (dataGridView1.Rows.Count > 0)
+            {
+                sum = dataGridView1.Rows.Cast<DataGridViewRow>()
+              .Sum(row => Convert.ToDecimal(row.Cells["TOTAL_TTC"].Value));
+                label21.Text = "Total : ";
+            }
+            label21.Text += sum.ToString("# ##0.00");
+            //----------------------
         }
 
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
@@ -1004,6 +1143,39 @@ namespace ALBAITAR_Softvet.Resources
         }
 
         private void comboBox2_TextUpdate(object sender, EventArgs e)
+        {
+            factures_filtr();
+        }
+
+        private void dataGridView1_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count < 2)
+            {
+                decimal sum = dataGridView1.Rows.Cast<DataGridViewRow>()
+                   .Sum(row => Convert.ToDecimal(row.Cells["TOTAL_TTC"].Value));
+
+                label21.Text = "Total : " + sum.ToString("# ##0.00");
+            }
+            else
+            {
+                decimal sum = dataGridView1.SelectedRows.Cast<DataGridViewRow>()
+                   .Sum(row => Convert.ToDecimal(row.Cells["TOTAL_TTC"].Value));
+                label21.Text = "Séléctionnée (" + dataGridView1.SelectedRows.Count + ") : " + sum.ToString("# ##0.00");
+            }
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBox3.Enabled = checkBox5.Checked;
+            factures_filtr();
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            factures_filtr();
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
             factures_filtr();
         }

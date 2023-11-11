@@ -90,7 +90,7 @@ namespace ALBAITAR_Softvet.Resources
                                                                + "LEFT JOIN tb_clients_finance tb2 ON tb1.ID = tb2.CLIENT_ID "
                                                                + "LEFT JOIN ("
                                                                + "    SELECT CLIENT_ID, COUNT(*) AS ANIM_CNT"
-                                                               + "    FROM tb_animaux"
+                                                               + "    FROM tb_animaux  WHERE IS_RADIATED = 0 OR IS_RADIATED IS NULL"
                                                                + "    GROUP BY CLIENT_ID"
                                                                + ") tb3 ON tb1.ID = tb3.CLIENT_ID "
                                                                + "GROUP BY tb1.ID, tb1.FAMNME, tb1.NME, FULL_NME, tb3.ANIM_CNT; ");
@@ -102,7 +102,6 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dgv1_fltr()
         {
-
             DataView dv = new DataView(clients);
             string fltr = "";
             if (checkBox1.Checked)
@@ -525,6 +524,12 @@ namespace ALBAITAR_Softvet.Resources
                             break;
                         case "OBSERVATIONS":
                             xcelApp.Cells[1, g.Index + 1].Value = "Observations";
+                            break;
+                        case "SLD":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Solde Monétique";
+                            break;
+                        case "ANIM_CNT":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Nombre d'Animaux";
                             break;
                     }
                     ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
