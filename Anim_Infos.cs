@@ -1,14 +1,10 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet
@@ -26,7 +22,7 @@ namespace ALBAITAR_Softvet
             //--------------------
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
-                if(Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
+                if (Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "20000" && (Int32)QQ[3] == 1).Count() == 0)//Consulter nn autoriz
                 {
                     this.Controls.Add(new Nn_Autorized());
                     this.Controls["Nn_Autorized"].Dock = DockStyle.Fill;
@@ -40,11 +36,53 @@ namespace ALBAITAR_Softvet
                 }
             }
         }
-        
+
         private void Load_Data()
-        {   
-            if(Main_Frm.Main_Frm_animals_tbl != null)
+        {
+            if (Main_Frm.Main_Frm_animals_tbl != null)
             {
+                if (make_refresh)
+                {
+                    Main_Frm.Main_Frm_animals_tbl = PreConnection.Load_data("SELECT  " +
+        "    tb1.*,  " +
+        "    tb2.CLIENT_FULL_NME,  " +
+        "    tb4.MALAD_NME,  " +
+        "    tb4.LAST_MALAD_DATE  " +
+        "FROM  " +
+        "    tb_animaux tb1  " +
+        "LEFT JOIN  " +
+        "    (SELECT  " +
+        "        ID,  " +
+        "        CONCAT(FAMNME,' ',NME) AS CLIENT_FULL_NME  " +
+        "     FROM  " +
+        "        tb_clients) tb2  " +
+        "ON  " +
+        "    tb1.CLIENT_ID = tb2.ID  " +
+        "LEFT JOIN  " +
+        "    (SELECT  " +
+        "        tb_maladies.ANIM_ID,  " +
+        "        tb_maladies.START_DATE AS LAST_MALAD_DATE,  " +
+        "        tb_maladies.MALAD_NME  " +
+        "     FROM  " +
+        "        tb_maladies  " +
+        "     JOIN  " +
+        "        (SELECT  " +
+        "            ANIM_ID,  " +
+        "            MAX(START_DATE) AS max_start_date  " +
+        "         FROM  " +
+        "            tb_maladies  " +
+        "         WHERE  " +
+        "            (START_DATE <= current_timestamp() OR START_DATE IS NULL)  " +
+        "            AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL)  " +
+        "         GROUP BY  " +
+        "            ANIM_ID) tb3  " +
+        "     ON  " +
+        "        tb_maladies.ANIM_ID = tb3.ANIM_ID  " +
+        "        AND tb_maladies.START_DATE = tb3.max_start_date) tb4  " +
+        "ON  " +
+        "    tb4.ANIM_ID = tb1.ID; ");
+
+                }
                 DataRow inf = Main_Frm.Main_Frm_animals_tbl.AsEnumerable().Where(zz => (int)zz["ID"] == selected_anim_id).FirstOrDefault();
                 if (inf != null)
                 {
@@ -91,15 +129,15 @@ namespace ALBAITAR_Softvet
                     pictureBox2.Image = inf["PICTURE"] != DBNull.Value ? PreConnection.ByteArrayToImage((byte[])inf["PICTURE"]) : (Properties.Settings.Default.Use_animals_logo ? (Image)Properties.Resources.ResourceManager.GetObject(label23.Text) : null);
                 }
             }
-            
+
         }
 
         private void Anim_Infos_Enter(object sender, EventArgs e)
         {
             if (make_refresh)
             {
-                make_refresh = false;
                 Load_Data();
+                make_refresh = false;
             }
         }
 
@@ -128,7 +166,7 @@ namespace ALBAITAR_Softvet
                 Animaux.ID_to_selectt = selected_anim_id;
                 Application.OpenForms["Animaux"].WindowState = Application.OpenForms["Animaux"].WindowState == FormWindowState.Minimized ? FormWindowState.Normal : Application.OpenForms["Animaux"].WindowState;
                 Application.OpenForms["Animaux"].BringToFront();
-            }            
+            }
         }
 
         private void textBox8_Enter(object sender, EventArgs e)

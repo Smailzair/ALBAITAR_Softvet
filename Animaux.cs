@@ -407,6 +407,7 @@ namespace ALBAITAR_Softvet.Resources
                              (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true));
 
                             if (FFF.Any()) { filtred_maladies_tbl = FFF.CopyToDataTable(); }
+                            
                         }
                         else
                         {
@@ -492,7 +493,7 @@ namespace ALBAITAR_Softvet.Resources
 
                 }
 
-
+                
                 iddx = iddx.Length > 0 ? iddx.Substring(1) : string.Empty;
 
                 if (iddx.Length > 0)
@@ -523,6 +524,10 @@ namespace ALBAITAR_Softvet.Resources
 
 
             label19.Visible = dataGridView1.Rows.Count == 0;
+            if (tabControl1.SelectedTab == tabPage4)
+            {
+                Load_malad_2();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1726,7 +1731,7 @@ richTextBox1.Text
                         }
 
                     }
-                    else if (dataGridView3.Columns[e.ColumnIndex].Name == "POIDS" && dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value  != null && dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value != DBNull.Value)
+                    else if (dataGridView3.Columns[e.ColumnIndex].Name == "POIDS" && dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value != null && dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value != DBNull.Value)
                     {
                         if ((decimal)dataGridView3.Rows[e.RowIndex].Cells["POIDS"].Value > 0)
                         {
@@ -1929,7 +1934,9 @@ richTextBox1.Text
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            dataGridView1.Rows[e.RowIndex].HeaderCell.Style.BackColor = dataGridView1.Rows[e.RowIndex].HeaderCell.Style.SelectionBackColor = maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value).ToList().Count > 0 ? panel3.BackColor : Color.White;
+            dataGridView1.Rows[e.RowIndex].HeaderCell.Style.BackColor = dataGridView1.Rows[e.RowIndex].HeaderCell.Style.SelectionBackColor = 
+                maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value && (F["START_DATE"] != DBNull.Value ? (DateTime)F["START_DATE"] <= DateTime.Now : true) &&
+                            (F["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)F["ESTIM_END_DATE"] >= DateTime.Now : true)).ToList().Count > 0 ? panel3.BackColor : Color.White;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -2095,6 +2102,7 @@ richTextBox1.Text
         private void button15_Click(object sender, EventArgs e)
         {
             bool pret = true;
+            int current_anim_id = dataGridView1.SelectedRows[0].Index;
             if (checkBox4.Checked)
             {
                 pret &= dateTimePicker9.Value.Date >= dateTimePicker8.Value.Date;
@@ -2137,6 +2145,7 @@ richTextBox1.Text
                 //------------------
                 Load_malad_1();
                 reload_cbx6_data();
+                dataGridView1.InvalidateRow(current_anim_id);
             }
         }
 
@@ -2216,7 +2225,7 @@ richTextBox1.Text
                 {
                     t.Cells.Cast<DataGridViewCell>().ToList().ForEach(b =>
                     {
-                        if(b.ColumnIndex == dataGridView4.Columns["START_DATE_MALAD"].Index || b.ColumnIndex == dataGridView4.Columns["ESTIM_END_DATE_MALAD"].Index)
+                        if (b.ColumnIndex == dataGridView4.Columns["START_DATE_MALAD"].Index || b.ColumnIndex == dataGridView4.Columns["ESTIM_END_DATE_MALAD"].Index)
                         {
                             xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView4.Rows[t.Index].Cells[b.ColumnIndex].Value != DBNull.Value ? ((DateTime)dataGridView4.Rows[t.Index].Cells[b.ColumnIndex].Value).ToString("dd/MM/yyyy") : "";
                         }
@@ -2224,7 +2233,7 @@ richTextBox1.Text
                         {
                             xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView4.Rows[t.Index].Cells[b.ColumnIndex].Value != DBNull.Value ? dataGridView4.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : "";
                         }
-                        
+
                     });
 
                 });
@@ -2255,7 +2264,7 @@ richTextBox1.Text
 
         private void button18_Click(object sender, EventArgs e)
         {
-            new Print_maldies(1, (int)dataGridView1.SelectedRows[0].Cells["ID"].Value,label25.Text != "- Tous -" ? label25.Text : "",label26.Text,label27.Text == "Oui").ShowDialog();
+            new Print_maldies(1, (int)dataGridView1.SelectedRows[0].Cells["ID"].Value, label25.Text != "- Tous -" ? label25.Text : "", label26.Text, label27.Text == "Oui").ShowDialog();
         }
 
         private void dataGridView3_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)

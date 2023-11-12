@@ -1,12 +1,12 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
+using MailKit.Net.Smtp;
 using MimeKit;
 using MySql.Data.MySqlClient;
 using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -14,9 +14,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using MailKit.Net.Smtp;
-using DataTable = System.Data.DataTable;
 using Xamarin.Forms.Internals;
+using DataTable = System.Data.DataTable;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
 
 namespace ALBAITAR_Softvet
@@ -615,7 +614,7 @@ namespace ALBAITAR_Softvet
                             int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
 
                             text_to_add_to_title = " (Produit non activé - réste [" + delay + "] jours)";
-                            if(delay >= 30)
+                            if (delay >= 30)
                             {
                                 new App_Activation().ShowDialog();
                             }
@@ -1764,7 +1763,7 @@ namespace ALBAITAR_Softvet
 
         private void button14_Click(object sender, EventArgs e)
         {
-            if(dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
                 if (dataGridView1.SelectedRows[0].Cells["REF2"].Value != DBNull.Value)
                 {
@@ -2573,8 +2572,8 @@ namespace ALBAITAR_Softvet
                     if (yy.Any()) { anim_idd = (int)yy.First()["ID"]; }
                 }
             }
-            if(anim_idd > 0) { new New_Ordonnance(anim_idd).ShowDialog(); }
-            
+            if (anim_idd > 0) { new New_Ordonnance(anim_idd).ShowDialog(); }
+
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -2655,8 +2654,8 @@ namespace ALBAITAR_Softvet
                 }
             }
 
-            if(anim_idd > 0) { new New_Pers_Cpt_Rnd_Visit(anim_idd).ShowDialog(); }
-            
+            if (anim_idd > 0) { new New_Pers_Cpt_Rnd_Visit(anim_idd).ShowDialog(); }
+
         }
 
         private void button32_Click(object sender, EventArgs e)
