@@ -150,6 +150,8 @@ namespace ALBAITAR_Softvet
                 Properties.Settings.Default.Save();
                 Properties.Settings.Default.Reload();
                 //---------------
+                MessageBox.Show("Un redémarrage du programme est nécessaire pour appliquer la modification.");
+                Application.OpenForms["Main_Frm"].Close();
                 Application.Restart();
             }
            
