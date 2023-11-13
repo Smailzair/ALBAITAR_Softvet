@@ -44,9 +44,13 @@ namespace ALBAITAR_Softvet.Resources
             comboBox3.DataSource = users;
             comboBox3.DisplayMember = "USER_FULL_NME";
             comboBox3.ValueMember = "ID";
-            comboBox3.SelectedIndexChanged -= comboBox3_SelectedIndexChanged;
-            comboBox3.SelectedValue = users.AsEnumerable().Where(F => (string)F["USER_FULL_NME"] == Properties.Settings.Default.Last_login_user_full_nme).First()["ID"];
-            comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
+            var tt = users.AsEnumerable().Where(F => (string)F["USER_FULL_NME"] == Properties.Settings.Default.Last_login_user_full_nme);
+            if (tt.Any())
+            {
+                comboBox3.SelectedIndexChanged -= comboBox3_SelectedIndexChanged;
+                comboBox3.SelectedValue = tt.First()["ID"];
+                comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
+            }
             //-----------------------
             clients = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
             comboBox1.DataSource = comboBox2.DataSource = clients;

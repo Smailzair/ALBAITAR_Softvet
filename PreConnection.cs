@@ -172,11 +172,12 @@ namespace ALBAITAR_Softvet
                 cmmd += "DELETE FROM " + Table_nme;
                 if (where_expression != null) { if (where_expression.Length > 0) { cmmd += " WHERE " + where_expression; } }
                 cmmd += ";";
-                Debug.WriteLine(">>>>>>>>>>>>>>> cmmd = " + cmmd);
             }
 
             int rows_nb = 0;
             open_conn();
+
+            Debug.WriteLine(">>>>>>>>>>>>>>>> CMD = " + cmmd);
             try
             {
                 using (MySqlCommand command = new MySqlCommand(cmmd, mySqlConnection))

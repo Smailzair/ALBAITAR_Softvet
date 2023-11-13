@@ -43,7 +43,7 @@ namespace ALBAITAR_Softvet
             this.ANSWER = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IS_ADMIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EMAIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FUNCTION = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FUNCT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CNI_NUM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ANV_NUM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
@@ -113,7 +113,7 @@ namespace ALBAITAR_Softvet
             this.ANSWER,
             this.IS_ADMIN,
             this.EMAIL,
-            this.FUNCTION,
+            this.FUNCT,
             this.CNI_NUM,
             this.ANV_NUM});
             this.dataGridView1.EnableHeadersVisualStyles = false;
@@ -208,13 +208,13 @@ namespace ALBAITAR_Softvet
             this.EMAIL.ReadOnly = true;
             this.EMAIL.Visible = false;
             // 
-            // FUNCTION
+            // FUNCT
             // 
-            this.FUNCTION.DataPropertyName = "FUNCTION";
-            this.FUNCTION.HeaderText = "FUNCTION";
-            this.FUNCTION.Name = "FUNCTION";
-            this.FUNCTION.ReadOnly = true;
-            this.FUNCTION.Visible = false;
+            this.FUNCT.DataPropertyName = "FUNCT";
+            this.FUNCT.HeaderText = "FUNCT";
+            this.FUNCT.Name = "FUNCT";
+            this.FUNCT.ReadOnly = true;
+            this.FUNCT.Visible = false;
             // 
             // CNI_NUM
             // 
@@ -713,7 +713,7 @@ namespace ALBAITAR_Softvet
         private DataGridViewTextBoxColumn ANSWER;
         private DataGridViewTextBoxColumn IS_ADMIN;
         private DataGridViewTextBoxColumn EMAIL;
-        private DataGridViewTextBoxColumn FUNCTION;
+        private DataGridViewTextBoxColumn FUNCT;
         private DataGridViewTextBoxColumn CNI_NUM;
         private DataGridViewTextBoxColumn ANV_NUM;
         private Label label13;

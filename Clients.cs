@@ -799,7 +799,78 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PreConnection.Excport_to_excel(dataGridView2, "Historique monétique", dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value != DBNull.Value ? "Monét." : dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value.ToString(), null, false);
+            //PreConnection.Excport_to_excel(dataGridView2, "Historique monétique", dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value != DBNull.Value ? "Monét." : dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value.ToString(), null, false);
+            if (dataGridView2.Rows.Count > 0)
+            {
+                Excc.Application xcelApp = new Excc.Application();
+                xcelApp.Application.Workbooks.Add(Type.Missing);
+                xcelApp.Application.Workbooks[1].Title = Application.ProductName + " - Historique monétique";
+                xcelApp.Application.Workbooks[1].Worksheets[1].Name = dataGridView1.SelectedRows[0].Cells["FAMNME"].Value + " " + dataGridView1.SelectedRows[0].Cells["NME"].Value;
+                //----------
+                xcelApp.Cells[1, 1].Value = "Date"; //OP_DATE
+                xcelApp.Cells[1, 2].Value = "Objet"; //OBJECT
+                xcelApp.Cells[1, 3].Value = "[+] Endetté"; //DEBIT
+                xcelApp.Cells[1, 4].Value = "[-] Doit"; //CREDIT
+                xcelApp.Cells[1, 5].Value = "Solde (Dette)";
+                //-----------
+                for (int i = 1; i < 5; i++)
+                {
+                    ((Excc.Range)xcelApp.Cells[1, i]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
+                    ((Excc.Range)xcelApp.Cells[1, i]).Font.Bold = true;
+                    ((Excc.Range)xcelApp.Cells[1, i]).Font.Color = ColorTranslator.ToOle(Color.White);
+                    ((Excc.Range)xcelApp.Cells[1, i]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
+                }
+                ((Excc.Range)xcelApp.Cells[1, 5]).Interior.Color = ColorTranslator.ToOle(Color.Orange); //TTC
+                //----------------
+                ((Excc.Range)xcelApp.Columns[1]).NumberFormat = "dd/MM/yyyy"; //OP_DATE
+                ((Excc.Range)xcelApp.Columns[3]).NumberFormat = //DEBIT
+                ((Excc.Range)xcelApp.Columns[4]).NumberFormat = //CREDIT
+                ((Excc.Range)xcelApp.Columns[5]).NumberFormat = "#,##0.00 [$Da-fr-dz]"; //SLDDD
+                //--------------
+                dataGridView2.Rows.Cast<DataGridViewRow>().Where(R => R.Index < dataGridView2.NewRowIndex).ToList().ForEach(t =>
+                {
+                    xcelApp.Cells[t.Index + 2, 1].Value = dataGridView2.Rows[t.Index].Cells["OP_DATE"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["OP_DATE"].Value.ToString().Replace("00:00:00", "").TrimStart().TrimEnd() : ""; //OP_DATE
+                    xcelApp.Cells[t.Index + 2, 2].Value = dataGridView2.Rows[t.Index].Cells["OBJECT"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["OBJECT"].Value.ToString().TrimStart().TrimEnd() : ""; //OBJECT
+                    xcelApp.Cells[t.Index + 2, 3].Value = dataGridView2.Rows[t.Index].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["DEBIT"].Value : 0; //DEBIT
+                    xcelApp.Cells[t.Index + 2, 4].Value = dataGridView2.Rows[t.Index].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["CREDIT"].Value : 0; //CREDIT
+                    xcelApp.Cells[t.Index + 2, 5].Value = xcelApp.Cells[t.Index + 2, 3].Value - xcelApp.Cells[t.Index + 2, 4].Value; //SLD
+
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 5]).Interior.Color = ColorTranslator.ToOle(Color.Moccasin);
+                });
+                //----------
+                xcelApp.Range["C" + (dataGridView2.RowCount + 1)].Formula = "=SUM(C2:C" + (dataGridView2.RowCount) + ")";
+                xcelApp.Range["D" + (dataGridView2.RowCount + 1)].Formula = "=SUM(D2:D" + (dataGridView2.RowCount) + ")";
+                xcelApp.Range["E" + (dataGridView2.RowCount + 1)].Formula = "=SUM(E2:E" + (dataGridView2.RowCount) + ")";
+                //-------------
+                for (int i = 1; i < 5; i++)
+                {
+                    ((Excc.Range)xcelApp.Cells[dataGridView2.RowCount + 1, i]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
+                    ((Excc.Range)xcelApp.Cells[dataGridView2.RowCount + 1, i]).Font.Bold = true;
+                    ((Excc.Range)xcelApp.Cells[dataGridView2.RowCount + 1, i]).Font.Color = ColorTranslator.ToOle(Color.White);
+                    ((Excc.Range)xcelApp.Cells[dataGridView2.RowCount + 1, i]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
+                }
+                ((Excc.Range)xcelApp.Cells[dataGridView2.RowCount + 1, 5]).Interior.Color = ColorTranslator.ToOle(Color.Orange);
+                //-----------
+                xcelApp.Columns.AutoFit();
+                //------------------
+                SaveFileDialog svd = new SaveFileDialog();
+                svd.Filter = "Excel | *.xlsx";
+                svd.DefaultExt = "*.xlsx";
+                svd.FileName = xcelApp.Application.Workbooks[1].Title + "_" + DateTime.Now.ToString("ddMMyyyy_HHmmss") + ".xlsx";
+                if (svd.ShowDialog() == DialogResult.OK)
+                {
+                    xcelApp.Workbooks[1].SaveAs(Path.GetFullPath(svd.FileName));
+                    Process.Start(Path.GetFullPath(svd.FileName));
+                }
+                xcelApp.Application.Workbooks[1].Close(false);
+                xcelApp.Quit();
+                //-------------------
+            }
+            else
+            {
+                MessageBox.Show("Aucun donnés !", ".", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

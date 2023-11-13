@@ -785,6 +785,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Login_Modif.resx">
       <DependentUpon>Login_Modif.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Login_Pass_Forgot.resx">
       <DependentUpon>Login_Pass_Forgot.cs</DependentUpon>
