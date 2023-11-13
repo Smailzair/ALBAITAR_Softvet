@@ -805,7 +805,7 @@ namespace ALBAITAR_Softvet.Resources
                 Excc.Application xcelApp = new Excc.Application();
                 xcelApp.Application.Workbooks.Add(Type.Missing);
                 xcelApp.Application.Workbooks[1].Title = Application.ProductName + " - Historique monétique";
-                xcelApp.Application.Workbooks[1].Worksheets[1].Name = dataGridView1.SelectedRows[0].Cells["FAMNME"].Value + " " + dataGridView1.SelectedRows[0].Cells["NME"].Value;
+                xcelApp.Application.Workbooks[1].Worksheets[1].Name = dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value;
                 //----------
                 xcelApp.Cells[1, 1].Value = "Date"; //OP_DATE
                 xcelApp.Cells[1, 2].Value = "Objet"; //OBJECT
