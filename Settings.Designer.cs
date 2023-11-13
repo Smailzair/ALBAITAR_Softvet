@@ -279,6 +279,7 @@
             this.radioButton1.TabIndex = 0;
             this.radioButton1.Text = "Horizontal";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // button4
             // 
