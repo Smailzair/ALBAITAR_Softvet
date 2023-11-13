@@ -356,7 +356,7 @@ namespace ALBAITAR_Softvet
                                     clnt.Send(Mssg);
                                     //------------------                                    
                                 }
-                                catch (Exception ex)
+                                catch
                                 {
                                     return;
                                 }
@@ -506,7 +506,7 @@ namespace ALBAITAR_Softvet
                                         clnt.Send(Mssg);
                                         //------------------                                    
                                     }
-                                    catch (Exception ex)
+                                    catch
                                     {
                                         return;
                                     }
@@ -2573,6 +2573,10 @@ namespace ALBAITAR_Softvet
                 }
             }
             if (anim_idd > 0) { new New_Ordonnance(anim_idd).ShowDialog(); }
+            else
+            {
+                MessageBox.Show("Aucun animal trouvé", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
         }
 
@@ -2589,6 +2593,10 @@ namespace ALBAITAR_Softvet
                 }
             }
             if (anim_idd > 0) { new New_Ordonnance(anim_idd).ShowDialog(); }
+            else
+            {
+                MessageBox.Show("Aucun animal trouvé", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -2655,6 +2663,10 @@ namespace ALBAITAR_Softvet
             }
 
             if (anim_idd > 0) { new New_Pers_Cpt_Rnd_Visit(anim_idd).ShowDialog(); }
+            else
+            {
+                MessageBox.Show("Aucun animal trouvé", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
         }
 
