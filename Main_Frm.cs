@@ -227,6 +227,155 @@ namespace ALBAITAR_Softvet
                             button33.Visible = true;
                         });
                         //================= I - For te clients ===============================================
+                        //                        vaccin_alerts.AsEnumerable().Where(G => (string)G["CLIENT_EMAIL_ALREADY_SENT"] == "Non" && !string.IsNullOrWhiteSpace(G["CLIENT_EMAIL"] != DBNull.Value ? (string)G["CLIENT_EMAIL"] : "")).Select(H => H["CLIENT_FULL_NME"]).Distinct().ForEach(D =>
+                        //                        {
+                        //                            string client_full_nme = (string)D;
+
+                        //                            var builder = new BodyBuilder();
+                        //                            builder.HtmlBody = @"<body>
+                        //    <style>
+                        //        table {
+                        //            border-collapse: collapse;
+                        //            font-family: Arial, sans-serif;
+                        //        }
+
+                        //        th,
+                        //        td {
+                        //            border: 1px solid rgb(214, 214, 214);
+                        //            padding: 5px;
+                        //        }
+
+                        //        p {
+                        //            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        //            color: black;
+                        //        }
+                        //    </style>
+                        //    <p>Cher propriétaire d'animal, " + client_full_nme + @":</p>
+                        //    <p>Nous espérons que vous et votre animal vous portez bien. Nous tenons à vous rappeler que la date de vaccination
+                        //        de votre animal de compagnie approche à grands pas. La santé et le bien-être de votre animal de compagnie sont
+                        //        d'une importance capitale pour nous, c'est pourquoi nous souhaitons vous assurer que votre animal reçoit les
+                        //        soins appropriés et les vaccins nécessaires pour rester en bonne santé.</p>";
+
+                        //                            var specif = vaccin_alerts.AsEnumerable().Where(K => (string)K["CLIENT_FULL_NME"] == client_full_nme && (int)K["IS_FOR_ALL"] == 0);
+
+                        //                            if (specif.Any())
+                        //                            {
+                        //                                builder.HtmlBody += @"<p>Veuillez noter que le rendez-vous pour la vaccination de votre animal est prévu comme de suite:</p>
+                        //    <p style=""color: chocolate; text-decoration: underline;"">&#8226; Vaccinations Spécifiées :</p>
+                        //    <table>
+                        //        <tr
+                        //            style=""background-color: rgb(78, 83, 160); color: rgb(255, 255, 255); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"">
+                        //            <th>Date</th>
+                        //            <th>Vaccination</th>
+                        //            <th>Animal (Nom)</th>
+                        //            <th>N° Ident.</th>
+                        //            <th>Espéce</th>
+                        //            <th>Age</th>
+                        //        </tr>";
+                        //                                specif.ForEach(X =>
+                        //                                {
+                        //                                    builder.HtmlBody += @"<tr>
+                        //            <td>" + ((DateTime)X["DATE"]).ToString("dd/MM/yyyy") + @"</td>
+                        //            <td>" + X["VACCIN_NME"] + @"</td>
+                        //            <td>" + X["ANIM_NME"] + @"</td>
+                        //            <td>" + X["ANIM_NUM_IDENTIF"] + @"</td>
+                        //            <td>" + X["ANIM_ESPECE"] + @"</td>
+                        //            <td>" + X["ANIM_AGE"] + @"</td>
+                        //        </tr>";
+                        //                                });
+                        //                                builder.HtmlBody += "</table>";
+                        //                            }
+
+                        //                            var for_all = vaccin_alerts.AsEnumerable().Where(K => (string)K["CLIENT_FULL_NME"] == client_full_nme && (int)K["IS_FOR_ALL"] == 1);
+                        //                            if (for_all.Any())
+                        //                            {
+                        //                                builder.HtmlBody += @"<p style=""color: rgb(0, 92, 145); text-decoration: underline;"">&#8226; Vaccinations Globales :</p>
+                        //    <table>
+                        //        <tr
+                        //            style=""background-color: rgb(78, 83, 160); color: rgb(255, 255, 255); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"">
+                        //            <th>Date</th>
+                        //            <th>Vaccination</th>
+                        //            <th>Animal</th>
+                        //        </tr>";
+                        //                                for_all.ForEach(X =>
+                        //                                {
+                        //                                    builder.HtmlBody += @"<tr>
+                        //            <td>" + ((DateTime)X["DATE"]).ToString("dd/MM/yyyy") + @"</td>
+                        //            <td>" + X["VACCIN_NME"] + @"</td>
+                        //            <td>" + X["ANIM_NME"] + @"</td>
+                        //        </tr>";
+                        //                                });
+                        //                                builder.HtmlBody += "</table>";
+                        //                            }
+
+                        //                            builder.HtmlBody += @"<p>Nous vous prions de bien vouloir prendre les dispositions nécessaires pour être présent à l'heure convenue. Si
+                        //        vous rencontrez des problèmes ou si vous avez des questions, n'hésitez pas à nous contacter immédiatement afin
+                        //        que nous puissions trouver une solution adaptée à vos besoins.<br><br>
+                        //        Nous nous engageons à fournir les meilleurs soins possibles à votre animal de compagnie, et nous vous remercions
+                        //        pour votre confiance continue en nos services vétérinaires. Si vous avez besoin de plus d'informations ou si
+                        //        vous souhaitez discuter de tout aspect spécifique de la vaccination, n'hésitez pas à nous contacter.<br><br>
+                        //        Nous sommes impatients de vous accueillir avec votre animal de compagnie à la date convenue pour assurer sa
+                        //        santé et son bien-être à long terme.<br><br>
+                        //        Cordialement,</p>
+
+                        //<p style=""color: rgb(146, 100, 0);"">--------------------------------------------<br>
+                        //                            <span style=""font-weight: bold; color: rgb(95, 182, 95);"">" + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + @"</span><br>";
+
+                        //                            if (Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString().Length > 0)
+                        //                            {
+                        //                                builder.HtmlBody += @"Tél: " + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + "<br>";
+                        //                            }
+                        //                            if (Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString().Length > 0)
+                        //                            {
+                        //                                builder.HtmlBody += @"Email: " + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + "<br>";
+                        //                            }
+                        //                            if (Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString().Length > 0)
+                        //                            {
+                        //                                builder.HtmlBody += @"Adresse: " + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + "<br>";
+                        //                            }
+                        //                            builder.HtmlBody += "--------------------------------------------</p>" +
+                        //                            "<p style=\"color: rgb(184, 223, 235);\">RancoSoft&copy;</p>" +
+                        //                            "</body>";
+
+
+                        //                            //---------------------------------------
+
+                        //                            MimeMessage Mssg = new MimeMessage();
+                        //                            Mssg.From.Add(new MailboxAddress("RancoSoft", "rancosoft@gmail.com"));
+                        //                            string clt_email = vaccin_alerts.AsEnumerable().Where(G => (G["CLIENT_FULL_NME"] != DBNull.Value ? (string)G["CLIENT_FULL_NME"] : "") == client_full_nme).FirstOrDefault()["CLIENT_EMAIL"].ToString();
+                        //                            Mssg.To.Add(MailboxAddress.Parse(clt_email));
+                        //                            Mssg.Subject = "ALBAITAR Softvet - Rappel de rendez-vous pour la vaccination de votre animal";
+                        //                            Mssg.Body = builder.ToMessageBody();
+                        //                            if (PreConnection.IsInternetAvailable()) //If the internet available
+                        //                            {
+                        //                                SmtpClient clnt = new SmtpClient();
+                        //                                try
+                        //                                {
+                        //                                    clnt.Connect("smtp.gmail.com", 465, true);
+                        //                                    clnt.Authenticate("rancosoft@gmail.com", PreConnection.Traduct_Codified_txt(Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT));
+                        //                                    clnt.Send(Mssg);
+                        //                                    //------------------                                    
+                        //                                }
+                        //                                catch
+                        //                                {
+                        //                                    return;
+                        //                                }
+                        //                                finally
+                        //                                {
+                        //                                    clnt.Disconnect(true);
+                        //                                    clnt.Dispose();
+                        //                                }
+                        //                                //-----------
+
+                        //                            }
+                        //                        });
+                        //                        string vaccin_ids = "";
+                        //                        vaccin_alerts.AsEnumerable().Select(E => E["VACCIN_ID"]).Distinct().ForEach(Z => vaccin_ids += "," + Z);
+                        //                        vaccin_ids = vaccin_ids.Length > 0 ? vaccin_ids.Substring(1) : vaccin_ids;
+                        //                        if (vaccin_ids.Length > 0)
+                        //                        {
+                        //                            PreConnection.Excut_Cmd_personnel("UPDATE tb_vaccin SET LAST_ALERT_EMAIL_CLIENT_SENT_DATE = '" + DateTime.Now.ToString("yyyy-MM-dd") + "' WHERE ID IN (" + vaccin_ids + ");", null, null);
+                        //                        }
                         vaccin_alerts.AsEnumerable().Where(G => (string)G["CLIENT_EMAIL_ALREADY_SENT"] == "Non" && !string.IsNullOrWhiteSpace(G["CLIENT_EMAIL"] != DBNull.Value ? (string)G["CLIENT_EMAIL"] : "")).Select(H => H["CLIENT_FULL_NME"]).Distinct().ForEach(D =>
                         {
                             string client_full_nme = (string)D;
@@ -250,27 +399,27 @@ namespace ALBAITAR_Softvet
             color: black;
         }
     </style>
-    <p>Cher propriétaire d'animal, " + client_full_nme + @":</p>
-    <p>Nous espérons que vous et votre animal vous portez bien. Nous tenons à vous rappeler que la date de vaccination
-        de votre animal de compagnie approche à grands pas. La santé et le bien-être de votre animal de compagnie sont
-        d'une importance capitale pour nous, c'est pourquoi nous souhaitons vous assurer que votre animal reçoit les
-        soins appropriés et les vaccins nécessaires pour rester en bonne santé.</p>";
+    <p>Cher Client(e), " + client_full_nme + @":</p>
+    <p>Dans notre souci de préserver la santé de votre animal, nous tenons à vous rappeler que sa date de vaccination
+        approche à grands pas. Sa santé et son bien-être sont d'une importance capitale pour nous, c'est pour cette
+        raison que nous souhaitons lui assurer les soins appropriés et les vaccins nécessaires pour sa bonne
+        santé.</p>";
 
                             var specif = vaccin_alerts.AsEnumerable().Where(K => (string)K["CLIENT_FULL_NME"] == client_full_nme && (int)K["IS_FOR_ALL"] == 0);
 
                             if (specif.Any())
                             {
-                                builder.HtmlBody += @"<p>Veuillez noter que le rendez-vous pour la vaccination de votre animal est prévu comme de suite:</p>
+                                builder.HtmlBody += @"<p>Veuillez noter que le rendez-vous pour la vaccination de votre compagnon est prévu comme suite:</p>
     <p style=""color: chocolate; text-decoration: underline;"">&#8226; Vaccinations Spécifiées :</p>
     <table>
         <tr
             style=""background-color: rgb(78, 83, 160); color: rgb(255, 255, 255); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"">
             <th>Date</th>
             <th>Vaccination</th>
-            <th>Animal (Nom)</th>
-            <th>N° Ident.</th>
-            <th>Espéce</th>
-            <th>Age</th>
+            <th style="" background-color: rgb(1, 172, 92);"">Animal (Nom)</th>
+            <th style="" background-color: rgb(1, 172, 92);"">N° Ident.</th>
+            <th style="" background-color: rgb(1, 172, 92);"">Espéce</th>
+            <th style="" background-color: rgb(1, 172, 92);"">Age</th>
         </tr>";
                                 specif.ForEach(X =>
                                 {
@@ -308,15 +457,15 @@ namespace ALBAITAR_Softvet
                                 builder.HtmlBody += "</table>";
                             }
 
-                            builder.HtmlBody += @"<p>Nous vous prions de bien vouloir prendre les dispositions nécessaires pour être présent à l'heure convenue. Si
-        vous rencontrez des problèmes ou si vous avez des questions, n'hésitez pas à nous contacter immédiatement afin
-        que nous puissions trouver une solution adaptée à vos besoins.<br><br>
+                            builder.HtmlBody += @"<p>Et vous prions de bien vouloir nous contacter pour confirmer le jour et l’heure qui vous conviennent le plus.<br>
+        En cas de doute ou d’information, n'hésitez pas à nous contacter afin de trouver une solution adaptée à vos
+        besoins.<br><br>
         Nous nous engageons à fournir les meilleurs soins possibles à votre animal de compagnie, et nous vous remercions
-        pour votre confiance continue en nos services vétérinaires. Si vous avez besoin de plus d'informations ou si
-        vous souhaitez discuter de tout aspect spécifique de la vaccination, n'hésitez pas à nous contacter.<br><br>
-        Nous sommes impatients de vous accueillir avec votre animal de compagnie à la date convenue pour assurer sa
-        santé et son bien-être à long terme.<br><br>
-        Cordialement,</p>
+        pour votre confiance inconditionnelle en nos services.<br>
+        Nous sommes impatients de vous accueillir dans notre centre à la date convenue et espérons être à la hauteur de
+        vos attentes.
+        <br><br>
+        Cordialement.</p>
     
 <p style=""color: rgb(146, 100, 0);"">--------------------------------------------<br>
                             <span style=""font-weight: bold; color: rgb(95, 182, 95);"">" + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + @"</span><br>";
@@ -378,6 +527,118 @@ namespace ALBAITAR_Softvet
                         }
                         //================= II - For the Cabinet ===============================================
 
+                        //                        string cabinet_nme = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1 && !string.IsNullOrWhiteSpace(QQ["VAL"] != DBNull.Value ? (string)QQ["VAL"] : "")).Any() ? Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() : "";
+                        //                        string cabinet_email = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3 && !string.IsNullOrWhiteSpace(QQ["VAL"] != DBNull.Value ? (string)QQ["VAL"] : "")).Any() ? Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() : "";
+
+                        //                        if (!string.IsNullOrWhiteSpace(cabinet_nme) && !string.IsNullOrWhiteSpace(cabinet_email))
+                        //                        {
+                        //                            var vaccin_alertss = vaccin_alerts.AsEnumerable().Where(G => (string)G["CABINET_EMAIL_ALREADY_SENT"] == "Non");
+                        //                            if (vaccin_alertss.Any())
+                        //                            {
+                        //                                var builder = new BodyBuilder();
+                        //                                builder.HtmlBody = @"<body>
+                        //                                                        <style>
+                        //                                                            table {
+                        //                                                                border-collapse: collapse;
+                        //                                                                font-family: Arial, sans-serif;
+                        //                                                            }
+                        //                                                             th,
+                        //                                                             td {
+                        //                                                                 border: 1px solid rgb(214, 214, 214);
+                        //                                                                 padding: 5px;
+                        //                                                             }
+
+                        //                                                             p {
+                        //                                                                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        //                                                                 color: black;
+                        //                                                             }
+                        //                                                         </style>
+                        //                                                         <p>Cher personnel du cabinet '" + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + @"',<br>
+                        //                                                             Nous souhaitons attirer votre attention sur les rendez-vous de vaccination proches qui nécessitent une préparation adéquate. Il est important de vous assurer que vous disposez des ressources nécessaires et que votre équipe est prête à fournir des services de qualité supérieure à nos patients à fourrure bien-aimés.<br>
+                        //                                                             Veuillez assurer que les fournitures médicales pertinentes sont en stock.</p>
+                        //                                                             </p>";
+                        //                                var specif = vaccin_alertss.AsEnumerable().Where(K => (int)K["IS_FOR_ALL"] == 0);
+                        //                                if (specif.Any())
+                        //                                {
+                        //                                    builder.HtmlBody += @"<p style=""color: chocolate; text-decoration: underline;"">&#8226; Vaccinations Spécifiées :</p>
+                        //    <table>
+                        //        <tr
+                        //            style=""background-color: rgb(78, 83, 160); color: rgb(255, 255, 255); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"">
+                        //            <th>Date</th>
+                        //            <th>Vaccination</th>
+                        //            <th style=""background-color: rgb(1, 172, 92);"">Animal (Nom)</th>
+                        //            <th style=""background-color: rgb(1, 172, 92);"">N° Ident.</th>
+                        //            <th style=""background-color: rgb(1, 172, 92);"">Espéce</th>
+                        //            <th style=""background-color: rgb(1, 172, 92);"">Age</th>
+                        //            <th style=""background-color: rgb(172, 35, 1);"">Propriétaire</th>
+                        //            <th style=""background-color: rgb(172, 35, 1);"">Propriétaire Email</th>
+                        //            <th style=""background-color: rgb(172, 35, 1);"">Rappel email envoyé au propriétaire?</th>
+                        //        </tr>";
+                        //                                    specif.ForEach(X =>
+                        //                                    {
+                        //                                        builder.HtmlBody += @"<tr>
+                        //            <td>" + ((DateTime)X["DATE"]).ToString("dd/MM/yyyy") + @"</td>
+                        //            <td>" + X["VACCIN_NME"] + @"</td>
+                        //            <td>" + X["ANIM_NME"] + @"</td>
+                        //            <td>" + X["ANIM_NUM_IDENTIF"] + @"</td>
+                        //            <td>" + X["ANIM_ESPECE"] + @"</td>
+                        //            <td>" + X["ANIM_AGE"] + @"</td>
+                        //            <td>" + X["CLIENT_FULL_NME"] + @"</td>
+                        //            <td>" + X["CLIENT_EMAIL"] + @"</td>
+                        //            <td>" + X["CLIENT_EMAIL_ALREADY_SENT"] + @"</td>
+                        //        </tr>";
+                        //                                    });
+                        //                                    builder.HtmlBody += "</table>";
+                        //                                }
+
+                        //                                var for_all = vaccin_alertss.AsEnumerable().Where(K => (int)K["IS_FOR_ALL"] == 1);
+                        //                                if (for_all.Any())
+                        //                                {
+                        //                                    builder.HtmlBody += @"<p style=""color: rgb(0, 92, 145); text-decoration: underline;"">&#8226; Vaccinations Globales :</p>
+                        //    <table>
+                        //        <tr
+                        //            style=""background-color: rgb(78, 83, 160); color: rgb(255, 255, 255); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"">
+                        //            <th>Date</th>
+                        //            <th>Vaccination</th>
+                        //            <th>Animal</th>
+                        //        </tr>";
+
+                        //                                    List<int> alredy_wrote = new List<int>();
+                        //                                    for_all.ForEach(X =>
+                        //                                    {
+                        //                                        if (!alredy_wrote.Contains((int)X["VACCIN_ID"]))
+                        //                                        {
+                        //                                            alredy_wrote.Add((int)X["VACCIN_ID"]);
+
+                        //                                            builder.HtmlBody += @"<tr>
+                        //            <td>" + ((DateTime)X["DATE"]).ToString("dd/MM/yyyy") + @"</td>
+                        //            <td>" + X["VACCIN_NME"] + @"</td>
+                        //            <td>" + X["ANIM_NME"] + @"</td>
+                        //        </tr>";
+                        //                                        }
+                        //                                    });
+                        //                                    builder.HtmlBody += "</table>";
+                        //                                }
+
+                        //                                builder.HtmlBody += @"<p>Nous encourageons également une communication proactive avec les propriétaires d'animaux pour confirmer leurs rendez-vous et leur fournir toute information supplémentaire dont ils pourraient avoir besoin.<br>
+                        //        N'hésitez pas à contacter notre équipe de gestion si vous avez des questions ou des préoccupations concernant les rendez-vous à venir. Votre diligence et votre engagement envers le bien-être des animaux de compagnie sont grandement appréciés.<br>
+                        //        Avec nos remerciements anticipés pour votre attention et votre soin continus.</p>
+
+                        //<p style=""color: rgb(146, 100, 0);"">--------------------------------------------<br>
+                        //                            <span style=""font-weight: bold; color: rgb(95, 182, 95);"">" + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + @"</span><br>";
+
+                        //                                if (Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString().Length > 0)
+                        //                                {
+                        //                                    builder.HtmlBody += @"Tél: " + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + "<br>";
+                        //                                }
+                        //                                builder.HtmlBody += @"Email: " + cabinet_email + "<br>";
+                        //                                if (Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString().Length > 0)
+                        //                                {
+                        //                                    builder.HtmlBody += @"Adresse: " + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + "<br>";
+                        //                                }
+                        //                                builder.HtmlBody += "--------------------------------------------</p>" +
+                        //                                "<p style=\"color: rgb(184, 223, 235);\">RancoSoft&copy;</p>" +
+                        //                                "</body>";
                         string cabinet_nme = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1 && !string.IsNullOrWhiteSpace(QQ["VAL"] != DBNull.Value ? (string)QQ["VAL"] : "")).Any() ? Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() : "";
                         string cabinet_email = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3 && !string.IsNullOrWhiteSpace(QQ["VAL"] != DBNull.Value ? (string)QQ["VAL"] : "")).Any() ? Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() : "";
 
@@ -405,8 +666,9 @@ namespace ALBAITAR_Softvet
                                                              }
                                                          </style>
                                                          <p>Cher personnel du cabinet '" + Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() + @"',<br>
-                                                             Nous souhaitons attirer votre attention sur les rendez-vous de vaccination proches qui nécessitent une préparation adéquate. Il est important de vous assurer que vous disposez des ressources nécessaires et que votre équipe est prête à fournir des services de qualité supérieure à nos patients à fourrure bien-aimés.<br>
-                                                             Veuillez assurer que les fournitures médicales pertinentes sont en stock.</p>
+                                                             Nous souhaitons attirer votre attention sur les rendez-vous des prochaines vaccinations qui nécessitent une
+        préparation adéquate. Il est important de vous assurer que vous disposez dans vos stocks les vaccins nécessaires
+        et que votre équipe est prête à fournir des services de qualité à nos patients à 4 pattes bien-aimés.<br>
                                                              </p>";
                                 var specif = vaccin_alertss.AsEnumerable().Where(K => (int)K["IS_FOR_ALL"] == 0);
                                 if (specif.Any())
@@ -887,11 +1149,6 @@ namespace ALBAITAR_Softvet
                 comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
                 //----------------
                 Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
-                //Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME`,tb3.MALAD_NME,tb3.LAST_MALAD_DATE FROM tb_animaux tb1 "
-                //                                             + "LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID` "
-                //                                             + "LEFT JOIN (SELECT ANIM_ID, MAX(START_DATE) AS LAST_MALAD_DATE,MALAD_NME "
-                //                                             + "FROM tb_maladies WHERE (START_DATE <= current_timestamp() OR START_DATE IS NULL) AND (ESTIM_END_DATE >= current_timestamp() OR ESTIM_END_DATE IS NULL) "
-                //                                             + "GROUP BY ANIM_ID) tb3 ON tb3.ANIM_ID = tb1.ID;");
                 Main_Frm_animals_tbl = PreConnection.Load_data("SELECT  " +
         "    tb1.*,  " +
         "    tb2.CLIENT_FULL_NME,  " +

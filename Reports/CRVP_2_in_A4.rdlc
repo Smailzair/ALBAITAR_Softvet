@@ -40,7 +40,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Compte Rendu De Viste</Value>
+                    <Value>Compte Rendu De Visite</Value>
                     <Style>
                       <FontFamily>Century Gothic</FontFamily>
                       <FontSize>15pt</FontSize>
@@ -835,7 +835,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Compte Rendu De Viste</Value>
+                    <Value>Compte Rendu De Visite</Value>
                     <Style>
                       <FontFamily>Century Gothic</FontFamily>
                       <FontSize>15pt</FontSize>
@@ -2103,7 +2103,6 @@
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
             <Line Name="Line3">
-              <Top>0cm</Top>
               <Left>14.85cm</Left>
               <Height>0.91063cm</Height>
               <Width>0cm</Width>
