@@ -112,7 +112,7 @@ namespace ALBAITAR_Softvet
             //----------------------------
             Params = PreConnection.Load_data("SELECT * FROM tb_params;");
             //------------------------------
-            th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting perfermance of "Clients" form
+            th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting performance of "Clients" form
             th.Start();
             th.Join();
             //--------------
@@ -1056,7 +1056,6 @@ namespace ALBAITAR_Softvet
                         }
                         if (dd != string.Empty)
                         {
-                            //PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = '" + dd.Replace("'", "''") + "' WHERE `ID` = 1;");
                             PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { dd }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 1 });
                             Params = PreConnection.Load_data("SELECT * FROM tb_params;");
                             label_cab_nme.Text = dd;

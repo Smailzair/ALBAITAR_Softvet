@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.ReportingServices.Diagnostics.Internal;
+using Microsoft.Win32;
 using MySql.Data.MySqlClient;
 using ServiceStack;
 using System;
@@ -24,8 +25,8 @@ namespace ALBAITAR_Softvet
     internal class PreConnection
     {
         //  public static Loading loading = new Loading();
-
-        public static MySqlConnection mySqlConnection = new MySqlConnection("Server=" + Properties.Settings.Default.Connection_String_IP_Or_LocalHost + ";Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;"); //DB Origine                
+        static string connectionString_txt = "Server=" + Properties.Settings.Default.Connection_String_IP_Or_LocalHost + ";Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;";
+        public static MySqlConnection mySqlConnection = new MySqlConnection(connectionString_txt); //DB Origine                
         // static bool Connection_opened = false;
         public static void open_conn()
         {
@@ -177,7 +178,6 @@ namespace ALBAITAR_Softvet
             int rows_nb = 0;
             open_conn();
 
-            Debug.WriteLine(">>>>>>>>>>>>>>>> CMD = " + cmmd);
             try
             {
                 using (MySqlCommand command = new MySqlCommand(cmmd, mySqlConnection))
@@ -231,6 +231,116 @@ namespace ALBAITAR_Softvet
             catch (MySqlException excc) { Debug.WriteLine(">>>>>>>>>> EXECPTION : >>>>>>>>>> " + excc.Message); }
             close_conn();
             return rows_nb;
+        }
+
+        public static bool DB_Backup(string backupPath)
+        {
+            MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder(connectionString_txt);
+            string host = builder.Server;
+            string userId = builder.UserID;
+            string password = builder.Password;
+            string database = builder.Database;
+
+
+            // Specify tables to be excluded from the backup
+            string[] tablesToExclude = { "tb_login_and_users", "tb_params"};
+
+            // Build the mysqldump command
+            string ignoreTables = string.Join(" ", tablesToExclude);
+            string command = $"mysqldump --host={host} --user={userId} --password={password} --databases {database} --routines --triggers --ignore-table={database}.{ignoreTables} > \"{backupPath}\"";
+
+            try
+            {
+                // Execute the mysqldump command
+                Process process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "cmd.exe",
+                        RedirectStandardInput = true,
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+
+                process.Start();
+
+                using (StreamWriter sw = process.StandardInput)
+                {
+                    if (sw.BaseStream.CanWrite)
+                    {
+                        sw.WriteLine(command);
+                    }
+                }
+
+                process.WaitForExit();
+                process.Close();
+
+            }
+            catch (Exception)
+            {
+            }
+
+            //-------------
+            bool answer = false;
+            FileInfo inff = new FileInfo(backupPath);
+            if (File.Exists(backupPath))
+            {
+                answer = (new FileInfo(backupPath)).Length > 0;
+            }
+            return answer;
+        }
+
+        public static bool DB_Restore(string backupPath)
+        {
+            bool answer = true;
+
+            MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder(connectionString_txt);
+            string host = builder.Server;
+            string userId = builder.UserID;
+            string password = builder.Password;
+            string database = builder.Database;
+
+
+            string command = $"mysql --host={host} --user={userId} --password={password} {database} < \"{backupPath}\"";
+
+            try
+            {
+                // Execute the mysqldump command
+                Process process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "cmd.exe",
+                        RedirectStandardInput = true,
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+
+                process.Start();
+
+                using (StreamWriter sw = process.StandardInput)
+                {
+                    if (sw.BaseStream.CanWrite)
+                    {
+                        sw.WriteLine(command);
+                    }
+                }
+
+                process.WaitForExit();
+                process.Close();
+
+            }
+            catch (Exception)
+            {
+                answer = false;
+            }
+
+            //-------------
+            return answer;
         }
         ///////////////////////  RancoSoft Cammands   /////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////
