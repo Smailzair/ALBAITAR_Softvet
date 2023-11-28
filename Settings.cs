@@ -166,5 +166,10 @@ namespace ALBAITAR_Softvet
         {
             new App_Activation().ShowDialog();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            new DB_Backup().ShowDialog();
+        }
     }
 }

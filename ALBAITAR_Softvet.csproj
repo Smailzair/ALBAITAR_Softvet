@@ -381,6 +381,12 @@
     <Compile Include="Dialogs\Clients_List_For_Vaccin.Designer.cs">
       <DependentUpon>Clients_List_For_Vaccin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\DB_Backup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DB_Backup.Designer.cs">
+      <DependentUpon>DB_Backup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\New_Pers_Cpt_Rnd_Visit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -663,6 +669,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Clients_List_For_Vaccin.resx">
       <DependentUpon>Clients_List_For_Vaccin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DB_Backup.resx">
+      <DependentUpon>DB_Backup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\New_Pers_Cpt_Rnd_Visit.resx">
       <DependentUpon>New_Pers_Cpt_Rnd_Visit.cs</DependentUpon>
@@ -1062,6 +1071,11 @@
     <None Include="Resources\icons8_comments_30px.png" />
     <None Include="Resources\Untitled-3.png" />
     <None Include="Resources\icons8_add_user_male_skin_type_7_25px.png" />
+    <None Include="Resources\Database.ico" />
+    <None Include="Resources\Database Export.png" />
+    <None Include="Resources\Database Restore.png" />
+    <None Include="Resources\Database Options.png" />
+    <None Include="Resources\Delete Database.png" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
