@@ -38,6 +38,9 @@ namespace ALBAITAR_Softvet.Dialogs
             //-----------
             string Back_Folder = (string)Main_Frm.Params.AsEnumerable().Where(R => (int)R["ID"] == 8).First()["VAL"];
             string Back_frq = (string)Main_Frm.Params.AsEnumerable().Where(R => (int)R["ID"] == 9).First()["VAL"];
+            numericUpDown2.ValueChanged -= numericUpDown2_ValueChanged;
+            numericUpDown2.Value = int.Parse(Main_Frm.Params.AsEnumerable().Where(R => (int)R["ID"] == 10).First()["VAL"].ToString());
+            numericUpDown2.ValueChanged += numericUpDown2_ValueChanged;
             textBox1.Text = Back_Folder;
             if (!string.IsNullOrWhiteSpace(Back_frq))
             {
@@ -115,7 +118,7 @@ namespace ALBAITAR_Softvet.Dialogs
                 }
                 else
                 {
-                    MessageBox.Show("Le dossier '" + folderBrowserDialog1.SelectedPath + "' non trouvé\nVeuillez réesayer.");
+                    MessageBox.Show("Le dossier '" + folderBrowserDialog1.SelectedPath + "' non trouvé !\nVeuillez réesayer.");
                 }
             }
         }
@@ -145,11 +148,6 @@ namespace ALBAITAR_Softvet.Dialogs
                 {
                 }
             }
-
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -188,7 +186,6 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             Directory.CreateDirectory(textBox1.Text);
             string file_nme = string.Concat("al_baitar_backup_", DateTime.Now.ToString("dd_MM_yyyy_HH'h'_mm'm'_ss's'_"), DateTime.Now.Millisecond, ".sql");
-            PreConnection.DB_Backup(textBox1.Text + @"\" + file_nme);
             if (PreConnection.DB_Backup(textBox1.Text + @"\" + file_nme))
             {
                 MessageBox.Show("Bien sauvegardé !");
@@ -216,13 +213,14 @@ namespace ALBAITAR_Softvet.Dialogs
             }
 
             PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { backk }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 9 });
+          //  PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { numericUpDown2.Value }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 10 });
             Main_Frm.Params = PreConnection.Load_data("SELECT * FROM tb_params;");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             if(dataGridView1.SelectedRows.Count > 0) {
-                if(MessageBox.Show("Êtes-vous sûr de restaurer la base de données ?\n\n(Toutes les données existantes seront écrasées !)", "Attention :",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes)
+                if(MessageBox.Show("Êtes-vous sûr de restaurer la base de données ?\n\n(Toutes les données existantes -à l'exception de login et des paramètres- seront écrasées !)", "Attention :",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     panel2.Visible = true;
                     panel2.Refresh();
@@ -230,11 +228,64 @@ namespace ALBAITAR_Softvet.Dialogs
                     {
                         panel2.Visible = false;
                         panel2.Refresh();
+                        Properties.Settings.Default.Tmp_Dont_auto_save = true;
+                        Properties.Settings.Default.Save();
                         MessageBox.Show("Restauration terminée avec succès, l'application se quitte, veuillez relancer le programme.");
                         Application.Exit();
                     }
                 }
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.FileName = string.Concat("al_baitar_backup_", DateTime.Now.ToString("dd_MM_yyyy_HH'h'_mm'm'_ss's'_"), DateTime.Now.Millisecond, ".sql");
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (PreConnection.DB_Backup(saveFileDialog1.FileName))
+                {
+                    MessageBox.Show("Bien sauvegardé !");
+                    scan_files();
+                }
+                else
+                {
+                    MessageBox.Show("Sauvegarde non efféctuée, veuillez réesayer.", "Non effectuée :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (MessageBox.Show("Êtes-vous sûr de restaurer la base de données ?\n\n(Toutes les données existantes -à l'exception de login et des paramètres- seront écrasées !)", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    panel2.Visible = true;
+                    panel2.Refresh();
+                    if (PreConnection.DB_Restore(openFileDialog1.FileName))
+                    {
+                        panel2.Visible = false;
+                        panel2.Refresh();
+                        Properties.Settings.Default.Tmp_Dont_auto_save = true;
+                        Properties.Settings.Default.Save(); 
+                        MessageBox.Show("Restauration terminée avec succès, l'application se quitte, veuillez relancer le programme.");
+                        Application.Exit();
+                    }
+                }
+            }
+            
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            numericUpDown2.Enabled = radioButton3.Checked == false;
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { numericUpDown2.Value }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 10 });
+            Main_Frm.Params = PreConnection.Load_data("SELECT * FROM tb_params;");
         }
     }
 }

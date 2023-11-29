@@ -260,5 +260,17 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Codified_Act_Clt_Nme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Tmp_Dont_auto_save {
+            get {
+                return ((bool)(this["Tmp_Dont_auto_save"]));
+            }
+            set {
+                this["Tmp_Dont_auto_save"] = value;
+            }
+        }
     }
 }

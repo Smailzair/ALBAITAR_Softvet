@@ -241,17 +241,13 @@ namespace ALBAITAR_Softvet
             string password = builder.Password;
             string database = builder.Database;
 
-
-            // Specify tables to be excluded from the backup
             string[] tablesToExclude = { "tb_login_and_users", "tb_params"};
 
-            // Build the mysqldump command
             string ignoreTables = string.Join(" ", tablesToExclude);
             string command = $"mysqldump --host={host} --user={userId} --password={password} --databases {database} --routines --triggers --ignore-table={database}.{ignoreTables} > \"{backupPath}\"";
 
             try
             {
-                // Execute the mysqldump command
                 Process process = new Process
                 {
                     StartInfo = new ProcessStartInfo
@@ -273,7 +269,15 @@ namespace ALBAITAR_Softvet
                         sw.WriteLine(command);
                     }
                 }
-
+                //--------------------------
+                FileInfo flle = new FileInfo(backupPath);
+                int max_s = 0;
+                int.TryParse(Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 10).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString(), out max_s);
+                while (max_s > 0 && GetFolderSizeInMB(flle.DirectoryName) > max_s)
+                {
+                    File.Delete((new DirectoryInfo(flle.DirectoryName)).GetFiles("*.sql", SearchOption.AllDirectories).OrderBy(TT => TT.CreationTime).First().FullName);
+                }
+                //------------------------
                 process.WaitForExit();
                 process.Close();
 
@@ -290,6 +294,25 @@ namespace ALBAITAR_Softvet
                 answer = (new FileInfo(backupPath)).Length > 0;
             }
             return answer;
+        }
+        static double GetFolderSizeInMB(string folderPath)
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
+
+            if (!directoryInfo.Exists)
+            {
+                return 0;
+            }
+
+            // Calculate the size of the folder and its subfolders in megabytes
+            double sizeInBytes = 0;
+            foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.sql", SearchOption.AllDirectories))
+            {
+                sizeInBytes += fileInfo.Length;
+            }
+
+            double sizeInMB = sizeInBytes / (1024.0 * 1024.0); // Convert bytes to megabytes
+            return sizeInMB;
         }
 
         public static bool DB_Restore(string backupPath)

@@ -1333,6 +1333,26 @@ namespace ALBAITAR_Softvet
             //----------------------------------
             Properties.Settings.Default.Maximize_Main_Frm = WindowState == FormWindowState.Maximized;
             Properties.Settings.Default.Save();
+            //------------------------------------
+            string backup_fold = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 8).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
+            string backup_freq = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 9).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
+            if (!string.IsNullOrEmpty(backup_fold) && !string.IsNullOrEmpty(backup_freq))
+            {
+                if (Properties.Settings.Default.Tmp_Dont_auto_save)
+                {
+                    Properties.Settings.Default.Tmp_Dont_auto_save = false;
+                    Properties.Settings.Default.Save();
+                }
+                else
+                {
+                    if (backup_freq.EndsWith("Quit"))
+                    {
+                        string file_nme = string.Concat("al_baitar_backup_", DateTime.Now.ToString("dd_MM_yyyy_HH'h'_mm'm'_ss's'_"), DateTime.Now.Millisecond, ".sql");
+                        PreConnection.DB_Backup(backup_fold + @"\" + file_nme);
+                    }
+                }
+            }
+            //------------------------
         }
 
         private void button6_Click(object sender, EventArgs e)
