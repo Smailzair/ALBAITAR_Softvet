@@ -1054,6 +1054,7 @@ namespace ALBAITAR_Softvet
                             PreConnection.InputBox("Veuillez saisir votre identification : ", "Exp : Dr.xxx , Cabinet xxx, ...", ref dd);
                             p--;
                         }
+                        dd = string.IsNullOrEmpty(dd) ? "Cabinet" : dd;
                         if (dd != string.Empty)
                         {
                             PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { dd }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 1 });
