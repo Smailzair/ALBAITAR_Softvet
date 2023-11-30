@@ -234,8 +234,6 @@ namespace ALBAITAR_Softvet.Dialogs
                         {
                             panel2.Visible = false;
                             panel2.Refresh();
-                            Properties.Settings.Default.Tmp_Dont_auto_save = true;
-                            Properties.Settings.Default.Save();
                             MessageBox.Show("Restauration terminée avec succès, l'application se quitte, veuillez relancer le programme.");
                             Application.Exit();
                         }
@@ -279,8 +277,6 @@ namespace ALBAITAR_Softvet.Dialogs
                         {
                             panel2.Visible = false;
                             panel2.Refresh();
-                            Properties.Settings.Default.Tmp_Dont_auto_save = true;
-                            Properties.Settings.Default.Save();
                             MessageBox.Show("Restauration terminée avec succès, l'application se quitte, veuillez relancer le programme.");
                             Application.Exit();
                         } 

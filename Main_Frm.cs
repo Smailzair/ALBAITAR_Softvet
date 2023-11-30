@@ -7,11 +7,13 @@ using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
@@ -853,9 +855,6 @@ namespace ALBAITAR_Softvet
                                 close_app_because_act = true;
                                 Application.Run(new App_Activation());
                             }
-
-
-
                         }
                     }
                     else
@@ -1302,21 +1301,48 @@ namespace ALBAITAR_Softvet
             string backup_freq = Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 9).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString();
             if (!string.IsNullOrEmpty(backup_fold) && !string.IsNullOrEmpty(backup_freq))
             {
-                if (Properties.Settings.Default.Tmp_Dont_auto_save)
+                bool make_backup = backup_freq.EndsWith("Quit") || Properties.Settings.Default.Last_Auto_Buckup_Date == DateTime.MinValue;
+                if (!make_backup)
                 {
-                    Properties.Settings.Default.Tmp_Dont_auto_save = false;
-                    Properties.Settings.Default.Save();
-                }
-                else
-                {
-                    if (backup_freq.EndsWith("Quit"))
+                    if (backup_freq.ToLower().EndsWith("mois"))
                     {
-                        string file_nme = string.Concat("al_baitar_backup_", DateTime.Now.ToString("dd_MM_yyyy_HH'h'_mm'm'_ss's'_"), DateTime.Now.Millisecond, ".sql");
-                        PreConnection.DB_Backup(backup_fold + @"\" + file_nme);
+                        int nb = 0;
+                        int.TryParse(ExtractNumericPart(backup_freq),out nb);
+                        if(nb > 0)
+                        {
+                            int mnth_diff = ((DateTime.Now - Properties.Settings.Default.Last_Auto_Buckup_Date).Days) / 30;
+                            make_backup = mnth_diff >= nb;
+                        }
+                    }
+                    else if (backup_freq.ToLower().EndsWith("jours"))
+                    {
+                        int nb = 0;
+                        int.TryParse(ExtractNumericPart(backup_freq), out nb);
+                        if (nb > 0)
+                        {
+                            int days_diff = (DateTime.Now - Properties.Settings.Default.Last_Auto_Buckup_Date).Days;
+                            make_backup = days_diff >= nb;
+                        }
+                    }
+                }
+                //--------
+                if (make_backup)
+                {
+                    string file_nme = string.Concat("al_baitar_backup_", DateTime.Now.ToString("dd_MM_yyyy_HH'h'_mm'm'_ss's'_"), DateTime.Now.Millisecond, ".sql");
+                    if (PreConnection.DB_Backup(backup_fold + @"\" + file_nme))
+                    {
+                        Properties.Settings.Default.Last_Auto_Buckup_Date = DateTime.Now;
+                        Properties.Settings.Default.Save();
                     }
                 }
             }
             //------------------------
+        }
+
+        static string ExtractNumericPart(string input)
+        {
+            Match match = Regex.Match(input, @"\d+");
+            return match.Success ? match.Value : string.Empty;
         }
 
         private void button6_Click(object sender, EventArgs e)

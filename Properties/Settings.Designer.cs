@@ -263,13 +263,12 @@ namespace ALBAITAR_Softvet.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Tmp_Dont_auto_save {
+        public global::System.DateTime Last_Auto_Buckup_Date {
             get {
-                return ((bool)(this["Tmp_Dont_auto_save"]));
+                return ((global::System.DateTime)(this["Last_Auto_Buckup_Date"]));
             }
             set {
-                this["Tmp_Dont_auto_save"] = value;
+                this["Last_Auto_Buckup_Date"] = value;
             }
         }
     }
