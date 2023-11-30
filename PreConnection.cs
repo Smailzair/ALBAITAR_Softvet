@@ -245,7 +245,6 @@ namespace ALBAITAR_Softvet
 
             string ignoreTables = string.Join(" ", tablesToExclude);
             string command = $"mysqldump --host={host} --user={userId} --password={password} --databases {database} --routines --triggers --ignore-table={database}.{ignoreTables} > \"{backupPath}\"";
-
             try
             {
                 Process process = new Process
@@ -896,6 +895,46 @@ namespace ALBAITAR_Softvet
             }
 
 
+        }
+
+        public static bool Verif_real_server_activ()
+        {
+            bool Verifyed_001 = false;
+            if (Properties.Settings.Default.Codifed_Activation_Email.Length > 2 && Properties.Settings.Default.Codified_Activate_Code.Length > 2)
+            {
+                MySqlConnection albaitar_online = new MySqlConnection(@"Server=62.72.50.1;Port=3306;Database=u844866977_BAITAR_CLIENTS;Uid=u844866977_baitar_user;Pwd=Zsd52##dQemN41;");
+                //---------------------
+                MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`ACTIVAT_CODE`) VALUES (" +
+                    "'" + PreConnection.generate_ID_of_client() + "'," +
+                    "'" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "'," +
+                    "'" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "');", albaitar_online);
+
+                try
+                {
+                    if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+                    command.ExecuteNonQuery();
+                }
+                catch { }
+                albaitar_online.Close();
+                //-------------------------------
+                DataTable dttb = new DataTable();
+                MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND  `ACTIVAT_CODE` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
+                try
+                {
+                    if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+                    using (MySqlDataReader reader = command2.ExecuteReader())
+                    {
+                        dttb.Load(reader);
+                    }
+                }
+                catch { }
+                albaitar_online.Close();
+                if (dttb.Rows.Count > 0) //Good
+                {
+                    Verifyed_001 = true;
+                }
+            }
+            return Verifyed_001;
         }
 
     }

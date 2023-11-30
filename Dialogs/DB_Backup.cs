@@ -12,7 +12,7 @@ namespace ALBAITAR_Softvet.Dialogs
 {
     public partial class DB_Backup : Form
     {
-        //string save_folder = "";
+        bool activated_prod = false;
         public DB_Backup()
         {
             InitializeComponent();
@@ -70,6 +70,8 @@ namespace ALBAITAR_Softvet.Dialogs
                 radioButton3.Checked = true;
             }
             scan_files();
+            //---------------------
+            activated_prod = PreConnection.Verif_real_server_activ();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -207,34 +209,43 @@ namespace ALBAITAR_Softvet.Dialogs
             if (radioButton2.Checked)
             {
                 backk = string.Concat(numericUpDown1.Value, (comboBox1.SelectedIndex == 0 ? " Jours" : " Mois"));
-            }else if (radioButton1.Checked)
+            }
+            else if (radioButton1.Checked)
             {
                 backk = "In_App_Quit";
             }
 
             PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { backk }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 9 });
-          //  PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { numericUpDown2.Value }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 10 });
+            //  PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { numericUpDown2.Value }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 10 });
             Main_Frm.Params = PreConnection.Load_data("SELECT * FROM tb_params;");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(dataGridView1.SelectedRows.Count > 0) {
-                if(MessageBox.Show("Êtes-vous sûr de restaurer la base de données ?\n\n(Toutes les données existantes -à l'exception de login et des paramètres- seront écrasées !)", "Attention :",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (activated_prod)
+            {
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    panel2.Visible = true;
-                    panel2.Refresh();
-                    if (PreConnection.DB_Restore((string)dataGridView1.SelectedRows[0].Cells["PATH"].Value))
+                    if (MessageBox.Show("Êtes-vous sûr de restaurer la base de données ?\n\n(Toutes les données existantes -à l'exception de login et des paramètres- seront écrasées !)", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        panel2.Visible = false;
+                        panel2.Visible = true;
                         panel2.Refresh();
-                        Properties.Settings.Default.Tmp_Dont_auto_save = true;
-                        Properties.Settings.Default.Save();
-                        MessageBox.Show("Restauration terminée avec succès, l'application se quitte, veuillez relancer le programme.");
-                        Application.Exit();
+                        if (PreConnection.DB_Restore((string)dataGridView1.SelectedRows[0].Cells["PATH"].Value))
+                        {
+                            panel2.Visible = false;
+                            panel2.Refresh();
+                            Properties.Settings.Default.Tmp_Dont_auto_save = true;
+                            Properties.Settings.Default.Save();
+                            MessageBox.Show("Restauration terminée avec succès, l'application se quitte, veuillez relancer le programme.");
+                            Application.Exit();
+                        }
                     }
                 }
             }
+            else {
+                MessageBox.Show("Vous n'êtes pas autorisé à utiliser cette option tant que le logiciel n'est pas activé.", "Produit non activé :",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -256,25 +267,30 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void button4_Click(object sender, EventArgs e)
         {
-            
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (activated_prod)
             {
-                if (MessageBox.Show("Êtes-vous sûr de restaurer la base de données ?\n\n(Toutes les données existantes -à l'exception de login et des paramètres- seront écrasées !)", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    panel2.Visible = true;
-                    panel2.Refresh();
-                    if (PreConnection.DB_Restore(openFileDialog1.FileName))
+                    if (MessageBox.Show("Êtes-vous sûr de restaurer la base de données ?\n\n(Toutes les données existantes -à l'exception de login et des paramètres- seront écrasées !)", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        panel2.Visible = false;
+                        panel2.Visible = true;
                         panel2.Refresh();
-                        Properties.Settings.Default.Tmp_Dont_auto_save = true;
-                        Properties.Settings.Default.Save(); 
-                        MessageBox.Show("Restauration terminée avec succès, l'application se quitte, veuillez relancer le programme.");
-                        Application.Exit();
+                        if (PreConnection.DB_Restore(openFileDialog1.FileName))
+                        {
+                            panel2.Visible = false;
+                            panel2.Refresh();
+                            Properties.Settings.Default.Tmp_Dont_auto_save = true;
+                            Properties.Settings.Default.Save();
+                            MessageBox.Show("Restauration terminée avec succès, l'application se quitte, veuillez relancer le programme.");
+                            Application.Exit();
+                        } 
                     }
                 }
             }
-            
+            else
+            {
+                MessageBox.Show("Vous n'êtes pas autorisé à utiliser cette option tant que le logiciel n'est pas activé.", "Produit non activé :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)

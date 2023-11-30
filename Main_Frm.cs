@@ -798,43 +798,8 @@ namespace ALBAITAR_Softvet
         {
             if (Properties.Settings.Default.Connection_String_IP_Or_LocalHost == "localhost")
             {
-                bool Verifyed_001 = false;
-                if (Properties.Settings.Default.Codifed_Activation_Email.Length > 2 && Properties.Settings.Default.Codified_Activate_Code.Length > 2)
-                {
-                    MySqlConnection albaitar_online = new MySqlConnection(@"Server=62.72.50.1;Port=3306;Database=u844866977_BAITAR_CLIENTS;Uid=u844866977_baitar_user;Pwd=Zsd52##dQemN41;");
-                    //---------------------
-                    MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`ACTIVAT_CODE`) VALUES (" +
-                        "'" + PreConnection.generate_ID_of_client() + "'," +
-                        "'" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "'," +
-                        "'" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "');", albaitar_online);
-
-                    try
-                    {
-                        if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
-                        command.ExecuteNonQuery();
-                    }
-                    catch { }
-                    albaitar_online.Close();
-                    //-------------------------------
-                    DataTable dttb = new DataTable();
-                    MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND  `ACTIVAT_CODE` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
-                    try
-                    {
-                        if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
-                        using (MySqlDataReader reader = command2.ExecuteReader())
-                        {
-                            dttb.Load(reader);
-                        }
-                    }
-                    catch { }
-                    albaitar_online.Close();
-                    if (dttb.Rows.Count > 0) //Good
-                    {
-                        Verifyed_001 = true;
-                    }
-                }
-
-                if (!Verifyed_001)
+                bool server_activated = PreConnection.Verif_real_server_activ();
+                if (!server_activated)
                 {
                     if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
                     {
@@ -899,8 +864,6 @@ namespace ALBAITAR_Softvet
                         Properties.Settings.Default.Save();
                         close_app_because_act = true;
                         Application.Run(new App_Activation());
-
-
                     }
 
                 }
