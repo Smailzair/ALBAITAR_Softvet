@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ALBAITAR_Softvet.Dialogs;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -13,6 +14,7 @@ namespace ALBAITAR_Softvet
         static bool change_infos_there = false;
         bool just_return_answer1 = false;
         int specified_usr_id = -1;
+
         public static bool enter_allow
         {
             get
@@ -40,7 +42,7 @@ namespace ALBAITAR_Softvet
         public Login(bool? just_return_answer, int? specified_user_id)
         {
             InitializeComponent();
-            just_return_answer1  = just_return_answer ?? false;
+            just_return_answer1 = just_return_answer ?? false;
             specified_usr_id = specified_user_id ?? -1;
             maskedTextBox1.Focus();
         }
@@ -54,7 +56,7 @@ namespace ALBAITAR_Softvet
             comboBox1.DataSource = datat;
             comboBox1.ValueMember = "ID";
             comboBox1.DisplayMember = "USER_FULL_NME";
-            if(specified_usr_id > 0)
+            if (specified_usr_id > 0)
             {
                 if (datat.Rows.Cast<DataRow>().Where(er => er["ID"].ToString() == specified_usr_id.ToString()).Count() > 0)
                 {
@@ -62,15 +64,16 @@ namespace ALBAITAR_Softvet
                 }
                 comboBox1.Enabled = false;
             }
-            else if(datat.Rows.Cast<DataRow>().Where(er => er["ID"].ToString() == Properties.Settings.Default.Last_login_user_idx.ToString()).Count() > 0)
+            else if (datat.Rows.Cast<DataRow>().Where(er => er["ID"].ToString() == Properties.Settings.Default.Last_login_user_idx.ToString()).Count() > 0)
             {
                 comboBox1.SelectedValue = Properties.Settings.Default.Last_login_user_idx;
             }
-            checkBox1.Checked = Properties.Settings.Default.Login_Auto_Enter;            
+            checkBox1.Checked = Properties.Settings.Default.Login_Auto_Enter;
             checkBox1.Visible = !just_return_answer1 && comboBox1.Enabled;
             //-----------------------            
             maskedTextBox1.Select();
             //-----
+            BringToFront();
             Activate();
 
         }
@@ -111,13 +114,18 @@ namespace ALBAITAR_Softvet
                 accept = false;
             }
             //--------------
-            if (just_return_answer1) { Close(); }
+
+            if (just_return_answer1)
+            {
+                Close();
+            }
+
 
         }
 
         private void maskedTextBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
             maskedTextBox1.BackColor = SystemColors.Window;
         }
 

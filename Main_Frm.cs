@@ -71,7 +71,7 @@ namespace ALBAITAR_Softvet
         //-------------------
         public Main_Frm()
         {
-            new Splash().Show();
+            //new Splash().Show();
             //------------------
             InitializeComponent();
             //-------------            

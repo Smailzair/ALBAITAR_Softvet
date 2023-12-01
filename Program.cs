@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ALBAITAR_Softvet.Dialogs;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
@@ -46,8 +47,10 @@ namespace ALBAITAR_Softvet
 
                 Process[] processes = Process.GetProcessesByName(procName);
 
+                Splash splash = new Splash();
                 if (processes.Length <= 1)
                 {
+                    splash.Show();
                     PreConnection.load_rancosoft_gmail_auth();
                     if (Properties.Settings.Default.Login_Auto_Enter && (DateTime.Now - Properties.Settings.Default.Last_entred_date_by_Auto_Enter).Days < 7)
                     {
@@ -59,9 +62,11 @@ namespace ALBAITAR_Softvet
                     {
                         Properties.Settings.Default.Login_Auto_Enter = false;
                         Properties.Settings.Default.Save();
+                        splash.Hide();
                         Login log = new Login(false, null);
                         Application.Run(log);
                         log.BringToFront();
+                        splash.Show();
                         //--------------
                         if (Login.enter_allow)
                         {
