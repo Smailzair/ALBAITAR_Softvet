@@ -14,7 +14,8 @@ namespace ALBAITAR_Softvet
         static bool change_infos_there = false;
         bool just_return_answer1 = false;
         int specified_usr_id = -1;
-
+        
+        public bool main_frm_locked = false;
         public static bool enter_allow
         {
             get
@@ -49,9 +50,6 @@ namespace ALBAITAR_Softvet
         DataTable datat;
         private void Login_Load(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Restarted_for_login_lock = false;
-            Properties.Settings.Default.Save();
-            //------------
             accept = false;
             //------------
             datat = PreConnection.Load_data("SELECT * ,CONCAT(IF(SEX = 'F','Mme. ','Mr. '),`USER_NME`,' ',`USER_FAMNME`) AS USER_FULL_NME FROM tb_login_and_users;");
@@ -73,7 +71,8 @@ namespace ALBAITAR_Softvet
             }
             checkBox1.Checked = Properties.Settings.Default.Login_Auto_Enter;
             checkBox1.Visible = !just_return_answer1 && comboBox1.Enabled;
-            //-----------------------            
+            //-----------------------
+            comboBox1.Enabled = !main_frm_locked;
             maskedTextBox1.Select();
             //-----
             BringToFront();
@@ -117,20 +116,19 @@ namespace ALBAITAR_Softvet
                 accept = false;
             }
             //--------------
-
             if (just_return_answer1)
             {
                 Close();
             }
-            
             //----------
-            Application.OpenForms["Main_Frm"]?.Show();
-
+            if (accept)
+            {
+                Application.OpenForms["Main_Frm"]?.Show();
+            }
         }
 
         private void maskedTextBox1_TextChanged(object sender, EventArgs e)
         {
-
             maskedTextBox1.BackColor = SystemColors.Window;
         }
 
@@ -146,10 +144,9 @@ namespace ALBAITAR_Softvet
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(Properties.Settings.Default.Restarted_for_login_lock)
+            if(main_frm_locked && !accept)
             {
-                Properties.Settings.Default.Restarted_for_login_lock = false;
-                Properties.Settings.Default.Save();
+                Application.OpenForms["Main_Frm"]?.Close();
                 Application.Exit();
             }
         }

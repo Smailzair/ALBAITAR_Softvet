@@ -74,7 +74,7 @@ namespace ALBAITAR_Softvet
                         }
                     }
                 }
-                else// if(!Properties.Settings.Default.Restarted_for_login_lock)
+                else
                 {
                     IntPtr hWnd;
                     hWnd = processes[0].MainWindowHandle; //use it as IntPtr not int

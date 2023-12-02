@@ -730,7 +730,6 @@ namespace ALBAITAR_Softvet
         private void button1_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Login_Auto_Enter = false;
-            Properties.Settings.Default.Restarted_for_login_lock = true;
             Properties.Settings.Default.Save();
 
             prev_open_frms = new List<string>();
@@ -739,7 +738,10 @@ namespace ALBAITAR_Softvet
                 prev_open_frms.Add(frm.Name);
                 frm.Hide();
             }
-            new Login(false, null).Show();
+
+            Login log = new Login(false, null);
+            log.main_frm_locked = true;
+            log.Show();
             //Application.Restart();
         }
 
