@@ -49,6 +49,9 @@ namespace ALBAITAR_Softvet
         DataTable datat;
         private void Login_Load(object sender, EventArgs e)
         {
+            Properties.Settings.Default.Restarted_for_login_lock = false;
+            Properties.Settings.Default.Save();
+            //------------
             accept = false;
             //------------
             datat = PreConnection.Load_data("SELECT * ,CONCAT(IF(SEX = 'F','Mme. ','Mr. '),`USER_NME`,' ',`USER_FAMNME`) AS USER_FULL_NME FROM tb_login_and_users;");
@@ -119,7 +122,9 @@ namespace ALBAITAR_Softvet
             {
                 Close();
             }
-
+            
+            //----------
+            Application.OpenForms["Main_Frm"]?.Show();
 
         }
 
@@ -137,6 +142,16 @@ namespace ALBAITAR_Softvet
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             maskedTextBox1.Focus();
+        }
+
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(Properties.Settings.Default.Restarted_for_login_lock)
+            {
+                Properties.Settings.Default.Restarted_for_login_lock = false;
+                Properties.Settings.Default.Save();
+                Application.Exit();
+            }
         }
     }
 }

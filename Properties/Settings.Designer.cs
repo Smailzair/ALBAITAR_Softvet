@@ -271,5 +271,17 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Last_Auto_Buckup_Date"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Restarted_for_login_lock {
+            get {
+                return ((bool)(this["Restarted_for_login_lock"]));
+            }
+            set {
+                this["Restarted_for_login_lock"] = value;
+            }
+        }
     }
 }

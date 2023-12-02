@@ -26,6 +26,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void App_Activation_Load(object sender, EventArgs e)
         {
+            Application.OpenForms["Splash"]?.Close();
             //--------------------
             label8.Text = PreConnection.generate_ID_of_client();
             label9.Text = Environment.MachineName;

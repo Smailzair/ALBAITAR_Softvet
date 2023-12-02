@@ -1,4 +1,5 @@
-﻿using Microsoft.ReportingServices.Diagnostics.Internal;
+﻿using ALBAITAR_Softvet.Dialogs;
+using Microsoft.ReportingServices.Diagnostics.Internal;
 using Microsoft.Win32;
 using MySql.Data.MySqlClient;
 using ServiceStack;
@@ -28,6 +29,9 @@ namespace ALBAITAR_Softvet
         static string connectionString_txt = "Server=" + Properties.Settings.Default.Connection_String_IP_Or_LocalHost + ";Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;";
         public static MySqlConnection mySqlConnection = new MySqlConnection(connectionString_txt); //DB Origine                
         // static bool Connection_opened = false;
+
+
+
         public static void open_conn()
         {
             try
