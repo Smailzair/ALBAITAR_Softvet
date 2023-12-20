@@ -15,6 +15,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
 using Excc = Microsoft.Office.Interop.Excel;
@@ -142,19 +143,21 @@ namespace ALBAITAR_Softvet
 
         public static int Excut_Cmd(int Insert_1_or_Update_2_Delete_3, string Table_nme, List<string> Columns_names, List<object> col_values, string where_expression, List<string> where_columns, List<object> where_values)
         {
+            string pattern = @"[^a-zA-Z0-9_@]";
             string cmmd = "";
             if (Insert_1_or_Update_2_Delete_3 == 1) //INSERT
             {
                 cmmd += "INSERT INTO " + Table_nme + " (";
                 foreach (var col in Columns_names)
                 {
-                    cmmd += col + ",";
+                    cmmd += "`" + col + "`,";
                 }
                 cmmd = cmmd.TrimEnd(',');
                 cmmd += ") VALUES (";
                 for (int i = 0; i < Columns_names.Count; i++)
                 {
-                    cmmd += "@i" + i.ToString() + "_" + Columns_names[i] + ",";
+                    string col_nme = Regex.Replace(Columns_names[i], pattern, "");
+                    cmmd += "@i" + i.ToString() + "_" + col_nme + ",";
                 }
                 cmmd = cmmd.TrimEnd(',');
                 cmmd += ")";
@@ -166,7 +169,8 @@ namespace ALBAITAR_Softvet
                 cmmd += "UPDATE " + Table_nme + " SET ";
                 for (int i = 0; i < Columns_names.Count; i++)
                 {
-                    cmmd += Columns_names[i] + " = @i" + i.ToString() + "_" + Columns_names[i] + ",";
+                    string col_nme = Regex.Replace(Columns_names[i], pattern, "");
+                    cmmd += "`" + Columns_names[i] + "`" + " = @i" + i.ToString() + "_" + col_nme + ",";
                 }
                 cmmd = cmmd.TrimEnd(',');
                 if (where_expression != null) { if (where_expression.Length > 0) { cmmd += " WHERE " + where_expression; } }
@@ -188,9 +192,11 @@ namespace ALBAITAR_Softvet
                 {
                     if (Columns_names != null && col_values != null)
                     {
+                        
                         for (int i = 0; i < Columns_names.Count; i++)
                         {
-                            command.Parameters.AddWithValue("@i" + i.ToString() + "_" + Columns_names[i], col_values[i]);
+                            string col_nme = Regex.Replace(Columns_names[i], pattern, "");
+                            command.Parameters.AddWithValue("@i" + i.ToString() + "_" + col_nme, col_values[i]);
                         }
                     }
                     
@@ -205,7 +211,7 @@ namespace ALBAITAR_Softvet
                 }
 
             }
-            catch { }
+            catch{ }
             close_conn();
             return rows_nb;
         }

@@ -191,19 +191,26 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             //------------------------------------------------------------
             products = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`CODE`,tb1.`CATEGOR`,tb1.`NME`,tb1.`REVIENT_PRTICE`,tb1.`VENTE_PRICE`,tb2.SLD FROM tb_produits AS tb1 LEFT JOIN (SELECT `PROD_ID`,SUM(`QNT_IN`) - SUM(`QNT_OUT`) AS SLD FROM tb_stock_mouv GROUP BY `PROD_ID`) AS tb2 ON tb2.`PROD_ID` = tb1.`ID`;");
-            foreach (DataRow rww in Vente.stock_to_modify.Rows)
+            try
             {
-                products.Rows.Cast<DataRow>().Where(x => x["ID"].ToString() == rww["PROD_ID"].ToString()).ToList().ForEach(f =>
+                foreach (DataRow rww in Vente.stock_to_modify.Rows)
                 {
-                    f.SetField("SLD", ((decimal)f["SLD"] - (decimal)rww["QNT_DIMIN"]));
-
-                    if ((decimal)f["SLD"] <= 0)
+                    products.Rows.Cast<DataRow>().Where(x => x["ID"].ToString() == rww["PROD_ID"].ToString()).ToList().ForEach(f =>
                     {
-                        f.Delete();
-                    }
-                });
+                        f.SetField("SLD", (decimal)(f["SLD"] ?? 0) - (decimal)(rww["QNT_DIMIN"] ?? 0));
+                        if ((decimal)f["SLD"] <= 0)
+                        {
+                            f.Delete();
+                        }
+                    });
 
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
             dataGridView2.DataSource = products;
             //-------------------------------------------------------------
             if (Vente.tmp_current_client_id > 0)

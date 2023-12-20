@@ -470,132 +470,132 @@ namespace ALBAITAR_Softvet.Labo
                 {
                     if (is_new)
                     {
-                        PreConnection.Excut_Cmd(1, "tb_labo_biochimie",new List<string>
-                        {
-                            "REF",
-"DATE_TIME",
-"ANIM_ID",
-"OBSERV",
-"Glucose",
-"Urée (BUN)",
-"Créatinine",
-"Acide Urique",
-"Cholesterol",
-"Triglycérides",
-"Proteines Totales",
-"Albumina",
-"Globulines",
-"Indice alb/glb",
-"Bilirubine Totale",
-"Bilirubine Conjuguée",
-"GPT(ALT)",
-"GOT(AST)",
-"Phosphatases Alc",
-"Gamma-GT",
-"L.D.H",
-"C.P.K",
-"Lipase",
-"Amylase",
-"Fructosamine",
-"Calcium",
-"Phosphore",
-"Chlore",
-"Potassium",
-"Sodium",
-"Amoniac",
-"Fer",
-"Glucose_NORMATIF",
-"Urée (BUN)_NORMATIF",
-"Créatinine_NORMATIF",
-"Acide Urique_NORMATIF",
-"Cholesterol_NORMATIF",
-"Triglycérides_NORMATIF",
-"Proteines Totales_NORMATIF",
-"Albumina_NORMATIF",
-"Globulines_NORMATIF",
-"Indice alb/glb_NORMATIF",
-"Bilirubine Totale_NORMATIF",
-"Bilirubine Conjuguée_NORMATIF",
-"GPT(ALT)_NORMATIF",
-"GOT(AST)_NORMATIF",
-"Phosphatases Alc_NORMATIF",
-"Gamma-GT_NORMATIF",
-"L.D.H_NORMATIF",
-"C.P.K_NORMATIF",
-"Lipase_NORMATIF",
-"Amylase_NORMATIF",
-"Fructosamine_NORMATIF",
-"Calcium_NORMATIF",
-"Phosphore_NORMATIF",
-"Chlore_NORMATIF",
-"Potassium_NORMATIF",
-"Sodium_NORMATIF",
-"Amoniac_NORMATIF",
-"Fer_NORMATIF"
-                        },new List<object>
-                        {
-                            textBox3.Text, //REF
-                            dateTimePicker1.Value, //DATE_TIME
-                            selected_animm.Cells["ID"].Value, //ANIM_ID
-                            textBox1.Text, //OBSERV
-                            dataGridView1.Rows[0].Cells["VALUE2"].Value,
-dataGridView1.Rows[1].Cells["VALUE2"].Value,
-dataGridView1.Rows[2].Cells["VALUE2"].Value,
-dataGridView1.Rows[3].Cells["VALUE2"].Value,
-dataGridView1.Rows[4].Cells["VALUE2"].Value,
-dataGridView1.Rows[5].Cells["VALUE2"].Value,
-dataGridView1.Rows[6].Cells["VALUE2"].Value,
-dataGridView1.Rows[7].Cells["VALUE2"].Value,
-dataGridView1.Rows[8].Cells["VALUE2"].Value,
-dataGridView1.Rows[9].Cells["VALUE2"].Value,
-dataGridView1.Rows[10].Cells["VALUE2"].Value,
-dataGridView1.Rows[11].Cells["VALUE2"].Value,
-dataGridView1.Rows[12].Cells["VALUE2"].Value,
-dataGridView1.Rows[13].Cells["VALUE2"].Value,
-dataGridView1.Rows[14].Cells["VALUE2"].Value,
-dataGridView1.Rows[15].Cells["VALUE2"].Value,
-dataGridView1.Rows[16].Cells["VALUE2"].Value,
-dataGridView1.Rows[17].Cells["VALUE2"].Value,
-dataGridView1.Rows[18].Cells["VALUE2"].Value,
-dataGridView1.Rows[19].Cells["VALUE2"].Value,
-dataGridView1.Rows[20].Cells["VALUE2"].Value,
-dataGridView1.Rows[21].Cells["VALUE2"].Value,
-dataGridView1.Rows[22].Cells["VALUE2"].Value,
-dataGridView1.Rows[23].Cells["VALUE2"].Value,
-dataGridView1.Rows[24].Cells["VALUE2"].Value,
-dataGridView1.Rows[25].Cells["VALUE2"].Value,
-dataGridView1.Rows[26].Cells["VALUE2"].Value,
-dataGridView1.Rows[27].Cells["VALUE2"].Value,
-dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[8].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[9].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[10].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[11].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[12].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[13].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[14].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[15].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[16].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[17].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[18].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[19].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[20].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[21].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[22].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[23].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[24].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[25].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[26].Cells["DEFAULT_FULL"].Value,
-dataGridView1.Rows[27].Cells["DEFAULT_FULL"].Value
-                        },null,null,null);
-                        //PreConnection.Excut_Cmd("INSERT INTO `tb_labo_biochimie`"
+                        PreConnection.Excut_Cmd(1, "tb_labo_biochimie", new List<string>
+                                                {
+                                                    "REF",
+                        "DATE_TIME",
+                        "ANIM_ID",
+                        "OBSERV",
+                        "Glucose",
+                        "Urée (BUN)",
+                        "Créatinine",
+                        "Acide Urique",
+                        "Cholesterol",
+                        "Triglycérides",
+                        "Proteines Totales",
+                        "Albumina",
+                        "Globulines",
+                        "Indice alb/glb",
+                        "Bilirubine Totale",
+                        "Bilirubine Conjuguée",
+                        "GPT(ALT)",
+                        "GOT(AST)",
+                        "Phosphatases Alc",
+                        "Gamma-GT",
+                        "L.D.H",
+                        "C.P.K",
+                        "Lipase",
+                        "Amylase",
+                        "Fructosamine",
+                        "Calcium",
+                        "Phosphore",
+                        "Chlore",
+                        "Potassium",
+                        "Sodium",
+                        "Amoniac",
+                        "Fer",
+                        "Glucose_NORMATIF",
+                        "Urée (BUN)_NORMATIF",
+                        "Créatinine_NORMATIF",
+                        "Acide Urique_NORMATIF",
+                        "Cholesterol_NORMATIF",
+                        "Triglycérides_NORMATIF",
+                        "Proteines Totales_NORMATIF",
+                        "Albumina_NORMATIF",
+                        "Globulines_NORMATIF",
+                        "Indice alb/glb_NORMATIF",
+                        "Bilirubine Totale_NORMATIF",
+                        "Bilirubine Conjuguée_NORMATIF",
+                        "GPT(ALT)_NORMATIF",
+                        "GOT(AST)_NORMATIF",
+                        "Phosphatases Alc_NORMATIF",
+                        "Gamma-GT_NORMATIF",
+                        "L.D.H_NORMATIF",
+                        "C.P.K_NORMATIF",
+                        "Lipase_NORMATIF",
+                        "Amylase_NORMATIF",
+                        "Fructosamine_NORMATIF",
+                        "Calcium_NORMATIF",
+                        "Phosphore_NORMATIF",
+                        "Chlore_NORMATIF",
+                        "Potassium_NORMATIF",
+                        "Sodium_NORMATIF",
+                        "Amoniac_NORMATIF",
+                        "Fer_NORMATIF"
+                                                }, new List<object>
+                                                {
+                                                    textBox3.Text, //REF
+                                                    dateTimePicker1.Value, //DATE_TIME
+                                                    selected_animm.Cells["ID"].Value, //ANIM_ID
+                                                    textBox1.Text, //OBSERV
+                                                    dataGridView1.Rows[0].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[1].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[2].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[3].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[4].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[5].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[6].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[7].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[8].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[9].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[10].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[11].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[12].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[13].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[14].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[15].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[16].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[17].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[18].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[19].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[20].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[21].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[22].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[23].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[24].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[25].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[26].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[27].Cells["VALUE2"].Value,
+                        dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[8].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[9].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[10].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[11].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[12].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[13].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[14].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[15].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[16].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[17].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[18].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[19].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[20].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[21].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[22].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[23].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[24].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[25].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[26].Cells["DEFAULT_FULL"].Value,
+                        dataGridView1.Rows[27].Cells["DEFAULT_FULL"].Value
+                                                }, null, null, null);
+                        //PreConnection.Excut_Cmd2("INSERT INTO `tb_labo_biochimie`"
                         //                      + "(`REF`,"
                         //                      + "`DATE_TIME`,"
                         //                      + "`ANIM_ID`,"
@@ -689,34 +689,34 @@ dataGridView1.Rows[27].Cells["DEFAULT_FULL"].Value
                         //                      + (dataGridView1.Rows[25].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[25].Cells["VALUE2"].Value : "NULL") + ","
                         //                      + (dataGridView1.Rows[26].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[26].Cells["VALUE2"].Value : "NULL") + ","
                         //                      + (dataGridView1.Rows[27].Cells["VALUE2"].Value != DBNull.Value ? dataGridView1.Rows[27].Cells["VALUE2"].Value : "NULL") + ","
-                        //                      + (dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[8].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[8].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[9].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[9].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[10].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[10].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[11].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[11].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[12].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[12].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[13].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[13].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[14].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[14].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[15].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[15].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[16].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[16].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[17].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[17].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[18].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[18].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[19].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[19].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[20].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[20].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[21].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[21].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[22].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[22].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[23].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[23].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[24].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[24].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[25].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[25].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[26].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[26].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ","
-                        //                      + (dataGridView1.Rows[27].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[27].Cells["DEFAULT_FULL"].Value.ToString().Replace("'","''") + "'" : "NULL") + ");");
+                        //                      + (dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[0].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[1].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[2].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[3].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[4].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[5].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[6].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[7].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[8].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[8].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[9].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[9].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[10].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[10].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[11].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[11].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[12].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[12].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[13].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[13].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[14].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[14].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[15].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[15].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[16].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[16].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[17].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[17].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[18].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[18].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[19].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[19].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[20].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[20].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[21].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[21].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[22].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[22].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[23].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[23].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[24].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[24].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[25].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[25].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[26].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[26].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ","
+                        //                      + (dataGridView1.Rows[27].Cells["DEFAULT_FULL"].Value != DBNull.Value ? "'" + dataGridView1.Rows[27].Cells["DEFAULT_FULL"].Value.ToString().Replace("'", "''") + "'" : "NULL") + ");");
                     }
                     else
                     {
