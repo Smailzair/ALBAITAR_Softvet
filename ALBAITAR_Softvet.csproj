@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\Xamarin.Forms.5.0.0.2578\build\Xamarin.Forms.props" Condition="Exists('packages\Xamarin.Forms.5.0.0.2578\build\Xamarin.Forms.props')" />
   <Import Project="packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props" Condition="Exists('packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" />
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
@@ -705,6 +705,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Vaccinations.resx">
       <DependentUpon>Vaccinations.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Vaccin_Alerts.resx">
       <DependentUpon>Vaccin_Alerts.cs</DependentUpon>
@@ -750,6 +751,7 @@
     <EmbeddedResource Include="Reports\certificat_enreg.rdlc" />
     <EmbeddedResource Include="Vaccination.resx">
       <DependentUpon>Vaccination.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Vente.resx">
       <DependentUpon>Vente.cs</DependentUpon>

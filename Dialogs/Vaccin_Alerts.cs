@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Dialogs
@@ -17,10 +13,10 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             InitializeComponent();
             //------------
-            if(Main_Frm.Main_Frm_vaccination == null)
+            if (Main_Frm.Main_Frm_vaccination == null)
             {
                 refresh_main_vaccin_tbl();
-            }            
+            }
             load_data();
         }
 
@@ -33,6 +29,7 @@ namespace ALBAITAR_Softvet.Dialogs
 + "         FIXED_DATE,"
 + "         IF("
 + "             CURRENT_DATE BETWEEN START_DATE AND END_DATE,"
+//+ "             YEAR(CURRENT_DATE) BETWEEN START_YEAR AND END_YEAR,"
 + "             IF("
 + "                 STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d') >= CURRENT_DATE,"
 + "                 STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
@@ -63,6 +60,7 @@ namespace ALBAITAR_Softvet.Dialogs
                                          + "        FIXED_DATE,"
                                          + "        IF("
                                          + "            CURRENT_DATE BETWEEN START_DATE AND END_DATE,"
+                                         //+ "            YEAR(CURRENT_DATE) BETWEEN START_YEAR AND END_YEAR,"
                                          + "            IF("
                                          + "                STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d') >= CURRENT_DATE,"
                                          + "                STR_TO_DATE(CONCAT(CAST(YEAR(CURRENT_DATE) AS CHAR),'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
@@ -84,7 +82,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void Vaccin_Alerts_Enter(object sender, EventArgs e)
         {
-           // load_data();
+            // load_data();
         }
 
         private void Vaccin_Alerts_Leave(object sender, EventArgs e)
@@ -125,7 +123,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            PreConnection.Excut_Cmd(2, "tb_vaccin", new List<string> {"LAST_ALERT_LUE_DATE"}, new List<object>{ DateTime.Now.Date}, "ID = @ID", new List<string> { "ID" }, new List<object> { dataGridView1.Rows[e.RowIndex].Cells["ID"].Value });
+            PreConnection.Excut_Cmd(2, "tb_vaccin", new List<string> { "LAST_ALERT_LUE_DATE" }, new List<object> { DateTime.Now.Date }, "ID = @ID", new List<string> { "ID" }, new List<object> { dataGridView1.Rows[e.RowIndex].Cells["ID"].Value });
             int prev_scrol = dataGridView1.FirstDisplayedScrollingRowIndex;
             load_data();
             dataGridView1.FirstDisplayedScrollingRowIndex = prev_scrol;

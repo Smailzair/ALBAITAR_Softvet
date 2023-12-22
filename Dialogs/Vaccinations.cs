@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
@@ -129,7 +130,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void apply_filter()
         {
-            if (dataGridView1.DataSource != null)
+;            if (dataGridView1.DataSource != null)
             {
                 string fltr = !string.IsNullOrWhiteSpace(textBox1.Text) ? string.Format("VACCIN_NME LIKE '%{0}%'", textBox1.Text) : "";
                 fltr += radioButton9.Checked ? (fltr.Length > 0 ? " AND " : "") + $"(IS_FOR_ALL = 1 OR ANIM_NUM_IDENs LIKE '%{selected_anim_ident_for_filter}%')" : "";

@@ -245,34 +245,32 @@ namespace ALBAITAR_Softvet
         {
             if (dataGridView1.DataSource != null)
             {
-                string fltr = !string.IsNullOrWhiteSpace(textBox1.Text) ? string.Format("VACCIN_NME LIKE '%{0}%'", textBox1.Text) : "";
-                fltr += radioButton9.Checked ? (fltr.Length > 0 ? " AND " : "") + $"(IS_FOR_ALL = 1 OR ANIM_NUM_IDENs LIKE '%{selected_anim_ident_for_filter}%')" : "";
-                if (radioButton10.Checked)
+                if(((DataTable)dataGridView1.DataSource).Columns.Count > 0)
                 {
-                    string tmmp_anms = "";
-                    Main_Frm.Main_Frm_animals_tbl.AsEnumerable().Where(Z => (Z["CLIENT_ID"] != DBNull.Value ? (int)Z["CLIENT_ID"] : -1) == selected_client_id_for_filter).ForEach(V => tmmp_anms += ",'" + V["NUM_IDENTIF"] + "'");
-                    tmmp_anms = tmmp_anms.Length > 0 ? tmmp_anms.Substring(1) : "";
-                    fltr += radioButton10.Checked ? (fltr.Length > 0 ? " AND " : "") + $"(IS_FOR_ALL = 1 OR RELATED_CLIENTS_IDS LIKE '{selected_client_id_for_filter},%' OR RELATED_CLIENTS_IDS LIKE '%,{selected_client_id_for_filter},%' OR RELATED_CLIENTS_IDS LIKE '%,{selected_client_id_for_filter}'" + (!string.IsNullOrEmpty(tmmp_anms) ? $" OR ANIM_NUM_IDENs IN ({tmmp_anms})" : "") + ")" : "";
+                    string fltr = !string.IsNullOrWhiteSpace(textBox1.Text) ? string.Format("VACCIN_NME LIKE '%{0}%'", textBox1.Text) : "";
+                    fltr += radioButton9.Checked ? (fltr.Length > 0 ? " AND " : "") + $"(IS_FOR_ALL = 1 OR ANIM_NUM_IDENs LIKE '%{selected_anim_ident_for_filter}%')" : "";
+                    if (radioButton10.Checked)
+                    {
+                        string tmmp_anms = "";
+                        Main_Frm.Main_Frm_animals_tbl.AsEnumerable().Where(Z => (Z["CLIENT_ID"] != DBNull.Value ? (int)Z["CLIENT_ID"] : -1) == selected_client_id_for_filter).ForEach(V => tmmp_anms += ",'" + V["NUM_IDENTIF"] + "'");
+                        tmmp_anms = tmmp_anms.Length > 0 ? tmmp_anms.Substring(1) : "";
+                        fltr += radioButton10.Checked ? (fltr.Length > 0 ? " AND " : "") + $"(IS_FOR_ALL = 1 OR RELATED_CLIENTS_IDS LIKE '{selected_client_id_for_filter},%' OR RELATED_CLIENTS_IDS LIKE '%,{selected_client_id_for_filter},%' OR RELATED_CLIENTS_IDS LIKE '%,{selected_client_id_for_filter}'" + (!string.IsNullOrEmpty(tmmp_anms) ? $" OR ANIM_NUM_IDENs IN ({tmmp_anms})" : "") + ")" : "";
+                    }
+                    fltr += !radioButton3.Checked ? (fltr.Length > 0 ? " AND " : "") + "IS_IMPORTANT = '" + (radioButton1.Checked ? "Oui" : "Non") + "'" : "";
+                    fltr += !radioButton4.Checked ? (fltr.Length > 0 ? " AND " : "") + "FIXED_DATE IS " + (radioButton5.Checked ? "NOT " : "") + "NULL" : "";
+                    if (checkBox1.Checked)
+                    {
+                        fltr += (fltr.Length > 0 ? " AND " : "");
+                        fltr += $"((FIXED_DATE IS NOT NULL AND FIXED_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND FIXED_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#) OR " +
+                            $"(FIXED_DATE IS NULL AND (" +
+                            $"(START_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND START_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#) OR " +
+                            $"(END_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND END_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#)" +
+                            $")))";
+                    }
+
+                    ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
                 }
-                fltr += !radioButton3.Checked ? (fltr.Length > 0 ? " AND " : "") + "IS_IMPORTANT = '" + (radioButton1.Checked ? "Oui" : "Non") + "'" : "";
-                fltr += !radioButton4.Checked ? (fltr.Length > 0 ? " AND " : "") + "FIXED_DATE IS " + (radioButton5.Checked ? "NOT " : "") + "NULL" : "";
-                if (checkBox1.Checked)
-                {
-                    fltr += (fltr.Length > 0 ? " AND " : "");
-                    fltr += $"((FIXED_DATE IS NOT NULL AND FIXED_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND FIXED_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#) OR " +
-                        $"(FIXED_DATE IS NULL AND (" +
-                        $"(START_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND START_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#) OR " +
-                        $"(END_DATE >= #{dateTimePicker1.Value.ToString("MM/dd/yyyy")}# AND END_DATE <= #{dateTimePicker2.Value.ToString("MM/dd/yyyy")}#)" +
-                        $")))";
-                }
-
-
-                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
-
-
             }
-
-
         }
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
