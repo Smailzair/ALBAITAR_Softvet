@@ -527,6 +527,7 @@ namespace ALBAITAR_Softvet.Resources
             if (tabControl1.SelectedTab == tabPage4)
             {
                 Load_malad_2();
+                //hhhhhh
             }
         }
 

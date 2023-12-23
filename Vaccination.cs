@@ -118,7 +118,7 @@ namespace ALBAITAR_Softvet
 + "             IF(CURRENT_DATE < STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
 + "                 STR_TO_DATE(CONCAT(START_YEAR,'-',EVERY_MOUNTH_NB,'-',EVERY_DAY_NB), '%Y-%m-%d'),"
 + "                 NULL"
-+ "                 )"
++ "                 )"  
 + "         )"
 + "     ) AS NEXT_DATE "
 + " FROM tb_vaccin ORDER BY NEXT_DATE;");

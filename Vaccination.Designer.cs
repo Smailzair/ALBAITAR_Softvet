@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,17 +50,25 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.radioButton9 = new System.Windows.Forms.RadioButton();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VACCIN_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IS_PERIODIC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FIXED_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IS_PERIODIC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EVERY_TXT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.END_YEAR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.START_YEAR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EVERY_DAY_NB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.START_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.END_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EVERY_MOUNTH_NB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.START_YEAR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.END_YEAR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IS_CONCERN_WHO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IS_IMPORTANT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ANIM_NUM_IDENs = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,14 +88,6 @@
             this.IS_FOR_ALL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NEXT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LAST_ALERT_LUE_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.radioButton10 = new System.Windows.Forms.RadioButton();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -100,7 +100,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(193, 3);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(62, 20);
+            this.checkBox1.Size = new System.Drawing.Size(63, 20);
             this.checkBox1.TabIndex = 86;
             this.checkBox1.Text = "Date : ";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -124,7 +124,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(129, 22);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 16);
+            this.label3.Size = new System.Drawing.Size(24, 16);
             this.label3.TabIndex = 3;
             this.label3.Text = "Et :";
             // 
@@ -142,7 +142,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 16);
+            this.label2.Size = new System.Drawing.Size(41, 16);
             this.label2.TabIndex = 1;
             this.label2.Text = "Entre :";
             // 
@@ -173,7 +173,7 @@
             this.radioButton4.Checked = true;
             this.radioButton4.Location = new System.Drawing.Point(109, 20);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(48, 20);
+            this.radioButton4.Size = new System.Drawing.Size(49, 20);
             this.radioButton4.TabIndex = 2;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "Tous";
@@ -185,7 +185,7 @@
             this.radioButton5.AutoSize = true;
             this.radioButton5.Location = new System.Drawing.Point(56, 20);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(47, 20);
+            this.radioButton5.Size = new System.Drawing.Size(48, 20);
             this.radioButton5.TabIndex = 1;
             this.radioButton5.Text = "Non";
             this.radioButton5.UseVisualStyleBackColor = true;
@@ -196,7 +196,7 @@
             this.radioButton6.AutoSize = true;
             this.radioButton6.Location = new System.Drawing.Point(6, 20);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(44, 20);
+            this.radioButton6.Size = new System.Drawing.Size(45, 20);
             this.radioButton6.TabIndex = 0;
             this.radioButton6.Text = "Oui";
             this.radioButton6.UseVisualStyleBackColor = true;
@@ -220,7 +220,7 @@
             this.radioButton3.Checked = true;
             this.radioButton3.Location = new System.Drawing.Point(109, 20);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(48, 20);
+            this.radioButton3.Size = new System.Drawing.Size(49, 20);
             this.radioButton3.TabIndex = 2;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Tous";
@@ -232,7 +232,7 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(56, 20);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(47, 20);
+            this.radioButton2.Size = new System.Drawing.Size(48, 20);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.Text = "Non";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -243,7 +243,7 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.Location = new System.Drawing.Point(6, 20);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(44, 20);
+            this.radioButton1.Size = new System.Drawing.Size(45, 20);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.Text = "Oui";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -254,7 +254,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(10, 110);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 16);
+            this.label1.Size = new System.Drawing.Size(76, 16);
             this.label1.TabIndex = 91;
             this.label1.Text = "Rechercher :";
             // 
@@ -341,27 +341,27 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeight = 38;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.VACCIN_NME,
-            this.IS_PERIODIC,
             this.FIXED_DATE,
+            this.IS_PERIODIC,
             this.EVERY_TXT,
+            this.END_YEAR,
+            this.START_YEAR,
             this.EVERY_DAY_NB,
             this.START_DATE,
             this.END_DATE,
             this.EVERY_MOUNTH_NB,
-            this.START_YEAR,
-            this.END_YEAR,
             this.IS_CONCERN_WHO,
             this.IS_IMPORTANT,
             this.ANIM_NUM_IDENs,
@@ -393,6 +393,97 @@
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
+            // radioButton9
+            // 
+            this.radioButton9.AutoSize = true;
+            this.radioButton9.Location = new System.Drawing.Point(6, 44);
+            this.radioButton9.Name = "radioButton9";
+            this.radioButton9.Size = new System.Drawing.Size(76, 20);
+            this.radioButton9.TabIndex = 0;
+            this.radioButton9.Text = "L\'animal :";
+            this.radioButton9.UseVisualStyleBackColor = true;
+            this.radioButton9.CheckedChanged += new System.EventHandler(this.radioButton9_CheckedChanged);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(323, 41);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(22, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "...";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.Location = new System.Drawing.Point(323, 67);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(22, 23);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "...";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // radioButton10
+            // 
+            this.radioButton10.AutoSize = true;
+            this.radioButton10.Location = new System.Drawing.Point(6, 68);
+            this.radioButton10.Name = "radioButton10";
+            this.radioButton10.Size = new System.Drawing.Size(108, 20);
+            this.radioButton10.TabIndex = 0;
+            this.radioButton10.Text = "Le Propriétaire :";
+            this.radioButton10.UseVisualStyleBackColor = true;
+            this.radioButton10.CheckedChanged += new System.EventHandler(this.radioButton10_CheckedChanged);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.label4);
+            this.groupBox6.Controls.Add(this.button4);
+            this.groupBox6.Controls.Add(this.button2);
+            this.groupBox6.Controls.Add(this.radioButton9);
+            this.groupBox6.Controls.Add(this.radioButton10);
+            this.groupBox6.Controls.Add(this.radioButton11);
+            this.groupBox6.Location = new System.Drawing.Point(435, 7);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(351, 94);
+            this.groupBox6.TabIndex = 95;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Concernant :";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(113, 70);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 16);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "--";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(82, 46);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(16, 16);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "--";
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Checked = true;
+            this.radioButton11.Location = new System.Drawing.Point(6, 21);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(49, 20);
+            this.radioButton11.TabIndex = 2;
+            this.radioButton11.TabStop = true;
+            this.radioButton11.Text = "Tous";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            this.radioButton11.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            // 
             // ID
             // 
             this.ID.DataPropertyName = "ID";
@@ -409,6 +500,18 @@
             this.VACCIN_NME.Name = "VACCIN_NME";
             this.VACCIN_NME.ReadOnly = true;
             // 
+            // FIXED_DATE
+            // 
+            this.FIXED_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FIXED_DATE.DataPropertyName = "FIXED_DATE";
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.FIXED_DATE.DefaultCellStyle = dataGridViewCellStyle2;
+            this.FIXED_DATE.HeaderText = "Date fixé";
+            this.FIXED_DATE.Name = "FIXED_DATE";
+            this.FIXED_DATE.ReadOnly = true;
+            this.FIXED_DATE.Width = 74;
+            // 
             // IS_PERIODIC
             // 
             this.IS_PERIODIC.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -416,19 +519,7 @@
             this.IS_PERIODIC.HeaderText = "Periodique?";
             this.IS_PERIODIC.Name = "IS_PERIODIC";
             this.IS_PERIODIC.ReadOnly = true;
-            this.IS_PERIODIC.Width = 96;
-            // 
-            // FIXED_DATE
-            // 
-            this.FIXED_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.FIXED_DATE.DataPropertyName = "FIXED_DATE";
-            dataGridViewCellStyle4.Format = "d";
-            dataGridViewCellStyle4.NullValue = null;
-            this.FIXED_DATE.DefaultCellStyle = dataGridViewCellStyle4;
-            this.FIXED_DATE.HeaderText = "Date fixé";
-            this.FIXED_DATE.Name = "FIXED_DATE";
-            this.FIXED_DATE.ReadOnly = true;
-            this.FIXED_DATE.Width = 73;
+            this.IS_PERIODIC.Width = 97;
             // 
             // EVERY_TXT
             // 
@@ -437,7 +528,25 @@
             this.EVERY_TXT.HeaderText = "Périodique - Chaque";
             this.EVERY_TXT.Name = "EVERY_TXT";
             this.EVERY_TXT.ReadOnly = true;
-            this.EVERY_TXT.Width = 91;
+            this.EVERY_TXT.Width = 92;
+            // 
+            // END_YEAR
+            // 
+            this.END_YEAR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.END_YEAR.DataPropertyName = "END_YEAR";
+            this.END_YEAR.HeaderText = "Périodique - Jusqu\'à";
+            this.END_YEAR.Name = "END_YEAR";
+            this.END_YEAR.ReadOnly = true;
+            this.END_YEAR.Width = 92;
+            // 
+            // START_YEAR
+            // 
+            this.START_YEAR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.START_YEAR.DataPropertyName = "START_YEAR";
+            this.START_YEAR.HeaderText = "Périodique - De";
+            this.START_YEAR.Name = "START_YEAR";
+            this.START_YEAR.ReadOnly = true;
+            this.START_YEAR.Width = 92;
             // 
             // EVERY_DAY_NB
             // 
@@ -475,24 +584,6 @@
             this.EVERY_MOUNTH_NB.Visible = false;
             this.EVERY_MOUNTH_NB.Width = 141;
             // 
-            // START_YEAR
-            // 
-            this.START_YEAR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.START_YEAR.DataPropertyName = "START_YEAR";
-            this.START_YEAR.HeaderText = "Périodique - De";
-            this.START_YEAR.Name = "START_YEAR";
-            this.START_YEAR.ReadOnly = true;
-            this.START_YEAR.Width = 91;
-            // 
-            // END_YEAR
-            // 
-            this.END_YEAR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.END_YEAR.DataPropertyName = "END_YEAR";
-            this.END_YEAR.HeaderText = "Périodique - Jusqu\'à";
-            this.END_YEAR.Name = "END_YEAR";
-            this.END_YEAR.ReadOnly = true;
-            this.END_YEAR.Width = 91;
-            // 
             // IS_CONCERN_WHO
             // 
             this.IS_CONCERN_WHO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -500,7 +591,7 @@
             this.IS_CONCERN_WHO.HeaderText = "Concernant";
             this.IS_CONCERN_WHO.Name = "IS_CONCERN_WHO";
             this.IS_CONCERN_WHO.ReadOnly = true;
-            this.IS_CONCERN_WHO.Width = 97;
+            this.IS_CONCERN_WHO.Width = 98;
             // 
             // IS_IMPORTANT
             // 
@@ -509,7 +600,7 @@
             this.IS_IMPORTANT.HeaderText = "Important?";
             this.IS_IMPORTANT.Name = "IS_IMPORTANT";
             this.IS_IMPORTANT.ReadOnly = true;
-            this.IS_IMPORTANT.Width = 92;
+            this.IS_IMPORTANT.Width = 93;
             // 
             // ANIM_NUM_IDENs
             // 
@@ -665,97 +756,6 @@
             this.LAST_ALERT_LUE_DATE.ReadOnly = true;
             this.LAST_ALERT_LUE_DATE.Visible = false;
             // 
-            // radioButton9
-            // 
-            this.radioButton9.AutoSize = true;
-            this.radioButton9.Location = new System.Drawing.Point(6, 44);
-            this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(75, 20);
-            this.radioButton9.TabIndex = 0;
-            this.radioButton9.Text = "L\'animal :";
-            this.radioButton9.UseVisualStyleBackColor = true;
-            this.radioButton9.CheckedChanged += new System.EventHandler(this.radioButton9_CheckedChanged);
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(323, 41);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(22, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "...";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button4
-            // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(323, 67);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(22, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "...";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // radioButton10
-            // 
-            this.radioButton10.AutoSize = true;
-            this.radioButton10.Location = new System.Drawing.Point(6, 68);
-            this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(107, 20);
-            this.radioButton10.TabIndex = 0;
-            this.radioButton10.Text = "Le Propriétaire :";
-            this.radioButton10.UseVisualStyleBackColor = true;
-            this.radioButton10.CheckedChanged += new System.EventHandler(this.radioButton10_CheckedChanged);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.label5);
-            this.groupBox6.Controls.Add(this.label4);
-            this.groupBox6.Controls.Add(this.button4);
-            this.groupBox6.Controls.Add(this.button2);
-            this.groupBox6.Controls.Add(this.radioButton9);
-            this.groupBox6.Controls.Add(this.radioButton10);
-            this.groupBox6.Controls.Add(this.radioButton11);
-            this.groupBox6.Location = new System.Drawing.Point(435, 7);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(351, 94);
-            this.groupBox6.TabIndex = 95;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Concernant :";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(113, 70);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(15, 16);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "--";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(82, 46);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(15, 16);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "--";
-            // 
-            // radioButton11
-            // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.Checked = true;
-            this.radioButton11.Location = new System.Drawing.Point(6, 21);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(48, 20);
-            this.radioButton11.TabIndex = 2;
-            this.radioButton11.TabStop = true;
-            this.radioButton11.Text = "Tous";
-            this.radioButton11.UseVisualStyleBackColor = true;
-            this.radioButton11.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
-            // 
             // Vaccination
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -824,15 +824,15 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn VACCIN_NME;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IS_PERIODIC;
         private System.Windows.Forms.DataGridViewTextBoxColumn FIXED_DATE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IS_PERIODIC;
         private System.Windows.Forms.DataGridViewTextBoxColumn EVERY_TXT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn END_YEAR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn START_YEAR;
         private System.Windows.Forms.DataGridViewTextBoxColumn EVERY_DAY_NB;
         private System.Windows.Forms.DataGridViewTextBoxColumn START_DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn END_DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn EVERY_MOUNTH_NB;
-        private System.Windows.Forms.DataGridViewTextBoxColumn START_YEAR;
-        private System.Windows.Forms.DataGridViewTextBoxColumn END_YEAR;
         private System.Windows.Forms.DataGridViewTextBoxColumn IS_CONCERN_WHO;
         private System.Windows.Forms.DataGridViewTextBoxColumn IS_IMPORTANT;
         private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_NUM_IDENs;

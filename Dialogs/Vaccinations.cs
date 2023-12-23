@@ -57,6 +57,7 @@ namespace ALBAITAR_Softvet.Dialogs
 + "     ) AS NEXT_DATE "
 + " FROM tb_vaccin ORDER BY NEXT_DATE;");
 
+            Main_Frm.Main_Frm_vaccination.Columns.Cast<DataColumn>().ToList().ForEach(R => Debug.WriteLine(">>>>>>>> " + R.ColumnName));
             dataGridView1.DataSource = Main_Frm.Main_Frm_vaccination;
             apply_filter();
         }
