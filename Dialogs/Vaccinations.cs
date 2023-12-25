@@ -26,6 +26,7 @@ namespace ALBAITAR_Softvet.Dialogs
         public Vaccinations()
         {
             InitializeComponent();
+            dataGridView1.AutoGenerateColumns = false;
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -34,7 +35,23 @@ namespace ALBAITAR_Softvet.Dialogs
         }
         private void Load_Data()
         {
-            Main_Frm.Main_Frm_vaccination = PreConnection.Load_data("SELECT *,"
+            Main_Frm.Main_Frm_vaccination = PreConnection.Load_data("SELECT *," +
+                "(concat(EVERY_DAY_NB ,' ',"
++ "CASE "
++ "WHEN EVERY_MOUNTH_NB = 1 THEN 'Janvier'"
++ "WHEN EVERY_MOUNTH_NB = 2 THEN 'Février'"
++ "WHEN EVERY_MOUNTH_NB = 3 THEN 'Mars'"
++ "WHEN EVERY_MOUNTH_NB = 4 THEN 'Avril'"
++ "WHEN EVERY_MOUNTH_NB = 5 THEN 'Mai'"
++ "WHEN EVERY_MOUNTH_NB = 6 THEN 'Juin'"
++ "WHEN EVERY_MOUNTH_NB = 7 THEN 'Juillet'"
++ "WHEN EVERY_MOUNTH_NB = 8 THEN 'Aout'"
++ "WHEN EVERY_MOUNTH_NB = 9 THEN 'Séptembre'"
++ "WHEN EVERY_MOUNTH_NB = 10 THEN 'Octobre'"
++ "WHEN EVERY_MOUNTH_NB = 11 THEN 'Novembre'"
++ "WHEN EVERY_MOUNTH_NB = 12 THEN 'Décembre' "       
++ "ELSE ''"
++ "  END)) AS EVERY_TXT,"
 + "     IF("
 + "         FIXED_DATE >= CURRENT_DATE, "
 + "         FIXED_DATE,"
@@ -57,6 +74,7 @@ namespace ALBAITAR_Softvet.Dialogs
 + "     ) AS NEXT_DATE "
 + " FROM tb_vaccin ORDER BY NEXT_DATE;");
 
+            Main_Frm.Main_Frm_vaccination.Columns.Cast<DataColumn>().ToList().ForEach(R => Debug.WriteLine(">>>>>>>> " + R.ColumnName));
             dataGridView1.DataSource = Main_Frm.Main_Frm_vaccination;
             apply_filter();
         }

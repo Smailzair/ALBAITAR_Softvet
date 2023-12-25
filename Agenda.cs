@@ -665,7 +665,7 @@ namespace ALBAITAR_Softvet.Resources
             foreach (Control vw in ((FlowLayoutPanel)sender).Controls.OfType<ListView>())
             {
                 //  vw.Width = (((FlowLayoutPanel)sender).Width - 9);
-                vw.Height = (((FlowLayoutPanel)sender).Height - 60) / 5;
+                vw.Height = (((FlowLayoutPanel)sender).Height - 60) / 6;
                 vw.Width = (((FlowLayoutPanel)sender).Width - 6);
             }
             label2.Width = label3.Width = label4.Width = label5.Width = label6.Width = label7.Width = label8.Width = (((FlowLayoutPanel)sender).Width - 6);
