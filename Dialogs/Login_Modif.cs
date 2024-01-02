@@ -99,7 +99,7 @@ namespace ALBAITAR_Softvet
                 {
                     restart_requir = Properties.Settings.Default.Last_login_user_idx == (int)dataGridView1.SelectedRows[0].Cells["ID"].Value;
                     //---------
-                    PreConnection.Excut_Cmd(2, "tb_login_and_users", new List<string> { "USER_NME", "USER_FAMNME", "SEX", "PASSWORD", "FUNCT", "IS_ADMIN", "QUESTION", "ANSWER", "EMAIL", "CNI_NUM", "ANV_NUM" }, new List<object> {
+                    PreConnection.Excut_Cmd(2, "tb_login_and_users", new List<string> { "USER_NME", "USER_FAMNME", "SEX", "PASSWORD", "FUNCTION", "IS_ADMIN", "QUESTION", "ANSWER", "EMAIL", "CNI_NUM", "ANV_NUM" }, new List<object> {
                     textBox1.Text,
                     textBox5.Text,
                     radioButton4.Checked ? "M" : "F",
@@ -134,7 +134,7 @@ namespace ALBAITAR_Softvet
                         "USER_FAMNME",
                         "SEX",
                         "PASSWORD",
-                        "FUNCT",
+                        "FUNCTION",
                         "IS_ADMIN",
                         "QUESTION",
                         "ANSWER",
@@ -247,7 +247,7 @@ namespace ALBAITAR_Softvet
                     textBox7.Text = dataGridView1.SelectedRows[0].Cells["ANV_NUM"].Value.ToString();
                     radioButton1.Checked = was_admin = (SByte)dataGridView1.SelectedRows[0].Cells["IS_ADMIN"].Value == 1;
                     radioButton3.Checked = dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString() == "F";
-                    comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCT"].Value.ToString();
+                    comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCTION"].Value.ToString();
                     button4.Enabled = radioButton1.Enabled = radioButton2.Enabled = dataGridView1.Rows.Count > 1;
                     //--------------
                     In_Modif_Mod = true;
@@ -268,7 +268,7 @@ namespace ALBAITAR_Softvet
                         textBox7.Text = dataGridView1.SelectedRows[0].Cells["ANV_NUM"].Value.ToString();
                         radioButton1.Checked = was_admin = (SByte)dataGridView1.SelectedRows[0].Cells["IS_ADMIN"].Value == 1;
                         radioButton3.Checked = dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString() == "F";
-                        comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCT"].Value.ToString();
+                        comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCTION"].Value.ToString();
                         radioButton1.Enabled = radioButton2.Enabled = false;
                         //--------------
                         In_Modif_Mod = true;
@@ -305,7 +305,7 @@ namespace ALBAITAR_Softvet
                         textBox7.Text = dataGridView1.SelectedRows[0].Cells["ANV_NUM"].Value.ToString();
                         radioButton1.Checked = was_admin = (SByte)dataGridView1.SelectedRows[0].Cells["IS_ADMIN"].Value == 1;
                         radioButton3.Checked = dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString() == "F";
-                        comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCT"].Value.ToString();
+                        comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["FUNCTION"].Value.ToString();
                         radioButton1.Enabled = radioButton2.Enabled = false;
                         //--------------
                         In_Modif_Mod = true;
