@@ -244,14 +244,16 @@ namespace ALBAITAR_Softvet.Resources
 
         private void load_prods(bool is_insert)
         {
-            int prec_select = 0;
+            int prec_select_id = 0;
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                prec_select = dataGridView1.SelectedRows[0].Index;
+                prec_select_id = (int)dataGridView1.SelectedRows[0].Cells["ID"].Value;
             }
             Products = PreConnection.Load_data("SELECT * FROM tb_produits;");
+            string dgv1_sortby_col_nme = dataGridView1.SortedColumn != null ? dataGridView1.SortedColumn.Name : "NME";
             dataGridView1.DataSource = Products;
             dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+            dataGridView1.Sort(dataGridView1.Columns[dgv1_sortby_col_nme], System.ComponentModel.ListSortDirection.Ascending);
             dataGridView1.ClearSelection();
             if (is_insert)
             {
@@ -271,9 +273,9 @@ namespace ALBAITAR_Softvet.Resources
             }
             else
             {
-                if (dataGridView1.Rows.Count > prec_select)
+                if (dataGridView1.Rows.Cast<DataGridViewRow>().Where(P => (int)P.Cells["ID"].Value == prec_select_id).Count() > 0)
                 {
-                    dataGridView1.Rows[prec_select].Selected = true;
+                    dataGridView1.Rows.Cast<DataGridViewRow>().Where(P => (int)P.Cells["ID"].Value == prec_select_id).First().Selected = true;
                 }
                 else if (dataGridView1.Rows.Count > 0)
                 {
@@ -403,10 +405,14 @@ namespace ALBAITAR_Softvet.Resources
         {
             if (dataGridView1.Rows.Count > 0)
             {
-                if (dataGridView1.Rows[e.RowIndex].Selected)
+                if(e.RowIndex > -1)
                 {
-                    dataGridView1_SelectionChanged(null, null);
+                    if (dataGridView1.Rows[e.RowIndex].Selected)
+                    {
+                        dataGridView1_SelectionChanged(null, null);
+                    }
                 }
+                
             }
 
         }
@@ -491,7 +497,7 @@ namespace ALBAITAR_Softvet.Resources
                         //-----------------------------------
                         dateTimePicker1.Value = (DateTime)dataGridView2.SelectedRows[0].Cells["OP_DATE"].Value; //OP_DATE
                         comboBox1.SelectedItem = (string)rw["CATEGOR"] == "--" ? "- Autre -" : rw["CATEGOR"];
-                        bool ttt = (int)comboBox3.SelectedValue == (int)rw["ID"];
+                        bool ttt = comboBox3.SelectedValue != null ? ((int)comboBox3.SelectedValue == (int)rw["ID"]) : false;
                         comboBox3.SelectedValue = (int)rw["ID"];
                         if (ttt)
                         {
