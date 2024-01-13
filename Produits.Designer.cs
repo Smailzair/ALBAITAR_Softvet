@@ -37,6 +37,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CATEGOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ALERT_MIN_ON = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QNT_MIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REVIENT_PRTICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VENTE_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TMP_FIRST_INSERT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -106,16 +116,6 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CATEGOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ALERT_MIN_ON = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QNT_MIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.REVIENT_PRTICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VENTE_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TMP_FIRST_INSERT_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -182,6 +182,88 @@
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // CODE
+            // 
+            this.CODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CODE.DataPropertyName = "CODE";
+            this.CODE.HeaderText = "Code";
+            this.CODE.Name = "CODE";
+            this.CODE.ReadOnly = true;
+            this.CODE.Width = 62;
+            // 
+            // NME
+            // 
+            this.NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NME.DataPropertyName = "NME";
+            this.NME.HeaderText = "Nom";
+            this.NME.Name = "NME";
+            this.NME.ReadOnly = true;
+            // 
+            // CATEGOR
+            // 
+            this.CATEGOR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CATEGOR.DataPropertyName = "CATEGOR";
+            this.CATEGOR.HeaderText = "Catégorie";
+            this.CATEGOR.Name = "CATEGOR";
+            this.CATEGOR.ReadOnly = true;
+            this.CATEGOR.Width = 85;
+            // 
+            // QNT
+            // 
+            this.QNT.DataPropertyName = "QNT";
+            this.QNT.HeaderText = "Quantité";
+            this.QNT.Name = "QNT";
+            this.QNT.ReadOnly = true;
+            this.QNT.Visible = false;
+            // 
+            // ALERT_MIN_ON
+            // 
+            this.ALERT_MIN_ON.DataPropertyName = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.HeaderText = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.Name = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.ReadOnly = true;
+            this.ALERT_MIN_ON.Visible = false;
+            // 
+            // QNT_MIN
+            // 
+            this.QNT_MIN.DataPropertyName = "QNT_MIN";
+            this.QNT_MIN.HeaderText = "Quantité Min";
+            this.QNT_MIN.Name = "QNT_MIN";
+            this.QNT_MIN.ReadOnly = true;
+            this.QNT_MIN.Visible = false;
+            // 
+            // REVIENT_PRTICE
+            // 
+            this.REVIENT_PRTICE.DataPropertyName = "REVIENT_PRTICE";
+            this.REVIENT_PRTICE.HeaderText = "Prix de revient";
+            this.REVIENT_PRTICE.Name = "REVIENT_PRTICE";
+            this.REVIENT_PRTICE.ReadOnly = true;
+            this.REVIENT_PRTICE.Visible = false;
+            // 
+            // VENTE_PRICE
+            // 
+            this.VENTE_PRICE.DataPropertyName = "VENTE_PRICE";
+            this.VENTE_PRICE.HeaderText = "Prix de vente";
+            this.VENTE_PRICE.Name = "VENTE_PRICE";
+            this.VENTE_PRICE.ReadOnly = true;
+            this.VENTE_PRICE.Visible = false;
+            // 
+            // TMP_FIRST_INSERT_DATE
+            // 
+            this.TMP_FIRST_INSERT_DATE.DataPropertyName = "TMP_FIRST_INSERT_DATE";
+            this.TMP_FIRST_INSERT_DATE.HeaderText = "TMP_FIRST_INSERT_DATE";
+            this.TMP_FIRST_INSERT_DATE.Name = "TMP_FIRST_INSERT_DATE";
+            this.TMP_FIRST_INSERT_DATE.ReadOnly = true;
+            this.TMP_FIRST_INSERT_DATE.Visible = false;
             // 
             // button5
             // 
@@ -341,7 +423,7 @@
             this.label6.ForeColor = System.Drawing.Color.DarkGoldenrod;
             this.label6.Location = new System.Drawing.Point(65, 116);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 16);
+            this.label6.Size = new System.Drawing.Size(62, 16);
             this.label6.TabIndex = 35;
             this.label6.Text = "Minimum !";
             this.toolTip1.SetToolTip(this.label6, "Par rapport au solde actuel des mouvements de ce produit");
@@ -354,7 +436,7 @@
             this.label25.ForeColor = System.Drawing.Color.DarkGoldenrod;
             this.label25.Location = new System.Drawing.Point(371, 83);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(63, 16);
+            this.label25.Size = new System.Drawing.Size(62, 16);
             this.label25.TabIndex = 42;
             this.label25.Text = "Minimum !";
             this.toolTip1.SetToolTip(this.label25, "Par rapport au solde actuel des mouvements de ce produit");
@@ -366,7 +448,7 @@
             this.label2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(53, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 16);
+            this.label2.Size = new System.Drawing.Size(44, 16);
             this.label2.TabIndex = 5;
             this.label2.Text = "Code :";
             // 
@@ -398,7 +480,7 @@
             this.label3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(59, 60);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 16);
+            this.label3.Size = new System.Drawing.Size(38, 16);
             this.label3.TabIndex = 7;
             this.label3.Text = "Nom :";
             // 
@@ -457,7 +539,7 @@
             this.label24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label24.Location = new System.Drawing.Point(10, 30);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(39, 32);
+            this.label24.Size = new System.Drawing.Size(38, 32);
             this.label24.TabIndex = 34;
             this.label24.Text = "Existe\r\nDéja !";
             this.label24.Visible = false;
@@ -482,7 +564,7 @@
             this.label13.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(10, 5);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(88, 16);
+            this.label13.Size = new System.Drawing.Size(87, 16);
             this.label13.TabIndex = 31;
             this.label13.Text = "Date d\'achat :";
             // 
@@ -513,7 +595,7 @@
             this.checkBox1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox1.Location = new System.Drawing.Point(33, 141);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(164, 20);
+            this.checkBox1.Size = new System.Drawing.Size(163, 20);
             this.checkBox1.TabIndex = 29;
             this.checkBox1.Text = "Alerte quantité minimum :";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -551,7 +633,7 @@
             this.label8.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(133, 116);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 16);
+            this.label8.Size = new System.Drawing.Size(62, 16);
             this.label8.TabIndex = 17;
             this.label8.Text = "Quantité :";
             // 
@@ -561,7 +643,7 @@
             this.label4.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(30, 87);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 16);
+            this.label4.Size = new System.Drawing.Size(67, 16);
             this.label4.TabIndex = 9;
             this.label4.Text = "Catégorie :";
             // 
@@ -571,7 +653,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDown3.DecimalPlaces = 2;
             this.numericUpDown3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown3.Location = new System.Drawing.Point(154, 195);
+            this.numericUpDown3.Location = new System.Drawing.Point(177, 195);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             -727379968,
             232,
@@ -579,7 +661,7 @@
             0});
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.numericUpDown3.Size = new System.Drawing.Size(168, 21);
+            this.numericUpDown3.Size = new System.Drawing.Size(145, 21);
             this.numericUpDown3.TabIndex = 16;
             this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown3.ThousandsSeparator = true;
@@ -614,21 +696,21 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(39, 197);
+            this.label7.Location = new System.Drawing.Point(10, 197);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(110, 16);
+            this.label7.Size = new System.Drawing.Size(161, 16);
             this.label7.TabIndex = 15;
-            this.label7.Text = "Prix de vente (HT) :";
+            this.label7.Text = "Prix (Unitaire) de vente (HT) :";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(58, 170);
+            this.label5.Location = new System.Drawing.Point(29, 170);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 16);
+            this.label5.Size = new System.Drawing.Size(142, 16);
             this.label5.TabIndex = 11;
-            this.label5.Text = "Prix de revient :";
+            this.label5.Text = "Prix (Unitaire) de revient :";
             // 
             // numericUpDown1
             // 
@@ -636,7 +718,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDown1.DecimalPlaces = 2;
             this.numericUpDown1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(154, 168);
+            this.numericUpDown1.Location = new System.Drawing.Point(177, 168);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             -727379968,
             232,
@@ -644,7 +726,7 @@
             0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.numericUpDown1.Size = new System.Drawing.Size(168, 21);
+            this.numericUpDown1.Size = new System.Drawing.Size(145, 21);
             this.numericUpDown1.TabIndex = 12;
             this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDown1.ThousandsSeparator = true;
@@ -704,7 +786,7 @@
             this.label22.ForeColor = System.Drawing.Color.Maroon;
             this.label22.Location = new System.Drawing.Point(283, 484);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(62, 16);
+            this.label22.Size = new System.Drawing.Size(61, 16);
             this.label22.TabIndex = 39;
             this.label22.Text = "Sortant (-)";
             // 
@@ -715,7 +797,7 @@
             this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label23.Location = new System.Drawing.Point(193, 484);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(64, 16);
+            this.label23.Size = new System.Drawing.Size(63, 16);
             this.label23.TabIndex = 38;
             this.label23.Text = "Entrant (+)";
             // 
@@ -785,7 +867,7 @@
             this.label20.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.Location = new System.Drawing.Point(76, 66);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(16, 16);
+            this.label20.Size = new System.Drawing.Size(15, 16);
             this.label20.TabIndex = 40;
             this.label20.Text = "--";
             // 
@@ -796,7 +878,7 @@
             this.label17.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(32, 38);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(39, 16);
+            this.label17.Size = new System.Drawing.Size(38, 16);
             this.label17.TabIndex = 39;
             this.label17.Text = "Nom :";
             // 
@@ -821,7 +903,7 @@
             this.label9.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(479, 59);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(109, 16);
+            this.label9.Size = new System.Drawing.Size(108, 16);
             this.label9.TabIndex = 18;
             this.label9.Text = "Quantité Actuelle :";
             // 
@@ -843,7 +925,7 @@
             this.label16.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(26, 65);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(45, 16);
+            this.label16.Size = new System.Drawing.Size(44, 16);
             this.label16.TabIndex = 37;
             this.label16.Text = "Code :";
             // 
@@ -880,7 +962,7 @@
             this.label15.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(3, 8);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(68, 16);
+            this.label15.Size = new System.Drawing.Size(67, 16);
             this.label15.TabIndex = 34;
             this.label15.Text = "Catégorie :";
             // 
@@ -913,7 +995,7 @@
             this.label12.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(239, 27);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(73, 16);
+            this.label12.Size = new System.Drawing.Size(72, 16);
             this.label12.TabIndex = 35;
             this.label12.Text = "Déscription :";
             // 
@@ -924,7 +1006,7 @@
             this.label11.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(274, 106);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 16);
+            this.label11.Size = new System.Drawing.Size(40, 16);
             this.label11.TabIndex = 20;
             this.label11.Text = "Date :";
             // 
@@ -1045,7 +1127,7 @@
             this.OP_DATE.HeaderText = "Date";
             this.OP_DATE.Name = "OP_DATE";
             this.OP_DATE.ReadOnly = true;
-            this.OP_DATE.Width = 59;
+            this.OP_DATE.Width = 58;
             // 
             // PROD_ID
             // 
@@ -1062,7 +1144,7 @@
             this.CODE2.HeaderText = "Code";
             this.CODE2.Name = "CODE2";
             this.CODE2.ReadOnly = true;
-            this.CODE2.Width = 63;
+            this.CODE2.Width = 62;
             // 
             // NME2
             // 
@@ -1071,7 +1153,7 @@
             this.NME2.HeaderText = "Nom";
             this.NME2.Name = "NME2";
             this.NME2.ReadOnly = true;
-            this.NME2.Width = 57;
+            this.NME2.Width = 56;
             // 
             // OBSERV
             // 
@@ -1091,7 +1173,7 @@
             this.QNT2.HeaderText = "Qnt.";
             this.QNT2.Name = "QNT2";
             this.QNT2.ReadOnly = true;
-            this.QNT2.Width = 56;
+            this.QNT2.Width = 55;
             // 
             // SLD
             // 
@@ -1107,7 +1189,7 @@
             this.label1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(22, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 16);
+            this.label1.Size = new System.Drawing.Size(28, 16);
             this.label1.TabIndex = 32;
             this.label1.Text = "De :";
             // 
@@ -1130,7 +1212,7 @@
             this.radioButton1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton1.Location = new System.Drawing.Point(71, 21);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(95, 20);
+            this.radioButton1.Size = new System.Drawing.Size(94, 20);
             this.radioButton1.TabIndex = 28;
             this.radioButton1.Text = "Tous produits";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -1155,88 +1237,6 @@
             this.label19.Size = new System.Drawing.Size(136, 15);
             this.label19.TabIndex = 35;
             this.label19.Text = "Mouvement (Quantité) : ";
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // CODE
-            // 
-            this.CODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CODE.DataPropertyName = "CODE";
-            this.CODE.HeaderText = "Code";
-            this.CODE.Name = "CODE";
-            this.CODE.ReadOnly = true;
-            this.CODE.Width = 63;
-            // 
-            // NME
-            // 
-            this.NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NME.DataPropertyName = "NME";
-            this.NME.HeaderText = "Nom";
-            this.NME.Name = "NME";
-            this.NME.ReadOnly = true;
-            // 
-            // CATEGOR
-            // 
-            this.CATEGOR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CATEGOR.DataPropertyName = "CATEGOR";
-            this.CATEGOR.HeaderText = "Catégorie";
-            this.CATEGOR.Name = "CATEGOR";
-            this.CATEGOR.ReadOnly = true;
-            this.CATEGOR.Width = 86;
-            // 
-            // QNT
-            // 
-            this.QNT.DataPropertyName = "QNT";
-            this.QNT.HeaderText = "Quantité";
-            this.QNT.Name = "QNT";
-            this.QNT.ReadOnly = true;
-            this.QNT.Visible = false;
-            // 
-            // ALERT_MIN_ON
-            // 
-            this.ALERT_MIN_ON.DataPropertyName = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.HeaderText = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.Name = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.ReadOnly = true;
-            this.ALERT_MIN_ON.Visible = false;
-            // 
-            // QNT_MIN
-            // 
-            this.QNT_MIN.DataPropertyName = "QNT_MIN";
-            this.QNT_MIN.HeaderText = "Quantité Min";
-            this.QNT_MIN.Name = "QNT_MIN";
-            this.QNT_MIN.ReadOnly = true;
-            this.QNT_MIN.Visible = false;
-            // 
-            // REVIENT_PRTICE
-            // 
-            this.REVIENT_PRTICE.DataPropertyName = "REVIENT_PRTICE";
-            this.REVIENT_PRTICE.HeaderText = "Prix de revient";
-            this.REVIENT_PRTICE.Name = "REVIENT_PRTICE";
-            this.REVIENT_PRTICE.ReadOnly = true;
-            this.REVIENT_PRTICE.Visible = false;
-            // 
-            // VENTE_PRICE
-            // 
-            this.VENTE_PRICE.DataPropertyName = "VENTE_PRICE";
-            this.VENTE_PRICE.HeaderText = "Prix de vente";
-            this.VENTE_PRICE.Name = "VENTE_PRICE";
-            this.VENTE_PRICE.ReadOnly = true;
-            this.VENTE_PRICE.Visible = false;
-            // 
-            // TMP_FIRST_INSERT_DATE
-            // 
-            this.TMP_FIRST_INSERT_DATE.DataPropertyName = "TMP_FIRST_INSERT_DATE";
-            this.TMP_FIRST_INSERT_DATE.HeaderText = "TMP_FIRST_INSERT_DATE";
-            this.TMP_FIRST_INSERT_DATE.Name = "TMP_FIRST_INSERT_DATE";
-            this.TMP_FIRST_INSERT_DATE.ReadOnly = true;
-            this.TMP_FIRST_INSERT_DATE.Visible = false;
             // 
             // Produits
             // 

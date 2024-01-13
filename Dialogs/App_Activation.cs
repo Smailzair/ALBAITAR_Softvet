@@ -26,26 +26,27 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void App_Activation_Load(object sender, EventArgs e)
         {
-            Application.OpenForms["Splash"]?.Close();
-            //--------------------
-            label8.Text = PreConnection.generate_ID_of_client();
-            label9.Text = Environment.MachineName;
-            label7.Text = Environment.UserName;
-            textBox1.Validating -= textBox1_Validating;
-            textBox1.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email);
-            textBox1.Validating += textBox1_Validating;
-            textBox5.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Tel);
-            textBox6.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Nme);
-            string cmd_dent_dte = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Command_dmnd_date);
+            
+               Application.OpenForms["Splash"]?.Close();
+                //--------------------
+                label8.Text = PreConnection.generate_ID_of_client();
+                label9.Text = Environment.MachineName;
+                label7.Text = Environment.UserName;
+                textBox1.Validating -= textBox1_Validating;
+                textBox1.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email);
+                textBox1.Validating += textBox1_Validating;
+                textBox5.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Tel);
+                textBox6.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Nme);
+                string cmd_dent_dte = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Command_dmnd_date);
 
-            bool fff = DateTime.TryParse(cmd_dent_dte, out DateTime dd);
-            if (fff)
-            {
-                label17.Visible = true;
-                label17.Text = "Demande envoyée le : " + DateTime.Parse(cmd_dent_dte).ToString("dd/MM/yyyy");
-            }
-            //-----------------------
-            string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
+                bool fff = DateTime.TryParse(cmd_dent_dte, out DateTime dd);
+                if (fff)
+                {
+                    label17.Visible = true;
+                    label17.Text = "Demande envoyée le : " + DateTime.Parse(cmd_dent_dte).ToString("dd/MM/yyyy");
+                }
+                //-----------------------
+                string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
             if (PreConnection.Verif_Activation_SOftVet(codd))
             {
                 label6.Text = codd.Substring(0, 3) + "***************" + codd.Substring(23, 2);
@@ -89,6 +90,8 @@ namespace ALBAITAR_Softvet.Dialogs
 
 
             }
+            
+
         }
 
         public bool IsEmailValid(string email)
@@ -258,7 +261,7 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             if (ready)
             {
-                if (label8.Text.Length == 29)
+                if (label8.Text.Length > 0)
                 {
                     label11.Visible = true;
                     label11.Refresh();

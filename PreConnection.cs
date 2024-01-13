@@ -18,6 +18,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
+//using Xamarin.Forms.Internals;
 using Excc = Microsoft.Office.Interop.Excel;
 using Label = System.Windows.Forms.Label;
 using Rectangle = System.Drawing.Rectangle;

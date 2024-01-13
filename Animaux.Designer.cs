@@ -40,9 +40,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
@@ -251,15 +251,6 @@
             this.splitContainer1.TabIndex = 0;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(148, 86);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(14, 13);
-            this.panel3.TabIndex = 43;
-            // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
@@ -286,6 +277,15 @@
             this.groupBox3.Size = new System.Drawing.Size(267, 108);
             this.groupBox3.TabIndex = 44;
             this.groupBox3.TabStop = false;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Location = new System.Drawing.Point(148, 86);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(14, 13);
+            this.panel3.TabIndex = 43;
             // 
             // radioButton2
             // 
@@ -1280,10 +1280,10 @@
             // 
             this.tabPage3.Controls.Add(this.Poid_Panel);
             this.tabPage3.Controls.Add(this.label30);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(556, 556);
+            this.tabPage3.Size = new System.Drawing.Size(556, 553);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "His. Poids";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1296,7 +1296,7 @@
             this.Poid_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Poid_Panel.Location = new System.Drawing.Point(3, 3);
             this.Poid_Panel.Name = "Poid_Panel";
-            this.Poid_Panel.Size = new System.Drawing.Size(550, 550);
+            this.Poid_Panel.Size = new System.Drawing.Size(550, 547);
             this.Poid_Panel.TabIndex = 2;
             this.Poid_Panel.Visible = false;
             // 
@@ -1354,7 +1354,7 @@
             this.dataGridView3.Location = new System.Drawing.Point(3, 4);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.Size = new System.Drawing.Size(544, 541);
+            this.dataGridView3.Size = new System.Drawing.Size(544, 538);
             this.dataGridView3.TabIndex = 0;
             this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
             this.dataGridView3.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView3_CellFormatting);

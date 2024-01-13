@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
+//using Xamarin.Forms.Internals;
 //using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Excc = Microsoft.Office.Interop.Excel;
 

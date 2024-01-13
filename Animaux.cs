@@ -407,7 +407,7 @@ namespace ALBAITAR_Softvet.Resources
                              (V["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)V["ESTIM_END_DATE"] >= DateTime.Now : true));
 
                             if (FFF.Any()) { filtred_maladies_tbl = FFF.CopyToDataTable(); }
-                            
+
                         }
                         else
                         {
@@ -493,7 +493,7 @@ namespace ALBAITAR_Softvet.Resources
 
                 }
 
-                
+
                 iddx = iddx.Length > 0 ? iddx.Substring(1) : string.Empty;
 
                 if (iddx.Length > 0)
@@ -645,40 +645,21 @@ checkBox1.Checked,
                                 varrs.Add(DBNull.Value);
                             }
                             PreConnection.Excut_Cmd(2, "tb_animaux", Cols, varrs, "ID = @ID", new List<string> { "ID" }, new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
-
-                            //================================== OLD CODE !! ==========================================================================================================
-                            //byte[] imageData = File.Exists(openFileDialog1.FileName) ? File.ReadAllBytes(openFileDialog1.FileName) : null;
-                            //string insert_cmnd = "UPDATE `tb_animaux` SET "
-                            //        + "`DATE_ADDED` = '" + dateTimePicker3.Value.Date.ToString("yyyy-MM-dd") + "',"
-                            //        + "`NME` = '" + textBox3.Text.Replace("'", "''") + "',"
-                            //        + "`NUM_IDENTIF` = '" + textBox2.Text.Replace("'", "''") + "',"
-                            //        + "`NUM_PASSPORT` = '" + textBox4.Text.Replace("'", "''") + "',"
-                            //        + "`CLIENT_ID` = " + comboBox1.SelectedValue + ","
-                            //        + "`ESPECE` = '" + comboBox2.Text.Replace("'", "''") + "',"
-                            //        + "`RACE` = '" + comboBox3.Text.Replace("'", "''") + "',"
-                            //        + "`SEXE` = '" + comboBox4.Text.Replace("'", "''") + "',"
-                            //        + "`NISS_DATE` = " + (checkBox2.Checked ? ("'" + dateTimePicker1.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
-                            //        + "`ROBE` = '" + textBox6.Text.Replace("'", "''") + "',"
-                            //        + "`OBSERVATIONS` = '" + textBox8.Text.Replace("'", "''") + "',"
-                            //        + "`IS_RADIATED` = " + (checkBox1.Checked ? "TRUE" : "FALSE") + ","
-                            //        + "`RADIATION_DATE` = " + (checkBox1.Checked ? ("'" + dateTimePicker2.Value.Date.ToString("yyyy-MM-dd") + "'") : "NULL") + ","
-                            //        + "`RADIATION_CAUSES` = '" + (checkBox1.Checked ? textBox5.Text.Replace("'", "''") : "") + "'"
-                            //        + (File.Exists(openFileDialog1.FileName) ? ",`PICTURE` = @Pic" : (!button7.Visible ? ",`PICTURE` = NULL" : ""))
-                            //        + " WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";";
-                            //MySqlCommand cmd = new MySqlCommand(insert_cmnd, PreConnection.mySqlConnection);
-                            //if (File.Exists(openFileDialog1.FileName)) { cmd.Parameters.AddWithValue("@Pic", imageData); }
-                            //PreConnection.open_conn();
-                            //cmd.ExecuteNonQuery();
-                            //============================================================================================================================================
                         }
                         //----------------
                         Load_anims_from_DB();
                         ((Main_Frm)Application.OpenForms["Main_Frm"]).refresh_main_tables();
+                        if (ID_to_selectt > -2)
+                        {
+                            BringToFront();
+                        }
+                        else
+                        {
+                            Close();
+                        }
+
                     }
                 }
-
-
-
             }
             else
             {
@@ -1672,7 +1653,27 @@ richTextBox1.Text
             prev_col_idx_dgv3 = dataGridView3.CurrentCell.ColumnIndex;
             if (prev_col_idx_dgv3 == dataGridView3.Columns["DATETIMEE"].Index)
             {
-                dateTimePicker5.Value = dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value != DBNull.Value ? DateTime.Parse(dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value.ToString()) : DateTime.Now;
+                //if(dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"] != null)
+                //{
+                //    if(dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value != DBNull.Value)
+                //    {
+                //        Debug.WriteLine("=====================================" + dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value);
+                //        dateTimePicker5.Value = DateTime.Parse(dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value.ToString());
+                //    }
+                //    else
+                //    {
+                //        dateTimePicker5.Value = DateTime.Now;
+                //    }
+                //}
+                //else
+                //{
+                //    dateTimePicker5.Value = DateTime.Now;
+                //}
+                dateTimePicker5.Value = dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value != null ? (dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value != DBNull.Value ? DateTime.Parse(dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value.ToString()) : DateTime.Now) : DateTime.Now;
+                //DateTime dtt = DateTime.Now;
+
+                //DateTime.TryParse((dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value != null ? dataGridView3.Rows[prev_rw_idx_dgv3].Cells["DATETIMEE"].Value : DateTime.Now).ToString(), out dtt);
+                //dateTimePicker5.Value = dtt;
                 dataGridView3.CurrentCell.Style.Padding = new Padding(0);
                 dateTimePicker5.Visible = true;
                 dateTimePicker5.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.Y + dataGridView3.Location.Y);
@@ -1764,16 +1765,38 @@ richTextBox1.Text
 
         private void dataGridView3_Scroll(object sender, ScrollEventArgs e)
         {
-            if (prev_col_idx_dgv3 == dataGridView3.Columns["DATETIMEE"].Index)
+            if (dataGridView3.Rows.Count > 1)
             {
-                dateTimePicker5.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.Y + dataGridView3.Location.Y);
-                dateTimePicker5.Visible = prev_rw_idx_dgv3 >= dataGridView3.FirstDisplayedScrollingRowIndex && prev_rw_idx_dgv3 < (dataGridView3.FirstDisplayedScrollingRowIndex + dataGridView3.DisplayedRowCount(false));
+                if (prev_col_idx_dgv3 == dataGridView3.Columns["DATETIMEE"].Index)
+                {
+                    dateTimePicker5.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.Y + dataGridView3.Location.Y);
+                    dateTimePicker5.Visible = prev_rw_idx_dgv3 >= dataGridView3.FirstDisplayedScrollingRowIndex && prev_rw_idx_dgv3 < (dataGridView3.FirstDisplayedScrollingRowIndex + dataGridView3.DisplayedRowCount(false));
+                }
+                else if (prev_col_idx_dgv3 == dataGridView3.Columns["POIDS"].Index)
+                {
+                    bool goo = true;
+                    if (dataGridView3.CurrentCell != null)
+                    {
+                        goo &= dataGridView3.CurrentCell.ColumnIndex == prev_col_idx_dgv3;
+                    }
+
+                    if (goo)
+                    {
+                        numericUpDown1.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.Y + dataGridView3.Location.Y);
+                        numericUpDown1.Visible = prev_rw_idx_dgv3 >= dataGridView3.FirstDisplayedScrollingRowIndex && prev_rw_idx_dgv3 < (dataGridView3.FirstDisplayedScrollingRowIndex + dataGridView3.DisplayedRowCount(false));
+                    }
+
+                }
             }
-            else if (prev_col_idx_dgv3 == dataGridView3.Columns["POIDS"].Index && dataGridView3.CurrentCell.ColumnIndex == prev_col_idx_dgv3)
+            else
             {
-                numericUpDown1.Location = new Point(dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.X + dataGridView3.Location.X, dataGridView3.GetCellDisplayRectangle(prev_col_idx_dgv3, prev_rw_idx_dgv3, false).Location.Y + dataGridView3.Location.Y);
-                numericUpDown1.Visible = prev_rw_idx_dgv3 >= dataGridView3.FirstDisplayedScrollingRowIndex && prev_rw_idx_dgv3 < (dataGridView3.FirstDisplayedScrollingRowIndex + dataGridView3.DisplayedRowCount(false));
+                prev_rw_idx_dgv3 = prev_col_idx_dgv3 = -1;
+                dateTimePicker5.Visible = numericUpDown1.Visible = false;
+                dateTimePicker5.Value = DateTime.Now;
+                numericUpDown1.Value = 0;
             }
+
+
         }
 
 
@@ -1935,7 +1958,7 @@ richTextBox1.Text
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            dataGridView1.Rows[e.RowIndex].HeaderCell.Style.BackColor = dataGridView1.Rows[e.RowIndex].HeaderCell.Style.SelectionBackColor = 
+            dataGridView1.Rows[e.RowIndex].HeaderCell.Style.BackColor = dataGridView1.Rows[e.RowIndex].HeaderCell.Style.SelectionBackColor =
                 maladies_tbl.Rows.Cast<DataRow>().Where(F => (int)F["ANIM_ID"] == (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value && (F["START_DATE"] != DBNull.Value ? (DateTime)F["START_DATE"] <= DateTime.Now : true) &&
                             (F["ESTIM_END_DATE"] != DBNull.Value ? (DateTime)F["ESTIM_END_DATE"] >= DateTime.Now : true)).ToList().Count > 0 ? panel3.BackColor : Color.White;
         }

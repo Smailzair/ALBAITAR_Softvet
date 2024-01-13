@@ -56,6 +56,7 @@ namespace ALBAITAR_Softvet.Resources
             comboBox1.DataSource = comboBox2.DataSource = clients;
             comboBox1.DisplayMember = comboBox2.DisplayMember = "FULL_NME";
             comboBox1.ValueMember = comboBox2.ValueMember = "ID";
+            if(comboBox1.Items.Count > 0) { comboBox1.SelectedIndex = 0; groupBox3.Enabled = true; }
             //----------------------
             if (stock_to_modify.Columns.Count == 0)
             {
@@ -682,7 +683,7 @@ namespace ALBAITAR_Softvet.Resources
               .Sum(row => Convert.ToDecimal(row.Cells["TOTAL_TTC"].Value));
                 label21.Text = "Total : ";
             }
-            label21.Text += sum.ToString("# ##0.00");
+            label21.Text = "Total : " + sum.ToString("# ##0.00");
             //----------------------
             if (dataGridView1.SelectedRows.Count > 0)
             {
@@ -842,7 +843,6 @@ namespace ALBAITAR_Softvet.Resources
             {
                 Transf_also_caisse = MessageBox.Show("Voulez-vous rendre le montant " + ((decimal)Selected_facture_old_infos.Rows[0]["SLD_REG_FAC"]).ToString("N2") + " DA au " + dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value + " -qu'il a payé precedement- ?", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
             }
-
             if (comboBox1.SelectedValue != null)
             {
                 groupBox3.Enabled = int.TryParse(comboBox1.SelectedValue.ToString(), out int yy) ? (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text).ToList().Count > 0 ? true : false) : false;
@@ -1185,4 +1185,3 @@ namespace ALBAITAR_Softvet.Resources
         }
     }
 }
-
