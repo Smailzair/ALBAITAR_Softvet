@@ -693,20 +693,22 @@ namespace ALBAITAR_Softvet.Resources
                 //if (dataGridView2.Rows[e.RowIndex].Cells["CLIENT_ID"].Value == DBNull.Value) //INSERT
                 if (dataGridView2.Rows[e.RowIndex].IsNewRow) //INSERT
                 {
+
                     PreConnection.Excut_Cmd(1, "tb_clients_finance", new List<string> {
                         "CLIENT_ID",
                         "OP_DATE",
                         "OBJECT",
                         "DEBIT",
                         "CREDIT" },
-                        new List<object>
-                    {
+                    new List<object>
+                {
                         dataGridView1.SelectedRows[0].Cells["ID"].Value,
-                        dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value : DateTime.Now,
-                        dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value : DBNull.Value,
-                        dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : 0,
-                        dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : 0
-                    }, null, null, null);
+                        (dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value != null && dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value != DBNull.Value) ? dataGridView2.Rows[e.RowIndex].Cells["OP_DATE"].Value : DateTime.Now,
+                        (dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value != null && dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value != DBNull.Value)? dataGridView2.Rows[e.RowIndex].Cells["OBJECT"].Value : DBNull.Value,
+                        (dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != null && dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value != DBNull.Value)? dataGridView2.Rows[e.RowIndex].Cells["DEBIT"].Value : 0,
+                        (dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != null && dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value != DBNull.Value)? dataGridView2.Rows[e.RowIndex].Cells["CREDIT"].Value : 0
+                }, null, null, null);
+
                 }
                 else //UPDATE
                 {
