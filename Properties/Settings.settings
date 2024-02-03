@@ -44,7 +44,7 @@
       <Value Profile="(Default)">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\DB_TMP.accdb</Value>
     </Setting>
     <Setting Name="Main_Frm_Tabs_Horientation_Is_Verticatl" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Connection_String_IP_Or_LocalHost" Type="System.String" Scope="User">
       <Value Profile="(Default)">localhost</Value>
