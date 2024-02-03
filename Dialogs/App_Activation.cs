@@ -26,27 +26,27 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void App_Activation_Load(object sender, EventArgs e)
         {
-            
-               Application.OpenForms["Splash"]?.Close();
-                //--------------------
-                label8.Text = PreConnection.generate_ID_of_client();
-                label9.Text = Environment.MachineName;
-                label7.Text = Environment.UserName;
-                textBox1.Validating -= textBox1_Validating;
-                textBox1.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email);
-                textBox1.Validating += textBox1_Validating;
-                textBox5.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Tel);
-                textBox6.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Nme);
-                string cmd_dent_dte = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Command_dmnd_date);
 
-                bool fff = DateTime.TryParse(cmd_dent_dte, out DateTime dd);
-                if (fff)
-                {
-                    label17.Visible = true;
-                    label17.Text = "Demande envoyée le : " + DateTime.Parse(cmd_dent_dte).ToString("dd/MM/yyyy");
-                }
-                //-----------------------
-                string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
+            Application.OpenForms["Splash"]?.Close();
+            //--------------------
+            label8.Text = PreConnection.generate_ID_of_client();
+            label9.Text = Environment.MachineName;
+            label7.Text = Environment.UserName;
+            textBox1.Validating -= textBox1_Validating;
+            textBox1.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email);
+            textBox1.Validating += textBox1_Validating;
+            textBox5.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Tel);
+            textBox6.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Nme);
+            string cmd_dent_dte = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Command_dmnd_date);
+
+            bool fff = DateTime.TryParse(cmd_dent_dte, out DateTime dd);
+            if (fff)
+            {
+                label17.Visible = true;
+                label17.Text = "Demande envoyée le : " + DateTime.Parse(cmd_dent_dte).ToString("dd/MM/yyyy");
+            }
+            //-----------------------
+            string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
             if (PreConnection.Verif_Activation_SOftVet(codd))
             {
                 label6.Text = codd.Substring(0, 3) + "***************" + codd.Substring(23, 2);
@@ -90,7 +90,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
 
             }
-            
+
 
         }
 
@@ -140,7 +140,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     //------------------------
                     DataTable dt = new DataTable();
                     MySqlCommand cmd = new MySqlCommand("SELECT VAL FROM SETTINGS WHERE NME = 'EMAIL_TO_RECIEVE_COMMANDS';", albaitar_online);
-                    if(albaitar_online.State != ConnectionState.Open)
+                    if (albaitar_online.State != ConnectionState.Open)
                     {
                         albaitar_online.Open();
                     }
@@ -274,7 +274,8 @@ namespace ALBAITAR_Softvet.Dialogs
                         "'" + textBox1.Text.Replace("'", "''") + "'," + //CLIENT_EMAL
                         "'" + textBox5.Text.Replace("'", "''") + "'," + //CLIENT_TEL
                         "'" + textBox6.Text.Replace("'", "''") + "'," + //CLIENT_NME
-                        "'" + textBox3.Text.Replace("'", "''") + "');", albaitar_online); //ACTIAVATE_CODe
+                        "'" + textBox3.Text.Replace("'", "''") + "');" + //ACTIVAT_CODE
+                        " CALL InsertAndUpdateMOUVEMENTS('" + textBox1.Text.Replace("'", "''") + "', '" + textBox3.Text.Replace("'", "''") + "');", albaitar_online);
                     if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
                     try { command.ExecuteNonQuery(); } catch { }
                     albaitar_online.Close();
