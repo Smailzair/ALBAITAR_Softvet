@@ -378,6 +378,7 @@ namespace ALBAITAR_Softvet.Resources
                         Columns_vals.Add(row.Cells["PRIX_UNIT"].Value);
                     }
 
+
                     PreConnection.Excut_Cmd(1, "tb_factures_vente", Columns, Columns_vals, null, null, null);
 
                     //-------Caisse (INSERT)----------                    

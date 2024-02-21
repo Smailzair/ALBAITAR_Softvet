@@ -187,24 +187,31 @@ namespace ALBAITAR_Softvet
             int rows_nb = 0;
             open_conn();
 
+            Debug.WriteLine(">>>>>>>>>>>>>>> CMD = " + cmmd);
             try
             {
                 using (MySqlCommand command = new MySqlCommand(cmmd, mySqlConnection))
                 {
                     if (Columns_names != null && col_values != null)
                     {
-                        
+                        Debug.WriteLine(">>>>>>>>>>>>>>> ---------------------- COLS ----------------------- ");
                         for (int i = 0; i < Columns_names.Count; i++)
                         {
+                            
                             string col_nme = Regex.Replace(Columns_names[i], pattern, "");
+
+                            Debug.WriteLine(">>> " + "@i" + i.ToString() + "_" + col_nme + " ||||| " + col_values[i]);
                             command.Parameters.AddWithValue("@i" + i.ToString() + "_" + col_nme, col_values[i]);
                         }
                     }
                     
+
                     if (where_columns != null && where_values != null)
                     {
+                        Debug.WriteLine(">>>>>>>>>>>>>>> ---------------------- WHERE ----------------------- ");
                         for (int i = 0; i < where_columns.Count; i++)
                         {
+                            Debug.WriteLine(">>> " + where_columns[i] + " ||||| " + where_values[i]);
                             command.Parameters.AddWithValue(where_columns[i], where_values[i]);
                         }
                     }
