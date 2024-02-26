@@ -304,7 +304,8 @@ namespace ALBAITAR_Softvet.Labo
                     string dq = "";
                     dataGridView22.SelectedRows.Cast<DataGridViewRow>().ForEach(row => { dq += "," + row.Cells["ID"].Value; });
                     dq = dq.Substring(1, dq.Length - 1);
-                    PreConnection.Excut_Cmd(3, "tb_labo_autre", null, null, "ID IN (@P_ID)",new List<string> { "P_ID"},new List<object> { dq} );
+                    //PreConnection.Excut_Cmd(3, "tb_labo_autre", null, null, "ID IN (@P_ID)",new List<string> { "P_ID"},new List<object> { dq} );
+                    PreConnection.Excut_Cmd_personnel("DELETE FROM tb_labo_autre WHERE ID IN (" + dq + ")", null, null);
                     //--------
                     Laboratoire.labo = PreConnection.Load_data(Laboratoire.labo_load_cmd);
                     Laboratoire.make_historic_refesh = true;

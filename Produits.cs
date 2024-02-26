@@ -431,8 +431,8 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (MessageBox.Show("Êtes-vous sûr de supprimer ces [" + cnt + "] produits ?\n\nAttention :\nTous les dépôts concernés seront supprimés.", "Confirmation :", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
-                    //PreConnection.Excut_Cmd("DELETE FROM tb_produits WHERE `ID` IN (" + ids_to_delete + ");");
-                    PreConnection.Excut_Cmd(3, "tb_produits", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { ids_to_delete });
+                    PreConnection.Excut_Cmd_personnel("DELETE FROM tb_produits WHERE `ID` IN (" + ids_to_delete + ")",null,null);
+                    //PreConnection.Excut_Cmd(3, "tb_produits", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { ids_to_delete });
                     load_prods(false);
                     load_stocks(false);
                 }
@@ -453,7 +453,7 @@ namespace ALBAITAR_Softvet.Resources
                 if ((string)row.Cells["OBSERV"].Value != "Achat (Premier Stock)") //DON'T DELETE FIRST MOUV !!
                 {
                     cntt++;
-                    ids_to_delette += "," + row.Cells["ID2"].Value;
+                    ids_to_delette += ", " + row.Cells["ID2"].Value;
                 }
             });
             ids_to_delette = cntt > 0 ? ids_to_delette.Substring(1, ids_to_delette.Length - 1) : "";
@@ -461,8 +461,8 @@ namespace ALBAITAR_Softvet.Resources
             {
                 if (MessageBox.Show("Êtes-vous sûr de supprimer ces [" + cntt + "] Mouvements ?", "Confirmation :", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    //PreConnection.Excut_Cmd("DELETE FROM tb_stock_mouv WHERE `ID` IN (" + ids_to_delette + ");");
-                    PreConnection.Excut_Cmd(3, "tb_stock_mouv", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { ids_to_delette });
+                    PreConnection.Excut_Cmd_personnel("DELETE FROM tb_stock_mouv WHERE `ID` IN (" + ids_to_delette + ")",null,null);
+                    //PreConnection.Excut_Cmd(3, "tb_stock_mouv", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { ids_to_delette });
                     load_stocks(false);
                 }
             }

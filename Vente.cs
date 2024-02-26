@@ -34,6 +34,8 @@ namespace ALBAITAR_Softvet.Resources
         bool Transf_also_caisse = false;
         static public int tmp_current_client_id = -1;
         bool has_asked_for_Transf_also_caisse = false;
+        //-------------
+        bool autoriz_filtr = true;
 
         public Vente(int to_select_id)
         {
@@ -56,7 +58,7 @@ namespace ALBAITAR_Softvet.Resources
             comboBox1.DataSource = comboBox2.DataSource = clients;
             comboBox1.DisplayMember = comboBox2.DisplayMember = "FULL_NME";
             comboBox1.ValueMember = comboBox2.ValueMember = "ID";
-            if(comboBox1.Items.Count > 0) { comboBox1.SelectedIndex = 0; groupBox3.Enabled = true; }
+            if (comboBox1.Items.Count > 0) { comboBox1.SelectedIndex = 0; groupBox3.Enabled = true; }
             //----------------------
             if (stock_to_modify.Columns.Count == 0)
             {
@@ -254,9 +256,10 @@ namespace ALBAITAR_Softvet.Resources
             load_factures();
         }
 
-        private void load_factures()
+        private void load_factures(bool select_new_id = false)
         {
             int prev_idx = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : -1;
+
             //factures = PreConnection.Load_data("SELECT `ID`,`DATE`,`CLIENT_ID`,`CLIENT_FULL_NME`,`REF`,`TVA_PERC`,`DROIT_TIMBRE`,`TOTAL_HT`,`TOTAL_TTC`,`LAST_MODIF_BY` FROM tb_factures_vente;");
             factures = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`DATE`,tb1.`CLIENT_ID`,tb1.`CLIENT_FULL_NME`,tb1.`REF`,tb1.`TVA_PERC`,tb1.`DROIT_TIMBRE`,tb1.`TOTAL_HT`,tb1.`TOTAL_TTC`,tb1.`LAST_MODIF_BY`,tb2.`SLD` FROM tb_factures_vente tb1 LEFT JOIN (SELECT `FACT_NUM`,SUM(COALESCE(DEBIT, 0)) - SUM(COALESCE(CREDIT, 0)) AS SLD,CLIENT_ID FROM tb_clients_finance GROUP BY FACT_NUM,CLIENT_ID) tb2 ON tb1.REF = tb2.FACT_NUM AND tb1.CLIENT_ID = tb2.CLIENT_ID;");
             dataGridView1.DataSource = factures;
@@ -273,22 +276,38 @@ namespace ALBAITAR_Softvet.Resources
                 });
                 to_select_idx = -1;
             }
-            else if (to_select_idx == 2)
+            else if (to_select_idx == -2)
             {
                 button3.PerformClick();
                 to_select_idx = -1;
             }
-            else if (prev_idx > -1 && dataGridView1.Rows.Count > prev_idx)
+            else if (select_new_id)
             {
-
                 dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
                 dataGridView1.ClearSelection();
                 dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
-                dataGridView1.Rows[prev_idx].Selected = true;
 
+                int newest_id = factures.Rows.Count > 0 ? factures.Rows.Cast<DataRow>()
+                                .Where(row => row["ID"] != DBNull.Value)
+                                .Select(row => Convert.ToInt32(row["ID"]))
+                                .Max()
+                                : -1;
 
+                dataGridView1.Rows.Cast<DataGridViewRow>().Where(Q => int.Parse(Q.Cells["ID"].Value != null ? Q.Cells["ID"].Value.ToString() : "-1") == newest_id).ToList().ForEach(W =>
+                    {
+                        W.Selected = true;
+                        dataGridView1.FirstDisplayedScrollingRowIndex = W.Index;
+                    });
             }
+            else if (prev_idx > -1 && dataGridView1.Rows.Count > prev_idx)
+            {
+                dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
+                dataGridView1.ClearSelection();
+                dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
 
+                dataGridView1.Rows[prev_idx].Selected = true;
+            }
+            //----------
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -601,7 +620,7 @@ namespace ALBAITAR_Softvet.Resources
                     }
                 }
                 //-------------
-                load_factures();
+                load_factures(Is_New);
             }
             else if (msg_txt.Length > 0)
             {
@@ -661,7 +680,7 @@ namespace ALBAITAR_Softvet.Resources
             }
             if (comboBox1.SelectedValue != null)
             {
-                groupBox3.Enabled = int.TryParse(comboBox1.SelectedValue.ToString(), out int yy) ? (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text).ToList().Count > 0 ? true : false) : false;
+                groupBox3.Enabled = int.TryParse(comboBox1.SelectedValue.ToString(), out int yy) && (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text).ToList().Count > 0 ? true : false);
             }
             else
             {
@@ -703,7 +722,8 @@ namespace ALBAITAR_Softvet.Resources
                 labos_to_update_fact_num = new List<string>();
                 comboBox1.SelectedValue = DBNull.Value;
                 //-------------------
-                Selected_facture_old_infos = PreConnection.Load_data("SELECT tb1.*,tb2.SLD_REG_FAC FROM tb_factures_vente tb1 LEFT JOIN (SELECT `FACT_NUM`,`CREDIT` AS SLD_REG_FAC FROM tb_clients_finance) tb2 ON tb2.`FACT_NUM` LIKE tb1.`REF` WHERE `ID` = " + dataGridView1.SelectedRows[0].Cells["ID"].Value + ";");
+                int idd = dataGridView1.SelectedRows[0].Cells["ID"].Value != null ? (int)dataGridView1.SelectedRows[0].Cells["ID"].Value : -1;
+                Selected_facture_old_infos = PreConnection.Load_data("SELECT tb1.*,tb2.SLD_REG_FAC FROM tb_factures_vente tb1 LEFT JOIN (SELECT `FACT_NUM`,`CREDIT` AS SLD_REG_FAC FROM tb_clients_finance) tb2 ON tb2.`FACT_NUM` LIKE tb1.`REF` WHERE `ID` = " + idd + ";");
                 if (Selected_facture_old_infos != null)
                 {
                     if (Selected_facture_old_infos.Rows.Count > 0)
@@ -761,7 +781,7 @@ namespace ALBAITAR_Softvet.Resources
                 //---------------------------
                 if (comboBox1.SelectedValue != null)
                 {
-                    groupBox3.Enabled = int.TryParse(comboBox1.SelectedValue.ToString(), out int yy) ? (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text).ToList().Count > 0 ? true : false) : false;
+                    groupBox3.Enabled = int.TryParse(comboBox1.SelectedValue.ToString(), out int yy) && (clients.Rows.Cast<DataRow>().Where(ww => (int)ww["ID"] == (int)comboBox1.SelectedValue && ww["FULL_NME"].ToString() == comboBox1.Text).ToList().Count > 0 ? true : false);
                 }
                 else
                 {
@@ -790,6 +810,7 @@ namespace ALBAITAR_Softvet.Resources
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
+                dataGridView1.SelectionChanged -= dataGridView1_SelectionChanged;
                 if (MessageBox.Show("Êtes-vous sûr de supprimer (" + dataGridView1.SelectedRows.Count + ") factures ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     string idx = "";
@@ -802,13 +823,12 @@ namespace ALBAITAR_Softvet.Resources
                         string cmd_tmp = "";
                         for (int f = 1; f < 71; f++)
                         {
-
                             //cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_NME',`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_PROD_CODE',SUM(`ITEM_QNT_" + (f < 10 ? "0" : "") + f + "`) AS 'ITEM_QNT' FROM tb_factures_vente WHERE `ID` IN ("+idx+") AND `ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f + "` AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ";
                             cmd_tmp += "SELECT `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_NME',`ITEM_PROD_CODE_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_PROD_CODE',`ITEM_QNT_" + (f < 10 ? "0" : "") + f + "` AS 'ITEM_QNT' FROM tb_factures_vente WHERE `ID` IN (" + idx + ") AND `ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f + "` AND `ITEM_NME_" + (f < 10 ? "0" : "") + f + "` IS NOT NULL UNION ALL ";
                         }
                         cmd_tmp += ";";
                         cmd_tmp = cmd_tmp.Replace(" UNION ALL ;", "");
-                        DataTable codes = PreConnection.Load_data("SELECT  tb1.ITEM_NME,SUM(tb1.ITEM_QNT) AS ITEM_QNT, PROD.`ID` AS 'PROD_ID' FROM (" + cmd_tmp + ") AS tb1 LEFT JOIN tb_produits AS PROD ON PROD.CODE = tb1.ITEM_PROD_CODE WHERE tb1.ITEM_NME IS NOT NULL AND PROD.`ID` IS NOT NULL GROUP BY tb1.ITEM_NME,PROD.`ID`;");
+                        DataTable codes = PreConnection.Load_data("SELECT tb1.ITEM_NME,SUM(tb1.ITEM_QNT) AS ITEM_QNT, PROD.`ID` AS 'PROD_ID' FROM (" + cmd_tmp + ") AS tb1 LEFT JOIN tb_produits AS PROD ON PROD.CODE = tb1.ITEM_PROD_CODE WHERE tb1.ITEM_NME IS NOT NULL AND PROD.`ID` IS NOT NULL GROUP BY tb1.ITEM_NME,PROD.`ID`;");
 
                         //RESULT COLUMNS >>> : ITEM_NME / ITEM_QNT / PROD_ID
                         foreach (DataRow row in codes.Rows)
@@ -829,9 +849,11 @@ namespace ALBAITAR_Softvet.Resources
                         }
                     }
                     //-------
-                    PreConnection.Excut_Cmd(3, "tb_factures_vente", null, null, "ID IN (@IDD)", new List<string> { "@IDD" }, new List<object> { idx });
-                    //PreConnection.Excut_Cmd("DELETE FROM tb_factures_vente WHERE ID IN (" + idx + ")");
+                    //PreConnection.Excut_Cmd(3, "tb_factures_vente", null, null, "ID IN (@IDD)", new List<string> { "@IDD" }, new List<object> { idx });
+                    PreConnection.Excut_Cmd_personnel("DELETE FROM tb_factures_vente WHERE ID IN (" + idx + ")", null, null);
+                    dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
                     load_factures();
+
                 }
             }
 
@@ -1114,7 +1136,8 @@ namespace ALBAITAR_Softvet.Resources
                         "CONVERT(TOTAL_TTC, 'System.String') LIKE '{0}' OR " +
                         "CONVERT(LAST_MODIF_BY, 'System.String') LIKE '%{0}%')", textBox1.Text.Replace("'", "''"));
                 }
-                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
+
+                    ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
             }
             //-----------
             decimal sum = 0;
@@ -1131,7 +1154,7 @@ namespace ALBAITAR_Softvet.Resources
                 label21.Text = "Total : ";
             }
             label21.Text += sum.ToString("# ##0.00");
-            //----------------------
+            ////----------------------
         }
 
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
@@ -1144,12 +1167,19 @@ namespace ALBAITAR_Softvet.Resources
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            factures_filtr();
+            if (comboBox2.Enabled)
+            {
+                factures_filtr();
+            }
         }
 
         private void comboBox2_TextUpdate(object sender, EventArgs e)
         {
-            factures_filtr();
+            if (comboBox2.Enabled)
+            {
+                factures_filtr();
+            }
+            
         }
 
         private void dataGridView1_DataSourceChanged(object sender, EventArgs e)
@@ -1177,12 +1207,26 @@ namespace ALBAITAR_Softvet.Resources
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            factures_filtr();
+            if (comboBox3.Enabled)
+            {
+                factures_filtr();
+            }
+            
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
             factures_filtr();
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+            //try
+            //{
+            //    dataGridView1.Rows[e.RowIndex].Visible = false;
+            //}
+            //catch { }
         }
     }
 }

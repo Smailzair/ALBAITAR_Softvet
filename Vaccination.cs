@@ -239,7 +239,8 @@ namespace ALBAITAR_Softvet
                     string idds = "";
                     dataGridView1.SelectedRows.Cast<DataGridViewRow>().ForEach(row => { idds += "," + row.Cells["ID"].Value.ToString(); });
                     idds = idds.Substring(1);
-                    PreConnection.Excut_Cmd(3, "tb_vaccin", null, null, "ID IN (@IDDs)", new List<string> { "IDDs" }, new List<object> { idds });
+                    //PreConnection.Excut_Cmd(3, "tb_vaccin", null, null, "ID IN (@IDDs)", new List<string> { "IDDs" }, new List<object> { idds });
+                    PreConnection.Excut_Cmd_personnel("DELETE FROM tb_vaccin WHERE ID IN (" + idds + ")", null, null);
                     Load_Data();
                     Vaccinations.theres_changes = true;
                 }

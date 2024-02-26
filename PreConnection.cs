@@ -177,7 +177,7 @@ namespace ALBAITAR_Softvet
                 if (where_expression != null) { if (where_expression.Length > 0) { cmmd += " WHERE " + where_expression; } }
                 cmmd += ";";
             }
-            else //DELETE
+            else //DELETE ------>> BE CAREFULL !! THERE'S PROBLEME OF CASTING WHERE VALUE (EXP: ..IN (12,13) It SEE IT AS DOUBLE NOT TWO INTEGERS) SO BEST TO USE VOID OF 'Excut_Cmd_personnel' WITHOUT PARAMS (ALL IN CMD TEXT), THAT'S ALL GENERALLY WHILE USING 'IN'.
             {
                 cmmd += "DELETE FROM " + Table_nme;
                 if (where_expression != null) { if (where_expression.Length > 0) { cmmd += " WHERE " + where_expression; } }
@@ -198,20 +198,20 @@ namespace ALBAITAR_Softvet
                             command.Parameters.AddWithValue("@i" + i.ToString() + "_" + col_nme, col_values[i]);
                         }
                     }
-                    
 
                     if (where_columns != null && where_values != null)
                     {
                         for (int i = 0; i < where_columns.Count; i++)
                         {
-                            command.Parameters.AddWithValue(where_columns[i], where_values[i]);
+                            command.Parameters.AddWithValue(where_columns[i], where_values[i].ToString());
                         }
                     }
+
                     rows_nb = command.ExecuteNonQuery();
                 }
 
             }
-            catch{ }
+            catch { }
             close_conn();
             return rows_nb;
         }
