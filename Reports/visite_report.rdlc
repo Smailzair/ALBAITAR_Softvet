@@ -1246,6 +1246,39 @@
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
+            <Textbox Name="PRIOR3">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=IIF(Right(Parameters!CLIENT_ADRESS.Value, 2) = vbCrLf, 
+     Left(Parameters!CLIENT_ADRESS.Value, Len(Parameters!CLIENT_ADRESS.Value) - 2), 
+     Parameters!CLIENT_ADRESS.Value)</Value>
+                      <Style>
+                        <FontFamily>Century Gothic</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>PRIOR1</rd:DefaultName>
+              <Top>1.52018cm</Top>
+              <Left>13.1682cm</Left>
+              <Height>0.86458cm</Height>
+              <Width>6.9491cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
             <Image Name="Image1">
               <Source>Embedded</Source>
               <Value>Layer11copy</Value>
@@ -1254,6 +1287,7 @@
               <Left>0.33854cm</Left>
               <Height>2.95231cm</Height>
               <Width>3.47896cm</Width>
+              <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1303,7 +1337,7 @@
               <Left>4.10311cm</Left>
               <Height>1.38162cm</Height>
               <Width>16.01419cm</Width>
-              <ZIndex>1</ZIndex>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1339,7 +1373,7 @@
               <Left>4.10311cm</Left>
               <Height>0.6cm</Height>
               <Width>0.99185cm</Width>
-              <ZIndex>2</ZIndex>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1372,7 +1406,7 @@
               <Left>5.09496cm</Left>
               <Height>0.6cm</Height>
               <Width>6.27cm</Width>
-              <ZIndex>3</ZIndex>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1408,7 +1442,7 @@
               <Left>4.10311cm</Left>
               <Height>0.6cm</Height>
               <Width>1.49456cm</Width>
-              <ZIndex>4</ZIndex>
+              <ZIndex>5</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1441,39 +1475,6 @@
               <Left>5.59767cm</Left>
               <Height>0.6cm</Height>
               <Width>7.2225cm</Width>
-              <ZIndex>5</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="PRIOR3">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=Parameters!CLIENT_ADRESS.Value</Value>
-                      <Style>
-                        <FontFamily>Century Gothic</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>PRIOR1</rd:DefaultName>
-              <Top>1.52018cm</Top>
-              <Left>13.1682cm</Left>
-              <Height>0.6cm</Height>
-              <Width>6.9491cm</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
@@ -1492,7 +1493,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Parameters!CLIENT_CITY.Value &amp; " - " &amp; Parameters!CLIENT_WILAYA.Value</Value>
+                      <Value>=Trim(Parameters!CLIENT_CITY.Value &amp; " - " &amp; Parameters!CLIENT_WILAYA.Value)</Value>
                       <Style>
                         <FontFamily>Century Gothic</FontFamily>
                         <FontSize>8pt</FontSize>
@@ -1642,9 +1643,9 @@
               </Paragraphs>
               <rd:DefaultName>PRIOR1</rd:DefaultName>
               <Top>2.82cm</Top>
-              <Left>13.34459cm</Left>
-              <Height>0.6cm</Height>
-              <Width>6.77271cm</Width>
+              <Left>13.1682cm</Left>
+              <Height>0.56472cm</Height>
+              <Width>6.9491cm</Width>
               <ZIndex>11</ZIndex>
               <Style>
                 <Border>

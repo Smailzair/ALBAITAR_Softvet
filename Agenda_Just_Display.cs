@@ -362,7 +362,6 @@ namespace ALBAITAR_Softvet
                 + ")" : "");
 
 
-            Debug.WriteLine(">>>>>>>>>>>>>>> fltr = " + fltr);
             tmp_infos.DefaultView.RowFilter = fltr;
             
             //-------------------------------------------
