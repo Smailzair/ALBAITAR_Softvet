@@ -406,7 +406,7 @@ namespace ALBAITAR_Softvet.Resources
                         PreConnection.Excut_Cmd(1, "tb_clients_finance", new List<string> { "CLIENT_ID", "OP_DATE", "OBJECT", "DEBIT", "CREDIT", "FACT_NUM" }, new List<object>
                         {
                             comboBox1.SelectedValue,
-                                          dateTimePicker1.Value.ToString("yyyy-MM-dd"),
+                                          dateTimePicker1.Value.ToString("yyyy-MM-dd") + DateTime.Now.ToString(" HH:mm:ss"),
                                           "Droits de facture [FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text,
                                           dataGridView3.Rows[3].Cells[1].Value,
                                           Convert.ToDouble(numericUpDown2.Value),
@@ -476,6 +476,7 @@ namespace ALBAITAR_Softvet.Resources
                     PreConnection.Excut_Cmd(2, "tb_factures_vente", Columns, Columns_vals, "ID = @P_ID", new List<string> { "@P_ID" }, new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
                     //-------Caisse (UPDATE)----------
                     //RMQ : il y a un trigger MySQL pour modifier quelques infos.
+                    //-----------
                     bool ttm = comboBox1.SelectedValue == dataGridView1.SelectedRows[0].Cells["CLIENT_ID"].Value;
                     bool ttm2 = !ttm ? comboBox1.Text == (dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value != DBNull.Value ? (string)dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value : "") : ttm;
                     int cb1_selected_value = comboBox1.SelectedValue == null ? -1 : (comboBox1.SelectedValue == DBNull.Value ? -1 : (((comboBox1.SelectedValue == dataGridView1.SelectedRows[0].Cells["CLIENT_ID"].Value && comboBox1.Text == dataGridView1.SelectedRows[0].Cells["CLIENT_FULL_NME"].Value.ToString()) || (clients.AsEnumerable().Where(row => row.Field<int>("ID") == (int)comboBox1.SelectedValue && row.Field<string>("FULL_NME") == comboBox1.Text).Count() > 0)) ? (int)comboBox1.SelectedValue : -1));

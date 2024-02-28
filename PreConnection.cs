@@ -238,7 +238,7 @@ namespace ALBAITAR_Softvet
                 }
 
             }
-            catch (MySqlException excc) { Debug.WriteLine(">>>>>>>>>> EXECPTION : >>>>>>>>>> " + excc.Message); }
+            catch { }
             close_conn();
             return rows_nb;
         }
