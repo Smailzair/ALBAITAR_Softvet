@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -190,7 +191,7 @@ namespace ALBAITAR_Softvet.Dialogs
                 dataGridView1.DataSource = services2;
             }
             //------------------------------------------------------------
-            products = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`CODE`,tb1.`CATEGOR`,tb1.`NME`,tb1.`REVIENT_PRTICE`,tb1.`VENTE_PRICE`,tb2.SLD FROM tb_produits AS tb1 LEFT JOIN (SELECT `PROD_ID`,SUM(`QNT_IN`) - SUM(`QNT_OUT`) AS SLD FROM tb_stock_mouv GROUP BY `PROD_ID`) AS tb2 ON tb2.`PROD_ID` = tb1.`ID`;");
+            products = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`CODE`,tb1.`CATEGOR`,tb1.`NME`,tb1.`REVIENT_PRTICE`,tb1.`VENTE_PRICE`,tb1.`ALERT_MIN_ON`,tb1.`QNT_MIN`,tb2.SLD FROM tb_produits AS tb1 LEFT JOIN (SELECT `PROD_ID`,SUM(`QNT_IN`) - SUM(`QNT_OUT`) AS SLD FROM tb_stock_mouv GROUP BY `PROD_ID`) AS tb2 ON tb2.`PROD_ID` = tb1.`ID`;");
             try
             {
                 foreach (DataRow rww in Vente.stock_to_modify.Rows)
@@ -403,10 +404,20 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            string fltr = "CODE LIKE '%" + textBox3.Text + "%'";
+            string fltr = "";
+            if (radioButton4.Checked)
+            {
+                fltr += "[SLD] <= [QNT_MIN] AND (";
+            }
+            else if (radioButton5.Checked)
+            {
+                fltr += "[SLD] > [QNT_MIN] AND (";
+            }
+            fltr += "CODE LIKE '%" + textBox3.Text + "%'";
             fltr += " OR CATEGOR LIKE '%" + textBox3.Text + "%'";
             fltr += " OR NME LIKE '%" + textBox3.Text + "%'";
-            ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = fltr;
+            fltr += radioButton4.Checked || radioButton5.Checked ? ")" : "";
+            ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = String.Format(fltr, textBox1.Text.Replace("'", "''"));
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -508,10 +519,13 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             if (dataGridView2.Enabled && tabControl1.SelectedTab == tabPage2)
             {
+                label12.Visible = false;
                 if (dataGridView2.SelectedRows.Count > 0)
                 {
-                    label2.Text = string.Concat("[", dataGridView2.SelectedRows[0].Cells["CODE"].Value, "] - ", dataGridView2.SelectedRows[0].Cells["NME"].Value);
+                    label2.Text = string.Concat("[", dataGridView2.SelectedRows[0].Cells["CODE"].Value, "] - ", dataGridView2.SelectedRows[0].Cells["NME"].Value);                    
                     numericUpDown2.Value = (decimal)(dataGridView2.SelectedRows[0].Cells["VENTE_PRICE"].Value != DBNull.Value ? dataGridView2.SelectedRows[0].Cells["VENTE_PRICE"].Value : (dataGridView2.SelectedRows[0].Cells["REVIENT_PRTICE"].Value != DBNull.Value ? dataGridView2.SelectedRows[0].Cells["REVIENT_PRTICE"].Value : 0));
+
+                    numericUpDown1.Maximum = dataGridView2.SelectedRows[0].Cells["SLD"].Value != DBNull.Value ? (decimal)dataGridView2.SelectedRows[0].Cells["SLD"].Value : decimal.MaxValue;
                     prix_vente = (decimal)(dataGridView2.SelectedRows[0].Cells["VENTE_PRICE"].Value != DBNull.Value ? dataGridView2.SelectedRows[0].Cells["VENTE_PRICE"].Value : 0);
                     prix_achat = (decimal)(dataGridView2.SelectedRows[0].Cells["REVIENT_PRTICE"].Value != DBNull.Value ? dataGridView2.SelectedRows[0].Cells["REVIENT_PRTICE"].Value : 0);
                 }
@@ -520,14 +534,17 @@ namespace ALBAITAR_Softvet.Dialogs
                     prix_vente = prix_achat = 0;
                     label2.Text = "--";
                     numericUpDown2.Value = 0;
+                    numericUpDown1.Maximum = decimal.MaxValue;
                 }
+                numericUpDown1_ValueChanged(null,null);
             }
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {            
             numericUpDown2.Value = 0;
             numericUpDown1.BackColor = numericUpDown2.BackColor = textBox2.BackColor = SystemColors.Window;
+            label12.Visible = label13.Visible = false;
             checkBox1.Visible = tabControl1.SelectedTab == tabPage2;
             make_select();
         }
@@ -538,7 +555,7 @@ namespace ALBAITAR_Softvet.Dialogs
             all_ready &= label2.Text.Length > 0 && label2.Text != "--";
             all_ready &= numericUpDown1.Value > 0;
             all_ready &= numericUpDown2.Value > 0;
-            numericUpDown1.BackColor = numericUpDown1.Value > 0 ? SystemColors.Window : Color.LightCoral;
+            //numericUpDown1.BackColor = numericUpDown1.Value > 0 ? SystemColors.Window : Color.LightCoral;
             numericUpDown2.BackColor = numericUpDown2.Value > 0 ? SystemColors.Window : Color.LightCoral;
             textBox2.BackColor = radioButton1.Checked && textBox2.Text.Trim().Length == 0 ? Color.LightCoral : SystemColors.Window;
             if (tabControl1.SelectedTab == tabPage2 && dataGridView2.SelectedRows.Count > 0)
@@ -606,6 +623,10 @@ namespace ALBAITAR_Softvet.Dialogs
                             rw["PROD_ID"] = (int)dataGridView2.SelectedRows[0].Cells["ID"].Value;
                             rw["PROD_CODE"] = dataGridView2.SelectedRows[0].Cells["CODE"].Value.ToString();
                             rw["QNT_DIMIN"] = numericUpDown1.Value;
+                            rw["ALERT_EMPTY_ON"] = label12.Visible ? 1 : 0; //Empty stck
+                            rw["ALERT_MIN_ON"] = label13.Visible ? 1 : 0; //Minim Stck
+                            rw["PROD_FULL_NME"] = label2.Text;
+                            rw["SLD"] = (decimal)dataGridView2.SelectedRows[0].Cells["SLD"].Value - numericUpDown1.Value;
                             Vente.stock_to_modify.Rows.Add(rw);
                         }
 
@@ -687,6 +708,33 @@ namespace ALBAITAR_Softvet.Dialogs
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             numericUpDown1.BackColor = SystemColors.Window;
+            label12.Visible = label13.Visible = false;
+            //-----------------
+            if (tabControl1.SelectedTab == tabPage2 && checkBox1.Checked)//PRODUIT
+            {
+                if(dataGridView2.SelectedRows.Count > 0)
+                {
+                    decimal sld = (decimal)dataGridView2.SelectedRows[0].Cells["SLD"].Value - numericUpDown1.Value;
+                    if (sld <= (decimal)dataGridView2.SelectedRows[0].Cells["QNT_MIN"].Value)
+                    {
+                        numericUpDown1.Increment = (decimal)0.01;
+                        if (sld == 0)
+                        {
+                            numericUpDown1.BackColor = Color.LightCoral;
+                            label12.Visible = true;
+                        }
+                        else
+                        {
+                            label13.Visible = true;
+                            numericUpDown1.BackColor = Color.Moccasin;
+                        }
+                    }
+                    else
+                    {
+                        numericUpDown1.Increment = 1;
+                    }
+                }                
+            }                
             //-----------------
             decimal mnt = numericUpDown1.Value * numericUpDown2.Value;
             label7.Text = mnt.ToString("N2") + " DA";
@@ -718,6 +766,7 @@ namespace ALBAITAR_Softvet.Dialogs
                         checkBox1.CheckedChanged += checkBox1_CheckedChanged;
                     }
                 }
+                numericUpDown1_ValueChanged(null,null);
             }
             Properties.Settings.Default.Faire_consom_stock_apres_vente = checkBox1.Checked;
             Properties.Settings.Default.Save();
@@ -765,6 +814,79 @@ namespace ALBAITAR_Softvet.Dialogs
                 label2.Text = "--";
             }
 
+        }
+
+        private void checkBox1_VisibleChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Visible)
+            {
+                numericUpDown1_ValueChanged(null,null);
+            }
+        }
+
+        private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage2)
+            {
+                numericUpDown1.Enabled = numericUpDown2.Enabled = checkBox1.Enabled = button1.Enabled = dataGridView2.Rows.Count > 0; 
+            }
+            
+        }
+
+        private void dataGridView2_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage2)
+            {
+                numericUpDown1.Enabled = numericUpDown2.Enabled = checkBox1.Enabled = button1.Enabled = dataGridView2.Rows.Count > 0;
+            }
+        }
+
+        private void dataGridView2_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if ((decimal)dataGridView2.Rows[e.RowIndex].Cells["QNT_MIN"].Value >= (decimal)dataGridView2.Rows[e.RowIndex].Cells["SLD"].Value)
+            {
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView2.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.Yellow;
+            }
+            else
+            {
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView2.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.White;
+            }
+        }
+
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView2.Rows[e.RowIndex].Selected)
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+            }
+            else
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Regular);
+            }
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton3.Checked)
+            {
+                textBox3_TextChanged(null, null);
+            }
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton5.Checked)
+            {
+                textBox3_TextChanged(null, null);
+            }
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton4.Checked)
+            {
+                textBox3_TextChanged(null, null);
+            }
         }
     }
 }

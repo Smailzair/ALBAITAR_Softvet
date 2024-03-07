@@ -19,6 +19,7 @@ namespace ALBAITAR_Softvet.Resources
         static public int to_select_idx = -1;
         static public DataGridViewRow selected_item = null;
         static public DataTable stock_to_modify = new DataTable();
+        static public DataTable stock_became_minimum = new DataTable();
         static public List<int> visite_to_update_fact_num = new List<int>();
         static public List<string> labos_to_update_fact_num = new List<string>();
         //-------------
@@ -65,6 +66,11 @@ namespace ALBAITAR_Softvet.Resources
                 stock_to_modify.Columns.Add("PROD_ID", typeof(int));
                 stock_to_modify.Columns.Add("PROD_CODE", typeof(string));
                 stock_to_modify.Columns.Add("QNT_DIMIN", typeof(decimal));
+
+                stock_to_modify.Columns.Add("ALERT_EMPTY_ON", typeof(int));
+                stock_to_modify.Columns.Add("ALERT_MIN_ON", typeof(int));
+                stock_to_modify.Columns.Add("PROD_FULL_NME", typeof(string));
+                stock_to_modify.Columns.Add("SLD", typeof(decimal));
             }
             //----------------------------
             selected_item = new DataGridViewRow();
@@ -355,6 +361,8 @@ namespace ALBAITAR_Softvet.Resources
             //-----------------
             if (All_Ready)
             {
+                string stck_min_alert_msg = "";
+                string stck_empty_alert_msg = "";
                 if (Is_New) //INSERT
                 {
                     List<string> Columns = new List<string> {
@@ -616,7 +624,33 @@ namespace ALBAITAR_Softvet.Resources
                                             + "'Vente (Facture [" + ("FA_" + dateTimePicker2.Value.ToString("yyyy") + "_" + textBox2.Text.Replace("'", "''")) + "]) -" + (Is_New ? "Crée" : "Modifiée") + "-' "  //OBSERV
                                             + "WHERE (SELECT COUNT(`CODE`) FROM tb_produits WHERE `CODE` LIKE @PROD_CODE) > 0;"
                                             , new List<string> { "@OP_DATE", "@PROD_CODE" }, new List<object> { dateTimePicker1.Value, group.First()["PROD_CODE"] });
+
                         }
+                        //---------------------
+                        
+                        int alertEmptyOn = group.First().Field<int?>("ALERT_EMPTY_ON") ?? 0;
+                        if(alertEmptyOn == 1)
+                        {
+                            string fullNme = group.First().Field<string>("PROD_FULL_NME") ?? "";
+                            stck_empty_alert_msg += stck_empty_alert_msg.Length == 0 ? "Des produits de stock viérge :" : "";
+                            stck_empty_alert_msg += "\n- " + fullNme;
+                        }
+                        else
+                        {
+                            int alertMinOn = group.First().Field<int?>("ALERT_MIN_ON") ?? 0;
+                            if(alertMinOn == 1)
+                            {
+                                string fullNme = group.First().Field<string>("PROD_FULL_NME") ?? "";
+                                decimal qntSld = group.First().Field<decimal?>("SLD") ?? 0;
+                                stck_min_alert_msg += stck_min_alert_msg.Length == 0 ? "Des produits de stock minimum :" : "";
+                                stck_min_alert_msg += "\n- " + fullNme + " [Solde:"+ qntSld + "]";
+                            }
+                        }
+                    }
+                    
+                    if(!string.IsNullOrEmpty(stck_empty_alert_msg) || !string.IsNullOrEmpty(stck_min_alert_msg))
+                    {
+                        MessageBox.Show("Veuillez noter ces mises à jour importantes des stocks de produits :\n\n" + stck_empty_alert_msg + "\n\n" + stck_min_alert_msg,"Stock des produits :",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                     }
                 }
                 //-------------

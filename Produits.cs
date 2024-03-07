@@ -322,7 +322,6 @@ namespace ALBAITAR_Softvet.Resources
             dataGridView2.ClearSelection();
             dataGridView2.SelectionChanged += dataGridView2_SelectionChanged;
 
-            Debug.WriteLine(">>>>>>>>>>>>>>>> is_insert = " + is_insert);
 
             if (is_insert)
             {
@@ -331,12 +330,9 @@ namespace ALBAITAR_Softvet.Resources
                     var maxIdRow = dataGridView2.Rows.Cast<DataGridViewRow>()
                                     .OrderByDescending(r => Convert.ToInt32(r.Cells["ID2"].Value))
                                     .FirstOrDefault();
-
-
                     
                     if (maxIdRow != null)
                     {
-                        Debug.WriteLine(">>>>>>>>>>>>>>>> maxIdRow (NME2) = " + ((DataGridViewRow)maxIdRow).Cells["NME2"].Value);
                         maxIdRow.Selected = true;
                     }
 
@@ -756,6 +752,7 @@ namespace ALBAITAR_Softvet.Resources
                 bool ready = true;
                 ready &= comboBox3.SelectedValue != null && comboBox3.Text.Trim().Length > 0;
                 ready &= numericUpDown2.BackColor != Color.LightCoral;
+                ready &= numericUpDown2.Value != 0;
                 //double mnnt = 0.00;
                 //double.TryParse(numericUpDown2.Text.Trim().Replace(" ", ""), out mnnt);
                 //ready &= mnnt != 0;
@@ -825,6 +822,7 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         rww["SLD"] = decimal.Parse(label10.Text);
                     }
+                    Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>> rww[\"SLD\"] = " + rww["SLD"]);
                     dataGridView1.Refresh();
                     //--------------------------
                     load_stocks(Is_New_Stock);
@@ -835,6 +833,11 @@ namespace ALBAITAR_Softvet.Resources
                     }
                     //----------------------------
                     
+                }else if(numericUpDown2.Value == 0)
+                {
+                    MessageBox.Show("Veuillez entrer une quantité valide.\n(0.00 non accepté)", "Champs requis :",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    numericUpDown2.Focus();
+                    numericUpDown2.Select(0,4);
                 }
             }
             else
@@ -944,13 +947,15 @@ namespace ALBAITAR_Softvet.Resources
                 if (radioButton4.Checked)
                 {
                     fltr += "[SLD] <= [QNT_MIN] AND (";
+                }else if (radioButton5.Checked)
+                {
+                    fltr += "[SLD] > [QNT_MIN] AND (";
                 }
                 fltr += "Convert([CODE], System.String) LIKE '%{0}%'";
                 fltr += " OR Convert([NME], System.String) LIKE '%{0}%'";
                 fltr += " OR Convert([CATEGOR], System.String) LIKE '%{0}%'";
-                fltr += radioButton4.Checked ? ")" : "";
+                fltr += radioButton4.Checked || radioButton5.Checked ? ")" : "";
 
-                Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>> fltr = " + fltr);
                 ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = String.Format(fltr, textBox1.Text.Replace("'", "''"));
             }
             
@@ -1078,9 +1083,27 @@ namespace ALBAITAR_Softvet.Resources
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-            textBox1_TextChanged(null, null);
+            if (radioButton3.Checked)
+            {
+                textBox1_TextChanged(null, null);
+            }
         }
 
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton4.Checked)
+            {
+                textBox1_TextChanged(null, null);
+            }
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton5.Checked)
+            {
+                textBox1_TextChanged(null, null);
+            }
+        }
     }
 }
 

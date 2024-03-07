@@ -748,7 +748,7 @@
             this.label6.Size = new System.Drawing.Size(123, 29);
             this.label6.TabIndex = 79;
             this.label6.Text = "Client non enregistré!";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label6.Visible = false;
             // 
             // button8
