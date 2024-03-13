@@ -1091,6 +1091,8 @@
     <None Include="Resources\Database Restore.png" />
     <None Include="Resources\Database Options.png" />
     <None Include="Resources\Delete Database.png" />
+    <None Include="Resources\icons8_slide_up_120px_2.png" />
+    <None Include="Resources\icons8_slide_up_down_30px.png" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
