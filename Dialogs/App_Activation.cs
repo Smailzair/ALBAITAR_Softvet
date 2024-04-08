@@ -1,5 +1,6 @@
 ﻿using MimeKit;
 using MySql.Data.MySqlClient;
+using ServiceStack;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -26,10 +27,10 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void App_Activation_Load(object sender, EventArgs e)
         {
-
             Application.OpenForms["Splash"]?.Close();
             //--------------------
-            label8.Text = PreConnection.generate_ID_of_client();
+            //label8.Text = PreConnection.generate_ID_of_client();
+            label8.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID);
             label9.Text = Environment.MachineName;
             label7.Text = Environment.UserName;
             textBox1.Validating -= textBox1_Validating;
@@ -47,7 +48,10 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             //-----------------------
             string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
-            if (PreConnection.Verif_Activation_SOftVet(codd))
+            //--------
+
+            //---------
+            if (Check_activation(codd, textBox6.Text))
             {
                 label6.Text = codd.Substring(0, 3) + "***************" + codd.Substring(23, 2);
                 panel4.Visible = true;
@@ -156,7 +160,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     Mssg.Body = new TextPart("plain")
                     {
                         Text = "======================================================\n" +
-                        " -<< AlBaitar SoftVet >>-  [ albaitar.technologie@gmail.com ]\n" +
+                        " -<< AlBaitar SoftVet >>-  [ "+ Albaitar_Email + " ]\n" +
                         "======================================================\n\n\n" +
                         "Une demande d'activation de logiciel 'ALBAITAR Softvet' :\n\n" +
                         "1)- Veuillez confirmer les informations. \n" +
@@ -165,7 +169,7 @@ namespace ALBAITAR_Softvet.Dialogs
                         "============================================\n\n" +
                         "Détails :\n" +
                         "-----------------\n" +
-                        "ID : " + label8.Text + "\n" +
+                        //"ID : " + label8.Text + "\n" +
                         "Email : " + textBox1.Text + "\n\n" +
                         "Nom Complet : " + textBox6.Text + "\n" +
                         "N° Tél : " + textBox5.Text + "\n" +
@@ -197,7 +201,8 @@ namespace ALBAITAR_Softvet.Dialogs
                         if (good_sent)
                         {
                             MySqlCommand command = new MySqlCommand("INSERT INTO `ACT_COMMANDS`(`CLIENT_ID`,`CLIENT_MAIL`,`CLIENT_TEL`,`CLIENT_NME`,`FIRST_TENTATIVE`) VALUES (" +
-                            "'" + PreConnection.generate_ID_of_client().Replace("'", "''") + "'," + //ID
+                            //"'" + PreConnection.generate_ID_of_client().Replace("'", "''") + "'," + //ID
+                            "NULL," + //ID
                             "'" + textBox1.Text.Replace("'", "''") + "'," + //MAIL
                             "'" + textBox5.Text.Replace("'", "''") + "'," + //TEL
                             "'" + textBox6.Text.Replace("'", "''") + "'," + //NME
@@ -269,37 +274,50 @@ namespace ALBAITAR_Softvet.Dialogs
                     bool Verifyed_001 = false;
 
                     //---------------------
-                    MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) VALUES (" +
-                        "'" + PreConnection.generate_ID_of_client() + "'," + //CLIENT_ID
+                    //MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) VALUES (" +
+                    //    "'" + PreConnection.generate_ID_of_client() + "'," + //CLIENT_ID
+                    //    "'" + textBox1.Text.Replace("'", "''") + "'," + //CLIENT_EMAL
+                    //    "'" + textBox5.Text.Replace("'", "''") + "'," + //CLIENT_TEL
+                    //    "'" + textBox6.Text.Replace("'", "''") + "'," + //CLIENT_NME
+                    //    "'" + textBox3.Text.Replace("'", "''") + "');" + //ACTIVAT_CODE
+                    //    " CALL InsertAndUpdateMOUVEMENTS('" + textBox1.Text.Replace("'", "''") + "', '" + textBox3.Text.Replace("'", "''") + "');", albaitar_online);
+
+                    MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) SELECT " +
+                        "(SELECT CLIENT_EMAIL FROM SERIALS_HISTORIQUE WHERE CLIENT_EMAIL = '" + textBox1.Text.Replace("'", "''") + "' AND ACTIVATION_SERIAL = '" + textBox3.Text.Replace("'", "''") + "' LIMIT 1)," + //CLIENT_ID
                         "'" + textBox1.Text.Replace("'", "''") + "'," + //CLIENT_EMAL
                         "'" + textBox5.Text.Replace("'", "''") + "'," + //CLIENT_TEL
                         "'" + textBox6.Text.Replace("'", "''") + "'," + //CLIENT_NME
                         "'" + textBox3.Text.Replace("'", "''") + "');" + //ACTIVAT_CODE
+                        " FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM SERIALS_HISTORIQUE WHERE CLIENT_EMAIL = '" + textBox1.Text.Replace("'", "''") + "' AND ACTIVATION_SERIAL = '" + textBox3.Text.Replace("'", "''") + "');" +
                         " CALL InsertAndUpdateMOUVEMENTS('" + textBox1.Text.Replace("'", "''") + "', '" + textBox3.Text.Replace("'", "''") + "');", albaitar_online);
                     if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
                     try { command.ExecuteNonQuery(); } catch { }
                     albaitar_online.Close();
                     //-------------------------------
-                    DataTable dttb = new DataTable();
-                    MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + textBox1.Text.Replace("'", "''") + "' AND `ACTIVAT_CODE` = '" + textBox3.Text.Replace("'", "''") + "';", albaitar_online);
-                    if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
-                    using (MySqlDataReader reader = command2.ExecuteReader())
-                    {
-                        dttb.Load(reader);
-                    }
-                    albaitar_online.Close();
-                    if (dttb.Rows.Count > 0) //Good
+                    if (Check_activation(textBox3.Text.Replace("'", "''"), textBox1.Text.Replace("'", "''"))) //Good
                     {
                         Verifyed_001 = true;
+                        Properties.Settings.Default.MachineClientID = PreConnection.Codify_txt(PreConnection.generate_ID_of_client());
+                        Properties.Settings.Default.Save();
                         PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
                     }
                     //--------------
-                    if (Verifyed_001 || (PreConnection.Verif_Activation_SOftVet(textBox3.Text) && PreConnection.ReadFromRegistry("Déja_try_version") != "OUI"))
+                    string MachineCltID = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID);
+                    if (Verifyed_001 || (PreConnection.Check_the_environ_ID(MachineCltID) && PreConnection.ReadFromRegistry("Déja_try_version") != "OUI"))
                     {
                         MessageBox.Show("Produit bien Activé !\n\n  ** Bienvenue avec AL BAITAR SoftVet **\n\n", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         label6.Text = textBox3.Text.Substring(0, 3) + "***************" + textBox3.Text.Substring(22, 2);
                         Properties.Settings.Default.Codifed_Activation_Email = PreConnection.Codify_txt(textBox1.Text);
                         Properties.Settings.Default.Codified_Activate_Code = PreConnection.Codify_txt(textBox3.Text);
+                        Properties.Settings.Default.Codified_Act_Clt_Tel = PreConnection.Codify_txt(textBox5.Text);
+                        Properties.Settings.Default.Codified_Act_Clt_Nme = PreConnection.Codify_txt(textBox6.Text);
+                        //---------
+                        bool tt = Properties.Settings.Default.Codified_Act_Command_dmnd_date == null;
+                        tt = (tt ? true : Properties.Settings.Default.Codified_Act_Command_dmnd_date.IsNullOrEmpty());
+                        if (tt) {
+                            Properties.Settings.Default.Codified_Act_Command_dmnd_date = PreConnection.Codify_txt(DateTime.Now.ToString());
+                        }     
+                        //----------
                         Properties.Settings.Default.Save();
                         panel4.Visible = true;
                         panel2.Visible = false;
@@ -315,6 +333,7 @@ namespace ALBAITAR_Softvet.Dialogs
                         textBox3.SelectAll();
                     }
                     label11.Visible = false;
+                    label11.Refresh();
                 }
                 else
                 {
@@ -368,6 +387,27 @@ namespace ALBAITAR_Softvet.Dialogs
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
             textBox6.BackColor = Color.White;
+        }
+
+        private bool Check_activation(string code, string email) {
+
+            DataTable dttb = new DataTable();
+            MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + email + "' AND `ACTIVAT_CODE` = '" + code + "';", albaitar_online);
+            if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+            using (MySqlDataReader reader = command2.ExecuteReader())
+            {
+                dttb.Load(reader);
+            }
+            albaitar_online.Close();
+
+            if (dttb.Rows.Count > 0) {
+                //---------                
+                Properties.Settings.Default.Codified_Act_Client_ID = PreConnection.Codify_txt(dttb.Rows[0]["CLIENT_ID"] != DBNull.Value ? (string)dttb.Rows[0]["CLIENT_ID"] : "");
+                Properties.Settings.Default.Save();
+                //------
+
+            }
+            return dttb.Rows.Count > 0;
         }
     }
 

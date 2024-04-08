@@ -568,8 +568,8 @@ namespace ALBAITAR_Softvet
                             }
                         }
                         //----------------
-                        string codd = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code);
-                        if (!PreConnection.Verif_Activation_SOftVet(codd))
+                        string MachineCltID = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID);
+                        if (!PreConnection.Check_the_environ_ID(MachineCltID))
                         {
                             string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
                             DateTime dt = DateTime.UtcNow;

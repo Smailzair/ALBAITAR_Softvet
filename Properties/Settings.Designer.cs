@@ -271,5 +271,8 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Last_Auto_Buckup_Date"] = value;
             }
         }
+
+        public string Codified_Act_Client_ID { get; internal set; }
+        public string MachineClientID { get; internal set; }
     }
 }

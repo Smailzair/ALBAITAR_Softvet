@@ -811,7 +811,7 @@ namespace ALBAITAR_Softvet
 
         }
         //================================================
-        public static string generate_ID_of_client()
+        public static string generate_ID_of_client() //This code to generate code specific for the current machine and current user (to check if the environ has changed)
         {
             string tmmp = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string IDd = "";
@@ -866,11 +866,11 @@ namespace ALBAITAR_Softvet
             return sb.ToString();
         }
 
-        public static bool Verif_Activation_SOftVet(string Code_Act)
+        public static bool Check_the_environ_ID(string MachineCLientID) //This code to check if the environ has changed or no.
         {
             string ID = generate_ID_of_client();
 
-            if (!string.IsNullOrEmpty(ID) && Code_Act.Length > 0)
+            if (!string.IsNullOrEmpty(ID) && MachineCLientID.Length > 0)
             {
 
                 string zzz = "Eck47eNK1pqhQ3UvsG6BfOnHmo9iMTlJbDA58dFjgXZxtVz0rSRWYyw2CILuPa";
@@ -897,7 +897,7 @@ namespace ALBAITAR_Softvet
 
                 }
                 string Act_code = string.Concat(w1, w2, w3, w4, w5);
-                return Act_code == Code_Act;
+                return Act_code == MachineCLientID;
             }
             else
             {
