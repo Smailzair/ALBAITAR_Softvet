@@ -30,14 +30,14 @@ namespace ALBAITAR_Softvet.Dialogs
             Application.OpenForms["Splash"]?.Close();
             //--------------------
             //label8.Text = PreConnection.generate_ID_of_client();
-            label8.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID);
+            label8.Text = Properties.Settings.Default.Codified_Act_Client_ID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID) : "";
             label9.Text = Environment.MachineName;
             label7.Text = Environment.UserName;
             textBox1.Validating -= textBox1_Validating;
-            textBox1.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email);
+            textBox1.Text = Properties.Settings.Default.Codifed_Activation_Email != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) : "";
             textBox1.Validating += textBox1_Validating;
-            textBox5.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Tel);
-            textBox6.Text = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Nme);
+            textBox5.Text = Properties.Settings.Default.Codified_Act_Clt_Tel != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Tel) : "";
+            textBox6.Text = Properties.Settings.Default.Codified_Act_Clt_Nme != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Clt_Nme) : "";
             string cmd_dent_dte = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Command_dmnd_date);
 
             bool fff = DateTime.TryParse(cmd_dent_dte, out DateTime dd);
@@ -51,7 +51,7 @@ namespace ALBAITAR_Softvet.Dialogs
             //--------
 
             //---------
-            if (Check_activation(codd, textBox6.Text))
+            if (Check_activation(codd, textBox1.Text))
             {
                 label6.Text = codd.Substring(0, 3) + "***************" + codd.Substring(23, 2);
                 panel4.Visible = true;
