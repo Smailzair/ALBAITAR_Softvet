@@ -160,7 +160,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     Mssg.Body = new TextPart("plain")
                     {
                         Text = "======================================================\n" +
-                        " -<< AlBaitar SoftVet >>-  [ "+ Albaitar_Email + " ]\n" +
+                        " -<< AlBaitar SoftVet >>-  [ " + Albaitar_Email + " ]\n" +
                         "======================================================\n\n\n" +
                         "Une demande d'activation de logiciel 'ALBAITAR Softvet' :\n\n" +
                         "1)- Veuillez confirmer les informations. \n" +
@@ -266,79 +266,83 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             if (ready)
             {
-                if (label8.Text.Length > 0)
+                //if (label8.Text.Length > 0)
+                //{
+                label11.Visible = true;
+                label11.Refresh();
+                //--------------------------
+                bool Verifyed_001 = false;
+
+                //---------------------
+                //MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) VALUES (" +
+                //    "'" + PreConnection.generate_ID_of_client() + "'," + //CLIENT_ID
+                //    "'" + textBox1.Text.Replace("'", "''") + "'," + //CLIENT_EMAL
+                //    "'" + textBox5.Text.Replace("'", "''") + "'," + //CLIENT_TEL
+                //    "'" + textBox6.Text.Replace("'", "''") + "'," + //CLIENT_NME
+                //    "'" + textBox3.Text.Replace("'", "''") + "');" + //ACTIVAT_CODE
+                //    " CALL InsertAndUpdateMOUVEMENTS('" + textBox1.Text.Replace("'", "''") + "', '" + textBox3.Text.Replace("'", "''") + "');", albaitar_online);
+
+                MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) SELECT " +
+                    "(SELECT CLIENT_EMAIL FROM SERIALS_HISTORIQUE WHERE CLIENT_EMAIL = '" + textBox1.Text.Replace("'", "''") + "' AND ACTIVATION_SERIAL = '" + textBox3.Text.Replace("'", "''") + "' LIMIT 1)," + //CLIENT_ID
+                    "'" + textBox1.Text.Replace("'", "''") + "'," + //CLIENT_EMAL
+                    "'" + textBox5.Text.Replace("'", "''") + "'," + //CLIENT_TEL
+                    "'" + textBox6.Text.Replace("'", "''") + "'," + //CLIENT_NME
+                    "'" + textBox3.Text.Replace("'", "''") + "');" + //ACTIVAT_CODE
+                    " FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM SERIALS_HISTORIQUE WHERE CLIENT_EMAIL = '" + textBox1.Text.Replace("'", "''") + "' AND ACTIVATION_SERIAL = '" + textBox3.Text.Replace("'", "''") + "');" +
+                    " CALL InsertAndUpdateMOUVEMENTS('" + textBox1.Text.Replace("'", "''") + "', '" + textBox3.Text.Replace("'", "''") + "');", albaitar_online);
+                if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+                try { command.ExecuteNonQuery(); } catch { }
+                albaitar_online.Close();
+                //-------------------------------
+                string MachineCltID = Properties.Settings.Default.MachineClientID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID) : "";
+                //----------
+                if (Check_activation(textBox3.Text.Replace("'", "''"), textBox1.Text.Replace("'", "''"))) //Good
                 {
-                    label11.Visible = true;
-                    label11.Refresh();
-                    //--------------------------
-                    bool Verifyed_001 = false;
-
-                    //---------------------
-                    //MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) VALUES (" +
-                    //    "'" + PreConnection.generate_ID_of_client() + "'," + //CLIENT_ID
-                    //    "'" + textBox1.Text.Replace("'", "''") + "'," + //CLIENT_EMAL
-                    //    "'" + textBox5.Text.Replace("'", "''") + "'," + //CLIENT_TEL
-                    //    "'" + textBox6.Text.Replace("'", "''") + "'," + //CLIENT_NME
-                    //    "'" + textBox3.Text.Replace("'", "''") + "');" + //ACTIVAT_CODE
-                    //    " CALL InsertAndUpdateMOUVEMENTS('" + textBox1.Text.Replace("'", "''") + "', '" + textBox3.Text.Replace("'", "''") + "');", albaitar_online);
-
-                    MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) SELECT " +
-                        "(SELECT CLIENT_EMAIL FROM SERIALS_HISTORIQUE WHERE CLIENT_EMAIL = '" + textBox1.Text.Replace("'", "''") + "' AND ACTIVATION_SERIAL = '" + textBox3.Text.Replace("'", "''") + "' LIMIT 1)," + //CLIENT_ID
-                        "'" + textBox1.Text.Replace("'", "''") + "'," + //CLIENT_EMAL
-                        "'" + textBox5.Text.Replace("'", "''") + "'," + //CLIENT_TEL
-                        "'" + textBox6.Text.Replace("'", "''") + "'," + //CLIENT_NME
-                        "'" + textBox3.Text.Replace("'", "''") + "');" + //ACTIVAT_CODE
-                        " FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM SERIALS_HISTORIQUE WHERE CLIENT_EMAIL = '" + textBox1.Text.Replace("'", "''") + "' AND ACTIVATION_SERIAL = '" + textBox3.Text.Replace("'", "''") + "');" +
-                        " CALL InsertAndUpdateMOUVEMENTS('" + textBox1.Text.Replace("'", "''") + "', '" + textBox3.Text.Replace("'", "''") + "');", albaitar_online);
-                    if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
-                    try { command.ExecuteNonQuery(); } catch { }
-                    albaitar_online.Close();
-                    //-------------------------------
-                    if (Check_activation(textBox3.Text.Replace("'", "''"), textBox1.Text.Replace("'", "''"))) //Good
+                    Verifyed_001 = true;
+                    Properties.Settings.Default.MachineClientID = PreConnection.Codify_txt(MachineCltID);
+                    Properties.Settings.Default.Save();
+                    PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
+                }
+                //--------------                    
+                if (Verifyed_001 || (PreConnection.Check_the_environ_ID(MachineCltID) && PreConnection.ReadFromRegistry("Déja_try_version") != "OUI"))
+                {
+                    try { Main_Frm.text_to_add_to_title = "Activated"; } catch { }                    
+                    //--------
+                    MessageBox.Show("Produit bien Activé !\n\n  ** Bienvenue avec AL BAITAR SoftVet **\n\n", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    label6.Text = textBox3.Text.Substring(0, 3) + "***************" + textBox3.Text.Substring(22, 2);
+                    Properties.Settings.Default.Codifed_Activation_Email = PreConnection.Codify_txt(textBox1.Text);
+                    Properties.Settings.Default.Codified_Activate_Code = PreConnection.Codify_txt(textBox3.Text);
+                    Properties.Settings.Default.Codified_Act_Clt_Tel = PreConnection.Codify_txt(textBox5.Text);
+                    Properties.Settings.Default.Codified_Act_Clt_Nme = PreConnection.Codify_txt(textBox6.Text);
+                    //---------
+                    bool tt = Properties.Settings.Default.Codified_Act_Command_dmnd_date == null;
+                    tt = (tt ? true : Properties.Settings.Default.Codified_Act_Command_dmnd_date.IsNullOrEmpty());
+                    if (tt)
                     {
-                        Verifyed_001 = true;
-                        Properties.Settings.Default.MachineClientID = PreConnection.Codify_txt(PreConnection.generate_ID_of_client());
-                        Properties.Settings.Default.Save();
-                        PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
+                        Properties.Settings.Default.Codified_Act_Command_dmnd_date = PreConnection.Codify_txt(DateTime.Now.ToString());
                     }
-                    //--------------
-                    string MachineCltID = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID);
-                    if (Verifyed_001 || (PreConnection.Check_the_environ_ID(MachineCltID) && PreConnection.ReadFromRegistry("Déja_try_version") != "OUI"))
-                    {
-                        MessageBox.Show("Produit bien Activé !\n\n  ** Bienvenue avec AL BAITAR SoftVet **\n\n", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        label6.Text = textBox3.Text.Substring(0, 3) + "***************" + textBox3.Text.Substring(22, 2);
-                        Properties.Settings.Default.Codifed_Activation_Email = PreConnection.Codify_txt(textBox1.Text);
-                        Properties.Settings.Default.Codified_Activate_Code = PreConnection.Codify_txt(textBox3.Text);
-                        Properties.Settings.Default.Codified_Act_Clt_Tel = PreConnection.Codify_txt(textBox5.Text);
-                        Properties.Settings.Default.Codified_Act_Clt_Nme = PreConnection.Codify_txt(textBox6.Text);
-                        //---------
-                        bool tt = Properties.Settings.Default.Codified_Act_Command_dmnd_date == null;
-                        tt = (tt ? true : Properties.Settings.Default.Codified_Act_Command_dmnd_date.IsNullOrEmpty());
-                        if (tt) {
-                            Properties.Settings.Default.Codified_Act_Command_dmnd_date = PreConnection.Codify_txt(DateTime.Now.ToString());
-                        }     
-                        //----------
-                        Properties.Settings.Default.Save();
-                        panel4.Visible = true;
-                        panel2.Visible = false;
-                        pictureBox1.Image = Properties.Resources.icons8_safe_ok_120px;
-                        textBox2.Visible = pictureBox3.Visible = panel3.Visible = false;
-                        this.Size = new System.Drawing.Size(this.Width, this.Height - panel3.Height);
-                        PreConnection.Excut_Cmd(2, "tb_params", new System.Collections.Generic.List<string> { "VAL" }, new System.Collections.Generic.List<object> { 1 }, "ID = @P_ID", new System.Collections.Generic.List<string> { "P_ID" }, new System.Collections.Generic.List<object> { 7 });
-                    }
-                    else
-                    {
-                        MessageBox.Show("Le code n'est pas valide ou éxpiré !", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        textBox3.Focus();
-                        textBox3.SelectAll();
-                    }
-                    label11.Visible = false;
-                    label11.Refresh();
+                    //----------
+                    Properties.Settings.Default.Save();
+                    panel4.Visible = true;
+                    panel2.Visible = false;
+                    pictureBox1.Image = Properties.Resources.icons8_safe_ok_120px;
+                    textBox2.Visible = pictureBox3.Visible = panel3.Visible = false;
+                    this.Size = new System.Drawing.Size(this.Width, this.Height - panel3.Height);
+                    PreConnection.Excut_Cmd(2, "tb_params", new System.Collections.Generic.List<string> { "VAL" }, new System.Collections.Generic.List<object> { 1 }, "ID = @P_ID", new System.Collections.Generic.List<string> { "P_ID" }, new System.Collections.Generic.List<object> { 7 });
                 }
                 else
                 {
-                    MessageBox.Show("Votre code ID n'est pas valide !", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Le code n'est pas valide ou éxpiré !", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textBox3.Focus();
+                    textBox3.SelectAll();
                 }
+                label11.Visible = false;
+                label11.Refresh();
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Votre code ID n'est pas valide !", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
             }
         }
 
@@ -389,7 +393,8 @@ namespace ALBAITAR_Softvet.Dialogs
             textBox6.BackColor = Color.White;
         }
 
-        private bool Check_activation(string code, string email) {
+        private bool Check_activation(string code, string email)
+        {
 
             DataTable dttb = new DataTable();
             MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + email + "' AND `ACTIVAT_CODE` = '" + code + "';", albaitar_online);
@@ -400,7 +405,8 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             albaitar_online.Close();
 
-            if (dttb.Rows.Count > 0) {
+            if (dttb.Rows.Count > 0)
+            {
                 //---------                
                 Properties.Settings.Default.Codified_Act_Client_ID = PreConnection.Codify_txt(dttb.Rows[0]["CLIENT_ID"] != DBNull.Value ? (string)dttb.Rows[0]["CLIENT_ID"] : "");
                 Properties.Settings.Default.Save();

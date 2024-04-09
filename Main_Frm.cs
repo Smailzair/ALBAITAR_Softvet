@@ -46,7 +46,7 @@ namespace ALBAITAR_Softvet
         int frst_scrll = -1;
         int prev_sel_rw_facture = -1;
         int frst_scrll_facture = -1;
-        string text_to_add_to_title = "";
+        public static string text_to_add_to_title = "";
         //----------
         DataTable chosen_anim_from_search;
         DataTable chosen_client_from_search;
@@ -568,7 +568,7 @@ namespace ALBAITAR_Softvet
                             }
                         }
                         //----------------
-                        string MachineCltID = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID);
+                        string MachineCltID = Properties.Settings.Default.MachineClientID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID) : "";
                         if (!PreConnection.Check_the_environ_ID(MachineCltID))
                         {
                             string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
@@ -2552,6 +2552,9 @@ namespace ALBAITAR_Softvet
             {
                 this.Text += text_to_add_to_title;
                 text_to_add_to_title = "";
+            }
+            else if (text_to_add_to_title == "Activated") {
+                this.Text = "ALBAITAR Softvet";
             }
         }
 
