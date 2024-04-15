@@ -1,6 +1,7 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
 using MailKit.Net.Smtp;
+using Microsoft.Office.Interop.Word;
 using MimeKit;
 using MySql.Data.MySqlClient;
 using ServiceStack;
@@ -17,6 +18,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
+using Application = System.Windows.Forms.Application;
 using DataTable = System.Data.DataTable;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
 
@@ -34,19 +36,22 @@ namespace ALBAITAR_Softvet
         bool sites_table_ready = false;
         public static DataTable Autorisations;
         public static DataTable Params;
+        public static DataTable Baitar_Server_Params;
         int selected_client_id = -1;
         int selected_animal_id = -1;
         public static DataTable Main_Frm_clients_tbl;
         public static DataTable Main_Frm_animals_tbl;
         public static DataTable Main_Frm_vaccination;
         ImageList tabcontrol_img_lst;
-        Font simple_font = new Font("Century Gothic", 9, FontStyle.Regular);
-        Font bold_font = new Font("Century Gothic", 10, FontStyle.Bold);
+        System.Drawing.Font simple_font = new System.Drawing.Font("Century Gothic", 9, FontStyle.Regular);
+        System.Drawing.Font bold_font = new System.Drawing.Font("Century Gothic", 10, FontStyle.Bold);
         int prev_sel_rw = -1;
         int frst_scrll = -1;
         int prev_sel_rw_facture = -1;
         int frst_scrll_facture = -1;
         public static string text_to_add_to_title = "";
+        public static bool activation_verified_corretly_with_server = false;
+        public static bool activation_is_finance_done = false;
         //----------
         DataTable chosen_anim_from_search;
         DataTable chosen_client_from_search;
@@ -114,6 +119,19 @@ namespace ALBAITAR_Softvet
             }
             //----------------------------
             Params = PreConnection.Load_data("SELECT * FROM tb_params;");
+            //------------------------------
+            Baitar_Server_Params = new DataTable();
+            try
+            {
+                MySqlCommand command2 = new MySqlCommand("SELECT * FROM `SETTINGS`;", PreConnection.albaitar_online);
+                if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
+                using (MySqlDataReader reader = command2.ExecuteReader())
+                {
+                    Baitar_Server_Params.Load(reader);
+                }
+                PreConnection.albaitar_online.Close();
+            }
+            catch { }
             //------------------------------
             th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting performance of "Clients" form
             th.Start();
@@ -539,76 +557,182 @@ namespace ALBAITAR_Softvet
         {
             if (Properties.Settings.Default.Connection_String_IP_Or_LocalHost == "localhost")
             {
-                bool server_activated = PreConnection.Verif_real_server_activ();
-                if (!server_activated)
+
+                //========= I/ First steps ==============
+                string filePath = "C:\\ProgramData\\Al_Baitar_Activation.txt";
+                if (!File.Exists(filePath))
                 {
-                    if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
+                    File.Create(filePath).Dispose();
+                    //---------
+                    FileAttributes attributes = File.GetAttributes(filePath);
+                    attributes |= FileAttributes.Hidden;
+                    File.SetAttributes(filePath, attributes);
+                }
+
+                if (File.Exists(filePath))
+                {
+                    //---------
+                    FileAttributes currentAttributes = File.GetAttributes(filePath);
+                    FileAttributes updatedAttributes = currentAttributes & ~FileAttributes.Hidden;
+                    File.SetAttributes(filePath, updatedAttributes);
+                    //---------
+                    string[] file_lines = File.ReadAllLines(filePath);
+                    string[] file_lines_to_save = new string[4];
+
+                    decimal prev_running_delay = 0; //delay per minute
+                    if (file_lines.Length > 0)
                     {
-                        string filePath = "C:\\ProgramData\\Al_Baitar_Activation.txt";
+                        decimal.TryParse(file_lines[0].ToString(), out prev_running_delay);
+                        file_lines_to_save[0] = file_lines[0];
+                    }
 
-                        if (File.Exists(filePath))
+                    DateTime prev_saved_running_delay_datetime = new DateTime(1900, 01, 01);
+                    if (file_lines.Length > 1)
+                    {
+                        DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
+                        file_lines_to_save[1] = file_lines[1];
+                    }
+
+                    bool Is_finance_done = false;
+                    if (file_lines.Length > 2)
+                    {
+                        Is_finance_done = PreConnection.Traduct_Codified_txt(file_lines[2]) == "Yes_is_done";
+                        file_lines_to_save[2] = file_lines[2];
+                    }
+
+                    DateTime Server_Verif_Date = DateTime.UtcNow;
+                    if (file_lines.Length > 3)
+                    {
+                        DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[3]), out Server_Verif_Date);
+                        file_lines_to_save[3] = file_lines[3];
+                    }
+
+                    //------------
+
+                    bool Activ_verif_required = false;
+                    Activ_verif_required = Activ_verif_required || (Is_finance_done == false && (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3"));
+                    Activ_verif_required = Activ_verif_required || (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "7");
+                    Activ_verif_required = Activ_verif_required || (prev_running_delay >= 10800 || prev_running_delay == 0);
+                    Activ_verif_required = Activ_verif_required || (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800); //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
+
+                    if (Activ_verif_required)
+                    {
+                        bool server_activated = PreConnection.Verif_real_server_activ();
+                        if (activation_verified_corretly_with_server)
                         {
-                            string fileContents = File.ReadAllText(filePath);
-                            double old_val = 0;
-                            double.TryParse(fileContents, out old_val);
-                            if (old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
-                            {
-                                PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
-                            }
+                            file_lines_to_save[2] = activation_is_finance_done ? PreConnection.Codify_txt("Yes_is_done") : PreConnection.Codify_txt("Not_yet");
+                            file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
                         }
-                        else
+                        File.WriteAllLines(filePath, file_lines_to_save);
+                        if (!server_activated) //if NOT activated (or couldn't verify yet)
                         {
-                            DateTime dtt = DateTime.UtcNow;
-                            bool rr = DateTime.TryParse(PreConnection.ReadFromRegistry("SoftVet_Start_Date"), out dtt);
-
-                            if (!rr || dtt == DateTime.Now)
-                            {
-                                Application.Run(new App_Activation());
-                                return;
-                            }
-                        }
-                        //----------------
-                        string MachineCltID = Properties.Settings.Default.MachineClientID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID) : "";
-                        if (!PreConnection.Check_the_environ_ID(MachineCltID))
-                        {
-                            string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
-                            DateTime dt = DateTime.UtcNow;
-                            if (strt_date == "")
-                            {
-                                PreConnection.WriteIntoRegistry("SoftVet_Start_Date", dt.ToString("dd/MM/yyyy"));
-                            }
-
-                            DateTime.TryParse(strt_date, out dt);
-                            int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
-
-                            text_to_add_to_title = " (Produit non activé - réste [" + delay + "] jours)";
-                            if (delay >= 30)
-                            {
-                                new App_Activation().ShowDialog();
-                            }
-                            else if (delay <= 0)
-                            {
-                                PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
-                                Properties.Settings.Default.Codified_Activate_Code = "";
-                                Properties.Settings.Default.Save();
-                                close_app_because_act = true;
-                                Application.Run(new App_Activation());
-                            }
+                            PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
+                            Properties.Settings.Default.Codified_Activate_Code = "";
+                            Properties.Settings.Default.Save();
+                            close_app_because_act = true;
+                            Application.Run(new App_Activation());
                         }
                     }
+                    //-------
                     else
                     {
-                        Properties.Settings.Default.Codified_Activate_Code = "";
-                        Properties.Settings.Default.Save();
-                        close_app_because_act = true;
-                        Application.Run(new App_Activation());
+                        //========= II/ if the previous check worked (ACTIVATED!), we come to this check steps ===============
+                        //---------- Check if the PC changed ---------------
+                        string MachineCltID = Properties.Settings.Default.MachineClientID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID) : "";
+
+                        if (!string.IsNullOrEmpty(MachineCltID) && !MachineCltID.Equals(PreConnection.generate_ID_of_client()))
+                        {
+                            PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
+                            Properties.Settings.Default.Codified_Activate_Code = "";
+                            Properties.Settings.Default.Save();
+                            close_app_because_act = true;
+                            Application.Run(new App_Activation());
+                        }
                     }
 
+                    //---------
+                    FileAttributes attributes = File.GetAttributes(filePath);
+                    attributes |= FileAttributes.Hidden;
+                    File.SetAttributes(filePath, attributes);
+                    //-----------
+
                 }
+                //////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                //if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
+                //{
+                //    //========= I/ First steps ==============
+                //    string filePath = "C:\\ProgramData\\Al_Baitar_Activation.txt";
+
+                //    if (File.Exists(filePath))
+                //    {
+                //        string fileContents = File.ReadAllText(filePath);
+                //        double old_val = 0;
+                //        double.TryParse(fileContents, out old_val);
+                //        if (old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
+                //        {
+                //            PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
+                //        }
+                //    }
+                //    else
+                //    {
+                //        //-------- Check if is the first time (just installed) OR the try periode ended -----------------
+                //        DateTime dtt = DateTime.UtcNow;
+                //        bool rr = DateTime.TryParse(PreConnection.ReadFromRegistry("SoftVet_Start_Date"), out dtt);
+                //        if (!rr || dtt == DateTime.Now)
+                //        {
+                //            Application.Run(new App_Activation());
+                //            return;
+                //        }
+                //    }
+                //    //----------------
+
+                //    //========= II/ if the previous check worked (ACTIVATED!), we come to this check steps ===============
+                //    //---------- Check if the PC changed ---------------
+                //    string MachineCltID = Properties.Settings.Default.MachineClientID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID) : "";
+                //    if (!PreConnection.Check_the_environ_ID(MachineCltID))
+                //    {
+                //        string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
+                //        DateTime dt = DateTime.UtcNow;
+                //        if (strt_date == "")
+                //        {
+                //            PreConnection.WriteIntoRegistry("SoftVet_Start_Date", dt.ToString("dd/MM/yyyy"));
+                //        }
+
+                //        DateTime.TryParse(strt_date, out dt);
+                //        int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
+
+                //        text_to_add_to_title = " (Produit non activé - réste [" + delay + "] jours)";
+                //        if (delay >= 30)
+                //        {
+                //            new App_Activation().ShowDialog();
+                //        }
+                //        else if (delay <= 0)
+                //        {
+                //            PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
+                //            Properties.Settings.Default.Codified_Activate_Code = "";
+                //            Properties.Settings.Default.Save();
+                //            close_app_because_act = true;
+                //            Application.Run(new App_Activation());
+                //        }
+                //    }
+                //}
+                //else
+                //{
+                //    Properties.Settings.Default.Codified_Activate_Code = "";
+                //    Properties.Settings.Default.Save();
+                //    close_app_because_act = true;
+                //    Application.Run(new App_Activation());
+                //}
+
+
 
 
             }
-            else
+            else //Destinated to the other PCs in local network (Important!: Activation just from the Server PC)
             {
                 bool activated = false;
                 DataTable acct = PreConnection.Load_data("SELECT * FROM tb_params WHERE `ID` = 7;");
@@ -619,6 +743,7 @@ namespace ALBAITAR_Softvet
                 }
                 if (!activated)
                 {
+                    //-----Important!: Activation is just from the Server PC
                     MessageBox.Show("malheureusement le produit de PC serveur n'est pas activé\navec une tentative expirée!", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     if (MessageBox.Show("Voulez vous de changer la connection à un autre serveur ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
@@ -726,14 +851,14 @@ namespace ALBAITAR_Softvet
 
         }
 
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Login_Auto_Enter = false;
             Properties.Settings.Default.Save();
 
             prev_open_frms = new List<string>();
-            foreach(Form frm in Application.OpenForms)
+            foreach (Form frm in Application.OpenForms)
             {
                 prev_open_frms.Add(frm.Name);
                 frm.Hide();
@@ -907,8 +1032,8 @@ namespace ALBAITAR_Softvet
                 Send_Vaccin_Alerts.Start();
                 // Send_Vaccin_Alerts.Join();
                 //--------------
-                Application.OpenForms["Splash"]?.Close();
-                
+                System.Windows.Forms.Application.OpenForms["Splash"]?.Close();
+
             }
 
         }
@@ -1031,20 +1156,56 @@ namespace ALBAITAR_Softvet
             if (!File.Exists(filePath))
             {
                 File.Create(filePath).Dispose();
+                //---------
+                FileAttributes attributes = File.GetAttributes(filePath);
+                attributes |= FileAttributes.Hidden;
+                File.SetAttributes(filePath, attributes);
             }
 
-            string fileContents = File.ReadAllText(filePath);
-            decimal old_val = 0;
-            decimal.TryParse(fileContents, out old_val);
-
-            if (old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
+            if (File.Exists(filePath))
             {
-                PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
-                //PreConnection.Excut_Cmd("UPDATE tb_params SET `VAL` = 0 WHERE `ID` = 7;");
-                PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
+                //---------
+                FileAttributes currentAttributes = File.GetAttributes(filePath);
+                FileAttributes updatedAttributes = currentAttributes & ~FileAttributes.Hidden;
+                File.SetAttributes(filePath, updatedAttributes);
+                //---------
+                string[] file_lines = File.ReadAllLines(filePath);
+                string[] file_lines_to_save = new string[4];
+
+                decimal prev_running_delay = 0; //delay per minute
+                if (file_lines.Length > 0)
+                {
+                    decimal.TryParse(file_lines[0].ToString(), out prev_running_delay);
+                    file_lines_to_save[0] = file_lines[0];
+                }
+
+                DateTime prev_saved_running_delay_datetime = new DateTime(1900, 01, 01);
+                if (file_lines.Length > 1)
+                {
+                    DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
+                    file_lines_to_save[1] = file_lines[1];
+                }
+
+                if (file_lines.Length > 2)
+                {
+                    file_lines_to_save[2] = file_lines[2];
+                }
+
+                if (file_lines.Length > 3)
+                {
+                    file_lines_to_save[3] = file_lines[3];
+                }
+
+
+                file_lines_to_save[0] = ((double)prev_running_delay + (double)time_delay / 60).ToString("N2");
+                file_lines_to_save[1] = time_delay > 0 ? PreConnection.Codify_txt(DateTime.UtcNow.ToString()) : file_lines_to_save[1];
+                File.WriteAllLines(filePath, file_lines_to_save);
+                //---------
+                FileAttributes attributes = File.GetAttributes(filePath);
+                attributes |= FileAttributes.Hidden;
+                File.SetAttributes(filePath, attributes);
             }
 
-            File.WriteAllText(filePath, ((double)old_val + (double)time_delay / 60).ToString("N2"));
             //----------------------------------
             Properties.Settings.Default.Maximize_Main_Frm = WindowState == FormWindowState.Maximized;
             Properties.Settings.Default.Save();
@@ -1059,8 +1220,8 @@ namespace ALBAITAR_Softvet
                     if (backup_freq.ToLower().EndsWith("mois"))
                     {
                         int nb = 0;
-                        int.TryParse(ExtractNumericPart(backup_freq),out nb);
-                        if(nb > 0)
+                        int.TryParse(ExtractNumericPart(backup_freq), out nb);
+                        if (nb > 0)
                         {
                             int mnth_diff = ((DateTime.Now - Properties.Settings.Default.Last_Auto_Buckup_Date).Days) / 30;
                             make_backup = mnth_diff >= nb;
@@ -1099,7 +1260,7 @@ namespace ALBAITAR_Softvet
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms["Vente"] == null)
+            if (System.Windows.Forms.Application.OpenForms["Vente"] == null)
             {
                 new Vente(-1).Show();
             }
@@ -1711,7 +1872,7 @@ namespace ALBAITAR_Softvet
             int fct1 = 0;
             if (update_tot && main_visites_tab != null)
             {
-                if(main_visites_tab.Columns.Count > 0)
+                if (main_visites_tab.Columns.Count > 0)
                 {
                     DataTable tmppp = main_visites_tab.Copy();
                     tmppp.DefaultView.RowFilter = fltr;
@@ -1720,7 +1881,7 @@ namespace ALBAITAR_Softvet
                     tmppp.DefaultView.RowFilter = fltr + (dd ? " AND " : "") + "LEN(FACTURE_REF) > 0";
                     fct1 = tmppp.DefaultView.Cast<DataRowView>().Count();
                 }
-                
+
             }
             //===================================================
             if (radioButton2.Checked) //Facturé
@@ -1733,11 +1894,11 @@ namespace ALBAITAR_Softvet
                 fltr += (dd ? " AND " : "") + "FACTURE_REF IS NULL OR LEN(FACTURE_REF) = 0";
             }
 
-            if(((DataTable)dataGridView2.DataSource).Columns.Count > 0)
+            if (((DataTable)dataGridView2.DataSource).Columns.Count > 0)
             {
                 ((DataTable)dataGridView2.DataSource).DefaultView.RowFilter = fltr;
             }
-            
+
             //--------------------------------
             if (update_tot)
             {
@@ -1861,14 +2022,14 @@ namespace ALBAITAR_Softvet
             int fct1 = 0;
             if (update_tot)
             {
-                    DataTable tmppp = main_lab_tab.Copy();
-                    tmppp.DefaultView.RowFilter = fltr;
-                    tss = tmppp.DefaultView.Cast<DataRowView>().Count();
-                    //----
-                    tmppp.DefaultView.RowFilter = fltr + (dd ? " AND " : "") + "LEN(FACTURE_REF) > 0";
-                    fct1 = tmppp.DefaultView.Cast<DataRowView>().Count();
-               // }
-                
+                DataTable tmppp = main_lab_tab.Copy();
+                tmppp.DefaultView.RowFilter = fltr;
+                tss = tmppp.DefaultView.Cast<DataRowView>().Count();
+                //----
+                tmppp.DefaultView.RowFilter = fltr + (dd ? " AND " : "") + "LEN(FACTURE_REF) > 0";
+                fct1 = tmppp.DefaultView.Cast<DataRowView>().Count();
+                // }
+
             }
             //===================================================
             if (radioButton5.Checked) //Facturé
@@ -1882,7 +2043,7 @@ namespace ALBAITAR_Softvet
             }
             if (dataGridView1.DataSource != null)
             {
-                    ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
+                ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
             }
             //--------------------
             if (update_tot)
@@ -2553,7 +2714,8 @@ namespace ALBAITAR_Softvet
                 this.Text += text_to_add_to_title;
                 text_to_add_to_title = "";
             }
-            else if (text_to_add_to_title == "Activated") {
+            else if (text_to_add_to_title == "Activated")
+            {
                 this.Text = "ALBAITAR Softvet";
             }
         }
@@ -2747,17 +2909,17 @@ namespace ALBAITAR_Softvet
         {
             if (dataGridView5.Rows[e.RowIndex].Selected)
             {
-                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+                e.CellStyle.Font = new System.Drawing.Font(e.CellStyle.Font, FontStyle.Bold);
             }
             else
             {
-                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Regular);
+                e.CellStyle.Font = new System.Drawing.Font(e.CellStyle.Font, FontStyle.Regular);
             }
         }
 
         private void Main_Frm_VisibleChanged(object sender, EventArgs e)
         {
-            if(this.Visible)
+            if (this.Visible)
             {
                 if (prev_open_frms != null)
                 {
@@ -2768,7 +2930,7 @@ namespace ALBAITAR_Softvet
                     prev_open_frms = null;
                 }
             }
-            
+
         }
     }
 }

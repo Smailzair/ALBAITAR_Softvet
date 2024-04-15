@@ -28,10 +28,11 @@ namespace ALBAITAR_Softvet
     internal class PreConnection
     {
         //  public static Loading loading = new Loading();
+        
         static string connectionString_txt = "Server=" + Properties.Settings.Default.Connection_String_IP_Or_LocalHost + ";Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;";
         public static MySqlConnection mySqlConnection = new MySqlConnection(connectionString_txt); //DB Origine                
         // static bool Connection_opened = false;
-
+        public static MySqlConnection albaitar_online = new MySqlConnection(@"Server=62.72.50.1;Port=3306;Database=u844866977_BAITAR_CLIENTS;Uid=u844866977_baitar_user;Pwd=Zsd52##dQemN41;");
 
 
         public static void open_conn()
@@ -897,7 +898,8 @@ namespace ALBAITAR_Softvet
 
                 }
                 string Act_code = string.Concat(w1, w2, w3, w4, w5);
-                return Act_code == MachineCLientID;
+
+                return Act_code.Equals(MachineCLientID);
             }
             else
             {
@@ -910,25 +912,24 @@ namespace ALBAITAR_Softvet
         public static bool Verif_real_server_activ()
         {
             bool Verifyed_001 = false;
-            if (Properties.Settings.Default.Codifed_Activation_Email.Length > 2 && Properties.Settings.Default.Codified_Activate_Code.Length > 2)
+            if (Properties.Settings.Default.Codified_Act_Client_ID.Length > 2 && Properties.Settings.Default.Codifed_Activation_Email.Length > 2 && Properties.Settings.Default.Codified_Activate_Code.Length > 2)
             {
-                MySqlConnection albaitar_online = new MySqlConnection(@"Server=62.72.50.1;Port=3306;Database=u844866977_BAITAR_CLIENTS;Uid=u844866977_baitar_user;Pwd=Zsd52##dQemN41;");
+                Main_Frm.activation_verified_corretly_with_server = true;
                 //---------------------
-                MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`ACTIVAT_CODE`) VALUES (" +
-                    "'" + PreConnection.generate_ID_of_client() + "'," +
-                    "'" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "'," +
-                    "'" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "');", albaitar_online);
+                MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_EMAIL`,`ACTIVAT_CODE`) VALUES (" +
+                    "'" + Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "'," +
+                    "'" + Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "');", albaitar_online);
 
                 try
                 {
                     if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
                     command.ExecuteNonQuery();
                 }
-                catch { }
+                catch { Main_Frm.activation_verified_corretly_with_server = false; }
                 albaitar_online.Close();
                 //-------------------------------
                 DataTable dttb = new DataTable();
-                MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND  `ACTIVAT_CODE` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
+                MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND  `ACTIVAT_CODE` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
                 try
                 {
                     if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
@@ -937,11 +938,29 @@ namespace ALBAITAR_Softvet
                         dttb.Load(reader);
                     }
                 }
-                catch { }
+                catch { Main_Frm.activation_verified_corretly_with_server = false; }
+                //-------------------------------
+                DataTable tbbl = new DataTable();
+                MySqlCommand command3 = new MySqlCommand("SELECT * FROM `SERIALS_HISTORIQUE` WHERE `CLIENT_EMAIL` = '" + Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND `ACTIVATION_SERIAL` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
+                try
+                {
+                    if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+                    using (MySqlDataReader reader2 = command3.ExecuteReader())
+                    {
+                        tbbl.Load(reader2);
+                    }
+                }
+                catch { Main_Frm.activation_verified_corretly_with_server = false; }
+                //-------------
                 albaitar_online.Close();
-                if (dttb.Rows.Count > 0) //Good
+                if (dttb.Rows.Count > 0) //Good (Activated)
                 {
                     Verifyed_001 = true;
+                }
+                if (tbbl.Rows.Count > 0) { //Check Finance
+                    int ee = 0;
+                    int.TryParse(tbbl.Rows[0]["IS_FINANCE_DONE"] != null ? tbbl.Rows[0]["IS_FINANCE_DONE"].ToString() : "0", out ee);
+                    Main_Frm.activation_is_finance_done = ee == 1;
                 }
             }
             return Verifyed_001;

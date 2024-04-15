@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Windows.Forms;
@@ -16,7 +17,7 @@ namespace ALBAITAR_Softvet.Dialogs
     public partial class App_Activation : Form
     {
 
-        MySqlConnection albaitar_online = new MySqlConnection(@"Server=62.72.50.1;Port=3306;Database=u844866977_BAITAR_CLIENTS;Uid=u844866977_baitar_user;Pwd=Zsd52##dQemN41;");
+
         int rest_jrs_delay = 30;
         public App_Activation()
         {
@@ -27,7 +28,12 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void App_Activation_Load(object sender, EventArgs e)
         {
-            Application.OpenForms["Splash"]?.Close();
+            try
+            {
+                Application.OpenForms["Splash"]?.Close();
+            }
+            catch { }
+
             //--------------------
             //label8.Text = PreConnection.generate_ID_of_client();
             label8.Text = Properties.Settings.Default.Codified_Act_Client_ID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID) : "";
@@ -63,34 +69,34 @@ namespace ALBAITAR_Softvet.Dialogs
             else
             {
 
-                if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
-                {
-                    string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
-                    DateTime dt = DateTime.UtcNow;
-                    if (strt_date == "")
-                    {
-                        PreConnection.WriteIntoRegistry("SoftVet_Start_Date", dt.ToString("dd/MM/yyyy"));
-                    }
-                    else
-                    {
-                        DateTime.TryParse(strt_date, out dt);
-                    }
+                //////////if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
+                //////////{
+                //////////    string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
+                //////////    DateTime dt = DateTime.UtcNow;
+                //////////    if (strt_date == "")
+                //////////    {
+                //////////        PreConnection.WriteIntoRegistry("SoftVet_Start_Date", dt.ToString("dd/MM/yyyy"));
+                //////////    }
+                //////////    else
+                //////////    {
+                //////////        DateTime.TryParse(strt_date, out dt);
+                //////////    }
 
-                    int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
-                    rest_jrs_delay = (delay >= 0 ? delay : 0);
-                    label13.Text = (delay >= 0 ? delay : 0) + " Jours";
-                    if (delay <= 0)
-                    {
-                        PreConnection.Excut_Cmd(2, "tb_params", new System.Collections.Generic.List<string> { "VAL" }, new System.Collections.Generic.List<object> { 0 }, "ID = @P_ID", new System.Collections.Generic.List<string> { "P_ID" }, new System.Collections.Generic.List<object> { 7 });
-                        label18.ForeColor = label13.ForeColor = Color.Red;
-                    }
-                }
-                else
-                {
-                    PreConnection.Excut_Cmd(2, "tb_params", new System.Collections.Generic.List<string> { "VAL" }, new System.Collections.Generic.List<object> { 0 }, "ID = @P_ID", new System.Collections.Generic.List<string> { "P_ID" }, new System.Collections.Generic.List<object> { 7 });
-                    label13.Text = "0 Jours";
-                    label18.ForeColor = label13.ForeColor = Color.Red;
-                }
+                //////////    int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
+                //////////    rest_jrs_delay = (delay >= 0 ? delay : 0);
+                //////////    label13.Text = (delay >= 0 ? delay : 0) + " Jours";
+                //////////    if (delay <= 0)
+                //////////    {
+                //////////        PreConnection.Excut_Cmd(2, "tb_params", new System.Collections.Generic.List<string> { "VAL" }, new System.Collections.Generic.List<object> { 0 }, "ID = @P_ID", new System.Collections.Generic.List<string> { "P_ID" }, new System.Collections.Generic.List<object> { 7 });
+                //////////        label18.ForeColor = label13.ForeColor = Color.Red;
+                //////////    }
+                //////////}
+                //////////else
+                //////////{
+                //////////    PreConnection.Excut_Cmd(2, "tb_params", new System.Collections.Generic.List<string> { "VAL" }, new System.Collections.Generic.List<object> { 0 }, "ID = @P_ID", new System.Collections.Generic.List<string> { "P_ID" }, new System.Collections.Generic.List<object> { 7 });
+                //////////    label13.Text = "0 Jours";
+                //////////    label18.ForeColor = label13.ForeColor = Color.Red;
+                //////////}
 
 
             }
@@ -143,14 +149,14 @@ namespace ALBAITAR_Softvet.Dialogs
                 {
                     //------------------------
                     DataTable dt = new DataTable();
-                    MySqlCommand cmd = new MySqlCommand("SELECT VAL FROM SETTINGS WHERE NME = 'EMAIL_TO_RECIEVE_COMMANDS';", albaitar_online);
-                    if (albaitar_online.State != ConnectionState.Open)
+                    MySqlCommand cmd = new MySqlCommand("SELECT VAL FROM SETTINGS WHERE NME = 'EMAIL_TO_RECIEVE_COMMANDS';", PreConnection.albaitar_online);
+                    if (PreConnection.albaitar_online.State != ConnectionState.Open)
                     {
-                        albaitar_online.Open();
+                        PreConnection.albaitar_online.Open();
                     }
                     MySqlDataReader reader = cmd.ExecuteReader();
                     dt.Load(reader);
-                    albaitar_online.Close();
+                    PreConnection.albaitar_online.Close();
                     string Albaitar_Email = dt.Rows[0][0].ToString();
                     //-----------------------
                     MimeMessage Mssg = new MimeMessage();
@@ -206,10 +212,10 @@ namespace ALBAITAR_Softvet.Dialogs
                             "'" + textBox1.Text.Replace("'", "''") + "'," + //MAIL
                             "'" + textBox5.Text.Replace("'", "''") + "'," + //TEL
                             "'" + textBox6.Text.Replace("'", "''") + "'," + //NME
-                            rest_jrs_delay + ");", albaitar_online); //TENTATIVE
-                            if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+                            rest_jrs_delay + ");", PreConnection.albaitar_online); //TENTATIVE
+                            if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
                             try { command.ExecuteNonQuery(); } catch { }
-                            albaitar_online.Close();
+                            PreConnection.albaitar_online.Close();
                             //----------------------------
                             Properties.Settings.Default.Codifed_Activation_Email = PreConnection.Codify_txt(textBox1.Text);
                             Properties.Settings.Default.Codified_Act_Clt_Tel = PreConnection.Codify_txt(textBox5.Text);
@@ -271,42 +277,35 @@ namespace ALBAITAR_Softvet.Dialogs
                 label11.Visible = true;
                 label11.Refresh();
                 //--------------------------
-                bool Verifyed_001 = false;
 
                 //---------------------
-                //MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) VALUES (" +
-                //    "'" + PreConnection.generate_ID_of_client() + "'," + //CLIENT_ID
-                //    "'" + textBox1.Text.Replace("'", "''") + "'," + //CLIENT_EMAL
-                //    "'" + textBox5.Text.Replace("'", "''") + "'," + //CLIENT_TEL
-                //    "'" + textBox6.Text.Replace("'", "''") + "'," + //CLIENT_NME
-                //    "'" + textBox3.Text.Replace("'", "''") + "');" + //ACTIVAT_CODE
-                //    " CALL InsertAndUpdateMOUVEMENTS('" + textBox1.Text.Replace("'", "''") + "', '" + textBox3.Text.Replace("'", "''") + "');", albaitar_online);
-
-                MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) SELECT " +
-                    "(SELECT CLIENT_EMAIL FROM SERIALS_HISTORIQUE WHERE CLIENT_EMAIL = '" + textBox1.Text.Replace("'", "''") + "' AND ACTIVATION_SERIAL = '" + textBox3.Text.Replace("'", "''") + "' LIMIT 1)," + //CLIENT_ID
+                MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) VALUES (" +
+                    //"'" + PreConnection.generate_ID_of_client() + "'," + //CLIENT_ID
+                    //"'" + label8.Text.Replace("'", "''") + "'," + //CLIENT_ID
                     "'" + textBox1.Text.Replace("'", "''") + "'," + //CLIENT_EMAL
                     "'" + textBox5.Text.Replace("'", "''") + "'," + //CLIENT_TEL
                     "'" + textBox6.Text.Replace("'", "''") + "'," + //CLIENT_NME
                     "'" + textBox3.Text.Replace("'", "''") + "');" + //ACTIVAT_CODE
-                    " FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM SERIALS_HISTORIQUE WHERE CLIENT_EMAIL = '" + textBox1.Text.Replace("'", "''") + "' AND ACTIVATION_SERIAL = '" + textBox3.Text.Replace("'", "''") + "');" +
-                    " CALL InsertAndUpdateMOUVEMENTS('" + textBox1.Text.Replace("'", "''") + "', '" + textBox3.Text.Replace("'", "''") + "');", albaitar_online);
-                if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+                    " CALL InsertAndUpdateMOUVEMENTS('" + textBox1.Text.Replace("'", "''") + "', '" + textBox3.Text.Replace("'", "''") + "');", PreConnection.albaitar_online);
+
+                //MySqlCommand command = new MySqlCommand("INSERT INTO `MOUVEMENTS` (`CLIENT_ID`,`CLIENT_EMAIL`,`CLIENT_TEL`,`CLIENT_NME`,`ACTIVAT_CODE`) SELECT " +
+                //    "(SELECT CLIENT_EMAIL FROM SERIALS_HISTORIQUE WHERE CLIENT_EMAIL = '" + textBox1.Text.Replace("'", "''") + "' AND ACTIVATION_SERIAL = '" + textBox3.Text.Replace("'", "''") + "' LIMIT 1)," + //CLIENT_ID
+                //    "'" + textBox1.Text.Replace("'", "''") + "'," + //CLIENT_EMAL
+                //    "'" + textBox5.Text.Replace("'", "''") + "'," + //CLIENT_TEL
+                //    "'" + textBox6.Text.Replace("'", "''") + "'," + //CLIENT_NME
+                //    "'" + textBox3.Text.Replace("'", "''") + "');" + //ACTIVAT_CODE
+                //    " FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM SERIALS_HISTORIQUE WHERE CLIENT_EMAIL = '" + textBox1.Text.Replace("'", "''") + "' AND ACTIVATION_SERIAL = '" + textBox3.Text.Replace("'", "''") + "');" +
+                //    " CALL InsertAndUpdateMOUVEMENTS('" + textBox1.Text.Replace("'", "''") + "', '" + textBox3.Text.Replace("'", "''") + "');", albaitar_online);
+                if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
                 try { command.ExecuteNonQuery(); } catch { }
-                albaitar_online.Close();
+                PreConnection.albaitar_online.Close();
                 //-------------------------------
-                string MachineCltID = Properties.Settings.Default.MachineClientID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID) : "";
+                // string MachineCltID = Properties.Settings.Default.MachineClientID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID) : "";
                 //----------
                 if (Check_activation(textBox3.Text.Replace("'", "''"), textBox1.Text.Replace("'", "''"))) //Good
                 {
-                    Verifyed_001 = true;
-                    Properties.Settings.Default.MachineClientID = PreConnection.Codify_txt(MachineCltID);
-                    Properties.Settings.Default.Save();
-                    PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
-                }
-                //--------------                    
-                if (Verifyed_001 || (PreConnection.Check_the_environ_ID(MachineCltID) && PreConnection.ReadFromRegistry("Déja_try_version") != "OUI"))
-                {
-                    try { Main_Frm.text_to_add_to_title = "Activated"; } catch { }                    
+
+                    try { Main_Frm.text_to_add_to_title = "Activated"; } catch { }
                     //--------
                     MessageBox.Show("Produit bien Activé !\n\n  ** Bienvenue avec AL BAITAR SoftVet **\n\n", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     label6.Text = textBox3.Text.Substring(0, 3) + "***************" + textBox3.Text.Substring(22, 2);
@@ -314,6 +313,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     Properties.Settings.Default.Codified_Activate_Code = PreConnection.Codify_txt(textBox3.Text);
                     Properties.Settings.Default.Codified_Act_Clt_Tel = PreConnection.Codify_txt(textBox5.Text);
                     Properties.Settings.Default.Codified_Act_Clt_Nme = PreConnection.Codify_txt(textBox6.Text);
+                    Properties.Settings.Default.MachineClientID = PreConnection.Codify_txt(PreConnection.generate_ID_of_client());
                     //---------
                     bool tt = Properties.Settings.Default.Codified_Act_Command_dmnd_date == null;
                     tt = (tt ? true : Properties.Settings.Default.Codified_Act_Command_dmnd_date.IsNullOrEmpty());
@@ -336,13 +336,69 @@ namespace ALBAITAR_Softvet.Dialogs
                     textBox3.Focus();
                     textBox3.SelectAll();
                 }
+                //-----------------------------//Check Finance
+                DataTable tbbl = new DataTable();
+                MySqlCommand command3 = new MySqlCommand("SELECT * FROM `SERIALS_HISTORIQUE` WHERE `CLIENT_EMAIL` = '" + textBox1.Text.Replace("'", "''") + "' AND `ACTIVATION_SERIAL` = '" + textBox3.Text.Replace("'", "''") + "';", PreConnection.albaitar_online);
+                try
+                {
+                    if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
+                    using (MySqlDataReader reader2 = command3.ExecuteReader())
+                    {
+                        tbbl.Load(reader2);
+                    }
+                }
+                catch { Main_Frm.activation_verified_corretly_with_server = false; }
+                PreConnection.albaitar_online.Close();
+                if (tbbl.Rows.Count > 0)
+                {
+                    int ee = 0;
+                    int.TryParse(tbbl.Rows[0]["IS_FINANCE_DONE"] != null ? tbbl.Rows[0]["IS_FINANCE_DONE"].ToString() : "0", out ee);
+                    string filePath = "C:\\ProgramData\\Al_Baitar_Activation.txt";
+                    if (!File.Exists(filePath))
+                    {
+                        File.Create(filePath).Dispose();
+                        //---------
+                        FileAttributes attributes = File.GetAttributes(filePath);
+                        attributes |= FileAttributes.Hidden;
+                        File.SetAttributes(filePath, attributes);
+                    }
+
+                    if (File.Exists(filePath))
+                    {
+                        //---------
+                        FileAttributes currentAttributes = File.GetAttributes(filePath);
+                        FileAttributes updatedAttributes = currentAttributes & ~FileAttributes.Hidden;
+                        File.SetAttributes(filePath, updatedAttributes);
+                        //---------
+
+                        string[] file_lines = File.ReadAllLines(filePath);
+                        string[] file_lines_to_save = new string[4];
+
+                        if (file_lines.Length > 0)
+                        {
+                            file_lines_to_save[0] = file_lines[0];
+                        }
+
+                        if (file_lines.Length > 1)
+                        {
+                            file_lines_to_save[1] = file_lines[1];
+                        }
+
+                        file_lines_to_save[2] = ee == 1 ? PreConnection.Codify_txt("Yes_is_done") : PreConnection.Codify_txt("Not_yet");
+                        file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
+                        //------------
+                        File.WriteAllLines(filePath, file_lines_to_save);
+                        //---------
+                        FileAttributes attributes = File.GetAttributes(filePath);
+                        attributes |= FileAttributes.Hidden;
+                        File.SetAttributes(filePath, attributes);
+                    }
+                }
+                //-----------------------------
                 label11.Visible = false;
                 label11.Refresh();
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Votre code ID n'est pas valide !", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
+                //------------------------------
+
             }
         }
 
@@ -395,15 +451,14 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private bool Check_activation(string code, string email)
         {
-
             DataTable dttb = new DataTable();
-            MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + email + "' AND `ACTIVAT_CODE` = '" + code + "';", albaitar_online);
-            if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
+            MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + email + "' AND `ACTIVAT_CODE` = '" + code + "';", PreConnection.albaitar_online);
+            if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
             using (MySqlDataReader reader = command2.ExecuteReader())
             {
                 dttb.Load(reader);
             }
-            albaitar_online.Close();
+            PreConnection.albaitar_online.Close();
 
             if (dttb.Rows.Count > 0)
             {

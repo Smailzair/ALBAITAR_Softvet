@@ -12,7 +12,7 @@ namespace ALBAITAR_Softvet.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -271,8 +271,29 @@ namespace ALBAITAR_Softvet.Properties {
                 this["Last_Auto_Buckup_Date"] = value;
             }
         }
-
-        public string Codified_Act_Client_ID { get; internal set; }
-        public string MachineClientID { get; internal set; }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Codified_Act_Client_ID {
+            get {
+                return ((string)(this["Codified_Act_Client_ID"]));
+            }
+            set {
+                this["Codified_Act_Client_ID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MachineClientID {
+            get {
+                return ((string)(this["MachineClientID"]));
+            }
+            set {
+                this["MachineClientID"] = value;
+            }
+        }
     }
 }
