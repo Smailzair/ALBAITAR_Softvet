@@ -559,9 +559,15 @@ namespace ALBAITAR_Softvet
             {
 
                 //========= I/ First steps ==============
-                string filePath = "C:\\ProgramData\\Al_Baitar_Activation.txt";
+                string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
+                string filePath = folderPath + "\\Al_Baitar_Activation.txt";
                 if (!File.Exists(filePath))
                 {
+                    if (!Directory.Exists(folderPath)) {
+                        Directory.CreateDirectory(folderPath);
+                        File.SetAttributes(folderPath, FileAttributes.Directory | FileAttributes.Hidden);
+                    }
+                    //--------
                     File.Create(filePath).Dispose();
                     //---------
                     FileAttributes attributes = File.GetAttributes(filePath);
@@ -673,7 +679,7 @@ namespace ALBAITAR_Softvet
                 //if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
                 //{
                 //    //========= I/ First steps ==============
-                //    string filePath = "C:\\ProgramData\\Al_Baitar_Activation.txt";
+                //    string filePath = "C:\\ProgramData\\BAITAR_CTRL\\Al_Baitar_Activation.txt";
 
                 //    if (File.Exists(filePath))
                 //    {
@@ -1160,9 +1166,16 @@ namespace ALBAITAR_Softvet
         {
             Application.OpenForms["Splash"]?.Close();
             //-----------
-            string filePath = "C:\\ProgramData\\Al_Baitar_Activation.txt";
+            string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
+            string filePath = folderPath + "\\Al_Baitar_Activation.txt";
             if (!File.Exists(filePath))
             {
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                    File.SetAttributes(folderPath, FileAttributes.Directory | FileAttributes.Hidden);
+                }
+                //--------
                 File.Create(filePath).Dispose();
                 //---------
                 FileAttributes attributes = File.GetAttributes(filePath);
@@ -1191,7 +1204,7 @@ namespace ALBAITAR_Softvet
                 if (file_lines.Length > 1)
                 {
                     DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
-                    file_lines_to_save[1] = file_lines[1];
+                    file_lines_to_save[1] = PreConnection.Codify_txt(prev_saved_running_delay_datetime.ToString());
                 }
 
                 if (file_lines.Length > 2)

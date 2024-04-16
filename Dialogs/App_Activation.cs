@@ -353,9 +353,16 @@ namespace ALBAITAR_Softvet.Dialogs
                 {
                     int ee = 0;
                     int.TryParse(tbbl.Rows[0]["IS_FINANCE_DONE"] != null ? tbbl.Rows[0]["IS_FINANCE_DONE"].ToString() : "0", out ee);
-                    string filePath = "C:\\ProgramData\\Al_Baitar_Activation.txt";
+                    string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
+                    string filePath = folderPath + "\\Al_Baitar_Activation.txt";
                     if (!File.Exists(filePath))
                     {
+                        if (!Directory.Exists(folderPath))
+                        {
+                            Directory.CreateDirectory(folderPath);
+                            File.SetAttributes(folderPath, FileAttributes.Directory | FileAttributes.Hidden);
+                        }
+                        //--------
                         File.Create(filePath).Dispose();
                         //---------
                         FileAttributes attributes = File.GetAttributes(filePath);
