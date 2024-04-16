@@ -600,7 +600,7 @@ namespace ALBAITAR_Softvet
                         file_lines_to_save[2] = file_lines[2];
                     }
 
-                    DateTime Server_Verif_Date = DateTime.UtcNow;
+                    DateTime Server_Verif_Date = new DateTime(1900,01,01);
                     if (file_lines.Length > 3)
                     {
                         DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[3]), out Server_Verif_Date);
@@ -613,7 +613,7 @@ namespace ALBAITAR_Softvet
                     Activ_verif_required = Activ_verif_required || (Is_finance_done == false && (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3"));
                     Activ_verif_required = Activ_verif_required || (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "7");
                     Activ_verif_required = Activ_verif_required || (prev_running_delay >= 10800 || prev_running_delay == 0);
-                    Activ_verif_required = Activ_verif_required || (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800); //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
+                    Activ_verif_required = Activ_verif_required || (PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() && (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800)); //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
 
                     if (Activ_verif_required)
                     {
@@ -626,11 +626,19 @@ namespace ALBAITAR_Softvet
                         File.WriteAllLines(filePath, file_lines_to_save);
                         if (!server_activated) //if NOT activated (or couldn't verify yet)
                         {
-                            PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
-                            Properties.Settings.Default.Codified_Activate_Code = "";
-                            Properties.Settings.Default.Save();
-                            close_app_because_act = true;
-                            Application.Run(new App_Activation());
+                            int RESTE_DELAY = Math.Min(int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "7"), int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3"));
+                            bool reste_delay_ended = (DateTime.Now - Server_Verif_Date).TotalDays >= RESTE_DELAY;
+                            bool prevent_enter = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() && (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800);
+                            if (reste_delay_ended || Server_Verif_Date.Year == 1900)
+                            {
+                                PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
+                                Properties.Settings.Default.Codified_Activate_Code = "";
+                                Properties.Settings.Default.Save();
+                                text_to_add_to_title = " (Produit non activé - réste [" + ((RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) >= 0 ? (RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) : 0) + "] jours)";
+                                close_app_because_act = prevent_enter;
+                                Application.Run(new App_Activation());
+                            }
+                            
                         }
                     }
                     //-------
