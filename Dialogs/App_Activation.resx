@@ -130,7 +130,9 @@
     - Et Voila -
 -------------------------------------------------------------
                                Remarque : 
-L'activation suit la quantité autorisée, si la quantité est dépassée, les anciennes versions seront automatiquement désactivées.</value>
+L'activation suit la quantité autorisée, si la quantité est dépassée, les anciennes versions seront automatiquement désactivées.
+-------------------------------------------------------------
+</value>
   </data>
   <data name="textBox4.Text" xml:space="preserve">
     <value>   Important :

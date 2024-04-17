@@ -929,7 +929,7 @@ namespace ALBAITAR_Softvet
                 albaitar_online.Close();
                 //-------------------------------
                 DataTable dttb = new DataTable();
-                MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND  `ACTIVAT_CODE` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
+                MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND  `ACTIVAT_CODE` = '" + Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
                 try
                 {
                     if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
@@ -941,7 +941,7 @@ namespace ALBAITAR_Softvet
                 catch { Main_Frm.activation_verified_corretly_with_server = false; }
                 //-------------------------------
                 DataTable tbbl = new DataTable();
-                MySqlCommand command3 = new MySqlCommand("SELECT * FROM `SERIALS_HISTORIQUE` WHERE `CLIENT_EMAIL` = '" + Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND `ACTIVATION_SERIAL` = '" + PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
+                MySqlCommand command3 = new MySqlCommand("SELECT * FROM `SERIALS_HISTORIQUE` WHERE `CLIENT_EMAIL` = '" + Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email) + "' AND `ACTIVATION_SERIAL` = '" + Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code) + "';", albaitar_online);
                 try
                 {
                     if (albaitar_online.State != ConnectionState.Open) { albaitar_online.Open(); }
@@ -964,6 +964,30 @@ namespace ALBAITAR_Softvet
                 }
             }
             return Verifyed_001;
+        }
+
+        public static string verify_baitar_client_finance(string email, string serial) {
+            //-----------------------------//Check Finance
+            int ee = -1;
+
+            DataTable tbbl = new DataTable();
+            MySqlCommand command3 = new MySqlCommand("SELECT * FROM `SERIALS_HISTORIQUE` WHERE `CLIENT_EMAIL` = '" +email + "' AND `ACTIVATION_SERIAL` = '" + serial + "';", PreConnection.albaitar_online);
+            try
+            {
+                if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
+                using (MySqlDataReader reader2 = command3.ExecuteReader())
+                {
+                    tbbl.Load(reader2);
+                }
+            }
+            catch { Main_Frm.activation_verified_corretly_with_server = false; }
+            PreConnection.albaitar_online.Close();
+
+            if (tbbl.Rows.Count > 0)
+            {
+                int.TryParse(tbbl.Rows[0]["IS_FINANCE_DONE"] != null ? tbbl.Rows[0]["IS_FINANCE_DONE"].ToString() : "-1", out ee);
+            }
+            return (ee == 1 ? "good" : (ee == 0 ? "not good" : "unknown"));
         }
 
     }

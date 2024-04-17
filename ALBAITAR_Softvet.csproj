@@ -1104,6 +1104,8 @@
     <None Include="Resources\Delete Database.png" />
     <None Include="Resources\icons8_slide_up_120px_2.png" />
     <None Include="Resources\icons8_slide_up_down_30px.png" />
+    <None Include="Resources\qqqqq.png" />
+    <None Include="Resources\icons8_expired_124px.png" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

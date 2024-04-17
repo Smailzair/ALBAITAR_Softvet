@@ -25,6 +25,12 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             InitializeComponent();
             //---------------------------
+            if (Main_Frm.Baitar_Server_Params.Rows.Count > 0)
+            {
+                string BAITAR_ADRESS_EMAIL = Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("EMAIL_TO_RECIEVE_COMMANDS")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("EMAIL_TO_RECIEVE_COMMANDS"))["VAL"] : "";
+                textBox2.Text += BAITAR_ADRESS_EMAIL;
+            }
+            //----------------------------
             PreConnection.load_rancosoft_gmail_auth();
         }
 
@@ -67,6 +73,91 @@ namespace ALBAITAR_Softvet.Dialogs
                 pictureBox1.Image = Properties.Resources.icons8_safe_ok_120px;
                 textBox2.Visible = pictureBox3.Visible = panel3.Visible = false;
                 this.Size = new System.Drawing.Size(this.Width, this.Height - panel3.Height);
+                //---------------
+                //-----------------------------//Check Finance
+                string finance_stat = PreConnection.verify_baitar_client_finance(textBox1.Text, textBox3.Text);
+
+                string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
+                string filePath = folderPath + "\\Al_Baitar_Activation.txt";
+
+                if (!File.Exists(filePath))
+                {
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                        File.SetAttributes(folderPath, FileAttributes.Directory | FileAttributes.Hidden);
+                    }
+                    //--------
+                    File.Create(filePath).Dispose();
+                    //---------
+                    FileAttributes attributes = File.GetAttributes(filePath);
+                    attributes |= FileAttributes.Hidden;
+                    File.SetAttributes(filePath, attributes);
+                }
+
+                if (File.Exists(filePath))
+                {
+                    //---------
+                    FileAttributes currentAttributes = File.GetAttributes(filePath);
+                    FileAttributes updatedAttributes = currentAttributes & ~FileAttributes.Hidden;
+                    File.SetAttributes(filePath, updatedAttributes);
+                    //---------
+
+                    string[] file_lines = File.ReadAllLines(filePath);
+                    string[] file_lines_to_save = new string[4];
+
+                    if (file_lines.Length > 0)
+                    {
+                        file_lines_to_save[0] = file_lines[0];
+                    }
+
+                    if (file_lines.Length > 1)
+                    {
+                        file_lines_to_save[1] = file_lines[1];
+                    }
+
+                    DateTime Server_Verif_Date = Properties.Settings.Default.First_Enter_Date_After_Install == new DateTime(1867, 05, 15) ? DateTime.UtcNow : Properties.Settings.Default.First_Enter_Date_After_Install;
+                    if (file_lines.Length > 3)
+                    {
+                        DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[3]), out Server_Verif_Date);
+                        file_lines_to_save[3] = file_lines[3];
+                    }
+
+                    if (finance_stat == "good")
+                    {
+                        file_lines_to_save[2] = PreConnection.Codify_txt("Yes_is_done");
+                        file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
+                        pictureBox5.Visible = true;
+                        pictureBox6.Visible = false;
+                        label22.Text = "Oui";
+                        label22.ForeColor = Color.Green;
+                    }
+                    else
+                    {
+                        int Finance_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3");
+                        label22.ForeColor = Color.Red;
+                        if (finance_stat == "not good")
+                        {
+                            file_lines_to_save[2] = PreConnection.Codify_txt("Not_yet");
+                            file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
+                            label22.Text = "Pas encore";
+                        }
+                        else
+                        {
+                            label22.Text = "(Veuillez nous contacter avant " + ((Finance_delay - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? Convert.ToInt32(Finance_delay - (DateTime.Now - Server_Verif_Date).TotalDays).ToString() : "--") + " jrs)";
+
+                        }
+                        pictureBox5.Visible = false;
+                        pictureBox6.Visible = true;
+
+                    }
+                    //------------
+                    File.WriteAllLines(filePath, file_lines_to_save);
+                    //---------
+                    FileAttributes attributes = File.GetAttributes(filePath);
+                    attributes |= FileAttributes.Hidden;
+                    File.SetAttributes(filePath, attributes);
+                }
             }
             else
             {
@@ -114,13 +205,56 @@ namespace ALBAITAR_Softvet.Dialogs
                     }
 
                     //------------
-
-                    int RESTE_DELAY = Math.Min(int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "7"), int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3"));
+                    int Finance_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3");
+                    int Default_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "7");
+                    int RESTE_DELAY = Math.Min(Default_delay, Finance_delay);
                     bool reste_delay_ended = (DateTime.Now - Server_Verif_Date).TotalDays >= RESTE_DELAY;
                     if (!reste_delay_ended)
                     {
-                        label13.Text = ((RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) >= 0 ? (RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) : 0) + " jours";
+                        label13.Text = ((RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? Convert.ToInt32(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays).ToString() : "--") + " jours";
                     }
+                    //------------------
+                    //////////////
+                    ///
+                    //////////////
+                    string finance_stat = PreConnection.verify_baitar_client_finance(PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email), PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code));
+
+                    if (finance_stat == "good")
+                    {
+                        file_lines_to_save[2] = PreConnection.Codify_txt("Yes_is_done");
+                        file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
+                        pictureBox5.Visible = true;
+                        pictureBox6.Visible = false;
+                        label22.Text = "Oui";
+                        label22.ForeColor = Color.Green;
+                    }
+                    else
+                    {
+                        label22.ForeColor = Color.Red;
+                        label22.Text = "";
+                        if (finance_stat == "not good")
+                        {
+                            file_lines_to_save[2] = PreConnection.Codify_txt("Not_yet");
+                            file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
+                            label22.Text = "Pas encore";
+                        }
+                        label22.Text += (label22.Text.Length > 0 ? "\n" : "")+ "(Veuillez nous contacter avant " + label13.Text + ")";
+                        pictureBox5.Visible = false;
+                        pictureBox6.Visible = true;
+
+                    }
+                    //------------
+                    File.WriteAllLines(filePath, file_lines_to_save);
+                    //---------
+                    FileAttributes attributes = File.GetAttributes(filePath);
+                    attributes |= FileAttributes.Hidden;
+                    File.SetAttributes(filePath, attributes);
+                   
+
+                   
+                    //////////////
+                    ///
+                    //////////////
 
                 }
                 else
@@ -206,88 +340,108 @@ namespace ALBAITAR_Softvet.Dialogs
                 //-------------------
                 if (PreConnection.IsInternetAvailable())
                 {
-                    //------------------------
-                    DataTable dt = new DataTable();
-                    MySqlCommand cmd = new MySqlCommand("SELECT VAL FROM SETTINGS WHERE NME = 'EMAIL_TO_RECIEVE_COMMANDS';", PreConnection.albaitar_online);
-                    if (PreConnection.albaitar_online.State != ConnectionState.Open)
+                    string Albaitar_Email = "";
+                    //---------
+                    if (Main_Frm.Baitar_Server_Params.Rows.Count > 0)
                     {
-                        PreConnection.albaitar_online.Open();
+                        Albaitar_Email = Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("EMAIL_TO_RECIEVE_COMMANDS")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("EMAIL_TO_RECIEVE_COMMANDS"))["VAL"] : "";
                     }
-                    MySqlDataReader reader = cmd.ExecuteReader();
-                    dt.Load(reader);
-                    PreConnection.albaitar_online.Close();
-                    string Albaitar_Email = dt.Rows[0][0].ToString();
-                    //-----------------------
-                    MimeMessage Mssg = new MimeMessage();
-                    Mssg.From.Add(new MailboxAddress("AlBaitar SoftVet", textBox1.Text));
-                    Mssg.To.Add(MailboxAddress.Parse(Albaitar_Email));
-                    Mssg.Subject = "ALBAITAR Softvet - Demande code d'activation";
-                    Mssg.Body = new TextPart("plain")
-                    {
-                        Text = "======================================================\n" +
-                        " -<< AlBaitar SoftVet >>-  [ " + Albaitar_Email + " ]\n" +
-                        "======================================================\n\n\n" +
-                        "Une demande d'activation de logiciel 'ALBAITAR Softvet' :\n\n" +
-                        "1)- Veuillez confirmer les informations. \n" +
-                        "2)- Si tous est bien, générer le code d'activation utilisant son ID envoyé. \n" +
-                        "3)- Envoyer ce code d'activation (généré) par un message Email déstiné au : " + textBox1.Text + ".\n\n" +
-                        "============================================\n\n" +
-                        "Détails :\n" +
-                        "-----------------\n" +
-                        //"ID : " + label8.Text + "\n" +
-                        "Email : " + textBox1.Text + "\n\n" +
-                        "Nom Complet : " + textBox6.Text + "\n" +
-                        "N° Tél : " + textBox5.Text + "\n" +
-                        "Ordinateur : " + label9.Text + "\n" +
-                        "Utilisateur (de PC) : " + label7.Text + "\n" +
-                        "Tentative reste : " + label13.Text + "\n\n" +
-                        "====================================="
-                    };
-                    bool good_sent = true;
-
-                    MailKit.Net.Smtp.SmtpClient clnt = new MailKit.Net.Smtp.SmtpClient();
-                    try
-                    {
-                        clnt.Connect("smtp.gmail.com", 465, true);
-                        clnt.Authenticate("rancosoft@gmail.com", PreConnection.Traduct_Codified_txt(Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT));
-                        clnt.Send(Mssg);
-                        MessageBox.Show("Votre demande a bien été envoyée, \nVous recevrez -prochainement- votre numéro d'activation par mail.\n\nMerci.", "Bien envoyé :", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    catch
-                    {
-                        good_sent = false;
-                        MessageBox.Show("Il y a eu un problème, veuillez réessayer.", "Non éffectué :", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                        clnt.Disconnect(true);
-                        clnt.Dispose();
-                        //---------------------
-                        if (good_sent)
+                    else {
+                        //------------------------
+                        DataTable dt = new DataTable();
+                        MySqlCommand cmd = new MySqlCommand("SELECT VAL FROM SETTINGS WHERE NME = 'EMAIL_TO_RECIEVE_COMMANDS';", PreConnection.albaitar_online);
+                        try
                         {
-                            MySqlCommand command = new MySqlCommand("INSERT INTO `ACT_COMMANDS`(`CLIENT_ID`,`CLIENT_MAIL`,`CLIENT_TEL`,`CLIENT_NME`,`FIRST_TENTATIVE`) VALUES (" +
-                            //"'" + PreConnection.generate_ID_of_client().Replace("'", "''") + "'," + //ID
-                            "NULL," + //ID
-                            "'" + textBox1.Text.Replace("'", "''") + "'," + //MAIL
-                            "'" + textBox5.Text.Replace("'", "''") + "'," + //TEL
-                            "'" + textBox6.Text.Replace("'", "''") + "'," + //NME
-                            rest_jrs_delay + ");", PreConnection.albaitar_online); //TENTATIVE
-                            if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
-                            try { command.ExecuteNonQuery(); } catch { }
+                            if (PreConnection.albaitar_online.State != ConnectionState.Open)
+                            {
+                                PreConnection.albaitar_online.Open();
+                            }
+                            MySqlDataReader reader = cmd.ExecuteReader();
+                            dt.Load(reader);
                             PreConnection.albaitar_online.Close();
-                            //----------------------------
-                            Properties.Settings.Default.Codifed_Activation_Email = PreConnection.Codify_txt(textBox1.Text);
-                            Properties.Settings.Default.Codified_Act_Clt_Tel = PreConnection.Codify_txt(textBox5.Text);
-                            Properties.Settings.Default.Codified_Act_Clt_Nme = PreConnection.Codify_txt(textBox6.Text);
-                            Properties.Settings.Default.Codified_Act_Command_dmnd_date = PreConnection.Codify_txt(DateTime.Now.ToString());
-                            Properties.Settings.Default.Save();
-                            label17.Visible = true;
-                            label17.Text = "Demande envoyée le : " + DateTime.Now.ToString("dd/MM/yyyy");
-
+                            Albaitar_Email = dt.Rows[0][0].ToString();
                         }
-                        //-------------------------------
+                        catch { }                        
                     }
-                    //-----------
+                    if (!Albaitar_Email.IsNullOrEmpty())
+                    {
+                        //-----------------------
+                        MimeMessage Mssg = new MimeMessage();
+                        Mssg.From.Add(new MailboxAddress("AlBaitar SoftVet", textBox1.Text));
+                        Mssg.To.Add(MailboxAddress.Parse(Albaitar_Email));
+                        Mssg.Subject = "ALBAITAR Softvet - Demande code d'activation";
+                        Mssg.Body = new TextPart("plain")
+                        {
+                            Text = "======================================================\n" +
+                            " -<< AlBaitar SoftVet >>-  [ " + Albaitar_Email + " ]\n" +
+                            "======================================================\n\n\n" +
+                            "Une demande d'activation de logiciel 'ALBAITAR Softvet' :\n\n" +
+                            "1)- Veuillez confirmer les informations. \n" +
+                            "2)- Si tous est bien, générer le code d'activation utilisant son ID envoyé. \n" +
+                            "3)- Envoyer ce code d'activation (généré) par un message Email déstiné au : " + textBox1.Text + ".\n\n" +
+                            "============================================\n\n" +
+                            "Détails :\n" +
+                            "-----------------\n" +
+                            //"ID : " + label8.Text + "\n" +
+                            "Email : " + textBox1.Text + "\n\n" +
+                            "Nom Complet : " + textBox6.Text + "\n" +
+                            "N° Tél : " + textBox5.Text + "\n" +
+                            "Ordinateur : " + label9.Text + "\n" +
+                            "Utilisateur (de PC) : " + label7.Text + "\n" +
+                            "Tentative reste : " + label13.Text + "\n\n" +
+                            "====================================="
+                        };
+                        bool good_sent = true;
+
+                        MailKit.Net.Smtp.SmtpClient clnt = new MailKit.Net.Smtp.SmtpClient();
+                        try
+                        {
+                            clnt.Connect("smtp.gmail.com", 465, true);
+                            clnt.Authenticate("rancosoft@gmail.com", PreConnection.Traduct_Codified_txt(Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT));
+                            clnt.Send(Mssg);
+                            MessageBox.Show("Votre demande a bien été envoyée, \nVous recevrez -prochainement- votre numéro d'activation par mail.\n\nMerci.", "Bien envoyé :", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                        catch
+                        {
+                            good_sent = false;
+                            MessageBox.Show("Il y a eu un problème, veuillez réessayer.", "Non éffectué :", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        finally
+                        {
+                            clnt.Disconnect(true);
+                            clnt.Dispose();
+                            //---------------------
+                            if (good_sent)
+                            {
+                                MySqlCommand command = new MySqlCommand("INSERT INTO `ACT_COMMANDS`(`CLIENT_ID`,`CLIENT_MAIL`,`CLIENT_TEL`,`CLIENT_NME`,`FIRST_TENTATIVE`) VALUES (" +
+                                //"'" + PreConnection.generate_ID_of_client().Replace("'", "''") + "'," + //ID
+                                "NULL," + //ID
+                                "'" + textBox1.Text.Replace("'", "''") + "'," + //MAIL
+                                "'" + textBox5.Text.Replace("'", "''") + "'," + //TEL
+                                "'" + textBox6.Text.Replace("'", "''") + "'," + //NME
+                                rest_jrs_delay + ");", PreConnection.albaitar_online); //TENTATIVE
+                                if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
+                                try { command.ExecuteNonQuery(); } catch { }
+                                PreConnection.albaitar_online.Close();
+                                //----------------------------
+                                Properties.Settings.Default.Codifed_Activation_Email = PreConnection.Codify_txt(textBox1.Text);
+                                Properties.Settings.Default.Codified_Act_Clt_Tel = PreConnection.Codify_txt(textBox5.Text);
+                                Properties.Settings.Default.Codified_Act_Clt_Nme = PreConnection.Codify_txt(textBox6.Text);
+                                Properties.Settings.Default.Codified_Act_Command_dmnd_date = PreConnection.Codify_txt(DateTime.Now.ToString());
+                                Properties.Settings.Default.Save();
+                                label17.Visible = true;
+                                label17.Text = "Demande envoyée le : " + DateTime.Now.ToString("dd/MM/yyyy");
+
+                            }
+                            //-------------------------------
+                        }
+                        //-----------
+                    }
+                    else {
+                        MessageBox.Show(" - Veuillez connectez a l'internet puis continuez.\n\r - Vérifiez votre adresse Email.", "Pas de connection internet !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
+                   
                 }
                 else
                 {
@@ -396,70 +550,183 @@ namespace ALBAITAR_Softvet.Dialogs
                     textBox3.SelectAll();
                 }
                 //-----------------------------//Check Finance
-                DataTable tbbl = new DataTable();
-                MySqlCommand command3 = new MySqlCommand("SELECT * FROM `SERIALS_HISTORIQUE` WHERE `CLIENT_EMAIL` = '" + textBox1.Text.Replace("'", "''") + "' AND `ACTIVATION_SERIAL` = '" + textBox3.Text.Replace("'", "''") + "';", PreConnection.albaitar_online);
-                try
+                string finance_stat = PreConnection.verify_baitar_client_finance(textBox1.Text, textBox3.Text);
+
+                string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
+                string filePath = folderPath + "\\Al_Baitar_Activation.txt";
+
+                if (!File.Exists(filePath))
                 {
-                    if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
-                    using (MySqlDataReader reader2 = command3.ExecuteReader())
+                    if (!Directory.Exists(folderPath))
                     {
-                        tbbl.Load(reader2);
+                        Directory.CreateDirectory(folderPath);
+                        File.SetAttributes(folderPath, FileAttributes.Directory | FileAttributes.Hidden);
                     }
+                    //--------
+                    File.Create(filePath).Dispose();
+                    //---------
+                    FileAttributes attributes = File.GetAttributes(filePath);
+                    attributes |= FileAttributes.Hidden;
+                    File.SetAttributes(filePath, attributes);
                 }
-                catch { Main_Frm.activation_verified_corretly_with_server = false; }
-                PreConnection.albaitar_online.Close();
-                if (tbbl.Rows.Count > 0)
+
+                if (File.Exists(filePath))
                 {
-                    int ee = 0;
-                    int.TryParse(tbbl.Rows[0]["IS_FINANCE_DONE"] != null ? tbbl.Rows[0]["IS_FINANCE_DONE"].ToString() : "0", out ee);
-                    string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
-                    string filePath = folderPath + "\\Al_Baitar_Activation.txt";
-                    if (!File.Exists(filePath))
+                    //---------
+                    FileAttributes currentAttributes = File.GetAttributes(filePath);
+                    FileAttributes updatedAttributes = currentAttributes & ~FileAttributes.Hidden;
+                    File.SetAttributes(filePath, updatedAttributes);
+                    //---------
+
+                    string[] file_lines = File.ReadAllLines(filePath);
+                    string[] file_lines_to_save = new string[4];
+
+                    if (file_lines.Length > 0)
                     {
-                        if (!Directory.Exists(folderPath))
-                        {
-                            Directory.CreateDirectory(folderPath);
-                            File.SetAttributes(folderPath, FileAttributes.Directory | FileAttributes.Hidden);
-                        }
-                        //--------
-                        File.Create(filePath).Dispose();
-                        //---------
-                        FileAttributes attributes = File.GetAttributes(filePath);
-                        attributes |= FileAttributes.Hidden;
-                        File.SetAttributes(filePath, attributes);
+                        file_lines_to_save[0] = file_lines[0];
                     }
 
-                    if (File.Exists(filePath))
+                    if (file_lines.Length > 1)
                     {
-                        //---------
-                        FileAttributes currentAttributes = File.GetAttributes(filePath);
-                        FileAttributes updatedAttributes = currentAttributes & ~FileAttributes.Hidden;
-                        File.SetAttributes(filePath, updatedAttributes);
-                        //---------
+                        file_lines_to_save[1] = file_lines[1];
+                    }
 
-                        string[] file_lines = File.ReadAllLines(filePath);
-                        string[] file_lines_to_save = new string[4];
-
-                        if (file_lines.Length > 0)
-                        {
-                            file_lines_to_save[0] = file_lines[0];
-                        }
-
-                        if (file_lines.Length > 1)
-                        {
-                            file_lines_to_save[1] = file_lines[1];
-                        }
-
-                        file_lines_to_save[2] = ee == 1 ? PreConnection.Codify_txt("Yes_is_done") : PreConnection.Codify_txt("Not_yet");
+                    
+                    if (finance_stat == "good")
+                    {
+                        file_lines_to_save[2] = PreConnection.Codify_txt("Yes_is_done");
                         file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
-                        //------------
-                        File.WriteAllLines(filePath, file_lines_to_save);
-                        //---------
-                        FileAttributes attributes = File.GetAttributes(filePath);
-                        attributes |= FileAttributes.Hidden;
-                        File.SetAttributes(filePath, attributes);
+                        pictureBox5.Visible = true;
+                        pictureBox6.Visible = false;
+                        label22.Text = "Oui";
+                        label22.ForeColor = Color.Green;
                     }
+                    else
+                    {
+                        int Finance_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3");
+                        label22.ForeColor = Color.Red;
+                        if (finance_stat == "not good")
+                        {
+                            file_lines_to_save[2] = PreConnection.Codify_txt("Not_yet");
+                            file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
+                            label22.Text = "Pas encore";
+                        }
+                        else
+                        {
+                            label22.Text = "(Veuillez nous contacter avant " + Finance_delay + " jrs)";
+
+                        }                        
+                        pictureBox5.Visible = false;
+                        pictureBox6.Visible = true;
+                 
+                    }
+                    //------------
+                    File.WriteAllLines(filePath, file_lines_to_save);
+                    //---------
+                    FileAttributes attributes = File.GetAttributes(filePath);
+                    attributes |= FileAttributes.Hidden;
+                    File.SetAttributes(filePath, attributes);
                 }
+
+
+
+
+
+
+                //DataTable tbbl = new DataTable();
+                //MySqlCommand command3 = new MySqlCommand("SELECT * FROM `SERIALS_HISTORIQUE` WHERE `CLIENT_EMAIL` = '" + textBox1.Text.Replace("'", "''") + "' AND `ACTIVATION_SERIAL` = '" + textBox3.Text.Replace("'", "''") + "';", PreConnection.albaitar_online);
+                //try
+                //{
+                //    if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
+                //    using (MySqlDataReader reader2 = command3.ExecuteReader())
+                //    {
+                //        tbbl.Load(reader2);
+                //    }
+                //}
+                //catch { Main_Frm.activation_verified_corretly_with_server = false; }
+                //PreConnection.albaitar_online.Close();
+
+
+                //if (tbbl.Rows.Count > 0)
+                //{
+                //    string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
+                //    string filePath = folderPath + "\\Al_Baitar_Activation.txt";
+
+                //    int ee = 0;
+                //    int.TryParse(tbbl.Rows[0]["IS_FINANCE_DONE"] != null ? tbbl.Rows[0]["IS_FINANCE_DONE"].ToString() : "0", out ee);
+
+                //    if (!File.Exists(filePath))
+                //    {
+                //        if (!Directory.Exists(folderPath))
+                //        {
+                //            Directory.CreateDirectory(folderPath);
+                //            File.SetAttributes(folderPath, FileAttributes.Directory | FileAttributes.Hidden);
+                //        }
+                //        //--------
+                //        File.Create(filePath).Dispose();
+                //        //---------
+                //        FileAttributes attributes = File.GetAttributes(filePath);
+                //        attributes |= FileAttributes.Hidden;
+                //        File.SetAttributes(filePath, attributes);
+                //    }
+
+                //    if (File.Exists(filePath))
+                //    {
+                //        //---------
+                //        FileAttributes currentAttributes = File.GetAttributes(filePath);
+                //        FileAttributes updatedAttributes = currentAttributes & ~FileAttributes.Hidden;
+                //        File.SetAttributes(filePath, updatedAttributes);
+                //        //---------
+
+                //        string[] file_lines = File.ReadAllLines(filePath);
+                //        string[] file_lines_to_save = new string[4];
+
+                //        if (file_lines.Length > 0)
+                //        {
+                //            file_lines_to_save[0] = file_lines[0];
+                //        }
+
+                //        if (file_lines.Length > 1)
+                //        {
+                //            file_lines_to_save[1] = file_lines[1];
+                //        }
+
+                //        file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
+                //        //------------
+                //        File.WriteAllLines(filePath, file_lines_to_save);
+                //        //---------
+                //        FileAttributes attributes = File.GetAttributes(filePath);
+                //        attributes |= FileAttributes.Hidden;
+                //        File.SetAttributes(filePath, attributes);
+
+
+                //        if (ee == 1)
+                //        {
+                //            file_lines_to_save[2] = PreConnection.Codify_txt("Yes_is_done");
+                //            pictureBox5.Visible = true;
+                //            pictureBox6.Visible = false;
+                //            label22.Text = "Oui";
+                //            label22.ForeColor = Color.Green;
+                //        }
+                //        else
+                //        {
+                //            int Finance_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3");
+                //            label22.ForeColor = Color.Red;
+                //            if (panel4.Visible)
+                //            {
+                //                label22.Text = "(Veuillez nous contacter avant " + Finance_delay + " jrs)";
+                //            }
+                //            else
+                //            {
+                //                label22.Text = "Pas encore";
+                //            }
+
+                //            file_lines_to_save[2] = PreConnection.Codify_txt("Not_yet");
+                //            pictureBox5.Visible = false;
+                //            pictureBox6.Visible = true;
+                //        }
+                //    }
+                //}
                 //-----------------------------
                 label11.Visible = false;
                 label11.Refresh();
@@ -517,14 +784,22 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private bool Check_activation(string code, string email)
         {
-            DataTable dttb = new DataTable();
             MySqlCommand command2 = new MySqlCommand("SELECT * FROM `MOUVEMENTS` WHERE `CLIENT_EMAIL` = '" + email + "' AND `ACTIVAT_CODE` = '" + code + "';", PreConnection.albaitar_online);
-            if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
-            using (MySqlDataReader reader = command2.ExecuteReader())
+            DataTable dttb = new DataTable();
+            try
             {
-                dttb.Load(reader);
+                if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
+                using (MySqlDataReader reader = command2.ExecuteReader())
+                {
+                    dttb.Load(reader);
+                }
+                PreConnection.albaitar_online.Close();
             }
-            PreConnection.albaitar_online.Close();
+            catch (Exception ex)
+            {
+
+            }
+
 
             if (dttb.Rows.Count > 0)
             {
