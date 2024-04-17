@@ -76,5 +76,8 @@
     <Setting Name="MachineClientID" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="First_Enter_Date_After_Install" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">1867-05-15</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

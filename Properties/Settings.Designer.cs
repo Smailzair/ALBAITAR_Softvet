@@ -295,5 +295,17 @@ namespace ALBAITAR_Softvet.Properties {
                 this["MachineClientID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1867-05-15")]
+        public global::System.DateTime First_Enter_Date_After_Install {
+            get {
+                return ((global::System.DateTime)(this["First_Enter_Date_After_Install"]));
+            }
+            set {
+                this["First_Enter_Date_After_Install"] = value;
+            }
+        }
     }
 }

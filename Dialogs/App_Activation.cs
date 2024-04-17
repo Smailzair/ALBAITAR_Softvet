@@ -2,11 +2,13 @@
 using MySql.Data.MySqlClient;
 using ServiceStack;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Windows.Forms;
@@ -68,6 +70,63 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             else
             {
+
+                //========= I/ First steps ==============
+                string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
+                string filePath = folderPath + "\\Al_Baitar_Activation.txt";
+
+                if (File.Exists(filePath))
+                {
+                    //---------
+                    FileAttributes currentAttributes = File.GetAttributes(filePath);
+                    FileAttributes updatedAttributes = currentAttributes & ~FileAttributes.Hidden;
+                    File.SetAttributes(filePath, updatedAttributes);
+                    //---------
+                    string[] file_lines = File.ReadAllLines(filePath);
+                    string[] file_lines_to_save = new string[4];
+
+                    decimal prev_running_delay = 0; //delay per minute
+                    if (file_lines.Length > 0)
+                    {
+                        decimal.TryParse(file_lines[0].ToString(), out prev_running_delay);
+                        file_lines_to_save[0] = file_lines[0];
+                    }
+
+                    DateTime prev_saved_running_delay_datetime = new DateTime(1900, 01, 01);
+                    if (file_lines.Length > 1)
+                    {
+                        DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
+                        file_lines_to_save[1] = file_lines[1];
+                    }
+
+                    bool Is_finance_done = false;
+                    if (file_lines.Length > 2)
+                    {
+                        Is_finance_done = PreConnection.Traduct_Codified_txt(file_lines[2]) == "Yes_is_done";
+                        file_lines_to_save[2] = file_lines[2];
+                    }
+
+                    DateTime Server_Verif_Date = Properties.Settings.Default.First_Enter_Date_After_Install == new DateTime(1867, 05, 15) ? DateTime.UtcNow : Properties.Settings.Default.First_Enter_Date_After_Install;
+                    if (file_lines.Length > 3)
+                    {
+                        DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[3]), out Server_Verif_Date);
+                        file_lines_to_save[3] = file_lines[3];
+                    }
+
+                    //------------
+
+                    int RESTE_DELAY = Math.Min(int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "7"), int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3"));
+                    bool reste_delay_ended = (DateTime.Now - Server_Verif_Date).TotalDays >= RESTE_DELAY;
+                    if (!reste_delay_ended)
+                    {
+                        label13.Text = ((RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) >= 0 ? (RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) : 0) + " jours";
+                    }
+
+                }
+                else
+                {
+                    label13.Text = "30 jours";
+                }
 
                 //////////if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
                 //////////{
