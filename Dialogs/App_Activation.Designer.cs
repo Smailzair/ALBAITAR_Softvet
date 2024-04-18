@@ -74,6 +74,7 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -608,6 +609,15 @@
             this.pictureBox1.TabIndex = 26;
             this.pictureBox1.TabStop = false;
             // 
+            // label23
+            // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label23.Location = new System.Drawing.Point(428, 9);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(206, 22);
+            this.label23.TabIndex = 54;
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // App_Activation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -624,6 +634,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.label23);
             this.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -699,5 +710,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
     }
 }

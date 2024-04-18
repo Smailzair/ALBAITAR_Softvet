@@ -307,17 +307,5 @@ namespace ALBAITAR_Softvet.Properties {
                 this["First_Enter_Date_After_Install"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ALBAITAR Softvet  (Produit non activé)")]
-        public string App_title {
-            get {
-                return ((string)(this["App_title"]));
-            }
-            set {
-                this["App_title"] = value;
-            }
-        }
     }
 }
