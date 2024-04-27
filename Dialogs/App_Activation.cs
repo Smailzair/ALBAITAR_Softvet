@@ -135,7 +135,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     }
                     else
                     {
-                        int Finance_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3");
+                        int Finance_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30");
                         label22.ForeColor = Color.Red;
                         if (finance_stat == "not good")
                         {
@@ -143,11 +143,11 @@ namespace ALBAITAR_Softvet.Dialogs
                             file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
                             label22.Text = "Pas encore";
                         }
-                        else
-                        {
-                            label22.Text = "(Veuillez nous contacter avant " + ((Finance_delay - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? Convert.ToInt32(Finance_delay - (DateTime.Now - Server_Verif_Date).TotalDays).ToString() : "--") + " jrs)";
-
-                        }
+                        int rest_finance_delay =
+                           (Finance_delay - (DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays) > 0 ?
+                           Convert.ToInt32(Finance_delay - (DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays)
+                           : Finance_delay;
+                        label22.Text += (label22.Text.Length > 0 ? "\n" : "") + "(Veuillez nous contacter " + (rest_finance_delay == 0 ? "immédiatement" : "avant " + rest_finance_delay + " jrs") + ")";
                         pictureBox5.Visible = false;
                         pictureBox6.Visible = true;
 
@@ -162,7 +162,7 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             else
             {
-
+                
                 //========= I/ First steps ==============
                 string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
                 string filePath = folderPath + "\\Al_Baitar_Activation.txt";
@@ -190,7 +190,6 @@ namespace ALBAITAR_Softvet.Dialogs
                         DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
                         file_lines_to_save[1] = file_lines[1];
                     }
-
                     bool Is_finance_done = false;
                     if (file_lines.Length > 2)
                     {
@@ -204,15 +203,18 @@ namespace ALBAITAR_Softvet.Dialogs
                         DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[3]), out Server_Verif_Date);
                         file_lines_to_save[3] = file_lines[3];
                     }
-
                     //------------
-                    int Finance_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3");
-                    int Default_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "7");
+                    int Finance_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30");
+                    int Default_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30");
                     int RESTE_DELAY = Math.Min(Default_delay, Finance_delay);
                     bool reste_delay_ended = (DateTime.Now - Server_Verif_Date).TotalDays >= RESTE_DELAY;
+
                     if (!reste_delay_ended)
                     {
                         label13.Text = ((RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? Convert.ToInt32(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays).ToString() : "--") + " jours";
+                    }
+                    else {
+                        label13.Text = Default_delay + " jours";
                     }
                     //------------------
                     //////////////
@@ -239,7 +241,12 @@ namespace ALBAITAR_Softvet.Dialogs
                             file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
                             label22.Text = "Pas encore";
                         }
-                        label22.Text += (label22.Text.Length > 0 ? "\n" : "")+ "(Veuillez nous contacter avant " + label13.Text + ")";
+                        //--------------------
+                        int rest_finance_delay = 
+                            (Finance_delay - (DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays) > 0 ? 
+                            Convert.ToInt32(Finance_delay - (DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays)
+                            : Finance_delay;
+                        label22.Text += (label22.Text.Length > 0 ? "\n" : "")+ "(Veuillez nous contacter "+ (rest_finance_delay == 0 ? "immédiatement" : "avant " + rest_finance_delay + " jrs") + ")";
                         pictureBox5.Visible = false;
                         pictureBox6.Visible = true;
 
@@ -294,7 +301,6 @@ namespace ALBAITAR_Softvet.Dialogs
 
 
             }
-
 
         }
 
@@ -604,7 +610,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     }
                     else
                     {
-                        int Finance_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3");
+                        int Finance_delay = int.Parse(Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Main_Frm.Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30");
                         label22.ForeColor = Color.Red;
                         if (finance_stat == "not good")
                         {
@@ -612,11 +618,12 @@ namespace ALBAITAR_Softvet.Dialogs
                             file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
                             label22.Text = "Pas encore";
                         }
-                        else
-                        {
-                            label22.Text = "(Veuillez nous contacter avant " + Finance_delay + " jrs)";
-
-                        }                        
+                       
+                        int rest_finance_delay =
+                           (Finance_delay - (DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays) > 0 ?
+                           Convert.ToInt32(Finance_delay - (DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays)
+                           : Finance_delay;
+                        label22.Text += (label22.Text.Length > 0 ? "\n" : "") + "(Veuillez nous contacter " + (rest_finance_delay == 0 ? "immédiatement" : "avant " + rest_finance_delay + " jrs") + ")";
                         pictureBox5.Visible = false;
                         pictureBox6.Visible = true;
                  

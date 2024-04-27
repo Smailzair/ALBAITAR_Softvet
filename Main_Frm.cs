@@ -631,21 +631,29 @@ namespace ALBAITAR_Softvet
                     //------------
 
                     bool Activ_verif_required = false;
-                    Activ_verif_required = Activ_verif_required || (Is_finance_done == false && (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3"));
-                    Activ_verif_required = Activ_verif_required || (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "7");
-                    Activ_verif_required = Activ_verif_required || (prev_running_delay >= 10800 || prev_running_delay == 0);
+                    Activ_verif_required = Activ_verif_required || (Is_finance_done == false && (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30"));
+                    Activ_verif_required = Activ_verif_required || (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30");
+                    Activ_verif_required = Activ_verif_required || ((DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes >= 10800 || prev_running_delay == 0);
                     Activ_verif_required = Activ_verif_required || (PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() && (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800)); //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
+                    is_activation_reqiired = Activ_verif_required;
 
                     string adding_to_title = "";
                     string adding_to_title_delay = "";
                     string adding_finance_to_title = "";
 
-                    int finnace_delay_tmp = (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3") - (int)(DateTime.Now - Server_Verif_Date).TotalDays) >= 0 ? (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3") - (int)(DateTime.Now - Server_Verif_Date).TotalDays) : 0;
-                    activation_delay_from_prev_server_check = (int)(DateTime.Now - Server_Verif_Date).TotalDays;
+                    //int finnace_delay_tmp = (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30") - (int)(DateTime.Now - Server_Verif_Date).TotalDays) >= 0 ? (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30") - (int)(DateTime.Now - Server_Verif_Date).TotalDays) : 0;
+                    int finnace_delay_tmp = (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ?
+                        (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30") - (int)(DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays) >= 0 ?
+                        (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ?
+                        (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30") - (int)(DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays) : 0;
+                    activation_finance_delay_days = finnace_delay_tmp;
+
+
+                    activation_delay_from_prev_server_check = (int)(DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays;
                     //----------
                     bool server_activated = PreConnection.Verif_real_server_activ();
                     activation_is_done = (server_activated && activation_verified_corretly_with_server) || (!server_activated && !Activ_verif_required);
-                    is_activation_reqiired = Activ_verif_required;
+                    
                     if (Activ_verif_required)
                     {   
                         if (activation_verified_corretly_with_server)
@@ -656,7 +664,8 @@ namespace ALBAITAR_Softvet
                             file_lines_to_save[2] = activation_is_finance_done ? PreConnection.Codify_txt("Yes_is_done") : PreConnection.Codify_txt("Not_yet");
                             file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
                             //------
-                            adding_finance_to_title = PreConnection.Traduct_Codified_txt(file_lines_to_save[2]) != "Yes_is_done" ? "Droits non réglés" : "";
+                            adding_finance_to_title = PreConnection.Traduct_Codified_txt(file_lines_to_save[2]) != "Yes_is_done" ? "Droits non réglés ["+finnace_delay_tmp+"]" : "";
+
                             activation_finance_delay_days = finnace_delay_tmp;
                         }
                         File.WriteAllLines(filePath, file_lines_to_save);
@@ -664,24 +673,21 @@ namespace ALBAITAR_Softvet
                         //-------
                         if (!server_activated || !activation_verified_corretly_with_server) //if NOT activated (or couldn't verify yet)
                         {
-                            activation_delay_days = int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "7");
-                            int RESTE_DELAY = (activation_is_finance_done && activation_verified_corretly_with_server) ? int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "7") : Math.Min(int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "7"), int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "3"));
+                            activation_delay_days = int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30");
+                            int RESTE_DELAY = (activation_is_finance_done && activation_verified_corretly_with_server) ? int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30") : Math.Min(int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30"), int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30"));
 
                             bool reste_delay_ended = (DateTime.Now - Server_Verif_Date).TotalDays >= RESTE_DELAY;
-                            bool prevent_enter = PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() && (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800);
+                            bool prevent_enter = (reste_delay_ended && PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty()) && (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800);
 
-                            if (reste_delay_ended)
-                            {
-                                PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
-                                Properties.Settings.Default.Codified_Activate_Code = "";
-                                Properties.Settings.Default.Save();
-                                close_app_because_act = prevent_enter;
-                                Application.Run(new App_Activation());
-                            }
+                            PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
+                            Properties.Settings.Default.Codified_Activate_Code = "";
+                            Properties.Settings.Default.Save();
+                            close_app_because_act = prevent_enter;
+                            Application.Run(new App_Activation());
                             //----------
                             adding_to_title += " (Produit non activé";
                             int restt = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays);
-                            adding_to_title_delay = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? " - réste [" + Convert.ToInt32(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays).ToString("0") + "] jours" : "";
+                            adding_to_title_delay = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? "[" + Convert.ToInt32(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays).ToString("0") + "] jours" : "";
                             //-------------
                         }
                         
@@ -705,12 +711,15 @@ namespace ALBAITAR_Softvet
                         }
                         else {
                             string finance_stat = PreConnection.verify_baitar_client_finance(PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email), PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code));
-                            adding_finance_to_title = finance_stat == "not good" ? "Droits non réglés" : "";
+                            adding_finance_to_title = finance_stat == "not good" ? "Droits non réglés ["+finnace_delay_tmp+"]" : "";
 
 
                             activation_is_finance_done = finance_stat == "unknown" ? activation_is_finance_done : finance_stat == "good";
+
+
                             activation_finance_delay_days = finnace_delay_tmp;
                         }
+                        
                     }
 
                     //--------
@@ -2797,15 +2806,10 @@ namespace ALBAITAR_Softvet
                 string tmp_titlt = "";
                 if (is_activation_reqiired || Properties.Settings.Default.Codified_Act_Client_ID.IsNullOrEmpty())
                 {
-                    tmp_titlt = !activation_is_done ? " (Produit non activé" + ((activation_delay_days - activation_delay_from_prev_server_check) > 0 ? " - réste [" + (activation_delay_days - activation_delay_from_prev_server_check) + "] jours)" : ")") : "";                    
+                    tmp_titlt = !activation_is_done ? " (Produit non activé" + ((activation_delay_days - activation_delay_from_prev_server_check) > 0 ? " [" + (activation_delay_days - activation_delay_from_prev_server_check) + "] jours)" : ")") : "";                    
                 }
-                tmp_titlt += !activation_is_finance_done ? " (Droit non réglés" + ((activation_finance_delay_days - activation_delay_from_prev_server_check) > 0 ? " - réste [" + (activation_finance_delay_days - activation_delay_from_prev_server_check) + "] jours)" : ")") : "";
+                tmp_titlt += !activation_is_finance_done ? " (Droit non réglés" + (activation_finance_delay_days > 0 ? " [" + activation_finance_delay_days + "] jours)" : ")") : "";
                 
-                MessageBox.Show(">>>>>> is_activation_reqiired = " + is_activation_reqiired + "\n" +
-                    "Properties.Settings.Default.Codified_Act_Client_ID.IsNullOrEmpty() = " + Properties.Settings.Default.Codified_Act_Client_ID.IsNullOrEmpty() + "\n" +
-                    "activation_is_done = " + activation_is_done + "\n" +
-                    "activation_is_finance_done = " + activation_is_finance_done + "\n" +
-                    "tmp_titlt = " + tmp_titlt);
 
                 text_to_add_to_title = tmp_titlt;
             }
