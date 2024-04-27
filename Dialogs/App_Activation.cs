@@ -525,7 +525,9 @@ namespace ALBAITAR_Softvet.Dialogs
                 if (Check_activation(textBox3.Text.Replace("'", "''"), textBox1.Text.Replace("'", "''"))) //Good
                 {
 
-                    try { Main_Frm.text_to_add_to_title = "make_title_activ_state_updat"; } catch { }
+                    try { Main_Frm.text_to_add_to_title = "make_title_activ_state_updat";
+                    
+                    } catch { }
                     //--------
                     MessageBox.Show("Produit bien Activé !\n\n  ** Bienvenue avec AL BAITAR SoftVet **\n\n", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     label6.Text = textBox3.Text.Substring(0, 3) + "***************" + textBox3.Text.Substring(22, 2);
@@ -819,6 +821,8 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             return dttb.Rows.Count > 0;
         }
+
+       
     }
 
 

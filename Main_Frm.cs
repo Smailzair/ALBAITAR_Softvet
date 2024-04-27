@@ -67,6 +67,7 @@ namespace ALBAITAR_Softvet
 
         public static bool make_title_activ_state_update = false;
         public static bool is_activation_reqiired = false;
+
         //----------
         DataTable chosen_anim_from_search;
         DataTable chosen_client_from_search;
@@ -685,9 +686,12 @@ namespace ALBAITAR_Softvet
                             close_app_because_act = prevent_enter;
                             Application.Run(new App_Activation());
                             //----------
-                            adding_to_title += " (Produit non activé";
-                            int restt = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays);
-                            adding_to_title_delay = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? "[" + Convert.ToInt32(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays).ToString("0") + "] jours" : "";
+
+                                adding_to_title += " (Produit non activé";
+                                int restt = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays);
+                                adding_to_title_delay = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? "[" + Convert.ToInt32(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays).ToString("0") + "] jours" : "";
+                            
+                            
                             //-------------
                         }
                         
@@ -2804,11 +2808,14 @@ namespace ALBAITAR_Softvet
                 make_title_activ_state_update = false;
                 //---
                 string tmp_titlt = "";
-                if (is_activation_reqiired || Properties.Settings.Default.Codified_Act_Client_ID.IsNullOrEmpty())
-                {
-                    tmp_titlt = !activation_is_done ? " (Produit non activé" + ((activation_delay_days - activation_delay_from_prev_server_check) > 0 ? " [" + (activation_delay_days - activation_delay_from_prev_server_check) + "] jours)" : ")") : "";                    
+                if (!text_to_add_to_title.Contains("make_title_activ_state_updat")) {
+
+                    if (is_activation_reqiired || Properties.Settings.Default.Codified_Act_Client_ID.IsNullOrEmpty())
+                    {
+                        tmp_titlt = !activation_is_done ? " (Produit non activé" + ((activation_delay_days - activation_delay_from_prev_server_check) > 0 ? " [" + (activation_delay_days - activation_delay_from_prev_server_check) + "] jours)" : ")") : "";
+                    }
+                    tmp_titlt += !activation_is_finance_done ? " (Droit non réglés" + (activation_finance_delay_days > 0 ? " [" + activation_finance_delay_days + "] jours)" : ")") : "";
                 }
-                tmp_titlt += !activation_is_finance_done ? " (Droit non réglés" + (activation_finance_delay_days > 0 ? " [" + activation_finance_delay_days + "] jours)" : ")") : "";
                 
 
                 text_to_add_to_title = tmp_titlt;
