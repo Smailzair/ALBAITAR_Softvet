@@ -76,7 +76,7 @@ namespace ALBAITAR_Softvet.Dialogs
                 this.Size = new System.Drawing.Size(this.Width, this.Height - panel3.Height);
                 //---------------
                 //-----------------------------//Check Finance
-                string finance_stat = PreConnection.verify_baitar_client_finance(textBox1.Text, textBox3.Text);
+                string finance_stat = PreConnection.verify_baitar_client_finance(textBox1.Text, codd);
 
                 string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
                 string filePath = folderPath + "\\Al_Baitar_Activation.txt";

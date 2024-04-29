@@ -12,7 +12,7 @@ namespace ALBAITAR_Softvet.Dialogs
 {
     public partial class DB_Backup : Form
     {
-        bool activated_prod = false;
+       // bool activated_prod = false;
         public DB_Backup()
         {
             InitializeComponent();
@@ -71,7 +71,7 @@ namespace ALBAITAR_Softvet.Dialogs
             }
             scan_files();
             //---------------------
-            activated_prod = PreConnection.Verif_real_server_activ();
+           // activated_prod = PreConnection.Verif_real_server_activ();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -222,8 +222,8 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (activated_prod)
-            {
+            //if (activated_prod)
+            //{
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     if (MessageBox.Show("Êtes-vous sûr de restaurer la base de données ?\n\n(Toutes les données existantes -à l'exception de login et des paramètres- seront écrasées !)", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -239,10 +239,10 @@ namespace ALBAITAR_Softvet.Dialogs
                         }
                     }
                 }
-            }
-            else {
-                MessageBox.Show("Vous n'êtes pas autorisé à utiliser cette option tant que le logiciel n'est pas activé.", "Produit non activé :",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-            }
+            //}
+            //else {
+            //    MessageBox.Show("Vous n'êtes pas autorisé à utiliser cette option tant que le logiciel n'est pas activé.", "Produit non activé :",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            //}
             
         }
 
@@ -265,8 +265,8 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (activated_prod)
-            {
+            //if (activated_prod)
+            //{
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     if (MessageBox.Show("Êtes-vous sûr de restaurer la base de données ?\n\n(Toutes les données existantes -à l'exception de login et des paramètres- seront écrasées !)", "Attention :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -282,11 +282,11 @@ namespace ALBAITAR_Softvet.Dialogs
                         } 
                     }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Vous n'êtes pas autorisé à utiliser cette option tant que le logiciel n'est pas activé.", "Produit non activé :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Vous n'êtes pas autorisé à utiliser cette option tant que le logiciel n'est pas activé.", "Produit non activé :", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)

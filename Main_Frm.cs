@@ -590,7 +590,6 @@ namespace ALBAITAR_Softvet
                     attributes |= FileAttributes.Hidden;
                     File.SetAttributes(filePath, attributes);
                 }
-
                 if (File.Exists(filePath))
                 {
                     //---------
@@ -654,9 +653,8 @@ namespace ALBAITAR_Softvet
                     //----------
                     bool server_activated = PreConnection.Verif_real_server_activ();
                     activation_is_done = (server_activated && activation_verified_corretly_with_server) || (!server_activated && !Activ_verif_required);
-                    
                     if (Activ_verif_required)
-                    {   
+                    {
                         if (activation_verified_corretly_with_server)
                         {
                             activation_is_done = server_activated;
