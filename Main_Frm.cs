@@ -607,7 +607,7 @@ namespace ALBAITAR_Softvet
                         file_lines_to_save[0] = file_lines[0];
                     }
 
-                    DateTime prev_saved_running_delay_datetime = new DateTime(1900, 01, 01);
+                    DateTime prev_saved_running_delay_datetime = new DateTime(2000, 01, 01);
                     if (file_lines.Length > 1)
                     {
                         DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
@@ -622,7 +622,7 @@ namespace ALBAITAR_Softvet
                     }
                     activation_is_finance_done = Is_finance_done;
 
-                    DateTime Server_Verif_Date = Properties.Settings.Default.First_Enter_Date_After_Install == new DateTime(1867, 05, 15) ? DateTime.UtcNow : Properties.Settings.Default.First_Enter_Date_After_Install;
+                    DateTime Server_Verif_Date = Properties.Settings.Default.First_Enter_Date_After_Install > new DateTime(1867, 05, 15) ? Properties.Settings.Default.First_Enter_Date_After_Install : DateTime.Now;
                     if (file_lines.Length > 3)
                     {
                         DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[3]), out Server_Verif_Date);
@@ -676,7 +676,18 @@ namespace ALBAITAR_Softvet
                             int RESTE_DELAY = (activation_is_finance_done && activation_verified_corretly_with_server) ? int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30") : Math.Min(int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30"), int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30"));
 
                             bool reste_delay_ended = (DateTime.Now - Server_Verif_Date).TotalDays >= RESTE_DELAY;
-                            bool prevent_enter = (reste_delay_ended && PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty()) && (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800);
+                           
+                            bool prevent_enter = !PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() && 
+                                (reste_delay_ended || prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800);
+
+                            //MessageBox.Show(">>>>>>>>>>>> reste_delay_ended = " + reste_delay_ended + "\n" +
+                            //   "Server_Verif_Date = " + Server_Verif_Date.ToString("yyyy-MM-dd") + "\n" +
+                            //   "RESTE_DELAY = " + RESTE_DELAY + "\n" +
+                            //   "----------------------\n" +
+                            //   "prevent_enter = " + prevent_enter + "\n" +
+                            //   "prev_saved_running_delay_datetime = "+ prev_saved_running_delay_datetime.ToString("yyyy-MM-dd") +"\n" +
+                            //   " PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() = " + !PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() + "\n" +
+                            //   "LASTTT = " + (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800).ToString());
 
                             PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
                             Properties.Settings.Default.Codified_Activate_Code = "";
