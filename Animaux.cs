@@ -56,6 +56,7 @@ namespace ALBAITAR_Softvet.Resources
         int splitter_prev_dist = 0;
 
         string[] default_maladies;
+        //------
         public Animaux(int ID_to_select, int visite_id)
         {
             InitializeComponent();
@@ -2091,8 +2092,7 @@ richTextBox1.Text
 
         private void numericUpDown1_Leave(object sender, EventArgs e)
         {
-
-            if (prev_col_idx_dgv3 > -1 && prev_rw_idx_dgv3 > -1)
+            if (prev_col_idx_dgv3 > -1 && prev_rw_idx_dgv3 > -1 && numericUpDown1.Visible)
             {
                 dataGridView3.Rows[prev_rw_idx_dgv3].Cells["POIDS"].Value = numericUpDown1.Value;
 
@@ -2112,13 +2112,10 @@ richTextBox1.Text
 
         private void numericUpDown1_VisibleChanged(object sender, EventArgs e)
         {
-
             if (numericUpDown1.Visible)
             {
                 numericUpDown1.Select();
             }
-
-
         }
 
         private void dateTimePicker5_VisibleChanged(object sender, EventArgs e)
