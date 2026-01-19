@@ -1,17 +1,10 @@
 ﻿using ALBAITAR_Softvet.Dialogs;
 using ALBAITAR_Softvet.Resources;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ALBAITAR_Softvet
 {
@@ -45,6 +38,7 @@ namespace ALBAITAR_Softvet
         private void Load_Data()
         {
             Main_Frm.Main_Frm_clients_tbl.AsEnumerable().Where(ZZ => (int)ZZ["ID"] == selected_client_id).ForEach(rww => {
+                label22.Text = rww["REF"].ToString();
                 label14.Text = rww["SEX"].ToString();
                 label12.Text = rww["FAMNME"].ToString();
                 label21.Text = rww["NME"].ToString();

@@ -157,6 +157,8 @@ namespace ALBAITAR_Softvet.Resources
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 label13.Visible = false;
+                label15.Visible = false;
+                textBox9.Validated -= textBox9_Validated;
                 textBox2.Validated -= textBox2_Validated;
                 textBox3.Validated -= textBox2_Validated;
                 comboBox3.SelectedIndexChanged -= comboBox3_SelectedIndexChanged;
@@ -172,6 +174,7 @@ namespace ALBAITAR_Softvet.Resources
                 panel3.Visible = true;
                 //if (tabControl1.TabPages.Count < 2) { tabControl1.TabPages.Add(tabPage1); }
                 //----------------------------------------------
+                textBox9.Text = (string)dataGridView1.SelectedRows[0].Cells["REF"].Value;
                 comboBox1.SelectedItem = (string)dataGridView1.SelectedRows[0].Cells["SEX"].Value;
                 textBox3.Text = (string)dataGridView1.SelectedRows[0].Cells["FAMNME"].Value;
                 textBox2.Text = (string)dataGridView1.SelectedRows[0].Cells["NME"].Value;
@@ -185,6 +188,7 @@ namespace ALBAITAR_Softvet.Resources
                 maskedTextBox1.Text = (string)dataGridView1.SelectedRows[0].Cells["NUM_PHONE"].Value;
 
                 //----------------------------------------------
+                textBox9.Validated += textBox9_Validated;
                 textBox2.Validated += textBox2_Validated;
                 textBox3.Validated += textBox2_Validated;
                 comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
@@ -350,21 +354,19 @@ namespace ALBAITAR_Softvet.Resources
             }
 
             bool all_ready = true;
+            textBox9.BackColor = textBox2.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
             textBox2.BackColor = textBox2.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
             textBox3.BackColor = textBox3.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
             textBox4.BackColor = textBox4.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
 
+            all_ready &= textBox9.Text.Trim() != string.Empty;
             all_ready &= textBox2.Text.Trim() != string.Empty;
-            bool all_ready_01 = all_ready;
             all_ready &= textBox3.Text.Trim() != string.Empty;
-            bool all_ready_02 = all_ready;
             all_ready &= textBox4.Text.Trim() != string.Empty;
-            bool all_ready_03 = all_ready;
             all_ready &= !label13.Visible;
-            bool all_ready_04 = all_ready;
+            all_ready &= !label15.Visible;
             //-------------
             label12.Visible = !all_ready;
-            bool all_ready_05 = all_ready;
             //-------------
             if (all_ready)
             {
@@ -372,7 +374,7 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     if (insert_autori)
                     {
-                        PreConnection.Excut_Cmd(1, "tb_clients", new List<string> { "SEX", "FAMNME", "NME", "NUM_CNI", "ADRESS", "POSTAL_CODE", "CITY", "WILAYA", "NUM_PHONE", "EMAIL", "OBSERVATIONS" }, new List<object> { comboBox1.Text, textBox3.Text, textBox2.Text, textBox4.Text, textBox5.Text, textBox6.Text, comboBox2.Text, comboBox3.Text, maskedTextBox1.Text, textBox7.Text, textBox8.Text }, null, null, null);
+                        PreConnection.Excut_Cmd(1, "tb_clients", new List<string> { "REF","SEX", "FAMNME", "NME", "NUM_CNI", "ADRESS", "POSTAL_CODE", "CITY", "WILAYA", "NUM_PHONE", "EMAIL", "OBSERVATIONS" }, new List<object> { textBox9.Text, comboBox1.Text, textBox3.Text, textBox2.Text, textBox4.Text, textBox5.Text, textBox6.Text, comboBox2.Text, comboBox3.Text, maskedTextBox1.Text, textBox7.Text, textBox8.Text }, null, null, null);
                     }
                     else
                     {
@@ -384,7 +386,7 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     if (updadate_autori)
                     {
-                        PreConnection.Excut_Cmd(2, "tb_clients", new List<string> { "SEX", "FAMNME", "NME", "NUM_CNI", "ADRESS", "POSTAL_CODE", "CITY", "WILAYA", "NUM_PHONE", "EMAIL", "OBSERVATIONS" }, new List<object> { comboBox1.Text, textBox3.Text, textBox2.Text, textBox4.Text, textBox5.Text, textBox6.Text, comboBox2.Text, comboBox3.Text, maskedTextBox1.Text, textBox7.Text, textBox8.Text }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
+                        PreConnection.Excut_Cmd(2, "tb_clients", new List<string> { "REF", "SEX", "FAMNME", "NME", "NUM_CNI", "ADRESS", "POSTAL_CODE", "CITY", "WILAYA", "NUM_PHONE", "EMAIL", "OBSERVATIONS" }, new List<object> { textBox9.Text, comboBox1.Text, textBox3.Text, textBox2.Text, textBox4.Text, textBox5.Text, textBox6.Text, comboBox2.Text, comboBox3.Text, maskedTextBox1.Text, textBox7.Text, textBox8.Text }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
                     }
                     else
                     {
@@ -467,6 +469,7 @@ namespace ALBAITAR_Softvet.Resources
                     ((ComboBox)ctrl).SelectedIndex = 0;
                 }
             }
+            label15.Visible = false;
             label13.Visible = false;
             pictureBox1.Image = Properties.Resources.NOUVEAU;
             panel3.Visible = false;
@@ -505,6 +508,9 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     switch (g.HeaderText)
                     {
+                        case "REF":
+                            xcelApp.Cells[1, g.Index + 1].Value = "Réf.";
+                            break;
                         case "SEX":
                             xcelApp.Cells[1, g.Index + 1].Value = "Sexe";
                             break;
@@ -1249,6 +1255,30 @@ namespace ALBAITAR_Softvet.Resources
             {
                 numericUpDown1.Location = new Point(dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.X + 2, dataGridView2.GetCellDisplayRectangle(prev_col_idx, prev_rw_idx, false).Location.Y + 3);
             }
+        }
+
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {            
+            ((TextBox)sender).BackColor = SystemColors.Window;
+            label15.Visible = false;
+        }
+
+        private void textBox9_Validated(object sender, EventArgs e)
+        {
+            ((TextBox)sender).Text = ((TextBox)sender).Text.Replace(".", "").Replace(" ", "");
+            verif_if_déja_exist_ref();
+        }
+
+        private void verif_if_déja_exist_ref()
+        {
+            if (textBox9.Text.Length > 0 && (Is_New || (!Is_New && dataGridView1.SelectedRows.Count > 0)))
+            {
+                DataTable tmmmmpp = PreConnection.Load_data("SELECT * FROM tb_clients WHERE REF LIKE '" + textBox9.Text.Replace("'", "''") + "'" + (!Is_New ? " AND ID <> " + dataGridView1.SelectedRows[0].Cells["ID"].Value : "") + ";");
+                int cntt = tmmmmpp != null ? tmmmmpp.Rows.Count : 0;
+
+                label15.Visible = cntt > 0;
+            }
+            else { label15.Visible = false; }
         }
     }
 }
