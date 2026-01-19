@@ -489,8 +489,7 @@ namespace ALBAITAR_Softvet.Resources
                 string slld = dd != 0 ? "- Il y a des soldes monétiques non réglés !" : "";
                 if (MessageBox.Show("Vous étes sures de supprimer " + (dataGridView1.SelectedRows.Count > 1 ? ("ces [" + dataGridView1.SelectedRows.Count + "] clients ?") : "ce client ?") + "\n\n\nAttention :\n\n" + slld + "\n\n-Tous " + (dataGridView1.SelectedRows.Count == 1 ? "ses" : "leurs") + " animaux seront supprimés!\n(Avec tous informations associés (Laboratires, Agenda ...))\n", "Confirmer :", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    //PreConnection.Excut_Cmd(3, "tb_clients", null, null, "ID IN (@P_ID)", new List<string> { "P_ID" }, new List<object> { fff });
-                    PreConnection.Excut_Cmd_personnel("DELETE FROM tb_clients WHERE ID IN (" + fff + ")", null, null);
+                    PreConnection.Excut_Cmd_personnel("DELETE FROM tb_clients WHERE ID IN (" + fff + ");", null, null);
                     Load_clients_from_DB();
                 }
             }
