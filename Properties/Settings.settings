@@ -79,5 +79,8 @@
     <Setting Name="First_Enter_Date_After_Install" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">1867-05-15</Value>
     </Setting>
+    <Setting Name="Last_date_RANCOSOFT_GMAIL_AUTHENT_Load" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">1990-01-01</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -5,34 +5,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Image Name="Image10">
-            <Source>Embedded</Source>
-            <Value>logocopy14</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>1.69899cm</Top>
-            <Left>14.75691cm</Left>
-            <Height>12.65179cm</Height>
-            <Width>14.82231cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
-          <Image Name="Image9">
-            <Source>Embedded</Source>
-            <Value>logocopy14</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>1.69899cm</Top>
-            <Height>12.65179cm</Height>
-            <Width>14.82231cm</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
           <Textbox Name="CABINET_ADRESS2">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -59,7 +31,6 @@
             <Left>4.1226cm</Left>
             <Height>0.81167cm</Height>
             <Width>6.50263cm</Width>
-            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -92,7 +63,7 @@
             <Left>0.33854cm</Left>
             <Height>0.6cm</Height>
             <Width>2.84396cm</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -127,7 +98,7 @@
             <Left>10.91383cm</Left>
             <Height>0.6cm</Height>
             <Width>3.59967cm</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>2</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!REF.Value &lt;&gt; "",False,True)</Hidden>
             </Visibility>
@@ -562,7 +533,7 @@
             <Left>0.23495cm</Left>
             <Height>3.38516cm</Height>
             <Width>7.08612cm</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>3</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!SHOW_ANIM_INFOS.Value = "YES",False,True)</Hidden>
             </Visibility>
@@ -784,7 +755,7 @@
             <Left>7.43267cm</Left>
             <Height>3.38516cm</Height>
             <Width>7.21841cm</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -815,7 +786,7 @@
             <Left>0.23495cm</Left>
             <Height>12.45747cm</Height>
             <Width>14.41613cm</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -854,7 +825,7 @@
             <Left>18.7219cm</Left>
             <Height>0.81167cm</Height>
             <Width>6.50263cm</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -887,7 +858,7 @@
             <Left>15.14951cm</Left>
             <Height>0.6cm</Height>
             <Width>2.84396cm</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -922,7 +893,7 @@
             <Left>25.72481cm</Left>
             <Height>0.6cm</Height>
             <Width>3.59967cm</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>8</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!REF.Value &lt;&gt; "", False, True)</Hidden>
             </Visibility>
@@ -1357,7 +1328,7 @@
             <Left>15.04592cm</Left>
             <Height>3.38516cm</Height>
             <Width>7.08612cm</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>9</ZIndex>
             <Visibility>
               <Hidden>=IIF(Parameters!SHOW_ANIM_INFOS.Value = "YES", False, True)</Hidden>
             </Visibility>
@@ -1579,7 +1550,7 @@
             <Left>22.24365cm</Left>
             <Height>3.38516cm</Height>
             <Width>7.21841cm</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -1610,7 +1581,7 @@
             <Left>15.04592cm</Left>
             <Height>12.45747cm</Height>
             <Width>14.41613cm</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
@@ -1627,7 +1598,7 @@
             <Left>14.85cm</Left>
             <Height>17.5cm</Height>
             <Width>0cm</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2103,6 +2074,7 @@
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
             <Line Name="Line3">
+              <Top>0cm</Top>
               <Left>14.85cm</Left>
               <Height>0.91063cm</Height>
               <Width>0cm</Width>

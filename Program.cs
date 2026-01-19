@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet
@@ -51,7 +52,9 @@ namespace ALBAITAR_Softvet
                 if (processes.Length <= 1)
                 {
                     splash.Show();
-                    PreConnection.load_rancosoft_gmail_auth();
+                    //------------------
+                    new Thread(new ThreadStart(PreConnection.load_rancosoft_gmail_auth)).Start();
+                    //-------------------                    
                     if (Properties.Settings.Default.Login_Auto_Enter && (DateTime.Now - Properties.Settings.Default.Last_entred_date_by_Auto_Enter).Days < 7)
                     {
                         Properties.Settings.Default.Last_entred_date_by_Auto_Enter = DateTime.Now;

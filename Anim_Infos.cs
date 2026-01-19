@@ -80,7 +80,7 @@ namespace ALBAITAR_Softvet
         "        tb_maladies.ANIM_ID = tb3.ANIM_ID  " +
         "        AND tb_maladies.START_DATE = tb3.max_start_date) tb4  " +
         "ON  " +
-        "    tb4.ANIM_ID = tb1.ID; ");
+        "    tb4.ANIM_ID = tb1.ID ORDER BY NME; ");
 
                 }
                 DataRow inf = Main_Frm.Main_Frm_animals_tbl.AsEnumerable().Where(zz => (int)zz["ID"] == selected_anim_id).FirstOrDefault();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Dialogs
@@ -29,7 +30,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string filter = textBox1.Text.ToLower().Replace("'", "''");
+            string filter = Regex.Replace(textBox1.Text.ToLower(), Main_Frm.client_mr_pattern, "", RegexOptions.IgnoreCase).Replace(".", "").Replace("'", "''").Trim();
 
             foreach (ListViewItem item in items2)
             {
@@ -84,7 +85,7 @@ namespace ALBAITAR_Softvet.Dialogs
             items2.Clear();
             listView1.Items.Clear();
             //----------
-            props = PreConnection.Load_data("SELECT *,concat(FAMNME,' ',NME) AS FULL_NME FROM tb_clients tb1" + (checkBox1.Checked ? " WHERE ID IN (SELECT CLIENT_ID FROM tb_clients_finance HAVING SUM(DEBIT)-SUM(CREDIT) <> 0)" : "") + (checkBox2.Checked ? (checkBox1.Checked ? " AND " : " WHERE ") + "(SELECT COUNT(*) FROM tb_animaux WHERE CLIENT_ID = tb1.ID) = 0" : "") + ";");
+            props = PreConnection.Load_data("SELECT *,concat(FAMNME,' ',NME) AS FULL_NME FROM tb_clients tb1" + (checkBox1.Checked ? " WHERE ID IN (SELECT CLIENT_ID FROM tb_clients_finance GROUP BY CLIENT_ID HAVING SUM(DEBIT)-SUM(CREDIT) <> 0)" : "") + (checkBox2.Checked ? (checkBox1.Checked ? " AND " : " WHERE ") + "(SELECT COUNT(*) FROM tb_animaux WHERE CLIENT_ID = tb1.ID) = 0" : "") + " ORDER BY FULL_NME;");
             if (props != null)
             {
                 if (props.Rows.Count > 0)

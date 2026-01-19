@@ -41,7 +41,7 @@ namespace ALBAITAR_Softvet.Dialogs
             comboBox3.SelectedIndex = 0;
             comboBox4.SelectedIndex = 0;
             comboBox5.SelectedIndex = 0;
-            if(Main_Frm.Main_Frm_clients_tbl.Rows.Count > 0)
+            if (Main_Frm.Main_Frm_clients_tbl.Rows.Count > 0)
             {
                 comboBox6.DataSource = Main_Frm.Main_Frm_clients_tbl;
                 comboBox6.DisplayMember = "FULL_NME";
@@ -102,14 +102,14 @@ namespace ALBAITAR_Softvet.Dialogs
                         }
                         else
                         {
-                            
+
                             string espec = rww["ANIM_ESPECE"] != DBNull.Value ? (string)rww["ANIM_ESPECE"] : "";
                             if (espec.Length > 0) { checkBox4.Checked = true; comboBox3.SelectedItem = espec; }
                             string racc = rww["ANIM_RACE"] != DBNull.Value ? (string)rww["ANIM_RACE"] : "";
                             if (racc.Length > 0) { checkBox5.Checked = true; comboBox4.SelectedItem = racc; }
                             string sexx = rww["ANIM_SEXE"] != DBNull.Value ? (string)rww["ANIM_SEXE"] : "";
                             if (sexx.Length > 0) { checkBox6.Checked = true; comboBox5.SelectedItem = sexx; }
-                            if(rww["DATE_NISS_MIN"] != DBNull.Value && rww["DATE_NISS_MAX"] != DBNull.Value)
+                            if (rww["DATE_NISS_MIN"] != DBNull.Value && rww["DATE_NISS_MAX"] != DBNull.Value)
                             {
                                 checkBox7.Checked = true;
                                 dateTimePicker5.Value = (DateTime)rww["DATE_NISS_MIN"];
@@ -118,7 +118,7 @@ namespace ALBAITAR_Softvet.Dialogs
                             double poidd = rww["POIDS_MAX"] != DBNull.Value ? (double)rww["POIDS_MAX"] : -1;
                             if (poidd > 0) { checkBox8.Checked = true; numericUpDown2.Value = (decimal)poidd; }
                             string[] idents = (rww["RELATED_CLIENTS_IDS"] != DBNull.Value ? (string)rww["RELATED_CLIENTS_IDS"] : "").Split(',');
-                            if(idents.Count() > 0)
+                            if (idents.Count() > 0)
                             {
                                 if (idents[0].Length > 0)
                                 {
@@ -126,7 +126,7 @@ namespace ALBAITAR_Softvet.Dialogs
                                     comboBox6.SelectedValue = int.Parse(idents[0]);
                                 }
                             }
-                            
+
                         }
 
                     }
@@ -145,8 +145,8 @@ namespace ALBAITAR_Softvet.Dialogs
 
                     checkBox10.Checked = (rww["IS_IMPORTANT"] != DBNull.Value ? (string)rww["IS_IMPORTANT"] : "Non") == "Oui";
                     numericUpDown1.Value = rww["ALERT_BEFORE_DAYS"] != DBNull.Value ? (int)rww["ALERT_BEFORE_DAYS"] : 1;
-                    checkBox1.Checked = (rww["SEND_ALERT_TO_CABINE_EMAIL"] != DBNull.Value ? (int)rww["SEND_ALERT_TO_CABINE_EMAIL"] : -1) == 1;
-                    checkBox2.Checked = (rww["SEND_ALERT_TO_CLIENT_EMAIL"] != DBNull.Value ? (int)rww["SEND_ALERT_TO_CLIENT_EMAIL"] : -1) == 1;
+                    checkBox2.Checked = (rww["SEND_ALERT_TO_CABINE_EMAIL"] != DBNull.Value ? (int)rww["SEND_ALERT_TO_CABINE_EMAIL"] : -1) == 1;
+                    checkBox1.Checked = (rww["SEND_ALERT_TO_CLIENT_EMAIL"] != DBNull.Value ? (int)rww["SEND_ALERT_TO_CLIENT_EMAIL"] : -1) == 1;
                     richTextBox1.Text = rww["DESCRIPTION"] != DBNull.Value ? (string)rww["DESCRIPTION"] : "";
                 }
                 else
@@ -384,7 +384,7 @@ namespace ALBAITAR_Softvet.Dialogs
                         DATE_NISS_MAX = dateTimePicker6.Value.Date;
                     }
                     POIDS_MAX = checkBox8.Checked ? double.Parse(numericUpDown2.Value.ToString()) : 0;
-                    if(checkBox9.Visible && checkBox9.Checked) { RELATED_CLIENTS_IDS = comboBox6.SelectedValue.ToString(); }
+                    if (checkBox9.Visible && checkBox9.Checked) { RELATED_CLIENTS_IDS = comboBox6.SelectedValue.ToString(); }
                 }
             }
             else if (comboBox1.SelectedIndex == 1) //Specific Clients

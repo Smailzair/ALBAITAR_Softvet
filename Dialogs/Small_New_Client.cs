@@ -15,16 +15,16 @@ namespace ALBAITAR_Softvet.Dialogs
             InitializeComponent();
             //---------------------
             comboBox1.SelectedIndex = 0;
-            clients = PreConnection.Load_data_keeping_duplicates("SELECT * FROM tb_clients;");
+            clients = PreConnection.Load_data_keeping_duplicates("SELECT * FROM tb_clients ORDER BY FAMNME;");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             bool all_ready = true;
-            textBox2.BackColor = textBox2.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
-            textBox3.BackColor = textBox3.Text.TrimStart().TrimEnd() != string.Empty ? SystemColors.Window : Color.LightCoral;
-            all_ready &= textBox2.Text.TrimStart().TrimEnd() != string.Empty;
-            all_ready &= textBox3.Text.TrimStart().TrimEnd() != string.Empty;
+            textBox2.BackColor = textBox2.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
+            textBox3.BackColor = textBox3.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
+            all_ready &= textBox2.Text.Trim() != string.Empty;
+            all_ready &= textBox3.Text.Trim() != string.Empty;
             all_ready &= !label13.Visible;
             //-------------------------
             if (all_ready)

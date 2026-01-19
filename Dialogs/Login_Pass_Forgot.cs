@@ -3,6 +3,7 @@ using MimeKit;
 using System;
 using System.Data;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet
@@ -29,7 +30,8 @@ namespace ALBAITAR_Softvet
                 groupBox1.Enabled = false;
             }
             //---------------------------------
-            PreConnection.load_rancosoft_gmail_auth();
+            new Thread(new ThreadStart(PreConnection.load_rancosoft_gmail_auth)).Start();
+            //-------------------
             if (datatt.Rows[0]["EMAIL"] != DBNull.Value && datatt.Rows[0]["EMAIL"].ToString().Length > 0 && Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT.Length > 0)
             {
                 groupBox2.Enabled = true;

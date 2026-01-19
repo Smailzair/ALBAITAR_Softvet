@@ -307,5 +307,17 @@ namespace ALBAITAR_Softvet.Properties {
                 this["First_Enter_Date_After_Install"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1990-01-01")]
+        public global::System.DateTime Last_date_RANCOSOFT_GMAIL_AUTHENT_Load {
+            get {
+                return ((global::System.DateTime)(this["Last_date_RANCOSOFT_GMAIL_AUTHENT_Load"]));
+            }
+            set {
+                this["Last_date_RANCOSOFT_GMAIL_AUTHENT_Load"] = value;
+            }
+        }
     }
 }

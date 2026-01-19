@@ -15,7 +15,7 @@ using Excc = Microsoft.Office.Interop.Excel;
 
 namespace ALBAITAR_Softvet.Resources
 {
-    public partial class Vente : Form
+    public partial class Vente_2 : Form
     {
         static public int to_select_idx = -1;
         static public DataGridViewRow selected_item = null;
@@ -36,14 +36,12 @@ namespace ALBAITAR_Softvet.Resources
         bool Transf_also_caisse = false;
         static public int tmp_current_client_id = -1;
         bool has_asked_for_Transf_also_caisse = false;
+        //bool insert_or_update_also_the_caisse_in_provisoire = true;
+        //decimal selected_fact_caisse_mnt = 0;
         //-------------
         bool autoriz_filtr = true;
         bool dateTimePicker2_IsDropedDown = false;
-        //-------
-        Add_Vente_Fact_Item add_Vente_Fact_Item;
-        //---------
-        decimal OLD_QNT = 0;
-        public Vente(int to_select_id)
+        public Vente_2(int to_select_id)
         {
             InitializeComponent();
             to_select_idx = to_select_id;
@@ -106,9 +104,7 @@ namespace ALBAITAR_Softvet.Resources
             tmp_current_client_id = comboBox1.SelectedValue != null ? (comboBox1.SelectedValue != DBNull.Value ? (int)comboBox1.SelectedValue : -1) : -1;
             selected_item = new DataGridViewRow();
             //------------------------
-            if(add_Vente_Fact_Item == null) { add_Vente_Fact_Item = new Add_Vente_Fact_Item(comboBox1.Text); }
-            add_Vente_Fact_Item.current_client_nme = comboBox1.Text;
-            add_Vente_Fact_Item.ShowDialog();
+            new Add_Vente_Fact_Item(comboBox1.Text).ShowDialog();
             //----------------------
             if (selected_item != null && selected_item.Cells.Count > 0)
             {
@@ -118,15 +114,6 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (add_Vente_Fact_Item != null)
-            {
-                if (add_Vente_Fact_Item.frm_opened)
-                {
-                    add_Vente_Fact_Item.Close();
-                    add_Vente_Fact_Item = null;
-                }
-            }
-            //-----------------------
             Is_New = true;
             Transf_also_caisse = false;
             has_asked_for_Transf_also_caisse = false;
@@ -236,9 +223,9 @@ namespace ALBAITAR_Softvet.Resources
         private void calcul_bill_tot()
         {
             tot_ht = 0;
-            foreach (DataGridViewRow rw in dataGridView2.Rows.Cast<DataGridViewRow>().Where(R => R.Index != dataGridView2.NewRowIndex))
+            foreach (DataGridViewRow rw in dataGridView2.Rows)
             {
-                tot_ht += rw.Cells["SLD"].Value != DBNull.Value ? decimal.Parse(rw.Cells["SLD"].Value.ToString().Trim()) : 0;
+                tot_ht += rw.Cells["SLD"].Value != DBNull.Value ? (decimal)rw.Cells["SLD"].Value : 0;
             }
             dataGridView3.Rows[0].Cells[1].Value = tot_ht; //HT
             //-------------------------------
@@ -347,9 +334,6 @@ namespace ALBAITAR_Softvet.Resources
             //----------
             string stck_min_alert_msg = "";
             string stck_empty_alert_msg = "";
-
-            int dgv2_select_col_idx = dataGridView2.CurrentCell.ColumnIndex;
-            int dgv2_select_rw_idx = dataGridView2.CurrentCell.RowIndex;
             if (Is_New) //INSERT
             {
                 List<string> Columns = new List<string> {
@@ -429,8 +413,10 @@ namespace ALBAITAR_Softvet.Resources
                         IS_PROVIS, //IS_PROVIS
                         Convert.ToDouble(numericUpDown2.Value) //PAYED_MNT
                     };
+
                 foreach (DataGridViewRow row in dataGridView2.Rows)
                 {
+
                     Columns.Add("ITEM_NME_" + (row.Index < 9 ? "0" : "") + (row.Index + 1));
                     Columns.Add("ITEM_QNT_" + (row.Index < 9 ? "0" : "") + (row.Index + 1));
                     Columns.Add("ITEM_IS_PROD_" + (row.Index < 9 ? "0" : "") + (row.Index + 1));
@@ -442,20 +428,6 @@ namespace ALBAITAR_Softvet.Resources
                     Columns_vals.Add(row.Cells["TYPE"].Value.ToString() == "Produit" ? 1 : 0);
                     Columns_vals.Add(row.Cells["PRODUCT_CODE"].Value != DBNull.Value ? (row.Cells["PRODUCT_CODE"].Value.ToString().Trim().Length > 0 ? row.Cells["PRODUCT_CODE"].Value : DBNull.Value) : DBNull.Value);
                     Columns_vals.Add(row.Cells["PRIX_UNIT"].Value);
-                }
-                for (int i = dataGridView2.Rows.Count + 1; i <= 70; i++)
-                {
-                    Columns.Add("ITEM_NME_" + (i < 10 ? "0" : "") + i);
-                    Columns.Add("ITEM_QNT_" + (i < 10 ? "0" : "") + i);
-                    Columns.Add("ITEM_IS_PROD_" + (i < 10 ? "0" : "") + i);
-                    Columns.Add("ITEM_PROD_CODE_" + (i < 10 ? "0" : "") + i);
-                    Columns.Add("ITEM_PRIX_UNIT_" + (i < 10 ? "0" : "") + i);
-
-                    Columns_vals.Add(DBNull.Value);
-                    Columns_vals.Add(DBNull.Value);
-                    Columns_vals.Add(DBNull.Value);
-                    Columns_vals.Add(DBNull.Value);
-                    Columns_vals.Add(DBNull.Value);
                 }
                 PreConnection.Excut_Cmd(2, "tb_factures_vente", Columns, Columns_vals, "ID = @P_ID", new List<string> { "@P_ID" }, new List<object> { dataGridView1.SelectedRows[0].Cells["ID"].Value });
 
@@ -520,17 +492,9 @@ namespace ALBAITAR_Softvet.Resources
             }
             //-------------
             load_factures(Is_New);
-            //------
-            if (dataGridView2.Columns.Count > 0 && dataGridView2.Rows.Count >= dgv2_select_rw_idx)
-            {
-                dataGridView2.CurrentCell = dataGridView2.Rows[dgv2_select_rw_idx].Cells[dgv2_select_col_idx];
-                dataGridView2.Rows[dgv2_select_rw_idx].Cells[dgv2_select_col_idx].Selected = true;
-                dataGridView2.Focus();
-            }
         }
         private void button5_Click(object sender, EventArgs e)
         {
-
             string msg_txt = "";
             bool All_Ready = true;
             //--------
@@ -678,15 +642,6 @@ namespace ALBAITAR_Softvet.Resources
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (add_Vente_Fact_Item != null)
-            {
-                if (add_Vente_Fact_Item.frm_opened)
-                {
-                    add_Vente_Fact_Item.Close();
-                    add_Vente_Fact_Item = null;
-                }
-            }
-            //-----------------------
             decimal sum = 0;
             if (dataGridView1.SelectedRows.Count > 1)
             {
@@ -793,8 +748,6 @@ namespace ALBAITAR_Softvet.Resources
             {
                 button3.PerformClick();
             }
-            //--------
-            
         }
 
         private void checkBox1_MouseClick(object sender, MouseEventArgs e)
@@ -1268,83 +1221,5 @@ namespace ALBAITAR_Softvet.Resources
                 dataGridView1_SelectionChanged(null, null);
             }
         }
-
-
-
-        private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-
-            if (e.ColumnIndex == dataGridView2.Columns["PRIX_UNIT"].Index || e.ColumnIndex == dataGridView2.Columns["QNT2"].Index)
-            {
-                decimal PRIX_UNIT = 0;
-                decimal QNT2 = 0;
-                decimal.TryParse((dataGridView2.Rows[e.RowIndex].Cells["PRIX_UNIT"].Value != null ? (dataGridView2.Rows[e.RowIndex].Cells["PRIX_UNIT"].Value != DBNull.Value ? decimal.Parse(dataGridView2.Rows[e.RowIndex].Cells["PRIX_UNIT"].Value.ToString().Trim()) : 0) : 0).ToString(), out PRIX_UNIT);
-                decimal.TryParse((dataGridView2.Rows[e.RowIndex].Cells["QNT2"].Value != null ? (dataGridView2.Rows[e.RowIndex].Cells["QNT2"].Value != DBNull.Value ? decimal.Parse(dataGridView2.Rows[e.RowIndex].Cells["QNT2"].Value.ToString().Trim()) : 0) : 0).ToString(), out QNT2);
-                dataGridView2.Rows[e.RowIndex].Cells["SLD"].Value = PRIX_UNIT * QNT2;
-                if (dataGridView2.SelectedRows[0].Cells["PRODUCT_CODE"].Value != DBNull.Value && e.ColumnIndex == dataGridView2.Columns["QNT2"].Index && QNT2 != OLD_QNT) {
-                    if (stock_to_modify.Rows.Cast<DataRow>().Where(row => row["PROD_CODE"].Equals(dataGridView2.Rows[e.RowIndex].Cells["PRODUCT_CODE"].Value.ToString())).ToList().Count > 0)
-                    {
-                        stock_to_modify.Rows.Cast<DataRow>().Where(row => row["PROD_CODE"].Equals(dataGridView2.Rows[e.RowIndex].Cells["PRODUCT_CODE"].Value.ToString())).ToList().ForEach(RR =>
-                        {
-                            RR["QNT_DIMIN"] = QNT2 - OLD_QNT;
-                        });
-                    }
-                    else {
-                        DataRow rw = Vente.stock_to_modify.NewRow();
-                        rw["PROD_ID"] = 0;
-                        rw["PROD_CODE"] = dataGridView2.SelectedRows[0].Cells["PRODUCT_CODE"].Value.ToString();
-                        rw["QNT_DIMIN"] = QNT2 - OLD_QNT;
-                        rw["ALERT_EMPTY_ON"] = 0; //Empty stck
-                        rw["ALERT_MIN_ON"] =  0; //Minim Stck
-                        rw["PROD_FULL_NME"] = dataGridView2.Rows[e.RowIndex].Cells["ITEM_NME"].Value;
-                        rw["SLD"] = 0;
-                        Vente.stock_to_modify.Rows.Add(rw);
-                    }
-                }
-                //--------
-                try
-                {
-                    dataGridView2.CurrentCell = dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex + 1];
-                    dataGridView2.CurrentCell = dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                }
-                catch { }
-                //---------
-                calcul_bill_tot();
-            }
-        }
-
-        private void dataGridView2_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                button2.PerformClick();
-            }
-        }
-
-        private void dataGridView2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (dataGridView2.Columns[e.ColumnIndex].Name == "PRIX_UNIT" || dataGridView2.Columns[e.ColumnIndex].Name == "QNT2")
-            {
-                if (decimal.TryParse(e.FormattedValue.ToString(), out decimal value))
-                {
-                    dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = value;
-                }
-                else if (e.FormattedValue.ToString().Length > 0)
-                {
-                    MessageBox.Show("Veuillez saisir un numéro valide.");
-                    e.Cancel = true;
-                }
-            }
-        }
-
-        private void dataGridView2_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            if (dataGridView2.Columns[e.ColumnIndex].Name == "QNT2")
-            {
-                decimal.TryParse((dataGridView2.Rows[e.RowIndex].Cells["QNT2"].Value != null ? (dataGridView2.Rows[e.RowIndex].Cells["QNT2"].Value != DBNull.Value ? decimal.Parse(dataGridView2.Rows[e.RowIndex].Cells["QNT2"].Value.ToString().Trim()) : 0) : 0).ToString(), out OLD_QNT);
-            }
-        }
-
-        
     }
 }

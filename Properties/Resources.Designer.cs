@@ -19,7 +19,7 @@ namespace ALBAITAR_Softvet.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -436,6 +436,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap icons8_ball_point_pen_25px {
             get {
                 object obj = ResourceManager.GetObject("icons8_ball_point_pen_25px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Box_Important_96px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Box_Important_96px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1436,6 +1446,16 @@ namespace ALBAITAR_Softvet.Properties {
         internal static System.Drawing.Bitmap pngtree_star_horizontal_line_decoration_elements_2986140_png_image_1731077_copy {
             get {
                 object obj = ResourceManager.GetObject("pngtree-star-horizontal-line-decoration-elements-2986140-png-image_1731077 copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap provisoire2 {
+            get {
+                object obj = ResourceManager.GetObject("provisoire2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

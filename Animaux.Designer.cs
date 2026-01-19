@@ -37,8 +37,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -168,12 +169,6 @@
             this.Visit_Panel = new System.Windows.Forms.Panel();
             this.button22 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.ID_VISITE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DATETIME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VISITOR_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OBJECT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FACTURE_REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button12 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -192,6 +187,12 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ID_VISITE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATETIME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VISITOR_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OBJECT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FACTURE_REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -1310,6 +1311,7 @@
             this.dateTimePicker5.TabIndex = 61;
             this.dateTimePicker5.Visible = false;
             this.dateTimePicker5.VisibleChanged += new System.EventHandler(this.dateTimePicker5_VisibleChanged);
+            this.dateTimePicker5.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dateTimePicker5_KeyDown);
             this.dateTimePicker5.Leave += new System.EventHandler(this.dateTimePicker5_Leave);
             // 
             // numericUpDown1
@@ -1352,6 +1354,7 @@
             this.DELETE});
             this.dataGridView3.EnableHeadersVisualStyles = false;
             this.dataGridView3.Location = new System.Drawing.Point(3, 4);
+            this.dataGridView3.MultiSelect = false;
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.Size = new System.Drawing.Size(544, 541);
@@ -1362,6 +1365,7 @@
             this.dataGridView3.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView3_DataError);
             this.dataGridView3.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView3_RowPostPaint);
             this.dataGridView3.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridView3_Scroll);
+            this.dataGridView3.SelectionChanged += new System.EventHandler(this.dataGridView3_SelectionChanged);
             // 
             // IDD
             // 
@@ -1390,13 +1394,15 @@
             // 
             this.POIDS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.POIDS.DataPropertyName = "POIDS";
+            dataGridViewCellStyle2.Format = "N2";
+            this.POIDS.DefaultCellStyle = dataGridViewCellStyle2;
             this.POIDS.HeaderText = "Poids (Kg)";
             this.POIDS.Name = "POIDS";
             // 
             // DELETE
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.DELETE.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DELETE.DefaultCellStyle = dataGridViewCellStyle3;
             this.DELETE.FillWeight = 20F;
             this.DELETE.HeaderText = "";
             this.DELETE.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
@@ -1764,14 +1770,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView4.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Purple;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Purple;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView4.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Purple;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Purple;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView4.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView4.ColumnHeadersHeight = 35;
             this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_MALAD,
@@ -1814,9 +1820,9 @@
             // 
             this.START_DATE_MALAD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.START_DATE_MALAD.DataPropertyName = "START_DATE";
-            dataGridViewCellStyle4.Format = "d";
-            dataGridViewCellStyle4.NullValue = null;
-            this.START_DATE_MALAD.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            this.START_DATE_MALAD.DefaultCellStyle = dataGridViewCellStyle5;
             this.START_DATE_MALAD.FillWeight = 85F;
             this.START_DATE_MALAD.HeaderText = "Date";
             this.START_DATE_MALAD.Name = "START_DATE_MALAD";
@@ -1845,8 +1851,8 @@
             // 
             this.ESTIM_END_DATE_MALAD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
             this.ESTIM_END_DATE_MALAD.DataPropertyName = "ESTIM_END_DATE";
-            dataGridViewCellStyle5.Format = "d";
-            this.ESTIM_END_DATE_MALAD.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Format = "d";
+            this.ESTIM_END_DATE_MALAD.DefaultCellStyle = dataGridViewCellStyle6;
             this.ESTIM_END_DATE_MALAD.HeaderText = "Date de la fin de la maladie";
             this.ESTIM_END_DATE_MALAD.MinimumWidth = 120;
             this.ESTIM_END_DATE_MALAD.Name = "ESTIM_END_DATE_MALAD";
@@ -1923,14 +1929,14 @@
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView2.ColumnHeadersHeight = 35;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_VISITE,
@@ -1948,63 +1954,7 @@
             this.dataGridView2.Size = new System.Drawing.Size(542, 322);
             this.dataGridView2.TabIndex = 57;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
-            this.dataGridView2.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView2_DataBindingComplete);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
-            // 
-            // ID_VISITE
-            // 
-            this.ID_VISITE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ID_VISITE.DataPropertyName = "ID";
-            this.ID_VISITE.HeaderText = "ID";
-            this.ID_VISITE.Name = "ID_VISITE";
-            this.ID_VISITE.ReadOnly = true;
-            this.ID_VISITE.Visible = false;
-            this.ID_VISITE.Width = 43;
-            // 
-            // DATETIME
-            // 
-            this.DATETIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DATETIME.DataPropertyName = "DATETIME";
-            dataGridViewCellStyle7.Format = "dd/MM/yyyy HH:mm";
-            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle7;
-            this.DATETIME.HeaderText = "Date";
-            this.DATETIME.Name = "DATETIME";
-            this.DATETIME.ReadOnly = true;
-            this.DATETIME.Width = 58;
-            // 
-            // VISITOR_FULL_NME
-            // 
-            this.VISITOR_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.VISITOR_FULL_NME.DataPropertyName = "VISITOR_FULL_NME";
-            this.VISITOR_FULL_NME.HeaderText = "Visiteur";
-            this.VISITOR_FULL_NME.Name = "VISITOR_FULL_NME";
-            this.VISITOR_FULL_NME.ReadOnly = true;
-            this.VISITOR_FULL_NME.Width = 67;
-            // 
-            // OBJECT
-            // 
-            this.OBJECT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OBJECT.DataPropertyName = "OBJECT";
-            this.OBJECT.HeaderText = "Objet";
-            this.OBJECT.Name = "OBJECT";
-            this.OBJECT.ReadOnly = true;
-            // 
-            // FACTURE_REF
-            // 
-            this.FACTURE_REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.FACTURE_REF.DataPropertyName = "FACTURE_REF";
-            this.FACTURE_REF.HeaderText = "N° Facture\n(s\'il est facturé)";
-            this.FACTURE_REF.Name = "FACTURE_REF";
-            this.FACTURE_REF.ReadOnly = true;
-            this.FACTURE_REF.Width = 109;
-            // 
-            // ANIM_ID
-            // 
-            this.ANIM_ID.DataPropertyName = "ANIM_ID";
-            this.ANIM_ID.HeaderText = "ANIM_ID";
-            this.ANIM_ID.Name = "ANIM_ID";
-            this.ANIM_ID.ReadOnly = true;
-            this.ANIM_ID.Visible = false;
             // 
             // pictureBox3
             // 
@@ -2202,8 +2152,8 @@
             // 
             // dataGridViewImageColumn1
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewImageColumn1.FillWeight = 20F;
             this.dataGridViewImageColumn1.HeaderText = "";
             this.dataGridViewImageColumn1.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
@@ -2216,8 +2166,8 @@
             // 
             // dataGridViewImageColumn2
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewImageColumn2.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewImageColumn2.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewImageColumn2.FillWeight = 20F;
             this.dataGridViewImageColumn2.HeaderText = "";
             this.dataGridViewImageColumn2.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_trash_25px_1;
@@ -2227,6 +2177,61 @@
             this.dataGridViewImageColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewImageColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewImageColumn2.Width = 20;
+            // 
+            // ID_VISITE
+            // 
+            this.ID_VISITE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ID_VISITE.DataPropertyName = "ID";
+            this.ID_VISITE.HeaderText = "ID";
+            this.ID_VISITE.Name = "ID_VISITE";
+            this.ID_VISITE.ReadOnly = true;
+            this.ID_VISITE.Visible = false;
+            this.ID_VISITE.Width = 42;
+            // 
+            // DATETIME
+            // 
+            this.DATETIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATETIME.DataPropertyName = "DATETIME";
+            dataGridViewCellStyle8.Format = "dd/MM/yyyy HH:mm";
+            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle8;
+            this.DATETIME.HeaderText = "Date";
+            this.DATETIME.Name = "DATETIME";
+            this.DATETIME.ReadOnly = true;
+            this.DATETIME.Width = 58;
+            // 
+            // VISITOR_FULL_NME
+            // 
+            this.VISITOR_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.VISITOR_FULL_NME.DataPropertyName = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME.HeaderText = "Visiteur";
+            this.VISITOR_FULL_NME.Name = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME.ReadOnly = true;
+            this.VISITOR_FULL_NME.Width = 67;
+            // 
+            // OBJECT
+            // 
+            this.OBJECT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OBJECT.DataPropertyName = "OBJECT";
+            this.OBJECT.HeaderText = "Objet";
+            this.OBJECT.Name = "OBJECT";
+            this.OBJECT.ReadOnly = true;
+            // 
+            // FACTURE_REF
+            // 
+            this.FACTURE_REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FACTURE_REF.DataPropertyName = "FACTURE_REF";
+            this.FACTURE_REF.HeaderText = "N° Facture\n(s\'il est déja facturé)";
+            this.FACTURE_REF.Name = "FACTURE_REF";
+            this.FACTURE_REF.ReadOnly = true;
+            this.FACTURE_REF.Width = 137;
+            // 
+            // ANIM_ID
+            // 
+            this.ANIM_ID.DataPropertyName = "ANIM_ID";
+            this.ANIM_ID.HeaderText = "ANIM_ID";
+            this.ANIM_ID.Name = "ANIM_ID";
+            this.ANIM_ID.ReadOnly = true;
+            this.ANIM_ID.Visible = false;
             // 
             // Animaux
             // 
@@ -2242,6 +2247,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Animaux - [ALBAITAR Softvet]";
             this.Activated += new System.EventHandler(this.Animaux_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Animaux_FormClosing);
             this.Load += new System.EventHandler(this.Animaux_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -2363,12 +2369,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_VISITE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DATETIME;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VISITOR_FULL_NME;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OBJECT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FACTURE_REF;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_ID;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TabPage tabPage3;
@@ -2386,11 +2386,6 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IDD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_IDD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DATETIMEE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn POIDS;
-        private System.Windows.Forms.DataGridViewImageColumn DELETE;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
@@ -2436,5 +2431,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ESTIM_END_DATE_MALAD;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_IDD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DATETIMEE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn POIDS;
+        private System.Windows.Forms.DataGridViewImageColumn DELETE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_VISITE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DATETIME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VISITOR_FULL_NME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OBJECT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FACTURE_REF;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ANIM_ID;
     }
 }

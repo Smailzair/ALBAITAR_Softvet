@@ -16,6 +16,7 @@ using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
 //using Xamarin.Forms.Internals;
@@ -114,7 +115,6 @@ namespace ALBAITAR_Softvet
         }
         public static DataTable Load_data(string cmd)
         {
-
             DataTable gg = new DataTable();
             MySqlCommand cd = new MySqlCommand(cmd, mySqlConnection);
             open_conn();
@@ -199,24 +199,24 @@ namespace ALBAITAR_Softvet
                             command.Parameters.AddWithValue("@i" + i.ToString() + "_" + col_nme, col_values[i]);
                         }
                     }
-
                     if (where_columns != null && where_values != null)
-                    {
+                    {                        
                         for (int i = 0; i < where_columns.Count; i++)
-                        {
+                        {                            
                             command.Parameters.AddWithValue(where_columns[i], where_values[i].ToString());
                         }
+                        
                     }
-
                     rows_nb = command.ExecuteNonQuery();
                 }
 
             }
-            catch { }
+            catch (Exception ee) { }
             close_conn();
             return rows_nb;
         }
 
+    
         public static int Excut_Cmd_personnel(string cmmd, List<string> params_names, List<object> params_values)
         {
             int rows_nb = 0;
@@ -324,30 +324,27 @@ namespace ALBAITAR_Softvet
             double sizeInMB = sizeInBytes / (1024.0 * 1024.0); // Convert bytes to megabytes
             return sizeInMB;
         }
-
         public static bool DB_Restore(string backupPath)
         {
             bool answer = true;
 
-            MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder(connectionString_txt);
-            string host = builder.Server;
-            string userId = builder.UserID;
-            string password = builder.Password;
-            string database = builder.Database;
-
-
-            string command = $"mysql --host={host} --user={userId} --password={password} {database} < \"{backupPath}\"";
-
             try
             {
-                // Execute the mysqldump command
+                MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder(connectionString_txt);
+                string host = builder.Server;
+                string userId = builder.UserID;
+                string password = builder.Password;
+                string database = builder.Database;
+
                 Process process = new Process
                 {
                     StartInfo = new ProcessStartInfo
                     {
-                        FileName = "cmd.exe",
+                        FileName = "mysql",
+                        Arguments = $"--host={host} --user={userId} --password={password} {database}",
                         RedirectStandardInput = true,
                         RedirectStandardOutput = true,
+                        RedirectStandardError = true,
                         UseShellExecute = false,
                         CreateNoWindow = true
                     }
@@ -359,22 +356,81 @@ namespace ALBAITAR_Softvet
                 {
                     if (sw.BaseStream.CanWrite)
                     {
-                        sw.WriteLine(command);
+                        string backupFileContent = File.ReadAllText(backupPath);
+                        sw.WriteLine(backupFileContent);
                     }
                 }
 
-                process.WaitForExit();
-                process.Close();
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
 
+                process.WaitForExit();
+
+                if (process.ExitCode != 0)
+                {
+                    Console.WriteLine($"Error: {error}");
+                    answer = false;
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine($"Exception: {ex.Message}");
                 answer = false;
             }
 
-            //-------------
             return answer;
         }
+
+        //public static bool DB_Restore(string backupPath)
+        //{
+        //    bool answer = true;
+
+        //    MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder(connectionString_txt);
+        //    string host = builder.Server;
+        //    string userId = builder.UserID;
+        //    string password = builder.Password;
+        //    string database = builder.Database;
+
+
+        //    string command = $"mysql --host={host} --user={userId} --password={password} {database} < \"{backupPath}\"";
+
+        //    try
+        //    {
+        //        // Execute the mysqldump command
+        //        Process process = new Process
+        //        {
+        //            StartInfo = new ProcessStartInfo
+        //            {
+        //                FileName = "cmd.exe",
+        //                RedirectStandardInput = true,
+        //                RedirectStandardOutput = true,
+        //                UseShellExecute = false,
+        //                CreateNoWindow = true
+        //            }
+        //        };
+
+        //        process.Start();
+
+        //        using (StreamWriter sw = process.StandardInput)
+        //        {
+        //            if (sw.BaseStream.CanWrite)
+        //            {
+        //                sw.WriteLine(command);
+        //            }
+        //        }
+
+        //        process.WaitForExit();
+        //        process.Close();
+
+        //    }
+        //    catch (Exception)
+        //    {
+        //        answer = false;
+        //    }
+
+        //    //-------------
+        //    return answer;
+        //}
         ///////////////////////  RancoSoft Cammands   /////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////
@@ -452,27 +508,35 @@ namespace ALBAITAR_Softvet
         }
         public static void load_rancosoft_gmail_auth()
         {
-            if (IsInternetAvailable())
-            {
-                if (client_manag.State != ConnectionState.Open)
+            if (Properties.Settings.Default.Last_date_RANCOSOFT_GMAIL_AUTHENT_Load.Date != DateTime.Today) {
+                if (IsInternetAvailable())
                 {
-                    client_manag.Open();
-                }
-                if (client_manag.State == ConnectionState.Open)
-                {
-                    try
+                    if (client_manag.State != ConnectionState.Open)
                     {
-                        //Load Gmail Authent Pass (to use it to send forgot login pass of login of clients)
-                        MySqlDataAdapter adp = new MySqlDataAdapter("SELECT VALUE_TXT FROM PARAMS_AND_VALUES WHERE NME = 'RancoSoft Gmail Auth';", client_manag);
-                        DataTable dt = new DataTable();
-                        adp.Fill(dt);
-                        if (dt.Rows.Count > 0) { Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT = PreConnection.Codify_txt(dt.Rows[0][0].ToString()); Properties.Settings.Default.Save(); }
-                        //==========================================================
+                        client_manag.Open();
                     }
-                    catch { }
-                    client_manag.Close();
+                    if (client_manag.State == ConnectionState.Open)
+                    {
+                        try
+                        {
+                            //Load Gmail Authent Pass (to use it to send forgot login pass of login of clients)
+                            MySqlDataAdapter adp = new MySqlDataAdapter("SELECT VALUE_TXT FROM PARAMS_AND_VALUES WHERE NME = 'RancoSoft Gmail Auth';", client_manag);
+                            DataTable dt = new DataTable();
+                            adp.Fill(dt);
+                            if (dt.Rows.Count > 0) { 
+                                Properties.Settings.Default.RANCOSOFT_GMAIL_AUTHENT = PreConnection.Codify_txt(dt.Rows[0][0].ToString()); Properties.Settings.Default.Save();
+                                Properties.Settings.Default.Last_date_RANCOSOFT_GMAIL_AUTHENT_Load = DateTime.Now;
+                                Properties.Settings.Default.Save();
+                            }
+                            //==========================================================
+                            
+                        }
+                        catch { }
+                        client_manag.Close();
+                    }
                 }
             }
+                
         }
         public static int Verif_manual_stop_of_RancoSoft()
         {
@@ -603,7 +667,7 @@ namespace ALBAITAR_Softvet
                 {
                     t.Cells.Cast<DataGridViewCell>().ToList().ForEach(b =>
                     {
-                        xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dgv.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dgv.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").TrimStart().TrimEnd() : "";
+                        xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dgv.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dgv.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").Trim() : "";
                     });
 
                 });
@@ -624,7 +688,7 @@ namespace ALBAITAR_Softvet
                     {
                         tbl_to_add.Columns.Cast<DataColumn>().ToList().ForEach(b =>
                         {
-                            xcelApp.Cells[dgv.Rows.Count + tbl_to_add.Rows.IndexOf(t) + 2, tbl_to_add.Columns.IndexOf(b) + 1].Value = t[b] != null ? t[b].ToString().Replace(" 00", "").Replace(":00", "").Replace(",", ".").TrimStart().TrimEnd() : "";
+                            xcelApp.Cells[dgv.Rows.Count + tbl_to_add.Rows.IndexOf(t) + 2, tbl_to_add.Columns.IndexOf(b) + 1].Value = t[b] != null ? t[b].ToString().Replace(" 00", "").Replace(":00", "").Replace(",", ".").Trim() : "";
                         });
 
                     });

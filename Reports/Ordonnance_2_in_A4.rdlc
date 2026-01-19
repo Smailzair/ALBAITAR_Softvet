@@ -4183,12 +4183,6 @@
           <Border>
             <Style>None</Style>
           </Border>
-          <BackgroundImage>
-            <Source>Embedded</Source>
-            <Value>logocopy14</Value>
-            <MIMEType>image/jpeg</MIMEType>
-            <BackgroundRepeat>RepeatX</BackgroundRepeat>
-          </BackgroundImage>
         </Style>
       </Body>
       <Width>297mm</Width>
@@ -4662,7 +4656,6 @@
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
             <Line Name="Line4">
-              <Top>0cm</Top>
               <Left>14.8cm</Left>
               <Height>1cm</Height>
               <Width>0cm</Width>

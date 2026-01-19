@@ -805,12 +805,6 @@
           <Border>
             <Style>None</Style>
           </Border>
-          <BackgroundImage>
-            <Source>Embedded</Source>
-            <Value>logocopy13</Value>
-            <MIMEType>image/jpeg</MIMEType>
-            <BackgroundRepeat>Clip</BackgroundRepeat>
-          </BackgroundImage>
         </Style>
       </Body>
       <Width>151.24739mm</Width>

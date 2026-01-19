@@ -119,7 +119,7 @@ namespace ALBAITAR_Softvet.Dialogs
             //        cmmd += "," + x;
             //    });
             //    cmmd = cmmd.Substring(1, cmmd.Length - 1);
-            props = PreConnection.Load_data("SELECT tb1.ID,tb1.NME,tb1.CLIENT_ID,CONCAT(tb2.FAMNME, ' ', tb2.NME) AS CLIENT_FULL_NME FROM tb_animaux AS tb1 LEFT JOIN tb_clients AS tb2 ON tb1.`CLIENT_ID` = tb2.ID;");
+            props = PreConnection.Load_data("SELECT tb1.ID,tb1.NME,tb1.CLIENT_ID,CONCAT(tb2.FAMNME, ' ', tb2.NME) AS CLIENT_FULL_NME FROM tb_animaux AS tb1 LEFT JOIN tb_clients AS tb2 ON tb1.`CLIENT_ID` = tb2.ID ORDER BY NME;");
             if (props != null)
             {
                 if (props.Rows.Count > 0)

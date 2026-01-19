@@ -1,8 +1,10 @@
 ﻿using ALBAITAR_Softvet.Resources;
+using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Dialogs
@@ -23,7 +25,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string filter = textBox1.Text.ToLower().Replace("'", "''");
+            string filter = Regex.Replace(textBox1.Text.ToLower(), Main_Frm.client_mr_pattern, "", RegexOptions.IgnoreCase).Replace(".", "").Replace("'", "''").Trim();
 
             foreach (ListViewItem item in items2)
             {
@@ -111,7 +113,7 @@ namespace ALBAITAR_Softvet.Dialogs
         private void Clients_List_Load(object sender, EventArgs e)
         {
             //-------------------------
-            props = PreConnection.Load_data("SELECT ID, concat(FAMNME, ' ', NME) AS FULL_NME FROM tb_clients;");
+            props = PreConnection.Load_data("SELECT ID, concat(FAMNME, ' ', NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME;");
             if (props != null)
             {
                 if (props.Rows.Count > 0)

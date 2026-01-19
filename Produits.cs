@@ -1023,7 +1023,7 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         if (b.ColumnIndex <= 4)
                         {
-                            xcelApp.Cells[t.Index + 2, b.ColumnIndex].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().TrimStart().TrimEnd() : "";
+                            xcelApp.Cells[t.Index + 2, b.ColumnIndex].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Trim() : "";
                         }
                         else
                         {

@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Dialogs
@@ -20,7 +21,7 @@ namespace ALBAITAR_Softvet.Dialogs
     {
 
 
-        int rest_jrs_delay = 30;
+       // int rest_jrs_delay = 30;
         public App_Activation()
         {
             InitializeComponent();
@@ -32,7 +33,9 @@ namespace ALBAITAR_Softvet.Dialogs
                 label23.Text = BAITAR_ADRESS_EMAIL;
             }
             //----------------------------
-            PreConnection.load_rancosoft_gmail_auth();
+            new Thread(new ThreadStart(PreConnection.load_rancosoft_gmail_auth)).Start();
+            //-------------------
+            
         }
 
         private void App_Activation_Load(object sender, EventArgs e)
@@ -426,7 +429,7 @@ namespace ALBAITAR_Softvet.Dialogs
                                 "'" + textBox1.Text.Replace("'", "''") + "'," + //MAIL
                                 "'" + textBox5.Text.Replace("'", "''") + "'," + //TEL
                                 "'" + textBox6.Text.Replace("'", "''") + "'," + //NME
-                                rest_jrs_delay + ");", PreConnection.albaitar_online); //TENTATIVE
+                                label13.Text + ");", PreConnection.albaitar_online); //TENTATIVE
                                 if (PreConnection.albaitar_online.State != ConnectionState.Open) { PreConnection.albaitar_online.Open(); }
                                 try { command.ExecuteNonQuery(); } catch { }
                                 PreConnection.albaitar_online.Close();
@@ -538,7 +541,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     Properties.Settings.Default.MachineClientID = PreConnection.Codify_txt(PreConnection.generate_ID_of_client());
                     //---------
                     bool tt = Properties.Settings.Default.Codified_Act_Command_dmnd_date == null;
-                    tt = (tt ? true : Properties.Settings.Default.Codified_Act_Command_dmnd_date.IsNullOrEmpty());
+                    tt = (tt || Properties.Settings.Default.Codified_Act_Command_dmnd_date.IsNullOrEmpty());
                     if (tt)
                     {
                         Properties.Settings.Default.Codified_Act_Command_dmnd_date = PreConnection.Codify_txt(DateTime.Now.ToString());

@@ -96,15 +96,15 @@ namespace ALBAITAR_Softvet.Resources
         }
         private void Load_all_data()
         {
-            clients = PreConnection.Load_data("SELECT * FROM tb_clients;;");
-            animals = PreConnection.Load_data("SELECT * FROM tb_animaux;");
+            clients = PreConnection.Load_data("SELECT * FROM tb_clients ORDER BY FAMNME;");
+            animals = PreConnection.Load_data("SELECT * FROM tb_animaux ORDER BY NME;");
             infos = PreConnection.Load_data("SELECT * FROM tb_agenda WHERE `FOR_THIS_USERS` IN (NULL, '') OR `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + ",%' OR `FOR_THIS_USERS` LIKE '%," + Properties.Settings.Default.Last_login_user_idx + "' OR `FOR_THIS_USERS` LIKE '" + Properties.Settings.Default.Last_login_user_idx + ",%';");
 
             icons = PreConnection.Load_data("SELECT * FROM tb_images WHERE IMG_DATA IS NOT NULL GROUP BY IMG_DATA ORDER BY MODIF_TIME;");
             //------------------------------
             items_icon.Images.Clear();
             listView_Icons.Items.Clear();
-            items_icon.Images.Add("-1", Properties.Resources.icons8_Checkmark_30px);
+            items_icon.Images.Add("-1",  Properties.Resources.icons8_Checkmark_30px);
             if (icons != null)
             {
                 icons.Rows.Cast<DataRow>().ToList().ForEach(row =>

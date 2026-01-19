@@ -40,6 +40,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.services_loading = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -47,10 +48,26 @@
             this.PRIX = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.products_loading = new System.Windows.Forms.Label();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CATEGOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.REVIENT_PRTICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VENTE_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SLD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ALERT_MIN_ON = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QNT_MIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.visites_loading = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
@@ -59,6 +76,7 @@
             this.ANIM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VISITOR_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.analyses_loading = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
@@ -81,22 +99,8 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CATEGOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.REVIENT_PRTICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VENTE_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SLD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ALERT_MIN_ON = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QNT_MIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -146,6 +150,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.services_loading);
             this.tabPage1.Controls.Add(this.radioButton2);
             this.tabPage1.Controls.Add(this.radioButton1);
             this.tabPage1.Controls.Add(this.dataGridView1);
@@ -159,6 +164,18 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Services";
             this.tabPage1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseClick);
+            // 
+            // services_loading
+            // 
+            this.services_loading.AutoSize = true;
+            this.services_loading.BackColor = System.Drawing.Color.Aquamarine;
+            this.services_loading.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.services_loading.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.services_loading.Location = new System.Drawing.Point(161, 147);
+            this.services_loading.Name = "services_loading";
+            this.services_loading.Size = new System.Drawing.Size(187, 22);
+            this.services_loading.TabIndex = 35;
+            this.services_loading.Text = "Chargement en cours ...";
             // 
             // radioButton2
             // 
@@ -246,6 +263,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.products_loading);
             this.tabPage2.Controls.Add(this.radioButton5);
             this.tabPage2.Controls.Add(this.radioButton4);
             this.tabPage2.Controls.Add(this.radioButton3);
@@ -260,6 +278,80 @@
             this.tabPage2.Size = new System.Drawing.Size(512, 197);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Produits";
+            // 
+            // products_loading
+            // 
+            this.products_loading.AutoSize = true;
+            this.products_loading.BackColor = System.Drawing.Color.Aquamarine;
+            this.products_loading.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.products_loading.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.products_loading.Location = new System.Drawing.Point(161, 97);
+            this.products_loading.Name = "products_loading";
+            this.products_loading.Size = new System.Drawing.Size(187, 22);
+            this.products_loading.TabIndex = 34;
+            this.products_loading.Text = "Chargement en cours ...";
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(230, 7);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(104, 20);
+            this.radioButton5.TabIndex = 32;
+            this.radioButton5.Text = "Quantité large";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(340, 7);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(164, 20);
+            this.radioButton4.TabIndex = 31;
+            this.radioButton4.Text = "Quantité minimum/viérge";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Checked = true;
+            this.radioButton3.Location = new System.Drawing.Point(176, 7);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(48, 20);
+            this.radioButton3.TabIndex = 30;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Tous";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            // 
+            // label28
+            // 
+            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label28.BackColor = System.Drawing.Color.Yellow;
+            this.label28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label28.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label28.Location = new System.Drawing.Point(363, 181);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(12, 12);
+            this.label28.TabIndex = 29;
+            // 
+            // label27
+            // 
+            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.SystemColors.Control;
+            this.label27.Font = new System.Drawing.Font("Century Gothic", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.label27.Location = new System.Drawing.Point(378, 181);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(126, 12);
+            this.label27.TabIndex = 28;
+            this.label27.Text = "Quantité minimale (ou viérge)";
             // 
             // dataGridView2
             // 
@@ -312,6 +404,79 @@
             this.dataGridView2.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView2_RowsRemoved);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // CODE
+            // 
+            this.CODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CODE.DataPropertyName = "CODE";
+            this.CODE.HeaderText = "Code";
+            this.CODE.Name = "CODE";
+            this.CODE.ReadOnly = true;
+            this.CODE.Width = 62;
+            // 
+            // CATEGOR
+            // 
+            this.CATEGOR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CATEGOR.DataPropertyName = "CATEGOR";
+            this.CATEGOR.HeaderText = "Categorie";
+            this.CATEGOR.Name = "CATEGOR";
+            this.CATEGOR.ReadOnly = true;
+            this.CATEGOR.Width = 85;
+            // 
+            // NME
+            // 
+            this.NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NME.DataPropertyName = "NME";
+            this.NME.HeaderText = "Produit";
+            this.NME.Name = "NME";
+            this.NME.ReadOnly = true;
+            // 
+            // REVIENT_PRTICE
+            // 
+            this.REVIENT_PRTICE.DataPropertyName = "REVIENT_PRTICE";
+            this.REVIENT_PRTICE.HeaderText = "REVIENT_PRTICE";
+            this.REVIENT_PRTICE.Name = "REVIENT_PRTICE";
+            this.REVIENT_PRTICE.ReadOnly = true;
+            this.REVIENT_PRTICE.Visible = false;
+            // 
+            // VENTE_PRICE
+            // 
+            this.VENTE_PRICE.DataPropertyName = "VENTE_PRICE";
+            this.VENTE_PRICE.HeaderText = "VENTE_PRICE";
+            this.VENTE_PRICE.Name = "VENTE_PRICE";
+            this.VENTE_PRICE.ReadOnly = true;
+            this.VENTE_PRICE.Visible = false;
+            // 
+            // SLD
+            // 
+            this.SLD.DataPropertyName = "SLD";
+            this.SLD.HeaderText = "Quantité Stock";
+            this.SLD.Name = "SLD";
+            this.SLD.ReadOnly = true;
+            // 
+            // ALERT_MIN_ON
+            // 
+            this.ALERT_MIN_ON.DataPropertyName = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.HeaderText = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.Name = "ALERT_MIN_ON";
+            this.ALERT_MIN_ON.ReadOnly = true;
+            this.ALERT_MIN_ON.Visible = false;
+            // 
+            // QNT_MIN
+            // 
+            this.QNT_MIN.DataPropertyName = "QNT_MIN";
+            this.QNT_MIN.HeaderText = "QNT_MIN";
+            this.QNT_MIN.Name = "QNT_MIN";
+            this.QNT_MIN.ReadOnly = true;
+            this.QNT_MIN.Visible = false;
+            // 
             // textBox3
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -334,6 +499,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.visites_loading);
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.label8);
             this.tabPage3.Controls.Add(this.dataGridView3);
@@ -344,6 +510,18 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Visites";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // visites_loading
+            // 
+            this.visites_loading.AutoSize = true;
+            this.visites_loading.BackColor = System.Drawing.Color.Aquamarine;
+            this.visites_loading.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.visites_loading.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.visites_loading.Location = new System.Drawing.Point(161, 104);
+            this.visites_loading.Name = "visites_loading";
+            this.visites_loading.Size = new System.Drawing.Size(187, 22);
+            this.visites_loading.TabIndex = 31;
+            this.visites_loading.Text = "Chargement en cours ...";
             // 
             // label9
             // 
@@ -435,6 +613,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.analyses_loading);
             this.tabPage4.Controls.Add(this.label11);
             this.tabPage4.Controls.Add(this.label10);
             this.tabPage4.Controls.Add(this.dataGridView4);
@@ -444,6 +623,18 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Analyses";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // analyses_loading
+            // 
+            this.analyses_loading.AutoSize = true;
+            this.analyses_loading.BackColor = System.Drawing.Color.Aquamarine;
+            this.analyses_loading.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.analyses_loading.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.analyses_loading.Location = new System.Drawing.Point(161, 100);
+            this.analyses_loading.Name = "analyses_loading";
+            this.analyses_loading.Size = new System.Drawing.Size(187, 22);
+            this.analyses_loading.TabIndex = 33;
+            this.analyses_loading.Text = "Chargement en cours ...";
             // 
             // label11
             // 
@@ -726,79 +917,6 @@
             this.label7.TabIndex = 35;
             this.label7.Text = "0.00 DA";
             // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // CODE
-            // 
-            this.CODE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CODE.DataPropertyName = "CODE";
-            this.CODE.HeaderText = "Code";
-            this.CODE.Name = "CODE";
-            this.CODE.ReadOnly = true;
-            this.CODE.Width = 62;
-            // 
-            // CATEGOR
-            // 
-            this.CATEGOR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CATEGOR.DataPropertyName = "CATEGOR";
-            this.CATEGOR.HeaderText = "Categorie";
-            this.CATEGOR.Name = "CATEGOR";
-            this.CATEGOR.ReadOnly = true;
-            this.CATEGOR.Width = 85;
-            // 
-            // NME
-            // 
-            this.NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NME.DataPropertyName = "NME";
-            this.NME.HeaderText = "Produit";
-            this.NME.Name = "NME";
-            this.NME.ReadOnly = true;
-            // 
-            // REVIENT_PRTICE
-            // 
-            this.REVIENT_PRTICE.DataPropertyName = "REVIENT_PRTICE";
-            this.REVIENT_PRTICE.HeaderText = "REVIENT_PRTICE";
-            this.REVIENT_PRTICE.Name = "REVIENT_PRTICE";
-            this.REVIENT_PRTICE.ReadOnly = true;
-            this.REVIENT_PRTICE.Visible = false;
-            // 
-            // VENTE_PRICE
-            // 
-            this.VENTE_PRICE.DataPropertyName = "VENTE_PRICE";
-            this.VENTE_PRICE.HeaderText = "VENTE_PRICE";
-            this.VENTE_PRICE.Name = "VENTE_PRICE";
-            this.VENTE_PRICE.ReadOnly = true;
-            this.VENTE_PRICE.Visible = false;
-            // 
-            // SLD
-            // 
-            this.SLD.DataPropertyName = "SLD";
-            this.SLD.HeaderText = "Quantité Stock";
-            this.SLD.Name = "SLD";
-            this.SLD.ReadOnly = true;
-            // 
-            // ALERT_MIN_ON
-            // 
-            this.ALERT_MIN_ON.DataPropertyName = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.HeaderText = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.Name = "ALERT_MIN_ON";
-            this.ALERT_MIN_ON.ReadOnly = true;
-            this.ALERT_MIN_ON.Visible = false;
-            // 
-            // QNT_MIN
-            // 
-            this.QNT_MIN.DataPropertyName = "QNT_MIN";
-            this.QNT_MIN.HeaderText = "QNT_MIN";
-            this.QNT_MIN.Name = "QNT_MIN";
-            this.QNT_MIN.ReadOnly = true;
-            this.QNT_MIN.Visible = false;
-            // 
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -824,68 +942,6 @@
             this.label13.TabIndex = 37;
             this.label13.Text = "Stock Minimum !";
             this.label13.Visible = false;
-            // 
-            // label28
-            // 
-            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label28.BackColor = System.Drawing.Color.Yellow;
-            this.label28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label28.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label28.Location = new System.Drawing.Point(363, 181);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(12, 12);
-            this.label28.TabIndex = 29;
-            // 
-            // label27
-            // 
-            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label27.AutoSize = true;
-            this.label27.BackColor = System.Drawing.SystemColors.Control;
-            this.label27.Font = new System.Drawing.Font("Century Gothic", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label27.Location = new System.Drawing.Point(378, 181);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(126, 12);
-            this.label27.TabIndex = 28;
-            this.label27.Text = "Quantité minimale (ou viérge)";
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(230, 7);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(104, 20);
-            this.radioButton5.TabIndex = 32;
-            this.radioButton5.Text = "Quantité large";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(340, 7);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(164, 20);
-            this.radioButton4.TabIndex = 31;
-            this.radioButton4.Text = "Quantité minimum/viérge";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Checked = true;
-            this.radioButton3.Location = new System.Drawing.Point(176, 7);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(48, 20);
-            this.radioButton3.TabIndex = 30;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Tous";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
             // Add_Vente_Fact_Item
             // 
@@ -918,7 +974,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Choisir un (01) élément à ajouter :";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Add_Vente_Fact_Item_FormClosing);
             this.Load += new System.EventHandler(this.Add_Vente_Fact_Item_Load);
+            this.Shown += new System.EventHandler(this.Add_Vente_Fact_Item_Shown);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1001,5 +1059,9 @@
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.Label visites_loading;
+        private System.Windows.Forms.Label services_loading;
+        private System.Windows.Forms.Label products_loading;
+        private System.Windows.Forms.Label analyses_loading;
     }
 }

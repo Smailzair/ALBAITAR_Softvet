@@ -33,6 +33,7 @@ namespace ALBAITAR_Softvet
     {
         int time_delay = 0;
         static DateTime last_update_time = new DateTime(1900, 12, 31);
+        Thread parr;
         Thread th;
         Thread Activ_Ver;
         Thread Send_Vaccin_Alerts;
@@ -91,6 +92,9 @@ namespace ALBAITAR_Softvet
         static bool ended_loading_fact_tab = false;
         //-------------------
         List<string> prev_open_frms;
+        bool params_bl_first_load = true;
+        //----------------
+        public static string client_mr_pattern = @"\b(Mr|Mme|Melle)\s*";
         public Main_Frm()
         {
             //new Splash().Show();
@@ -98,7 +102,7 @@ namespace ALBAITAR_Softvet
             InitializeComponent();
             //-------------
             timer1.Enabled = true;
-            if (Properties.Settings.Default.First_Enter_Date_After_Install == new DateTime(1867, 05, 15)){ Properties.Settings.Default.First_Enter_Date_After_Install = DateTime.UtcNow; Properties.Settings.Default.Save(); }
+            if (Properties.Settings.Default.First_Enter_Date_After_Install == new DateTime(1867, 05, 15)) { Properties.Settings.Default.First_Enter_Date_After_Install = DateTime.UtcNow; Properties.Settings.Default.Save(); }
             //-----------
             tabControl1.Alignment = Properties.Settings.Default.Main_Frm_Tabs_Horientation_Is_Verticatl ? TabAlignment.Left : TabAlignment.Top;
             //-----------------
@@ -136,7 +140,27 @@ namespace ALBAITAR_Softvet
             }
             //----------------------------
             Params = PreConnection.Load_data("SELECT * FROM tb_params;");
+
             //------------------------------
+            th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting performance of "Clients" form
+            th.Start();
+            //th.Join();
+            //--------------
+
+            parr = new Thread(new ThreadStart(load_server_params)); 
+            parr.Start();
+            parr.Join(); // <--- used 'Join' to wait loading params to use them next in 'Activ_Verif'.
+            //---
+            Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
+            Activ_Ver.Start();
+            // Activ_Ver.Join();
+            //--------------
+
+
+        }
+
+        private void load_server_params()
+        {
             Baitar_Server_Params = new DataTable();
             try
             {
@@ -149,17 +173,6 @@ namespace ALBAITAR_Softvet
                 PreConnection.albaitar_online.Close();
             }
             catch { }
-            //------------------------------
-            th = new Thread(new ThreadStart(Load_sites_table)); //I use it because of starting performance of "Clients" form
-            th.Start();
-            th.Join();
-            //--------------
-            Activ_Ver = new Thread(new ThreadStart(Activ_Verif)); //I use it to verify activation situation (not of RancoSoft)
-            Activ_Ver.Start();
-            Activ_Ver.Join();
-            //--------------
-
-
         }
 
         public void Send_Email_Vaccin_Alerts()
@@ -579,7 +592,8 @@ namespace ALBAITAR_Softvet
                 string filePath = folderPath + "\\Al_Baitar_Activation.txt";
                 if (!File.Exists(filePath))
                 {
-                    if (!Directory.Exists(folderPath)) {
+                    if (!Directory.Exists(folderPath))
+                    {
                         Directory.CreateDirectory(folderPath);
                         File.SetAttributes(folderPath, FileAttributes.Directory | FileAttributes.Hidden);
                     }
@@ -603,30 +617,46 @@ namespace ALBAITAR_Softvet
                     decimal prev_running_delay = 0; //delay per minute
                     if (file_lines.Length > 0)
                     {
-                        decimal.TryParse(file_lines[0].ToString(), out prev_running_delay);
-                        file_lines_to_save[0] = file_lines[0];
+                        if (file_lines[0].Trim().Length > 0)
+                        {
+                            decimal.TryParse(file_lines[0].ToString(), out prev_running_delay);
+                            file_lines_to_save[0] = file_lines[0];
+                        }
+
                     }
 
                     DateTime prev_saved_running_delay_datetime = new DateTime(2000, 01, 01);
                     if (file_lines.Length > 1)
                     {
-                        DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
-                        file_lines_to_save[1] = file_lines[1];
+                        if (file_lines[1].Trim().Length > 0)
+                        {
+                            DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
+                            file_lines_to_save[1] = file_lines[1];
+                        }
+
                     }
 
                     bool Is_finance_done = false;
                     if (file_lines.Length > 2)
                     {
-                        Is_finance_done = PreConnection.Traduct_Codified_txt(file_lines[2]) == "Yes_is_done";
-                        file_lines_to_save[2] = file_lines[2];
+                        if (file_lines[2].Trim().Length > 0)
+                        {
+                            Is_finance_done = PreConnection.Traduct_Codified_txt(file_lines[2]) == "Yes_is_done";
+                            file_lines_to_save[2] = file_lines[2];
+                        }
+
                     }
                     activation_is_finance_done = Is_finance_done;
 
                     DateTime Server_Verif_Date = Properties.Settings.Default.First_Enter_Date_After_Install > new DateTime(1867, 05, 15) ? Properties.Settings.Default.First_Enter_Date_After_Install : DateTime.Now;
                     if (file_lines.Length > 3)
                     {
-                        DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[3]), out Server_Verif_Date);
-                        file_lines_to_save[3] = file_lines[3];
+                        if (file_lines[3].Trim().Length > 0)
+                        {
+                            DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[3]), out Server_Verif_Date);
+                            file_lines_to_save[3] = file_lines[3];
+                        }
+
                     }
                     //------------
 
@@ -637,11 +667,10 @@ namespace ALBAITAR_Softvet
                     Activ_verif_required = Activ_verif_required || (PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() && (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800)); //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
                     is_activation_reqiired = Activ_verif_required;
 
-                    string adding_to_title = "";
-                    string adding_to_title_delay = "";
-                    string adding_finance_to_title = "";
+                    //string adding_to_title = "";
+                    //string adding_to_title_delay = "";
+                    //string adding_finance_to_title = "";
 
-                    //int finnace_delay_tmp = (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30") - (int)(DateTime.Now - Server_Verif_Date).TotalDays) >= 0 ? (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30") - (int)(DateTime.Now - Server_Verif_Date).TotalDays) : 0;
                     int finnace_delay_tmp = (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ?
                         (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30") - (int)(DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays) >= 0 ?
                         (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ?
@@ -663,7 +692,7 @@ namespace ALBAITAR_Softvet
                             file_lines_to_save[2] = activation_is_finance_done ? PreConnection.Codify_txt("Yes_is_done") : PreConnection.Codify_txt("Not_yet");
                             file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
                             //------
-                            adding_finance_to_title = PreConnection.Traduct_Codified_txt(file_lines_to_save[2]) != "Yes_is_done" ? "Droits non réglés ["+finnace_delay_tmp+"]" : "";
+                            //adding_finance_to_title = PreConnection.Traduct_Codified_txt(file_lines_to_save[2]) != "Yes_is_done" ? "Droits non réglés ["+finnace_delay_tmp+"]" : "";
 
                             activation_finance_delay_days = finnace_delay_tmp;
                         }
@@ -676,35 +705,31 @@ namespace ALBAITAR_Softvet
                             int RESTE_DELAY = (activation_is_finance_done && activation_verified_corretly_with_server) ? int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30") : Math.Min(int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30"), int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30"));
 
                             bool reste_delay_ended = (DateTime.Now - Server_Verif_Date).TotalDays >= RESTE_DELAY;
-                           
-                            bool prevent_enter = !PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() && 
+
+                            bool prevent_enter = !PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() &&
                                 (reste_delay_ended || prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800);
 
-                            //MessageBox.Show(">>>>>>>>>>>> reste_delay_ended = " + reste_delay_ended + "\n" +
-                            //   "Server_Verif_Date = " + Server_Verif_Date.ToString("yyyy-MM-dd") + "\n" +
-                            //   "RESTE_DELAY = " + RESTE_DELAY + "\n" +
-                            //   "----------------------\n" +
-                            //   "prevent_enter = " + prevent_enter + "\n" +
-                            //   "prev_saved_running_delay_datetime = "+ prev_saved_running_delay_datetime.ToString("yyyy-MM-dd") +"\n" +
-                            //   " PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() = " + !PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() + "\n" +
-                            //   "LASTTT = " + (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800).ToString());
 
                             PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
                             Properties.Settings.Default.Codified_Activate_Code = "";
                             Properties.Settings.Default.Save();
                             close_app_because_act = prevent_enter;
                             Application.Run(new App_Activation());
+                            if (prevent_enter)
+                            { // !! NOT TESTED YET !!
+                                this.Hide();
+                            }
                             //----------
 
-                                adding_to_title += " (Produit non activé";
-                                int restt = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays);
-                                adding_to_title_delay = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? "[" + Convert.ToInt32(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays).ToString("0") + "] jours" : "";
-                            
-                            
+                            //adding_to_title += " (Produit non activé";
+                            //int restt = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays);
+                            //adding_to_title_delay = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? "[" + Convert.ToInt32(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays).ToString("0") + "] jours" : "";
+
+
                             //-------------
                         }
-                        
-                        
+
+
 
                     }
                     //-------
@@ -722,9 +747,10 @@ namespace ALBAITAR_Softvet
                             close_app_because_act = true;
                             Application.Run(new App_Activation());
                         }
-                        else {
+                        else
+                        {
                             string finance_stat = PreConnection.verify_baitar_client_finance(PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email), PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code));
-                            adding_finance_to_title = finance_stat == "not good" ? "Droits non réglés ["+finnace_delay_tmp+"]" : "";
+                            //adding_finance_to_title = finance_stat == "not good" ? "Droits non réglés ["+finnace_delay_tmp+"]" : "";
 
 
                             activation_is_finance_done = finance_stat == "unknown" ? activation_is_finance_done : finance_stat == "good";
@@ -732,17 +758,11 @@ namespace ALBAITAR_Softvet
 
                             activation_finance_delay_days = finnace_delay_tmp;
                         }
-                        
+
                     }
 
                     //--------
                     make_title_activ_state_update = true;
-                    //string tmp_titlt = adding_to_title;
-                    //tmp_titlt += !adding_finance_to_title.IsEmpty() ? (!adding_to_title.IsEmpty() ? " & " : " (") + adding_finance_to_title : "";
-                    
-                    //tmp_titlt += !tmp_titlt.IsEmpty() ? (!adding_to_title_delay.IsEmpty() ? adding_to_title_delay : (int)(finnace_delay_tmp) > 0 ? (" - réste [" + finnace_delay_tmp.ToString("0") + "] jours") : "") : "";
-                    //tmp_titlt += !tmp_titlt.IsEmpty() ? ")" : "";
-                    //text_to_add_to_title = tmp_titlt;                    
 
                     //---------
                     FileAttributes attributes = File.GetAttributes(filePath);
@@ -751,79 +771,6 @@ namespace ALBAITAR_Softvet
                     //-----------
 
                 }
-                //////////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                //if (PreConnection.ReadFromRegistry("Déja_try_version") != "OUI")
-                //{
-                //    //========= I/ First steps ==============
-                //    string filePath = "C:\\ProgramData\\BAITAR_CTRL\\Al_Baitar_Activation.txt";
-
-                //    if (File.Exists(filePath))
-                //    {
-                //        string fileContents = File.ReadAllText(filePath);
-                //        double old_val = 0;
-                //        double.TryParse(fileContents, out old_val);
-                //        if (old_val >= 10800) //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
-                //        {
-                //            PreConnection.WriteIntoRegistry("SoftVet_Start_Date", "01/01/1900");
-                //        }
-                //    }
-                //    else
-                //    {
-                //        //-------- Check if is the first time (just installed) OR the try periode ended -----------------
-                //        DateTime dtt = DateTime.UtcNow;
-                //        bool rr = DateTime.TryParse(PreConnection.ReadFromRegistry("SoftVet_Start_Date"), out dtt);
-                //        if (!rr || dtt == DateTime.Now)
-                //        {
-                //            Application.Run(new App_Activation());
-                //            return;
-                //        }
-                //    }
-                //    //----------------
-
-                //    //========= II/ if the previous check worked (ACTIVATED!), we come to this check steps ===============
-                //    //---------- Check if the PC changed ---------------
-                //    string MachineCltID = Properties.Settings.Default.MachineClientID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID) : "";
-                //    if (!PreConnection.Check_the_environ_ID(MachineCltID))
-                //    {
-                //        string strt_date = PreConnection.ReadFromRegistry("SoftVet_Start_Date");
-                //        DateTime dt = DateTime.UtcNow;
-                //        if (strt_date == "")
-                //        {
-                //            PreConnection.WriteIntoRegistry("SoftVet_Start_Date", dt.ToString("dd/MM/yyyy"));
-                //        }
-
-                //        DateTime.TryParse(strt_date, out dt);
-                //        int delay = 30 - (DateTime.UtcNow.Date - dt.Date).Days;
-
-                //        text_to_add_to_title = " (Produit non activé - réste [" + delay + "] jours)";
-                //        if (delay >= 30)
-                //        {
-                //            new App_Activation().ShowDialog();
-                //        }
-                //        else if (delay <= 0)
-                //        {
-                //            PreConnection.WriteIntoRegistry("Déja_try_version", "OUI");
-                //            Properties.Settings.Default.Codified_Activate_Code = "";
-                //            Properties.Settings.Default.Save();
-                //            close_app_because_act = true;
-                //            Application.Run(new App_Activation());
-                //        }
-                //    }
-                //}
-                //else
-                //{
-                //    Properties.Settings.Default.Codified_Activate_Code = "";
-                //    Properties.Settings.Default.Save();
-                //    close_app_because_act = true;
-                //    Application.Run(new App_Activation());
-                //}
-
-
-
 
             }
             else //Destinated to the other PCs in local network (Important!: Activation just from the Server PC)
@@ -1081,7 +1028,7 @@ namespace ALBAITAR_Softvet
                 comboBox3.SelectedIndex = 0;
                 comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
                 //----------------
-                Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
+                Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients ORDER BY FAMNME;");
                 Main_Frm_animals_tbl = PreConnection.Load_data("SELECT  " +
         "    tb1.*,  " +
         "    tb2.CLIENT_FULL_NME,  " +
@@ -1119,7 +1066,7 @@ namespace ALBAITAR_Softvet
         "        tb_maladies.ANIM_ID = tb3.ANIM_ID  " +
         "        AND tb_maladies.START_DATE = tb3.max_start_date) tb4  " +
         "ON  " +
-        "    tb4.ANIM_ID = tb1.ID; ");
+        "    tb4.ANIM_ID = tb1.ID ORDER BY NME; ");
                 main_poids_tab = PreConnection.Load_data("SELECT * FROM tb_poids;");
                 comboBox1.SelectedIndex = 1;
                 //-----
@@ -1138,7 +1085,7 @@ namespace ALBAITAR_Softvet
             last_update_time = DateTime.Now;
             //------------
             int cb1_idx = comboBox1.SelectedIndex > -1 ? comboBox1.SelectedIndex : 0;
-            Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients;");
+            Main_Frm_clients_tbl = PreConnection.Load_data("SELECT *,CONCAT(`SEX`,' ',`FAMNME`,' ',`NME`) AS FULL_NME FROM tb_clients ORDER BY FAMNME;");
             //Main_Frm_animals_tbl = PreConnection.Load_data("SELECT tb1.*,tb2.`CLIENT_FULL_NME`,tb3.MALAD_NME,tb3.LAST_MALAD_DATE FROM tb_animaux tb1 "
             //                                             + "LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID` "
             //                                             + "LEFT JOIN (SELECT ANIM_ID, MAX(START_DATE) AS LAST_MALAD_DATE,MALAD_NME "
@@ -1181,7 +1128,7 @@ namespace ALBAITAR_Softvet
     "        tb_maladies.ANIM_ID = tb3.ANIM_ID  " +
     "        AND tb_maladies.START_DATE = tb3.max_start_date) tb4  " +
     "ON  " +
-    "    tb4.ANIM_ID = tb1.ID; ");
+    "    tb4.ANIM_ID = tb1.ID ORDER BY NME;");
             comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
             comboBox1.SelectedIndex = cb1_idx;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
@@ -1274,29 +1221,80 @@ namespace ALBAITAR_Softvet
                 string[] file_lines = File.ReadAllLines(filePath);
                 string[] file_lines_to_save = new string[4];
 
+
+
                 decimal prev_running_delay = 0; //delay per minute
                 if (file_lines.Length > 0)
                 {
-                    decimal.TryParse(file_lines[0].ToString(), out prev_running_delay);
-                    file_lines_to_save[0] = file_lines[0];
+                    if (file_lines[0].Trim().Length > 0)
+                    {
+                        decimal.TryParse(file_lines[0].ToString(), out prev_running_delay);
+                        file_lines_to_save[0] = file_lines[0];
+                    }
+
                 }
 
-                DateTime prev_saved_running_delay_datetime = new DateTime(1900, 01, 01);
+                DateTime prev_saved_running_delay_datetime = new DateTime(2000, 01, 01);
                 if (file_lines.Length > 1)
                 {
-                    DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
-                    file_lines_to_save[1] = PreConnection.Codify_txt(prev_saved_running_delay_datetime.ToString());
+                    if (file_lines[1].Trim().Length > 0)
+                    {
+                        DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
+                        file_lines_to_save[1] = file_lines[1];
+                    }
+
                 }
 
+                bool Is_finance_done = false;
                 if (file_lines.Length > 2)
                 {
-                    file_lines_to_save[2] = file_lines[2];
-                }
+                    if (file_lines[2].Trim().Length > 0)
+                    {
+                        Is_finance_done = PreConnection.Traduct_Codified_txt(file_lines[2]) == "Yes_is_done";
+                        file_lines_to_save[2] = file_lines[2];
+                    }
 
+                }
+                activation_is_finance_done = Is_finance_done;
+
+                DateTime Server_Verif_Date = Properties.Settings.Default.First_Enter_Date_After_Install > new DateTime(1867, 05, 15) ? Properties.Settings.Default.First_Enter_Date_After_Install : DateTime.Now;
                 if (file_lines.Length > 3)
                 {
-                    file_lines_to_save[3] = file_lines[3];
+                    if (file_lines[3].Trim().Length > 0)
+                    {
+                        DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[3]), out Server_Verif_Date);
+                        file_lines_to_save[3] = file_lines[3];
+                    }
+
                 }
+                //------------
+                //================================================================
+                //decimal prev_running_delay = 0; //delay per minute
+                //if (file_lines.Length > 0)
+                //{
+                //    decimal.TryParse(file_lines[0].ToString(), out prev_running_delay);
+                //    file_lines_to_save[0] = file_lines[0];
+                //}
+
+                //DateTime prev_saved_running_delay_datetime = new DateTime(1900, 01, 01);
+                //if (file_lines.Length > 1)
+                //{
+                //    DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
+                //    file_lines_to_save[1] = PreConnection.Codify_txt(prev_saved_running_delay_datetime.ToString());
+                //}
+
+                //if (file_lines.Length > 2)
+                //{
+                //    file_lines_to_save[2] = file_lines[2];
+                //}
+
+                //if (file_lines.Length > 3)
+                //{
+                //    file_lines_to_save[3] = file_lines[3];
+                //}
+
+
+
 
 
                 file_lines_to_save[0] = ((double)prev_running_delay + (double)time_delay / 60).ToString("N2");
@@ -1453,17 +1451,22 @@ namespace ALBAITAR_Softvet
 
         private void Main_Frm_Activated(object sender, EventArgs e)
         {
-            Params = PreConnection.Load_data("SELECT * FROM tb_params;");
-            //-----------
+
             try
             {
                 DateTime tt = DateTime.Now;
-                if (Params != null)
+                if (!params_bl_first_load)
                 {
-                    label_cab_nme.Text = Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 1).FirstOrDefault()["VAL"].ToString();
-                    //----------
-                    DateTime.TryParse(Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 6).FirstOrDefault()["VAL"].ToString(), out tt);
+                    Params = PreConnection.Load_data("SELECT * FROM tb_params;");
+                    if (Params != null)
+                    {
+                        label_cab_nme.Text = Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 1).FirstOrDefault()["VAL"].ToString();
+                        //----------
+                        DateTime.TryParse(Params.Rows.Cast<DataRow>().Where(RR => (int)RR["ID"] == 6).FirstOrDefault()["VAL"].ToString(), out tt);
+                    }
                 }
+                params_bl_first_load = false;
+                //-------------------------
                 if ((tt - last_update_time).Seconds > 0)
                 {
                     refresh_main_tables();
@@ -1820,14 +1823,14 @@ namespace ALBAITAR_Softvet
         }
         private void finance_lab_tab()
         {
-            main_financ_tab = PreConnection.Load_data("SELECT tb1.*,tb2.CLIENT_FULL_NME FROM tb_clients_finance tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID`;");
+            main_financ_tab = PreConnection.Load_data("SELECT tb1.*,tb2.CLIENT_FULL_NME FROM tb_clients_finance tb1 LEFT JOIN (SELECT `ID`,CONCAT(`FAMNME`,' ',`NME`) AS CLIENT_FULL_NME FROM tb_clients) tb2 ON tb1.`CLIENT_ID` = tb2.`ID` ORDER BY CLIENT_FULL_NME, OP_DATE;");
             ended_loading_finn_tab = true;
 
 
         }
         private void facture_lab_tab()
         {
-            main_factures_tbl = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`DATE`,tb1.`CLIENT_ID`,tb1.`CLIENT_FULL_NME`,tb1.`REF`,tb1.`TOTAL_HT`,tb1.`TVA_PERC`,tb1.`DROIT_TIMBRE`,tb1.`TOTAL_TTC`,tb1.`LAST_MODIF_BY`,tb2.`SLD` AS FACT_PAID_MNT,tb3.SLD AS SLD_OF_CLIENT FROM tb_factures_vente tb1 LEFT JOIN (SELECT SUM(`DEBIT` - `CREDIT`) AS SLD, `FACT_NUM` FROM tb_clients_finance WHERE `FACT_NUM` IS NOT NULL GROUP BY `FACT_NUM`) tb2 ON tb1.`REF` = tb2.`FACT_NUM` LEFT JOIN (SELECT `CLIENT_ID`,SUM(`DEBIT` - `CREDIT`) AS SLD FROM tb_clients_finance WHERE `CLIENT_ID` IS NOT NULL GROUP BY `CLIENT_ID`) tb3 ON tb1.`CLIENT_ID` = tb3.`CLIENT_ID`;");
+            main_factures_tbl = PreConnection.Load_data("SELECT tb1.`ID`,tb1.`DATE`,tb1.`CLIENT_ID`,tb1.`CLIENT_FULL_NME`,tb1.`REF`,tb1.`TOTAL_HT`,tb1.`TVA_PERC`,tb1.`DROIT_TIMBRE`,tb1.`TOTAL_TTC`,tb1.`LAST_MODIF_BY`,tb1.`IS_PROVIS`,tb2.`SLD` AS FACT_PAID_MNT,tb3.SLD AS SLD_OF_CLIENT FROM tb_factures_vente tb1 LEFT JOIN (SELECT SUM(`DEBIT` - `CREDIT`) AS SLD, `FACT_NUM` FROM tb_clients_finance WHERE `FACT_NUM` IS NOT NULL GROUP BY `FACT_NUM`) tb2 ON tb1.`REF` = tb2.`FACT_NUM` LEFT JOIN (SELECT `CLIENT_ID`,SUM(`DEBIT` - `CREDIT`) AS SLD FROM tb_clients_finance WHERE `CLIENT_ID` IS NOT NULL GROUP BY `CLIENT_ID`) tb3 ON tb1.`CLIENT_ID` = tb3.`CLIENT_ID`;");
             ended_loading_fact_tab = true;
         }
         private void animal_lab_tab()
@@ -2687,17 +2690,18 @@ namespace ALBAITAR_Softvet
             dataGridView7.Rows[0].Cells[3].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["DROIT_TIMBRE"] != DBNull.Value).Sum(rowView => (decimal)rowView["DROIT_TIMBRE"]);
             dataGridView7.Rows[0].Cells[4].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["TOTAL_TTC"] != DBNull.Value).Sum(rowView => (decimal)rowView["TOTAL_TTC"]);
             dataGridView7.Rows[0].Cells[5].Value = ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["FACT_PAID_MNT"] != DBNull.Value).Sum(rowView => (decimal)rowView["FACT_PAID_MNT"]);
-            //-----------------
-            dataGridView5.Columns[5].Width = dataGridView7.Columns[1].Width;
-            dataGridView5.Columns[6].Width = dataGridView7.Columns[2].Width;
-            dataGridView5.Columns[7].Width = dataGridView7.Columns[3].Width;
-            dataGridView5.Columns[8].Width = dataGridView7.Columns[4].Width;
-            dataGridView5.Columns[9].Width = dataGridView7.Columns[5].Width;
             //---------------
-            dataGridView7.Width = dataGridView5.Width - dataGridView5.Columns[10].Width - (dataGridView5.Controls.OfType<VScrollBar>().FirstOrDefault().Visible ? 17 : 0);
-            //-------            
-            label8.Text = "Réglé (" + ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["CLIENT_ID"] != DBNull.Value && (XX["FACT_PAID_MNT"] != DBNull.Value ? (decimal)XX["FACT_PAID_MNT"] : 0) <= 0).Count() + ")";
-            label7.Text = "Non réglé (" + ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["CLIENT_ID"] != DBNull.Value && (XX["FACT_PAID_MNT"] != DBNull.Value ? (decimal)XX["FACT_PAID_MNT"] : 0) > 0).Count() + ")";
+            dataGridView5.Columns["dataGridViewTextBoxColumn5"].Width = dataGridView7.Columns["dataGridViewTextBoxColumn16"].Width;
+            dataGridView5.Columns["dataGridViewTextBoxColumn6"].Width = dataGridView7.Columns["dataGridViewTextBoxColumn17"].Width;
+            dataGridView5.Columns["DROIT_TIMBRE"].Width = dataGridView7.Columns["dataGridViewTextBoxColumn18"].Width;
+            dataGridView5.Columns["TOTAL_TTC"].Width = dataGridView7.Columns["dataGridViewTextBoxColumn19"].Width;
+            dataGridView5.Columns["FACT_PAID_MNT"].Width = dataGridView7.Columns["dataGridViewTextBoxColumn20"].Width;
+            //---------------
+            dataGridView7.Width = dataGridView5.Width - dataGridView5.Columns["LAST_MODIF_BY"].Width - dataGridView5.Columns["SLD_OF_CLIENT"].Width - (dataGridView5.Controls.OfType<VScrollBar>().FirstOrDefault().Visible ? 17 : 0);
+            //---------------   
+            label8.Text = "Réglé (" + ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["CLIENT_ID"] != DBNull.Value && (XX["FACT_PAID_MNT"] != DBNull.Value ? (decimal)XX["FACT_PAID_MNT"] : 0) <= 0 && (XX["IS_PROVIS"] != DBNull.Value ? (int)XX["IS_PROVIS"] : 1) != 1).Count() + ")";
+            label7.Text = "Non réglé (" + ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => XX["CLIENT_ID"] != DBNull.Value && (XX["FACT_PAID_MNT"] != DBNull.Value ? (decimal)XX["FACT_PAID_MNT"] : 0) > 0 && (XX["IS_PROVIS"] != DBNull.Value ? (int)XX["IS_PROVIS"] : 1) != 1).Count() + ")";
+            label13.Text = "Provisoire (" + ((DataTable)dataGridView5.DataSource).DefaultView.Cast<DataRowView>().Where(XX => (XX["IS_PROVIS"] != DBNull.Value ? (int)XX["IS_PROVIS"] : 1) == 1).Count() + ")";
         }
 
         private void dataGridView4_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -2792,9 +2796,10 @@ namespace ALBAITAR_Softvet
             if (e.RowIndex >= 0)
             {
                 decimal cellValue = dataGridView5.Rows[e.RowIndex].Cells["FACT_PAID_MNT"].Value != DBNull.Value ? (decimal)dataGridView5.Rows[e.RowIndex].Cells["FACT_PAID_MNT"].Value : 0;
+                bool is_provis = (dataGridView5.Rows[e.RowIndex].Cells["IS_PROVIS"].Value != DBNull.Value ? (int)dataGridView5.Rows[e.RowIndex].Cells["IS_PROVIS"].Value : 1) == 1;
                 if (dataGridView5.Rows[e.RowIndex].Cells["dataGridViewTextBoxColumn2"].Value != DBNull.Value) //CLIENT_ID
                 {
-                    dataGridView5.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView5.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = cellValue > 0 ? Color.FromArgb(255, 192, 192) : Color.FromArgb(128, 255, 128);
+                    dataGridView5.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridView5.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = is_provis ? Color.NavajoWhite : (cellValue > 0 ? Color.FromArgb(255, 192, 192) : Color.FromArgb(128, 255, 128));
                 }
                 else
                 {
@@ -2812,20 +2817,22 @@ namespace ALBAITAR_Softvet
         {
             time_delay++;
             //----------------------------
-            if (make_title_activ_state_update) {
-                
+            if (make_title_activ_state_update)
+            {
+
                 make_title_activ_state_update = false;
                 //---
                 string tmp_titlt = "";
-                if (!text_to_add_to_title.Contains("make_title_activ_state_updat")) {
+                if (!text_to_add_to_title.Contains("make_title_activ_state_updat"))
+                {
 
                     if (is_activation_reqiired || Properties.Settings.Default.Codified_Act_Client_ID.IsNullOrEmpty())
                     {
-                        tmp_titlt = !activation_is_done ? " (Produit non activé" + ((activation_delay_days - activation_delay_from_prev_server_check) > 0 ? " [" + (activation_delay_days - activation_delay_from_prev_server_check) + "] jours)" : ")") : "";
+                        tmp_titlt = !activation_is_done ? " (Produit non activé" + ((activation_delay_days - activation_delay_from_prev_server_check) > 0 ? " - reste [" + (activation_delay_days - activation_delay_from_prev_server_check) + "] jours)" : ")") : "";
                     }
-                    tmp_titlt += !activation_is_finance_done ? " (Droit non réglés" + (activation_finance_delay_days > 0 ? " [" + activation_finance_delay_days + "] jours)" : ")") : "";
+                    tmp_titlt += !activation_is_finance_done ? " (Droit non réglés" + (activation_finance_delay_days > 0 ? " - reste [" + activation_finance_delay_days + "] jours)" : ")") : "";
                 }
-                
+
 
                 text_to_add_to_title = tmp_titlt;
             }
@@ -2833,30 +2840,13 @@ namespace ALBAITAR_Softvet
             if (text_to_add_to_title.Contains("make_title_activ_state_updat"))
             {
                 text_to_add_to_title = "";
-                Activ_Verif();
+                //Activ_Verif(); //comment this line to minimize activ verifying.
             }
             else if (text_to_add_to_title.Length > 0)
             {
                 this.Text += text_to_add_to_title;
                 text_to_add_to_title = "";
             }
-
-            //if (text_to_add_to_title.Length > 0)
-            //{
-            //    this.Text = Properties.Settings.Default.App_title + text_to_add_to_title + " - " + Properties.Settings.Default.Last_login_user_full_nme;               
-            //    text_to_add_to_title = "";
-            //}
-            //else if (text_to_add_to_title.Contains("Activated"))
-            //{
-            //    this.Text = "ALBAITAR Softvet - " + Properties.Settings.Default.Last_login_user_full_nme;
-            //}
-            //else if (Text.Contains("(Produit non activé)") && Text.Contains("(Produit non activé -"))
-            //{
-            //    Text = Text.Replace(" (Produit non activé)", "");
-            //    Text = Text.Replace("(Produit non activé)", "");
-            //    Properties.Settings.Default.App_title = Text;
-            //    Properties.Settings.Default.Save();
-            //}
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -2941,11 +2931,6 @@ namespace ALBAITAR_Softvet
                 }
                 if (!label18.Visible)
                 {
-                    //PreConnection.Excut_Cmd("UPDATE `tb_visites` SET "
-                    //                      + "`DATETIME` = '" + dateTimePicker4.Value.ToString("yyyy-MM-dd HH:mm:ss") + "',"
-                    //                      + "`VISITOR_FULL_NME` = '" + comboBox5.Text.Replace("'","''") + "',"
-                    //                      + "`OBJECT` = '" + richTextBox1.Text.Replace("'", "''") + "'"
-                    //                      + " WHERE `ID` = " + dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value + ";");
                     PreConnection.Excut_Cmd(2, "tb_visites", new List<string> { "DATETIME", "VISITOR_FULL_NME", "OBJECT" }, new List<object> { dateTimePicker4.Value, comboBox5.Text, richTextBox1.Text }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { dataGridView2.SelectedRows[0].Cells["ID_VISITE"].Value });
                 }
                 bool label18_visible = label18.Visible;
@@ -3070,6 +3055,98 @@ namespace ALBAITAR_Softvet
                 }
             }
 
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            if (dataGridView5.SelectedRows.Count > 0)
+            {
+                bool continu = true;
+                if ((int)dataGridView5.SelectedRows[0].Cells["IS_PROVIS"].Value == 1) {
+                    continu = MessageBox.Show("C'est une facture provisoire,\nSouhaitez-vous continuer à imprimer comme même ?", "Attention",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Warning) == DialogResult.Yes;
+                }
+                if(continu)
+                {
+                    DataTable facture_infos = PreConnection.Load_data("SELECT * FROM tb_factures_vente WHERE `ID` = " + dataGridView5.SelectedRows[0].Cells["dataGridViewTextBoxColumn1"].Value + ";");
+                    DataTable facture_to_print_items = new DataTable();
+                    facture_to_print_items.Columns.Add("Type", typeof(string));
+                    facture_to_print_items.Columns.Add("Item", typeof(string));
+                    facture_to_print_items.Columns.Add("Qnt", typeof(decimal));
+                    facture_to_print_items.Columns.Add("Unit", typeof(decimal));
+                    facture_to_print_items.Columns.Add("Tot", typeof(decimal));
+                    if (facture_infos != null)
+                    {
+                        if (facture_infos.Rows.Count > 0)
+                        {
+
+                            for (int f = 1; f < 71; f++)
+                            {
+                                if (facture_infos.Rows[0]["ITEM_NME_" + (f < 10 ? "0" : "") + f] != DBNull.Value)
+                                {
+                                    if (facture_infos.Rows[0]["ITEM_NME_" + (f < 10 ? "0" : "") + f].ToString().Length > 0)
+                                    {
+                                        DataRow row = facture_to_print_items.NewRow();
+
+                                        row[0] = facture_infos.Rows[0]["ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f] != DBNull.Value ? ((SByte)facture_infos.Rows[0]["ITEM_IS_PROD_" + (f < 10 ? "0" : "") + f] == 1 ? "Produit" : "Service") : "Service";
+                                        row[1] = facture_infos.Rows[0]["ITEM_NME_" + (f < 10 ? "0" : "") + f];
+                                        row[2] = facture_infos.Rows[0]["ITEM_QNT_" + (f < 10 ? "0" : "") + f];
+                                        row[3] = facture_infos.Rows[0]["ITEM_PRIX_UNIT_" + (f < 10 ? "0" : "") + f];
+                                        row[4] = (decimal)row[2] * (decimal)row[3];
+
+                                        facture_to_print_items.Rows.Add(row);
+                                    }
+                                }
+                            }
+                            //--------------
+                            DataTable dt = new DataTable();
+                            dt.Columns.Add("PARAM_NME", typeof(string));
+                            dt.Columns.Add("PARAM_VAL", typeof(string));
+                            //----------------
+                            dt.Rows.Add(new object[] { "CABINET", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 1).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+                            dt.Rows.Add(new object[] { "CABINET_TEL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 2).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+                            dt.Rows.Add(new object[] { "CABINET_EMAIL", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 3).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+                            dt.Rows.Add(new object[] { "CABINET_ADRESS", Main_Frm.Params.Rows.Cast<DataRow>().Where(QQ => (int)QQ["ID"] == 4).Select(QQ => QQ["VAL"]).FirstOrDefault().ToString() });
+
+                            dt.Rows.Add(new object[] { "REF", dataGridView5.SelectedRows[0].Cells["dataGridViewTextBoxColumn7"].Value });
+                            DateTime datt = DateTime.Now;
+                            DateTime.TryParse(dataGridView5.SelectedRows[0].Cells["dataGridViewTextBoxColumn3"].Value.ToString(), out datt);
+                            dt.Rows.Add(new object[] { "DATE", datt.ToString("dd/MM/yyyy") });
+
+                            dt.Rows.Add(new object[] { "TOT_HT", facture_infos.Rows[0]["TOTAL_HT"] });
+                            dt.Rows.Add(new object[] { "TVA_PERC", facture_infos.Rows[0]["TVA_PERC"] });
+                            dt.Rows.Add(new object[] { "TVA_MNT", (decimal)facture_infos.Rows[0]["TOTAL_HT"] * (decimal)facture_infos.Rows[0]["TVA_PERC"] / 100 });
+                            dt.Rows.Add(new object[] { "D_TIMBRE", facture_infos.Rows[0]["DROIT_TIMBRE"] });
+                            dt.Rows.Add(new object[] { "TOT_TTC", facture_infos.Rows[0]["TOTAL_TTC"] });
+
+                            DataRow rww = Main_Frm_clients_tbl.Rows.Cast<DataRow>().Where(FF => (int)FF["ID"] == (int)dataGridView5.SelectedRows[0].Cells["dataGridViewTextBoxColumn2"].Value).FirstOrDefault();
+                            if (rww != null)
+                            {
+                                dt.Rows.Add(new object[] { "CLIENT_SEX", rww["SEX"] != DBNull.Value ? rww["SEX"].ToString() : null });
+                                dt.Rows.Add(new object[] { "CLIENT_FAMNME", rww["FAMNME"] != DBNull.Value ? rww["FAMNME"].ToString() : null });
+                                dt.Rows.Add(new object[] { "CLIENT_NME", rww["NME"] != DBNull.Value ? rww["NME"].ToString() : null });
+                                dt.Rows.Add(new object[] { "CLIENT_NUM_CNI", rww["NUM_CNI"] != DBNull.Value ? rww["NUM_CNI"].ToString() : null });
+                                dt.Rows.Add(new object[] { "CLIENT_ADRESS", rww["ADRESS"] != DBNull.Value ? rww["ADRESS"].ToString() : null });
+                                dt.Rows.Add(new object[] { "CLIENT_CITY", rww["CITY"] != DBNull.Value ? rww["CITY"].ToString() : null });
+                                dt.Rows.Add(new object[] { "CLIENT_WILAYA", rww["WILAYA"] != DBNull.Value ? rww["WILAYA"].ToString() : null });
+                                dt.Rows.Add(new object[] { "POSTAL_CODE", rww["POSTAL_CODE"] != DBNull.Value ? rww["POSTAL_CODE"].ToString() : null });
+                                dt.Rows.Add(new object[] { "CLIENT_NUM_PHONE", rww["NUM_PHONE"] != DBNull.Value ? rww["NUM_PHONE"].ToString() : null });
+                                dt.Rows.Add(new object[] { "CLIENT_EMAIL", rww["EMAIL"] != DBNull.Value ? rww["EMAIL"].ToString() : null });
+                            }
+                            else
+                            {
+                                string full_nme = comboBox1.Text;
+                                string sexx = full_nme.Length > 4 ? (full_nme.IndexOf(".") > 0 ? full_nme.Substring(0, 5).Substring(0, full_nme.IndexOf(".")) : "Mr.") : "Mr.";
+                                string nmme = full_nme.Replace(sexx, "");
+                                dt.Rows.Add(new object[] { "CLIENT_SEX", sexx });
+                                dt.Rows.Add(new object[] { "CLIENT_FAMNME", nmme });
+                                dt.Rows.Add(new object[] { "CLIENT_NME", "" });
+                            }
+                            //-------------
+                            new Print_report("facture_vente", dt, facture_to_print_items).ShowDialog();
+                        }
+                    }
+                }
+            }
         }
     }
 }

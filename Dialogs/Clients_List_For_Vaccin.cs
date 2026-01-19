@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace ALBAITAR_Softvet.Dialogs
@@ -18,7 +20,7 @@ namespace ALBAITAR_Softvet.Dialogs
         {
             InitializeComponent();
             //-------------------------
-            props = PreConnection.Load_data("SELECT ID, concat(FAMNME, ' ', NME) AS FULL_NME FROM tb_clients;");
+            props = PreConnection.Load_data("SELECT ID, concat(FAMNME, ' ', NME) AS FULL_NME FROM tb_clients ORDER BY FULL_NME;");
             if (props != null)
             {
                 if (props.Rows.Count > 0)
@@ -33,12 +35,16 @@ namespace ALBAITAR_Softvet.Dialogs
 
                     if (Add_Modif_Vaccin.Clientss2.Length > 0)
                     {
+
+                        
                         for (int dd = 0; dd < Add_Modif_Vaccin.Clientss2.Length; dd++)
                         {
-                            ListViewItem item = listView1.Items.Cast<ListViewItem>().Where(XX => XX.SubItems[0].Text == Add_Modif_Vaccin.Clientss2[dd].SubItems[0].Text).FirstOrDefault();
+                            ListViewItem item = listView1.Items.Cast<ListViewItem>().Where(XX => XX.SubItems[0].Text == Add_Modif_Vaccin.Clientss2[dd].SubItems[0].Text.Substring(Add_Modif_Vaccin.Clientss2[dd].SubItems[0].Text.IndexOf(".") + 2)).FirstOrDefault();
+                           
                             listView1.Items.Remove(item);
                             items2.Remove(item);
                             listView2.ItemSelectionChanged -= listView2_ItemSelectionChanged;
+                            
                             listView2.Items.Add(item);
                             listView2.SelectedIndices.Clear();
                             listView2.ItemSelectionChanged += listView2_ItemSelectionChanged;
@@ -70,7 +76,7 @@ namespace ALBAITAR_Softvet.Dialogs
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string filter = textBox1.Text.ToLower().Replace("'", "''");
+            string filter = Regex.Replace(textBox1.Text.ToLower(), Main_Frm.client_mr_pattern, "", RegexOptions.IgnoreCase).Replace(".", "").Replace("'", "''").Trim();
 
             foreach (ListViewItem item in items2)
             {
