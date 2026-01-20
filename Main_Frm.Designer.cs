@@ -483,7 +483,7 @@ namespace ALBAITAR_Softvet
             this.button23.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button23.Image = global::ALBAITAR_Softvet.Properties.Resources.Excel_In;
             this.button23.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button23.Location = new System.Drawing.Point(927, 347);
+            this.button23.Location = new System.Drawing.Point(905, 347);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(43, 36);
             this.button23.TabIndex = 96;
@@ -547,7 +547,7 @@ namespace ALBAITAR_Softvet
             this.button25.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button25.Image = global::ALBAITAR_Softvet.Properties.Resources.Excel_In;
             this.button25.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button25.Location = new System.Drawing.Point(886, 452);
+            this.button25.Location = new System.Drawing.Point(864, 452);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(43, 36);
             this.button25.TabIndex = 98;
@@ -665,6 +665,7 @@ namespace ALBAITAR_Softvet
             this.tabControl1.Controls.Add(this.tabPage_Calendar);
             this.tabControl1.Controls.Add(this.tabPage_vaccin);
             this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControl1.ItemSize = new System.Drawing.Size(33, 55);
             this.tabControl1.Location = new System.Drawing.Point(1, 69);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
@@ -679,12 +680,13 @@ namespace ALBAITAR_Softvet
             // 
             this.tabPage_infos.AutoScroll = true;
             this.tabPage_infos.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage_infos.Location = new System.Drawing.Point(70, 4);
+            this.tabPage_infos.Location = new System.Drawing.Point(114, 4);
             this.tabPage_infos.Name = "tabPage_infos";
             this.tabPage_infos.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_infos.Size = new System.Drawing.Size(979, 491);
+            this.tabPage_infos.Size = new System.Drawing.Size(935, 491);
             this.tabPage_infos.TabIndex = 0;
             this.tabPage_infos.Text = "Informations";
+            this.tabPage_infos.UseVisualStyleBackColor = true;
             // 
             // tabPage_animaux
             // 
@@ -698,10 +700,10 @@ namespace ALBAITAR_Softvet
             this.tabPage_animaux.Controls.Add(this.dataGridView3);
             this.tabPage_animaux.Controls.Add(this.button8);
             this.tabPage_animaux.Controls.Add(this.button10);
-            this.tabPage_animaux.Location = new System.Drawing.Point(70, 4);
+            this.tabPage_animaux.Location = new System.Drawing.Point(59, 4);
             this.tabPage_animaux.Name = "tabPage_animaux";
             this.tabPage_animaux.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_animaux.Size = new System.Drawing.Size(979, 491);
+            this.tabPage_animaux.Size = new System.Drawing.Size(990, 491);
             this.tabPage_animaux.TabIndex = 4;
             this.tabPage_animaux.Text = "Animaux";
             // 
@@ -711,7 +713,7 @@ namespace ALBAITAR_Softvet
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label3.Location = new System.Drawing.Point(833, 319);
+            this.label3.Location = new System.Drawing.Point(811, 319);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 15);
             this.label3.TabIndex = 95;
@@ -739,7 +741,7 @@ namespace ALBAITAR_Softvet
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
             this.textBox8.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox8.Size = new System.Drawing.Size(850, 137);
+            this.textBox8.Size = new System.Drawing.Size(828, 137);
             this.textBox8.TabIndex = 93;
             this.textBox8.WordWrap = false;
             this.textBox8.Enter += new System.EventHandler(this.textBox8_Enter_1);
@@ -749,7 +751,7 @@ namespace ALBAITAR_Softvet
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Brown;
-            this.label2.Location = new System.Drawing.Point(880, 12);
+            this.label2.Location = new System.Drawing.Point(858, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 16);
             this.label2.TabIndex = 71;
@@ -760,7 +762,7 @@ namespace ALBAITAR_Softvet
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.LightCoral;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(861, 11);
+            this.panel2.Location = new System.Drawing.Point(839, 11);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(18, 18);
             this.panel2.TabIndex = 70;
@@ -771,7 +773,7 @@ namespace ALBAITAR_Softvet
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(20, 7);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(446, 21);
+            this.textBox2.Size = new System.Drawing.Size(424, 21);
             this.textBox2.TabIndex = 69;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
@@ -813,7 +815,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView3.ReadOnly = true;
             this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(968, 282);
+            this.dataGridView3.Size = new System.Drawing.Size(946, 282);
             this.dataGridView3.TabIndex = 59;
             this.dataGridView3.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView3_CellMouseDoubleClick);
             this.dataGridView3.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView3_RowPrePaint);
@@ -936,7 +938,7 @@ namespace ALBAITAR_Softvet
             this.button8.ForeColor = System.Drawing.Color.ForestGreen;
             this.button8.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_add_25px;
             this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button8.Location = new System.Drawing.Point(866, 448);
+            this.button8.Location = new System.Drawing.Point(844, 448);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(106, 36);
             this.button8.TabIndex = 73;
@@ -957,7 +959,7 @@ namespace ALBAITAR_Softvet
             this.button10.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button10.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_pencil_drawing_25px_1;
             this.button10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button10.Location = new System.Drawing.Point(865, 406);
+            this.button10.Location = new System.Drawing.Point(843, 406);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(106, 36);
             this.button10.TabIndex = 72;
@@ -982,10 +984,10 @@ namespace ALBAITAR_Softvet
             this.tabPage_visites.Controls.Add(this.button24);
             this.tabPage_visites.Controls.Add(this.button17);
             this.tabPage_visites.Controls.Add(this.button18);
-            this.tabPage_visites.Location = new System.Drawing.Point(70, 4);
+            this.tabPage_visites.Location = new System.Drawing.Point(59, 4);
             this.tabPage_visites.Name = "tabPage_visites";
             this.tabPage_visites.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_visites.Size = new System.Drawing.Size(979, 491);
+            this.tabPage_visites.Size = new System.Drawing.Size(990, 491);
             this.tabPage_visites.TabIndex = 1;
             this.tabPage_visites.Text = "Visites";
             // 
@@ -1001,7 +1003,7 @@ namespace ALBAITAR_Softvet
             this.button31.ForeColor = System.Drawing.Color.SteelBlue;
             this.button31.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_ball_point_pen_25px;
             this.button31.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button31.Location = new System.Drawing.Point(705, 440);
+            this.button31.Location = new System.Drawing.Point(716, 440);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(128, 45);
             this.button31.TabIndex = 102;
@@ -1022,7 +1024,7 @@ namespace ALBAITAR_Softvet
             this.groupBox1.Controls.Add(this.dateTimePicker4);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.comboBox5);
-            this.groupBox1.Location = new System.Drawing.Point(692, 34);
+            this.groupBox1.Location = new System.Drawing.Point(703, 34);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(279, 330);
             this.groupBox1.TabIndex = 101;
@@ -1147,7 +1149,7 @@ namespace ALBAITAR_Softvet
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(448, 10);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(257, 21);
+            this.textBox1.Size = new System.Drawing.Size(268, 21);
             this.textBox1.TabIndex = 68;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -1224,7 +1226,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(679, 407);
+            this.dataGridView2.Size = new System.Drawing.Size(690, 407);
             this.dataGridView2.TabIndex = 58;
             this.dataGridView2.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDoubleClick);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
@@ -1241,7 +1243,7 @@ namespace ALBAITAR_Softvet
             this.button28.ForeColor = System.Drawing.Color.MediumVioletRed;
             this.button28.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_treatment_25px;
             this.button28.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button28.Location = new System.Drawing.Point(839, 440);
+            this.button28.Location = new System.Drawing.Point(850, 440);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(128, 45);
             this.button28.TabIndex = 100;
@@ -1305,9 +1307,9 @@ namespace ALBAITAR_Softvet
             this.tabPage_labo.Controls.Add(this.dataGridView1);
             this.tabPage_labo.Controls.Add(this.button14);
             this.tabPage_labo.Controls.Add(this.button13);
-            this.tabPage_labo.Location = new System.Drawing.Point(70, 4);
+            this.tabPage_labo.Location = new System.Drawing.Point(59, 4);
             this.tabPage_labo.Name = "tabPage_labo";
-            this.tabPage_labo.Size = new System.Drawing.Size(979, 491);
+            this.tabPage_labo.Size = new System.Drawing.Size(990, 491);
             this.tabPage_labo.TabIndex = 2;
             this.tabPage_labo.Text = "Laboratoire";
             this.tabPage_labo.UseVisualStyleBackColor = true;
@@ -1397,7 +1399,7 @@ namespace ALBAITAR_Softvet
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Location = new System.Drawing.Point(265, 9);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(379, 21);
+            this.textBox3.Size = new System.Drawing.Size(357, 21);
             this.textBox3.TabIndex = 29;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
@@ -1456,7 +1458,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(960, 384);
+            this.dataGridView1.Size = new System.Drawing.Size(938, 384);
             this.dataGridView1.TabIndex = 27;
             this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
@@ -1562,7 +1564,7 @@ namespace ALBAITAR_Softvet
             this.button14.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button14.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_pencil_drawing_25px_1;
             this.button14.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button14.Location = new System.Drawing.Point(662, 452);
+            this.button14.Location = new System.Drawing.Point(640, 452);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(106, 36);
             this.button14.TabIndex = 50;
@@ -1583,7 +1585,7 @@ namespace ALBAITAR_Softvet
             this.button13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button13.Image = global::ALBAITAR_Softvet.Properties.Resources.icons8_print_25px;
             this.button13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button13.Location = new System.Drawing.Point(774, 452);
+            this.button13.Location = new System.Drawing.Point(752, 452);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(106, 36);
             this.button13.TabIndex = 49;
@@ -1619,9 +1621,9 @@ namespace ALBAITAR_Softvet
             this.tabPage_monetique.Controls.Add(this.button21);
             this.tabPage_monetique.Controls.Add(this.button16);
             this.tabPage_monetique.Controls.Add(this.button19);
-            this.tabPage_monetique.Location = new System.Drawing.Point(70, 4);
+            this.tabPage_monetique.Location = new System.Drawing.Point(59, 4);
             this.tabPage_monetique.Name = "tabPage_monetique";
-            this.tabPage_monetique.Size = new System.Drawing.Size(979, 491);
+            this.tabPage_monetique.Size = new System.Drawing.Size(990, 491);
             this.tabPage_monetique.TabIndex = 5;
             this.tabPage_monetique.Text = "Monétique";
             this.tabPage_monetique.UseVisualStyleBackColor = true;
@@ -1652,7 +1654,7 @@ namespace ALBAITAR_Softvet
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Century Gothic", 7F);
             this.label13.ForeColor = System.Drawing.Color.DarkOrange;
-            this.label13.Location = new System.Drawing.Point(789, 696);
+            this.label13.Location = new System.Drawing.Point(1157, 696);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(54, 15);
             this.label13.TabIndex = 82;
@@ -1663,7 +1665,7 @@ namespace ALBAITAR_Softvet
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel6.BackColor = System.Drawing.Color.NavajoWhite;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Location = new System.Drawing.Point(776, 698);
+            this.panel6.Location = new System.Drawing.Point(1144, 698);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(10, 10);
             this.panel6.TabIndex = 81;
@@ -1673,7 +1675,7 @@ namespace ALBAITAR_Softvet
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label9.Location = new System.Drawing.Point(437, 327);
+            this.label9.Location = new System.Drawing.Point(805, 327);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(463, 22);
             this.label9.TabIndex = 83;
@@ -1686,7 +1688,7 @@ namespace ALBAITAR_Softvet
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Century Gothic", 7F);
             this.label8.ForeColor = System.Drawing.Color.Green;
-            this.label8.Location = new System.Drawing.Point(788, 669);
+            this.label8.Location = new System.Drawing.Point(1156, 669);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(36, 15);
             this.label8.TabIndex = 82;
@@ -1697,7 +1699,7 @@ namespace ALBAITAR_Softvet
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Location = new System.Drawing.Point(776, 672);
+            this.panel4.Location = new System.Drawing.Point(1144, 672);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(10, 10);
             this.panel4.TabIndex = 81;
@@ -1708,7 +1710,7 @@ namespace ALBAITAR_Softvet
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 7F);
             this.label7.ForeColor = System.Drawing.Color.Brown;
-            this.label7.Location = new System.Drawing.Point(789, 683);
+            this.label7.Location = new System.Drawing.Point(1157, 683);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 15);
             this.label7.TabIndex = 80;
@@ -1719,7 +1721,7 @@ namespace ALBAITAR_Softvet
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(776, 685);
+            this.panel3.Location = new System.Drawing.Point(1144, 685);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 10);
             this.panel3.TabIndex = 79;
@@ -1729,7 +1731,7 @@ namespace ALBAITAR_Softvet
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label6.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.label6.Location = new System.Drawing.Point(483, 673);
+            this.label6.Location = new System.Drawing.Point(851, 673);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(273, 36);
             this.label6.TabIndex = 78;
@@ -1777,7 +1779,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView7.ReadOnly = true;
             this.dataGridView7.RowHeadersVisible = false;
             this.dataGridView7.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView7.Size = new System.Drawing.Size(898, 25);
+            this.dataGridView7.Size = new System.Drawing.Size(1266, 25);
             this.dataGridView7.TabIndex = 67;
             // 
             // dataGridViewTextBoxColumn15
@@ -1906,7 +1908,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView6.RowHeadersVisible = false;
             this.dataGridView6.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView6.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView6.Size = new System.Drawing.Size(900, 24);
+            this.dataGridView6.Size = new System.Drawing.Size(1268, 24);
             this.dataGridView6.TabIndex = 65;
             // 
             // dataGridViewTextBoxColumn11
@@ -2013,7 +2015,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView5.ReadOnly = true;
             this.dataGridView5.RowHeadersVisible = false;
             this.dataGridView5.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView5.Size = new System.Drawing.Size(916, 244);
+            this.dataGridView5.Size = new System.Drawing.Size(1284, 244);
             this.dataGridView5.TabIndex = 62;
             this.dataGridView5.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView5_CellFormatting);
             this.dataGridView5.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView5_CellMouseDoubleClick);
@@ -2204,7 +2206,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView4.ReadOnly = true;
             this.dataGridView4.RowHeadersVisible = false;
             this.dataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView4.Size = new System.Drawing.Size(916, 263);
+            this.dataGridView4.Size = new System.Drawing.Size(1284, 263);
             this.dataGridView4.TabIndex = 60;
             this.dataGridView4.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView4_CellMouseDoubleClick);
             // 
@@ -2373,19 +2375,19 @@ namespace ALBAITAR_Softvet
             // 
             // tabPage_Calendar
             // 
-            this.tabPage_Calendar.Location = new System.Drawing.Point(70, 4);
+            this.tabPage_Calendar.Location = new System.Drawing.Point(114, 4);
             this.tabPage_Calendar.Name = "tabPage_Calendar";
             this.tabPage_Calendar.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Calendar.Size = new System.Drawing.Size(979, 491);
+            this.tabPage_Calendar.Size = new System.Drawing.Size(935, 491);
             this.tabPage_Calendar.TabIndex = 3;
             this.tabPage_Calendar.Text = "Calendrier";
             this.tabPage_Calendar.UseVisualStyleBackColor = true;
             // 
             // tabPage_vaccin
             // 
-            this.tabPage_vaccin.Location = new System.Drawing.Point(70, 4);
+            this.tabPage_vaccin.Location = new System.Drawing.Point(114, 4);
             this.tabPage_vaccin.Name = "tabPage_vaccin";
-            this.tabPage_vaccin.Size = new System.Drawing.Size(979, 491);
+            this.tabPage_vaccin.Size = new System.Drawing.Size(935, 491);
             this.tabPage_vaccin.TabIndex = 6;
             this.tabPage_vaccin.Text = "Vaccinations";
             this.tabPage_vaccin.UseVisualStyleBackColor = true;

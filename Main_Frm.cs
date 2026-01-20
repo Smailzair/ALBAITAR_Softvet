@@ -132,7 +132,7 @@ namespace ALBAITAR_Softvet
             tabPage_Calendar.ImageIndex = 3;
             tabPage_animaux.ImageIndex = 5;
             tabPage_monetique.ImageIndex = 6;
-            tabPage_vaccin.ImageIndex = 7;
+            tabPage_vaccin.ImageIndex = 7;            
             //---------------------------
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
@@ -2376,9 +2376,15 @@ namespace ALBAITAR_Softvet
                     else
                     {
                         fntt = simple_font;
-                        using (var brush = new SolidBrush(Color.White))
+                        using (var brush = new SolidBrush(Color.WhiteSmoke))
                         {
                             e.Graphics.FillRectangle(brush, headerBounds);
+                        }
+                        // Draw the bottom rectangle with the specified color and height
+                        System.Drawing.Rectangle bottomRect = new System.Drawing.Rectangle(e.Bounds.Left, e.Bounds.Bottom - 25, e.Bounds.Width + 2, 25);
+                        using (SolidBrush brush = new SolidBrush(Color.FromArgb(214, 224, 242)))
+                        {
+                            e.Graphics.FillRectangle(brush, bottomRect);
                         }
                     }
 
@@ -2386,7 +2392,7 @@ namespace ALBAITAR_Softvet
                     if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
                     {
                         var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];
-                        var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 10, e.Bounds.Bottom - 20, icon.Width, icon.Height);
+                        var iconBounds = new System.Drawing.Rectangle(e.Bounds.Left + 20, e.Bounds.Bottom - 20, icon.Width, icon.Height);
 
                         e.Graphics.DrawImage(icon, iconBounds);
                         headerBounds.X += iconBounds.Width + 4; // Adjust the X position for the text
@@ -2402,7 +2408,7 @@ namespace ALBAITAR_Softvet
                     e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
                     e.Graphics.TranslateTransform(headerBounds.Left + headerBounds.Width / 2, headerBounds.Top + headerBounds.Height / 2);
                     e.Graphics.RotateTransform(-90);
-                    e.Graphics.DrawString(tabPage.Text, fntt, color_txt, -(headerBounds.Height / 2) + 25, -(headerBounds.Width / 2) - 10, StringFormat.GenericDefault);
+                    e.Graphics.DrawString(tabPage.Text, fntt, color_txt, -(headerBounds.Height / 2) + 30, -(headerBounds.Width / 2), StringFormat.GenericDefault);
 
                     e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
                     e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -2435,10 +2441,19 @@ namespace ALBAITAR_Softvet
                     else
                     {
                         fntt = simple_font;
-                        using (var brush = new SolidBrush(Color.White))
+                        using (var brush = new SolidBrush(Color.WhiteSmoke))
                         {
                             e.Graphics.FillRectangle(brush, headerBounds);
                         }
+
+
+                        // Draw the bottom rectangle with the specified color and height
+                        System.Drawing.Rectangle bottomRect = new System.Drawing.Rectangle(e.Bounds.Left, e.Bounds.Top, 30, e.Bounds.Height);
+                        using (SolidBrush brush = new SolidBrush(Color.FromArgb(214, 224, 242)))
+                        {
+                            e.Graphics.FillRectangle(brush, bottomRect);
+                        }
+
                     }
                     if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
                     {
