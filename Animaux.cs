@@ -30,6 +30,7 @@ namespace ALBAITAR_Softvet.Resources
         DataTable poids_tbl = new DataTable();
         DataTable maladies_tbl = new DataTable();
         DataTable filtred_maladies_tbl;
+        DataTable doctors_tbl;
         List<string> full_nme_clients;
         bool Is_New = true;
         bool Is_New_Visite = true;
@@ -195,7 +196,8 @@ namespace ALBAITAR_Softvet.Resources
                 full_nme_clients.Add((string)clt["FULL_NME"]);
             });
             //--------------------
-            comboBox5.AutoCompleteCustomSource.AddRange(clients.AsEnumerable().Select(row => row.Field<string>("FULL_NME")).ToArray());
+            doctors_tbl = PreConnection.Load_data("SELECT ID, concat(USER_FAMNME, ' ', USER_NME) AS FULL_NME FROM tb_login_and_users ORDER BY FULL_NME ASC;");
+            comboBox5.AutoCompleteCustomSource.AddRange(doctors_tbl.AsEnumerable().Select(row => row.Field<string>("FULL_NME")).ToArray());
             //---------------------
             default_maladies = new string[] {
                 "- Tous -",
@@ -1216,7 +1218,7 @@ checkBox1.Checked,
             label18.Visible = false;
             Is_New_Visite = true;
             dateTimePicker4.Value = DateTime.Now;
-            comboBox5.Text = comboBox1.Text;
+            comboBox5.Text = doctors_tbl.Rows.Cast<DataRow>().Where(P => P["ID"].ToString() == Properties.Settings.Default.Last_login_user_idx.ToString()).FirstOrDefault()["FULL_NME"].ToString();
             richTextBox1.Text = string.Empty;
             richTextBox1.BackColor = SystemColors.Window;
             pictureBox3.Image = Properties.Resources.NOUVEAU_003;
