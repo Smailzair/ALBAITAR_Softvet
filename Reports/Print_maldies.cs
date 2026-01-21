@@ -18,7 +18,7 @@ namespace ALBAITAR_Softvet
         string malade_nme = "";
         string malade_level = "";
         bool actually_malad = false;
-        AutoCompleteStringCollection malad_lst;
+        //AutoCompleteStringCollection malad_lst;
         string[] default_maladies;
         public Print_maldies(int Anim_1_Or_Prop_2, int ID, string malad_nme, string malad_level, bool just_actually_malad)
         {
@@ -520,10 +520,10 @@ namespace ALBAITAR_Softvet
 
         private void comboBox6_Leave(object sender, EventArgs e)
         {
-            if (!malad_lst.Contains(comboBox6.Text))
-            {
-                malad_lst.Add(comboBox6.Text);
-            }
+            //if (!malad_lst.Contains(comboBox6.Text))
+            //{
+            //    malad_lst.Add(comboBox6.Text);
+            //}
             load_report();
         }
         private void comboBox6_KeyDown(object sender, KeyEventArgs e)

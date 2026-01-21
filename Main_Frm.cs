@@ -2475,47 +2475,6 @@ namespace ALBAITAR_Softvet
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-            //if (e.Index < tabControl1.TabPages.Count)
-            //{
-            //    var tabPage = tabControl1.TabPages[e.Index];
-            //    var headerBounds = tabControl1.GetTabRect(e.Index);
-
-            //    e.Graphics.FillRectangle(Brushes.White, headerBounds);
-
-            //    if (e.Index == tabControl1.SelectedIndex)
-            //    {
-            //        using (var brush = new SolidBrush(Color.DarkGreen))
-            //        {
-            //            e.Graphics.FillRectangle(brush, headerBounds);
-            //        }
-            //    }
-
-            //    if (tabcontrol_img_lst != null && tabPage.ImageIndex >= 0 && tabPage.ImageIndex < tabcontrol_img_lst.Images.Count)
-            //    {
-            //        var icon = tabcontrol_img_lst.Images[tabPage.ImageIndex];
-            //        var iconBounds = new Rectangle(headerBounds.Left + 10, headerBounds.Top + 10, icon.Width, icon.Height);
-            //        e.Graphics.DrawImage(icon, iconBounds);
-            //        headerBounds.X += iconBounds.Width + 4;
-            //    }
-
-            //    using (var sf = new StringFormat())
-            //    {
-            //        sf.Alignment = StringAlignment.Center;
-            //        sf.LineAlignment = StringAlignment.Center;
-            //        e.Graphics.DrawString(tabPage.Text, tabControl1.Font, Brushes.Black, headerBounds, sf);
-            //    }
-            //}
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -3162,6 +3121,11 @@ namespace ALBAITAR_Softvet
                     }
                 }
             }
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

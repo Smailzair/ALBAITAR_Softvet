@@ -31,7 +31,7 @@ namespace ALBAITAR_Softvet.Resources
         int ttimee = 0;
         int ttimee2 = 0;
 
-        bool show_hide_patienter = false;
+        //bool show_hide_patienter = false;
 
         public Produits()
         {
@@ -461,7 +461,7 @@ namespace ALBAITAR_Softvet.Resources
             initial_stock_fields();
         }
 
-        [Obsolete]
+        //[Obsolete]
         private void button9_Click(object sender, EventArgs e)
         {
 

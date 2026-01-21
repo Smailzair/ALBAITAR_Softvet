@@ -668,12 +668,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Vente_2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vente_2.Designer.cs">
-      <DependentUpon>Vente_2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Visites_Report_DataSet.cs">
       <DependentUpon>Visites_Report_DataSet.xsd</DependentUpon>
     </Compile>
@@ -856,9 +850,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Vente_2.resx">
-      <DependentUpon>Vente_2.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Baitar24.snk" />
     <None Include="BaitarCert.pfx" />

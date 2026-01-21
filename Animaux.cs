@@ -6,12 +6,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Dynamic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
@@ -24,7 +20,6 @@ namespace ALBAITAR_Softvet.Resources
 
         public static int ID_to_selectt = -1;
         public static int visite_idd = -1;
-        int firstOpenVisitID = -1;
         DataTable clients;
         DataTable animaux;
         DataTable poids_tbl = new DataTable();
@@ -40,16 +35,11 @@ namespace ALBAITAR_Softvet.Resources
         DataTable chosen_anim_from_search;
         //----------
         AutoCompleteStringCollection malad_lst;
-        int prev_rw_idx = -1;
-        int prev_col_idx = -1;
         int prev_rw_idx_dgv3 = -1;
         int prev_col_idx_dgv3 = -1;
-        string last_selected_column = "START_DATE_MALAD";
 
 
         DateTime prev_dt6_val = DateTime.Now;
-        int prev_dt6_rww = -1;
-        int prev_dt6_coll = -1;
         //----------
 
         int spliter_panel1_wdth = 0;

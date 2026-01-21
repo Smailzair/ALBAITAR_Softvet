@@ -27,14 +27,12 @@ namespace ALBAITAR_Softvet.Resources
         List<string> wilayaa;
         List<string> cities;
         bool Is_New = true;
-        bool can_start_historic_saving = false;
-        DataTable chosen_client_from_search;
-        bool monetic_not_autorsed = false;
+        //bool monetic_not_autorsed = false;
         bool monetic_del_autorised = true;
         int prev_rw_idx = -1;
         int prev_col_idx = -1;
 
-        string fact_ref_pattern = @"FA_\d{4}_\d{4}";
+        //string fact_ref_pattern = @"FA_\d{4}_\d{4}";
         int last_rw_idx_shown_conf_msg = -1;
         public Clients(int ID_to_select, int Infos_1_Caiss_2, int Caisse_Id)
         {
@@ -473,6 +471,11 @@ namespace ALBAITAR_Softvet.Resources
             label13.Visible = false;
             pictureBox1.Image = Properties.Resources.NOUVEAU;
             panel3.Visible = false;
+            //-----------
+            if (clients.Rows.Count > 0) {
+                int yy = (int)clients.Rows.Cast<DataRow>().Max(rr => rr["ID"]) + 1;
+                textBox9.Text = yy.ToString("00000"); }
+            //----------
             //if (tabControl1.TabPages.Count > 1) { tabControl1.TabPages.Remove(tabPage1); }
             if (!textBox1.Focused) { textBox3.Select(); }
         }
@@ -607,7 +610,7 @@ namespace ALBAITAR_Softvet.Resources
                 //--------------------
                 if (Main_Frm.Autorisations.Rows.Cast<DataRow>().Where(QQ => QQ["CODE"].ToString() == "50000" && (Int32)QQ[3] == 1).Count() == 0)
                 {
-                    monetic_not_autorsed = true;
+                    //monetic_not_autorsed = true;
                     panel3.Visible = false;
                     //tabControl1.TabPages.Remove(tabPage1);
                 }

@@ -37,7 +37,7 @@ namespace ALBAITAR_Softvet.Resources
         static public int tmp_current_client_id = -1;
         bool has_asked_for_Transf_also_caisse = false;
         //-------------
-        bool autoriz_filtr = true;
+        //bool autoriz_filtr = true;
         bool dateTimePicker2_IsDropedDown = false;
         //-------
         Add_Vente_Fact_Item add_Vente_Fact_Item;
@@ -1143,6 +1143,7 @@ namespace ALBAITAR_Softvet.Resources
                     ((DataTable)dataGridView1.DataSource).DefaultView.RowFilter = fltr;
             }
             //-----------
+            label21.Text = "Total : ";
             decimal sum = 0;
             if (dataGridView1.SelectedRows.Count > 1)
             {
@@ -1153,8 +1154,7 @@ namespace ALBAITAR_Softvet.Resources
             else if (dataGridView1.Rows.Count > 0)
             {
                 sum = dataGridView1.Rows.Cast<DataGridViewRow>()
-              .Sum(row => Convert.ToDecimal(row.Cells["TOTAL_TTC"].Value));
-                label21.Text = "Total : ";
+              .Sum(row => Convert.ToDecimal(row.Cells["TOTAL_TTC"].Value));                
             }
             label21.Text += sum.ToString("# ##0.00");
             ////----------------------

@@ -808,7 +808,7 @@ namespace ALBAITAR_Softvet.Dialogs
                 }
                 PreConnection.albaitar_online.Close();
             }
-            catch (Exception ex)
+            catch
             {
 
             }

@@ -211,7 +211,7 @@ namespace ALBAITAR_Softvet
                 }
 
             }
-            catch (Exception ee) { }
+            catch { }
             close_conn();
             return rows_nb;
         }

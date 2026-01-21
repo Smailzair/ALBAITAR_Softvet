@@ -32,9 +32,7 @@ namespace ALBAITAR_Softvet.Dialogs
         Thread load_visites_data_thread;
         Thread load_analyses_data_thread;
         bool services_loaded = false;
-        bool products_loaded = false;
         bool visites_non_facturé_loaded = false;
-        bool labos_non_facturé_loaded = false;
         public bool frm_opened = false;
         public Add_Vente_Fact_Item(string client_nme)
         {
