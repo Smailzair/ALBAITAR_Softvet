@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
@@ -776,7 +777,7 @@ dataGridView1.Rows[14].Cells["VALUE2"].Value
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            button5.Visible = false;
+            button5.Visible = false;           
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -784,5 +785,6 @@ dataGridView1.Rows[14].Cells["VALUE2"].Value
             button5.Visible = false;
         }
 
+      
     }
 }

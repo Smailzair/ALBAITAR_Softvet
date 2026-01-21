@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Xamarin.Forms.Internals;
@@ -907,11 +908,44 @@ dataGridView1.Rows[14].Cells["DEFAULT_FULL"].Value //Monocytes_NORMATIF
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             button5.Visible = false;
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "DEFAULT_FULL" && e.RowIndex >= 0)
+            {
+                // Invalidate the specific row to force a redraw.
+                dataGridView1.InvalidateRow(e.RowIndex);
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             button5.Visible = false;
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "VALUE2" && e.RowIndex >= 0)
+            {
+                var row = dataGridView1.Rows[e.RowIndex];
+
+                string limitText = row.Cells["DEFAULT_FULL"].Value?.ToString() ?? "";
+                string valueText = e.Value?.ToString() ?? "";
+
+                var matches = Regex.Matches(limitText, @"\d+(\.\d+)?");
+
+                if (matches.Count >= 2 && double.TryParse(valueText, out double currentValue))
+                {
+                    double min = double.Parse(matches[0].Value);
+                    double max = double.Parse(matches[1].Value);
+
+                    if (currentValue < min || currentValue > max)
+                    {
+                        e.CellStyle.BackColor = Color.FromArgb(255, 147, 147);
+                    }
+                    else
+                    {
+                        e.CellStyle.BackColor = dataGridView1.DefaultCellStyle.BackColor;
+                    }
+                }
+            }
         }
     }
 }
