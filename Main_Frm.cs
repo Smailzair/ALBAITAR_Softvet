@@ -1374,7 +1374,7 @@ namespace ALBAITAR_Softvet
 
         static void visites_tab()
         {
-            main_visites_tab = PreConnection.Load_data("SELECT tb1.*,concat('Dr.',tb1.`VISITOR_FULL_NME`) AS VISITOR_FULL_NME_2,tb3.`NME` AS ANIM_NME,tb3.`CLIENT_ID`,tb3.CLIENT_FULL_NME,tb2.REF AS 'FACTURE_REF' FROM tb_visites tb1 LEFT JOIN ("
+            main_visites_tab = PreConnection.Load_data("SELECT tb1.*,`VISITOR_FULL_NME` AS VISITOR_FULL_NME_2,tb3.`NME` AS ANIM_NME,tb3.`CLIENT_ID`,tb3.CLIENT_FULL_NME,tb2.REF AS 'FACTURE_REF' FROM tb_visites tb1 LEFT JOIN ("
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_01` collate utf8mb4_unicode_ci AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_01` IS FALSE AND `ITEM_PROD_CODE_01` IS NOT NULL AND `ITEM_NME_01` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_02` collate utf8mb4_unicode_ci AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_02` IS FALSE AND `ITEM_PROD_CODE_02` IS NOT NULL AND `ITEM_NME_02` IS NOT NULL UNION "
                                                           + "SELECT `REF`,`ITEM_PROD_CODE_03` collate utf8mb4_unicode_ci AS 'VISIT' FROM tb_factures_vente WHERE `ITEM_IS_PROD_03` IS FALSE AND `ITEM_PROD_CODE_03` IS NOT NULL AND `ITEM_NME_03` IS NOT NULL UNION "

@@ -35,6 +35,7 @@ namespace ALBAITAR_Softvet
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -61,7 +62,6 @@ namespace ALBAITAR_Softvet
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Frm));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button33 = new System.Windows.Forms.Button();
@@ -127,6 +127,16 @@ namespace ALBAITAR_Softvet
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.ID_VISITE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DATETIME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VISITOR_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OBJECT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VISITOR_FULL_NME_0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ANIM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CLIENT_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FACTURE_REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button28 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
@@ -210,16 +220,6 @@ namespace ALBAITAR_Softvet
             this.radioButton8 = new System.Windows.Forms.RadioButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel5 = new System.Windows.Forms.Panel();
-            this.ID_VISITE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DATETIME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VISITOR_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OBJECT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VISITOR_FULL_NME_0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIM_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CLIENT_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANIM_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CLIENT_FULL_NME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FACTURE_REF = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_animaux.SuspendLayout();
@@ -1244,6 +1244,95 @@ namespace ALBAITAR_Softvet
             this.dataGridView2.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDoubleClick);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
+            // ID_VISITE
+            // 
+            this.ID_VISITE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ID_VISITE.DataPropertyName = "ID";
+            this.ID_VISITE.HeaderText = "ID";
+            this.ID_VISITE.Name = "ID_VISITE";
+            this.ID_VISITE.ReadOnly = true;
+            this.ID_VISITE.Visible = false;
+            this.ID_VISITE.Width = 43;
+            // 
+            // DATETIME
+            // 
+            this.DATETIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.DATETIME.DataPropertyName = "DATETIME";
+            dataGridViewCellStyle5.Format = "dd/MM/yyyy HH:mm";
+            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle5;
+            this.DATETIME.HeaderText = "Date";
+            this.DATETIME.Name = "DATETIME";
+            this.DATETIME.ReadOnly = true;
+            this.DATETIME.Width = 58;
+            // 
+            // VISITOR_FULL_NME
+            // 
+            this.VISITOR_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.VISITOR_FULL_NME.DataPropertyName = "VISITOR_FULL_NME_2";
+            this.VISITOR_FULL_NME.HeaderText = "Visiteur";
+            this.VISITOR_FULL_NME.Name = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME.ReadOnly = true;
+            this.VISITOR_FULL_NME.Width = 67;
+            // 
+            // OBJECT
+            // 
+            this.OBJECT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OBJECT.DataPropertyName = "OBJECT";
+            this.OBJECT.HeaderText = "Rapport";
+            this.OBJECT.Name = "OBJECT";
+            this.OBJECT.ReadOnly = true;
+            // 
+            // VISITOR_FULL_NME_0
+            // 
+            this.VISITOR_FULL_NME_0.DataPropertyName = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME_0.HeaderText = "VISITOR_FULL_NME";
+            this.VISITOR_FULL_NME_0.Name = "VISITOR_FULL_NME_0";
+            this.VISITOR_FULL_NME_0.ReadOnly = true;
+            this.VISITOR_FULL_NME_0.Visible = false;
+            // 
+            // ANIM_ID
+            // 
+            this.ANIM_ID.DataPropertyName = "ANIM_ID";
+            this.ANIM_ID.HeaderText = "ANIM_ID";
+            this.ANIM_ID.Name = "ANIM_ID";
+            this.ANIM_ID.ReadOnly = true;
+            this.ANIM_ID.Visible = false;
+            // 
+            // CLIENT_ID
+            // 
+            this.CLIENT_ID.DataPropertyName = "CLIENT_ID";
+            this.CLIENT_ID.HeaderText = "CLIENT_ID";
+            this.CLIENT_ID.Name = "CLIENT_ID";
+            this.CLIENT_ID.ReadOnly = true;
+            this.CLIENT_ID.Visible = false;
+            // 
+            // ANIM_NME
+            // 
+            this.ANIM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ANIM_NME.DataPropertyName = "ANIM_NME";
+            this.ANIM_NME.HeaderText = "Animal";
+            this.ANIM_NME.Name = "ANIM_NME";
+            this.ANIM_NME.ReadOnly = true;
+            this.ANIM_NME.Width = 67;
+            // 
+            // CLIENT_FULL_NME
+            // 
+            this.CLIENT_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.CLIENT_FULL_NME.DataPropertyName = "CLIENT_FULL_NME";
+            this.CLIENT_FULL_NME.HeaderText = "Propriétaire";
+            this.CLIENT_FULL_NME.Name = "CLIENT_FULL_NME";
+            this.CLIENT_FULL_NME.ReadOnly = true;
+            this.CLIENT_FULL_NME.Width = 92;
+            // 
+            // FACTURE_REF
+            // 
+            this.FACTURE_REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FACTURE_REF.DataPropertyName = "FACTURE_REF";
+            this.FACTURE_REF.HeaderText = "N° Facture";
+            this.FACTURE_REF.Name = "FACTURE_REF";
+            this.FACTURE_REF.ReadOnly = true;
+            this.FACTURE_REF.Width = 87;
+            // 
             // button28
             // 
             this.button28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -1667,7 +1756,7 @@ namespace ALBAITAR_Softvet
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Century Gothic", 7F);
             this.label13.ForeColor = System.Drawing.Color.DarkOrange;
-            this.label13.Location = new System.Drawing.Point(838, 696);
+            this.label13.Location = new System.Drawing.Point(804, 696);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(54, 15);
             this.label13.TabIndex = 82;
@@ -1678,7 +1767,7 @@ namespace ALBAITAR_Softvet
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel6.BackColor = System.Drawing.Color.NavajoWhite;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Location = new System.Drawing.Point(825, 698);
+            this.panel6.Location = new System.Drawing.Point(791, 698);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(10, 10);
             this.panel6.TabIndex = 81;
@@ -1688,7 +1777,7 @@ namespace ALBAITAR_Softvet
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label9.Location = new System.Drawing.Point(424, 327);
+            this.label9.Location = new System.Drawing.Point(390, 327);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(463, 22);
             this.label9.TabIndex = 83;
@@ -1701,7 +1790,7 @@ namespace ALBAITAR_Softvet
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Century Gothic", 7F);
             this.label8.ForeColor = System.Drawing.Color.Green;
-            this.label8.Location = new System.Drawing.Point(837, 669);
+            this.label8.Location = new System.Drawing.Point(803, 669);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(36, 15);
             this.label8.TabIndex = 82;
@@ -1712,7 +1801,7 @@ namespace ALBAITAR_Softvet
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Location = new System.Drawing.Point(825, 672);
+            this.panel4.Location = new System.Drawing.Point(791, 672);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(10, 10);
             this.panel4.TabIndex = 81;
@@ -1723,7 +1812,7 @@ namespace ALBAITAR_Softvet
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 7F);
             this.label7.ForeColor = System.Drawing.Color.Brown;
-            this.label7.Location = new System.Drawing.Point(837, 683);
+            this.label7.Location = new System.Drawing.Point(803, 683);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 15);
             this.label7.TabIndex = 80;
@@ -1734,7 +1823,7 @@ namespace ALBAITAR_Softvet
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(825, 685);
+            this.panel3.Location = new System.Drawing.Point(791, 685);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 10);
             this.panel3.TabIndex = 79;
@@ -1744,7 +1833,7 @@ namespace ALBAITAR_Softvet
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label6.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.label6.Location = new System.Drawing.Point(491, 673);
+            this.label6.Location = new System.Drawing.Point(457, 673);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(320, 36);
             this.label6.TabIndex = 78;
@@ -1792,7 +1881,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView7.ReadOnly = true;
             this.dataGridView7.RowHeadersVisible = false;
             this.dataGridView7.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView7.Size = new System.Drawing.Size(903, 25);
+            this.dataGridView7.Size = new System.Drawing.Size(869, 25);
             this.dataGridView7.TabIndex = 67;
             // 
             // dataGridViewTextBoxColumn15
@@ -1921,7 +2010,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView6.RowHeadersVisible = false;
             this.dataGridView6.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView6.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView6.Size = new System.Drawing.Size(903, 24);
+            this.dataGridView6.Size = new System.Drawing.Size(869, 24);
             this.dataGridView6.TabIndex = 65;
             // 
             // dataGridViewTextBoxColumn11
@@ -2028,7 +2117,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView5.ReadOnly = true;
             this.dataGridView5.RowHeadersVisible = false;
             this.dataGridView5.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView5.Size = new System.Drawing.Size(903, 244);
+            this.dataGridView5.Size = new System.Drawing.Size(869, 244);
             this.dataGridView5.TabIndex = 62;
             this.dataGridView5.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView5_CellFormatting);
             this.dataGridView5.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView5_CellMouseDoubleClick);
@@ -2219,7 +2308,7 @@ namespace ALBAITAR_Softvet
             this.dataGridView4.ReadOnly = true;
             this.dataGridView4.RowHeadersVisible = false;
             this.dataGridView4.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView4.Size = new System.Drawing.Size(903, 263);
+            this.dataGridView4.Size = new System.Drawing.Size(869, 263);
             this.dataGridView4.TabIndex = 60;
             this.dataGridView4.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView4_CellMouseDoubleClick);
             // 
@@ -2455,95 +2544,6 @@ namespace ALBAITAR_Softvet
             this.panel5.TabIndex = 38;
             this.panel5.Visible = false;
             this.panel5.Leave += new System.EventHandler(this.panel5_Leave);
-            // 
-            // ID_VISITE
-            // 
-            this.ID_VISITE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ID_VISITE.DataPropertyName = "ID";
-            this.ID_VISITE.HeaderText = "ID";
-            this.ID_VISITE.Name = "ID_VISITE";
-            this.ID_VISITE.ReadOnly = true;
-            this.ID_VISITE.Visible = false;
-            this.ID_VISITE.Width = 42;
-            // 
-            // DATETIME
-            // 
-            this.DATETIME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.DATETIME.DataPropertyName = "DATETIME";
-            dataGridViewCellStyle5.Format = "dd/MM/yyyy HH:mm";
-            this.DATETIME.DefaultCellStyle = dataGridViewCellStyle5;
-            this.DATETIME.HeaderText = "Date";
-            this.DATETIME.Name = "DATETIME";
-            this.DATETIME.ReadOnly = true;
-            this.DATETIME.Width = 58;
-            // 
-            // VISITOR_FULL_NME
-            // 
-            this.VISITOR_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.VISITOR_FULL_NME.DataPropertyName = "VISITOR_FULL_NME_2";
-            this.VISITOR_FULL_NME.HeaderText = "Visiteur";
-            this.VISITOR_FULL_NME.Name = "VISITOR_FULL_NME";
-            this.VISITOR_FULL_NME.ReadOnly = true;
-            this.VISITOR_FULL_NME.Width = 67;
-            // 
-            // OBJECT
-            // 
-            this.OBJECT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OBJECT.DataPropertyName = "OBJECT";
-            this.OBJECT.HeaderText = "Rapport";
-            this.OBJECT.Name = "OBJECT";
-            this.OBJECT.ReadOnly = true;
-            // 
-            // VISITOR_FULL_NME_0
-            // 
-            this.VISITOR_FULL_NME_0.DataPropertyName = "VISITOR_FULL_NME";
-            this.VISITOR_FULL_NME_0.HeaderText = "VISITOR_FULL_NME";
-            this.VISITOR_FULL_NME_0.Name = "VISITOR_FULL_NME_0";
-            this.VISITOR_FULL_NME_0.ReadOnly = true;
-            this.VISITOR_FULL_NME_0.Visible = false;
-            // 
-            // ANIM_ID
-            // 
-            this.ANIM_ID.DataPropertyName = "ANIM_ID";
-            this.ANIM_ID.HeaderText = "ANIM_ID";
-            this.ANIM_ID.Name = "ANIM_ID";
-            this.ANIM_ID.ReadOnly = true;
-            this.ANIM_ID.Visible = false;
-            // 
-            // CLIENT_ID
-            // 
-            this.CLIENT_ID.DataPropertyName = "CLIENT_ID";
-            this.CLIENT_ID.HeaderText = "CLIENT_ID";
-            this.CLIENT_ID.Name = "CLIENT_ID";
-            this.CLIENT_ID.ReadOnly = true;
-            this.CLIENT_ID.Visible = false;
-            // 
-            // ANIM_NME
-            // 
-            this.ANIM_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.ANIM_NME.DataPropertyName = "ANIM_NME";
-            this.ANIM_NME.HeaderText = "Animal";
-            this.ANIM_NME.Name = "ANIM_NME";
-            this.ANIM_NME.ReadOnly = true;
-            this.ANIM_NME.Width = 67;
-            // 
-            // CLIENT_FULL_NME
-            // 
-            this.CLIENT_FULL_NME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.CLIENT_FULL_NME.DataPropertyName = "CLIENT_FULL_NME";
-            this.CLIENT_FULL_NME.HeaderText = "Propriétaire";
-            this.CLIENT_FULL_NME.Name = "CLIENT_FULL_NME";
-            this.CLIENT_FULL_NME.ReadOnly = true;
-            this.CLIENT_FULL_NME.Width = 92;
-            // 
-            // FACTURE_REF
-            // 
-            this.FACTURE_REF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.FACTURE_REF.DataPropertyName = "FACTURE_REF";
-            this.FACTURE_REF.HeaderText = "N° Facture";
-            this.FACTURE_REF.Name = "FACTURE_REF";
-            this.FACTURE_REF.ReadOnly = true;
-            this.FACTURE_REF.Width = 87;
             // 
             // Main_Frm
             // 
