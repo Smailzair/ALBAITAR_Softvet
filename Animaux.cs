@@ -258,6 +258,10 @@ namespace ALBAITAR_Softvet.Resources
             { dataGridView1.ClearSelection(); dataGridView1.Rows[fd].Selected = true; }
             else if (dataGridView1.Rows.Count > 0)
             { dataGridView1.ClearSelection(); dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true; }
+            else 
+            { 
+                new_anim(false);
+            }
 
             Load_malad_1();
             //------------------

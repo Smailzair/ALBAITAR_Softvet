@@ -106,6 +106,9 @@ namespace ALBAITAR_Softvet.Resources
                 dataGridView1.Rows.Cast<DataGridViewRow>().OrderBy(r => r.Cells["ID"].Value).Last().Selected = true;
             }
             else if (dataGridView1.Rows.Count > fd) { dataGridView1.ClearSelection(); dataGridView1.Rows[fd].Selected = true; }
+            else { 
+                button3.PerformClick();
+            }
         }
 
         private void dgv1_fltr()
@@ -472,6 +475,7 @@ namespace ALBAITAR_Softvet.Resources
             pictureBox1.Image = Properties.Resources.NOUVEAU;
             panel3.Visible = false;
             //-----------
+            textBox9.Text = "00001";
             if (clients.Rows.Count > 0) {
                 int yy = (int)clients.Rows.Cast<DataRow>().Max(rr => rr["ID"]) + 1;
                 textBox9.Text = yy.ToString("00000"); }

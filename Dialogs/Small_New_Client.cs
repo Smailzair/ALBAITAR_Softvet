@@ -16,6 +16,11 @@ namespace ALBAITAR_Softvet.Dialogs
             //---------------------
             comboBox1.SelectedIndex = 0;
             clients = PreConnection.Load_data_keeping_duplicates("SELECT * FROM tb_clients ORDER BY FAMNME;");
+            if (clients.Rows.Count > 0)
+            {
+                int yy = (int)clients.Rows.Cast<DataRow>().Max(rr => rr["ID"]) + 1;
+                textBox9.Text = yy.ToString("00000");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -23,15 +28,19 @@ namespace ALBAITAR_Softvet.Dialogs
             bool all_ready = true;
             textBox2.BackColor = textBox2.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
             textBox3.BackColor = textBox3.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
+            textBox9.BackColor = textBox9.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
             all_ready &= textBox2.Text.Trim() != string.Empty;
             all_ready &= textBox3.Text.Trim() != string.Empty;
+            all_ready &= textBox9.Text.Trim() != string.Empty;
             all_ready &= !label13.Visible;
+            all_ready &= !label15.Visible;
             //-------------------------
             if (all_ready)
             {
                 PreConnection.Excut_Cmd(1, "tb_clients", new List<string>
                 {
-                    "SEX",
+                    "REF",
+                    "SEX",                    
                     "FAMNME",
                     "NME",
                     "NUM_CNI",
@@ -44,6 +53,7 @@ namespace ALBAITAR_Softvet.Dialogs
                     "OBSERVATIONS"
                 }, new List<object>
                 {
+                    textBox9.Text,
                     comboBox1.Text,
                     textBox3.Text,
                     textBox2.Text,
@@ -75,6 +85,29 @@ namespace ALBAITAR_Softvet.Dialogs
                 label13.Visible = cnt > 0;
             }
             else { label13.Visible = false; }
+        }
+
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+            ((TextBox)sender).BackColor = SystemColors.Window;
+            label15.Visible = false;
+        }
+
+        private void textBox9_Validated(object sender, EventArgs e)
+        {
+            ((TextBox)sender).Text = ((TextBox)sender).Text.Replace(".", "").Replace(" ", "");
+            verif_if_déja_exist_ref();
+        }
+        private void verif_if_déja_exist_ref()
+        {
+            if (textBox9.Text.Length > 0)
+            {
+                int cntt = clients.Rows.Cast<DataRow>().Where(zz => zz["REF"].ToString().ToLower().Equals(textBox9.Text.ToLower())).ToList().Count();
+
+                label15.Visible = cntt > 0;
+            }
+            else { label15.Visible = false; }
+            textBox9.BackColor = label15.Visible ? Color.LightCoral : SystemColors.Window;
         }
     }
 }
