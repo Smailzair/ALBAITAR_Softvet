@@ -33,7 +33,7 @@ namespace ALBAITAR_Softvet
         static string connectionString_txt = "Server=" + Properties.Settings.Default.Connection_String_IP_Or_LocalHost + ";Port=3306;Database=albaitar_db;Uid=albaitar_user;Pwd=AlBaiTar9999;";
         public static MySqlConnection mySqlConnection = new MySqlConnection(connectionString_txt); //DB Origine                
         // static bool Connection_opened = false;
-        public static MySqlConnection albaitar_online = new MySqlConnection(@"Server=62.72.50.1;Port=3306;Database=u844866977_BAITAR_CLIENTS;Uid=u844866977_baitar_user;Pwd=Zsd52##dQemN41;");
+        public static MySqlConnection albaitar_online = new MySqlConnection(@"Server=31.97.208.25;Port=3306;Database=u844866977_BAITAR_CLIENTS;Uid=u844866977_baitar_user;Pwd=Zsd52##dQemN41;");
 
 
         public static void open_conn()
