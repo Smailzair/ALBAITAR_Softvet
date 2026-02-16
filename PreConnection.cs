@@ -434,7 +434,7 @@ namespace ALBAITAR_Softvet
         ///////////////////////  RancoSoft Cammands   /////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////
-        public static MySqlConnection client_manag = new MySqlConnection(@"Server=62.72.50.1;Port=3306;Database=u844866977_CLIENTS_MANAG;Uid=u844866977_RANCO_USER;Pwd=v[y:hyiN3W4;");
+        public static MySqlConnection client_manag = new MySqlConnection(@"Server=31.97.208.25;Port=3306;Database=u844866977_CLIENTS_MANAG;Uid=u844866977_RANCO_USER;Pwd=v[y:hyiN3W4;");
         ////////////////////////////////////////////        
         static string SERIAL = "zXdsf14s6q35EDdc7xc82vvc6d";
         ////////////////////////////////////////////
@@ -535,8 +535,7 @@ namespace ALBAITAR_Softvet
                         client_manag.Close();
                     }
                 }
-            }
-                
+            }                
         }
         public static int Verif_manual_stop_of_RancoSoft()
         {
