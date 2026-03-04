@@ -175,18 +175,18 @@ namespace ALBAITAR_Softvet.Resources
                 panel3.Visible = true;
                 //if (tabControl1.TabPages.Count < 2) { tabControl1.TabPages.Add(tabPage1); }
                 //----------------------------------------------
-                textBox9.Text = (string)dataGridView1.SelectedRows[0].Cells["REF"].Value;
-                comboBox1.SelectedItem = (string)dataGridView1.SelectedRows[0].Cells["SEX"].Value;
-                textBox3.Text = (string)dataGridView1.SelectedRows[0].Cells["FAMNME"].Value;
-                textBox2.Text = (string)dataGridView1.SelectedRows[0].Cells["NME"].Value;
-                textBox4.Text = (string)dataGridView1.SelectedRows[0].Cells["NUM_CNI"].Value;
-                textBox5.Text = (string)dataGridView1.SelectedRows[0].Cells["ADRESS"].Value;
-                textBox6.Text = (string)dataGridView1.SelectedRows[0].Cells["POSTAL_CODE"].Value;
-                textBox7.Text = (string)dataGridView1.SelectedRows[0].Cells["EMAIL"].Value;
-                textBox8.Text = (string)dataGridView1.SelectedRows[0].Cells["OBSERVATIONS"].Value;
-                comboBox3.Text = (string)dataGridView1.SelectedRows[0].Cells["WILAYA"].Value;
-                comboBox2.Text = (string)dataGridView1.SelectedRows[0].Cells["CITY"].Value;
-                maskedTextBox1.Text = (string)dataGridView1.SelectedRows[0].Cells["NUM_PHONE"].Value;
+                textBox9.Text = dataGridView1.SelectedRows[0].Cells["REF"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["REF"].Value.ToString() : "";
+                comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["SEX"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["SEX"].Value.ToString() : "";
+                textBox3.Text = dataGridView1.SelectedRows[0].Cells["FAMNME"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["FAMNME"].Value.ToString() : "";
+                textBox2.Text = dataGridView1.SelectedRows[0].Cells["NME"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["NME"].Value.ToString() : "";
+                textBox4.Text = dataGridView1.SelectedRows[0].Cells["NUM_CNI"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["NUM_CNI"].Value.ToString() : "";
+                textBox5.Text = dataGridView1.SelectedRows[0].Cells["ADRESS"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["ADRESS"].Value.ToString() : "";
+                textBox6.Text = dataGridView1.SelectedRows[0].Cells["POSTAL_CODE"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["POSTAL_CODE"].Value.ToString() : "";
+                textBox7.Text = dataGridView1.SelectedRows[0].Cells["EMAIL"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["EMAIL"].Value.ToString() : "";
+                textBox8.Text = dataGridView1.SelectedRows[0].Cells["OBSERVATIONS"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["OBSERVATIONS"].Value.ToString() : "";
+                comboBox3.Text = dataGridView1.SelectedRows[0].Cells["WILAYA"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["WILAYA"].Value.ToString() : "";
+                comboBox2.Text = dataGridView1.SelectedRows[0].Cells["CITY"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["CITY"].Value.ToString() : "";
+                maskedTextBox1.Text = dataGridView1.SelectedRows[0].Cells["NUM_PHONE"].Value != DBNull.Value ? dataGridView1.SelectedRows[0].Cells["NUM_PHONE"].Value.ToString() : "";
 
                 //----------------------------------------------
                 textBox9.Validated += textBox9_Validated;
