@@ -347,6 +347,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivationStore.cs" />
     <Compile Include="Agenda.cs">
       <SubType>Form</SubType>
     </Compile>

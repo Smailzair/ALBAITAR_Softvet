@@ -132,7 +132,7 @@ namespace ALBAITAR_Softvet
             tabPage_Calendar.ImageIndex = 3;
             tabPage_animaux.ImageIndex = 5;
             tabPage_monetique.ImageIndex = 6;
-            tabPage_vaccin.ImageIndex = 7;            
+            tabPage_vaccin.ImageIndex = 7;
             //---------------------------
             if (!Properties.Settings.Default.Last_login_is_admin)
             {
@@ -147,7 +147,7 @@ namespace ALBAITAR_Softvet
             //th.Join();
             //--------------
 
-            parr = new Thread(new ThreadStart(load_server_params)); 
+            parr = new Thread(new ThreadStart(load_server_params));
             parr.Start();
             parr.Join(); // <--- used 'Join' to wait loading params to use them next in 'Activ_Verif'.
             //---
@@ -588,189 +588,128 @@ namespace ALBAITAR_Softvet
             if (Properties.Settings.Default.Connection_String_IP_Or_LocalHost == "localhost")
             {
                 //========= I/ First steps ==============
-                string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
-                string filePath = folderPath + "\\Al_Baitar_Activation.txt";
-                if (!File.Exists(filePath))
+                // migrate existing file if present (one-time)
+                ActivationStore.MigrateFromFileIfExists();
+
+                // load activation data from Settings
+                var actData = ActivationStore.Load();
+
+                decimal prev_running_delay = actData.PrevRunningDelay;
+                DateTime prev_saved_running_delay_datetime = actData.PrevSavedRunningDelayDate;
+                bool Is_finance_done = actData.IsFinanceDone;
+                activation_is_finance_done = Is_finance_done;
+
+                // Server verify date: keep same fallback as original code
+                DateTime Server_Verif_Date = Properties.Settings.Default.First_Enter_Date_After_Install > new DateTime(1867, 05, 15)
+                    ? Properties.Settings.Default.First_Enter_Date_After_Install
+                    : DateTime.Now;
+
+                // if migrated value is meaningful, prefer it
+                if (actData.ServerVerifyDate > new DateTime(1900, 1, 1))
                 {
-                    if (!Directory.Exists(folderPath))
-                    {
-                        Directory.CreateDirectory(folderPath);
-                        File.SetAttributes(folderPath, FileAttributes.Directory | FileAttributes.Hidden);
-                    }
-                    //--------
-                    File.Create(filePath).Dispose();
-                    //---------
-                    FileAttributes attributes = File.GetAttributes(filePath);
-                    attributes |= FileAttributes.Hidden;
-                    File.SetAttributes(filePath, attributes);
+                    Server_Verif_Date = actData.ServerVerifyDate;
                 }
-                if (File.Exists(filePath))
+
+
+                //------------
+
+                bool Activ_verif_required = false;
+                Activ_verif_required = Activ_verif_required || (Is_finance_done == false && (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30"));
+                Activ_verif_required = Activ_verif_required || (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30");
+                Activ_verif_required = Activ_verif_required || ((DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes >= 10800 || prev_running_delay == 0);
+                Activ_verif_required = Activ_verif_required || (PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() && (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800)); //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
+                is_activation_reqiired = Activ_verif_required;
+
+                //string adding_to_title = "";
+                //string adding_to_title_delay = "";
+                //string adding_finance_to_title = "";
+
+                int finnace_delay_tmp = (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ?
+                    (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30") - (int)(DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays) >= 0 ?
+                    (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ?
+                    (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30") - (int)(DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays) : 0;
+                activation_finance_delay_days = finnace_delay_tmp;
+
+
+                activation_delay_from_prev_server_check = (int)(DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays;
+                //----------
+                bool server_activated = PreConnection.Verif_real_server_activ();
+                activation_is_done = (server_activated && activation_verified_corretly_with_server) || (!server_activated && !Activ_verif_required);
+                if (Activ_verif_required)
                 {
-                    //---------
-                    FileAttributes currentAttributes = File.GetAttributes(filePath);
-                    FileAttributes updatedAttributes = currentAttributes & ~FileAttributes.Hidden;
-                    File.SetAttributes(filePath, updatedAttributes);
-                    //---------
-                    string[] file_lines = File.ReadAllLines(filePath);
-                    string[] file_lines_to_save = new string[5];
-
-                    decimal prev_running_delay = 0; //delay per minute
-                    if (file_lines.Length > 0)
+                    // persist updated activation data into settings
+                    if (activation_verified_corretly_with_server)
                     {
-                        if (file_lines[0].Trim().Length > 0)
-                        {
-                            decimal.TryParse(file_lines[0].ToString(), out prev_running_delay);
-                            file_lines_to_save[0] = file_lines[0];
-                        }
-
+                        actData.IsFinanceDone = activation_is_finance_done;
+                        actData.ServerVerifyDate = DateTime.UtcNow;
+                        ActivationStore.Save(actData);
                     }
 
-                    DateTime prev_saved_running_delay_datetime = new DateTime(2000, 01, 01);
-                    if (file_lines.Length > 1)
-                    {
-                        if (file_lines[1].Trim().Length > 0)
-                        {
-                            DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
-                            file_lines_to_save[1] = file_lines[1];
-                        }
-
-                    }
-
-                    bool Is_finance_done = false;
-                    if (file_lines.Length > 2)
-                    {
-                        if (file_lines[2].Trim().Length > 0)
-                        {
-                            Is_finance_done = PreConnection.Traduct_Codified_txt(file_lines[2]) == "Yes_is_done";
-                            file_lines_to_save[2] = file_lines[2];
-                        }
-
-                    }
-                    activation_is_finance_done = Is_finance_done;
-
-                    DateTime Server_Verif_Date = Properties.Settings.Default.First_Enter_Date_After_Install > new DateTime(1867, 05, 15) ? Properties.Settings.Default.First_Enter_Date_After_Install : DateTime.Now;
-                    if (file_lines.Length > 3)
-                    {
-                        if (file_lines[3].Trim().Length > 0)
-                        {
-                            DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[3]), out Server_Verif_Date);
-                            file_lines_to_save[3] = file_lines[3];
-                        }
-
-                    }
-                    //------------
-
-                    bool Activ_verif_required = false;
-                    Activ_verif_required = Activ_verif_required || (Is_finance_done == false && (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30"));
-                    Activ_verif_required = Activ_verif_required || (DateTime.Now - Server_Verif_Date).TotalDays >= int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30");
-                    Activ_verif_required = Activ_verif_required || ((DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes >= 10800 || prev_running_delay == 0);
-                    Activ_verif_required = Activ_verif_required || (PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() && (prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800)); //30Jrs x 6Hr x 60Min (Pour éviter le jouer par date)
-                    is_activation_reqiired = Activ_verif_required;
-
-                    //string adding_to_title = "";
-                    //string adding_to_title_delay = "";
-                    //string adding_finance_to_title = "";
-
-                    int finnace_delay_tmp = (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ?
-                        (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30") - (int)(DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays) >= 0 ?
-                        (int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ?
-                        (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30") - (int)(DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays) : 0;
-                    activation_finance_delay_days = finnace_delay_tmp;
-
-
-                    activation_delay_from_prev_server_check = (int)(DateTime.Now - Properties.Settings.Default.First_Enter_Date_After_Install).TotalDays;
-                    //----------
-                    bool server_activated = PreConnection.Verif_real_server_activ();
-                    activation_is_done = (server_activated && activation_verified_corretly_with_server) || (!server_activated && !Activ_verif_required);
-                    if (Activ_verif_required)
-                    {
-                        if (activation_verified_corretly_with_server)
-                        {
-                            activation_is_done = server_activated;
-
-
-                            file_lines_to_save[2] = activation_is_finance_done ? PreConnection.Codify_txt("Yes_is_done") : PreConnection.Codify_txt("Not_yet");
-                            file_lines_to_save[3] = PreConnection.Codify_txt(DateTime.UtcNow.ToString());
-                            //------
-                            //adding_finance_to_title = PreConnection.Traduct_Codified_txt(file_lines_to_save[2]) != "Yes_is_done" ? "Droits non réglés ["+finnace_delay_tmp+"]" : "";
-
-                            activation_finance_delay_days = finnace_delay_tmp;
-                        }
-                        File.WriteAllLines(filePath, file_lines_to_save);
-
-                        //-------
-                        if (!server_activated || !activation_verified_corretly_with_server) //if NOT activated (or couldn't verify yet)
-                        {
-                            activation_delay_days = int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30");
-                            int RESTE_DELAY = (activation_is_finance_done && activation_verified_corretly_with_server) ? int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30") : Math.Min(int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30"), int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30"));
-
-                            bool reste_delay_ended = (DateTime.Now - Server_Verif_Date).TotalDays >= RESTE_DELAY;
-
-                            bool prevent_enter = !PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() &&
-                                (reste_delay_ended || prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800);
-
-
-                            PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
-                            Properties.Settings.Default.Codified_Activate_Code = "";
-                            Properties.Settings.Default.Save();
-                            close_app_because_act = prevent_enter;
-                            Application.Run(new App_Activation());
-                            if (prevent_enter)
-                            { // !! NOT TESTED YET !!
-                                this.Hide();
-                            }
-                            //----------
-
-                            //adding_to_title += " (Produit non activé";
-                            //int restt = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays);
-                            //adding_to_title_delay = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? "[" + Convert.ToInt32(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays).ToString("0") + "] jours" : "";
-
-
-                            //-------------
-                        }
-
-
-
-                    }
                     //-------
+                    if (!server_activated || !activation_verified_corretly_with_server) //if NOT activated (or couldn't verify yet)
+                    {
+                        activation_delay_days = int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30");
+                        int RESTE_DELAY = (activation_is_finance_done && activation_verified_corretly_with_server) ? int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30") : Math.Min(int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_DEFAULT"))["VAL"] : "30"), int.Parse(Baitar_Server_Params.Rows.Cast<DataRow>().Where(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED")).ToList().Count > 0 ? (string)Baitar_Server_Params.Rows.Cast<DataRow>().First(d => d["NME"].Equals("VERIF_DAYS_DELAY_FOR_NN_PAYED"))["VAL"] : "30"));
+
+                        bool reste_delay_ended = (DateTime.Now - Server_Verif_Date).TotalDays >= RESTE_DELAY;
+
+                        bool prevent_enter = !PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Act_Client_ID).IsNullOrEmpty() &&
+                            (reste_delay_ended || prev_saved_running_delay_datetime > DateTime.Now || (DateTime.Now - prev_saved_running_delay_datetime).TotalMinutes > 10800);
+
+
+                        PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
+                        Properties.Settings.Default.Codified_Activate_Code = "";
+                        Properties.Settings.Default.Save();
+                        close_app_because_act = prevent_enter;
+                        Application.Run(new App_Activation());
+                        if (prevent_enter)
+                        { // !! NOT TESTED YET !!
+                            this.Hide();
+                        }
+                        //----------
+
+                        //adding_to_title += " (Produit non activé";
+                        //int restt = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays);
+                        //adding_to_title_delay = (int)(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays) > 0 ? "[" + Convert.ToInt32(RESTE_DELAY - (DateTime.Now - Server_Verif_Date).TotalDays).ToString("0") + "] jours" : "";
+
+
+                        //-------------
+                    }
+
+
+
+                }
+                //-------
+                else
+                {
+                    //========= II/ if the previous check worked (ACTIVATED!), we come to this check steps ===============
+                    //---------- Check if the PC changed ---------------
+                    string MachineCltID = Properties.Settings.Default.MachineClientID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID) : "";
+
+                    if (!string.IsNullOrEmpty(MachineCltID) && !MachineCltID.Equals(PreConnection.generate_ID_of_client()))
+                    {
+                        PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
+                        Properties.Settings.Default.Codified_Activate_Code = "";
+                        Properties.Settings.Default.Save();
+                        close_app_because_act = true;
+                        Application.Run(new App_Activation());
+                    }
                     else
                     {
-                        //========= II/ if the previous check worked (ACTIVATED!), we come to this check steps ===============
-                        //---------- Check if the PC changed ---------------
-                        string MachineCltID = Properties.Settings.Default.MachineClientID != null ? PreConnection.Traduct_Codified_txt(Properties.Settings.Default.MachineClientID) : "";
-
-                        if (!string.IsNullOrEmpty(MachineCltID) && !MachineCltID.Equals(PreConnection.generate_ID_of_client()))
-                        {
-                            PreConnection.Excut_Cmd(2, "tb_params", new List<string> { "VAL" }, new List<object> { 0 }, "ID = @P_ID", new List<string> { "P_ID" }, new List<object> { 7 });
-                            Properties.Settings.Default.Codified_Activate_Code = "";
-                            Properties.Settings.Default.Save();
-                            close_app_because_act = true;
-                            Application.Run(new App_Activation());
-                        }
-                        else
-                        {
-                            string finance_stat = PreConnection.verify_baitar_client_finance(PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email), PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code));
-                            //adding_finance_to_title = finance_stat == "not good" ? "Droits non réglés ["+finnace_delay_tmp+"]" : "";
+                        string finance_stat = PreConnection.verify_baitar_client_finance(PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codifed_Activation_Email), PreConnection.Traduct_Codified_txt(Properties.Settings.Default.Codified_Activate_Code));
+                        //adding_finance_to_title = finance_stat == "not good" ? "Droits non réglés ["+finnace_delay_tmp+"]" : "";
 
 
-                            activation_is_finance_done = finance_stat == "unknown" ? activation_is_finance_done : finance_stat == "good";
+                        activation_is_finance_done = finance_stat == "unknown" ? activation_is_finance_done : finance_stat == "good";
 
 
-                            activation_finance_delay_days = finnace_delay_tmp;
-                        }
-
+                        activation_finance_delay_days = finnace_delay_tmp;
                     }
 
-                    //--------
-                    make_title_activ_state_update = true;
-
-                    //---------
-                    FileAttributes attributes = File.GetAttributes(filePath);
-                    attributes |= FileAttributes.Hidden;
-                    File.SetAttributes(filePath, attributes);
-                    //-----------
-
                 }
+
+                //--------
+                make_title_activ_state_update = true;
 
             }
             else //Destinated to the other PCs in local network (Important!: Activation just from the Server PC)
@@ -1194,117 +1133,17 @@ namespace ALBAITAR_Softvet
         {
             Application.OpenForms["Splash"]?.Close();
             //-----------
-            string folderPath = "C:\\ProgramData\\BAITAR_CTRL";
-            string filePath = folderPath + "\\Al_Baitar_Activation.txt";
-            if (!File.Exists(filePath))
+            // migrate existing file if present (one-time)
+            ActivationStore.MigrateFromFileIfExists();
+
+            // load, update and save activation counters
+            var actData = ActivationStore.Load();
+            actData.PrevRunningDelay = actData.PrevRunningDelay + (decimal)time_delay / 60m;
+            if (time_delay > 0)
             {
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                    File.SetAttributes(folderPath, FileAttributes.Directory | FileAttributes.Hidden);
-                }
-                //--------
-                File.Create(filePath).Dispose();
-                //---------
-                FileAttributes attributes = File.GetAttributes(filePath);
-                attributes |= FileAttributes.Hidden;
-                File.SetAttributes(filePath, attributes);
+                actData.PrevSavedRunningDelayDate = DateTime.UtcNow;
             }
-
-            if (File.Exists(filePath))
-            {
-                //---------
-                FileAttributes currentAttributes = File.GetAttributes(filePath);
-                FileAttributes updatedAttributes = currentAttributes & ~FileAttributes.Hidden;
-                File.SetAttributes(filePath, updatedAttributes);
-                //---------
-                string[] file_lines = File.ReadAllLines(filePath);
-                string[] file_lines_to_save = new string[4];
-
-
-
-                decimal prev_running_delay = 0; //delay per minute
-                if (file_lines.Length > 0)
-                {
-                    if (file_lines[0].Trim().Length > 0)
-                    {
-                        decimal.TryParse(file_lines[0].ToString(), out prev_running_delay);
-                        file_lines_to_save[0] = file_lines[0];
-                    }
-
-                }
-
-                DateTime prev_saved_running_delay_datetime = new DateTime(2000, 01, 01);
-                if (file_lines.Length > 1)
-                {
-                    if (file_lines[1].Trim().Length > 0)
-                    {
-                        DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
-                        file_lines_to_save[1] = file_lines[1];
-                    }
-
-                }
-
-                bool Is_finance_done = false;
-                if (file_lines.Length > 2)
-                {
-                    if (file_lines[2].Trim().Length > 0)
-                    {
-                        Is_finance_done = PreConnection.Traduct_Codified_txt(file_lines[2]) == "Yes_is_done";
-                        file_lines_to_save[2] = file_lines[2];
-                    }
-
-                }
-                activation_is_finance_done = Is_finance_done;
-
-                DateTime Server_Verif_Date = Properties.Settings.Default.First_Enter_Date_After_Install > new DateTime(1867, 05, 15) ? Properties.Settings.Default.First_Enter_Date_After_Install : DateTime.Now;
-                if (file_lines.Length > 3)
-                {
-                    if (file_lines[3].Trim().Length > 0)
-                    {
-                        DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[3]), out Server_Verif_Date);
-                        file_lines_to_save[3] = file_lines[3];
-                    }
-
-                }
-                //------------
-                //================================================================
-                //decimal prev_running_delay = 0; //delay per minute
-                //if (file_lines.Length > 0)
-                //{
-                //    decimal.TryParse(file_lines[0].ToString(), out prev_running_delay);
-                //    file_lines_to_save[0] = file_lines[0];
-                //}
-
-                //DateTime prev_saved_running_delay_datetime = new DateTime(1900, 01, 01);
-                //if (file_lines.Length > 1)
-                //{
-                //    DateTime.TryParse(PreConnection.Traduct_Codified_txt(file_lines[1]), out prev_saved_running_delay_datetime);
-                //    file_lines_to_save[1] = PreConnection.Codify_txt(prev_saved_running_delay_datetime.ToString());
-                //}
-
-                //if (file_lines.Length > 2)
-                //{
-                //    file_lines_to_save[2] = file_lines[2];
-                //}
-
-                //if (file_lines.Length > 3)
-                //{
-                //    file_lines_to_save[3] = file_lines[3];
-                //}
-
-
-
-
-
-                file_lines_to_save[0] = ((double)prev_running_delay + (double)time_delay / 60).ToString("N2");
-                file_lines_to_save[1] = time_delay > 0 ? PreConnection.Codify_txt(DateTime.UtcNow.ToString()) : file_lines_to_save[1];
-                File.WriteAllLines(filePath, file_lines_to_save);
-                //---------
-                FileAttributes attributes = File.GetAttributes(filePath);
-                attributes |= FileAttributes.Hidden;
-                File.SetAttributes(filePath, attributes);
-            }
+            ActivationStore.Save(actData);
 
             //----------------------------------
             Properties.Settings.Default.Maximize_Main_Frm = WindowState == FormWindowState.Maximized;
@@ -3036,10 +2875,11 @@ namespace ALBAITAR_Softvet
             if (dataGridView5.SelectedRows.Count > 0)
             {
                 bool continu = true;
-                if ((int)dataGridView5.SelectedRows[0].Cells["IS_PROVIS"].Value == 1) {
-                    continu = MessageBox.Show("C'est une facture provisoire,\nSouhaitez-vous continuer à imprimer comme même ?", "Attention",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Warning) == DialogResult.Yes;
+                if ((int)dataGridView5.SelectedRows[0].Cells["IS_PROVIS"].Value == 1)
+                {
+                    continu = MessageBox.Show("C'est une facture provisoire,\nSouhaitez-vous continuer à imprimer comme même ?", "Attention", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes;
                 }
-                if(continu)
+                if (continu)
                 {
                     DataTable facture_infos = PreConnection.Load_data("SELECT * FROM tb_factures_vente WHERE `ID` = " + dataGridView5.SelectedRows[0].Cells["dataGridViewTextBoxColumn1"].Value + ";");
                     DataTable facture_to_print_items = new DataTable();
@@ -3129,4 +2969,5 @@ namespace ALBAITAR_Softvet
         }
     }
 }
+
 

@@ -82,5 +82,8 @@
     <Setting Name="Last_date_RANCOSOFT_GMAIL_AUTHENT_Load" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">1990-01-01</Value>
     </Setting>
+    <Setting Name="AlBaitarActivationCodified" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
