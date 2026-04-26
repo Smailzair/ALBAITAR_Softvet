@@ -355,7 +355,7 @@ namespace ALBAITAR_Softvet.Resources
             }
 
             bool all_ready = true;
-            textBox9.BackColor = textBox2.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
+            textBox9.BackColor = textBox9.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
             textBox2.BackColor = textBox2.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
             textBox3.BackColor = textBox3.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
             textBox4.BackColor = textBox4.Text.Trim() != string.Empty ? SystemColors.Window : Color.LightCoral;
@@ -482,6 +482,7 @@ namespace ALBAITAR_Softvet.Resources
             //----------
             //if (tabControl1.TabPages.Count > 1) { tabControl1.TabPages.Remove(tabPage1); }
             if (!textBox1.Focused) { textBox3.Select(); }
+            button5.Visible = false;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -1267,12 +1268,13 @@ namespace ALBAITAR_Softvet.Resources
         {            
             ((TextBox)sender).BackColor = SystemColors.Window;
             label15.Visible = false;
+            button5.Visible = ((TextBox)sender).Text.Trim() == string.Empty || label15.Visible;
         }
 
         private void textBox9_Validated(object sender, EventArgs e)
         {
             ((TextBox)sender).Text = ((TextBox)sender).Text.Replace(".", "").Replace(" ", "");
-            verif_if_déja_exist_ref();
+            verif_if_déja_exist_ref();           
         }
 
         private void verif_if_déja_exist_ref()
@@ -1285,6 +1287,15 @@ namespace ALBAITAR_Softvet.Resources
                 label15.Visible = cntt > 0;
             }
             else { label15.Visible = false; }
+            button5.Visible = textBox9.Text.Trim() == string.Empty || label15.Visible;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int tt = clients.Rows.Cast<DataRow>().Max(Q => Q["REF"].ToString().Length > 0 && Q["REF"].ToString().All(c => char.IsDigit(c)) ? int.Parse(Q["REF"].ToString()) : 0);
+            textBox9.Text = (tt + 1).ToString("00000");
+            verif_if_déja_exist_ref();
+            button5.Visible = false;
         }
     }
 }
