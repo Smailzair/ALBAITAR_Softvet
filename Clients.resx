@@ -197,6 +197,29 @@
   <metadata name="ANIM_CNT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="button5.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAP0SURBVGhD7ZnbaxNBFIejxTveQKwWbXY3RUXxxRuiIOijIHh5V1HxBvrggwoKFi36oLTadHcb
+        igheUKOC/0qr6JNaimK12jYzG1urdP1NclZnt0mabLObBPzgPGTPnDlnsmdmzs5EgkK5Z8/WDG7Sz9pC
+        i1vrVZ2/VQ1u06PaAUEfh4yI4GtqAPU3++epBrvvBF5TA5BTJocMknRjTjzWDOuc1pneFGm2p5N5ZUFg
+        rpQpQfoUw7q+Mp5uoK4qg2byUwjGzwAcGVFM1qolBhdSl+GjJNga1eQ9OYIrRT4rBttLXYbPilZ7DoJI
+        eIKyG43hxWqXVa+aqS2Kzg5jrjzE82Fvu7+i8zuRpF1H3YaPqlsHVcOynIDosQsxWMXkJxBsvyt4R0z+
+        bF3SnknNw0dOKXqUk6b27wsU3bqBdr9cA8hKsixvAv/SJVVne+hn0TgpRT8LEtX5TrQdkILPiJjc1MQf
+        WK93o6NxyG/IGXocCNH4sAofb0TgkoxHTbaPmpSG0ja0CBvPR0+Hl0kdCGrHSBQ+vrh8Yp6IWKhJ8SBt
+        brk6Qp7GTLad1IER09k2+BqVfZecSmJ3hKF3cwr035fRTHbR4/sHJvsyUk8Olrgr7g5Y78aEPYPUgSOW
+        UPh954rB5C2kngTbnoZ1/INsjAGdJW1owK+osf4NALVTUQWg2DE9hqmGhD2X1KGRLc85d8WC2EidH9Qj
+        F9xG/CWpQgcr0FM5FhEbqfKjGPyFbKTp/DSpQidTbkixiBKDVPlBw1duoyJeW0AoRmqrOxbeQ6r8oOGQ
+        bKSYQwqpQidm8qVyLJABUuUHjcZko0pMYIemdnuWHAtklFT5QaOfslGY678XvwP4JhutSrAlpAodvynk
+        msSant5MqtDxNYm9yyiKuqOkCh1fy6i3kMKAHpEqdCZsZDo7T6r8iJSRjSBVU0pEO9IbSF0AFEyi+pQN
+        8RZOkjY04NdTzFnvRaFJ6sIg11pcxvgqWn13YD6pA4eWT3c5bfBrpJ6caCK9HAbeD5riO5giE79HSvyg
+        EWgmv+3pZEzt4DtIHRhY+3fBl+uYxdfphEgZGH+SO4IMxvRUEzUpO42dfC18pGSf4mDBd/riLRyQOxOC
+        Cf06iAKv7McqDjlSScjXcqZTYAdbGZJ2ndgBvZ1DxvCx0ywu86hlyWRO73R+FX0Fd7QooFOC5x4HJKwX
+        u/eRUgaSPXZkx2DfN7E/SCCHu+JN6Dye02FW8CHEHiiGdSizm3dZ9Zl/UNhV0/E60ma/2NhyOp+ahHfB
+        QeembXA6laslRyp3xSSOIMVFHYLIncuFpTou+TKgABR5L65QEdgTSDdEXK06wVbvNet//lPTRCJ/AHb5
+        atlgCACKAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

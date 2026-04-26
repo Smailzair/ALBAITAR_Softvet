@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Clients));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -65,6 +65,7 @@
             this.ANIM_CNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -114,7 +115,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label30 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -479,6 +479,22 @@
             this.tabPage2.Text = "Détails :";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button5
+            // 
+            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(403, 5);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(26, 22);
+            this.button5.TabIndex = 29;
+            this.toolTip1.SetToolTip(this.button5, "Génerer une Réf.");
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -785,10 +801,10 @@
             // 
             this.tabPage1.Controls.Add(this.panel3);
             this.tabPage1.Controls.Add(this.label30);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(534, 373);
+            this.tabPage1.Size = new System.Drawing.Size(534, 376);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Hist. Monétique :";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -803,7 +819,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(528, 367);
+            this.panel3.Size = new System.Drawing.Size(528, 370);
             this.panel3.TabIndex = 60;
             this.panel3.Visible = false;
             // 
@@ -854,16 +870,16 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView3.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView3.Location = new System.Drawing.Point(102, 336);
+            this.dataGridView3.Location = new System.Drawing.Point(102, 339);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
             this.dataGridView3.RowHeadersVisible = false;
@@ -880,9 +896,9 @@
             // 
             // Column2
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            dataGridViewCellStyle8.Format = "N2";
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle1.Format = "N2";
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column2.HeaderText = "Column2";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
@@ -890,9 +906,9 @@
             // 
             // Column3
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            dataGridViewCellStyle9.Format = "N2";
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle2.Format = "N2";
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column3.HeaderText = "Column3";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
@@ -907,14 +923,14 @@
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView2.ColumnHeadersHeight = 30;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDD_FINANC,
@@ -930,7 +946,7 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(522, 327);
+            this.dataGridView2.Size = new System.Drawing.Size(522, 330);
             this.dataGridView2.TabIndex = 53;
             this.dataGridView2.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView2_CellBeginEdit);
             this.dataGridView2.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView2_CellFormatting);
@@ -958,8 +974,8 @@
             // 
             this.OP_DATE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.OP_DATE.DataPropertyName = "OP_DATE";
-            dataGridViewCellStyle12.Format = "dd/MM/yyyy HH:mm";
-            this.OP_DATE.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle5.Format = "dd/MM/yyyy HH:mm";
+            this.OP_DATE.DefaultCellStyle = dataGridViewCellStyle5;
             this.OP_DATE.HeaderText = "Date";
             this.OP_DATE.Name = "OP_DATE";
             this.OP_DATE.Width = 58;
@@ -975,9 +991,9 @@
             // 
             this.DEBIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.DEBIT.DataPropertyName = "DEBIT";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            dataGridViewCellStyle13.Format = "N2";
-            this.DEBIT.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.DEBIT.DefaultCellStyle = dataGridViewCellStyle6;
             this.DEBIT.HeaderText = "[+] Endetté ";
             this.DEBIT.Name = "DEBIT";
             this.DEBIT.Width = 95;
@@ -986,9 +1002,9 @@
             // 
             this.CREDIT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.CREDIT.DataPropertyName = "CREDIT";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            dataGridViewCellStyle14.Format = "N2";
-            this.CREDIT.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle7.Format = "N2";
+            this.CREDIT.DefaultCellStyle = dataGridViewCellStyle7;
             this.CREDIT.HeaderText = "[-] Doit";
             this.CREDIT.Name = "CREDIT";
             this.CREDIT.Width = 68;
@@ -1029,7 +1045,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(3, 331);
+            this.button1.Location = new System.Drawing.Point(3, 334);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 31);
             this.button1.TabIndex = 56;
@@ -1046,22 +1062,6 @@
             this.label30.TabIndex = 59;
             this.label30.Text = "Aucun Séléction\r\n(ou un nouveau propriétaire non enregisré encore)";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button5
-            // 
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(403, 5);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(26, 22);
-            this.button5.TabIndex = 29;
-            this.toolTip1.SetToolTip(this.button5, "Génerer une Réf.");
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Visible = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Clients
             // 
