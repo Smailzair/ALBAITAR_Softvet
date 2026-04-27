@@ -2,7 +2,7 @@
 using ALBAITAR_Softvet.Resources;
 using MailKit.Net.Smtp;
 using Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Word;
+//using Microsoft.Office.Interop.Word;
 using MimeKit;
 using MimeKit.Text;
 using MySql.Data.MySqlClient;

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using word = Microsoft.Office.Interop.Word.Application;
-using Excel = Microsoft.Office.Interop.Excel.Application;
+using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.ReportingServices.Interfaces;
 using System.Diagnostics;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
@@ -118,7 +118,7 @@ namespace ALBAITAR_Softvet
                 File.WriteAllBytes(inputFilePath2, excelBytes); // save the byte array as an Excel file
                 File.SetAttributes(inputFilePath2, FileAttributes.Hidden);
 
-                Excel excelApp = new Excel(); // create an instance of the Excel application
+                Excel.Application excelApp = new Excel.Application(); // create an instance of the Excel application
                 Workbook workbook = excelApp.Workbooks.Open(inputFilePath2); // open the Excel file as a workbook
                 Worksheet worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Worksheets[1]; // get the first worksheet in the workbook
 
