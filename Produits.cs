@@ -989,12 +989,12 @@ namespace ALBAITAR_Softvet.Resources
                 Excc.Application xcelApp = new Excc.Application();
                 xcelApp.Application.Workbooks.Add(Type.Missing);
                 xcelApp.Application.Workbooks[1].Title = "Produits";
-                xcelApp.Application.Workbooks[1].Worksheets[1].Name = "Produits";
+                ((Excc.Worksheet)xcelApp.Application.Workbooks[1].Worksheets[1]).Name = "Produits";
                 List<string> cols = new List<string>();
                 cols.AddRange(new string[] { "CODE", "NME", "CATEGOR", "REVIENT_PRTICE", "VENTE_PRICE" });
                 dataGridView1.Columns.Cast<DataGridViewColumn>().Where(cc => cols.Contains(cc.Name)).ToList().ForEach(g =>
                 {
-                    xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)].Value = g.HeaderText.Replace("Prix de revient", "Prix -unitaire- de revient").Replace("Prix de vente", "Prix -unitaire- de vente"); ;
+                    ((Excc.Range)xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)]).Value = g.HeaderText.Replace("Prix de revient", "Prix -unitaire- de revient").Replace("Prix de vente", "Prix -unitaire- de vente"); ;
                     ((Excc.Range)xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
                     ((Excc.Range)xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)]).Font.Bold = true;
                     ((Excc.Range)xcelApp.Cells[1, (g.Index > 4 ? g.Index - 2 : g.Index)]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
@@ -1023,11 +1023,11 @@ namespace ALBAITAR_Softvet.Resources
                     {
                         if (b.ColumnIndex <= 4)
                         {
-                            xcelApp.Cells[t.Index + 2, b.ColumnIndex].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Trim() : "";
+                            ((Excc.Range)xcelApp.Cells[t.Index + 2, b.ColumnIndex]).Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Trim() : "";
                         }
                         else
                         {
-                            xcelApp.Cells[t.Index + 2, b.ColumnIndex - 2].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? Convert.ToDouble(dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value) : 0;
+                            ((Excc.Range)xcelApp.Cells[t.Index + 2, b.ColumnIndex - 2]).Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? Convert.ToDouble(dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value) : 0;
                         }
 
                     });

@@ -307,7 +307,7 @@ namespace ALBAITAR_Softvet
 
                 Excel excelApp = new Excel(); // create an instance of the Excel application
                 Microsoft.Office.Interop.Excel.Workbook workbook = excelApp.Workbooks.Open(inputFilePath2); // open the Excel file as a workbook
-                Microsoft.Office.Interop.Excel.Worksheet worksheet = workbook.Worksheets[1]; // get the first worksheet in the workbook
+                Microsoft.Office.Interop.Excel.Worksheet worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Worksheets[1]; // get the first worksheet in the workbook
 
                 // ...
                 // Disable alerts and screen updates to improve performance

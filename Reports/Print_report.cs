@@ -7,13 +7,13 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using word = Microsoft.Office.Interop.Word.Application;
-using Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Word;
 using Excel = Microsoft.Office.Interop.Excel.Application;
 using Microsoft.ReportingServices.Interfaces;
 using System.Diagnostics;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using DataSet = System.Data.DataSet;
+using Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Word;
 
 namespace ALBAITAR_Softvet
 {
@@ -120,7 +120,7 @@ namespace ALBAITAR_Softvet
 
                 Excel excelApp = new Excel(); // create an instance of the Excel application
                 Workbook workbook = excelApp.Workbooks.Open(inputFilePath2); // open the Excel file as a workbook
-                Worksheet worksheet = workbook.Worksheets[1]; // get the first worksheet in the workbook
+                Worksheet worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Worksheets[1]; // get the first worksheet in the workbook
 
                 // ...
                 // Disable alerts and screen updates to improve performance

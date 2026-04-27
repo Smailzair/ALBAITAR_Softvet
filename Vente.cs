@@ -949,17 +949,17 @@ namespace ALBAITAR_Softvet.Resources
                 Excc.Application xcelApp = new Excc.Application();
                 xcelApp.Application.Workbooks.Add(Type.Missing);
                 xcelApp.Application.Workbooks[1].Title = Application.ProductName + " - Factures";
-                xcelApp.Application.Workbooks[1].Worksheets[1].Name = "Factures";
+                ((Excc.Worksheet)xcelApp.Application.Workbooks[1].Worksheets[1]).Name = "Factures";
                 //----------
-                xcelApp.Cells[1, 1].Value = "Date"; //DATE
-                xcelApp.Cells[1, 2].Value = "Ref."; //REF
-                xcelApp.Cells[1, 3].Value = "Client"; //CLIENT_FULL_NME
-                xcelApp.Cells[1, 4].Value = "Total HT"; //TOTAL_HT
-                xcelApp.Cells[1, 5].Value = "TVA"; //TVA_PERC
-                xcelApp.Cells[1, 6].Value = "D.Timbre"; //DROIT_TIMBRE
-                xcelApp.Cells[1, 7].Value = "Total TTC"; //TOTAL_TTC
-                xcelApp.Cells[1, 8].Value = "Montant non payé\n(Jusqu'à " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + ")"; //SLDDD
-                xcelApp.Cells[1, 9].Value = "Crée par"; //LAST_MODIF_BY
+                ((Excc.Range)xcelApp.Cells[1, 1]).Value = "Date"; //DATE
+                ((Excc.Range)xcelApp.Cells[1, 2]).Value = "Ref."; //REF
+                ((Excc.Range)xcelApp.Cells[1, 3]).Value = "Client"; //CLIENT_FULL_NME
+                ((Excc.Range)xcelApp.Cells[1, 4]).Value = "Total HT"; //TOTAL_HT
+                ((Excc.Range)xcelApp.Cells[1, 5]).Value = "TVA"; //TVA_PERC
+                ((Excc.Range)xcelApp.Cells[1, 6]).Value = "D.Timbre"; //DROIT_TIMBRE
+                ((Excc.Range)xcelApp.Cells[1, 7]).Value = "Total TTC"; //TOTAL_TTC
+                ((Excc.Range)xcelApp.Cells[1, 8]).Value = "Montant non payé\n(Jusqu'à " + DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + ")"; //SLDDD
+                ((Excc.Range)xcelApp.Cells[1, 9]).Value = "Crée par"; //LAST_MODIF_BY
                 //-----------
                 for (int i = 1; i < 10; i++)
                 {
@@ -971,23 +971,23 @@ namespace ALBAITAR_Softvet.Resources
                 ((Excc.Range)xcelApp.Cells[1, 7]).Interior.Color = ColorTranslator.ToOle(Color.Orange); //TTC
                 //----------------
                 ((Excc.Range)xcelApp.Columns[1]).NumberFormat = "dd/MM/yyyy"; //DATE
-                ((Excc.Range)xcelApp.Columns[4]).NumberFormat = //HT
-                ((Excc.Range)xcelApp.Columns[5]).NumberFormat = //TVA
-                ((Excc.Range)xcelApp.Columns[6]).NumberFormat = //DROIT_TIMBRE
-                ((Excc.Range)xcelApp.Columns[7]).NumberFormat = //TOTAL_TTC
+                ((Excc.Range)xcelApp.Columns[4]).NumberFormat = "#,##0.00 [$Da-fr-dz]"; //HT
+                ((Excc.Range)xcelApp.Columns[5]).NumberFormat = "#,##0.00 [$Da-fr-dz]"; //TVA
+                ((Excc.Range)xcelApp.Columns[6]).NumberFormat = "#,##0.00 [$Da-fr-dz]"; //DROIT_TIMBRE
+                ((Excc.Range)xcelApp.Columns[7]).NumberFormat = "#,##0.00 [$Da-fr-dz]"; //TOTAL_TTC
                 ((Excc.Range)xcelApp.Columns[8]).NumberFormat = "#,##0.00 [$Da-fr-dz]"; //SLDDD
                 //--------------
                 dataGridView1.Rows.Cast<DataGridViewRow>().ToList().ForEach(t =>
                 {
-                    xcelApp.Cells[t.Index + 2, 1].Value = dataGridView1.Rows[t.Index].Cells[1].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[1].Value.ToString().Replace("00:00:00", "").Trim() : ""; //DATE
-                    xcelApp.Cells[t.Index + 2, 2].Value = dataGridView1.Rows[t.Index].Cells[4].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[4].Value.ToString().Replace(",", ".").Trim() : ""; //REF
-                    xcelApp.Cells[t.Index + 2, 3].Value = dataGridView1.Rows[t.Index].Cells[3].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[3].Value.ToString().Replace(",", ".").Trim() : ""; //CLIENT_FULL_NME
-                    xcelApp.Cells[t.Index + 2, 4].Value = dataGridView1.Rows[t.Index].Cells[7].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[7].Value.ToString().Replace(",", ".").Trim() : ""; //TOTAL_HT
-                    xcelApp.Cells[t.Index + 2, 5].Value = dataGridView1.Rows[t.Index].Cells[5].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[5].Value.ToString().Replace(",", ".").Trim() : ""; //TVA_PERC
-                    xcelApp.Cells[t.Index + 2, 6].Value = dataGridView1.Rows[t.Index].Cells[6].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[6].Value.ToString().Replace(",", ".").Trim() : ""; //DROIT_TIMBRE
-                    xcelApp.Cells[t.Index + 2, 7].Value = dataGridView1.Rows[t.Index].Cells[8].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[8].Value.ToString().Replace(",", ".").Trim() : ""; //TOTAL_TTC
-                    xcelApp.Cells[t.Index + 2, 8].Value = dataGridView1.Rows[t.Index].Cells[10].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[10].Value.ToString().Replace(",", ".").Trim() : "(Unconnu)"; //SLDDD
-                    xcelApp.Cells[t.Index + 2, 9].Value = dataGridView1.Rows[t.Index].Cells[9].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[9].Value.ToString().Trim() : ""; //LAST_MODIF_BY
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 1]).Value = dataGridView1.Rows[t.Index].Cells[1].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[1].Value.ToString().Replace("00:00:00", "").Trim() : ""; //DATE
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 2]).Value = dataGridView1.Rows[t.Index].Cells[4].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[4].Value.ToString().Replace(",", ".").Trim() : ""; //REF
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 3]).Value = dataGridView1.Rows[t.Index].Cells[3].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[3].Value.ToString().Replace(",", ".").Trim() : ""; //CLIENT_FULL_NME
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 4]).Value = dataGridView1.Rows[t.Index].Cells[7].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[7].Value.ToString().Replace(",", ".").Trim() : ""; //TOTAL_HT
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 5]).Value = dataGridView1.Rows[t.Index].Cells[5].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[5].Value.ToString().Replace(",", ".").Trim() : ""; //TVA_PERC
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 6]).Value = dataGridView1.Rows[t.Index].Cells[6].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[6].Value.ToString().Replace(",", ".").Trim() : ""; //DROIT_TIMBRE
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 7]).Value = dataGridView1.Rows[t.Index].Cells[8].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[8].Value.ToString().Replace(",", ".").Trim() : ""; //TOTAL_TTC
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 8]).Value = dataGridView1.Rows[t.Index].Cells[10].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[10].Value.ToString().Replace(",", ".").Trim() : "(Unconnu)"; //SLDDD
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 9]).Value = dataGridView1.Rows[t.Index].Cells[9].Value != DBNull.Value ? dataGridView1.Rows[t.Index].Cells[9].Value.ToString().Trim() : ""; //LAST_MODIF_BY
 
                     ((Excc.Range)xcelApp.Cells[t.Index + 2, 7]).Interior.Color = ColorTranslator.ToOle(Color.Moccasin);
                 });

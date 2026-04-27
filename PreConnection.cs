@@ -636,10 +636,10 @@ namespace ALBAITAR_Softvet
                 Excc.Application xcelApp = new Excc.Application();
                 xcelApp.Application.Workbooks.Add(Type.Missing);
                 xcelApp.Application.Workbooks[1].Title = Workbook_title != null ? Workbook_title : "Classeur";
-                xcelApp.Application.Workbooks[1].Worksheets[1].Name = Worksheet_title != null ? Worksheet_title : "Page";
+                ((Excc.Worksheet)xcelApp.Application.Workbooks[1].Worksheets[1]).Name = Worksheet_title != null ? Worksheet_title : "Page";
                 dgv.Columns.Cast<DataGridViewColumn>().ToList().ForEach(g =>
                 {
-                    xcelApp.Cells[1, g.Index + 1].Value = g.HeaderText;
+                    ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = g.HeaderText;
                     ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
                     ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Font.Bold = true;
                     ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).HorizontalAlignment = Excc.XlHAlign.xlHAlignCenter;
@@ -666,7 +666,7 @@ namespace ALBAITAR_Softvet
                 {
                     t.Cells.Cast<DataGridViewCell>().ToList().ForEach(b =>
                     {
-                        xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dgv.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dgv.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").Trim() : "";
+                        ((Excc.Range)xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1]).Value = dgv.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dgv.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").Trim() : "";
                     });
 
                 });
@@ -676,7 +676,7 @@ namespace ALBAITAR_Softvet
                     int yy = 0;
                     dgv.Columns.Cast<DataGridViewColumn>().Where(z => !z.Visible).ToList().ForEach(g =>
                     {
-                        xcelApp.Columns[g.Index + 1 - yy].Delete();
+                        ((Excc.Range)xcelApp.Columns[g.Index + 1 - yy]).Delete();
                         yy++;
                     });
                 }
@@ -687,7 +687,7 @@ namespace ALBAITAR_Softvet
                     {
                         tbl_to_add.Columns.Cast<DataColumn>().ToList().ForEach(b =>
                         {
-                            xcelApp.Cells[dgv.Rows.Count + tbl_to_add.Rows.IndexOf(t) + 2, tbl_to_add.Columns.IndexOf(b) + 1].Value = t[b] != null ? t[b].ToString().Replace(" 00", "").Replace(":00", "").Replace(",", ".").Trim() : "";
+                            ((Excc.Range)xcelApp.Cells[dgv.Rows.Count + tbl_to_add.Rows.IndexOf(t) + 2, tbl_to_add.Columns.IndexOf(b) + 1]).Value = t[b] != null ? t[b].ToString().Replace(" 00", "").Replace(":00", "").Replace(",", ".").Trim() : "";
                         });
 
                     });

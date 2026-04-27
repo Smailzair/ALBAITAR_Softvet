@@ -505,57 +505,58 @@ namespace ALBAITAR_Softvet.Resources
 
         private void button6_Click(object sender, EventArgs e)
         {
+            label37.Visible = true;
             if (dataGridView1.Rows.Count > 0)
             {
                 Excc.Application xcelApp = new Excc.Application();
                 xcelApp.Application.Workbooks.Add(Type.Missing);
                 xcelApp.Application.Workbooks[1].Title = Application.ProductName + " - Clients";
-                xcelApp.Application.Workbooks[1].Worksheets[1].Name = "Clients";
+                ((Excc.Worksheet)xcelApp.Application.Workbooks[1].Worksheets[1]).Name = "Clients";
                 dataGridView1.Columns.Cast<DataGridViewColumn>().Where(ss => ss.Name != "ID" && ss.Name != "FULL_NME").ToList().ForEach(g =>
                 {
                     switch (g.HeaderText)
                     {
                         case "REF":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Réf.";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Réf.";
                             break;
                         case "SEX":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Sexe";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Sexe";
                             break;
                         case "FAMNME":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Prénom";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Prénom";
                             break;
                         case "NME":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Nom";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Nom";
                             break;
                         case "NUM_CNI":
-                            xcelApp.Cells[1, g.Index + 1].Value = "N° CNI";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "N° CNI";
                             break;
                         case "ADRESS":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Adresse";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Adresse";
                             break;
                         case "POSTAL_CODE":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Code Postal";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Code Postal";
                             break;
                         case "CITY":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Ville";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Ville";
                             break;
                         case "WILAYA":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Wilaya";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Wilaya";
                             break;
                         case "NUM_PHONE":
-                            xcelApp.Cells[1, g.Index + 1].Value = "N° Tél";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "N° Tél";
                             break;
                         case "EMAIL":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Email";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Email";
                             break;
                         case "OBSERVATIONS":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Observations";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Observations";
                             break;
                         case "SLD":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Solde Monétique";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Solde Monétique";
                             break;
                         case "ANIM_CNT":
-                            xcelApp.Cells[1, g.Index + 1].Value = "Nombre d'Animaux";
+                            ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Value = "Nombre d'Animaux";
                             break;
                     }
                     ((Excc.Range)xcelApp.Cells[1, g.Index + 1]).Interior.Color = ColorTranslator.ToOle(Color.DarkCyan);
@@ -579,12 +580,12 @@ namespace ALBAITAR_Softvet.Resources
                 {
                     t.Cells.Cast<DataGridViewCell>().ToList().ForEach(b =>
                     {
-                        xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1].Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").Replace("00:00:00", "").Trim() : "";
+                        ((Excc.Range)xcelApp.Cells[t.Index + 2, b.ColumnIndex + 1]).Value = dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value != null ? dataGridView1.Rows[t.Index].Cells[b.ColumnIndex].Value.ToString().Replace(",", ".").Replace("00:00:00", "").Trim() : "";
                     });
 
                 });
-                xcelApp.Columns[dataGridView1.Columns["ID"].Index + 1].Delete();
-                xcelApp.Columns[dataGridView1.Columns["FULL_NME"].Index].Delete();
+                ((Excc.Range)xcelApp.Columns[dataGridView1.Columns["ID"].Index + 1]).Delete();
+                ((Excc.Range)xcelApp.Columns[dataGridView1.Columns["FULL_NME"].Index]).Delete();
                 xcelApp.Columns.AutoFit();
                 //------------------
                 SaveFileDialog svd = new SaveFileDialog();
@@ -604,6 +605,7 @@ namespace ALBAITAR_Softvet.Resources
             {
                 MessageBox.Show("Aucun donnés !", ".", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
+            label37.Visible = false;
         }
 
         private void Clients_Load(object sender, EventArgs e)
@@ -859,13 +861,13 @@ namespace ALBAITAR_Softvet.Resources
                 Excc.Application xcelApp = new Excc.Application();
                 xcelApp.Application.Workbooks.Add(Type.Missing);
                 xcelApp.Application.Workbooks[1].Title = Application.ProductName + " - Historique monétique";
-                xcelApp.Application.Workbooks[1].Worksheets[1].Name = dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value;
+                ((Excc.Worksheet)xcelApp.Application.Workbooks[1].Worksheets[1]).Name = dataGridView1.SelectedRows[0].Cells["FULL_NME"].Value.ToString();
                 //----------
-                xcelApp.Cells[1, 1].Value = "Date"; //OP_DATE
-                xcelApp.Cells[1, 2].Value = "Objet"; //OBJECT
-                xcelApp.Cells[1, 3].Value = "[+] Endetté"; //DEBIT
-                xcelApp.Cells[1, 4].Value = "[-] Doit"; //CREDIT
-                xcelApp.Cells[1, 5].Value = "Solde (Dette)";
+                ((Excc.Range)xcelApp.Cells[1, 1]).Value = "Date"; //OP_DATE
+                ((Excc.Range)xcelApp.Cells[1, 2]).Value = "Objet"; //OBJECT
+                ((Excc.Range)xcelApp.Cells[1, 3]).Value = "[+] Endetté"; //DEBIT
+                ((Excc.Range)xcelApp.Cells[1, 4]).Value = "[-] Doit"; //CREDIT
+                ((Excc.Range)xcelApp.Cells[1, 5]).Value = "Solde (Dette)";
                 //-----------
                 for (int i = 1; i < 5; i++)
                 {
@@ -883,12 +885,11 @@ namespace ALBAITAR_Softvet.Resources
                 //--------------
                 dataGridView2.Rows.Cast<DataGridViewRow>().Where(R => R.Index < dataGridView2.NewRowIndex).ToList().ForEach(t =>
                 {
-                    xcelApp.Cells[t.Index + 2, 1].Value = dataGridView2.Rows[t.Index].Cells["OP_DATE"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["OP_DATE"].Value.ToString().Replace("00:00:00", "").Trim() : ""; //OP_DATE
-                    xcelApp.Cells[t.Index + 2, 2].Value = dataGridView2.Rows[t.Index].Cells["OBJECT"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["OBJECT"].Value.ToString().Trim() : ""; //OBJECT
-                    xcelApp.Cells[t.Index + 2, 3].Value = dataGridView2.Rows[t.Index].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["DEBIT"].Value : 0; //DEBIT
-                    xcelApp.Cells[t.Index + 2, 4].Value = dataGridView2.Rows[t.Index].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["CREDIT"].Value : 0; //CREDIT
-                    xcelApp.Cells[t.Index + 2, 5].Value = xcelApp.Cells[t.Index + 2, 3].Value - xcelApp.Cells[t.Index + 2, 4].Value; //SLD
-
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 1]).Value = dataGridView2.Rows[t.Index].Cells["OP_DATE"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["OP_DATE"].Value.ToString().Replace("00:00:00", "").Trim() : ""; //OP_DATE
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 2]).Value = dataGridView2.Rows[t.Index].Cells["OBJECT"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["OBJECT"].Value.ToString().Trim() : ""; //OBJECT
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 3]).Value = dataGridView2.Rows[t.Index].Cells["DEBIT"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["DEBIT"].Value : 0; //DEBIT
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 4]).Value = dataGridView2.Rows[t.Index].Cells["CREDIT"].Value != DBNull.Value ? dataGridView2.Rows[t.Index].Cells["CREDIT"].Value : 0; //CREDIT
+                    ((Excc.Range)xcelApp.Cells[t.Index + 2, 5]).Value = double.Parse(((Excc.Range)xcelApp.Cells[t.Index + 2, 3]).Value.ToString()) - double.Parse(((Excc.Range)xcelApp.Cells[t.Index + 2, 4]).Value.ToString()); //SLD
                     ((Excc.Range)xcelApp.Cells[t.Index + 2, 5]).Interior.Color = ColorTranslator.ToOle(Color.Moccasin);
                 });
                 //----------

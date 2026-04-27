@@ -854,6 +854,7 @@ checkBox1.Checked,
 
         private void button6_Click(object sender, EventArgs e)
         {
+            label37.Visible = true;
             if (dataGridView1.Rows.Count > 0)
             {
                 Excc.Application xcelApp = new Excc.Application();
@@ -957,6 +958,7 @@ checkBox1.Checked,
             {
                 MessageBox.Show("Aucun donnés !", ".", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
+            label37.Visible = false;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
